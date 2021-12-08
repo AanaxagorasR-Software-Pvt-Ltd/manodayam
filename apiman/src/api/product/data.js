@@ -1,0 +1,87 @@
+const product = [
+  {
+    id: 1,
+    name: "Clear Whey Isolate",
+    overview: "Our award-winning hydrolysed whey this...",
+    MRP: "₹3499",
+    price: "₹3099",
+    url: "https://s1.thcdn.com/productimg/300/300/12081397-9654687777704018.jpg",
+  },
+  {
+    id: 2,
+    name: "Energy Elite Gel",
+    overview: "Carbohydrate, electrolyte, and vitamin blend...",
+    MRP: "₹3499",
+    price: "₹3099",
+    url: "https://s1.thcdn.com/productimg/1600/1600/11654647-8634904767969092.jpg",
+  },
+  {
+    id: 3,
+    name: "Collagen Powder",
+    overview: "Highly purified collagen, high in protein with zero fat...",
+    MRP: "₹1299",
+    price: "₹1099",
+    url: "https://s1.thcdn.com/productimg/1600/1600/12702344-1724888413426597.jpg",
+  },
+  {
+    id: 4,
+    name: "Impact Whey Isolate",
+    overview: "our Impact whey Isolate boasts over 90% protein...",
+    MRP: "₹1499",
+    price: "₹1399",
+    url: "https://s1.thcdn.com/productimg/1600/1600/11654647-8634904767969092.jpg",
+  },
+  //   {
+  //     id: 5,
+  //     name: "Micellar Casein",
+  //     overview: "Night-time protein shake, wake up raring to go...",
+  //     MRP: "₹699",
+  //     price: "₹599",
+  //     url: "https://s1.thcdn.com/productimg/300/300/11654639-4904677353591331.jpg",
+  //   },
+  // {
+  //   id: 6,
+  //   name: "Pea Protein Isolate",
+  //   overview: "Power-up with all-natural, plant-based protein...",
+  //   MRP: "₹1499",
+  //   price: "₹1399",
+  //   url: "https://s1.thcdn.com/productimg/1600/1600/11654740-1804622705536041.jpg",
+  // },
+  // {
+  //   id: 7,
+  //   name: "Metal Shaker",
+  //   overview: "The perfect alternative to plastic shakers...",
+  //   MRP: "₹1899",
+  //   price: "₹1699",
+  //   url: "https://s1.thcdn.com/productimg/1600/1600/11429436-9174806509164068.jpg",
+  // },
+  // {
+  //   id: 8,
+  //   name: "Soy Protein Isolate",
+  //   overview: "It is an unbeatable choice for vegetarians, vegans...",
+  //   MRP: "₹2639",
+  //   price: "₹2399",
+  //   url: "https://s1.thcdn.com/productimg/1600/1600/11654583-9984622705420877.jpg",
+  // },
+  // {
+  //   id: 9,
+  //   name: "High Protein Bar",
+  //   overview: "packed with 30g of both fast-and slow-releasing proteins...",
+  //   MRP: "₹399",
+  //   price: "₹299",
+  //   url: "https://s1.thcdn.com/productimg/1600/1600/12565702-6564838635959549.jpg",
+  // },
+];
+const viewPoduct = [
+  {
+    // name: "Impact Whey Isolate",
+    // price: "₹3099",
+    // quantity: "",
+    more: "One of the purest whey protein powders available, with 90% protein content...",
+    // head: "What are the benefits of Impact Whey Isolate?",
+    para: "The 23g (Unflavoured version) of high-quality protein per serving is perfect for supporting all training goals, contributing to the growth and maintenance of muscle mass, while also being low in fat and containing less than 1g of carbs – the ideal choice if you’re keeping an eye on calories, too.",
+    readMore:
+      "Enjoy it in a range of specially created flavours, from classic Chocolate Smooth and Strawberry Cream to the indulgent Rocky Road and Salted Caramel.",
+  },
+];
+module.exports = product;
