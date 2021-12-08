@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { RegisterService } from "../Services/Register"
-import { loadingAction } from "../slices/loading.slice";
+import { loadingAction } from "./loading.slice";
 
 const registerSlice = createSlice({
     name:"register",

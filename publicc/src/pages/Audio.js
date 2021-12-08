@@ -1,6 +1,6 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle, useRef } from "react";
 import { leftSideBarMenu } from "../Layout/menuList";
-import { useToggle } from "../hooks/";
+import { useToggle } from "../hooks";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
@@ -12,7 +12,7 @@ import { Modal } from "react-bootstrap";
 
 
 
-const Product = () => {
+const Audio = () => {
 	const dispatch = useDispatch();
 	const { logout } = useAuth()
 	const navigate = useNavigate();
@@ -249,7 +249,7 @@ const Product = () => {
 
 								<div class="col-md-12 grid-margin">
 									<div class="row">
-										<div class="col-12 col-xl-4 offset-10">
+									<div class="col-12 col-xl-4 offset-10">
 											<button type="button" class="btn btn-social-icon-text btn-info" onClick={()=>{formRef.current.openForm()}}>
 												<i class="ti-plus"></i>Add</button>
 										</div>
@@ -257,31 +257,32 @@ const Product = () => {
 								</div>
 
 
-
 								<div class="col-lg-12 grid-margin stretch-card">
 									<div class="card">
 										<div class="card-body">
-											<h4 class="card-title">Product list</h4>
+											<h4 class="card-title">Video list</h4>
 											<div class="table-responsive pt-3">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
 															<th>S.N</th>
-															<th>Product Title</th>
-															<th>Product Image</th>
-															<th>Product Description</th>
-															<th>Product Price</th>
+														
+															<th>Audio</th>
+															<th> Audio Title</th>
+															<th> Audio Depression</th>
+															<th>Audio Link</th>
+															<th>Date</th>
 															<th style={{width: '80px'}}>Action</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
 															<td>1</td>
-															<td>Fidget Cube</td>
 															<td><img src="../images/product/pr.png" class="mr-2" alt="pr" /></td>
-														
-															<td>dolor sit amet consectetur, adipisicing elit.1</td>
-															<td> ₹ 399/-</td>
+															<td>Mental Health</td>
+															<td>Fidget Cube</td>
+															<td>https://www.youtube.com/watch?v=BVJkf8IuRjE</td>
+															<td>Dec 15, 2021</td>
 															<td>
 																<button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"><i class="ti-pencil"></i></button>
 																<button type="button" class="btn btn-sm btn-danger add-btn"><i class="ti-plus"></i></button>
@@ -294,10 +295,11 @@ const Product = () => {
 									</div>
 								</div>
 							</div>
+							</div>
 						</div>
 						{/* content-wrapper ends */}
 						{/* partial:partials/_footer.html */}
-						<footer class="footer">
+            <footer class="footer">
 							<div class="col-md-12 text-center">
 								<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
 								Copyright © 2021 All Right Reserved Aanaxagorasr Software Pvt. Ltd{" "}
@@ -312,7 +314,7 @@ const Product = () => {
 						{/* partial */}
 					</div>
 				</div>
-			</div>
+			
 		</>
 	);
 };
@@ -330,38 +332,50 @@ const Addform = forwardRef((props, ref) => {
 
 	return (
 		<>
-			<Modal show={show} size="xl"  onHide={() => { handleVisible(false) }}>
+		<Modal show={show} size="xl"  onHide={() => { handleVisible(false) }}>
 				<Modal.Header >
-					<Modal.Title>Product Add</Modal.Title>
+					<Modal.Title>Audio Uplode</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 
-				<form class="forms-sample">
+					<form class="forms-sample">
+						<div class="form-group">
+              <div class="col-md-3  offset-9">
+              <label for="exampleInputUsername1">Audio Type</label>
+								<select class="form-control">
+									<option>Mental Health</option>
+									<option>Depression</option>
+									<option>Anxiety</option>
+									<option>Attention</option>
+								</select>
+							</div>
+              <div class="form-group">
+                      <label for="exampleInputUsername1">Audio Title</label>
+								<input type="text" class="form-control" placeholder="Audio  Title" />
+							</div>
 					<div class="row">
               <div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Product Title</label>
-								<input type="text" class="form-control" placeholder="Product Title" />
+                      <label for="exampleInputUsername1">Audio Upload</label>
+								<input type="file" class="form-control file-upload-info" placeholder="Upload Audio" />
+
 							</div>
 
 							<div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Product Upload</label>
-								<input type="file" class="form-control file-upload-info" placeholder="Product Image" />
+                      <label for="exampleInputUsername1">Audio Link</label>
+								<input type="text" class="form-control file-upload-info" placeholder=" Audio Link" />
 
 							</div>
-							<div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Product Description</label>
-								<textarea class="form-control" placeholder=" Product Description" />
 							</div>
-							
-							<div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Product Price</label>
-					  <input type="text" class="form-control file-upload-info" placeholder="Product Price" />
+              <div class="form-group">
+                      <label for="exampleInputUsername1">Audio Description</label>
+								<textarea class="form-control" placeholder=" Audio Description" />
 							</div>
-							</div>
+						</div>
+
 					</form>
 
 					
-				</Modal.Body>
+					</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={()=> {handleVisible(false)}}>
 						Close
@@ -374,4 +388,4 @@ const Addform = forwardRef((props, ref) => {
 		</>
 	);
 })
-export default Product;
+export default Audio;

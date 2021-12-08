@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API_ADMIN_URL, LOGIN_API} from "../../utill/api.endpoints";
-import { notify } from "../../utill/"
+import { notify } from "../../utill"
 export const UserLogin = createAsyncThunk(
     'login/loginStatus',
     async (reqData, thunkAPI) => {

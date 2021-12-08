@@ -14,9 +14,10 @@ var filter =
 export default function Login() {
   const [logineMail, setlogineMail] = useState("");
   const [loginPassword, setloginPassword] = useState("");
-  const [ragisterationName, setragisterationName] = useState("");
-  const [ragisterationMail, setragisterationMail] = useState("");
-  const [ragisterationPassword, setragisterationPassword] = useState("");
+  const [registrationName, setregistrationName] = useState("");
+  const [registrationMail, setregistrationMail] = useState("");
+  const [registrationPassword, setregistrationPassword] = useState("");
+  const [registrationConfirmPsd, setregistrationConfirmPsd] = useState("");
   const [doctorName, setdoctorName] = useState("");
   const [doctoraddress, setdoctoraddress] = useState("");
   const [doctorphone, setdoctorphone] = useState("");
@@ -40,9 +41,22 @@ export default function Login() {
   const [libraryMailError, setlibraryMailError] = useState("");
   const [libraryDateError, setlibraryDateError] = useState("");
   const [libraryMsgError, setlibraryMsgError] = useState("");
+  const [LoginmailError, setLoginmailError] = useState("");
+  const [loginPasswordError, setloginPasswordError] = useState("");
+  const [registrationNameError, setregistrationNameError] = useState("");
+  const [registrationMailError, setregistrationMailError] = useState("");
+  const [registrationPasswordError, setregistrationPasswordError] = useState("");
+  const [registrationConfirmPsdError, setregistrationConfirmPsdError] = useState("");
+
 
   // Login
   const LoginApi = () => {
+    if (logineMail == "") {
+      setLoginmailError("Enter your mail");
+    }
+    if (loginPassword == "") {
+      setloginPasswordError("Enter Your Password");
+    }
     console.log(`${API_ADMIN_URL}${LOGIN_API}`);
     const loginOptions = {
       email: logineMail,
@@ -60,11 +74,23 @@ export default function Login() {
   };
   // Registration
   const RegisterationApi = () => {
+    if (registrationName == "") {
+      setregistrationNameError("Enter your name");
+    }
+    if (registrationMail == "") {
+      setregistrationMailError("Enter your mail");
+    }
+    if (registrationPassword == "") {
+      setregistrationPasswordError("Enter your password");
+    }
+    if( registrationConfirmPsd == ""){
+      setregistrationConfirmPsdError("Enter your confirm password")
+    }
     console.log(`${API_ADMIN_URL}${REGISTER_API}`);
     const RegisterationOptions = {
-      email: ragisterationMail,
-      password: ragisterationPassword,
-      name: ragisterationName,
+      email: registrationMail,
+      password: registrationPassword,
+      name: registrationName,
     };
     // console.log('dt', dt);
     // return;
@@ -192,6 +218,11 @@ export default function Login() {
                       setlogineMail(logineMail.target.value)
                     }
                   />
+                  {logineMail == "" ? (
+                    <p className="text-danger">
+                      <small> {LoginmailError}</small>
+                    </p>
+                  ) : null}
                 </div>
                 <div className="form-group">
                   <label for="">Password</label>
@@ -205,6 +236,11 @@ export default function Login() {
                       setloginPassword(loginPassword.target.value)
                     }
                   />
+                  {loginPassword == "" ? (
+                    <p className="text-danger">
+                      <small> {loginPasswordError}</small>
+                    </p>
+                  ) : null}
                 </div>
 
                 <div className="form-inline">
@@ -560,11 +596,16 @@ export default function Login() {
                     name=""
                     id=""
                     placeholder="Enter your name here"
-                    // value={ragisterationName}
-                    onChange={(ragisterationName) =>
-                      setragisterationName(ragisterationName.target.value)
+                    // value={registrationName}
+                    onChange={(registrationName) =>
+                      setregistrationName(registrationName.target.value)
                     }
                   />
+                  {registrationName == "" ? (
+                    <p className="text-danger">
+                      <small> {registrationNameError}</small>
+                    </p>
+                  ) : null}
                 </div>
                 <div className="form-group">
                   <label for="">Email</label>
@@ -573,12 +614,17 @@ export default function Login() {
                     name=""
                     id=""
                     placeholder="Type your email here"
-                    // value={ragisterationMail}
-                    onChange={(ragisterationMail) => {
-                      // console.log('ragisterationMail', ragisterationMail.target.value)
-                      setragisterationMail(ragisterationMail.target.value);
+                    // value={registrationMail}
+                    onChange={(registrationMail) => {
+                      // console.log('registrationMail', registrationMail.target.value)
+                      setregistrationMail(registrationMail.target.value);
                     }}
                   />
+                  {registrationMail == "" ? (
+                    <p className="text-danger">
+                      <small> {registrationMailError}</small>
+                    </p>
+                  ) : null}
                 </div>
                 <div className="form-group">
                   <label for="">Password</label>
@@ -587,13 +633,18 @@ export default function Login() {
                     name=""
                     id=""
                     placeholder="Type your password here"
-                    // value={ragisterationPassword}
-                    onChange={(ragisterationPassword) =>
-                      setragisterationPassword(
-                        ragisterationPassword.target.value
+                    // value={registrationPassword}
+                    onChange={(registrationPassword) =>
+                      setregistrationPassword(
+                        registrationPassword.target.value
                       )
                     }
                   />
+                  {registrationPassword == "" ? (
+                    <p className="text-danger">
+                      <small>{registrationPasswordError}</small>
+                    </p>
+                  ) : null}
                 </div>
                 <div className="form-group">
                   <label for="">Confirm Password</label>
@@ -602,7 +653,13 @@ export default function Login() {
                     name=""
                     id=""
                     placeholder="Confirm your password"
+                    onChange={(registrationConfirmPsd)=> setregistrationConfirmPsd(registrationConfirmPsd)}
                   />
+                  {registrationConfirmPsd == "" ? (
+                    <p className="text-danger">
+                      <small> {registrationConfirmPsdError}</small>
+                    </p>
+                  ) : null}
                 </div>
                 <div className="signup-btn">
                   {/* <Link to="/Home"> */}

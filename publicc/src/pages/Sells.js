@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { leftSideBarMenu } from "../Layout/menuList";
-import { useToggle } from "../hooks/";
+import { useToggle } from "../hooks";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";

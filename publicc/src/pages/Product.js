@@ -1,20 +1,18 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle, useRef } from "react";
 import { leftSideBarMenu } from "../Layout/menuList";
-import { useToggle } from "../hooks/";
+import { useToggle } from "../hooks";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
 import Button from 'react-bootstrap/Button';
-
 import { Modal } from "react-bootstrap";
-
 // let Button = new AA()
 
 
 
-const Video = () => {
+const Product = () => {
 	const dispatch = useDispatch();
 	const { logout } = useAuth()
 	const navigate = useNavigate();
@@ -251,8 +249,8 @@ const Video = () => {
 
 								<div class="col-md-12 grid-margin">
 									<div class="row">
-									<div class="col-12 col-xl-4 offset-10">
-											<button type="button" class="btn btn-social-icon-text btn-info" onClick={() => { formRef.current.openForm() }}>
+										<div class="col-12 col-xl-4 offset-10">
+											<button type="button" class="btn btn-social-icon-text btn-info" onClick={()=>{formRef.current.openForm()}}>
 												<i class="ti-plus"></i>Add</button>
 										</div>
 									</div>
@@ -260,33 +258,30 @@ const Video = () => {
 
 
 
-
 								<div class="col-lg-12 grid-margin stretch-card">
 									<div class="card">
 										<div class="card-body">
-											<h4 class="card-title">Video list</h4>
+											<h4 class="card-title">Product list</h4>
 											<div class="table-responsive pt-3">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
 															<th>S.N</th>
-														
-															<th>Video </th>
-															<th> Video Title</th>
-															<th> Video Depression</th>
-															<th> Video Link</th>
-															<th>Date</th>
+															<th>Product Title</th>
+															<th>Product Image</th>
+															<th>Product Description</th>
+															<th>Product Price</th>
 															<th style={{width: '80px'}}>Action</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
 															<td>1</td>
-															<td><img src="../images/product/pr.png" class="mr-2" alt="pr" /></td>
-															<td>Mental Health</td>
 															<td>Fidget Cube</td>
-															<td>https://www.youtube.com/watch?v=BVJkf8IuRjE</td>
-															<td>Dec 15, 2021</td>
+															<td><img src="../images/product/pr.png" class="mr-2" alt="pr" /></td>
+														
+															<td>dolor sit amet consectetur, adipisicing elit.1</td>
+															<td> ₹ 399/-</td>
 															<td>
 																<button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"><i class="ti-pencil"></i></button>
 																<button type="button" class="btn btn-sm btn-danger add-btn"><i class="ti-plus"></i></button>
@@ -326,66 +321,52 @@ const Video = () => {
 const Addform = forwardRef((props, ref) => {
 	const [show, setShow] = useState(false);
 
-	const handleVisible = (state) => { setShow(state) }
+	const handleVisible = (state) =>{ setShow(state) }
 	useImperativeHandle(ref, () => ({
-		openForm() {
-			handleVisible(true);
-		}
-	}));
+        openForm() {
+            handleVisible(true);
+        }
+    }));
 
 	return (
 		<>
 			<Modal show={show} size="xl"  onHide={() => { handleVisible(false) }}>
 				<Modal.Header >
-					<Modal.Title>Video Uplode</Modal.Title>
+					<Modal.Title>Product Add</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 
 				<form class="forms-sample">
-						<div class="form-group">
-							<div class="col-md-3  offset-9">
-              <label for="exampleInputUsername1">Video Type</label>
-								<select class="form-control">
-									<option>Mental Health</option>
-									<option>Depression</option>
-									<option>Anxiety</option>
-									<option>Attention</option>
-								</select>
-							</div>
-              <div class="form-group">
-                      <label for="exampleInputUsername1">Video Title</label>
-								<input type="text" class="form-control" placeholder="Video  Title" />
-							</div>
-				<div class="row">
+					<div class="row">
               <div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Video Upload</label>
-								<input type="file" class="form-control file-upload-info" placeholder="Upload Video" />
-
+                      <label for="exampleInputUsername1">Product Title</label>
+								<input type="text" class="form-control" placeholder="Product Title" />
 							</div>
 
+							<div class="form-group col-md-6">
+                      <label for="exampleInputUsername1">Product Upload</label>
+								<input type="file" class="form-control file-upload-info" placeholder="Product Image" />
+
+							</div>
+							<div class="form-group col-md-6">
+                      <label for="exampleInputUsername1">Product Description</label>
+								<textarea class="form-control" placeholder=" Product Description" />
+							</div>
 							
 							<div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Video Link</label>
-								<input type="text" class="form-control file-upload-info" placeholder=" Video Link" />
-
+                      <label for="exampleInputUsername1">Product Price</label>
+					  <input type="text" class="form-control file-upload-info" placeholder="Product Price" />
 							</div>
-
-
 							</div>
-              <div class="form-group">
-                      <label for="exampleInputUsername1">Video Description</label>
-								<textarea class="form-control" rows={3} placeholder=" Video Description" />
-							</div>
-						</div>
-
 					</form>
 
+					
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={() => { handleVisible(false) }}>
+					<Button variant="secondary" onClick={()=> {handleVisible(false)}}>
 						Close
 					</Button>
-					<Button variant="primary" onClick={() => { handleVisible(false) }}>
+					<Button variant="primary" onClick={()=> {handleVisible(false)}}>
 						Save Changes
 					</Button>
 				</Modal.Footer>
@@ -393,4 +374,4 @@ const Addform = forwardRef((props, ref) => {
 		</>
 	);
 })
-export default Video;
+export default Product;

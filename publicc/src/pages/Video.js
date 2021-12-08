@@ -1,18 +1,20 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle, useRef } from "react";
 import { leftSideBarMenu } from "../Layout/menuList";
-import { useToggle } from "../hooks/";
+import { useToggle } from "../hooks";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
 import Button from 'react-bootstrap/Button';
+
 import { Modal } from "react-bootstrap";
+
 // let Button = new AA()
 
 
 
-const Audio = () => {
+const Video = () => {
 	const dispatch = useDispatch();
 	const { logout } = useAuth()
 	const navigate = useNavigate();
@@ -250,11 +252,13 @@ const Audio = () => {
 								<div class="col-md-12 grid-margin">
 									<div class="row">
 									<div class="col-12 col-xl-4 offset-10">
-											<button type="button" class="btn btn-social-icon-text btn-info" onClick={()=>{formRef.current.openForm()}}>
+											<button type="button" class="btn btn-social-icon-text btn-info" onClick={() => { formRef.current.openForm() }}>
 												<i class="ti-plus"></i>Add</button>
 										</div>
 									</div>
 								</div>
+
+
 
 
 								<div class="col-lg-12 grid-margin stretch-card">
@@ -267,10 +271,10 @@ const Audio = () => {
 														<tr>
 															<th>S.N</th>
 														
-															<th>Audio</th>
-															<th> Audio Title</th>
-															<th> Audio Depression</th>
-															<th>Audio Link</th>
+															<th>Video </th>
+															<th> Video Title</th>
+															<th> Video Depression</th>
+															<th> Video Link</th>
 															<th>Date</th>
 															<th style={{width: '80px'}}>Action</th>
 														</tr>
@@ -295,11 +299,10 @@ const Audio = () => {
 									</div>
 								</div>
 							</div>
-							</div>
 						</div>
 						{/* content-wrapper ends */}
 						{/* partial:partials/_footer.html */}
-            <footer class="footer">
+						<footer class="footer">
 							<div class="col-md-12 text-center">
 								<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
 								Copyright © 2021 All Right Reserved Aanaxagorasr Software Pvt. Ltd{" "}
@@ -314,7 +317,7 @@ const Audio = () => {
 						{/* partial */}
 					</div>
 				</div>
-			
+			</div>
 		</>
 	);
 };
@@ -323,25 +326,25 @@ const Audio = () => {
 const Addform = forwardRef((props, ref) => {
 	const [show, setShow] = useState(false);
 
-	const handleVisible = (state) =>{ setShow(state) }
+	const handleVisible = (state) => { setShow(state) }
 	useImperativeHandle(ref, () => ({
-        openForm() {
-            handleVisible(true);
-        }
-    }));
+		openForm() {
+			handleVisible(true);
+		}
+	}));
 
 	return (
 		<>
-		<Modal show={show} size="xl"  onHide={() => { handleVisible(false) }}>
+			<Modal show={show} size="xl"  onHide={() => { handleVisible(false) }}>
 				<Modal.Header >
-					<Modal.Title>Audio Uplode</Modal.Title>
+					<Modal.Title>Video Uplode</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 
-					<form class="forms-sample">
+				<form class="forms-sample">
 						<div class="form-group">
-              <div class="col-md-3  offset-9">
-              <label for="exampleInputUsername1">Audio Type</label>
+							<div class="col-md-3  offset-9">
+              <label for="exampleInputUsername1">Video Type</label>
 								<select class="form-control">
 									<option>Mental Health</option>
 									<option>Depression</option>
@@ -350,37 +353,39 @@ const Addform = forwardRef((props, ref) => {
 								</select>
 							</div>
               <div class="form-group">
-                      <label for="exampleInputUsername1">Audio Title</label>
-								<input type="text" class="form-control" placeholder="Audio  Title" />
+                      <label for="exampleInputUsername1">Video Title</label>
+								<input type="text" class="form-control" placeholder="Video  Title" />
 							</div>
-					<div class="row">
+				<div class="row">
               <div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Audio Upload</label>
-								<input type="file" class="form-control file-upload-info" placeholder="Upload Audio" />
+                      <label for="exampleInputUsername1">Video Upload</label>
+								<input type="file" class="form-control file-upload-info" placeholder="Upload Video" />
 
 							</div>
 
+							
 							<div class="form-group col-md-6">
-                      <label for="exampleInputUsername1">Audio Link</label>
-								<input type="text" class="form-control file-upload-info" placeholder=" Audio Link" />
+                      <label for="exampleInputUsername1">Video Link</label>
+								<input type="text" class="form-control file-upload-info" placeholder=" Video Link" />
 
 							</div>
+
+
 							</div>
               <div class="form-group">
-                      <label for="exampleInputUsername1">Audio Description</label>
-								<textarea class="form-control" placeholder=" Audio Description" />
+                      <label for="exampleInputUsername1">Video Description</label>
+								<textarea class="form-control" rows={3} placeholder=" Video Description" />
 							</div>
 						</div>
 
 					</form>
 
-					
-					</Modal.Body>
+				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={()=> {handleVisible(false)}}>
+					<Button variant="secondary" onClick={() => { handleVisible(false) }}>
 						Close
 					</Button>
-					<Button variant="primary" onClick={()=> {handleVisible(false)}}>
+					<Button variant="primary" onClick={() => { handleVisible(false) }}>
 						Save Changes
 					</Button>
 				</Modal.Footer>
@@ -388,4 +393,4 @@ const Addform = forwardRef((props, ref) => {
 		</>
 	);
 })
-export default Audio;
+export default Video;

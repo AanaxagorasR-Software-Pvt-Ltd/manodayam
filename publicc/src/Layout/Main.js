@@ -4,7 +4,7 @@ import { isToggle } from "../Store/slices/toggle.slice";
 import { isDropDown } from "../Store/slices/dropDown.slice";
 import { leftSideBarMenu } from "./menuList";
 import { v4 as uuidv4 } from "uuid";
-import { useToggle } from "../hooks/"
+import { useToggle } from "../hooks"
 import  useAuth  from "../hooks/Auth"
 import { useNavigate } from "react-router";
 const Main = () => {
