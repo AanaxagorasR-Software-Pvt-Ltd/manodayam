@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from "react-slick";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Login from "./Login";
 import {
   API_ADMIN_URL,
@@ -62,8 +62,6 @@ export default function Home(props) {
         // console.log("====llll=====", res.data.data);
         alert("Appointment Successfully");
         //  pathname="/counsultvideo"
-       
-
       })
       .catch((error) => {
         console.log(error);
@@ -224,6 +222,20 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 <h1>your support network, manage yourself with us.</h1>
+                <button className="btn-web">
+                  <a href="">register for assessment</a>
+                </button>
+                <button className="btn-web">
+                  {" "}
+                  <Link to="/support">your support network</Link>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="web-banner web-banner4 mb-50">
+            <div className="container">
+              <div className="web-banner-content">
+                <h1>Shakti Power To Heal Yourself</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -683,9 +695,9 @@ export default function Home(props) {
                     </div>
                   </div>
                   <div className="col-lg-12">
-                    <div className="form-group">
+                    <div className="form-group ">
                       <select name="" id="">
-                        <option value="">Depression</option>
+                        <option value=""> Depression</option>
                         <option value="">Anxiety</option>
                         <option value="">Attention Disorder</option>
                         <option value="">Psychosis</option>
@@ -793,6 +805,7 @@ export default function Home(props) {
                     <div className="col-lg-6">
                       <div className="form-group">
                         <select
+                          className="text-secondary"
                           name=""
                           id=""
                           onChange={(appointDisorder) =>
@@ -886,7 +899,7 @@ export default function Home(props) {
             <div className="col-lg-12">
               <div className="service-heading">
                 <h5>Eco System</h5>
-                <h2>Get Our Amazing Products</h2>
+                {/* <h2>Get Our Amazing Products</h2> */}
                 <p>
                   Commodo tempus sapien sit bibendum sit morbi auctor molestie
                   rutrum pellentesque eget vitae justo congue amet malesuada.
@@ -896,6 +909,7 @@ export default function Home(props) {
 
             {responseData.map((element) => (
               <div className="col-lg-3 col-sm-6">
+              {console.log('element', element)}
                 <div className="product-card">
                   <img src={element.url} alt="" />
                   <h3>{element.name}</h3>
@@ -903,8 +917,8 @@ export default function Home(props) {
                   <span>{element.price}</span>
                   <Link
                     to={{
-                      pathname: "/ViewProduct",
-                      statedata: 'helloworld'
+                      pathname: "/ViewProduct/" + element.slug,
+                      slug : element.slug
                     }}
                   >
                     <buttton className="btn-web cart-btn">View</buttton>

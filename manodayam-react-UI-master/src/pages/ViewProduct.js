@@ -1,9 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import ReadMoreReact from "read-more-react";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+// import ReadMoreReact from "read-more-react";
+import {
+  API_ADMIN_URL,
+  VIEW_PRODUCT,
+} from "../utill/api.endpoints";
 export default function ViewProduct(props) {
-
-  console.log("*********", props);
+  const [slug, setSlug] = useState(useParams().slug);
+  console.log("77777777777");
+  // const {slug} = useParams();
+  useEffect(() => {
+    // alert(slug);
+    setSlug(slug);
+    console.log("slug", slug);
+  }, []);
 
   const [quantity, setquantity] = useState(0);
   const plus = () => {
@@ -11,7 +22,25 @@ export default function ViewProduct(props) {
   };
   const Minus = () => {
     if (quantity >= 1) setquantity(quantity - 1);
+    setSlug(slug);
   };
+  // productlist
+  const [responseData, setResponseData] = useState([]);
+  const ViewProjuct = () => {
+    console.log(`${API_ADMIN_URL}${VIEW_PRODUCT}`);
+    axios
+      .get(`${API_ADMIN_URL}/${VIEW_PRODUCT}/${slug}`)
+      .then((res) => {
+        setResponseData(res.data.data);
+        console.log("$$$$$$$$$$", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect((props) => {
+    ViewProjuct(props);
+  }, []);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -19,12 +48,11 @@ export default function ViewProduct(props) {
           <div className="row">
             <div className="col-lg-6">
               <div className="contact-breadcrumb">
-                <h3>Details of Product</h3>
                 <ol className="breadcrumb">
                   <li>
                     <Link to="/home">Home / &nbsp;</Link>
                   </li>
-                  <li>View</li>
+                  <li>Product Details</li>
                 </ol>
               </div>
             </div>
@@ -50,11 +78,7 @@ export default function ViewProduct(props) {
                       <div className="row">
                         <div className="col-lg-5">
                           <div className="ml-2 library-video ">
-                            <img
-                              className="w-100"
-                              src="assets/image/isolate.jpeg"
-                              alt=""
-                            />
+                            <img src={responseData?.[0]?.url} alt="" />
                           </div>
 
                           <Link to="/Cart" className="ml-4 mt-4">
@@ -70,11 +94,8 @@ export default function ViewProduct(props) {
                           <img src="assets/image/doctor-img.jpg" alt="" />
                         </div> */}
                               <div className="col-9">
-                                <h3>Impact Whey Isolate</h3>
-                                <h5>
-                                  One of the purest whey protein powders
-                                  available, with 90% protein content...
-                                </h5>
+                                <h3>{responseData?.[0]?.name}</h3>
+                                <h5>{responseData?.[0]?.overview}</h5>
                                 <div className="service-heading d-inline-flex">
                                   <h5 className="ml-1 bg-light text-dark rounded-bottom rounded-top border p-1">
                                     Vegetarian
@@ -84,7 +105,7 @@ export default function ViewProduct(props) {
                                   </h5>
                                 </div>
                                 <div className="mb-3">
-                                  <span>₹ 86798</span>
+                                  <span>{responseData?.[0]?.price}</span>
                                 </div>
                                 <h3 className="text-dark">Quantity:</h3>
                                 <div className="d-inline-flex">
@@ -104,29 +125,16 @@ export default function ViewProduct(props) {
                                 </div>
                               </div>
                             </div>
-                            <h6>
-                              What are the benefits of Impact Whey Isolate?
-                            </h6>
-                            <p>
-                              The 23g (Unflavoured version) of high-quality
-                              protein per serving is perfect for supporting all
-                              training goals, contributing to the growth and
-                              maintenance of muscle mass, while also being low
-                              in fat and containing less than 1g of carbs – the
-                              ideal choice if you’re keeping an eye on calories,
-                              too.
-                            </p>
-                            <p>
+                            <p>{responseData?.[0]?.para}</p>
+                            {/* <p>
                               <ReadMoreReact
-                                text={
-                                  "Enjoy it in a range of specially created flavours, from classic Chocolate Smooth and Strawberry Cream to the indulgent Rocky Road and Salted Caramel."
-                                }
+                                text={responseData?.[0]?.more}
                                 min={20}
                                 ideal={30}
-                                max={100}
+                                max={70}
                                 readMoreText="View More"
                               />
-                            </p>
+                            </p> */}
                           </div>
                         </div>
                       </div>

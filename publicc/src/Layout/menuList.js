@@ -11,7 +11,7 @@ const leftSideBarMenu = [
     isHover: false
   },
   {
-    name: "OTT Platform",
+    name: "Shakti",
     isActive: false,
     dataToggle: "",
     isExpand: false,

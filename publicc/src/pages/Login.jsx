@@ -54,7 +54,7 @@ const Login = (props) => {
               <h4>Hello! let's get started</h4>
               <h6 className="font-weight-light">Sign in to continue.</h6>
               <form className="pt-3"
-              // onSubmit={handleSubmit(onSubmitHandler)}
+              onSubmit={handleSubmit(onSubmitHandler)}
               >
                 <div className="form-group">
                   <input

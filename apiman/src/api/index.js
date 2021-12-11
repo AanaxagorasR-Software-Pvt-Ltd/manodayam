@@ -29,6 +29,7 @@ router.use(`/products`, require("./product/product.list"));
 router.use(`/products`, require("./product/addproduct"));
 router.use(`/products`, require("./product/update.product"));
 router.use(`/products`, require("./product/removeProducts"));
+router.use(`/products`, require("./product/productDetails"));
 
 router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));

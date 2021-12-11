@@ -354,6 +354,11 @@ header{
  background-size: cover;
  background-position-y: 1%;
 }
+.web-banner4{
+    background-image:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(../image/banner/research1.png);
+ background-size: cover;
+ background-position-y: 30%;
+}
 .about-img img {
     border-radius: 15px;
 }

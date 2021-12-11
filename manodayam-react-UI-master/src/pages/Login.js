@@ -1,5 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import {
   API_ADMIN_URL,
   LOGIN_API,
@@ -9,15 +8,19 @@ import {
 } from "../utill/api.endpoints";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import Modal from "react-modal";
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
-export default function Login() {
+export default function Login(props) {
+  // const navigate = useNavigate();
+
   const [logineMail, setlogineMail] = useState("");
   const [loginPassword, setloginPassword] = useState("");
   const [registrationName, setregistrationName] = useState("");
   const [registrationMail, setregistrationMail] = useState("");
   const [registrationPassword, setregistrationPassword] = useState("");
-  const [registrationConfirmPsd, setregistrationConfirmPsd] = useState("");
+  // const [registrationConfirmPsd, setregistrationConfirmPsd] = useState("");
   const [doctorName, setdoctorName] = useState("");
   const [doctoraddress, setdoctoraddress] = useState("");
   const [doctorphone, setdoctorphone] = useState("");
@@ -28,7 +31,6 @@ export default function Login() {
   const [libraryMail, setlibraryMail] = useState("");
   const [libraryDate, setlibraryDate] = useState("");
   const [libraryMsg, setlibraryMsg] = useState("");
-  // const [phoneTenDigits, setphoneTenDigits] = useState("");
 
   // validation Error
   const [doctorNameError, setdoctorNameError] = useState("");
@@ -45,12 +47,16 @@ export default function Login() {
   const [loginPasswordError, setloginPasswordError] = useState("");
   const [registrationNameError, setregistrationNameError] = useState("");
   const [registrationMailError, setregistrationMailError] = useState("");
-  const [registrationPasswordError, setregistrationPasswordError] = useState("");
-  const [registrationConfirmPsdError, setregistrationConfirmPsdError] = useState("");
-
-
+  const [registrationPasswordError, setregistrationPasswordError] =
+    useState("");
+  const [modalIsOpen, setmodalIsOpen] = useState();
+  function handleCloseModal() {
+    // document.getElementByClassName("close-btn").onClick();
+    // alert('hhhhh');
+    return <div className="close-btn"></div>;
+  }
   // Login
-  const LoginApi = () => {
+  const LoginApi = (props) => {
     if (logineMail == "") {
       setLoginmailError("Enter your mail");
     }
@@ -66,7 +72,13 @@ export default function Login() {
       .post(`${API_ADMIN_URL}${LOGIN_API}`, loginOptions)
       .then((res) => {
         console.log("====llll=====", res.data);
-        alert("Successfully Login");
+
+        if (res.status == 200) {
+          alert("%%%%%%%%%%");
+          handleCloseModal();
+        } else {
+          alert("enter correct mail or password");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -83,9 +95,7 @@ export default function Login() {
     if (registrationPassword == "") {
       setregistrationPasswordError("Enter your password");
     }
-    if( registrationConfirmPsd == ""){
-      setregistrationConfirmPsdError("Enter your confirm password")
-    }
+
     console.log(`${API_ADMIN_URL}${REGISTER_API}`);
     const RegisterationOptions = {
       email: registrationMail,
@@ -190,8 +200,25 @@ export default function Login() {
         console.log(error);
       });
   };
+  // const openModal = () => {
+  //   setmodalIsOpen(true);
+  // };
+  // const closeModal = () => {
+  //   setmodalIsOpen(false);
+  // };
   return (
     <>
+      {/* <button onClick={openModal}>Open Modal</button>
+      <Modal
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        // style={customStyles}
+        className={}
+        contentLabel="Example Modal"
+    
+
+      ></Modal> */}
       <div className="modal fade" id="myModal">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -213,7 +240,7 @@ export default function Login() {
                     name=""
                     id=""
                     placeholder="Enter your email here"
-                    // value={logineMail}
+                    value={logineMail}
                     onChange={(logineMail) =>
                       setlogineMail(logineMail.target.value)
                     }
@@ -250,16 +277,21 @@ export default function Login() {
                   <p className="fgt-btn">Forgot Password?</p>
                 </div>
                 <div className="signup-btn">
-                  <button
-                    type="button"
+                  <div
+                    className="signup-btn sgn-btn btn btn-web
+                    hvr-float-shadow"
+                  >
+                    <Link to="/" onClick={LoginApi}>
+                      Submit
+                    </Link>
+                  </div>
+                  {/* <button
+                    // type="button"
                     className="sgn-btn btn btn-web hvr-float-shadow"
                     onClick={LoginApi}
                   >
-                    {/* <Link to="/Home" > */}
                     Submit
-                    {/* </Link> */}
-                    {/* <Link to="/home" >Submit</Link> */}
-                  </button>
+                  </button> */}
                 </div>
               </form>
               <div className="forgot-password">
@@ -318,7 +350,6 @@ export default function Login() {
                     placeholder="Confirm your password"
                   />
                 </div>
-                {/* <div>hello</div> */}
                 <div className="signup-btn">
                   <button className="sgn-btn btn btn-web hvr-float-shadow">
                     Create Account
@@ -401,8 +432,8 @@ export default function Login() {
                     id="mobile"
                     placeholder="Phone no."
                     type="tel"
-                    minlength="10"
-                    maxlength="10"
+                    minLength="10"
+                    maxLength="10"
                     onChange={(doctorphone) =>
                       setdoctorphone(doctorphone.target.value)
                     }
@@ -505,8 +536,8 @@ export default function Login() {
                     name=""
                     id="mobile"
                     placeholder="Phone no."
-                    minlength="10"
-                    maxlength="10"
+                    minLength="10"
+                    maxLength="10"
                     onChange={(libraryNum) =>
                       setlibraryNum(libraryNum.target.value)
                     }
@@ -635,9 +666,7 @@ export default function Login() {
                     placeholder="Type your password here"
                     // value={registrationPassword}
                     onChange={(registrationPassword) =>
-                      setregistrationPassword(
-                        registrationPassword.target.value
-                      )
+                      setregistrationPassword(registrationPassword.target.value)
                     }
                   />
                   {registrationPassword == "" ? (
@@ -646,21 +675,7 @@ export default function Login() {
                     </p>
                   ) : null}
                 </div>
-                <div className="form-group">
-                  <label for="">Confirm Password</label>
-                  <input
-                    type="password"
-                    name=""
-                    id=""
-                    placeholder="Confirm your password"
-                    onChange={(registrationConfirmPsd)=> setregistrationConfirmPsd(registrationConfirmPsd)}
-                  />
-                  {registrationConfirmPsd == "" ? (
-                    <p className="text-danger">
-                      <small> {registrationConfirmPsdError}</small>
-                    </p>
-                  ) : null}
-                </div>
+
                 <div className="signup-btn">
                   {/* <Link to="/Home"> */}
 

@@ -35,9 +35,8 @@ function App() {
           <Route path="/healthheal" element={<Healthheal />} exact />
           <Route path="/profile" element={<Profile />} exact />
           <Route path="/spirituality" element={<Spirituality />} exact />
-          <Route path="/ViewProduct" element={<ViewProduct />} exact />
+          <Route path="/ViewProduct/:slug" element={<ViewProduct />} exact />
 
-          
         </Routes>
 
         <Footer />
