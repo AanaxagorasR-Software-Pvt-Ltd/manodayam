@@ -17,8 +17,6 @@ const peerServer = ExpressPeerServer(server, {
 const { v4:uuidv4 } = require("uuid")
 
 
-
-
 app.set('view engine','ejs')
 app.use('/peerjs', peerServer);
 app.get('/',(req,res) => { 
@@ -40,6 +38,5 @@ io.on('connection' , socket => {
 	})
 	
 })
-
 
 server.listen(process.env.PORT || 3000,() => console.log("server up and running "))

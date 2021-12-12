@@ -8,6 +8,7 @@ import {
   API_ADMIN_URL,
   PRODUCT_API,
   APPOINTMENT_API,
+  BANNER_API,
 } from "../utill/api.endpoints";
 
 export default function Home(props) {
@@ -19,7 +20,6 @@ export default function Home(props) {
   const [appointMsg, setappointMsg] = useState("");
 
   //error
-
   const [appointNameError, setappointNameError] = useState("");
   const [appointMailError, setappointMailError] = useState("");
   const [appointNumError, setappointNumError] = useState("");
@@ -69,7 +69,6 @@ export default function Home(props) {
   };
 
   // productlist
-  console.log("111111111");
   const [responseData, setResponseData] = useState([]);
   const Productlist = () => {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
@@ -83,13 +82,27 @@ export default function Home(props) {
         console.log(error);
       });
   };
-
+  // Banner
+  const [bannerData, setbannerData] = useState([]);
+  const BannerData = () => {
+    console.log(`${API_ADMIN_URL}${BANNER_API}`);
+    axios
+      .get(`${API_ADMIN_URL}${BANNER_API}`)
+      .then((res) => {
+        setbannerData(res.data.data);
+        console.log("====bannerData====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   // useEffect(()=>{
   //   console.log('responseData', responseData.data);
   // }, [responseData])
 
   useEffect((props) => {
     Productlist(props);
+    BannerData();
   }, []);
   var settings = {
     dots: false,
@@ -174,7 +187,7 @@ export default function Home(props) {
           <div className="web-banner web-banner3 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>Manodayam addresses various mental health issues.</h1>
+                <h1>{bannerData?.[0]?.caption}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -187,10 +200,7 @@ export default function Home(props) {
           <div className="web-banner web-banner1 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>
-                  privacy and data security is paramount, we understand your
-                  concern.
-                </h1>
+                <h1>{bannerData?.[1]?.caption}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -204,10 +214,7 @@ export default function Home(props) {
           <div className="web-banner web-banner2 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>
-                  continual research and development , we are research driven
-                  mental health organisation.
-                </h1>
+                <h1>{bannerData?.[2]?.caption}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -221,7 +228,7 @@ export default function Home(props) {
           <div className="web-banner mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>your support network, manage yourself with us.</h1>
+                <h1>{bannerData?.[3]?.caption}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -235,7 +242,7 @@ export default function Home(props) {
           <div className="web-banner web-banner4 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>Shakti Power To Heal Yourself</h1>
+                <h1>{bannerData?.[4]?.caption}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -714,7 +721,7 @@ export default function Home(props) {
 
                   <div className="col-lg-12">
                     <buttton className="btn hvr-float-shadow">
-                      <Link to="/consultvideo" style={{ color: "#23adba" }}>
+                      <Link to="/bookingAppoint" style={{ color: "#23adba" }}>
                         Submit
                       </Link>
                     </buttton>
@@ -909,7 +916,7 @@ export default function Home(props) {
 
             {responseData.map((element) => (
               <div className="col-lg-3 col-sm-6">
-              {console.log('element', element)}
+                {console.log('element', element)}
                 <div className="product-card">
                   <img src={element.url} alt="" />
                   <h3>{element.name}</h3>
@@ -918,7 +925,7 @@ export default function Home(props) {
                   <Link
                     to={{
                       pathname: "/ViewProduct/" + element.slug,
-                      slug : element.slug
+                      slug: element.slug
                     }}
                   >
                     <buttton className="btn-web cart-btn">View</buttton>

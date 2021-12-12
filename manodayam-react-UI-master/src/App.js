@@ -13,7 +13,7 @@ import Healthheal from "./pages/Healthheal";
 import Profile from "./pages/Profile";
 import Spirituality from "./pages/Spirituality";
 import ViewProduct from "./pages/ViewProduct";
-
+import BookingAppoint from "./pages/BookAppoint";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -36,7 +36,7 @@ function App() {
           <Route path="/profile" element={<Profile />} exact />
           <Route path="/spirituality" element={<Spirituality />} exact />
           <Route path="/ViewProduct/:slug" element={<ViewProduct />} exact />
-
+          <Route path="/bookingAppoint" element={<BookingAppoint />} exact />
         </Routes>
 
         <Footer />
