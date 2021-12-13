@@ -166,25 +166,23 @@ export default function Appointment() {
                           className="text-secondary"
                           name=""
                           id=""
-                          onChange={(appointDisorder) =>
-                            setappointDisorder(appointDisorder.target.value)
+                          onChange={(appointmentSchedule) =>
+                            setappointmentSchedule(appointmentSchedule.target.value)
                           }
-                        > fgfhg
-                          <option value="">Depression</option>
-                          <option value="Anxiety">Anxiety</option>
-                        
-                          <option value="Psychosis">Psychosis</option>
-                         
-                          <option value="Drug_Abuse">Drug Abuse</option>
-                         
+                        >
+                          {" "}
+                          fgfhg
+                          <option value="TowOClock">02:00</option>
+                          <option value="FourOClock">04:00</option>
+                          <option value="SixOClock">06:00</option>
+                          <option value="EightOClock">08:00</option>
                         </select>
-                        {appointDisorder == "" ? (
-                          <p className="text-danger">{appointDisorderError}</p>
+                        {appointmentSchedule == "" ? (
+                          <p className="text-danger">{appointmentScheduleError}</p>
                         ) : null}
                       </div>
                     </div>
-                  
-                    
+
                     <div className="col-lg-6">
                       <div className="form-group">
                         <select

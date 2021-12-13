@@ -1,6 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { VDO_URL, VDO_API } from "../utill/api.endpoints";
 export default function Profile() {
+  // const Appointment = () => {
+
+  //   console.log("hhhhhhhhh", `${VDO_URL}${VDO_API}`);
+
+  //   axios
+  //     .post(`${VDO_URL}${VDO_API}`, VDO_API)
+  //     .then((res) => {
+  //       alert("Appointment Successfully");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   return (
     <>
       <div className="contact-banner mb-50">
@@ -92,7 +107,6 @@ export default function Profile() {
             <div className="col-lg-12">
               <div className="profile-setting">
                 <div className="tab-content">
-
                   <div class="tab-pane active" id="home">
                     <div class="row">
                       <div class="col-lg-12">
@@ -121,7 +135,6 @@ export default function Profile() {
                                     id=""
                                     placeholder="Last name"
                                     disabled
-
                                   />
                                 </div>
                               </div>
@@ -134,7 +147,6 @@ export default function Profile() {
                                     id=""
                                     placeholder="Phone no."
                                     disabled
-
                                   />
                                 </div>
                               </div>
@@ -147,7 +159,6 @@ export default function Profile() {
                                     id=""
                                     placeholder="Email address"
                                     disabled
-
                                   />
                                 </div>
                               </div>
@@ -259,7 +270,7 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-                
+
                   {/* <div className="tab-pane fade" id="menu2">
                     <div className="row">
                       <div className="col-lg-12">
@@ -340,11 +351,11 @@ export default function Profile() {
                           <table className="table table-bordered table-striped table-hover">
                             <thead>
                               <tr>
-                                <th>Product</th>
-                                <th>Product name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Shipping charges</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Condition</th>
+                                <th>Call</th>
                                 <th>Status</th>
                               </tr>
                             </thead>
@@ -353,43 +364,81 @@ export default function Profile() {
                                 <td>
                                   <img src="image/pr.png" alt="" />
                                 </td>
-                                <td>Fidget Cube</td>
+                                <td>06:00</td>
+                                <td>XYZ</td>
+                                <td>Anxiety</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 399
+                                  {/* <i className="fa fa-video-camera"></i> */}
+                                  <a href="http://localhost:3000/">
+                                    <img src="assets/image/vdo.png" alt="" />
+                                  </a>
                                 </td>
-                                <td>2</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 500
+                                  <select className="mt-2">
+                                    <option value="TowOClock">Success</option>
+                                    <option value="FourOClock">
+                                      UnSuccess
+                                    </option>
+                                    <option value="SixOClock">Pending</option>
+                                  </select>
                                 </td>
-                                <td>Success</td>
                               </tr>
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
                                 </td>
-                                <td>Fidget Cube</td>
+                                <td>04:00</td>
+                                <td>ABC</td>
+                                <td>Dementia</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 399
+                                  <a href="http://localhost:3000/">
+                                    <img
+                                      className=""
+                                      src="assets/image/vdo.png"
+                                      alt=""
+                                    />
+                                  </a>
+                                  {/* <i className="fa fa-video-camera"></i> */}
                                 </td>
-                                <td>3</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 500
+                                  <select className="mt-2">
+                                    <option value="TowOClock">Success</option>
+                                    <option value="FourOClock">
+                                      UnSuccess
+                                    </option>
+                                    <option value="SixOClock">Pending</option>
+                                  </select>
                                 </td>
-                                <td>Success</td>
                               </tr>
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
                                 </td>
-                                <td>Fidget Cube</td>
+                                <td>02:00</td>
+                                <td>XYZ</td>
+                                <td>Bipolar</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 399
+                                  {/* <Link to="http://localhost:3000/"> */}
+                                  <a href="http://localhost:3000/">
+                                    <img
+                                      // onClick={Appointment}
+                                      className=""
+                                      src="assets/image/vdo.png"
+                                      alt=""
+                                    />
+                                  </a>
+                                  {/* <i className="fa fa-video-camera"></i> */}
+                                  {/* </Link> */}
                                 </td>
-                                <td>3</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 500
+                                  <select className="mt-2">
+                                    <option value="TowOClock">Success</option>
+                                    <option value="FourOClock">
+                                      UnSuccess
+                                    </option>
+                                    <option value="SixOClock">Pending</option>
+                                  </select>
                                 </td>
-                                <td>Success</td>
                               </tr>
                             </tbody>
                           </table>
