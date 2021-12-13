@@ -23,9 +23,9 @@ export default function Login(props) {
   // const [registrationConfirmPsd, setregistrationConfirmPsd] = useState("");
   const [doctorName, setdoctorName] = useState("");
   const [doctoraddress, setdoctoraddress] = useState("");
-  const [doctorphone, setdoctorphone] = useState("");
+  const [doctoremail, setdoctoremail] = useState("");
   const [doctorspeciality, setdoctorspeciality] = useState("");
-  const [doctorotp, setdoctorotp] = useState("");
+  const [doctorpassword, setdoctorpassword] = useState("");
   const [libraryName, setlibraryName] = useState("");
   const [libraryNum, setlibraryNum] = useState("");
   const [libraryMail, setlibraryMail] = useState("");
@@ -35,9 +35,9 @@ export default function Login(props) {
   // validation Error
   const [doctorNameError, setdoctorNameError] = useState("");
   const [doctoraddressError, setdoctoraddressError] = useState("");
-  const [doctorphoneError, setdoctorphoneError] = useState("");
+  const [doctoremailError, setdoctoremailError] = useState("");
   const [doctorspecialityError, setdoctorspecialityError] = useState("");
-  const [doctorotpError, setdoctorotpError] = useState(doctorphone);
+  const [doctorpasswordError, setdoctorpasswordError] = useState("");
   const [libraryNameError, setlibraryNameError] = useState("");
   const [libraryNumError, setlibraryNumError] = useState("");
   const [libraryMailError, setlibraryMailError] = useState("");
@@ -124,29 +124,29 @@ export default function Login(props) {
     if (doctoraddress == "") {
       setdoctoraddressError("Enter Your Address");
     }
-    if (doctorphone == "") {
-      setdoctorphoneError("Enter Your Phone");
+    if (doctoremail == "") {
+      setdoctoremailError("Enter Your email");
     }
-    if (filter.test(doctorphone)) {
-      if (doctorphone.length == 10) {
-      } else {
-        alert("Please put 10  digit mobile number");
-      }
-    }
+    // if (filter.test(doctoremail)) {
+    //   if (doctoremail.length == 10) {
+    //   } else {
+    //     alert("Please put 10  digit mobile number");
+    //   }
+    // }
     if (doctorspecialityError == "") {
       setdoctorspecialityError("Fill Your Speciality");
     }
-    if (doctorotpError == "") {
-      setdoctorotpError("OTP Here");
+    if (doctorpassword == "") {
+      setdoctorpassword("OTP Here");
     }
 
     console.log(`${API_ADMIN_URL}${DOCTOR_API}`);
     const doctorOptions = {
       name: doctorName,
       address: doctoraddress,
-      phone: doctorphone,
+      email: doctoremail,
       speciality: doctorspeciality,
-      otp: doctorotp,
+      password: doctorpassword,
     };
     axios
       .post(`${API_ADMIN_URL}${DOCTOR_API}`, doctorOptions)
@@ -425,22 +425,22 @@ export default function Login(props) {
                 </div>
 
                 <div className="form-group">
-                  <label for="">Your Phone No.</label>
+                  <label for="">Your Mail</label>
                   <input
                     type="tel"
                     name=""
-                    id="mobile"
-                    placeholder="Phone no."
+                    // id="mobile"
+                    placeholder="Mail id"
                     type="tel"
-                    minLength="10"
-                    maxLength="10"
-                    onChange={(doctorphone) =>
-                      setdoctorphone(doctorphone.target.value)
+                    // minLength="10"
+                    // maxLength="10"
+                    onChange={(doctoremail) =>
+                      setdoctoremail(doctoremail.target.value)
                     }
                   />
-                  {doctorphone == "" ? (
+                  {doctoremail == "" ? (
                     <p className="text-danger">
-                      <small> {doctorphoneError}</small>
+                      <small> {doctoremailError}</small>
                     </p>
                   ) : null}
                   {/* {doctorphone == doctorphone ? null : (
@@ -467,22 +467,23 @@ export default function Login(props) {
                   ) : null}
                 </div>
                 <div className="form-group">
-                  <label for="">Enter OTP (One Time Password)</label>
+                  <label for="">Password</label>
                   <input
                     type="text"
                     name=""
                     id=""
-                    placeholder="OTP"
-                    onChange={(doctorotp) =>
-                      setdoctorotp(doctorotp.target.value)
+                    placeholder="Enter Your Password"
+                    onChange={(doctorpassword) =>
+                      setdoctorpassword(doctorpassword.target.value)
                     }
                   />
-                  {doctorotp == "" ? (
+                  {doctorpassword == "" ? (
                     <p className="text-danger">
-                      <small> {doctorotpError}</small>
+                      <small> {doctorpasswordError}</small>
                     </p>
                   ) : null}
                 </div>
+
                 <div
                   className="Register text-center"
                   onClick={Doctorregistration}

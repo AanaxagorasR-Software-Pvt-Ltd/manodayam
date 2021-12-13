@@ -64,7 +64,7 @@ export default function Profile() {
                             My Orders
                           </a>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                           <a
                             className="nav-link"
                             data-toggle="tab"
@@ -72,7 +72,7 @@ export default function Profile() {
                           >
                             Address Change
                           </a>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                           <a
                             className="nav-link"
@@ -92,59 +92,67 @@ export default function Profile() {
             <div className="col-lg-12">
               <div className="profile-setting">
                 <div className="tab-content">
-                  <div className="tab-pane active" id="home">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div className="profile-form checkout-form doctor-form">
+
+                  <div class="tab-pane active" id="home">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="profile-form checkout-form doctor-form">
                           <h3>Edit Your Profile Here</h3>
                           <form action="">
-                            <div className="row">
-                              <div className="col-lg-6">
-                                <div className="form-group">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
                                   <label for="">First Name</label>
                                   <input
                                     type="text"
                                     name=""
                                     id=""
                                     placeholder="First name"
+                                    disabled
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
+                              <div class="col-lg-6">
+                                <div class="form-group">
                                   <label for="">Last Name</label>
                                   <input
                                     type="text"
                                     name=""
                                     id=""
                                     placeholder="Last name"
+                                    disabled
+
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
+                              <div class="col-lg-6">
+                                <div class="form-group">
                                   <label for="">Phone No.</label>
                                   <input
                                     type="text"
                                     name=""
                                     id=""
                                     placeholder="Phone no."
+                                    disabled
+
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
+                              <div class="col-lg-6">
+                                <div class="form-group">
                                   <label for="">Email Address</label>
                                   <input
                                     type="email"
                                     name=""
                                     id=""
                                     placeholder="Email address"
+                                    disabled
+
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
+                              <div class="col-lg-6">
+                                <div class="form-group">
                                   <label for="">Old Password</label>
                                   <input
                                     type="password"
@@ -154,8 +162,8 @@ export default function Profile() {
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
+                              <div class="col-lg-6">
+                                <div class="form-group">
                                   <label for="">New Password</label>
                                   <input
                                     type="password"
@@ -165,8 +173,8 @@ export default function Profile() {
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-12">
-                                <div className="form-group">
+                              <div class="col-lg-12">
+                                <div class="form-group">
                                   <label for="">Confirm Password</label>
                                   <input
                                     type="password"
@@ -176,10 +184,10 @@ export default function Profile() {
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-12">
-                                <button className="btn hvr-float-shadow">
-                                  Save settings
-                                </button>
+                              <div class="col-lg-12">
+                                <buttton class="btn hvr-float-shadow">
+                                  Save
+                                </buttton>
                               </div>
                             </div>
                           </form>
@@ -187,7 +195,6 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-
                   <div className="tab-pane fade" id="menu1">
                     <div className="row">
                       <div className="col-lg-12">
@@ -252,8 +259,8 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-
-                  <div className="tab-pane fade" id="menu2">
+                
+                  {/* <div className="tab-pane fade" id="menu2">
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="profile-form checkout-form doctor-form">
@@ -325,8 +332,7 @@ export default function Profile() {
                         </div>
                       </div>
                     </div>
-                  </div>
-
+                  </div> */}
                   <div className="tab-pane fade" id="menu3">
                     <div className="row">
                       <div className="col-lg-12">

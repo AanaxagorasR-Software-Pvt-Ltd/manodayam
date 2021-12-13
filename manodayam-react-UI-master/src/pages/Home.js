@@ -642,7 +642,7 @@ export default function Home(props) {
 
             <div className="col-lg-6">
               <div className="doctor-form">
-                <h3>Search Doctors Here</h3>
+                <h3>Search Doctors For Appointment</h3>
                 <form action="">
                   <div className="col-lg-12">
                     <div className="form-group">
@@ -732,174 +732,6 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-
-      <div className="zoom-consult mb-50">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="doctor-form">
-                <h3>Consult With Us</h3>
-                <form action="">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          name=""
-                          id=""
-                          placeholder="Full name"
-                          onChange={(appointName) =>
-                            setappointName(appointName.target.value)
-                          }
-                        />
-                        {appointName == "" ? (
-                          <p className="text-danger">{appointNameError}</p>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <input
-                          type="email"
-                          name=""
-                          id=""
-                          placeholder="Email"
-                          onChange={(appointMail) =>
-                            setappointMail(appointMail.target.value)
-                          }
-                        />
-                        {appointMail == "" ? (
-                          <p className="text-danger">{appointMailError}</p>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          name=""
-                          id=""
-                          placeholder="Mobile no."
-                          onChange={(appointNum) =>
-                            setappointNum(appointNum.target.value)
-                          }
-                        />
-                        {appointNum == "" ? (
-                          <p className="text-danger">{appointNumError}</p>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          name=""
-                          id=""
-                          placeholder="Scheduling date and time"
-                          onChange={(appointmentSchedule) =>
-                            setappointmentSchedule(
-                              appointmentSchedule.target.value
-                            )
-                          }
-                        />
-                        {appointmentSchedule == "" ? (
-                          <p className="text-danger">
-                            {appointmentScheduleError}
-                          </p>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <select
-                          className="text-secondary"
-                          name=""
-                          id=""
-                          onChange={(appointDisorder) =>
-                            setappointDisorder(appointDisorder.target.value)
-                          }
-                        >
-                          <option value="Depression">Depression</option>
-                          <option value="Anxiety">Anxiety</option>
-                          <option value="Attention_Disorder">
-                            Attention Disorder
-                          </option>
-                          <option value="Psychosis">Psychosis</option>
-                          <option value="Obsessive_Compulsive_Disorder">
-                            Obsessive Compulsive Disorder
-                          </option>
-                          <option value="Drug_Abuse">Drug Abuse</option>
-                          <option value="Alcohol_Abuse">Alcohol Abuse</option>
-                          <option value="Sexual_Dysfunction">
-                            Sexual Dysfunction
-                          </option>
-                          <option value="Dementia">Dementia</option>
-                          <option value="Bipolar">Bipolar</option>
-                          <option value="schizophrenia">schizophrenia </option>
-                        </select>
-                        {appointDisorder == "" ? (
-                          <p className="text-danger">{appointDisorderError}</p>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group schedule-msg">
-                        <textarea
-                          name=""
-                          id=""
-                          cols="30"
-                          rows="1"
-                          placeholder="Enter your message here"
-                          onChange={(appointMsg) =>
-                            setappointMsg(appointMsg.target.value)
-                          }
-                        ></textarea>
-                        {appointMsg == "" ? (
-                          <p className="text-danger">{appointMsgError}</p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12" onClick={Appointment}>
-                      {/* <Link to="/counsultvideo"> */}
-                      <buttton className="btn hvr-float-shadow">
-                        Book appointment
-                      </buttton>
-                      {/* </Link> */}
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="doctor-heading mt-25 mt-30">
-                <h2>Schedule your appointment</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                  ad repellendus laboriosam ea, dolorem odio culpa.
-                </p>
-
-                <div className="expert-details">
-                  <span>01</span>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veritatis cupiditate nostrum et quisquam aliquid ipsa ad
-                    necessitatibus.
-                  </p>
-                </div>
-                <div className="expert-details">
-                  <span>02</span>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veritatis cupiditate nostrum et quisquam aliquid ipsa ad
-                    necessitatibus.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="service-section mb-50">
         <div className="container">
           <div className="row">
@@ -916,7 +748,7 @@ export default function Home(props) {
 
             {responseData.map((element) => (
               <div className="col-lg-3 col-sm-6">
-                {console.log('element', element)}
+                {console.log("element", element)}
                 <div className="product-card">
                   <img src={element.url} alt="" />
                   <h3>{element.name}</h3>
@@ -925,7 +757,7 @@ export default function Home(props) {
                   <Link
                     to={{
                       pathname: "/ViewProduct/" + element.slug,
-                      slug: element.slug
+                      slug: element.slug,
                     }}
                   >
                     <buttton className="btn-web cart-btn">View</buttton>
