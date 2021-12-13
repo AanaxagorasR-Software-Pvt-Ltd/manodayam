@@ -5,9 +5,9 @@ const bcrypt = require("bcrypt");
 const { getDatabase } = require("../../db/mongo");
 
 const validate = (req, res, next ) => {
-  const {name, address, phone, speciality, otp } = req.body;
+  const {name, address, email, speciality, password } = req.body;
 console.log('888888', );
-  if (name, address, phone, speciality, otp ) {
+  if (name, address, email, speciality, password ) {
     next();
   } else {
     res.status(400).json({ status: false, message: "Bad request" });
@@ -16,8 +16,8 @@ console.log('888888', );
 router.post("/user/doctor", validate, async (req, res) => {
   try {
     const db = await getDatabase();
-    const { name, address, phone, speciality, otp  } = req.body;
-    // const phone = await bcrypt.hash(phone, 10);
+    const { name, address, email, speciality, password  } = req.body;
+    // const email = await bcrypt.hash(email, 10);
     console.log("#######", req.body);
     const user = await db.collection("users").findOne({ name: name });
 	  console.log("user ragister",user);
@@ -27,9 +27,9 @@ router.post("/user/doctor", validate, async (req, res) => {
         .insertOne({
           name: name,
           address: address,
-          phone: phone,
+          email: email,
           speciality: speciality,
-          otp: otp,
+          password: password,
         })
         .then((resp) => {
           res.status(200).json({

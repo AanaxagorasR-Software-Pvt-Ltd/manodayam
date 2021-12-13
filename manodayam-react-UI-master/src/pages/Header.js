@@ -129,7 +129,7 @@ export default function Header() {
                       Register
                     </button>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <button
                       className="btn-web hvr-float-shadow"
                       data-toggle="modal"
@@ -137,7 +137,7 @@ export default function Header() {
                     >
                       Doctor
                     </button>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </nav>

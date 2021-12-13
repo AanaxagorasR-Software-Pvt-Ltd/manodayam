@@ -22,10 +22,11 @@ app.use('/peerjs', peerServer);
 app.get('/',(req,res) => { 
 	res.redirect(`/${uuidv4()}`)
 })
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.get('/:room', (req,res) => {
+	//  es.send('hhheloo')
 	res.render('room',{ roomid: req.params.room})
-})
+}) 
 
 io.on('connection' , socket => {
 	socket.on('join-room', (roomid,userid) => {

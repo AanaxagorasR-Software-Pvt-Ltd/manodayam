@@ -11,7 +11,7 @@ export default function BookingAppoint() {
                                 <h3>Doctor Lists</h3>
                                 <ol className="breadcrumb">
                                     <li>
-                                        <Link to="/home">Booking  / &nbsp;</Link>
+                                        <Link to="/appointment">Booking  / &nbsp;</Link>
                                     </li>
                                     <li>Doctor Booking</li>
                                 </ol>
@@ -37,7 +37,7 @@ export default function BookingAppoint() {
                                 </p>
                                 <p>2.3 Km Away</p>
                                 <button className="btn-web hvr-float-shadow">
-                                    <Link to="/">Book Your Appointment</Link>
+                                    <Link to="/appointment">Book Your Appointment</Link>
                                 </button>
                             </div>
                         </div>
@@ -62,7 +62,7 @@ export default function BookingAppoint() {
                                 </p>
                                 <p>2.3 Km Away</p>
                                 <button className="btn-web hvr-float-shadow">
-                                    <Link to="/">Book Your Appointment</Link>
+                                    <Link to="/appointment">Book Your Appointment</Link>
                                 </button>
                             </div>
                         </div>
