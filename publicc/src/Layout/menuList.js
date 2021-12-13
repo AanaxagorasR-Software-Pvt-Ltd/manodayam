@@ -11,6 +11,28 @@ const leftSideBarMenu = [
     isHover: false
   },
   {
+    name: "Appointment List",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/appointment-list" ,
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu:[],
+    isHover: false
+  },
+  {
+    name: "Doctor List",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/doctor-list" ,
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu:[],
+    isHover: false
+  },
+  {
     name: "Shakti",
     isActive: false,
     dataToggle: "",

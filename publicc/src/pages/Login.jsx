@@ -85,7 +85,7 @@ const Login = (props) => {
 
                   <Link to="/Main">
                     <button
-                      className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                      className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" 
                     >
 
                       Sign In
