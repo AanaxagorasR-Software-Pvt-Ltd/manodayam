@@ -23,6 +23,10 @@ export default function Appointment() {
   const [appointmentScheduleError, setappointmentScheduleError] = useState("");
   const [appointDisorderError, setappointDisorderError] = useState("");
   const [appointMsgError, setappointMsgError] = useState("");
+  const [update, setupdate] = useState(false);
+  const Slot = () => {
+    setupdate(true);
+  };
 
   // Appointments
   const Appointment = () => {
@@ -160,14 +164,16 @@ export default function Appointment() {
                         ) : null}
                       </div>
                     </div> */}
-                    <div className="col-lg-6">
+                    {/* <div className="col-lg-6">
                       <div className="form-group">
                         <select
                           className="text-secondary"
                           name=""
                           id=""
                           onChange={(appointmentSchedule) =>
-                            setappointmentSchedule(appointmentSchedule.target.value)
+                            setappointmentSchedule(
+                              appointmentSchedule.target.value
+                            )
                           }
                         >
                           {" "}
@@ -178,11 +184,36 @@ export default function Appointment() {
                           <option value="EightOClock">08:00</option>
                         </select>
                         {appointmentSchedule == "" ? (
-                          <p className="text-danger">{appointmentScheduleError}</p>
+                          <p className="text-danger">
+                            {appointmentScheduleError}
+                          </p>
+                        ) : null}
+                      </div>
+                    </div> */}
+                    <div className="col-lg-6">
+                      <div className="form-group">
+                      <input
+                          type="text"
+                          name=""
+                          id=""
+                          placeholder="Schedule Book"
+                          disabled
+                        />
+                        <div onClick={Slot}>hello</div>
+                        {update == true ? (
+                          <div
+                            style={{
+                              background: "white",
+                              zIndex: 1,
+                              height: 200,
+                            }}
+                          >
+                            hello whatsup
+                            <div>my name is robert downey</div>
+                          </div>
                         ) : null}
                       </div>
                     </div>
-
                     <div className="col-lg-6">
                       <div className="form-group">
                         <select

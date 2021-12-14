@@ -22,6 +22,7 @@ router.post("/user/new", validate, async (req, res) => {
 	  console.log("user ragister",user);
 
     if (!user) {
+      console.log('7777777');
       db.collection("users")
         .insertOne({
           name: name,

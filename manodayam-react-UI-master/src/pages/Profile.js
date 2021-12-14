@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { VDO_URL, VDO_API } from "../utill/api.endpoints";
 export default function Profile() {
+  // console.log('0000000000', match.token.params);
   // const Appointment = () => {
 
   //   console.log("hhhhhhhhh", `${VDO_URL}${VDO_API}`);
@@ -50,6 +51,8 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h3>Simran Raturi</h3>
+                  {/* {localStorage.getItem('Token')} */}
+
                       <p>
                         <i className="fa fa-phone"></i> +91 123245 567
                       </p>
@@ -369,7 +372,8 @@ export default function Profile() {
                                 <td>Anxiety</td>
                                 <td>
                                   {/* <i className="fa fa-video-camera"></i> */}
-                                  <a href="http://localhost:3000/">
+                                  {/* <Link to="http://localhost:4000/">hello</Link> */}
+                                  <a href="http://localhost:4000/"> 
                                     <img src="assets/image/vdo.png" alt="" />
                                   </a>
                                 </td>
@@ -391,7 +395,7 @@ export default function Profile() {
                                 <td>ABC</td>
                                 <td>Dementia</td>
                                 <td>
-                                  <a href="http://localhost:3000/">
+                                  <a href="http://localhost:4000/" target="_blank">
                                     <img
                                       className=""
                                       src="assets/image/vdo.png"
@@ -419,7 +423,7 @@ export default function Profile() {
                                 <td>Bipolar</td>
                                 <td>
                                   {/* <Link to="http://localhost:3000/"> */}
-                                  <a href="http://localhost:3000/">
+                                  <a href="http://localhost:4000/" target="_blank">
                                     <img
                                       // onClick={Appointment}
                                       className=""

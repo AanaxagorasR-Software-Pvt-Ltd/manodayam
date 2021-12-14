@@ -1,8 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import Login from "./Login";
 import { Link } from "react-router-dom";
-
 export default function Header() {
+  {
+    console.log("******j*", localStorage.getItem("Token"));
+  }
+  const [update, setupdate] = useState(localStorage.getItem("Token"));
   return (
     <>
       <Login />
@@ -111,7 +115,8 @@ export default function Header() {
                       Login
                     </button>
                   </li>
-                  <li className="nav-item">
+
+                  {/* <li className="nav-item">
                     <button
                       className="btn-web hvr-float-shadow ipad-btn"
                       data-toggle="modal"
@@ -119,7 +124,7 @@ export default function Header() {
                     >
                       Login
                     </button>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <button
                       className="btn-web hvr-float-shadow ipad-none"

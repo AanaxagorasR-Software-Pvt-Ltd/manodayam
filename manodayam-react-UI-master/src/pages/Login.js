@@ -71,11 +71,13 @@ export default function Login(props) {
     axios
       .post(`${API_ADMIN_URL}${LOGIN_API}`, loginOptions)
       .then((res) => {
-        console.log("====llll=====", res.data);
-
+        
+        // console.log("====llll=====", ((typeof res.data, res.data)));
+        console.log('**********', res.data.token);
         if (res.status == 200) {
+          localStorage.setItem('Token', res.data.token);
           alert("%%%%%%%%%%");
-          handleCloseModal();
+          // handleCloseModal();
         } else {
           alert("enter correct mail or password");
         }
@@ -109,6 +111,7 @@ export default function Login(props) {
       .then((res) => {
         console.log("====rrrr=====", res.data);
         alert("Account Created");
+
       })
       .catch((error) => {
         console.log(error);
