@@ -1,10 +1,12 @@
+
 const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
+// const product = require('./data');
 
 const validate = (req, res, next) => {
-  console.log("=fgf===", req.body.collectiontypedata);
-  if (req.body.collectiontypedata) {
+  console.log("====", req.body);
+  if (req.body.collectionMcq) {
     next();
   } else {
     res.status(400).json({
@@ -13,14 +15,13 @@ const validate = (req, res, next) => {
     });
   }
 };
-router.post("/bannertext",validate, async (req, res) => {
+router.post("/question", validate, async (req, res) => {
+  // res.send('hello');
   const db = await getDatabase();
 
   try {
-    const { collectiontypedata } = req.body;
-    console.log('collectiontypedata', req.body);
-    const data = await db.collection(`${collectiontypedata}`).find().toArray();
-    // console.log('=====jfgjh', data);
+    const { collectionMcq } = req.body;
+    const data = await db.collection(`${collectionMcq}`).find().toArray();
     if (Array.isArray(data)) {
       res.status(200).json({
         data: data,

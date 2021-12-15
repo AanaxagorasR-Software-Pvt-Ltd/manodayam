@@ -23,10 +23,6 @@ export default function Appointment() {
   const [appointmentScheduleError, setappointmentScheduleError] = useState("");
   const [appointDisorderError, setappointDisorderError] = useState("");
   const [appointMsgError, setappointMsgError] = useState("");
-  const [update, setupdate] = useState(false);
-  const Slot = () => {
-    setupdate(true);
-  };
 
   // Appointments
   const Appointment = () => {
@@ -91,7 +87,7 @@ export default function Appointment() {
       <div className="zoom-consult mb-50">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-7">
               <div className="doctor-form">
                 <h3>Consult With Us</h3>
                 <form action="">
@@ -144,76 +140,25 @@ export default function Appointment() {
                         ) : null}
                       </div>
                     </div>
-                    {/* <div className="col-lg-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          name=""
-                          id=""
-                          placeholder="Scheduling date and time"
-                          onChange={(appointmentSchedule) =>
-                            setappointmentSchedule(
-                              appointmentSchedule.target.value
-                            )
-                          }
-                        />
-                        {appointmentSchedule == "" ? (
-                          <p className="text-danger">
-                            {appointmentScheduleError}
-                          </p>
-                        ) : null}
-                      </div>
-                    </div> */}
-                    {/* <div className="col-lg-6">
-                      <div className="form-group">
-                        <select
-                          className="text-secondary"
-                          name=""
-                          id=""
-                          onChange={(appointmentSchedule) =>
-                            setappointmentSchedule(
-                              appointmentSchedule.target.value
-                            )
-                          }
-                        >
-                          {" "}
-                          fgfhg
-                          <option value="TowOClock">02:00</option>
-                          <option value="FourOClock">04:00</option>
-                          <option value="SixOClock">06:00</option>
-                          <option value="EightOClock">08:00</option>
-                        </select>
-                        {appointmentSchedule == "" ? (
-                          <p className="text-danger">
-                            {appointmentScheduleError}
-                          </p>
-                        ) : null}
-                      </div>
-                    </div> */}
+
                     <div className="col-lg-6">
                       <div className="form-group">
-                      <input
-                          type="text"
-                          name=""
-                          id=""
-                          placeholder="Schedule Book"
-                          disabled
+                        <input
+                          type="datetime-local"
+                          onChange={(appointmentSchedule) =>
+                            setappointmentSchedule(
+                              appointmentSchedule.target.value
+                            )
+                          }
                         />
-                        <div onClick={Slot}>hello</div>
-                        {update == true ? (
-                          <div
-                            style={{
-                              background: "white",
-                              zIndex: 1,
-                              height: 200,
-                            }}
-                          >
-                            hello whatsup
-                            <div>my name is robert downey</div>
-                          </div>
+                        {appointmentSchedule == "" ? (
+                          <p className="text-danger">
+                            {appointmentScheduleError}
+                          </p>
                         ) : null}
                       </div>
                     </div>
+
                     <div className="col-lg-6">
                       <div className="form-group">
                         <select
@@ -277,7 +222,7 @@ export default function Appointment() {
               </div>
             </div>
 
-            <div className="col-lg-6">
+            <div className="col-lg-5">
               <div className="doctor-heading mt-25 mt-30">
                 <h2>Schedule your appointment</h2>
                 <p>

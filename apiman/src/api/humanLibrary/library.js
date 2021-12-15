@@ -15,7 +15,7 @@ router.post("/digitalHumanLibrary", validate, async (req, res) => {
   const { fullname, email, phone, date, msg } = req.body;
 
   try {
-    let resp = await db.collection("appointments").findOne({
+    let resp = await db.collection("humanLibrary").findOne({
       $and: [
         { 'fullname': fullname },
         { 'email': email },
@@ -25,7 +25,7 @@ router.post("/digitalHumanLibrary", validate, async (req, res) => {
       ],
     });
     if (!resp) {
-      const { insertedId } = await db.collection("appointments").insertOne({
+      const { insertedId } = await db.collection("humanLibrary").insertOne({
         ...req.body,
       });
 

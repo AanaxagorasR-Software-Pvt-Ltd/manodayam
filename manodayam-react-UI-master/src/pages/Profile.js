@@ -366,6 +366,7 @@ export default function Profile() {
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
+                                  22/12/2021
                                 </td>
                                 <td>06:00</td>
                                 <td>XYZ</td>
@@ -390,6 +391,7 @@ export default function Profile() {
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
+                                  02/01/2022
                                 </td>
                                 <td>04:00</td>
                                 <td>ABC</td>
@@ -417,6 +419,7 @@ export default function Profile() {
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
+                                  29/12/2021
                                 </td>
                                 <td>02:00</td>
                                 <td>XYZ</td>

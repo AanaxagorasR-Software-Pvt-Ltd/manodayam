@@ -26,6 +26,7 @@ export default function Home(props) {
   const [appointmentScheduleError, setappointmentScheduleError] = useState("");
   const [appointDisorderError, setappointDisorderError] = useState("");
   const [appointMsgError, setappointMsgError] = useState("");
+  const [responseData, setResponseData] = useState([]);
 
   // Appointments
   const Appointment = () => {
@@ -69,14 +70,16 @@ export default function Home(props) {
   };
 
   // productlist
-  const [responseData, setResponseData] = useState([]);
   const Productlist = () => {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
+    const productlisting = {
+      collectiontype: "products",
+    };
     axios
-      .get(`${API_ADMIN_URL}${PRODUCT_API}`)
+      .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
       .then((res) => {
         setResponseData(res.data.data);
-        console.log("====fgf====", res.data.data);
+        console.log("====pppppp====", res.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -86,8 +89,11 @@ export default function Home(props) {
   const [bannerData, setbannerData] = useState([]);
   const BannerData = () => {
     console.log(`${API_ADMIN_URL}${BANNER_API}`);
+    const bannerdata = {
+      collectiontypedata: "banner",
+    }
     axios
-      .get(`${API_ADMIN_URL}${BANNER_API}`)
+      .post(`${API_ADMIN_URL}${BANNER_API}`, bannerdata)
       .then((res) => {
         setbannerData(res.data.data);
         console.log("====bannerData====", res.data.data);
@@ -187,7 +193,7 @@ export default function Home(props) {
           <div className="web-banner web-banner3 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[0]?.caption}</h1>
+                <h1>{bannerData?.[0]?.bannerText}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -200,7 +206,7 @@ export default function Home(props) {
           <div className="web-banner web-banner1 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[1]?.caption}</h1>
+                <h1>{bannerData?.[1]?.bannerText}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -214,7 +220,7 @@ export default function Home(props) {
           <div className="web-banner web-banner2 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[2]?.caption}</h1>
+                <h1>{bannerData?.[2]?.bannerText}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -228,7 +234,7 @@ export default function Home(props) {
           <div className="web-banner mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[3]?.caption}</h1>
+                <h1>{bannerData?.[3]?.bannerText}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -242,7 +248,7 @@ export default function Home(props) {
           <div className="web-banner web-banner4 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[4]?.caption}</h1>
+                <h1>{bannerData?.[4]?.bannerText}</h1>
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
@@ -750,10 +756,14 @@ export default function Home(props) {
               <div className="col-lg-3 col-sm-6">
                 {console.log("element", element)}
                 <div className="product-card">
-                  <img src={element.url} alt="" />
-                  <h3>{element.name}</h3>
-                  <p>{element.overview}</p>
-                  <span>{element.price}</span>
+                  <img src={element.pic_url} alt="" />
+                  <h3>{element.productname}</h3>
+                  <p>{element.pdescription}</p>
+                  <span>
+                    <i className="fa fa-inr"></i>
+                    {element.mrp}
+                  </span>
+                  
                   <Link
                     to={{
                       pathname: "/ViewProduct/" + element.slug,
