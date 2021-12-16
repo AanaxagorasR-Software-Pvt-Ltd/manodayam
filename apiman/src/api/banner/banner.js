@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
-const bannertext = require('./bannerData');
-
-// console.log("@@@@@@@@@", bannertext);
 
 const validate = (req, res, next) => {
-  console.log("====", req.body);
-  if (req.body.collectiontype) {
+  console.log("=fgf===", req.body.collectiontypedata);
+  if (req.body.collectiontypedata) {
     next();
   } else {
     res.status(400).json({
@@ -16,15 +13,17 @@ const validate = (req, res, next) => {
     });
   }
 };
-router.get("/bannertext", async (req, res) => {
+router.post("/bannertext",validate, async (req, res) => {
   const db = await getDatabase();
 
   try {
-    const { collectiontype } = req.body;
-    const data = await db.collection(`${collectiontype}`).find().toArray();
+    const { collectiontypedata } = req.body;
+    console.log('collectiontypedata', req.body);
+    const data = await db.collection(`${collectiontypedata}`).find().toArray();
+    // console.log('=====jfgjh', data);
     if (Array.isArray(data)) {
       res.status(200).json({
-        data: bannertext,
+        data: data,
         status: true,
         message: "data fetched sucseccfully",
         id: "kkkkk",

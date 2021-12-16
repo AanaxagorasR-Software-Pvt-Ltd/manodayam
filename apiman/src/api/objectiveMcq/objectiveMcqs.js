@@ -1,18 +1,27 @@
+
 const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
-// const projectDetails = require('./data2');
+// const product = require('./data');
 
-// console.log("#########", projectDetails);
-
-
-router.get("/:slug", async (req, res) => {
-  const slug = req.params.slug
+const validate = (req, res, next) => {
+  console.log("====", req.body);
+  if (req.body.collectionMcq) {
+    next();
+  } else {
+    res.status(400).json({
+      status: false,
+      message: "bad request",
+    });
+  }
+};
+router.post("/question", validate, async (req, res) => {
+  // res.send('hello');
   const db = await getDatabase();
+
   try {
-    const { collectiontype } = req.body;
-    const data = await db.collection("products").find({slug : slug}).toArray();
-    console.log('|||||||||', data);
+    const { collectionMcq } = req.body;
+    const data = await db.collection(`${collectionMcq}`).find().toArray();
     if (Array.isArray(data)) {
       res.status(200).json({
         data: data,

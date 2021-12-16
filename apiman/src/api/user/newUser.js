@@ -7,7 +7,7 @@ const { getDatabase } = require("../../db/mongo");
 const validate = (req, res, next ) => {
   const { email, password, name, type } = req.body;
 console.log('888888', );
-  if (email && password && name ) {
+  if (email && password && name) {
     next();
   } else {
     res.status(400).json({ status: false, message: "Bad request1" });
@@ -19,9 +19,10 @@ router.post("/user/new", validate, async (req, res) => {
     const { email, password, name, type } = req.body;
     const encryptedPassword = await bcrypt.hash(password, 10);
     const user = await db.collection("users").findOne({ email: email });
-	  console.log("user ragister",user);
+	  console.log("user ragister", user);
 
     if (!user) {
+      console.log('7777777');
       db.collection("users")
         .insertOne({
           name: name,

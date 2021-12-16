@@ -6,13 +6,31 @@ import {
   DOCTOR_API,
   DIGITAL_HUMAN_LIBRARY,
 } from "../utill/api.endpoints";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
+import FacebookLogin from "react-facebook-login";
+import { Card, Image } from "react-bootstrap";
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+const clientId = "Your-Client-Id";
 export default function Login(props) {
+  const [login, setLogin] = useState(false);
+  const [data, setData] = useState({});
+  const [picture, setPicture] = useState("");
+
+  const responseFacebook = (response) => {
+    console.log(response);
+    setData(response);
+    // setPicture(response.picture.data.url);
+    if (response.accessToken) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  };
   // const navigate = useNavigate();
 
   const [logineMail, setlogineMail] = useState("");
@@ -49,12 +67,30 @@ export default function Login(props) {
   const [registrationMailError, setregistrationMailError] = useState("");
   const [registrationPasswordError, setregistrationPasswordError] =
     useState("");
-  const [modalIsOpen, setmodalIsOpen] = useState();
-  function handleCloseModal() {
-    // document.getElementByClassName("close-btn").onClick();
-    // alert('hhhhh');
-    return <div className="close-btn"></div>;
-  }
+  // const [modalIsOpen, setmodalIsOpen] = useState();
+  // function handleCloseModal() {
+  //   // document.getElementByClassName("close-btn").onClick();
+  //   // alert('hhhhh');
+  //   return <div className="close-btn"></div>;
+  // }
+  const [showloginButton, setShowloginButton] = useState(true);
+  const [showlogoutButton, setShowlogoutButton] = useState(false);
+  const onLoginSuccess = (res) => {
+    console.log("Login Success:", res.profileObj);
+    setShowloginButton(true);
+    // setShowlogoutButton(true);
+  };
+
+  // const onLoginFailure = (res) => {
+  //   console.log("Login Failed:", res);
+  // };
+
+  // const onSignoutSuccess = () => {
+  //   alert("You have been logged out successfully");
+  //   console.clear();
+  //   setShowloginButton(true);
+  //   setShowlogoutButton(false);
+  // };
   // Login
   const LoginApi = (props) => {
     if (logineMail == "") {
@@ -71,11 +107,12 @@ export default function Login(props) {
     axios
       .post(`${API_ADMIN_URL}${LOGIN_API}`, loginOptions)
       .then((res) => {
-        console.log("====llll=====", res.data);
-
+        // console.log("====llll=====", ((typeof res.data, res.data)));
+        console.log("**********", res.data.token);
         if (res.status == 200) {
+          localStorage.setItem("Token", res.data.token);
           alert("%%%%%%%%%%");
-          handleCloseModal();
+          // handleCloseModal();
         } else {
           alert("enter correct mail or password");
         }
@@ -102,8 +139,7 @@ export default function Login(props) {
       password: registrationPassword,
       name: registrationName,
     };
-    // console.log('dt', dt);
-    // return;
+   
     axios
       .post(`${API_ADMIN_URL}${REGISTER_API}`, RegisterationOptions)
       .then((res) => {
@@ -194,31 +230,14 @@ export default function Login(props) {
       .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY}`, humanLibraryOptions)
       .then((res) => {
         // console.log("====llll=====", res.data.data);
-        alert("Will Connect You Soon");
+        alert("We Will Connect You Soon");
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  // const openModal = () => {
-  //   setmodalIsOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setmodalIsOpen(false);
-  // };
   return (
     <>
-      {/* <button onClick={openModal}>Open Modal</button>
-      <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        // style={customStyles}
-        className={}
-        contentLabel="Example Modal"
-    
-
-      ></Modal> */}
       <div className="modal fade" id="myModal">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -285,13 +304,6 @@ export default function Login(props) {
                       Submit
                     </Link>
                   </div>
-                  {/* <button
-                    // type="button"
-                    className="sgn-btn btn btn-web hvr-float-shadow"
-                    onClick={LoginApi}
-                  >
-                    Submit
-                  </button> */}
                 </div>
               </form>
               <div className="forgot-password">
@@ -363,8 +375,41 @@ export default function Login(props) {
               <div className="signup-detail">
                 <p className="crt-btn">Create a New Account</p>
                 <p>Or sign up with</p>
-                <i className="fa fa-facebook"></i>
-                <i className="fa fa-google"></i>
+                {showloginButton ? (
+                  <GoogleLogin
+                    clientId={clientId}
+                    buttonText="Login with Google"
+                    onSuccess={onLoginSuccess}
+                    // onFailure={onLoginFailure}
+                    cookiePolicy={"single_host_origin"}
+                    isSignedIn={true}
+                    // icon="fa-facebook"
+                  />
+                ) : null}
+                {/* <Card style={{ width: "150px", height: "10px"}}> */}
+                {/* <Card.Header> */}
+                {!login && (
+                  <FacebookLogin
+                    appId="921201001964201"
+                    autoLoad={true}
+                    fields="name,email"
+                    scope="public_profile,user_friends"
+                    callback={responseFacebook}
+                    // icon="fa-facebook"
+                    style={{ width: "50px", height: "50px" }}
+                  />
+                )}
+                {login && <Image src={picture} roundedCircle />}
+                {/* </Card.Header>
+                  {login && (
+                    <Card.Body>
+                      <Card.Title>{data.name}</Card.Title>
+                      <Card.Text>{data.email}</Card.Text>
+                    </Card.Body>
+                  )}
+                </Card> */}
+                {/* <i className="fa fa-facebook"></i> */}
+                {/* <i className="fa fa-google"></i> */}
               </div>
               <div
                 className="g-recaptcha"
@@ -565,7 +610,7 @@ export default function Login(props) {
                 <div className="form-group">
                   <label for="">Date</label>
                   <input
-                    type="text"
+                    type="date"
                     name=""
                     id=""
                     placeholder="DD/MM/YYYY"

@@ -1,6 +1,29 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { API_ADMIN_URL, PROFIL_API } from "../utill/api.endpoints";
 export default function Profile() {
+  const [profilData, setprofilData] = useState([]);
+  const ProfilData = () => {
+    console.log(`${API_ADMIN_URL}${PROFIL_API}`);
+    const profileData = {
+      // collectiontypedata: "banner",
+      token: "token",
+    };
+    axios
+      .post(`${API_ADMIN_URL}${PROFIL_API}`, profileData)
+      .then((res) => {
+        setprofilData(res.data.data);
+        console.log("====profileData====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect((props) => {
+    ProfilData();
+  }, []);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -14,6 +37,7 @@ export default function Profile() {
                     <Link to="/home">Home / &nbsp;</Link>
                   </li>
                   <li>Profile</li>
+                  {profilData?.[0]?.bannerText}
                 </ol>
               </div>
             </div>
@@ -35,6 +59,8 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h3>Simran Raturi</h3>
+                      {/* {localStorage.getItem('Token')} */}
+
                       <p>
                         <i className="fa fa-phone"></i> +91 123245 567
                       </p>
@@ -92,7 +118,6 @@ export default function Profile() {
             <div className="col-lg-12">
               <div className="profile-setting">
                 <div className="tab-content">
-
                   <div class="tab-pane active" id="home">
                     <div class="row">
                       <div class="col-lg-12">
@@ -121,7 +146,6 @@ export default function Profile() {
                                     id=""
                                     placeholder="Last name"
                                     disabled
-
                                   />
                                 </div>
                               </div>
@@ -134,7 +158,6 @@ export default function Profile() {
                                     id=""
                                     placeholder="Phone no."
                                     disabled
-
                                   />
                                 </div>
                               </div>
@@ -147,7 +170,6 @@ export default function Profile() {
                                     id=""
                                     placeholder="Email address"
                                     disabled
-
                                   />
                                 </div>
                               </div>
@@ -259,7 +281,7 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-                
+
                   {/* <div className="tab-pane fade" id="menu2">
                     <div className="row">
                       <div className="col-lg-12">
@@ -340,11 +362,11 @@ export default function Profile() {
                           <table className="table table-bordered table-striped table-hover">
                             <thead>
                               <tr>
-                                <th>Product</th>
-                                <th>Product name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Shipping charges</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Condition</th>
+                                <th>Call</th>
                                 <th>Status</th>
                               </tr>
                             </thead>
@@ -352,44 +374,92 @@ export default function Profile() {
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
+                                  22/12/2021
                                 </td>
-                                <td>Fidget Cube</td>
+                                <td>06:00</td>
+                                <td>XYZ</td>
+                                <td>Anxiety</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 399
+                                  {/* <i className="fa fa-video-camera"></i> */}
+                                  {/* <Link to="http://localhost:4000/">hello</Link> */}
+                                  <a href="http://localhost:4000/">
+                                    <img src="assets/image/vdo.png" alt="" />
+                                  </a>
                                 </td>
-                                <td>2</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 500
+                                  <select className="mt-2">
+                                    <option value="TowOClock">Success</option>
+                                    <option value="FourOClock">
+                                      UnSuccess
+                                    </option>
+                                    <option value="SixOClock">Pending</option>
+                                  </select>
                                 </td>
-                                <td>Success</td>
                               </tr>
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
+                                  02/01/2022
                                 </td>
-                                <td>Fidget Cube</td>
+                                <td>04:00</td>
+                                <td>ABC</td>
+                                <td>Dementia</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 399
+                                  <a
+                                    href="http://localhost:4000/"
+                                    target="_blank"
+                                  >
+                                    <img
+                                      className=""
+                                      src="assets/image/vdo.png"
+                                      alt=""
+                                    />
+                                  </a>
+                                  {/* <i className="fa fa-video-camera"></i> */}
                                 </td>
-                                <td>3</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 500
+                                  <select className="mt-2">
+                                    <option value="TowOClock">Success</option>
+                                    <option value="FourOClock">
+                                      UnSuccess
+                                    </option>
+                                    <option value="SixOClock">Pending</option>
+                                  </select>
                                 </td>
-                                <td>Success</td>
                               </tr>
                               <tr>
                                 <td>
                                   <img src="image/pr.png" alt="" />
+                                  29/12/2021
                                 </td>
-                                <td>Fidget Cube</td>
+                                <td>02:00</td>
+                                <td>XYZ</td>
+                                <td>Bipolar</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 399
+                                  {/* <Link to="http://localhost:3000/"> */}
+                                  <a
+                                    href="http://localhost:4000/"
+                                    target="_blank"
+                                  >
+                                    <img
+                                      // onClick={Appointment}
+                                      className=""
+                                      src="assets/image/vdo.png"
+                                      alt=""
+                                    />
+                                  </a>
+                                  {/* <i className="fa fa-video-camera"></i> */}
+                                  {/* </Link> */}
                                 </td>
-                                <td>3</td>
                                 <td>
-                                  <i className="fa fa-inr"></i> 500
+                                  <select className="mt-2">
+                                    <option value="TowOClock">Success</option>
+                                    <option value="FourOClock">
+                                      UnSuccess
+                                    </option>
+                                    <option value="SixOClock">Pending</option>
+                                  </select>
                                 </td>
-                                <td>Success</td>
                               </tr>
                             </tbody>
                           </table>

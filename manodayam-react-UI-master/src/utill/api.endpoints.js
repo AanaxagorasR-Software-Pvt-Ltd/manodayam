@@ -8,4 +8,7 @@ export const VIEW_PRODUCT = "/products";
 export const APPOINTMENT_API ="/appointments/appoint";
 export const DIGITAL_HUMAN_LIBRARY ="/library/digitalHumanLibrary";
 export const BANNER_API ="/banner/bannertext";
+export const DOCTOR_LIST_API = "/doctors/doctorlists";
+export const PROFIL_API = "/auth/user/profil"
+// export const MCQ = "/mcq/question"
 export const API_ADMIN_URL = API_HOST_URL + API_MIDD 

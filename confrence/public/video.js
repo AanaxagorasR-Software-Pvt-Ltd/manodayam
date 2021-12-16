@@ -1,9 +1,33 @@
 
 const socket = io("/");
 let myVideo = document.createElement("video");
+import axios from "axios";
 myVideo.muted = true;
 const videoGrid = document.getElementById("video-grid")
 let videoStream;
+// export const API_HOST_URL = "http://localhost:3001";
+// export const API_MIDD = "/api";
+// export const MCQ = "/mcq/question"
+
+// const BannerData = () => {
+//   console.log(`${API_ADMIN_URL}${BANNER_API}`);
+//   const bannerdata = {
+//     collectionMcq: "objectiveMcqs",
+//   }
+//   axios
+//     .post(`${API_HOST_URL}${API_MIDD}${MCQ}`, bannerdata)
+//     .then((res) => {
+//     //   setbannerData(res.data.data);
+//       console.log("====mcqQues..====", res.data.data);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+// useEffect((props) => {
+//     BannerData();
+//   }, []);
+
 
 const peer = new Peer(undefined, {
     path: "/peerjs",

@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 
-router.post("/phone.verification.key", async (req, res) => {
+router.post("/add", async (req, res) => {
   const db = await getDatabase();
+  console.log("mmmmmmm", productname);
   try {
     let resp = await db
       .collection("products")

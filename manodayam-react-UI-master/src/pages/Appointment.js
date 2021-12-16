@@ -87,7 +87,7 @@ export default function Appointment() {
       <div className="zoom-consult mb-50">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-7">
               <div className="doctor-form">
                 <h3>Consult With Us</h3>
                 <form action="">
@@ -140,13 +140,11 @@ export default function Appointment() {
                         ) : null}
                       </div>
                     </div>
-                    {/* <div className="col-lg-6">
+
+                    <div className="col-lg-6">
                       <div className="form-group">
                         <input
-                          type="text"
-                          name=""
-                          id=""
-                          placeholder="Scheduling date and time"
+                          type="datetime-local"
                           onChange={(appointmentSchedule) =>
                             setappointmentSchedule(
                               appointmentSchedule.target.value
@@ -159,32 +157,8 @@ export default function Appointment() {
                           </p>
                         ) : null}
                       </div>
-                    </div> */}
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <select
-                          className="text-secondary"
-                          name=""
-                          id=""
-                          onChange={(appointDisorder) =>
-                            setappointDisorder(appointDisorder.target.value)
-                          }
-                        > fgfhg
-                          <option value="">Depression</option>
-                          <option value="Anxiety">Anxiety</option>
-                        
-                          <option value="Psychosis">Psychosis</option>
-                         
-                          <option value="Drug_Abuse">Drug Abuse</option>
-                         
-                        </select>
-                        {appointDisorder == "" ? (
-                          <p className="text-danger">{appointDisorderError}</p>
-                        ) : null}
-                      </div>
                     </div>
-                  
-                    
+
                     <div className="col-lg-6">
                       <div className="form-group">
                         <select
@@ -248,7 +222,7 @@ export default function Appointment() {
               </div>
             </div>
 
-            <div className="col-lg-6">
+            <div className="col-lg-5">
               <div className="doctor-heading mt-25 mt-30">
                 <h2>Schedule your appointment</h2>
                 <p>
