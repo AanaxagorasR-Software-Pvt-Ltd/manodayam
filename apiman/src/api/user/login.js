@@ -4,7 +4,7 @@ const { getDatabase } = require("../../db/mongo");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validate = (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, type } = req.body;
   if (email && password) {
     next();
     // res.redirect("/");

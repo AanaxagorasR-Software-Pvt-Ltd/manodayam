@@ -7,8 +7,9 @@ import {
   VIEW_PRODUCT,
 } from "../utill/api.endpoints";
 export default function ViewProduct(props) {
+  // const {_id} = useParams();
+  // console.log("*****###", useParams()._id);
   const [slug, setSlug] = useState(useParams().slug);
-  console.log("77777777777");
   // const {slug} = useParams();
   useEffect(() => {
     // alert(slug);
@@ -28,11 +29,15 @@ export default function ViewProduct(props) {
   const [responseData, setResponseData] = useState([]);
   const ViewProjuct = () => {
     console.log(`${API_ADMIN_URL}${VIEW_PRODUCT}`);
+    // const productlisting = {
+    //   collectiontype: "products",
+    //   // slug: slug,
+    // };
     axios
       .get(`${API_ADMIN_URL}/${VIEW_PRODUCT}/${slug}`)
       .then((res) => {
         setResponseData(res.data.data);
-        console.log("$$$$$$$$$$", res.data.data);
+        console.log("----View----", res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -78,7 +83,7 @@ export default function ViewProduct(props) {
                       <div className="row">
                         <div className="col-lg-5">
                           <div className="ml-2 library-video ">
-                            <img src={responseData?.[0]?.url} alt="" />
+                            <img src={responseData?.[0]?.pic_url} alt="" />
                           </div>
 
                           <Link to="/Cart" className="ml-4 mt-4">
@@ -94,8 +99,9 @@ export default function ViewProduct(props) {
                           <img src="assets/image/doctor-img.jpg" alt="" />
                         </div> */}
                               <div className="col-9">
-                                <h3>{responseData?.[0]?.name}</h3>
-                                <h5>{responseData?.[0]?.overview}</h5>
+                                <h3>{responseData?.[0]?.productname}</h3>
+                                <h5>{responseData?.[0]?.pdescription}</h5>
+                                {/* <p>{responseData?.[0]?.</p> */}
                                 <div className="service-heading d-inline-flex">
                                   <h5 className="ml-1 bg-light text-dark rounded-bottom rounded-top border p-1">
                                     Vegetarian
@@ -105,7 +111,7 @@ export default function ViewProduct(props) {
                                   </h5>
                                 </div>
                                 <div className="mb-3">
-                                  <span>{responseData?.[0]?.price}</span>
+                                  <span>{responseData?.[0]?.mrp}</span>
                                 </div>
                                 <h3 className="text-dark">Quantity:</h3>
                                 <div className="d-inline-flex">
@@ -125,7 +131,7 @@ export default function ViewProduct(props) {
                                 </div>
                               </div>
                             </div>
-                            <p>{responseData?.[0]?.para}</p>
+                            {/* <p>{responseData?.[0]?.para}</p> */}
                             {/* <p>
                               <ReadMoreReact
                                 text={responseData?.[0]?.more}

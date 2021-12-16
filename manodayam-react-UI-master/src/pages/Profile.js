@@ -1,22 +1,29 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { VDO_URL, VDO_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, PROFIL_API } from "../utill/api.endpoints";
 export default function Profile() {
-  // console.log('0000000000', match.token.params);
-  // const Appointment = () => {
-
-  //   console.log("hhhhhhhhh", `${VDO_URL}${VDO_API}`);
-
-  //   axios
-  //     .post(`${VDO_URL}${VDO_API}`, VDO_API)
-  //     .then((res) => {
-  //       alert("Appointment Successfully");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const [profilData, setprofilData] = useState([]);
+  const ProfilData = () => {
+    console.log(`${API_ADMIN_URL}${PROFIL_API}`);
+    const profileData = {
+      // collectiontypedata: "banner",
+      token: "token",
+    };
+    axios
+      .post(`${API_ADMIN_URL}${PROFIL_API}`, profileData)
+      .then((res) => {
+        setprofilData(res.data.data);
+        console.log("====profileData====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect((props) => {
+    ProfilData();
+  }, []);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -30,6 +37,7 @@ export default function Profile() {
                     <Link to="/home">Home / &nbsp;</Link>
                   </li>
                   <li>Profile</li>
+                  {profilData?.[0]?.bannerText}
                 </ol>
               </div>
             </div>
@@ -51,7 +59,7 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h3>Simran Raturi</h3>
-                  {/* {localStorage.getItem('Token')} */}
+                      {/* {localStorage.getItem('Token')} */}
 
                       <p>
                         <i className="fa fa-phone"></i> +91 123245 567
@@ -374,7 +382,7 @@ export default function Profile() {
                                 <td>
                                   {/* <i className="fa fa-video-camera"></i> */}
                                   {/* <Link to="http://localhost:4000/">hello</Link> */}
-                                  <a href="http://localhost:4000/"> 
+                                  <a href="http://localhost:4000/">
                                     <img src="assets/image/vdo.png" alt="" />
                                   </a>
                                 </td>
@@ -397,7 +405,10 @@ export default function Profile() {
                                 <td>ABC</td>
                                 <td>Dementia</td>
                                 <td>
-                                  <a href="http://localhost:4000/" target="_blank">
+                                  <a
+                                    href="http://localhost:4000/"
+                                    target="_blank"
+                                  >
                                     <img
                                       className=""
                                       src="assets/image/vdo.png"
@@ -426,7 +437,10 @@ export default function Profile() {
                                 <td>Bipolar</td>
                                 <td>
                                   {/* <Link to="http://localhost:3000/"> */}
-                                  <a href="http://localhost:4000/" target="_blank">
+                                  <a
+                                    href="http://localhost:4000/"
+                                    target="_blank"
+                                  >
                                     <img
                                       // onClick={Appointment}
                                       className=""

@@ -1,17 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
-// const projectDetails = require('./data2');
-
-// console.log("#########", projectDetails);
-
-
-router.get("/:slug", async (req, res) => {
-  const slug = req.params.slug
+router.get("/profil", async (req, res) => {
+  const _id = req.params._id
   const db = await getDatabase();
+
   try {
-    const { collectiontype } = req.body;
-    const data = await db.collection("products").find({slug : slug}).toArray();
+    // const { collectiontype } = req.body;
+    const data = await db.collection("users").find({_id : _id}).toArray();
     console.log('|||||||||', data);
     if (Array.isArray(data)) {
       res.status(200).json({

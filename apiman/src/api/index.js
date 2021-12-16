@@ -14,7 +14,7 @@ const validate = (req,res,next) => {
 }
 
 console.log("test")
-router.get(`/`, async (req,res) => {
+router.get(`/`, validate, async (req,res) => {
     const db = await getDatabase();
    const data = await db.collection("products").find().toArray();
 //    const jjj = await db.collection("auth").find().toArray();
@@ -25,14 +25,15 @@ router.get(`/`, async (req,res) => {
 router.use(`/auth`, require("./user/newUser"));
 router.use(`/auth`, require("./user/doctor"));
 router.use(`/auth`, require("./user/login"));
+router.use(`/auth`, require("./user/profile"));
 router.use(`/products`, require("./product/product.list"));
 router.use(`/products`, require("./product/addproduct"));
 router.use(`/products`, require("./product/update.product"));
 router.use(`/products`, require("./product/removeProducts"));
 router.use(`/products`, require("./product/productDetails"));
 router.use(`/banner`, require("./banner/banner"));
+router.use(`/doctors`, require("./doctorlist/doctorlists"));
 router.use(`/mcq`, require("./objectiveMcq/objectiveMcqs"));
-
 router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));

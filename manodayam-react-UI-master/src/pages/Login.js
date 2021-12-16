@@ -139,8 +139,7 @@ export default function Login(props) {
       password: registrationPassword,
       name: registrationName,
     };
-    // console.log('dt', dt);
-    // return;
+   
     axios
       .post(`${API_ADMIN_URL}${REGISTER_API}`, RegisterationOptions)
       .then((res) => {
@@ -237,25 +236,8 @@ export default function Login(props) {
         console.log(error);
       });
   };
-  // const openModal = () => {
-  //   setmodalIsOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setmodalIsOpen(false);
-  // };
   return (
     <>
-      {/* <button onClick={openModal}>Open Modal</button>
-      <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        // style={customStyles}
-        className={}
-        contentLabel="Example Modal"
-    
-
-      ></Modal> */}
       <div className="modal fade" id="myModal">
         <div className="modal-dialog">
           <div className="modal-content">
