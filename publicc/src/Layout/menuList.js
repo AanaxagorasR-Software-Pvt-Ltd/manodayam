@@ -11,7 +11,18 @@ const leftSideBarMenu = [
     isHover: false
   },
   {
-    name: "Appointment List",
+    name: "Category",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/category" ,
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu:[],
+    isHover: false
+  },
+  {
+    name: "Appointment",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -32,6 +43,7 @@ const leftSideBarMenu = [
     submenu:[],
     isHover: false
   },
+ 
   {
     name: "Shakti",
     isActive: false,
@@ -40,12 +52,18 @@ const leftSideBarMenu = [
     link: "javascript:void(0)" ,
     iconClass: "icon-layout",
     submenu: [
+      {
+        name: "Media Solutions",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/media-solutions" ,
+        isExpand: false,
+      },
         {
           name: "Video",
           isActive: true,
           dataToggle: "",
           link: "/admin/video" ,
-          // to: '/admin/video',
           isExpand: false,
         },
         {

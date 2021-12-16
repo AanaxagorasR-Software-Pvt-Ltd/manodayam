@@ -31,6 +31,8 @@ app.use(morgan("combined"));
 
 app.use("/uploads", express.static("uploads"));
 
+
+
 /**
  * Social media login
  */
@@ -50,9 +52,9 @@ app.get(`/test`, (req, res) => {
 });
 
 app.use(`/api`, require(`./api`));
-// app.get('/', (req, res)=>{
-//   res.send('hello');
-// })
+app.get('/', (req, res)=>{
+  res.send('hello');
+})
 startDatabase().then(async () => {
   try {
     const db = await getDatabase();

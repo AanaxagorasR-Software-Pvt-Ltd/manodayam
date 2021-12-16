@@ -3,48 +3,43 @@ const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 const ObjectID = require('mongodb').ObjectID;
 
-const appointment = require('../../Model/appointment');
-const validate = (req, res, next) => {
-	const { fullname, email, mobileNmb, schedule, disorder, msg } = req.body;
-	if (fullname && email && mobileNmb && disorder && schedule && msg) {
-		next()
-	} else {
-		res.status(400).json({ status: false, message: "bad request" })
-	}
-}
-router.post("/appoint", async (req, res) => {
+
+router.post("/new", async (req, res) => {
 	const db = await getDatabase();
 	const body = req.body;
 	console.log('data', req.body);
 
 	try {
-		
+		let resp = await db
+			.collection("media_solutions")
+			.findOne({ name: body.name });
+		if (resp) {
+			if (resp._id == body._id) {
+				resp = null;
+			}
+		}
+		if (!resp) {
+
 			let data = {
-				fullname: body.fullname,
-				email: body.email,
-				mobileNmb: body.mobileNmb,
-				disorder: body.disorder,
-				schedule: body.schedule,
-				msg: body.msg,
+				name: body.name,
+                slug: body.slug,
 				status: body.status,
 			}
-			console.log(data);
-			if (!body?._id) {
-				data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
-			} else {
-				data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+			if(!body?._id){
+				data.createdAt = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+			}else{
+				data.updatedAt = new Date().toJSON().slice(0,10).replace(/-/g,'-')
 			}
 
 			let insertedId = null;
-			let appointments = await db.collection("appointments");
+			let media_solutions = await db.collection("media_solutions");
 			if (body._id) {
-				insertedId = await appointments.updateOne(
-					{ _id: new ObjectID(body._id) },
-					{ $set: data },
-				).insertedId;
+				insertedId = await media_solutions.updateOne(
+								{ _id: new ObjectID(body._id) },
+								{$set: data},
+							).insertedId;
 			} else {
-				insertedId = await appointments.insertOne(data).insertedId;
-
+				insertedId = await media_solutions.insertOne(data).insertedId;
 			}
 
 			res.status(200).json({
@@ -55,9 +50,13 @@ router.post("/appoint", async (req, res) => {
 				status: true,
 				message: "data inserted"
 			});
+		} else {
+			res.status(200).json({
+				message: "data already exist.",
+				data: [],
+			});
 		}
-
-	catch (e) {
+	} catch (e) {
 		console.log("error", e);
 		res.status(500).json({
 			message: "server error",
@@ -71,8 +70,8 @@ router.get('/', async (req, res) => {
 	try {
 		const db = await getDatabase();
 		let dt = await db
-			.collection("appointments")
-			.find().sort({ '_id': -1 }).toArray()
+			.collection("media_solutions")
+			.find().toArray()
 		res.send(dt)
 	} catch (err) {
 		console.log('err', err.message);
@@ -89,7 +88,7 @@ router.delete('/delete/:_id', async (req, res) => {
 	try {
 		const db = await getDatabase();
 		const body = req.body;
-		let dt = await db.collection("appointments").deleteOne( { _id: _id } )
+		let dt = await db.collection("media_solutions").deleteOne( { _id: _id } )
 		res.send({
 			message: "data deleted"
 		});
@@ -99,5 +98,4 @@ router.delete('/delete/:_id', async (req, res) => {
 
 	// res.send('hello')
 })
-
 module.exports = router;

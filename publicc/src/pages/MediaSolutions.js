@@ -7,14 +7,15 @@ import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
 import Button from 'react-bootstrap/Button';
-import { Modal } from "react-bootstrap";
+import mediasolutions from '../Store/Services/mediasolutions';
 import axios from "../utill/axios";
-import appointment from '../Store/Connect/appointment';
+import { Modal } from "react-bootstrap";
+
 // let Button = new AA()
 
 
 
-const Appointment = () => {
+const MediaSolutions = () => {
 	const [data, setData] = React.useState([]);
 	const dispatch = useDispatch();
 	const { logout } = useAuth()
@@ -24,7 +25,7 @@ const Appointment = () => {
 	const formRef = useRef();
 
 	const list = () =>{
-		axios.get('appointments').then(res => {
+		axios.get('media-solutions').then(res => {
 			console.log('res', res, typeof res);
 			setData(res);
 		}).catch(err => {
@@ -34,9 +35,6 @@ const Appointment = () => {
 	React.useEffect(() => {
 		list();
 	}, []);
-
-	
-
 
 	const handleClickMenu = (name) => {
 		setMenuList(
@@ -61,7 +59,6 @@ const Appointment = () => {
 		setMenuList(
 			menuList.map((li) => ({ ...li, isHover: false })))
 	}
-
 	const handleSideBar = () => {
 		dispatch(isToggle());
 	};
@@ -74,18 +71,19 @@ const Appointment = () => {
 				console.log("some error")
 			})
 	}
-
-	const deleteData = (_id) => {
-		appointment.delete(_id).then((res) => {
+	const deleteCat = (_id) => {
+		mediasolutions.delete(_id).then((res) => {
+			// console.log('res', res);
 			alert(res?.message)
 			list();
 		})
 	
 	  }
-
+  
+	
 	return (
 		<>
-				<Addform ref={formRef} list={list} />
+			<Addform ref={formRef} list={list} />
 			<div class="container-scroller">
 				<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 					<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -273,32 +271,28 @@ const Appointment = () => {
 					<div class="main-panel">
 						<div class="content-wrapper">
 							<div class="row">
-
 								<div class="col-md-12 grid-margin">
 									<div class="row">
 										<div class="col-12 col-xl-4 offset-10">
-											<button type="button" class="btn btn-social-icon-text btn-info" onClick={()=>{formRef.current.openForm()}}>
+											<button type="button" class="btn btn-social-icon-text btn-info" onClick={() => { formRef.current.openForm() }}>
 												<i class="ti-plus"></i>Add</button>
 										</div>
 									</div>
 								</div>
-
-
-
 								<div class="col-lg-12 grid-margin stretch-card">
 									<div class="card">
 										<div class="card-body">
-											<h4 class="card-title">Appointment list</h4>
+											<h4 class="card-title">Media Solutions</h4>
 											<div class="table-responsive pt-3">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
 															<th>S.No</th>
-															<th>Patient Details</th>
-															<th>Issue</th>
-															<th>Schedule Date</th>
-															<th> Status</th>
-															<th>Connect Here!</th>
+
+															<th>Solution Name </th>
+                                                            <th>Solution Slug </th>
+															<th>Status</th>
+															<th>Created Date</th>
 															<th style={{ width: '80px' }}>Action</th>
 														</tr>
 													</thead>
@@ -306,30 +300,26 @@ const Appointment = () => {
 														{
 															data.map((v, i) => (
 																<tr key={i}>
-																	<td>{i + 1 }</td>
-																	<td><strong>Name: </strong> {v.fullname}<br/>
-																	<strong>Email:</strong> {v.email} <br/>
-																	<strong>Phone:</strong> {v.mobileNmb} </td>
-																	<td>{v.disorder}</td>
-
-																	<td>{ (new Date(v.schedule )).toLocaleDateString() }</td>
-																	<td>{v.status === 'pending' ? 'Pending' : v.status === 'booked' ? 'Booked' : 'Cancelled'}</td>
-																	<td>{v.status === 'booked' ? 
-																		<a href="http://localhost:5000/" target="_blank"><button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"><i class="ti-video-camera"></i></button>
-																		</a> : <button type="button" class="btn btn-sm btn-danger border-radius-0 "><i class="ti-video-camera"></i></button>}</td>
+																	<td>{i + 1}</td>
+																	<td>{v.name}</td>
+                                                                    <td>{v.slug}</td>
+																	<td>
+																		{v.status === '1' ? 'Active' : 'Inactive'}
+																	</td>
+																	<td>{v.createdAt}</td>
 																	<td>
 																		<button type="button" class="btn btn-sm btn-info border-radius-0 add-btn" 
-																			onClick={()=>{formRef.current.openForm(v)}}
-																			><i class="ti-pencil"></i></button>
-																		<button type="button" class="btn btn-sm btn-danger add-btn"
-																			onClick={() => deleteData(v._id)}
-																			>
-																				<i class="ti-trash"></i></button>
+																			onClick={()=>{formRef.current.openForm(v)}}>
+																			<i class="ti-pencil"></i>
+																		</button>
+																		<button type="button" class="btn btn-sm btn-danger add-btn" 
+																		onClick={() => deleteCat(v._id)}>
+																			<i class="ti-trash"></i>
+																		</button>
 																	</td>
 																</tr>
 															))
 														}
-														
 													</tbody>
 												</table>
 											</div>
@@ -365,6 +355,7 @@ const Addform = forwardRef((props, ref) => {
 	const [show, setShow] = useState(false);
 	const [data, setData] = useState({});
 	const {list} = props;
+
 	const handleChange = (v, k) => { setData({ ...data, [k]: v }) }
 
 	const handleVisible = (state) => { setShow(state) }
@@ -381,7 +372,7 @@ const Addform = forwardRef((props, ref) => {
 
 	const save = () => {
 		let fd = new FormData();
-		appointment.save(data, data.id).then((res) => {
+		mediasolutions.save(data, data.id).then((res) => {
 			alert(res.message)
 			handleVisible(false);
 			list();
@@ -389,57 +380,38 @@ const Addform = forwardRef((props, ref) => {
 			alert(err.message)
 		})
 	}
+	
 
 	return (
 		<>
-			<Modal show={show} onHide={() => { handleVisible(false) }}>
+			<Modal
+				show={show}
+				// size="sm"
+				onHide={() => { handleVisible(false) }}
+			>
 				<Modal.Header >
-					<Modal.Title>Book Appointment</Modal.Title>
+					<Modal.Title>Add Media Solution</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 
-				<form class="forms-sample">
+					<form class="forms-sample">
 						<div class="form-group">
-							<label for="exampleInputUsername1"> Name</label>
-							<input type="text" class="form-control" value={data.fullname || ''} onChange={(e) => { handleChange(e.target.value, 'fullname') }} placeholder="Enter Name" />
+							<label for="exampleInputUsername1">Media Solution Name</label>
+							<input type="text" class="form-control" value={data.name || ''} onChange={(e) => { handleChange(e.target.value, 'name') }} placeholder="Media Solution Name" />
 						</div>
-
-						<div class="form-group">
-							<label for="exampleInputUsername1"> Email</label>
-							<input type="text" class="form-control" value={data.email || ''} onChange={(e) => { handleChange(e.target.value, 'email') }} placeholder="Enter Email" />
+                        <div class="form-group">
+							<label for="exampleInputUsername1">Media Solution Slug</label>
+							<input type="text" class="form-control" value={data.slug || ''} onChange={(e) => { handleChange(e.target.value, 'slug') }} placeholder="Media Solution Slug" />
 						</div>
-
-						<div class="form-group">
-							<label for="exampleInputUsername1"> Phone</label>
-							<input type="number" class="form-control" value={data.mobileNmb || ''} onChange={(e) => { handleChange(e.target.value, 'mobileNmb') }} placeholder="Enter Phone" />
-						</div>
-
-						<div class="form-group">
-							<label for="exampleInputUsername1"> Issue</label>
-							<input type="text" class="form-control" value={data.disorder || ''} onChange={(e) => { handleChange(e.target.value, 'disorder') }} placeholder="Enter Issue" />
-						</div>
-
-						<div class="form-group">
-							<label for="exampleInputUsername1"> Schedule Date</label>
-							<input type="datetime-local" class="form-control" value={data.schedule || ''} onChange={(e) => { handleChange(e.target.value, 'schedule') }} placeholder="Enter Schedule Date" />
-						</div>
-
-						<div class="form-group">
-								<label for="exampleInputUsername1"> Message</label>
-								<textarea class="form-control" rows={4} value={data.msg || ''} onChange={(e) => { handleChange(e.target.value, 'msg') }} placeholder=" Message" />
-							</div>
-
 						<div class="form-group ">
-							<label for="exampleInputUsername1">Appointment Status</label>
+							<label for="exampleInputUsername1">Media Solution Status</label>
 							<select class="form-control" value={data.status || ''} onChange={(e) => { handleChange(e.target.value, 'status') }}>
-								<option value="" disabled>Select Appointment Status</option>
-								<option value="pending">Pending</option>
-								<option value="booked">Booked</option>
-								<option value="cancelled">Cancelled</option>
+								<option value="" disabled>Select Status</option>
+								<option value="1">Active</option>
+								<option value="0">Inactive</option>
 							</select>
 						</div>
 					</form>
-
 
 				</Modal.Body>
 				<Modal.Footer>
@@ -454,4 +426,4 @@ const Addform = forwardRef((props, ref) => {
 		</>
 	);
 })
-export default Appointment;
+export default MediaSolutions;

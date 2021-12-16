@@ -3,7 +3,7 @@ const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 const projectDetails = require('./data2');
 
-console.log("#########", projectDetails);
+// console.log("#########", projectDetails);
 
 const validate = (req, res, next) => {
   console.log("====", req.body);

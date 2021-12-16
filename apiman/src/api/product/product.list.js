@@ -46,7 +46,7 @@ const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 const product = require('./data');
 
-console.log("@@@@@@@@@", product);
+// console.log("@@@@@@@@@", product);
 
 const validate = (req, res, next) => {
   console.log("====", req.body);

@@ -14,7 +14,7 @@ const validate = (req,res,next) => {
 }
 
 console.log("test")
-router.get(`/`, async (req,res) => {
+router.get(`/`,  validate,async (req,res) => {
     const db = await getDatabase();
    const data = await db.collection("products").find().toArray();
 //    const jjj = await db.collection("auth").find().toArray();
@@ -36,5 +36,9 @@ router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));
 router.use(`/upload`, require("./media"));
+//Upload video
+router.use('/videos', require("./media/video"));
+
+router.use(`/media-solutions`, require("./media-solutions"));
 
 module.exports = router;
