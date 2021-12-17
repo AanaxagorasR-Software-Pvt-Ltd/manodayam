@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
-const ObjectID = require("mongodb").ObjectID;
+const ObjectID = require('mongodb').ObjectID;
 
 const validate = (req, res, next) => {
   const { fullname, email, mobileNmb, schedule, disorder, msg } = req.body;
@@ -11,6 +11,7 @@ const validate = (req, res, next) => {
     res.status(400).json({ status: false, message: "bad request" });
   }
 };
+
 router.post("/appoint", async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
@@ -76,6 +77,7 @@ router.get("/", async (req, res) => {
 
 	// res.send('hello')
 })
+
 router.get('/booked', async (req, res) => {
 
 	try {
@@ -90,10 +92,6 @@ router.get('/booked', async (req, res) => {
 
 	// res.send('hello')
 })
-
-router.delete('/delete/:_id', async (req, res) => {
-	const _id = new ObjectID(req.params._id);
-	console.log('delete', _id)
 
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectID(req.params._id);
@@ -112,7 +110,6 @@ router.delete("/delete/:_id", async (req, res) => {
 
   // res.send('hello')
 });
-
 
 router.post('/saveroom', async (req, res) => {
 	const db = await getDatabase();
@@ -158,5 +155,4 @@ catch (e) {
 	});
 }
 });
-
 module.exports = router;
