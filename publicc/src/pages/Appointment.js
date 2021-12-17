@@ -298,7 +298,7 @@ const Appointment = () => {
 															<th>Issue</th>
 															<th>Schedule Date</th>
 															<th> Status</th>
-															<th>Connect Here!</th>
+															
 															<th style={{ width: '80px' }}>Action</th>
 														</tr>
 													</thead>
@@ -314,9 +314,7 @@ const Appointment = () => {
 
 																	<td>{ (new Date(v.schedule )).toLocaleDateString() }</td>
 																	<td>{v.status === 'pending' ? 'Pending' : v.status === 'booked' ? 'Booked' : 'Cancelled'}</td>
-																	<td>{v.status === 'booked' ? 
-																		<a href="http://localhost:5000/" target="_blank"><button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"><i class="ti-video-camera"></i></button>
-																		</a> : <button type="button" class="btn btn-sm btn-danger border-radius-0 "><i class="ti-video-camera"></i></button>}</td>
+				
 																	<td>
 																		<button type="button" class="btn btn-sm btn-info border-radius-0 add-btn" 
 																			onClick={()=>{formRef.current.openForm(v)}}

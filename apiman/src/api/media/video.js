@@ -49,7 +49,7 @@ router.post(
   `/media`,
   imageUpload.single("image"),
   async (req, res) => {
-    if (typeof req.file !== "undefined") {
+    if(typeof req.file !== "undefined") {
       const { filename } = req.file;
       const { pid } = req.query;
       const url = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + filename;
@@ -65,12 +65,16 @@ router.post(
             .updateOne(
               { _id: ObjectId(pid) },
               { $set: { pic_url: `${url}`, image_id: ObjectId(insertedId) } }
-            )
-            .then((su) => {
+            ).then(su => {
               res
-                //  const ll = [db]
-                .status(200)
-                .json({ status: true, message: "file uploaded done" });
+            //  const ll = [db]
+              .status(200)
+          .json({ status: true, message: "file uploaded done" });
+            }) 
+            .catch(e => {
+              res
+              .status(200)
+              .json({ status: false, message: "please try again " });
             })
             .catch((e) => {
               res
@@ -93,17 +97,22 @@ router.post(
   },
   (error, req, res, next) => {
     res.status(500).json({ status: false, message: "please try again " });
+
   }
 );
 
-router.get("/", async (req, res) => {
-  try {
-    const db = await getDatabase();
-    let dt = await db.collection("videos").find().toArray();
-    res.send(dt);
-  } catch (err) {
-    console.log("err", err.message);
-  }
+
+router.get('/', async (req, res) => {
+
+	try {
+		const db = await getDatabase();
+		let dt = await db
+			.collection("videos")
+			.find().toArray()
+		res.send(dt)
+	} catch (err) {
+		console.log('err', err.message);
+	}
 
   // res.send('hello')
 });

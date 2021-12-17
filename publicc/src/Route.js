@@ -5,6 +5,7 @@ import Loader from "./Components/Loading";
 import { useSelector } from "react-redux";
 import ToastNote from "./Components/ToastNotification"
 import AppointmentList from "./pages/Appointment";
+import BookedAppointmentList from "./pages/BookedAppointment";
 import Category from "./pages/Category";
 import Doctor from "./pages/Doctor";
 import Video from "./pages/Video";
@@ -32,6 +33,8 @@ console.log("isLoading",loading)
           <Route path="/admin/forgotpassword" element={<Forgotpassword />} />
           <Route path="/Main" element={<Main />} exact/>
           <Route path="/appointment-list" element={<AppointmentList/>} exact/>
+          <Route path="/booked-appointment-list" element={<BookedAppointmentList/>} exact/>
+          
           <Route path="/category" element={<Category />} />
           <Route path = "admin/media-solutions" element={<MediaSolutions />} exact />
           <Route path="/admin/Video" element={<Video />} exact/>

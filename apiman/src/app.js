@@ -64,6 +64,6 @@ startDatabase().then(async () => {
 });
 
 // start the server
-app.listen(env.PORT || 8080, async () => {
-  console.log(`listening on port ${env.PORT || 8080}`);
+app.listen(env.PORT || 3001, async () => {
+  console.log(`listening on port ${env.PORT || 3001}`);
 });

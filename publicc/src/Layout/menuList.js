@@ -4,7 +4,7 @@ const leftSideBarMenu = [
     isActive: true,
     dataToggle: "",
     isExpand: false,
-    link: "/admin/login" ,
+    link: "javascript:void(0)" ,
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
     submenu:[],
@@ -21,17 +21,34 @@ const leftSideBarMenu = [
     submenu:[],
     isHover: false
   },
+
   {
-    name: "Appointment",
+    name: "Appointments",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/appointment-list" ,
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu:[],
+    link: "javascript:void(0)",
+    iconClass: "icon-layout",
+    submenu: [
+      {
+        name: "All Appointements",
+        isActive: true,
+        dataToggle: "",
+        link: "/appointment-list",
+        isExpand: false,
+      },
+      {
+        name: "Booked List",
+        isActive: true,
+        dataToggle: "",
+        link: "/booked-appointment-list",
+        isExpand: false,
+      },
+      
+    ],
     isHover: false
   },
+
   {
     name: "Doctor List",
     isActive: false,
