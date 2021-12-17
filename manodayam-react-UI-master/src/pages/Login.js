@@ -147,7 +147,7 @@ export default function Login(props) {
       .then((res) => {
         console.log("====rrrr=====", res.data);
         alert("Account Created");
-        // window.$('#myModal').modal('hide')
+        window.$('#registermodal').modal('hide')
 
       })
       .catch((error) => {
