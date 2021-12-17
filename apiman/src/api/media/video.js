@@ -55,13 +55,11 @@ router.post(
       const url = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + filename;
       try {
         const db = await getDatabase();
-        const { insertedId }  = await db
-        .collection("media")
-        .insertOne({
+        const { insertedId } = await db.collection("media").insertOne({
           url: `${url}`,
           pid: ObjectId(pid),
-        })
-        if(insertedId) {
+        });
+        if (insertedId) {
           await db
             .collection("products")
             .updateOne(
@@ -78,25 +76,28 @@ router.post(
               .status(200)
               .json({ status: false, message: "please try again " });
             })
+            .catch((e) => {
+              res
+                .status(200)
+                .json({ status: false, message: "please try again " });
+            });
         } else {
           res
-          .status(200)
-          .json({ status: false, message: "please try again later" });
+            .status(200)
+            .json({ status: false, message: "please try again later" });
         }
-          
-      } catch(e2) {
-      res
-        .status(400)
-        .json({ status: false, message: "please try again later " }); 
+      } catch (e2) {
+        res
+          .status(400)
+          .json({ status: false, message: "please try again later " });
       }
-      
     } else {
       res.status(200).json({ status: false, message: "please try again " });
     }
-
   },
   (error, req, res, next) => {
     res.status(500).json({ status: false, message: "please try again " });
+<<<<<<< HEAD
 
   }
 );
@@ -113,9 +114,22 @@ router.get('/', async (req, res) => {
 	} catch (err) {
 		console.log('err', err.message);
 	}
+=======
+  }
+);
 
-	// res.send('hello')
-})
+router.get("/", async (req, res) => {
+  try {
+    const db = await getDatabase();
+    let dt = await db.collection("videos").find().toArray();
+    res.send(dt);
+  } catch (err) {
+    console.log("err", err.message);
+  }
+>>>>>>> a940fc8cc0e708c7984cb7d6eadff42ecfac394f
+
+  // res.send('hello')
+});
 
 // router.post("/media", (req,res) => { console.log("req",req); res.jon } )
 module.exports = router;

@@ -29,7 +29,7 @@ function App() {
           <Route path="/library" element={<Library />} exact />
           <Route path="/research" element={<Research />} exact />
           <Route path="/contact" element={<Contact />} exact />
-          <Route path="/cart" element={<Cart />} exact />
+          <Route path="/cart/:slug" element={<Cart />} exact />
           <Route path="/checkout" element={<Checkout />} exact />
           <Route path="/counsult" element={<Consult />} exact />
           <Route path="/counsultvideo" element={<Consultvideo />} exact />

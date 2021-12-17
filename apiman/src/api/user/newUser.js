@@ -28,7 +28,7 @@ router.post("/user/new", validate, async (req, res) => {
           name: name,
           email: email,
           password: encryptedPassword,
-          type: type,
+          // type: type,
         })
         .then((resp) => {
           res.status(200).json({

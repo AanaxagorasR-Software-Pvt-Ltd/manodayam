@@ -1,7 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { API_ADMIN_URL, ADD_CART_API } from "../utill/api.endpoints";
+
+// var quen = 2;
+{
+  localStorage.getItem("Password");
+}
+
 export default function Cart(props) {
-  console.log("====fg=====", props);
+  const [slug, setSlug] = useState(useParams().slug);
+  // const {slug} = useParams();
+  useEffect(() => {
+    // alert(slug);
+    setSlug(slug);
+    console.log("slug", slug);
+
+    // console.log("0000000",  localStorage.getItem("quent"));
+
+  }, []);
+  const [responseData, setResponseData] = useState([]);
+  const ProductCart = () => {
+    console.log(`${API_ADMIN_URL}${ADD_CART_API}`);
+    // const productlisting = {
+    //   collectiontype: "products",
+    //   // slug: slug,
+    // };
+    axios
+      .get(`${API_ADMIN_URL}/${ADD_CART_API}/${slug}`)
+      .then((res) => {
+        setResponseData(res.data.data);
+        console.log("----Cart----", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect((props) => {
+    ProductCart(props);
+  }, []);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -46,69 +83,29 @@ export default function Cart(props) {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <img src="assets/image/pr.png" alt="" />
-                      </td>
-                      <td>Fidget Cube</td>
-                      <td>
-                        <i className="fa fa-inr"></i> 399
-                      </td>
-                      <td>
-                        {/* <input type="number" name="" id="" /> */}
-                        <p>4</p>
-                      </td>
-                      <td>
-                        <i className="fa fa-inr"></i> 500
-                      </td>
-                      <td>
-                        <button className="del-btn">
-                          <i className="fa fa-trash-o" aria-hidden="true"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="assets/image/pr.png" alt="" />
-                      </td>
-                      <td>Fidget Cube</td>
-                      <td>
-                        <i className="fa fa-inr"></i> 399
-                      </td>
-                      <td>
-                        {/* <input type="number" name="" id="" /> */}
-                        <p>3</p>
-                      </td>
-                      <td>
-                        <i className="fa fa-inr"></i> 500
-                      </td>
-                      <td>
-                        <button className="del-btn">
-                          <i className="fa fa-trash-o" aria-hidden="true"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="assets/image/pr.png" alt="" />
-                      </td>
-                      <td>Fidget Cube</td>
-                      <td>
-                        <i className="fa fa-inr"></i> 399
-                      </td>
-                      <td>
-                        {/* <input type="number" name="" id="" /> */}
-                        <p>3</p>
-                      </td>
-                      <td>
-                        <i className="fa fa-inr"></i> 500
-                      </td>
-                      <td>
-                        <button className="del-btn">
-                          <i className="fa fa-trash-o" aria-hidden="true"></i>
-                        </button>
-                      </td>
-                    </tr>
+                    {responseData.map((element) => (
+                      <tr>
+                        <td>
+                          <img src={element.pic_url} alt="" />
+                        </td>
+                        <td>{element.productname}</td>
+                        <td>
+                          <i className="fa fa-inr"></i>{" "}{element.mrp}
+                          {/* {element.mrp * localStorage.getItem("Password")} */}
+                        </td>
+                        <td>
+                          <p>4</p>
+                        </td>
+                        <td>
+                          <i className="fa fa-inr"></i> {element.shipping}
+                        </td>
+                        <td>
+                          <button className="del-btn">
+                            <i className="fa fa-trash-o" aria-hidden="true"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                     <tr>
                       <td></td>
                       <td></td>
