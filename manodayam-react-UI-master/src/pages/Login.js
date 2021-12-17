@@ -110,8 +110,10 @@ export default function Login(props) {
         // console.log("====llll=====", ((typeof res.data, res.data)));
         console.log("**********", res.data.token);
         if (res.status == 200) {
-          localStorage.setItem("Token", res.data.token);
-          alert("%%%%%%%%%%");
+          // localStorage.setItem("Token", res.data.token);
+          alert("Done");
+          window.$('#myModal').modal('hide')
+
           // handleCloseModal();
         } else {
           alert("enter correct mail or password");
@@ -145,6 +147,8 @@ export default function Login(props) {
       .then((res) => {
         console.log("====rrrr=====", res.data);
         alert("Account Created");
+        // window.$('#myModal').modal('hide')
+
       })
       .catch((error) => {
         console.log(error);
@@ -189,6 +193,8 @@ export default function Login(props) {
       .then((res) => {
         console.log("====rrrr=====", res.data);
         alert("successfully Done");
+        window.$('#doctor-modal').modal('hide')
+
       })
       .catch((error) => {
         console.log(error);
@@ -231,6 +237,13 @@ export default function Login(props) {
       .then((res) => {
         // console.log("====llll=====", res.data.data);
         alert("We Will Connect You Soon");
+        if (res.status == 200) {
+          // localStorage.setItem("Token", res.data.token);
+          window.$('#library-modal').modal('hide')
+
+        } else {
+          alert("enter correct mail or password");
+        }
       })
       .catch((error) => {
         console.log(error);

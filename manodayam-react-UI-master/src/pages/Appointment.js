@@ -57,7 +57,7 @@ export default function Appointment() {
       .post(`${API_ADMIN_URL}${APPOINTMENT_API}`, appointmentOptions)
       .then((res) => {
         // console.log("====llll=====", res.data.data);
-        alert("Appointment Successfully");
+        // alert("Appointment Successfully");
         //  pathname="/counsultvideo"
       })
       .catch((error) => {

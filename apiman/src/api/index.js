@@ -31,6 +31,7 @@ router.use(`/products`, require("./product/addproduct"));
 router.use(`/products`, require("./product/update.product"));
 router.use(`/products`, require("./product/removeProducts"));
 router.use(`/products`, require("./product/productDetails"));
+
 router.use(`/addcarts`, require("./addToCart/aaToCarts"));
 
 router.use(`/banner`, require("./banner/banner"));

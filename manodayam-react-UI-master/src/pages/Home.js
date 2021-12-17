@@ -9,62 +9,6 @@ import { API_ADMIN_URL, PRODUCT_API, BANNER_API } from "../utill/api.endpoints";
 export default function Home(props) {
   const [responseData, setResponseData] = useState([]);
 
-  // const [appointName, setappointName] = useState("");
-  // const [appointMail, setappointMail] = useState("");
-  // const [appointNum, setappointNum] = useState("");
-  // const [appointmentSchedule, setappointmentSchedule] = useState("");
-  // const [appointDisorder, setappointDisorder] = useState("");
-  // const [appointMsg, setappointMsg] = useState("");
-
-  //error
-  // const [appointNameError, setappointNameError] = useState("");
-  // const [appointMailError, setappointMailError] = useState("");
-  // const [appointNumError, setappointNumError] = useState("");
-  // const [appointmentScheduleError, setappointmentScheduleError] = useState("");
-  // const [appointDisorderError, setappointDisorderError] = useState("");
-  // const [appointMsgError, setappointMsgError] = useState("");
-
-  // Appointments
-  // const Appointment = () => {
-  //   if (appointName == "") {
-  //     setappointNameError("Please Enter Your Name");
-  //   }
-  //   if (appointMail == "") {
-  //     setappointMailError("Please Enter Your Email");
-  //   }
-  //   if (appointNum == "") {
-  //     setappointNumError("Please Enter Mobile Number");
-  //   }
-  //   if (appointmentSchedule == "") {
-  //     setappointmentScheduleError("Please Enter Your Schedule");
-  //   }
-  //   if (appointDisorder == "") {
-  //     setappointDisorderError("You have to select any option");
-  //   }
-  //   if (appointMsg == "") {
-  //     setappointMsgError("Enter Your Message");
-  //   }
-  //   console.log("hhhhhhhhh", `${API_ADMIN_URL}${APPOINTMENT_API}`);
-  //   const appointmentOptions = {
-  //     fullname: appointName,
-  //     email: appointMail,
-  //     mobileNmb: appointNum,
-  //     disorder: appointDisorder,
-  //     schedule: appointmentSchedule,
-  //     msg: appointMsg,
-  //   };
-  //   axios
-  //     .post(`${API_ADMIN_URL}${APPOINTMENT_API}`, appointmentOptions)
-  //     .then((res) => {
-  //       // console.log("====llll=====", res.data.data);
-  //       alert("Appointment Successfully");
-  //       //  pathname="/counsultvideo"
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
   // productlist
   const Productlist = () => {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
@@ -241,20 +185,6 @@ export default function Home(props) {
               </div>
             </div>
           </div>
-          <div className="web-banner web-banner4 mb-50">
-            <div className="container">
-              <div className="web-banner-content">
-                <h1>{bannerData?.[4]?.bannerText}</h1>
-                <button className="btn-web">
-                  <a href="">register for assessment</a>
-                </button>
-                <button className="btn-web">
-                  {" "}
-                  <Link to="/support">your support network</Link>
-                </button>
-              </div>
-            </div>
-          </div>
         </Slider>
       </div>
       <div className="video-section mb-50">
@@ -387,12 +317,9 @@ export default function Home(props) {
           <div className="col-lg-12">
             <div className="service-heading">
               {/* <h5>Advantages</h5> */}
-              <h5>Shakti power to heal yourself</h5>
-              <h2>We Can Help You With</h2>
-              <p>
-                Commodo tempus sapien sit bibendum sit morbi auctor molestie
-                rutrum pellentesque eget vitae justo congue amet malesuada.
-              </p>
+              <h5>Shakthi-Power to Heal</h5>
+              {/* <h2>Shakthi gives you power to heal and get you to wellness</h2> */}
+              <p>Shakthi gives you power to heal and get you to wellness</p>
             </div>
           </div>
 
@@ -609,34 +536,31 @@ export default function Home(props) {
           <div className="row">
             <div className="col-lg-6">
               <div className="doctor-heading">
-                <h2>Consult With Experts.</h2>
-                <p>
+                <br />
+                <h2>Consult with Experts-Swayam</h2>
+                {/* <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
                   ad repellendus laboriosam ea, dolorem odio culpa.
-                </p>
-
+                </p> */}
+                <br />
                 <div className="expert-details">
                   <span>01</span>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veritatis cupiditate nostrum et quisquam aliquid ipsa ad
-                    necessitatibus.
+                    Meet the specialists who can take care of your requirement
+                    in discreet mode
                   </p>
                 </div>
                 <div className="expert-details">
                   <span>02</span>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veritatis cupiditate nostrum et quisquam aliquid ipsa ad
-                    necessitatibus.
+                    Do It Your Self-Please record your voice for 60 seconds and
+                    you can assess yourself
                   </p>
                 </div>
                 <div className="expert-details">
                   <span>03</span>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veritatis cupiditate nostrum et quisquam aliquid ipsa ad
-                    necessitatibus.
+                    Your reports will be available for your continual progress
                   </p>
                 </div>
               </div>
@@ -742,8 +666,8 @@ export default function Home(props) {
                 <h5>Eco System</h5>
                 {/* <h2>Get Our Amazing Products</h2> */}
                 <p>
-                  Commodo tempus sapien sit bibendum sit morbi auctor molestie
-                  rutrum pellentesque eget vitae justo congue amet malesuada.
+                  Please see your support system such as genetics support, find
+                  brain mapping centers
                 </p>
               </div>
             </div>
@@ -779,11 +703,11 @@ export default function Home(props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="service-heading">
-                <h5>Library</h5>
+                {/* <h5>Digital Human Library</h5> */}
                 <h2>Digital Human Library</h2>
                 <p>
-                  Commodo tempus sapien sit bibendum sit morbi auctor molestie
-                  rutrum pellentesque eget vitae justo congue amet malesuada.
+                  Find yourself mentor or coach, He/She can help you to overcome
+                  your inhibitions, learn from their experiences
                 </p>
               </div>
             </div>
@@ -848,11 +772,10 @@ export default function Home(props) {
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>Sprituality</h5>
-              <h2>What Are We All So Afraid Of?</h2>
+              <h5>Spirituality</h5>
+              {/* <h2> You can heal and create  balance life style .Do it yourself</h2> */}
               <p>
-                Commodo tempus sapien sit bibendum sit morbi auctor molestie
-                rutrum pellentesque eget vitae justo congue amet malesuada.
+              You can heal and create  balance life style .Do it yourself
               </p>
             </div>
           </div>

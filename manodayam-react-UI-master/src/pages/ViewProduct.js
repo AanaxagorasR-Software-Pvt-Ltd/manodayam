@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 // import ReadMoreReact from "read-more-react";
-import {
-  API_ADMIN_URL,
-  VIEW_PRODUCT,
-} from "../utill/api.endpoints";
+import { API_ADMIN_URL, VIEW_PRODUCT } from "../utill/api.endpoints";
+
+
 export default function ViewProduct(props) {
+  
+  
   // const {_id} = useParams();
   // console.log("*****###", useParams()._id);
   const [slug, setSlug] = useState(useParams().slug);
@@ -16,13 +17,16 @@ export default function ViewProduct(props) {
     setSlug(slug);
     console.log("slug", slug);
   }, []);
-
-  const [quantity, setquantity] = useState(0);
+  
+  const [quantity, setquantity] = useState(1);
   const plus = () => {
     setquantity(quantity + 1);
+  //   const quen = quantity * 3
+  // (localStorage.setItem('quent', quen));
+
   };
   const Minus = () => {
-    if (quantity >= 1) setquantity(quantity - 1);
+    if (quantity >= 2) setquantity(quantity - 1);
     setSlug(slug);
   };
   // productlist
@@ -85,23 +89,24 @@ export default function ViewProduct(props) {
                           <div className="ml-2 library-video ">
                             <img src={responseData?.[0]?.pic_url} alt="" />
                           </div>
-
-                          <Link to="/Cart" className="ml-4 mt-4">
+                          <Link
+                            to={{ pathname: "/Cart/" + slug }}
+                            className="ml-4 mt-4"
+                          >
                             <button className=" mt-4 ml-4 btn-web hvr-float-shadow">
                               Add to Cart
                             </button>
                           </Link>
                         </div>
+                        {responseData.map((element) => (
                         <div className="col-lg-6 offset-1">
                           <div className="library-person">
                             <div className="row">
-                              {/* <div className="col-3">
-                          <img src="assets/image/doctor-img.jpg" alt="" />
-                        </div> */}
+                           
                               <div className="col-9">
-                                <h3>{responseData?.[0]?.productname}</h3>
-                                <h5>{responseData?.[0]?.pdescription}</h5>
-                                {/* <p>{responseData?.[0]?.</p> */}
+                                <h3>{element.productname}</h3>
+                                <h5>{element.pdescription}</h5>
+                                <h5>{element.details}</h5>
                                 <div className="service-heading d-inline-flex">
                                   <h5 className="ml-1 bg-light text-dark rounded-bottom rounded-top border p-1">
                                     Vegetarian
@@ -111,7 +116,8 @@ export default function ViewProduct(props) {
                                   </h5>
                                 </div>
                                 <div className="mb-3">
-                                  <span>{responseData?.[0]?.mrp}</span>
+                                <i className="fa fa-inr"></i>
+                                  <span>{element.mrp}</span>
                                 </div>
                                 <h3 className="text-dark">Quantity:</h3>
                                 <div className="d-inline-flex">
@@ -121,7 +127,7 @@ export default function ViewProduct(props) {
                                   >
                                     <i className="fa fa-minus"></i>
                                   </div>
-                                  <h5 className="ml-3 mt-2">{quantity}</h5>
+                                  <h5 className="ml-3 mt-2 text-dark font-weight-bold">{quantity}</h5>
                                   <div
                                     className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
                                     onClick={plus}
@@ -143,6 +149,7 @@ export default function ViewProduct(props) {
                             </p> */}
                           </div>
                         </div>
+                        ))}
                       </div>
                     </div>
                   </div>

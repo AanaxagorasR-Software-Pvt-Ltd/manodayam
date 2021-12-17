@@ -6,11 +6,10 @@ const { getDatabase } = require("../../db/mongo");
 // console.log("#########", projectDetails);
 
 
-router.get("/cart", async (req, res) => {
+router.get("/:slug", async (req, res) => {
   const slug = req.params.slug
   const db = await getDatabase();
   try {
-    const { collectiontype } = req.body;
     const data = await db.collection("products").find({slug : slug}).toArray();
     console.log('|||||||||', data);
     if (Array.isArray(data)) {
