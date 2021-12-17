@@ -17,7 +17,7 @@ async function startDatabase() {
     });
     database = connection.db();
     console.log('Database connected', database);
-  } catch {
+  } catch (err) {
     
     console.log('Database not connected');
   }

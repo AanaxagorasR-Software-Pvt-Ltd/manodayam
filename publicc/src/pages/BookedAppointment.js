@@ -25,7 +25,8 @@ const BookedAppointment = () => {
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
-  const formRef = useRef();
+  const createRoomRef = useRef();
+  const changeStatusRef = useRef();
 
   const listBooked = () => {
     axios
@@ -84,7 +85,8 @@ const BookedAppointment = () => {
 
   return (
     <>
-      <Addform ref={formRef} list={listBooked} />
+      <CreateRoomForm ref={createRoomRef} list={listBooked} />
+      <CreateRoomForm ref={changeStatusRef} list={listBooked} />
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -337,7 +339,7 @@ const BookedAppointment = () => {
                                       type="button"
                                       class="btn btn-sm btn-info border-radius-0 add-btn"
                                       onClick={() => {
-                                        formRef.current.openRoomForm(v);
+                                        createRoomRef.current.openForm(v);
                                       }}
                                       title="Create Room"
                                     >
@@ -364,7 +366,7 @@ const BookedAppointment = () => {
                                     type="button"
                                     class="btn btn-sm btn-info border-radius-0 add-btn"
                                     onClick={() => {
-                                      formRef.current.openForm(v);
+                                      createRoomRef.current.openForm(v);
                                     }}
                                   >
                                     <i class="ti-pencil"></i>
@@ -379,8 +381,11 @@ const BookedAppointment = () => {
                                 </td>
                               </tr>
                             ))}
-                        </ul>
-                    </nav>
+                            
+                            </tbody>  
+                        </table>
+                      </div>
+                    </div>
                     <div class="main-panel">
                         <div class="content-wrapper">
                             <div class="row">
