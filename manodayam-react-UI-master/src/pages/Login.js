@@ -12,7 +12,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import FacebookLogin from "react-facebook-login";
-import { Card, Image } from "react-bootstrap";
+// import { Card, Image } from "react-bootstrap";
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
 const clientId = "Your-Client-Id";
@@ -399,7 +399,7 @@ export default function Login(props) {
                     style={{ width: "50px", height: "50px" }}
                   />
                 )}
-                {login && <Image src={picture} roundedCircle />}
+                {/* {login && <Image src={picture} roundedCircle />} */}
                 {/* </Card.Header>
                   {login && (
                     <Card.Body>

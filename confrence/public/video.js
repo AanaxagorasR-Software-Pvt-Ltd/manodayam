@@ -1,7 +1,6 @@
 
 const socket = io("/");
 let myVideo = document.createElement("video");
-import axios from "axios";
 myVideo.muted = true;
 const videoGrid = document.getElementById("video-grid")
 let videoStream;
