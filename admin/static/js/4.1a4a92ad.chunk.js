@@ -1,0 +1,2 @@
+(this.webpackJsonpmanodyam=this.webpackJsonpmanodyam||[]).push([[4],{254:function(t,a,e){"use strict";e.r(a);e(1),e(5);var n=e(4),c=e(8),i=e(0);a.default=function(t){t.children;return Object(c.a)().isAuthenticated?Object(i.jsx)(n.b,{}):Object(i.jsx)(n.a,{to:"/admin/login",replace:"/"})}}}]);
+//# sourceMappingURL=4.1a4a92ad.chunk.js.map

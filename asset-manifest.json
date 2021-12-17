@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/manodayam/static/css/main.2ae47eeb.chunk.css",
+    "main.js": "/manodayam/static/js/main.b0542113.chunk.js",
+    "main.js.map": "/manodayam/static/js/main.b0542113.chunk.js.map",
+    "runtime-main.js": "/manodayam/static/js/runtime-main.2e2f0516.js",
+    "runtime-main.js.map": "/manodayam/static/js/runtime-main.2e2f0516.js.map",
+    "static/js/2.2e048a47.chunk.js": "/manodayam/static/js/2.2e048a47.chunk.js",
+    "static/js/2.2e048a47.chunk.js.map": "/manodayam/static/js/2.2e048a47.chunk.js.map",
+    "static/js/3.ba1e9e68.chunk.js": "/manodayam/static/js/3.ba1e9e68.chunk.js",
+    "static/js/3.ba1e9e68.chunk.js.map": "/manodayam/static/js/3.ba1e9e68.chunk.js.map",
+    "index.html": "/manodayam/index.html",
+    "static/css/main.2ae47eeb.chunk.css.map": "/manodayam/static/css/main.2ae47eeb.chunk.css.map",
+    "static/js/2.2e048a47.chunk.js.LICENSE.txt": "/manodayam/static/js/2.2e048a47.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2e2f0516.js",
+    "static/js/2.2e048a47.chunk.js",
+    "static/css/main.2ae47eeb.chunk.css",
+    "static/js/main.b0542113.chunk.js"
+  ]
+}

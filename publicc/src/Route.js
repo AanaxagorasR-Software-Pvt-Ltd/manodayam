@@ -23,7 +23,7 @@ const InternalRoute = (props) => {
   const { loading } = useSelector((store) => store.userLogin)
 console.log("isLoading",loading)
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/manodayam/admin">
       <Suspense fallback={<Loader type="spokes" color="red"/>} >
         { loading ? <Loader type="spokes" color="red" /> : null }
 
