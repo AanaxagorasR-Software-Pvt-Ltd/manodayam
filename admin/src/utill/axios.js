@@ -4,7 +4,7 @@ const defaultModules = ['login'];
 let axiosBaseUrl = 'http://localhost:3020/api';
 
 if (window.location.hostname !== 'localhost') {
-    axiosBaseUrl = 'http://52.14.173.191:3020/api/';
+    axiosBaseUrl = 'http://3.145.192.104:3020/api/';
 }
 
 const axiosInstance = axios.create({

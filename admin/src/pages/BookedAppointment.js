@@ -348,7 +348,7 @@ const BookedAppointment = () => {
                                   ) : (
                                     <a
                                       href={
-                                        "http://localhost:5000/" + v.room_no
+                                        "http://3.145.192.104:5000/" + v.room_no
                                       }
                                       target="_blank"
                                     >
@@ -424,7 +424,7 @@ const BookedAppointment = () => {
                                                                         <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn" onClick={() => { createRoomRef.current.openForm(v) }} title="Create Room">
                                                                             <i class="ti-plus"></i>
                                                                         </button> :
-                                                                        <a href={"http://localhost:5000/" + v.room_no} target="_blank"><button type="button" class="btn btn-sm btn-success border-radius-0 add-btn" >
+                                                                        <a href={"http://3.145.192.104:5000/" + v.room_no} target="_blank"><button type="button" class="btn btn-sm btn-success border-radius-0 add-btn" >
                                                                             <i class="ti-video-camera"></i></button>
                                                                         </a>
                                                                     }</td>
