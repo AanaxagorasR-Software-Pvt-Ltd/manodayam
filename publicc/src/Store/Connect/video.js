@@ -12,7 +12,7 @@ class video {
         return axios.get( "/all/ignore-status");
     }
     save(data) {
-        return axios.post( '/videos/video-uploads', data);
+        return axios.post( '/videos/media', data);
     }
     delete(id) {
         return axios.delete(`/videos/delete/${id}`);

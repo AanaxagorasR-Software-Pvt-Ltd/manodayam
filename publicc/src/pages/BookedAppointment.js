@@ -379,9 +379,83 @@ const BookedAppointment = () => {
                                 </td>
                               </tr>
                             ))}
-                          </tbody>
-                        </table>
-                      </div>
+                        </ul>
+                    </nav>
+                    <div class="main-panel">
+                        <div class="content-wrapper">
+                            <div class="row">
+
+
+                                <div class="col-lg-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Booked Appointment list</h4>
+                                            <div class="table-responsive pt-3">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No</th>
+                                                            <th>Patient Details</th>
+                                                            <th>Issue</th>
+                                                            <th>Schedule Date</th>
+                                                            <th>Call Status</th>
+                                                            <th>Connect Here!</th>
+                                                            <th style={{ width: '80px' }}>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            data.map((v, i) => (
+                                                                <tr key={i}>
+                                                                    <td>{i + 1}</td>
+                                                                    <td><strong>Name: </strong> {v.fullname}<br />
+                                                                        <strong>Email:</strong> {v.email} <br />
+                                                                        <strong>Phone:</strong> {v.mobileNmb} </td>
+                                                                    <td>{v.disorder}</td>
+
+                                                                    <td>{(new Date(v.schedule)).toLocaleDateString()}</td>
+                                                                    <td>{v.call_status === 'pending' ? 'Pending' : v.call_status === 'success' ? 'Success' : 'Unsuccess'}</td>
+                                                                    <td>{v.room_no == null ?
+                                                                        <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn" onClick={() => { createRoomRef.current.openForm(v) }} title="Create Room">
+                                                                            <i class="ti-plus"></i>
+                                                                        </button> :
+                                                                        <a href={"http://localhost:5000/" + v.room_no} target="_blank"><button type="button" class="btn btn-sm btn-success border-radius-0 add-btn" >
+                                                                            <i class="ti-video-camera"></i></button>
+                                                                        </a>
+                                                                    }</td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
+                                                                            onClick={() => { changeStatusRef.current.openForm(v) }}
+                                                                        >Change Call Status</button>
+
+                                                                    </td>
+                                                                </tr>
+                                                            ))
+                                                        }
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* content-wrapper ends */}
+                        {/* partial:partials/_footer.html */}
+                        <footer class="footer">
+                            <div class="col-md-12 text-center">
+                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                                    Copyright © 2021 All Right Reserved Aanaxagorasr Software Pvt. Ltd{" "}
+                                    <a href="#" target="_blank">
+
+                                    </a>{" "}
+
+                                </span>
+
+                            </div>
+                        </footer>
+                        {/* partial */}
                     </div>
                   </div>
                 </div>
@@ -405,107 +479,62 @@ const BookedAppointment = () => {
   );
 };
 
-const Addform = forwardRef((props, ref) => {
-  const [show, setShow] = useState(false);
-  const [show1, setShow1] = useState(false);
-  const [data, setData] = useState({});
-  const { list } = props;
-  const handleChange = (v, k) => {
-    setData({ ...data, [k]: v });
-  };
 
-  const handleVisible = (state) => {
-    setShow(state);
-  };
-  useImperativeHandle(ref, () => ({
-    openForm(dt) {
-      if (dt?._id) {
-        setData(dt);
-      } else {
-        setData({});
-      }
-      handleVisible(true);
-    },
-  }));
+const CreateRoomForm = forwardRef((props, ref) => {
+    const [show, setShow] = useState(false);
+    const [data, setData] = useState({});
+    const { list } = props;
+    const handleChange = (v, k) => { setData({ ...data, [k]: v }) }
 
-  const handleVisibleRoom = (state) => {
-    setShow1(state);
-  };
-  useImperativeHandle(ref, () => ({
-    openRoomForm(dt) {
-      if (dt?._id) {
-        setData(dt);
-      } else {
-        setData({});
-      }
-      handleVisibleRoom(true);
-    },
-  }));
+    const handleVisibleRoom = (state) => { setShow(state) }
+    useImperativeHandle(ref, () => ({
+        openForm(dt) {
+            if (dt?._id) {
+                setData(dt);
+            } else {
+                setData({});
+            }
+            handleVisibleRoom(true);
+        }
+    }));
 
-  const save = () => {
-    let fd = new FormData();
-    appointment
-      .save(data, data.id)
-      .then((res) => {
-        alert(res.message);
-        handleVisible(false);
-        list();
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  };
-  const saveRoom = () => {
-    appointment
-      .saveRoom(data, data.id)
-      .then((res) => {
-        alert(res?.message);
-        handleVisibleRoom(false);
-        list();
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  };
+   
+    const saveRoom = () => {
+        appointment.saveRoom(data, data.id).then((res) => {
+            alert(res?.message)
+            handleVisibleRoom(false);
+            list();
+        }).catch(err => {
+            alert(err.message)
+        })
+    }
 
-  return (
-    <>
-      <Modal
-        show={show}
-        onHide={() => {
-          handleVisible(false);
-        }}
-      >
-        <Modal.Header>
-          <Modal.Title>Book Appointment</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form class="forms-sample">
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Name</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.fullname || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "fullname");
-                }}
-                placeholder="Enter Name"
-              />
-            </div>
+    return (
+        <>
+            <Modal show={show} onHide={() => { handleVisibleRoom(false) }}>
+                <Modal.Header >
+                    <Modal.Title>Create Room</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
 
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Email</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.email || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "email");
-                }}
-                placeholder="Enter Email"
-              />
-            </div>
+                    <form class="forms-sample">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1"> Room No</label>
+                            <input type="text" class="form-control" value={data.room_no || ''} onChange={(e) => { handleChange(e.target.value, 'room_no') }} placeholder="Enter Room No" />
+                        </div>
+                    </form>
+
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => { handleVisibleRoom(false) }}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={saveRoom}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
             <div class="form-group">
               <label for="exampleInputUsername1"> Phone</label>
@@ -520,31 +549,60 @@ const Addform = forwardRef((props, ref) => {
               />
             </div>
 
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Issue</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.disorder || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "disorder");
-                }}
-                placeholder="Enter Issue"
-              />
-            </div>
+           
+        </>
+    );
+})
+const ChangeStatusForm = forwardRef((props, ref) => {
+    const [show1, setShow1] = useState(false);
+    const [data, setData] = useState({});
+    const { list } = props;
+    const handleChange = (v, k) => { setData({ ...data, [k]: v }) }
 
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Schedule Date</label>
-              <input
-                type="datetime-local"
-                class="form-control"
-                value={data.schedule || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "schedule");
-                }}
-                placeholder="Enter Schedule Date"
-              />
-            </div>
+   
+
+    const handleVisibleStatus = (state) => { setShow1(state) }
+    useImperativeHandle(ref, () => ({
+        openForm(dt) {
+            if (dt?._id) {
+                setData(dt);
+            } else {
+                setData({});
+            }
+            handleVisibleStatus(true);
+        }
+    }));
+
+    const saveCallStatus = () => {
+        appointment.saveCallStatus(data, data.id).then((res) => {
+            alert(res?.message)
+            handleVisibleStatus(false);
+            list();
+        }).catch(err => {
+            alert(err.message)
+        })
+    }
+
+    return (
+        <>
+            <Modal show={show1} onHide={() => { handleVisibleStatus(false) }}>
+                <Modal.Header >
+                    <Modal.Title>Change Call Status</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                    <form class="forms-sample">
+                            <div class="form-group ">
+							<label for="exampleInputUsername1">Call Status</label>
+							<select class="form-control" value={data.call_status || ''} onChange={(e) => { handleChange(e.target.value, 'call_status') }}>
+								<option value="" disabled>Change Call Status</option>
+								<option value="pending">Pending</option>
+								<option value="success">Success</option>
+								<option value="unsuccess">Unsuccess</option>
+							</select>
+						</div>
+                        
+                    </form>
 
             <div class="form-group">
               <label for="exampleInputUsername1"> Message</label>
@@ -559,80 +617,20 @@ const Addform = forwardRef((props, ref) => {
               />
             </div>
 
-            <div class="form-group ">
-              <label for="exampleInputUsername1">Appointment Status</label>
-              <select
-                class="form-control"
-                value={data.status || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "status");
-                }}
-              >
-                <option value="" disabled>
-                  Select Appointment Status
-                </option>
-                <option value="pending">Pending</option>
-                <option value="booked">Booked</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              handleVisible(false);
-            }}
-          >
-            Close
-          </Button>
-          <Button variant="primary" onClick={save}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => { handleVisibleStatus(false) }}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={saveCallStatus}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
-      <Modal
-        show={show1}
-        onHide={() => {
-          handleVisibleRoom(false);
-        }}
-      >
-        <Modal.Header>
-          <Modal.Title>Create Room</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form class="forms-sample">
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Room No</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.room_no || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "room_no");
-                }}
-                placeholder="Enter Room No"
-              />
-            </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              handleVisibleRoom(false);
-            }}
-          >
-            Close
-          </Button>
-          <Button variant="primary" onClick={saveRoom}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-});
+
+           
+        </>
+    );
+})
 export default BookedAppointment;

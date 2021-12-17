@@ -31,7 +31,7 @@ const leftSideBarMenu = [
     iconClass: "icon-layout",
     submenu: [
       {
-        name: "All Appointements",
+        name: "All Appointments",
         isActive: true,
         dataToggle: "",
         link: "/appointment-list",

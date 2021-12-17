@@ -435,8 +435,6 @@ const Addform = forwardRef((props, ref) => {
 									<input type="file" class="form-control file-upload-info" value={data.image || ''} onChange={(e) => { handleChange(e.target.value, 'image') }} placeholder="Video Thumbnail Image" />
 
 								</div>
-
-
 							
 							
 							<div class="form-group col-md-12">

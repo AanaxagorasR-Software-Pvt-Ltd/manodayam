@@ -136,6 +136,9 @@ router.post('/saveroom', async (req, res) => {
 				{ $set: data },
 			).insertedId;
 		}
+    else {
+      insertedId = await category.insertOne(data).insertedId;
+    }
 
 		res.status(200).json({
 			data: {
@@ -144,6 +147,52 @@ router.post('/saveroom', async (req, res) => {
 			},
 			status: true,
 			message: "Room created successfully!"
+		});
+	}
+
+catch (e) {
+	console.log("error", e);
+	res.status(500).json({
+		message: "server error",
+		error: e,
+	});
+}
+});
+
+router.post('/changecallstatus', async (req, res) => {
+	const db = await getDatabase();
+	const body = req.body;
+
+	try {
+		
+		let data = {
+			call_status: body.call_status,
+		}
+		console.log(data);
+		if (!body?._id) {
+			data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+		} else {
+			data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+		}
+
+		let insertedId = null;
+		let appointments = await db.collection("appointments");
+		if (body._id) {
+			insertedId = await appointments.updateOne(
+				{ _id: new ObjectID(body._id) },
+				{ $set: data },
+			).insertedId;
+		}
+    else {
+      insertedId = await category.insertOne(data).insertedId;
+    }
+		res.status(200).json({
+			data: {
+				_id: insertedId,
+				...req.body
+			},
+			status: true,
+			message: "Call Status Changed successfully!"
 		});
 	}
 
