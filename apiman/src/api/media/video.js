@@ -97,7 +97,6 @@ router.post(
   },
   (error, req, res, next) => {
     res.status(500).json({ status: false, message: "please try again " });
-<<<<<<< HEAD
 
   }
 );
@@ -114,19 +113,6 @@ router.get('/', async (req, res) => {
 	} catch (err) {
 		console.log('err', err.message);
 	}
-=======
-  }
-);
-
-router.get("/", async (req, res) => {
-  try {
-    const db = await getDatabase();
-    let dt = await db.collection("videos").find().toArray();
-    res.send(dt);
-  } catch (err) {
-    console.log("err", err.message);
-  }
->>>>>>> a940fc8cc0e708c7984cb7d6eadff42ecfac394f
 
   // res.send('hello')
 });
