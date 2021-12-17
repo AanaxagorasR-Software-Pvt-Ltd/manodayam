@@ -20,6 +20,9 @@ class appointment {
     saveRoom(data) {
         return axios.post(`/appointments/saveroom`, data);
     }
+    saveCallStatus(data) {
+        return axios.post(`/appointments/changecallstatus`, data);
+    }
     delete(id) {
         return axios.delete(`/appointments/delete/${id}`);
     }

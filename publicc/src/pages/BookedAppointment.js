@@ -21,7 +21,8 @@ const BookedAppointment = () => {
     const navigate = useNavigate();
     const [menuList, setMenuList] = useState(leftSideBarMenu);
     const [profileShow, setProfileShow] = useToggle(false);
-    const formRef = useRef();
+    const createRoomRef = useRef();
+    const changeStatusRef = useRef();
 
     const listBooked = () => {
         axios.get('appointments/booked').then(res => {
@@ -85,7 +86,8 @@ const BookedAppointment = () => {
 
     return (
         <>
-            <Addform ref={formRef} list={listBooked} />
+            <CreateRoomForm ref={createRoomRef} list={listBooked} />
+            <ChangeStatusForm ref={changeStatusRef} list={listBooked} />
             <div class="container-scroller">
                 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -303,23 +305,20 @@ const BookedAppointment = () => {
                                                                     <td>{v.disorder}</td>
 
                                                                     <td>{(new Date(v.schedule)).toLocaleDateString()}</td>
-                                                                    <td>{v.call_status === 'pending' ? 'Pending' : v.status === 'success' ? 'Success' : 'Unsuccess'}</td>
+                                                                    <td>{v.call_status === 'pending' ? 'Pending' : v.call_status === 'success' ? 'Success' : 'Unsuccess'}</td>
                                                                     <td>{v.room_no == null ?
-                                                                        <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn" onClick={() => { formRef.current.openRoomForm(v) }} title="Create Room">
+                                                                        <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn" onClick={() => { createRoomRef.current.openForm(v) }} title="Create Room">
                                                                             <i class="ti-plus"></i>
-                                                                        </button> : 
-                                                                            <a href={"http://localhost:5000/" + v.room_no} target="_blank"><button type="button" class="btn btn-sm btn-success border-radius-0 add-btn" >
-                                                                                <i class="ti-video-camera"></i></button>
-                                                                            </a> 
-                                                                                }</td>
+                                                                        </button> :
+                                                                        <a href={"http://localhost:5000/" + v.room_no} target="_blank"><button type="button" class="btn btn-sm btn-success border-radius-0 add-btn" >
+                                                                            <i class="ti-video-camera"></i></button>
+                                                                        </a>
+                                                                    }</td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
-                                                                           onClick={() => { formRef.current.openForm(v) }}
-                                                                        ><i class="ti-pencil"></i></button>
-                                                                        <button type="button" class="btn btn-sm btn-danger add-btn"
-                                                                            onClick={() => deleteData(v._id)}
-                                                                        >
-                                                                            <i class="ti-trash"></i></button>
+                                                                            onClick={() => { changeStatusRef.current.openForm(v) }}
+                                                                        >Change Call Status</button>
+
                                                                     </td>
                                                                 </tr>
                                                             ))
@@ -356,28 +355,15 @@ const BookedAppointment = () => {
 };
 
 
-const Addform = forwardRef((props, ref) => {
+const CreateRoomForm = forwardRef((props, ref) => {
     const [show, setShow] = useState(false);
-    const [show1, setShow1] = useState(false);
     const [data, setData] = useState({});
     const { list } = props;
     const handleChange = (v, k) => { setData({ ...data, [k]: v }) }
 
-    const handleVisible = (state) => { setShow(state) }
+    const handleVisibleRoom = (state) => { setShow(state) }
     useImperativeHandle(ref, () => ({
         openForm(dt) {
-            if (dt?._id) {
-                setData(dt);
-            } else {
-                setData({});
-            }
-            handleVisible(true);
-        }
-    }));
-
-    const handleVisibleRoom = (state) => { setShow1(state) }
-    useImperativeHandle(ref, () => ({
-        openRoomForm(dt) {
             if (dt?._id) {
                 setData(dt);
             } else {
@@ -387,16 +373,7 @@ const Addform = forwardRef((props, ref) => {
         }
     }));
 
-    const save = () => {
-        let fd = new FormData();
-        appointment.save(data, data.id).then((res) => {
-            alert(res.message)
-            handleVisible(false);
-            list();
-        }).catch(err => {
-            alert(err.message)
-        })
-    }
+   
     const saveRoom = () => {
         appointment.saveRoom(data, data.id).then((res) => {
             alert(res?.message)
@@ -409,68 +386,7 @@ const Addform = forwardRef((props, ref) => {
 
     return (
         <>
-            <Modal show={show} onHide={() => { handleVisible(false) }}>
-                <Modal.Header >
-                    <Modal.Title>Book Appointment</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-
-                    <form class="forms-sample">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1"> Name</label>
-                            <input type="text" class="form-control" value={data.fullname || ''} onChange={(e) => { handleChange(e.target.value, 'fullname') }} placeholder="Enter Name" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputUsername1"> Email</label>
-                            <input type="text" class="form-control" value={data.email || ''} onChange={(e) => { handleChange(e.target.value, 'email') }} placeholder="Enter Email" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputUsername1"> Phone</label>
-                            <input type="number" class="form-control" value={data.mobileNmb || ''} onChange={(e) => { handleChange(e.target.value, 'mobileNmb') }} placeholder="Enter Phone" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputUsername1"> Issue</label>
-                            <input type="text" class="form-control" value={data.disorder || ''} onChange={(e) => { handleChange(e.target.value, 'disorder') }} placeholder="Enter Issue" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputUsername1"> Schedule Date</label>
-                            <input type="datetime-local" class="form-control" value={data.schedule || ''} onChange={(e) => { handleChange(e.target.value, 'schedule') }} placeholder="Enter Schedule Date" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputUsername1"> Message</label>
-                            <textarea class="form-control" rows={4} value={data.msg || ''} onChange={(e) => { handleChange(e.target.value, 'msg') }} placeholder=" Message" />
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="exampleInputUsername1">Appointment Status</label>
-                            <select class="form-control" value={data.status || ''} onChange={(e) => { handleChange(e.target.value, 'status') }}>
-                                <option value="" disabled>Select Appointment Status</option>
-                                <option value="pending">Pending</option>
-                                <option value="booked">Booked</option>
-                                <option value="cancelled">Cancelled</option>
-                            </select>
-                        </div>
-                    </form>
-
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => { handleVisible(false) }}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={save}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-
-            <Modal show={show1} onHide={() => { handleVisibleRoom(false) }}>
+            <Modal show={show} onHide={() => { handleVisibleRoom(false) }}>
                 <Modal.Header >
                     <Modal.Title>Create Room</Modal.Title>
                 </Modal.Header>
@@ -494,6 +410,77 @@ const Addform = forwardRef((props, ref) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+
+           
+        </>
+    );
+})
+const ChangeStatusForm = forwardRef((props, ref) => {
+    const [show1, setShow1] = useState(false);
+    const [data, setData] = useState({});
+    const { list } = props;
+    const handleChange = (v, k) => { setData({ ...data, [k]: v }) }
+
+   
+
+    const handleVisibleStatus = (state) => { setShow1(state) }
+    useImperativeHandle(ref, () => ({
+        openForm(dt) {
+            if (dt?._id) {
+                setData(dt);
+            } else {
+                setData({});
+            }
+            handleVisibleStatus(true);
+        }
+    }));
+
+    const saveCallStatus = () => {
+        appointment.saveCallStatus(data, data.id).then((res) => {
+            alert(res?.message)
+            handleVisibleStatus(false);
+            list();
+        }).catch(err => {
+            alert(err.message)
+        })
+    }
+
+    return (
+        <>
+            <Modal show={show1} onHide={() => { handleVisibleStatus(false) }}>
+                <Modal.Header >
+                    <Modal.Title>Change Call Status</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                    <form class="forms-sample">
+                            <div class="form-group ">
+							<label for="exampleInputUsername1">Call Status</label>
+							<select class="form-control" value={data.call_status || ''} onChange={(e) => { handleChange(e.target.value, 'call_status') }}>
+								<option value="" disabled>Change Call Status</option>
+								<option value="pending">Pending</option>
+								<option value="success">Success</option>
+								<option value="unsuccess">Unsuccess</option>
+							</select>
+						</div>
+                        
+                    </form>
+
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => { handleVisibleStatus(false) }}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={saveCallStatus}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
+           
         </>
     );
 })

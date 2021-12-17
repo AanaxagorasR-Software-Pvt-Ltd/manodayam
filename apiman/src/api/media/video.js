@@ -49,7 +49,31 @@ router.post(
   `/media`,
   imageUpload.single("image"),
   async (req, res) => {
-    if(typeof req.file !== "undefined") {
+    let data = {
+      video_type: body.video_type,
+      title: body.title,
+      video_link: body.video_link,
+      description: body.description,
+      status: body.status,
+    }
+    if (!body?._id) {
+      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    } else {
+      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    }
+
+    let insertedId = null;
+    let media_solutions = await db.collection("videos");
+    if (body._id) {
+      insertedId = await media_solutions.updateOne(
+        { _id: new ObjectID(body._id) },
+        { $set: data },
+      ).insertedId;
+    } else {
+      insertedId = await media_solutions.insertOne(data).insertedId;
+    }
+
+    if (typeof req.file !== "undefined") {
       const { filename } = req.file;
       const { pid } = req.query;
       const url = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + filename;
@@ -67,14 +91,14 @@ router.post(
               { $set: { pic_url: `${url}`, image_id: ObjectId(insertedId) } }
             ).then(su => {
               res
-            //  const ll = [db]
-              .status(200)
-          .json({ status: true, message: "file uploaded done" });
-            }) 
+                //  const ll = [db]
+                .status(200)
+                .json({ status: true, message: "file uploaded done" });
+            })
             .catch(e => {
               res
-              .status(200)
-              .json({ status: false, message: "please try again " });
+                .status(200)
+                .json({ status: false, message: "please try again 1" });
             })
             .catch((e) => {
               res
@@ -92,11 +116,11 @@ router.post(
           .json({ status: false, message: "please try again later " });
       }
     } else {
-      res.status(200).json({ status: false, message: "please try again " });
+      res.status(200).json({ status: false, message: "please try again2 " });
     }
   },
   (error, req, res, next) => {
-    res.status(500).json({ status: false, message: "please try again " });
+    res.status(500).json({ status: false, message: "please try again 3" });
 
   }
 );
@@ -104,18 +128,18 @@ router.post(
 
 router.get('/', async (req, res) => {
 
-	try {
-		const db = await getDatabase();
-		let dt = await db
-			.collection("videos")
-			.find().toArray()
-		res.send(dt)
-	} catch (err) {
-		console.log('err', err.message);
-	}
+  try {
+    const db = await getDatabase();
+    let dt = await db
+      .collection("videos")
+      .find().toArray()
+    res.send(dt)
+  } catch (err) {
+    console.log('err', err.message);
+  }
 
   // res.send('hello')
 });
 
-// router.post("/media", (req,res) => { console.log("req",req); res.jon } )
+
 module.exports = router;
