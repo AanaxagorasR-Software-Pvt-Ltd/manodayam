@@ -23,16 +23,15 @@ const validate = (req, res, next) => {
   // next()
 };
 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
+const imageStorage = multer.diskStorage({
+  destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+  },
 });
-  
-var upload = multer({ storage: storage });
 const imageUpload = multer({
   storage: imageStorage,
   limits: {
@@ -40,90 +39,74 @@ const imageUpload = multer({
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(png|jpg)$/)) {
-		alert("Please upload a Image");
       return cb(new Error("Please upload a Image"));
     }
     cb(undefined, true);
   },
 });
 
-
-
 router.post(
-  `/video-uploads`,
+  `/media`,
   imageUpload.single("image"),
   async (req, res) => {
-    if( req.file === "jpg|png") {
+    if (typeof req.file !== "undefined") {
       const { filename } = req.file;
       const { pid } = req.query;
       const url = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + filename;
       try {
         const db = await getDatabase();
-        const { insertedId }  = await db
-        .collection("media")
-        .insertOne({
+        const { insertedId } = await db.collection("media").insertOne({
           url: `${url}`,
           pid: ObjectId(pid),
-        })
-        if(insertedId) {
+        });
+        if (insertedId) {
           await db
-            .collection("videos")
+            .collection("products")
             .updateOne(
               { _id: ObjectId(pid) },
-              { $set: { pic_url: `${url}`, image_id: ObjectId(insertedId) } },
-              {title: body.title},
-              {slug: body.slug},
-              {video_link: body.video_link},
-              {description: body.description},
-              {status: body.status},
-            ).then(su => {
+              { $set: { pic_url: `${url}`, image_id: ObjectId(insertedId) } }
+            )
+            .then((su) => {
               res
-            //  const ll = [db]
-              .status(200)
-          .json({ status: true, message: "file uploaded done" });
-            }) 
-            .catch(e => {
-              res
-              .status(200)
-              .json({ status: false, message: "please try again1 " });
+                //  const ll = [db]
+                .status(200)
+                .json({ status: true, message: "file uploaded done" });
             })
+            .catch((e) => {
+              res
+                .status(200)
+                .json({ status: false, message: "please try again " });
+            });
         } else {
           res
-          .status(200)
-          .json({ status: false, message: "please try again later" });
+            .status(200)
+            .json({ status: false, message: "please try again later" });
         }
-          
-      } catch(e2) {
-      res
-        .status(400)
-        .json({ status: false, message: "please try again later " }); 
+      } catch (e2) {
+        res
+          .status(400)
+          .json({ status: false, message: "please try again later " });
       }
-      
     } else {
-      res.status(500).json({ status: false, message: "please try again2 " });
+      res.status(200).json({ status: false, message: "please try again " });
     }
-
   },
   (error, req, res, next) => {
-    res.status(500).json({ status: false, message: "please try again3 " });
-
+    res.status(500).json({ status: false, message: "please try again " });
   }
 );
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
+  try {
+    const db = await getDatabase();
+    let dt = await db.collection("videos").find().toArray();
+    res.send(dt);
+  } catch (err) {
+    console.log("err", err.message);
+  }
 
-	try {
-		const db = await getDatabase();
-		let dt = await db
-			.collection("videos")
-			.find().toArray()
-		res.send(dt)
-	} catch (err) {
-		console.log('err', err.message);
-	}
-
-	// res.send('hello')
-})
+  // res.send('hello')
+});
 
 // router.post("/media", (req,res) => { console.log("req",req); res.jon } )
 module.exports = router;
