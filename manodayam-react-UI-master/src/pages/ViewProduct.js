@@ -3,11 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 // import ReadMoreReact from "read-more-react";
 import { API_ADMIN_URL, VIEW_PRODUCT } from "../utill/api.endpoints";
-
-
 export default function ViewProduct(props) {
-  
-  
   // const {_id} = useParams();
   // console.log("*****###", useParams()._id);
   const [slug, setSlug] = useState(useParams().slug);
@@ -17,14 +13,13 @@ export default function ViewProduct(props) {
     setSlug(slug);
     console.log("slug", slug);
   }, []);
-  
+
   const [quantity, setquantity] = useState(1);
   const plus = () => {
     setquantity(quantity + 1);
-  //   const quen = quantity * 3
-  // (localStorage.setItem('quent', quen));
-
+    // const quen = quantity * 3
   };
+  localStorage.setItem("quent", quantity);
   const Minus = () => {
     if (quantity >= 2) setquantity(quantity - 1);
     setSlug(slug);
@@ -79,66 +74,67 @@ export default function ViewProduct(props) {
               </div>
             </div>
             <br />
-            <div className="library-section mb-50">
-              <div className="container">
-                <div className="row">
-                  <div className="col-lg-10 offset-1 ">
-                    <div className="library-card">
-                      <div className="row">
-                        <div className="col-lg-5">
-                          <div className="ml-2 library-video ">
-                            <img src={responseData?.[0]?.pic_url} alt="" />
+            {responseData.map((element) => (
+              <div className="library-section mb-50">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-10 offset-1 ">
+                      <div className="library-card">
+                        <div className="row">
+                          <div className="col-lg-5">
+                            <div className="ml-2 library-video ">
+                              <img src={element.pic_url} alt="" />
+                            </div>
+                            <Link
+                              to={{ pathname: "/Cart/" + slug }}
+                              className="ml-4 mt-4"
+                            >
+                              <button className=" mt-4 ml-4 btn-web hvr-float-shadow">
+                                Add to Cart
+                              </button>
+                            </Link>
                           </div>
-                          <Link
-                            to={{ pathname: "/Cart/" + slug }}
-                            className="ml-4 mt-4"
-                          >
-                            <button className=" mt-4 ml-4 btn-web hvr-float-shadow">
-                              Add to Cart
-                            </button>
-                          </Link>
-                        </div>
-                        {responseData.map((element) => (
-                        <div className="col-lg-6 offset-1">
-                          <div className="library-person">
-                            <div className="row">
-                           
-                              <div className="col-9">
-                                <h3>{element.productname}</h3>
-                                <h5>{element.pdescription}</h5>
-                                <h5>{element.details}</h5>
-                                <div className="service-heading d-inline-flex">
-                                  <h5 className="ml-1 bg-light text-dark rounded-bottom rounded-top border p-1">
-                                    Vegetarian
-                                  </h5>
-                                  <h5 className="ml-2 bg-light text-dark rounded-bottom rounded-top border p-1">
-                                    Gluten Free
-                                  </h5>
-                                </div>
-                                <div className="mb-3">
-                                <i className="fa fa-inr"></i>
-                                  <span>{element.mrp}</span>
-                                </div>
-                                <h3 className="text-dark">Quantity:</h3>
-                                <div className="d-inline-flex">
-                                  <div
-                                    className="bg-light rounded-bottom rounded-top border h-25 p-1"
-                                    onClick={Minus}
-                                  >
-                                    <i className="fa fa-minus"></i>
+                          <div className="col-lg-6 offset-1">
+                            <div className="library-person">
+                              <div className="row">
+                                <div className="col-9">
+                                  <h3>{element.productname}</h3>
+                                  <h5>{element.pdescription}</h5>
+                                  <h5>{element.details}</h5>
+                                  <div className="service-heading d-inline-flex">
+                                    <h5 className="ml-1 bg-light text-dark rounded-bottom rounded-top border p-1">
+                                      Vegetarian
+                                    </h5>
+                                    <h5 className="ml-2 bg-light text-dark rounded-bottom rounded-top border p-1">
+                                      Gluten Free
+                                    </h5>
                                   </div>
-                                  <h5 className="ml-3 mt-2 text-dark font-weight-bold">{quantity}</h5>
-                                  <div
-                                    className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
-                                    onClick={plus}
-                                  >
-                                    <i className="fa fa-plus"></i>
+                                  <div className="mb-3">
+                                    <i className="fa fa-inr"></i>
+                                    <span>{element.mrp}</span>
+                                  </div>
+                                  <h3 className="text-dark">Quantity:</h3>
+                                  <div className="d-inline-flex">
+                                    <div
+                                      className="bg-light rounded-bottom rounded-top border h-25 p-1"
+                                      onClick={Minus}
+                                    >
+                                      <i className="fa fa-minus"></i>
+                                    </div>
+                                    <h5 className="ml-3 mt-2 text-dark font-weight-bold">
+                                      {quantity}
+                                    </h5>
+                                    <div
+                                      className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
+                                      onClick={plus}
+                                    >
+                                      <i className="fa fa-plus"></i>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            {/* <p>{responseData?.[0]?.para}</p> */}
-                            {/* <p>
+                              {/* <p>{responseData?.[0]?.para}</p> */}
+                              {/* <p>
                               <ReadMoreReact
                                 text={responseData?.[0]?.more}
                                 min={20}
@@ -147,15 +143,15 @@ export default function ViewProduct(props) {
                                 readMoreText="View More"
                               />
                             </p> */}
+                            </div>
                           </div>
                         </div>
-                        ))}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

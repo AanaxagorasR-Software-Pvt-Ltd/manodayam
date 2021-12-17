@@ -382,7 +382,11 @@ export default function Profile() {
                                 <td>
                                   {/* <i className="fa fa-video-camera"></i> */}
                                   {/* <Link to="http://localhost:4000/">hello</Link> */}
-                                  <a href="http://localhost:4000/">
+
+                                  <a
+                                    href={"http://localhost:5000/" }
+                                    target="_blank"
+                                  >
                                     <img src="assets/image/vdo.png" alt="" />
                                   </a>
                                 </td>
@@ -406,7 +410,7 @@ export default function Profile() {
                                 <td>Dementia</td>
                                 <td>
                                   <a
-                                    href="http://localhost:4000/"
+                                    href="http://localhost:5000/"
                                     target="_blank"
                                   >
                                     <img
@@ -438,7 +442,7 @@ export default function Profile() {
                                 <td>
                                   {/* <Link to="http://localhost:3000/"> */}
                                   <a
-                                    href="http://localhost:4000/"
+                                    href="http://localhost:5000/"
                                     target="_blank"
                                   >
                                     <img

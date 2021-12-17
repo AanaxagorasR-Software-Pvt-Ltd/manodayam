@@ -5,9 +5,8 @@ import { API_ADMIN_URL, ADD_CART_API } from "../utill/api.endpoints";
 
 // var quen = 2;
 {
-  localStorage.getItem("Password");
+  localStorage.getItem("quent");
 }
-
 export default function Cart(props) {
   const [slug, setSlug] = useState(useParams().slug);
   // const {slug} = useParams();
@@ -17,17 +16,13 @@ export default function Cart(props) {
     console.log("slug", slug);
 
     // console.log("0000000",  localStorage.getItem("quent"));
-
   }, []);
   const [responseData, setResponseData] = useState([]);
   const ProductCart = () => {
     console.log(`${API_ADMIN_URL}${ADD_CART_API}`);
-    // const productlisting = {
-    //   collectiontype: "products",
-    //   // slug: slug,
-    // };
+
     axios
-      .get(`${API_ADMIN_URL}/${ADD_CART_API}/${slug}`)
+      .post(`${API_ADMIN_URL}/${ADD_CART_API}/${slug}`)
       .then((res) => {
         setResponseData(res.data.data);
         console.log("----Cart----", res.data);
@@ -90,12 +85,10 @@ export default function Cart(props) {
                         </td>
                         <td>{element.productname}</td>
                         <td>
-                          <i className="fa fa-inr"></i>{" "}{element.mrp}
+                          <i className="fa fa-inr"></i> {element.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}
                         </td>
-                        <td>
-                          <p>4</p>
-                        </td>
+                        <td>{localStorage.getItem("quent")}</td>
                         <td>
                           <i className="fa fa-inr"></i> {element.shipping}
                         </td>

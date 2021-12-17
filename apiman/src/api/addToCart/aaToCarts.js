@@ -4,13 +4,19 @@ const { getDatabase } = require("../../db/mongo");
 // const projectDetails = require('./data2');
 
 // console.log("#########", projectDetails);
-
-
-router.get("/:slug", async (req, res) => {
+router.post("/:slug", async (req, res) => {
   const slug = req.params.slug
   const db = await getDatabase();
   try {
     const data = await db.collection("products").find({slug : slug}).toArray();
+   
+
+    // const addToCart = await db.collection("addToCarts").insertOne({
+    //   product_id : data._id,
+    // }).toArray();
+
+
+  // console.log('*********', addToCart);
     console.log('|||||||||', data);
     if (Array.isArray(data)) {
       res.status(200).json({
