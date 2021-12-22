@@ -9,12 +9,10 @@ router.post("/:slug", async (req, res) => {
   const db = await getDatabase();
   try {
     const data = await db.collection("products").find({slug : slug}).toArray();
-   
 
     // const addToCart = await db.collection("addToCarts").insertOne({
     //   product_id : data._id,
     // }).toArray();
-
 
   // console.log('*********', addToCart);
     console.log('|||||||||', data);
