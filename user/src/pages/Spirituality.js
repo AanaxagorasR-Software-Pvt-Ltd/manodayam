@@ -27,11 +27,8 @@ export default function Spirituality() {
             <div className="col-lg-12">
               <div className="service-heading">
                 <h5>Sprituality</h5>
-                <h2>What Are We All So Afraid Of?</h2>
-                <p>
-                  Commodo tempus sapien sit bibendum sit morbi auctor molestie
-                  rutrum pellentesque eget vitae justo congue amet malesuada.
-                </p>
+                {/* <h2>What Are We All So Afraid Of?</h2> */}
+                <h3>What do you worry about?</h3>
               </div>
             </div>
             <div className="col-lg-6 offset-3">
@@ -52,10 +49,13 @@ export default function Spirituality() {
                     <button className="btn spr-btn">Fear of something</button>
                   </li>
                 </ul>
+                <button className="ctn-btn btn btn-web cnt-btn hvr-float-shadow">
+                  <a href="http://localhost:3002">Continue &nbsp;</a>
+                </button>
               </div>
             </div>
 
-            <div className="col-lg-12">
+            {/* <div className="col-lg-12">
               <div className="related-videos">
                 <div className="row">
                   <div className="col-lg-12">
@@ -225,7 +225,7 @@ export default function Spirituality() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

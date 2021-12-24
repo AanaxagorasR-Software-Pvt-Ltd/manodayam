@@ -42,7 +42,15 @@ router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));
 router.use(`/upload`, require("./media"));
 router.use('/videos', require("./media/video"));
-
 router.use(`/media-solutions`, require("./media-solutions"));
+
+// shakthi
+router.use(`/shakthi-sleep`, require("./shakthi/sleep"));
+router.use(`/shakthi-meditate`, require("./shakthi/meditate"));
+router.use(`/shakthi-music`, require("./shakthi/music"));
+router.use(`/shakthi-masterclass`, require("./shakthi/masterclass"));
+router.use(`/shakthi-body`, require("./shakthi/body"));
+router.use(`/shakthi-scene`, require("./shakthi/scene"));
+
 
 module.exports = router;
