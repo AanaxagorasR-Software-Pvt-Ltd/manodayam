@@ -41,7 +41,17 @@ router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));
 router.use(`/upload`, require("./media"));
+<<<<<<< HEAD
 router.use('/videos', require("./media/video"));
+=======
+router.use('/videos', 
+// (req, res)=>{
+//     res.send('111')
+// },
+require("./media/video")
+);
+
+>>>>>>> f2234b26b04abe4facc6c67fbe03ac0fd831a8d6
 router.use(`/media-solutions`, require("./media-solutions"));
 
 // shakthi
