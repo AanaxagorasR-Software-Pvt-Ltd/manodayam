@@ -41,7 +41,12 @@ router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));
 router.use(`/upload`, require("./media"));
-router.use('/videos', require("./media/video"));
+router.use('/videos', 
+// (req, res)=>{
+//     res.send('111')
+// },
+require("./media/video")
+);
 
 router.use(`/media-solutions`, require("./media-solutions"));
 

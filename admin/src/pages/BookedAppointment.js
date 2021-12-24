@@ -348,7 +348,7 @@ const BookedAppointment = () => {
                                   ) : (
                                     <a
                                       href={
-                                        "http://3.145.192.104:5000/" + v.room_no
+                                        "http://localhost:5000/" + v.room_no
                                       }
                                       target="_blank"
                                     >
@@ -386,82 +386,7 @@ const BookedAppointment = () => {
                         </table>
                       </div>
                     </div>
-                    <div class="main-panel">
-                        <div class="content-wrapper">
-                            <div class="row">
-
-
-                                <div class="col-lg-12 grid-margin stretch-card">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Booked Appointment list</h4>
-                                            <div class="table-responsive pt-3">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>S.No</th>
-                                                            <th>Patient Details</th>
-                                                            <th>Issue</th>
-                                                            <th>Schedule Date</th>
-                                                            <th>Call Status</th>
-                                                            <th>Connect Here!</th>
-                                                            <th style={{ width: '80px' }}>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {
-                                                            data.map((v, i) => (
-                                                                <tr key={i}>
-                                                                    <td>{i + 1}</td>
-                                                                    <td><strong>Name: </strong> {v.fullname}<br />
-                                                                        <strong>Email:</strong> {v.email} <br />
-                                                                        <strong>Phone:</strong> {v.mobileNmb} </td>
-                                                                    <td>{v.disorder}</td>
-
-                                                                    <td>{(new Date(v.schedule)).toLocaleDateString()}</td>
-                                                                    <td>{v.call_status === 'pending' ? 'Pending' : v.call_status === 'success' ? 'Success' : 'Unsuccess'}</td>
-                                                                    <td>{v.room_no == null ?
-                                                                        <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn" onClick={() => { createRoomRef.current.openForm(v) }} title="Create Room">
-                                                                            <i class="ti-plus"></i>
-                                                                        </button> :
-                                                                        <a href={"http://3.145.192.104:5000/" + v.room_no} target="_blank"><button type="button" class="btn btn-sm btn-success border-radius-0 add-btn" >
-                                                                            <i class="ti-video-camera"></i></button>
-                                                                        </a>
-                                                                    }</td>
-                                                                    <td>
-                                                                        <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
-                                                                            onClick={() => { changeStatusRef.current.openForm(v) }}
-                                                                        >Change Call Status</button>
-
-                                                                    </td>
-                                                                </tr>
-                                                            ))
-                                                        }
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* content-wrapper ends */}
-                        {/* partial:partials/_footer.html */}
-                        <footer class="footer">
-                            <div class="col-md-12 text-center">
-                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
-                                    Copyright © 2021 All Right Reserved Aanaxagorasr Software Pvt. Ltd{" "}
-                                    <a href="#" target="_blank">
-
-                                    </a>{" "}
-
-                                </span>
-
-                            </div>
-                        </footer>
-                        {/* partial */}
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -541,7 +466,7 @@ const CreateRoomForm = forwardRef((props, ref) => {
                 </Modal.Footer>
             </Modal>
 
-            <div class="form-group">
+            {/* <div class="form-group">
               <label for="exampleInputUsername1"> Phone</label>
               <input
                 type="number"
@@ -552,7 +477,7 @@ const CreateRoomForm = forwardRef((props, ref) => {
                 }}
                 placeholder="Enter Phone"
               />
-            </div>
+            </div> */}
 
            
         </>
