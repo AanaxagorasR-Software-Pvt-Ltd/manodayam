@@ -31,7 +31,6 @@ router.use(`/products`, require("./product/addproduct"));
 router.use(`/products`, require("./product/update.product"));
 router.use(`/products`, require("./product/removeProducts"));
 router.use(`/products`, require("./product/productDetails"));
-
 router.use(`/addcarts`, require("./addToCart/aaToCarts"));
 
 router.use(`/banner`, require("./banner/banner"));
@@ -41,17 +40,7 @@ router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));
 router.use(`/upload`, require("./media"));
-<<<<<<< HEAD
 router.use('/videos', require("./media/video"));
-=======
-router.use('/videos', 
-// (req, res)=>{
-//     res.send('111')
-// },
-require("./media/video")
-);
-
->>>>>>> f2234b26b04abe4facc6c67fbe03ac0fd831a8d6
 router.use(`/media-solutions`, require("./media-solutions"));
 
 // shakthi
@@ -61,6 +50,7 @@ router.use(`/shakthi-music`, require("./shakthi/music"));
 router.use(`/shakthi-masterclass`, require("./shakthi/masterclass"));
 router.use(`/shakthi-body`, require("./shakthi/body"));
 router.use(`/shakthi-scene`, require("./shakthi/scene"));
+router.use(`/shakthi-home`, require("./shakthi/home"));
 
 
 module.exports = router;

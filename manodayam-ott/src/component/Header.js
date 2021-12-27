@@ -80,15 +80,15 @@ export default function Header() {
                   <span class="sidemenu-label">Profile</span>
                 </Link>
               </li>
-			  
+
               <li class="nav-item">
-                {/* <Link class="nav-link " to="scene"> */}
-                <a href="http://localhost:4000" class="nav-link">
+                <Link class="nav-link " to="vdolist">
+                  {/* <a href="http://localhost:4000" class="nav-link"> */}
                   <i class="fas fa-stream"></i>
 
                   <span class="sidemenu-label">Live</span>
-                </a>
-                {/* </Link> */}
+                  {/* </a> */}
+                </Link>
               </li>
             </ul>
           </div>
@@ -122,7 +122,7 @@ export default function Header() {
               </div>
               <div class="input-group">
                 <div class="mt-0 top-color">
-                  <h3>Home</h3>
+                  <h3>Shakthi</h3>
                 </div>
               </div>
             </div>

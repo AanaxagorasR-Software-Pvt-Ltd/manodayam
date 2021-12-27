@@ -385,7 +385,6 @@ const BookedAppointment = () => {
                         </table>
                       </div>
                     </div>
-<<<<<<< HEAD
                     <div class="main-panel">
                       <div class="content-wrapper">
                         <div class="row">
@@ -502,9 +501,6 @@ const BookedAppointment = () => {
                       </footer>
                       {/* partial */}
                     </div>
-=======
-                   
->>>>>>> f2234b26b04abe4facc6c67fbe03ac0fd831a8d6
                   </div>
                 </div>
               </div>
@@ -562,7 +558,6 @@ const CreateRoomForm = forwardRef((props, ref) => {
       });
   };
 
-<<<<<<< HEAD
   return (
     <>
       <Modal
@@ -578,10 +573,6 @@ const CreateRoomForm = forwardRef((props, ref) => {
           <form class="forms-sample">
             <div class="form-group">
               <label for="exampleInputUsername1"> Room No</label>
-=======
-            {/* <div class="form-group">
-              <label for="exampleInputUsername1"> Phone</label>
->>>>>>> f2234b26b04abe4facc6c67fbe03ac0fd831a8d6
               <input
                 type="text"
                 class="form-control"
@@ -591,7 +582,6 @@ const CreateRoomForm = forwardRef((props, ref) => {
                 }}
                 placeholder="Enter Room No"
               />
-<<<<<<< HEAD
             </div>
           </form>
         </Modal.Body>
@@ -625,14 +615,6 @@ const CreateRoomForm = forwardRef((props, ref) => {
     </>
   );
 });
-=======
-            </div> */}
-
-           
-        </>
-    );
-})
->>>>>>> f2234b26b04abe4facc6c67fbe03ac0fd831a8d6
 const ChangeStatusForm = forwardRef((props, ref) => {
   const [show1, setShow1] = useState(false);
   const [data, setData] = useState({});

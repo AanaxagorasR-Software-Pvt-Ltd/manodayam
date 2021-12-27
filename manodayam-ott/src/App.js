@@ -10,6 +10,7 @@ import Scene from "./pages/Scene";
 import Meditate from "./pages/Meditate";
 import Musicplayer from "./pages/Musicplayer";
 import Videoplayer from "./pages/Videoplayer";
+import Vdolist from "./pages/Vdolist";
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -31,6 +32,8 @@ function App() {
           <Route path="/meditate" element={<Meditate />} exact />
           <Route path="/musicplayer" element={<Musicplayer />} exact />
           <Route path="/videoplayer" element={<Videoplayer />} exact />
+          <Route path="/vdolist" element={<Vdolist />} exact />
+
         </Routes>
       </BrowserRouter>
     </>

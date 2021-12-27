@@ -50,7 +50,7 @@ export default function Spirituality() {
                   </li>
                 </ul>
                 <button className="ctn-btn btn btn-web cnt-btn hvr-float-shadow">
-                  <a href="http://localhost:3002">Continue &nbsp;</a>
+                  <a href="http://localhost:3000">Continue &nbsp;</a>
                 </button>
               </div>
             </div>

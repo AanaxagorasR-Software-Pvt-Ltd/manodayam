@@ -11,7 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
 // import { Card, Image } from "react-bootstrap";
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
@@ -401,7 +401,7 @@ export default function Login(props) {
                 ) : null}
                 {/* <Card style={{ width: "150px", height: "10px"}}> */}
                 {/* <Card.Header> */}
-                {!login && (
+                {/* {!login && (
                   <FacebookLogin
                     appId="921201001964201"
                     autoLoad={true}
@@ -411,7 +411,7 @@ export default function Login(props) {
                     // icon="fa-facebook"
                     style={{ width: "50px", height: "50px" }}
                   />
-                )}
+                )} */}
                 {/* {login && <Image src={picture} roundedCircle />} */}
                 {/* </Card.Header>
                   {login && (
