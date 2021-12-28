@@ -43,7 +43,7 @@ export default function Body() {
                       <div class="col-lg-3 col-sm-5">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>
-                          {/* <Link to="/videoplayer"> */}
+                          <Link to="/videoplayer">
                             <img
                               style={{ borderRadius: "25px" }}
                               src={element.img_url}
@@ -57,7 +57,7 @@ export default function Body() {
                             >
                               {element.title}
                             </h4>
-                          {/* </Link> */}
+                          </Link>
                         </div>
                       </div>
                     ))}

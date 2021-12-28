@@ -20,7 +20,6 @@ export default function Spirituality() {
           </div>
         </div>
       </div>
-
       <div className="about-section mb-50">
         <div className="container">
           <div className="row">
@@ -122,12 +121,17 @@ export default function Spirituality() {
                   <div className="col-lg-3">
                     <div className="video-card">
                       <iframe
-                        width="100%"
+                       ay; 
+                        clipboard-write; 
+                        encrypted-media; 
+                        gyroscope; 
+                        picture-in width="100%"
                         height="250"
                         src="https://www.youtube.com/embed/xsEJ6GeAGb0"
                         title="YouTube video player"
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allow="accelerometer; 
+                        autopl-picture"
                         allowfullscreen
                       ></iframe>
                     </div>

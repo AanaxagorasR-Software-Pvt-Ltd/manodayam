@@ -5,6 +5,7 @@ import axios from "axios";
 import { API_ADMIN_URL, SHAKTHI_SCENE_API } from "./api-link/api.endpoints";
 import "bootstrap/dist/css/bootstrap.css";
 import Carousel from "react-bootstrap/Carousel";
+import { Link } from "react-router-dom";
 export default function Vdolist() {
   const [resData, setResData] = useState([]);
   const SleepApi = () => {
@@ -42,11 +43,13 @@ export default function Vdolist() {
                     {resData.map((element) => (
                       <Carousel.Item interval={2000}>
                       <a href="http://localhost:4000">
+                      {/* <Link to="/videoplayer"> */}
                         <img
                           className="d-block w-100"
                           src={element.img_url}
                           alt="Image One"
                         />
+                      {/* </Link> */}
                         </a>
                       </Carousel.Item>
                     ))}
