@@ -16,6 +16,7 @@ import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import appointment from "../Store/Connect/appointment";
+import globalData from "../rdx";
 // let Button = new AA()
 
 const BookedAppointment = () => {
@@ -348,7 +349,7 @@ const BookedAppointment = () => {
                                   ) : (
                                     <a
                                       href={
-                                        "http://localhost:5000/" + v.room_no
+                                        globalData.videoCallLink + v.room_no
                                       }
                                       target="_blank"
                                     >
@@ -452,7 +453,7 @@ const BookedAppointment = () => {
                                             ) : (
                                               <a
                                                 href={
-                                                  "http://52.15.159.16:5000/" +
+                                                  globalData.videoCallLink +
                                                   v.room_no
                                                 }
                                                 target="_blank"
