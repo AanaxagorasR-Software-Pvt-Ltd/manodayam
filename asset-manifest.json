@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/manodayam/static/css/main.2ae47eeb.chunk.css",
-    "main.js": "/manodayam/static/js/main.b0dec86d.chunk.js",
-    "main.js.map": "/manodayam/static/js/main.b0dec86d.chunk.js.map",
+    "main.js": "/manodayam/static/js/main.4343cab7.chunk.js",
+    "main.js.map": "/manodayam/static/js/main.4343cab7.chunk.js.map",
     "runtime-main.js": "/manodayam/static/js/runtime-main.bb6f26a9.js",
     "runtime-main.js.map": "/manodayam/static/js/runtime-main.bb6f26a9.js.map",
     "static/js/2.c665987b.chunk.js": "/manodayam/static/js/2.c665987b.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.bb6f26a9.js",
     "static/js/2.c665987b.chunk.js",
     "static/css/main.2ae47eeb.chunk.css",
-    "static/js/main.b0dec86d.chunk.js"
+    "static/js/main.4343cab7.chunk.js"
   ]
 }

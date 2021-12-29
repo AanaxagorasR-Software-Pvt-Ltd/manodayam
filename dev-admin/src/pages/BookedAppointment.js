@@ -452,7 +452,7 @@ const BookedAppointment = () => {
                                             ) : (
                                               <a
                                                 href={
-                                                  "http://3.145.192.104:5000/" +
+                                                  "http://52.15.159.16:5000/" +
                                                   v.room_no
                                                 }
                                                 target="_blank"
