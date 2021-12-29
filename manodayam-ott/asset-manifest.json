@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/manodayam/manodayam-ott/static/css/main.5739ad41.chunk.css",
+    "main.js": "/manodayam/manodayam-ott/static/js/main.cab17112.chunk.js",
+    "main.js.map": "/manodayam/manodayam-ott/static/js/main.cab17112.chunk.js.map",
+    "runtime-main.js": "/manodayam/manodayam-ott/static/js/runtime-main.03aafc48.js",
+    "runtime-main.js.map": "/manodayam/manodayam-ott/static/js/runtime-main.03aafc48.js.map",
+    "static/css/2.8c0e6b67.chunk.css": "/manodayam/manodayam-ott/static/css/2.8c0e6b67.chunk.css",
+    "static/js/2.a5de425a.chunk.js": "/manodayam/manodayam-ott/static/js/2.a5de425a.chunk.js",
+    "static/js/2.a5de425a.chunk.js.map": "/manodayam/manodayam-ott/static/js/2.a5de425a.chunk.js.map",
+    "static/js/3.f7f7bdd6.chunk.js": "/manodayam/manodayam-ott/static/js/3.f7f7bdd6.chunk.js",
+    "static/js/3.f7f7bdd6.chunk.js.map": "/manodayam/manodayam-ott/static/js/3.f7f7bdd6.chunk.js.map",
+    "index.html": "/manodayam/manodayam-ott/index.html",
+    "static/css/2.8c0e6b67.chunk.css.map": "/manodayam/manodayam-ott/static/css/2.8c0e6b67.chunk.css.map",
+    "static/css/main.5739ad41.chunk.css.map": "/manodayam/manodayam-ott/static/css/main.5739ad41.chunk.css.map",
+    "static/js/2.a5de425a.chunk.js.LICENSE.txt": "/manodayam/manodayam-ott/static/js/2.a5de425a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.03aafc48.js",
+    "static/css/2.8c0e6b67.chunk.css",
+    "static/js/2.a5de425a.chunk.js",
+    "static/css/main.5739ad41.chunk.css",
+    "static/js/main.cab17112.chunk.js"
+  ]
+}
