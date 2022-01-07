@@ -333,7 +333,7 @@ const Appointment = () => {
                                   <strong>Name: </strong> {v.fullname}
                                   <br />
                                   <strong>Email:</strong> {v.email} <br />
-                                  <strong>Phone:</strong> {v.mobileNmb}{" "}
+                                  <strong>Phone:</strong> {v.mobileNmb}
                                 </td>
                                 <td>{v.disorder}</td>
 
