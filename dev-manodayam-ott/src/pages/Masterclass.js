@@ -12,7 +12,7 @@ export default function Masterclass() {
   const MusicApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_MASTERCLASS_API}`);
     const musiclisting = {
-      collectiontype: "shakthi_masterclass",
+      collectiontype: "audio",
     };
     axios
       .post(`${API_ADMIN_URL}${SHAKTHI_MASTERCLASS_API}`, musiclisting)
@@ -27,6 +27,9 @@ export default function Masterclass() {
   useEffect(() => {
     MusicApi();
   }, []);
+  const filterType = resData.filter((element) =>
+  element.type.includes((element = "Calm Masterclass"))
+);
   return (
     <>
       <div>
@@ -42,14 +45,14 @@ export default function Masterclass() {
               <section class="video-cards">
                 <div class="container">
                   <div class="row">
-                    {resData.map((element) => (
+                    {filterType.map((element) => (
                       <div class="col-lg-5 col-sm-14 ">
                         <div class="display-card ">
                           {/* <i class="fas fa-lock"></i> */}
                           <Link to="/musicplayer">
                             <img
                               style={{ borderRadius: "25px" }}
-                              src={element.img_url}
+                              src={element.image}
                               alt=""
                             />
 
@@ -67,7 +70,7 @@ export default function Masterclass() {
                                   borderRadius: "50px",
                                   marginRight: "25px",
                                 }}
-                                src={element.author_img_url}
+                                src={element.image}
                                 alt=""
                               />
                               <span

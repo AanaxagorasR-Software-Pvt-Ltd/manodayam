@@ -448,23 +448,6 @@ const Addform = forwardRef((props, ref) => {
         alert(err.message);
       });
   }
-  // const statussave = () => {
-  //   let formadata = new FormData();
-  //   appointment
-  //     .save(data, data.id)
-  //     .then((res) => {
-  //       alert(res.message);
-  //       handleVisible(false);
-  //       list();
-  //     })
-  //     .catch((err) => {
-  //       alert(err.message);
-  //     });
-  // };
-
-
-
-
 
   return (
     <>
@@ -593,9 +576,4 @@ const Addform = forwardRef((props, ref) => {
     </>
   );
 });
-
-
-
-
-
 export default Appointment;

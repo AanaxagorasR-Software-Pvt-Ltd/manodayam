@@ -344,7 +344,14 @@ const BookedAppointment = () => {
                         <div class="row">
                           <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
-                              <div class="card-body">
+                              <div
+                                class="card-body"
+                                // data-bs-spy="scroll"
+                                // data-bs-target="#list-example"
+                                // data-bs-offset="0"
+                                // class="scrollspy-example"
+                                // tabindex="0"
+                              >
                                 <h4 class="card-title">
                                   Booked Appointment list
                                 </h4>
@@ -553,7 +560,7 @@ const CreateRoomForm = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
-
+      {/* 
       <div class="form-group">
         <label for="exampleInputUsername1"> Phone</label>
         <input
@@ -565,7 +572,7 @@ const CreateRoomForm = forwardRef((props, ref) => {
           }}
           placeholder="Enter Phone"
         />
-      </div>
+      </div> */}
     </>
   );
 });

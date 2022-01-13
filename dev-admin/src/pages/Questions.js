@@ -28,7 +28,7 @@ const Questions = () => {
   const formRef = useRef();
   const list = () => {
     axios
-      .get("questions")
+      .get("question")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
@@ -318,7 +318,11 @@ const Questions = () => {
                               <th style={{ width: "10px" }}>S.No</th>
                               <th>Questions</th>
                               <th>Right-Answer</th>
-                              <th>Date</th>
+                              <th>Category</th>
+                              <th>Type</th>
+
+                              <th>Created Date</th>
+
 
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
@@ -337,10 +341,14 @@ const Questions = () => {
                                   <strong>Ans4:</strong> {v.ans4} <br />
                                 </td>
                                 <td>{v.rytAns}</td>
+                                <td>{v.category}</td>
+                                <td>{v.type}</td>
 
-                                <td>
+                                <td>{v.createdAt}</td>
+
+                                {/* <td>
                                   {new Date(v.datetime).toLocaleDateString()}
-                                </td>
+                                </td> */}
                                
                                 <td>
                                   <button
@@ -516,16 +524,48 @@ const Addform = forwardRef((props, ref) => {
               </select>
             </div>
             <div class="form-group">
-              <label for="exampleInputUsername1">Date</label>
-              <input
-                type="date"
+              <label for="exampleInputUsername1"> Select Category</label>
+              <select
                 class="form-control"
-                value={data.datetime || ""}
+                value={data.category || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "datetime");
+                  handleChange(e.target.value, "category");
                 }}
-                placeholder="Enter Date"
-              />
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                <option value="Anxiety">Anxiety</option>
+                <option value="Attention Disorder">Attention Disorder</option>
+                <option value="Psychosis">Psychosis</option>
+                <option value="Alcohol Abuse">Alcohol Abuse</option>
+                <option value="Dementia">Dementia</option>
+                <option value="Bipolar">Bipolar</option>
+                <option value="Obsessive Compulsive Disorder">Obsessive Compulsive Disorder</option>
+                <option value="Drug Addiction">Drug Addiction</option>
+                <option value="Schizophrenia">Schizophrenia</option>
+                <option value="Sexual Addiction">Sexual Addiction</option>
+                <option value="Hyperactivity">Hyperactivity</option>
+                <option value="Impulsivity">Impulsivity</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Select Type</label>
+              <select
+                class="form-control"
+                value={data.type || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "type");
+                }}
+              >
+                <option value="" disabled>
+                  Select Type
+                </option>
+                <option value="p1">p1</option>
+                <option value="p2">p2</option>
+                <option value="p3">p3</option>
+                <option value="p4">p4</option>
+              </select>
             </div>
           </form>
         </Modal.Body>

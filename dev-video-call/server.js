@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const axios = require('axios');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const port = process.env.PORT || 5000;
@@ -15,14 +16,20 @@ app.get('/', (req, res) => {
 	res.send(uuidv4());
 });
 app.get('/:room', (req, res) => {
-	res.render('index', { RoomId: req.params.room });
+	console.log(8798798798797979);
+	axios.get('http://localhost:3020/api/question').then(response => {
+		console.log(9999999, response.data)
+		res.render('index', { RoomId: req.params.room, data: response.data });
+	}).catch(err => {
+		console.log(err)});
+	
 });
 io.on("connection", (socket) => {
-	socket.on('newUser', (id, room) => {
-		socket.join(room);
-		socket.to(room).broadcast.emit('userJoined', id);
+	socket.on('newUser', (id, RoomId) => {
+		socket.join(RoomId);
+		socket.to(RoomId).broadcast.emit('userJoined', id);
 		socket.on('disconnect', () => {
-			socket.to(room).broadcast.emit('userDisconnect', id);
+			socket.to(RoomId).broadcast.emit('userDisconnect', id);
 		})
 	})
 })

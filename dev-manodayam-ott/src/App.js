@@ -13,13 +13,11 @@ import Videoplayer from "./pages/Videoplayer";
 import Vdolist from "./pages/Vdolist";
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
 function App() {
   return (
     <>
       <BrowserRouter basename="/manodayam/manodayam-ott">
         <Header />
-
         <Routes>
           <Route path="/" exact element={<Home />} exact />
           <Route path="/home" element={<Home />} exact />

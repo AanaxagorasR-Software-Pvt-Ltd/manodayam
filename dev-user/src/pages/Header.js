@@ -46,7 +46,7 @@ export default function Header() {
                     </Link>
                   </button>
                   <i className="fa fa-mobile" aria-hidden="true"></i>
-                  <a href="telto:+92 1234567 890">+92 1234567 890</a>
+                  <a href="telto:+91 7428409721">+91 7428409721</a>
                   <p>contact us for help</p>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function Header() {
                   </li>
                   <li className="nav-item">
                     <Link to="/support" className="nav-link">
-                      support
+                      Support
                     </Link>
                   </li>
 

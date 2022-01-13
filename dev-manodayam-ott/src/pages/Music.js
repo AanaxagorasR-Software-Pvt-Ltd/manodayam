@@ -9,7 +9,7 @@ export default function Music() {
   const MusicApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_MUSIC_API}`);
     const musiclisting = {
-      collectiontype: "shakti-music",
+      collectiontype: "audio",
     };
     axios
       .post(`${API_ADMIN_URL}${SHAKTHI_MUSIC_API}`, musiclisting)
@@ -24,6 +24,9 @@ export default function Music() {
   useEffect(() => {
     MusicApi();
   }, []);
+  const filterType = resData.filter((element) =>
+  element.type.includes((element = "Music"))
+);
   return (
     <>
       <div>
@@ -33,37 +36,31 @@ export default function Music() {
               <div class="page-header">
                 <div class="page-header-1">
                   <h1 class="main-content-title tx-30">Music</h1>
-                  <ol class="breadcrumb">
+                  {/* <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                       <select name="" id="">
                         <option value="">All</option>
                         <option value="">For me</option>
                         <option value="">Featured</option>
                         <option value="">Sleep</option>
-                        <option value="">Playlist</option>
-                        <option value="">Soundscapes</option>
-                        <option value="">Nature Melodies</option>
-                        <option value="">Work</option>
-                        <option value="">Relax</option>
-                        <option value="">Lullabies</option>
-                        <option value="">Focus</option>
+               
                       </select>
                     </li>
-                  </ol>
+                  </ol> */}
                 </div>
               </div>
 
               <section class="video-cards">
                 <div class="container">
                   <div class="row">
-                    {resData.map((element) => (
+                    {filterType.map((element) => (
                       <div class="col-lg-3 col-sm-6">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>
                           <Link to="/musicplayer">
                             <img
                               style={{ borderRadius: "25px" }}
-                              src={element.img_url}
+                              src={element.image}
                               alt=""
                             />
                             <h4
