@@ -16,6 +16,7 @@ import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import audio from "../Store/Connect/audio";
+import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
 const Audio = () => {
@@ -278,6 +279,7 @@ const Audio = () => {
                 </li>
               ))}
             </ul>
+            <LeftSideBar />
           </nav>
           <div class="main-panel">
             <div class="content-wrapper">
