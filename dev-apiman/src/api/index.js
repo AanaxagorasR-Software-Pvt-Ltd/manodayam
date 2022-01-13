@@ -45,8 +45,10 @@ router.use(`/yesNo`, require("./Mcq/objectiveYesNo"));
 router.use(`/audios`,require("./media/Audio"))
 
 router.use(`/upload`, require("./media"));
+router.use(`/audios`,require("./media/Audio"))
 router.use('/videos', require("./media/video"));
 router.use(`/media-solutions`, require("./media-solutions"));
+// router.user(`./profile`,require("./user/profile"))
 
 // shakthi
 router.use(`/shakthi-sleep`, require("./shakthi/sleep"));

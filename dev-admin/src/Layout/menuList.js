@@ -10,7 +10,6 @@ const leftSideBarMenu = [
     submenu:[],
     isHover: false
   },
-
   {
     name: "Category",
     isActive: false,
@@ -22,17 +21,7 @@ const leftSideBarMenu = [
     submenu:[],
     isHover: false
   },
-  {
-    name: "Spirituality",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "/spirituality" ,
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu:[],
-    isHover: false
-  },
+
   {
     name: "Appointments",
     isActive: false,
@@ -75,37 +64,26 @@ const leftSideBarMenu = [
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    iconClass: "icon-layout",
-    submenu: [
-      {
-        name: "MCQ",
-        isActive: true,
-        dataToggle: "",
-        link: "/questions",
-        isExpand: false,
-      },
-      {
-        name: "True/False",
-        isActive: true,
-        dataToggle: "",
-        link: "/yes-no-questions",
-        isExpand: false,
-      },
-      
-    ],
+    link: "questions" ,
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu:[],
     isHover: false
   },
-  // {
-  //   name: "Questions Part",
-  //   isActive: false,
-  //   dataToggle: "",
-  //   isExpand: false,
-  //   link: "/questions" ,
-  //   iconClass: "icon-grid",
-  //   subMenuid: "ui-basic",
-  //   submenu:[],
-  //   isHover: false
-  // },
+
+  {
+    name: "Questions Part",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "questions" ,
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu:[],
+    isHover: false
+  },
+
+
   {
     name: "Shakti",
     isActive: false,
@@ -174,18 +152,6 @@ const leftSideBarMenu = [
         isExpand: false,
       }
     ],
-    isHover: false
-
-  },
-  {
-    name: "Banner",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    // link: "javascript:void(0)" ,
-    link: "/banner" ,
-    iconClass: "icon-contract",
-    submenu: [],
     isHover: false
 
   },

@@ -25,6 +25,7 @@ export default function BookingAppoint() {
   useEffect((props) => {
     Productlist(props);
   }, []);
+  
   return (
     <>
       <div className="contact-banner mb-50">

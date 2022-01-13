@@ -24,6 +24,20 @@ export default function Profile() {
   useEffect((props) => {
     ProfilData();
   }, []);
+  // const listBooked = () => {
+  //   axios
+  //     .get("profile")
+  //     .then((res) => {
+  //       console.log("res", res, typeof res);
+  //       setprofilData(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err.message);
+  //     });
+  // };
+  // React.useEffect(() => {
+  //   listBooked();
+  // }, []);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -371,101 +385,38 @@ export default function Profile() {
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>
-                                  <img src="image/pr.png" alt="" />
-                                  22/12/2021
-                                </td>
-                                <td>06:00</td>
-                                <td>XYZ</td>
-                                <td>Anxiety</td>
-                                <td>
-                                  {/* <i className="fa fa-video-camera"></i> */}
-                                  {/* <Link to="http://localhost:4000/">hello</Link> */}
+                            {
+                              profilData.map((a, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  <td>{a.schedule}</td>
+                                  {/* <td>{a.title}</td> */}
+                                  <td>{a.fullname}</td>
 
-                                  <a
-                                    href={"http://localhost:5000/" }
-                                    target="_blank"
-                                  >
-                                    <img src="assets/image/vdo.png" alt="" />
-                                  </a>
-                                </td>
-                                <td>
-                                  <select className="mt-2">
-                                    <option value="TowOClock">Success</option>
-                                    <option value="FourOClock">
-                                      UnSuccess
-                                    </option>
-                                    <option value="SixOClock">Pending</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="image/pr.png" alt="" />
-                                  02/01/2022
-                                </td>
-                                <td>04:00</td>
-                                <td>ABC</td>
-                                <td>Dementia</td>
-                                <td>
-                                  <a
-                                    href="http://localhost:5000/"
-                                    target="_blank"
-                                  >
-                                    <img
-                                      className=""
-                                      src="assets/image/vdo.png"
-                                      alt=""
-                                    />
-                                  </a>
-                                  {/* <i className="fa fa-video-camera"></i> */}
-                                </td>
-                                <td>
-                                  <select className="mt-2">
-                                    <option value="TowOClock">Success</option>
-                                    <option value="FourOClock">
-                                      UnSuccess
-                                    </option>
-                                    <option value="SixOClock">Pending</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="image/pr.png" alt="" />
-                                  29/12/2021
-                                </td>
-                                <td>02:00</td>
-                                <td>XYZ</td>
-                                <td>Bipolar</td>
-                                <td>
-                                  {/* <Link to="http://localhost:3000/"> */}
-                                  <a
-                                    href="http://localhost:5000/"
-                                    target="_blank"
-                                  >
-                                    <img
-                                      // onClick={Appointment}
-                                      className=""
-                                      src="assets/image/vdo.png"
-                                      alt=""
-                                    />
-                                  </a>
-                                  {/* <i className="fa fa-video-camera"></i> */}
-                                  {/* </Link> */}
-                                </td>
-                                <td>
-                                  <select className="mt-2">
-                                    <option value="TowOClock">Success</option>
-                                    <option value="FourOClock">
-                                      UnSuccess
-                                    </option>
-                                    <option value="SixOClock">Pending</option>
-                                  </select>
-                                </td>
-                              </tr>
-                            </tbody>
+                                  <td>{a.disorder}</td>
+
+
+
+
+                                  <td>{a.created}</td>
+                                  <td>{a.call_status}</td>
+
+
+
+                                  {/* <td>
+                                    <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
+                                      onClick={() => { formRef.current.openForm(a) }}>
+                                      <i class="ti-pencil"></i>
+                                    </button>
+                                    <button type="button" onClick={() => deleteData(a._id)} class="btn btn-sm btn-danger add-btn">
+                                      <i class="ti-trash"></i>
+                                    </button>
+                                  </td> */}
+                                </tr>
+                              ))
+                            }
+                          </tbody>
+                           
                           </table>
                         </div>
                       </div>

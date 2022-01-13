@@ -18,12 +18,25 @@ import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
 const Doctor = () => {
+  const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
   const formRef = useRef();
+
+  const list = () => {
+    axios.get('doctors').then(res => {
+      setData(res);
+    }).catch(err => {
+      console.log('err', err.message);
+    })
+  }
+  React.useEffect(() => {
+    list();
+  }, []);
+
 
   const handleClickMenu = (name) => {
     setMenuList(
@@ -56,10 +69,18 @@ const Doctor = () => {
         console.log("some error");
       });
   };
+  const deleteData = (_id) => {
+
+    doctor.delete(_id).then((res) => {
+      alert(res?.message)
+      list();
+    })
+
+  }
 
   return (
     <>
-      <Addform ref={formRef} />
+      <Addform ref={formRef} list={list} />
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -167,9 +188,8 @@ const Doctor = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -182,9 +202,8 @@ const Doctor = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -214,7 +233,53 @@ const Doctor = () => {
         </nav>
         <div class="container-fluid page-body-wrapper">
           <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <LeftSideBar />
+            <ul class="nav">
+              {menuList.map((sMenu) => (
+                <li
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${sMenu?.isHover ? "hover-open" : ""
+                    }`}
+                  key={uuidv4()}
+                  onClick={(e) => handleClickMenu(sMenu?.name)}
+                  onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
+                  onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
+                >
+                  <a
+                    className={`nav-link ${sMenu.submenu.length > 0 ? "collapsed" : ""
+                      }`}
+                    href={`${sMenu?.link}`}
+                    data-toggle="collapse"
+                    aria-expanded={sMenu?.isActive ? true : false}
+                  >
+                    <i className={`${sMenu?.iconClass} menu-icon`}></i>
+                    <span className="menu-title">{sMenu?.name}</span>
+                    {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                      <i class="menu-arrow"></i>
+                    ) : null}
+                  </a>
+                  {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                    <div
+                      className={`collapse ${sMenu?.isActive ? " show" : ""}`}
+                      id="ui-basic"
+                    >
+                      <ul className="nav flex-column sub-menu">
+                        {sMenu.submenu.map((sub) => (
+                          <li class="nav-item">
+                            {" "}
+                            <a
+                              href={`${sub.link}`}
+                              class="nav-link"
+                              aria-expanded={sMenu?.isActive ? true : false}
+                            >
+                              {sub.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
           </nav>
           <div class="main-panel">
             <div class="content-wrapper">
@@ -245,41 +310,46 @@ const Doctor = () => {
                             <tr>
                               <th>S.N</th>
 
+
+                              <th>Doctor Name</th>
                               <th>Doctor Image</th>
-                              <th> Doctor Name</th>
-                              <th> Doctor status</th>
-                              <th>Date</th>
+
+                              <th>Doctor experience</th>
+                              <th>Doctor specialist</th>
+                              <th>Upload Date</th>
+
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>
-                                <img
-                                  src="../images/product/pr.png"
-                                  class="mr-2"
-                                  alt="pr"
-                                />
-                              </td>
-                              <td>Mental Health</td>
-                              <td>Fidget Cube</td>
-                              <td>Dec 15, 2021</td>
-                              <td>
-                                <button
-                                  type="button"
-                                  class="btn btn-sm btn-info border-radius-0 add-btn"
-                                >
-                                  <i class="ti-pencil"></i>
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-sm btn-danger add-btn"
-                                >
-                                  <i class="ti-plus"></i>
-                                </button>
-                              </td>
-                            </tr>
+                            {
+                              data.map((d, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  <td>{d.name}</td>
+                                  <td><img src={d.img_url} /></td>
+                                  <td>{d.experience}</td>
+                                  <td>{d.specialist}</td>
+
+
+
+
+                                  <td>{d.created}</td>
+
+
+
+                                  <td>
+                                    <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
+                                      onClick={() => { formRef.current.openForm(d) }}>
+                                      <i class="ti-pencil"></i>
+                                    </button>
+                                    <button type="button" onClick={() => deleteData(d._id)} class="btn btn-sm btn-danger add-btn">
+                                      <i class="ti-trash"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                              ))
+                            }
                           </tbody>
                         </table>
                       </div>
@@ -304,19 +374,54 @@ const Doctor = () => {
       </div>
     </>
   );
-};
 
+
+};
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
+  const [media, setMedia] = useState([]);
+  const [data, setData] = useState({});
+  const { list } = props;
 
   const handleVisible = (state) => {
     setShow(state);
   };
+  const handleChange = (d, k) => { setData({ ...data, [k]: d }) }
+
+  const save = () => {
+    let fd = new FormData();
+    for (let prop in data) {
+      fd.append(prop, data[prop]);
+    }
+    doctor.save(fd).then((res) => {
+      alert(res.message)
+      handleVisible(false);
+      list();
+    }).catch(err => {
+      alert(err.message)
+    })
+
+  }
   useImperativeHandle(ref, () => ({
-    openForm() {
+    openForm(dt) {
+      if (dt?._id) {
+        setData(dt);
+      } else {
+        setData({});
+      }
+      console.log(dt);
       handleVisible(true);
     },
   }));
+
+
+  // React.useEffect(() => {
+  // 	axios.get('doctorlist').then(res => {
+  // 		setMedia(res);
+  // 	}).catch(err => {
+  // 		console.log('err', err.message);
+  // 	})
+  // }, []);
 
   return (
     <>
@@ -328,25 +433,21 @@ const Addform = forwardRef((props, ref) => {
         }}
       >
         <Modal.Header>
-          <Modal.Title>Doctor Uplode</Modal.Title>
+          <Modal.Title>Doctor List </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
               <div class="col-md-3  offset-9">
-                <label for="exampleInputUsername1">Doctor Type</label>
-                <select class="form-control">
-                  <option>Mental Health</option>
-                  <option>Depression</option>
-                  <option>Anxiety</option>
-                  <option>Attention</option>
-                </select>
+
+
               </div>
               <div class="form-group">
-                <label for="exampleInputUsername1">Doctor Title</label>
+                <label for="exampleInputUsername1">Doctor Name</label>
                 <input
                   type="text"
                   class="form-control"
+                  value={data.name || ''} onChange={(e) => { handleChange(e.target.value, 'name') }}
                   placeholder="Doctor  Title"
                 />
               </div>
@@ -356,14 +457,27 @@ const Addform = forwardRef((props, ref) => {
                   <input
                     type="file"
                     class="form-control file-upload-info"
+                    onChange={(e) => { handleChange(e.target.files[0], 'img_url') }}
                     placeholder="Upload Doctor"
+                  />
+                </div>
+
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputUsername1">Docter specialist</label>
+                  <input
+                    type="text"
+                    class="form-control file-upload-info"
+                    value={data.specialist || ''} onChange={(e) => { handleChange(e.target.value, 'specialist') }}
+                    placeholder=" Audio Link"
                   />
                 </div>
               </div>
               <div class="form-group">
-                <label for="exampleInputUsername1">Doctor Description</label>
+                <label for="exampleInputUsername1">Doctor Experience</label>
                 <textarea
                   class="form-control"
+                  value={data.experience || ''} onChange={(e) => { handleChange(e.target.value, 'experience') }}
                   placeholder=" Doctor Description"
                 />
               </div>
@@ -379,17 +493,16 @@ const Addform = forwardRef((props, ref) => {
           >
             Close
           </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleVisible(false);
-            }}
-          >
+          <Button variant="primary" onClick={save}>
             Save Changes
           </Button>
+
         </Modal.Footer>
       </Modal>
     </>
   );
 });
+
 export default Doctor;
+
+
