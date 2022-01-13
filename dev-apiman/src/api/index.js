@@ -40,8 +40,10 @@ router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));
 router.use(`/upload`, require("./media"));
+router.use(`/audios`,require("./media/Audio"))
 router.use('/videos', require("./media/video"));
 router.use(`/media-solutions`, require("./media-solutions"));
+// router.user(`./profile`,require("./user/profile"))
 
 // shakthi
 router.use(`/shakthi-sleep`, require("./shakthi/sleep"));

@@ -17,6 +17,14 @@ class video {
     delete(id) {
         return axios.delete(`/videos/delete/${id}`);
     }
+    // update(data){
+    //     return  axios.put('/video/media',data)
+
+    // }
+    
+
+
+    
 }
 
 export default new video();

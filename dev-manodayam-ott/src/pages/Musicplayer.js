@@ -1,13 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ReactAudioPlayer from "react-audio-player";
+import song from "./music/first.mp3";
+import img from "./music/img.jpeg";
+
 export default function Musicplayer() {
+  const main = {
+    height: "360px",
+  };
+  const image = {
+  height: "530px"
+  };
   return (
     <>
       <div>
         <div class="main-content side-content pt-0">
-          <div class="container-fluid">
+          <div style={main}>
             <div class="inner-body">
-              <div class="page-header">
+              {/* <div class="page-header">
                 <div class="page-header-1">
                   <h1 class="main-content-title tx-30">Manodayam</h1>
                   <ol class="breadcrumb">
@@ -31,12 +41,14 @@ export default function Musicplayer() {
                     </li>
                   </ol>
                 </div>
-              </div>
-
-              <section class="video-cards">
-                <div class="container">
-                  <div class="player">
-                    <div class="player-track">
+              </div> */}
+              <img
+                style={image}
+                src="https://media.istockphoto.com/photos/stones-in-the-ocean-at-sunrise-picture-id1264258168?b=1&k=20&m=1264258168&s=170667a&w=0&h=R0PyemIlBRgiEO6I3bZi7ixQ-JM66ejYOaKh_5wTF9g="
+                alt="img"
+              />
+              <div class="player">
+                {/* <div class="player-track">
                       <div class="artist-name"></div>
                       <div class="music-name"></div>
                       <div class="progress-bar">
@@ -52,10 +64,14 @@ export default function Musicplayer() {
                       <i id="prev" class="prev-btn fas fa-backward"></i>
                       <i id="play" class="play-btn fas fa-play"></i>
                       <i id="next" class="next-btn fas fa-forward"></i>
-                    </div>
-                  </div>
-                </div>
-              </section>
+                    </div> */}
+                <ReactAudioPlayer
+                  src={song}
+                  autoPlay={false}
+                  controls
+                  style={{ color: "red" }}
+                />
+              </div>
             </div>
           </div>
         </div>

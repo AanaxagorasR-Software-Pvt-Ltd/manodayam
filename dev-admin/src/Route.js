@@ -14,6 +14,8 @@ import Audio from "./pages/Audio";
 import Order from "./pages/Order";
 import Product from "./pages/Product";
 import Sells from "./pages/Sells";
+import Questions from "./pages/Questions";
+
 const Login = React.lazy(() => import("./pages/Login"));
 const ProtectedRoute = React.lazy(() => import("./Auth/Protected"));
 const Register = React.lazy(() => import("./pages/Register"));
@@ -33,6 +35,8 @@ const InternalRoute = (props) => {
           <Route path="/admin/forgotpassword" element={<Forgotpassword />} />
           <Route path="/Main" element={<Main />} exact />
           <Route path="/appointment-list" element={<AppointmentList />} exact />
+          <Route path="/questions" element={<Questions />} exact />
+
           <Route
             path="/booked-appointment-list"
             element={<BookedAppointmentList />}
@@ -55,6 +59,7 @@ const InternalRoute = (props) => {
           <Route path="/" element={<ProtectedRoute />}>
             <Route exact path="/admin/Main" element={<Main />} />
           </Route>
+          Questions
         </Routes>
       </Suspense>
       <ToastNote />

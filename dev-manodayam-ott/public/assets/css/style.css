@@ -226,6 +226,17 @@ option:hover{
     background: linear-gradient( 
         45deg, #23adba, #9d1892) !important;
 }
+.main-content{
+    /* background: linear-gradient( 
+        45deg, #23adba, #9d1892); */
+        background: url("https://assets.entrepreneur.com/content/3x2/2000/20150824181921-meditate-yoga-relax-calm-zen.jpeg?crop=16:9");
+
+}
+.container-fluid{
+    background: linear-gradient( 
+        45deg, #23adba, #9d1892);
+        height: 10px
+}
 .account-detail-form form input{
     width: 100%;
     padding: 14px 15px;
@@ -289,6 +300,7 @@ option:hover{
 	transform: translate(-50%, -50%);
 	padding: 10px;
 	user-select: none;
+    /* background: red; */
 }
 .player .circle {
 	max-width: 120px;
@@ -10980,12 +10992,17 @@ div.dataTables_wrapper div.dataTables_length select {
     bottom: 0;
     position: relative;
     height: 100%;
+  /* background: red; */
+  /* background: linear-gradient(45deg, #23adba, #9d1892); */
+
 }
 
 .main-content .container,
 .main-content .container-fluid {
     padding-left: 25px;
     padding-right: 25px;
+    background: linear-gradient(45deg, #23adba, #9d1892);
+height: 523px
 }
 
 @media (max-width: 575px) {
@@ -72701,7 +72718,9 @@ ul.inbox-pagination {
     .video-cards {
         height: 770px;
         overflow: scroll;
+        /* background: red; */
     }
+    
 
     .header-search .select2-container--default .select2-selection--single {
         background-color: #ffffff;
@@ -72964,15 +72983,16 @@ ul.inbox-pagination {
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    margin: 1.5rem 0 1.5rem;
+    /* margin: 1.5rem 0 1.5rem; */
     -ms-flex-wrap: wrap;
     justify-content: space-between;
     padding: 0;
     position: relative;
     min-height: 50px;
     display: -ms-flexbox;
-    margin: 2rem 0;
+    /* margin: 2rem 0; */
     border-radius: 7px;
+    height: 100%
 }
 
 .page-header .breadcrumb {

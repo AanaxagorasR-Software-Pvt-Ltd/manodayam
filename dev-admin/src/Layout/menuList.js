@@ -60,7 +60,17 @@ const leftSideBarMenu = [
     submenu:[],
     isHover: false
   },
- 
+  {
+    name: "Questions Part",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "questions" ,
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu:[],
+    isHover: false
+  },
   {
     name: "Shakti",
     isActive: false,

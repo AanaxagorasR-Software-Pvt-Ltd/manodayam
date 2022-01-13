@@ -16,6 +16,7 @@ import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import appointment from "../Store/Connect/appointment";
+// import { get } from "immer/dist/internal";
 // let Button = new AA()
 
 const Appointment = () => {
@@ -75,16 +76,29 @@ const Appointment = () => {
       });
   };
 
-  const deleteData = (_id) => {
-    appointment.delete(_id).then((res) => {
-      alert(res?.message);
+  // const deleteData = (_id) => {
+  //   appointment.delete(_id).then((res) => {
+  //     alert(res?.message);
+  //     list();
+  //   });
+  // };
+  const update_status = async (status, id) => {
+    try {
+      let response = appointment.status({
+        _id: id,
+        status: status
+      }); 
+      alert("Satuts updated sucessfully")
       list();
-    });
-  };
+    } catch (error) {
+      alert("Something went to  wrong")
+      
+    }
 
+  }
   return (
     <>
-      <Addform ref={formRef} list={list} />
+      {/* <Addform ref={formRef} list={list} /> */}
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -99,7 +113,7 @@ const Appointment = () => {
             <button
               class="navbar-toggler navbar-toggler align-self-center"
               type="button"
-              data-toggle="minimize"
+            data-toggle="minimize"
               onClick={handleSideBar}
             >
               <span class="icon-menu"></span>
@@ -192,9 +206,8 @@ const Appointment = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -207,9 +220,8 @@ const Appointment = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -242,18 +254,16 @@ const Appointment = () => {
             <ul class="nav">
               {menuList.map((sMenu) => (
                 <li
-                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
-                    sMenu?.isHover ? "hover-open" : ""
-                  }`}
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${sMenu?.isHover ? "hover-open" : ""
+                    }`}
                   key={uuidv4()}
                   onClick={(e) => handleClickMenu(sMenu?.name)}
                   onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
                   onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
                 >
                   <a
-                    className={`nav-link ${
-                      sMenu.submenu.length > 0 ? "collapsed" : ""
-                    }`}
+                    className={`nav-link ${sMenu.submenu.length > 0 ? "collapsed" : ""
+                      }`}
                     href={`${sMenu?.link}`}
                     data-toggle="collapse"
                     aria-expanded={sMenu?.isActive ? true : false}
@@ -292,12 +302,12 @@ const Appointment = () => {
           <div class="main-panel">
             <div class="content-wrapper">
               <div class="row">
-                <div class="col-md-12 grid-margin">
+                {/* <div class="col-md-12 grid-margin">
                   <div class="row">
                     <div class="col-12 col-xl-4 offset-10">
                       <button
                         type="button"
-                        class="btn btn-social-icon-text btn-info"
+                        class=""
                         onClick={() => {
                           formRef.current.openForm();
                         }}
@@ -306,7 +316,7 @@ const Appointment = () => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
@@ -322,11 +332,11 @@ const Appointment = () => {
                               <th>Schedule Date</th>
                               <th> Status</th>
 
-                              <th style={{ width: "80px" }}>Action</th>
+                              {/* <th style={{ width: "80px" }}>Action</th> */}
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((v, i) => (
+                            {data && data.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
@@ -340,15 +350,23 @@ const Appointment = () => {
                                 <td>
                                   {new Date(v.schedule).toLocaleDateString()}
                                 </td>
-                                <td>
+                                {/* <td>
                                   {v.status === "pending"
                                     ? "Pending"
                                     : v.status === "booked"
-                                    ? "Booked"
-                                    : "Cancelled"}
-                                </td>
-
+                                      ? "Booked"
+                                      : "Cancelled"}
+                                </td> */}
                                 <td>
+                                  <select className="mt-2" value={v.status || ''} onChange={(e) => { update_status(e.target.value, v._id) }}>
+                                    <option value="pending">Pending</option>
+                                    <option value="cancelled">
+                                      cancelled
+                                    </option>
+                                    <option value="booked" >Booked</option>
+                                  </select>
+                                </td>
+                                {/* <td>
                                   <button
                                     type="button"
                                     class="btn btn-sm btn-info border-radius-0 add-btn"
@@ -365,7 +383,7 @@ const Appointment = () => {
                                   >
                                     <i class="ti-trash"></i>
                                   </button>
-                                </td>
+                                </td> */}
                               </tr>
                             ))}
                           </tbody>
@@ -428,7 +446,24 @@ const Addform = forwardRef((props, ref) => {
       .catch((err) => {
         alert(err.message);
       });
-  };
+  }
+  // const statussave = () => {
+  //   let formadata = new FormData();
+  //   appointment
+  //     .save(data, data.id)
+  //     .then((res) => {
+  //       alert(res.message);
+  //       handleVisible(false);
+  //       list();
+  //     })
+  //     .catch((err) => {
+  //       alert(err.message);
+  //     });
+  // };
+
+
+
+
 
   return (
     <>
@@ -557,4 +592,9 @@ const Addform = forwardRef((props, ref) => {
     </>
   );
 });
+
+
+
+
+
 export default Appointment;

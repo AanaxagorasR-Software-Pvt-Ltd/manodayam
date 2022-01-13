@@ -252,11 +252,17 @@
         margin: 3px 11px;
         line-height: 2.1;
     }
+    .main-sidebar-body {
+        background: url("https://i.pinimg.com/originals/de/f6/62/def662098133f62d53a5615388201054.jpg");
 
+    }
     .main-sidebar-hide .nav-header {
         margin: 0;
     }
+    .container-fluid{
 
+        
+      }
     .main-sidebar-hide.main-sidebar-open .nav-header {
         margin: 0 0 0 15px;
     }

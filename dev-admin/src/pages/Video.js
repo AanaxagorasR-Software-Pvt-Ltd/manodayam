@@ -23,7 +23,7 @@ const Video = () => {
 	const [profileShow, setProfileShow] = useToggle(false);
 	const formRef = useRef();
 
-	const list = () =>{
+	const list = () => {
 		axios.get('videos').then(res => {
 			setData(res);
 		}).catch(err => {
@@ -35,7 +35,7 @@ const Video = () => {
 	}, []);
 
 
-	
+
 
 	const handleClickMenu = (name) => {
 		setMenuList(
@@ -74,12 +74,13 @@ const Video = () => {
 	}
 
 	const deleteData = (_id) => {
+
 		video.delete(_id).then((res) => {
 			alert(res?.message)
 			list();
 		})
-	
-	  }
+
+	}
 
 
 
@@ -281,6 +282,7 @@ const Video = () => {
 												<i class="ti-plus"></i>Add</button>
 										</div>
 									</div>
+									
 								</div>
 
 
@@ -296,7 +298,7 @@ const Video = () => {
 														<tr>
 															<th>S.N</th>
 
-															<th>Video </th>
+															{/* <th>Video </th> */}
 															<th> Video Thumbnail</th>
 															<th> Video Title</th>
 															<th> Video Type</th>
@@ -310,17 +312,24 @@ const Video = () => {
 															data.map((v, i) => (
 																<tr key={i}>
 																	<td>{i + 1}</td>
-																	<td>{v.name}</td>
-																	<td>
-																		{v.status === '1' ? 'Active' : 'Inactive'}
-																	</td>
-																	<td>{v.created_at}</td>
+																	<td><img src={v.image} /></td>
+																	<td>{v.title}</td>
+																	<td>{v.video_type}</td>
+																	<td>{v.video_link}</td>
+
+
+
+
+																	<td>{v.created}</td>
+
+
+																	<td>	{v.status === '1' ? 'Active' : 'Inactive'}</td>
 																	<td>
 																		<button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
 																			onClick={() => { formRef.current.openForm(v) }}>
 																			<i class="ti-pencil"></i>
 																		</button>
-																		<button type="button" class="btn btn-sm btn-danger add-btn">
+																		<button type="button" onClick={() => deleteData(v._id)} class="btn btn-sm btn-danger add-btn">
 																			<i class="ti-trash"></i>
 																		</button>
 																	</td>
@@ -367,24 +376,36 @@ const Addform = forwardRef((props, ref) => {
 
 	const handleChange = (v, k) => { setData({ ...data, [k]: v }) }
 
+	useImperativeHandle(ref, () => ({
+		openForm(dt) {
+			if (dt?._id) {
+				setData(dt);
+			} else {
+				setData({});
+			}
+			handleVisible(true);
+		},
+	}));
+
 
 	const handleVisible = (state) => { setShow(state) }
-	useImperativeHandle(ref, () => ({
-		openForm() {
-			handleVisible(true);
-		}
-	}));
+
 
 	const save = () => {
 		let fd = new FormData();
-		video.save(data, data.id).then((res) => {
+		for (let prop in data) {
+			fd.append(prop, data[prop]);
+		}
+		video.save(fd).then((res) => {
 			alert(res.message)
 			handleVisible(false);
 			list();
 		}).catch(err => {
 			alert(err.message)
 		})
+
 	}
+
 
 	React.useEffect(() => {
 		axios.get('media-solutions').then(res => {
@@ -406,11 +427,14 @@ const Addform = forwardRef((props, ref) => {
 							<div class="form-group col-md-4">
 								<label for="exampleInputUsername1">Video Type</label>
 
-								<select class="form-control">
+								{/* <select class="form-control">
 									<option value="-1">Select Video Type</option>
 									{
 										media.map(el => <option key={el._id} value={media.slug}>{el.name}</option>)
-									}</select>
+									}</select> */}
+								
+								<input type="text" class="form-control" value={data.video_type || ''} onChange={(e) => { handleChange(e.target.value, 'video_type') }} placeholder="Video  type" />
+
 							</div>
 
 							<div class="form-group col-md-4">
@@ -418,25 +442,25 @@ const Addform = forwardRef((props, ref) => {
 								<input type="text" class="form-control" value={data.title || ''} onChange={(e) => { handleChange(e.target.value, 'title') }} placeholder="Video  Title" />
 							</div>
 							<div class="form-group col-md-4">
-									<label for="exampleInputUsername1">Video Link</label>
-									<input type="text" class="form-control file-upload-info" value={data.video_link || ''} onChange={(e) => { handleChange(e.target.value, 'video_link') }} placeholder=" Video Link" />
+								<label for="exampleInputUsername1">Video Link</label>
+								<input type="text" class="form-control file-upload-info" value={data.video_link || ''} onChange={(e) => { handleChange(e.target.value, 'video_link') }} placeholder=" Video Link" />
 
-								</div>
+							</div>
 
 
-								<div class="form-group col-md-6">
-									<label for="exampleInputUsername1">Video Upload</label>
-									<input type="file" class="form-control file-upload-info" value={data.video || ''} onChange={(e) => { handleChange(e.target.value, 'video') }} placeholder="Upload Video" />
+							<div class="form-group col-md-6">
+								<label for="exampleInputUsername1">Video Upload</label>
+								<input type="file" class="form-control file-upload-info" onChange={(e) => { handleChange(e.target.files[0], 'video') }} placeholder="Upload Video" />
 
-								</div>
+							</div>
 
-								<div class="form-group col-md-6">
-									<label for="exampleInputUsername1">Video Thumbnail Image</label>
-									<input type="file" class="form-control file-upload-info" value={data.image || ''} onChange={(e) => { handleChange(e.target.value, 'image') }} placeholder="Video Thumbnail Image" />
+							<div class="form-group col-md-6">
+								<label for="exampleInputUsername1">Video Thumbnail Image</label>
+								<input type="file" class="form-control file-upload-info" onChange={(e) => { handleChange(e.target.files[0], 'image') }} placeholder="Video Thumbnail Image" />
 
-								</div>
-							
-							
+							</div>
+
+
 							<div class="form-group col-md-12">
 								<label for="exampleInputUsername1">Video Description</label>
 								<textarea class="form-control" rows={4} value={data.description || ''} onChange={(e) => { handleChange(e.target.value, 'description') }} placeholder=" Video Description" />

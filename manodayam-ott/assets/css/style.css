@@ -10980,12 +10980,14 @@ div.dataTables_wrapper div.dataTables_length select {
     bottom: 0;
     position: relative;
     height: 100%;
+    /* background: linear-gradient(45deg, #23adba, #9d1892); */
 }
 
 .main-content .container,
 .main-content .container-fluid {
     padding-left: 25px;
     padding-right: 25px;
+    
 }
 
 @media (max-width: 575px) {
