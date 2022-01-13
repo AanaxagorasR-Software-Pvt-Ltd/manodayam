@@ -4,10 +4,20 @@ import axios from "axios";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import { API_ADMIN_URL, PRODUCT_API, BANNER_API } from "../utill/api.endpoints";
+import {
+  API_ADMIN_URL,
+  PRODUCT_API,
+  BANNER_API,
+  CATEGORY_API,
+  SPIRITUALITY_API,
+} from "../utill/api.endpoints";
 
 export default function Home(props) {
   const [responseData, setResponseData] = useState([]);
+  const [bannerData, setbannerData] = useState([]);
+  const [categoryData, setcategoryData] = useState([]);
+  const [SpritualityData, setSpritualityData] = useState([]);
+
 
   // productlist
   const Productlist = () => {
@@ -26,7 +36,6 @@ export default function Home(props) {
       });
   };
   // Banner
-  const [bannerData, setbannerData] = useState([]);
   const BannerData = () => {
     console.log(`${API_ADMIN_URL}${BANNER_API}`);
     const bannerdata = {
@@ -42,13 +51,43 @@ export default function Home(props) {
         console.log(error);
       });
   };
-  // useEffect(()=>{
-  //   console.log('responseData', responseData.data);
-  // }, [responseData])
-
+  // category
+  const Categorylist = () => {
+    console.log(`${API_ADMIN_URL}${CATEGORY_API}`);
+    const categorylisting = {
+      collectiontypedata: "categories",
+    };
+    axios
+      .post(`${API_ADMIN_URL}${CATEGORY_API}`, categorylisting)
+      .then((res) => {
+        setcategoryData(res.data.data);
+        console.log("====category====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  //Sprituality
+  const Spritualitylist = () => {
+    console.log(`${API_ADMIN_URL}${SPIRITUALITY_API}`);
+    const spiritualitylisting = {
+      collectiontypedata: "spirituality",
+    };
+    axios
+      .post(`${API_ADMIN_URL}${SPIRITUALITY_API}`, spiritualitylisting)
+      .then((res) => {
+        setSpritualityData(res.data.data);
+        console.log("====Sprituality====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect((props) => {
     Productlist(props);
     BannerData();
+    Categorylist();
+    Spritualitylist();
   }, []);
   var settings = {
     dots: false,
@@ -243,18 +282,27 @@ export default function Home(props) {
               <div className="video-question">
                 <ul>
                   <li>
-                    <button className="btn">Social Gathering?</button>
+                    <Link to="./bookingAppoint">
+                      <button className="btn">Social Gathering?</button>
+                    </Link>
                   </li>
                   <li>
-                    <button className="btn">
-                      Having a problem related to study/job?
-                    </button>
+                    <Link to="./bookingAppoint">
+                      <button className="btn">
+                        Having a problem related to study/job?
+                      </button>
+                    </Link>
                   </li>
                   <li>
-                    <button className="btn">Drugs</button>
+                    <Link to="./bookingAppoint">
+                      <button className="btn">Drugs</button>
+                    </Link>
                   </li>
+
                   <li>
-                    <button className="btn">Fear of something</button>
+                    <Link to="./bookingAppoint">
+                      <button className="btn">Fear of something</button>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -293,7 +341,7 @@ export default function Home(props) {
                   Panic, Stress, PSTD, Alcoholism, Substance Abuse,
                   Schizophrenia, Bipolar, ADHD, Dementia, Alzheimer’s,
                   Parkinson’s, Juvenile Delinquency, Autism, Sexual Disorders,
-                  Sleeplessness{" "}
+                  Sleeplessness
                 </p>
                 <p>
                   Manodayam has Comprehensive team of Clinical Psychologist,
@@ -317,215 +365,26 @@ export default function Home(props) {
           <div className="col-lg-12">
             <div className="service-heading">
               {/* <h5>Advantages</h5> */}
-              <h5>Shakthi-Power to Heal</h5>
-              {/* <h2>Shakthi gives you power to heal and get you to wellness</h2> */}
+              <h5>Swayam- Do It Yourself</h5>
               <p>Shakthi gives you power to heal and get you to wellness</p>
             </div>
           </div>
 
           <div className="service-slide">
             <Slider {...settingstwo}>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/depression.png" alt="" />
-                  <img
-                    src="assets/image/depression.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Depression</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
+              {categoryData.map((element) => (
+                <div className="col-lg-12">
+                  <div className="service-card hvr-float-shadow">
+                    <img src={element.img} alt="" />
+                    <img src={element.img} className="img-bfr" alt="" />
+                    <h3>{element.name}</h3>
+                    <p>{element.description}</p>
+                    <button className="btn-web hvr-float-shadow">
+                      <Link to="/healthheal">get solution</Link>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/anxiety.png" alt="" />
-                  <img
-                    src="assets/image/anxiety.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Anxiety</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/attention.png" alt="" />
-                  <img
-                    src="assets/image/attention.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Attention Disorder</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/psychosis.png" alt="" />
-                  <img
-                    src="assets/image/psychosis.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Psychosis</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/alcohol.png" alt="" />
-                  <img
-                    src="assets/image/alcohol.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Alcohol Abuse</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/sd.png" alt="" />
-                  <img src="assets/image/sd.png" className="img-bfr" alt="" />
-                  <h3>sexual Dysfunction</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/depression.png" alt="" />
-                  <img
-                    src="assets/image/depression.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Dementia</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/bipolar.png" alt="" />
-                  <img
-                    src="assets/image/bipolar.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Bipolar</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/ocd.png" alt="" />
-                  <img src="assets/image/ocd.png" className="img-bfr" alt="" />
-                  <h3>Obsessive Compulsive Disorder</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/drug-abuse.png" alt="" />
-                  <img
-                    src="assets/image/drug-abuse.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Drug Abuse</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card hvr-float-shadow">
-                  <img src="assets/image/schizophrenia.png" alt="" />
-                  <img
-                    src="assets/image/schizophrenia.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Schizophrenia</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="btn-web hvr-float-shadow">
-                    <Link to="/healthheal">get solution</Link>
-                  </button>
-                </div>
-              </div>
+              ))}
             </Slider>
           </div>
         </div>
@@ -658,45 +517,7 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      <div className="service-section mb-50">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="service-heading">
-                <h5>Eco System</h5>
-                {/* <h2>Get Our Amazing Products</h2> */}
-                <p>
-                  Please see your support system such as genetics support, find
-                  brain mapping centers
-                </p>
-              </div>
-            </div>
-
-            {responseData.map((element) => (
-              <div className="col-lg-3 col-sm-6">
-                {console.log("element", element)}
-                <div className="product-card">
-                  <img src={element.pic_url} alt="" />
-                  <h3>{element.productname}</h3>
-                  <p>{element.pdescription}</p>
-                  <span>
-                    <i className="fa fa-inr"></i>
-                    {element.mrp}
-                  </span>
-
-                  <Link
-                    to={{
-                      pathname: "/ViewProduct/" + element.slug,
-                    }}
-                  >
-                    <buttton className="btn-web cart-btn">View</buttton>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <hr />
       {/* Digital Human Library */}
       <div className="library-section mb-50">
         <div className="container">
@@ -711,53 +532,158 @@ export default function Home(props) {
                 </p>
               </div>
             </div>
-
-            <div className="col-lg-10 offset-1 ">
-              <div className="library-card">
-                <div className="row">
-                  <div className="col-lg-5">
-                    <div className="library-video">
-                      <iframe
-                        width="100%"
-                        height="315"
-                        src="https://www.youtube.com/embed/sHO5bL02fOQ"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                      ></iframe>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 offset-1">
-                    <div className="library-person">
-                      <div className="row">
-                        <div className="col-3">
-                          <img src="assets/image/doctor-img.jpg" alt="" />
-                        </div>
-                        <div className="col-9">
-                          <h3>Jim Rohn</h3>
-                          <h5>Motivational Speaker</h5>
+            <div className="d-flex">
+              <div className="col-lg-4 ">
+                <div className="library-card">
+                  <div className="row">
+                    <div className="col-lg-6 offset-1">
+                      <div className="library-person">
+                        <div className="d-flex">
+                          <div className="">
+                            <div className="col-8">
+                              <img src="assets/image/doctor-img.jpg" alt="" />
+                            </div>
+                            <div className="col-9">
+                              <h3>Jim Rohn</h3>
+                              <h5>Motivational Speaker</h5>
+                            </div>
+                          </div>
+                          <div className="col-lg-12 mr-2">
+                            <div className="library-video">
+                              <iframe
+                                width="140%"
+                                height="160"
+                                src="https://www.youtube.com/embed/sHO5bL02fOQ"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                              ></iframe>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <p>
-                        Emanuel James "Jim" Rohn was born in Yakima, Washington,
-                        to Emmanuel and Clara Rohn. The Rohns owned and worked a
-                        farm in Caldwell, Idaho, where Jim grew up, being the
-                        only child.{" "}
-                      </p>
-                      <p>
-                        Rohn left college after just one year and started his
-                        professional life.
-                      </p>
+                    </div>
+                    <div className="ml-3">
+                      <button className="btn-web col-11">
+                        <Link to="/library">View More</Link>
+                      </button>
+                      <button className="btn-web col-11 mt-2">
+                        Please Join
+                      </button>
                       <button
-                        className="btn-web hvr-float-shadow"
                         data-toggle="modal"
                         data-target="#library-modal"
+                        className="btn-web col-11 mt-2"
                       >
-                        Talk With him
+                        Please Talk
                       </button>
-                      <button className="btn-web hvr-float-shadow">
-                        <Link to="/library">view more</Link>
+                      <button className="btn-web col-11 mt-2">
+                        <Link to="/library">View Others</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 ">
+                <div className="library-card">
+                  <div className="row">
+                    <div className="col-lg-6 offset-1">
+                      <div className="library-person">
+                        <div className="d-flex">
+                          <div className="">
+                            <div className="col-8">
+                              <img src="assets/image/doctor-img.jpg" alt="" />
+                            </div>
+                            <div className="col-9">
+                              <h3>Jim Rohn</h3>
+                              <h5>Motivational Speaker</h5>
+                            </div>
+                          </div>
+                          <div className="col-lg-12 mr-2">
+                            <div className="library-video">
+                              <iframe
+                                width="140%"
+                                height="160"
+                                src="https://www.youtube.com/embed/sHO5bL02fOQ"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                              ></iframe>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <button className="btn-web col-11">
+                        <Link to="/library">View More</Link>
+                      </button>
+                      <button className="btn-web col-11 mt-2">
+                        Please Join
+                      </button>
+                      <button
+                        data-toggle="modal"
+                        data-target="#library-modal"
+                        className="btn-web col-11 mt-2"
+                      >
+                        Please Talk
+                      </button>
+                      <button className="btn-web col-11 mt-2">
+                        <Link to="/library">View Others</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 ">
+                <div className="library-card">
+                  <div className="row">
+                    <div className="col-lg-6 offset-1">
+                      <div className="library-person">
+                        <div className="d-flex">
+                          <div className="">
+                            <div className="col-8">
+                              <img src="assets/image/doctor-img.jpg" alt="" />
+                            </div>
+                            <div className="col-9">
+                              <h3>Jim Rohn</h3>
+                              <h5>Motivational Speaker</h5>
+                            </div>
+                          </div>
+                          <div className="col-lg-12 mr-2">
+                            <div className="library-video">
+                              <iframe
+                                width="140%"
+                                height="160"
+                                src="https://www.youtube.com/embed/sHO5bL02fOQ"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                              ></iframe>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <button className="btn-web col-11">
+                        <Link to="/library">View More</Link>
+                      </button>
+                      <button className="btn-web col-11 mt-2">
+                        Please Join
+                      </button>
+                      <button
+                        data-toggle="modal"
+                        data-target="#library-modal"
+                        className="btn-web col-11 mt-2"
+                      >
+                        Please Talk
+                      </button>
+                      <button className="btn-web col-11 mt-2">
+                        <Link to="/library">View Others</Link>
                       </button>
                     </div>
                   </div>
@@ -774,109 +700,37 @@ export default function Home(props) {
             <div className="service-heading">
               <h5>Spirituality</h5>
               {/* <h2> You can heal and create  balance life style .Do it yourself</h2> */}
-              <p>
-              You can heal and create  balance life style .Do it yourself
-              </p>
+              <p>You can heal and create balance life style .Do it yourself</p>
             </div>
           </div>
 
           <div className="service-slide">
             <Slider {...settingstwo}>
+            {SpritualityData.map((element)=> (
+
               <div className="col-lg-12">
                 <div className="service-card spritual-card">
                   <img src="assets/image//vedic.png" alt="" />
-                  <img
+                  {/* <img
                     src="assets/image//vedic.png"
                     className="img-bfr"
                     alt=""
+                  /> */}
+                   <img
+                    src={element.img}
+                    className="img-bfr"
+                    alt=""
                   />
-                  <h3>Vedic Mantras</h3>
+                  <h3>{element.name}</h3>
                   <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
+                   {element.description}
                   </p>
                   <button className="qst-show btn-web hvr-float-shadow">
                     <Link to="/spirituality">Get your solution</Link>
                   </button>
                 </div>
               </div>
-              <div className="col-lg-12">
-                <div className="service-card spritual-card">
-                  <img src="assets/image/dua-hands.png" alt="" />
-                  <img
-                    src="assets/image/dua-hands.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Islamic Verses</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="qst-show btn-web hvr-float-shadow">
-                    <Link to="/spirituality">Get your solution</Link>
-                  </button>{" "}
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card spritual-card">
-                  <img src="assets/image/music-note.png" alt="" />
-                  <img
-                    src="assets/image/music-note.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Music</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="qst-show btn-web hvr-float-shadow">
-                    <Link to="/spirituality">Get your solution</Link>
-                  </button>{" "}
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card spritual-card">
-                  <img src="assets/image/meditation.png" alt="" />
-                  <img
-                    src="assets/image/meditation.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Meditation</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="qst-show btn-web hvr-float-shadow">
-                    <Link to="/spirituality">Get your solution</Link>
-                  </button>{" "}
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="service-card spritual-card">
-                  <img src="assets/image/bodyandmind.png" alt="" />
-                  <img
-                    src="assets/image/bodyandmind.png"
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>Body & Mind Balance</h3>
-                  <p>
-                    Depression (major depressive disorder) is a common and
-                    serious medical illness that negatively affects how you
-                    feel.
-                  </p>
-                  <button className="qst-show btn-web hvr-float-shadow">
-                    <Link to="/spirituality">Get your solution</Link>
-                  </button>{" "}
-                </div>
-              </div>
+            ))}
             </Slider>
           </div>
         </div>
@@ -921,6 +775,44 @@ export default function Home(props) {
                 <img src="assets/image/support.jpg" alt="" />
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="service-section mb-50">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="service-heading">
+                <h5>Manodayam Ecosystem</h5>
+                <p>
+                  Please see your support system such as genetics support, find
+                  brain mapping centers
+                </p>
+              </div>
+            </div>
+
+            {responseData.map((element) => (
+              <div className="col-lg-3 col-sm-6">
+                {console.log("element", element)}
+                <div className="product-card">
+                  <img src={element.pic_url} alt="" />
+                  <h3>{element.productname}</h3>
+                  <p>{element.pdescription}</p>
+                  <span>
+                    <i className="fa fa-inr"></i>
+                    {element.mrp}
+                  </span>
+
+                  <Link
+                    to={{
+                      pathname: "/ViewProduct/" + element.slug,
+                    }}
+                  >
+                    <buttton className="btn-web cart-btn">View</buttton>
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

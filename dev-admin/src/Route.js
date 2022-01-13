@@ -15,6 +15,11 @@ import Order from "./pages/Order";
 import Product from "./pages/Product";
 import Sells from "./pages/Sells";
 import Questions from "./pages/Questions";
+import Banner from "./pages/Banner";
+import Spirituality from "./pages/Spirituality";
+import YesNoQues from "./pages/YesNoQues";
+
+
 
 const Login = React.lazy(() => import("./pages/Login"));
 const ProtectedRoute = React.lazy(() => import("./Auth/Protected"));
@@ -36,14 +41,20 @@ const InternalRoute = (props) => {
           <Route path="/Main" element={<Main />} exact />
           <Route path="/appointment-list" element={<AppointmentList />} exact />
           <Route path="/questions" element={<Questions />} exact />
+          <Route path="/yes-no-questions" element={<YesNoQues />} exact />
 
+          <Route path="/banner" element={<Banner />} exact />
+
+          
           <Route
             path="/booked-appointment-list"
             element={<BookedAppointmentList />}
             exact
           />
 
-          <Route path="/category" element={<Category />} />
+          <Route path="/category" element={<Category />} exact/>
+          <Route path="/spirituality" element={<Spirituality />} exact/>
+
           <Route
             path="admin/media-solutions"
             element={<MediaSolutions />}

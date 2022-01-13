@@ -269,8 +269,11 @@ const Category = () => {
                           <thead>
                             <tr>
                               <th>S.No</th>
+                              <th>Category Image </th>
 
                               <th>Category Name </th>
+                              <th> Description </th>
+
                               <th>Status</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -280,7 +283,11 @@ const Category = () => {
                             {data.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
+                                <td>{v.img}</td>
+
                                 <td>{v.name}</td>
+                                <td>{v.description}</td>
+
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
                                 </td>
@@ -392,6 +399,30 @@ const Addform = forwardRef((props, ref) => {
                   handleChange(e.target.value, "name");
                 }}
                 placeholder="Category Name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Category description</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.description || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "description");
+                }}
+                placeholder="Category description"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Category Image</label>
+              <input
+                type="file"
+                class="form-control"
+                value={data.img || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "img");
+                }}
+                placeholder="Category img"
               />
             </div>
             <div class="form-group ">

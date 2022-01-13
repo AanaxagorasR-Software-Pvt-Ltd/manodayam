@@ -9,7 +9,7 @@ export default function Home() {
   const SleepApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_SCENE_API}`);
     const scenelisting = {
-      collectiontype: "shakthi_home",
+      collectiontype: "audio",
     };
     axios
       .post(`${API_ADMIN_URL}${SHAKTHI_SCENE_API}`, scenelisting)
@@ -24,6 +24,10 @@ export default function Home() {
   useEffect(() => {
     SleepApi();
   }, []);
+
+  const filterType = resData.filter((element) =>
+  element.type.includes((element = "Home"))
+);
   return (
     <>
       <div>
@@ -43,14 +47,14 @@ export default function Home() {
               <section class="video-cards">
                 <div class="container">
                   <div class="row">
-                    {resData.map((element) => (
+                    {filterType.map((element) => (
                       <div class="col-lg-9 col-sm-6 ">
                         <div class="featured-card rounded-right rounded-left">
                           <div class="row">
                             <div class="col-lg-2">
                               <img
                                 class="rounded-left"
-                                src={element.img_url}
+                                src={element.image}
                                 alt=""
                               />
                             </div>

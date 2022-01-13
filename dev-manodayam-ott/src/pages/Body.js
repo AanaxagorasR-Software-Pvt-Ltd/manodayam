@@ -9,7 +9,7 @@ export default function Body() {
   const SleepApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`);
     const bodylisting = {
-      collectiontype: "shakthi_body",
+      collectiontype: "videos",
     };
     axios
       .post(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`, bodylisting)
@@ -46,7 +46,7 @@ export default function Body() {
                           <Link to="/videoplayer">
                             <img
                               style={{ borderRadius: "25px" }}
-                              src={element.img_url}
+                              src={element.image}
                               alt=""
                             />
                             <h4

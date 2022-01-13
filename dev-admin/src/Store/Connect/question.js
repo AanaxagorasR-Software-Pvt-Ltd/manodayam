@@ -5,9 +5,6 @@ class question {
     list(data) {
         return axios.get( '/', { params: data });
     }
-    listBooked(data) {
-        return axios.get('/booked', {parames: data});
-    }
     listAll() {
         return axios.get( "/all");
     }
@@ -15,16 +12,10 @@ class question {
         return axios.get( "/all/ignore-status");
     }
     save(data) {
-        return axios.post( 'questions/mcq', data);
-    }
-    saveRoom(data) {
-        return axios.post(`/questions/saveroom`, data);
-    }
-    saveCallStatus(data) {
-        return axios.post(`/questions/changecallstatus`, data);
+        return axios.post( '/question/new', data);
     }
     delete(id) {
-        return axios.delete(`/questions/delete/${id}`);
+        return axios.delete(`/question/delete/${id}`);
     }
 }
 

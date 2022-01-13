@@ -32,13 +32,18 @@ router.use(`/products`, require("./product/update.product"));
 router.use(`/products`, require("./product/removeProducts"));
 router.use(`/products`, require("./product/productDetails"));
 router.use(`/addcarts`, require("./addToCart/aaToCarts"));
-
 router.use(`/banner`, require("./banner/banner"));
 router.use(`/doctors`, require("./doctorlist/doctorlists"));
-router.use(`/mcq`, require("./objectiveMcq/objectiveMcqs"));
 router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/category`, require("./category"));
+router.use(`/spirituality`, require("./category/spirituality"));
+router.use(`/category-item`, require("./category/category"));
+router.use(`/question`, require("./Mcq/objectiveMcq"));
+router.use(`/yesNo`, require("./Mcq/objectiveYesNo"));
+
+router.use(`/audios`,require("./media/Audio"))
+
 router.use(`/upload`, require("./media"));
 router.use('/videos', require("./media/video"));
 router.use(`/media-solutions`, require("./media-solutions"));

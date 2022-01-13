@@ -9,7 +9,7 @@ export default function Sleep() {
   const SleepApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_SLEEP_API}`);
     const sleeplisting = {
-      collectiontype: "shakthi_sleep",
+      collectiontype: "audio",
     };
     axios
       .post(`${API_ADMIN_URL}${SHAKTHI_SLEEP_API}`, sleeplisting)
@@ -24,6 +24,9 @@ export default function Sleep() {
   useEffect(() => {
     SleepApi();
   }, []);
+  const filterType = resData.filter((element) =>
+    element.type.includes((element = "Sleep"))
+  );
   return (
     <>
       <div>
@@ -33,7 +36,7 @@ export default function Sleep() {
               <div class="page-header">
                 <div class="page-header-1">
                   <h1 class="main-content-title tx-30">Sleep</h1>
-                  <ol class="breadcrumb">
+                  {/* <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                       <select name="" id="">
                         <option value="">All</option>
@@ -50,21 +53,21 @@ export default function Sleep() {
                         <option value="">By Narratore</option>
                       </select>
                     </li>
-                  </ol>
+                  </ol> */}
                 </div>
               </div>
 
               <section class="video-cards">
                 <div class="container">
                   <div class="row">
-                    {resData.map((element) => (
+                    {filterType.map((element) => (
                       <div class="col-lg-3 col-sm-6">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>
                           <Link to="/musicplayer">
                             <img
                               style={{ borderRadius: "25px" }}
-                              src={element.img_url}
+                              src={element.image}
                               alt="Some issue"
                             />
                             <h4
