@@ -29,12 +29,15 @@ const Audio = () => {
   const formRef = useRef();
 
   const list = () => {
-    axios.get('audios').then(res => {
-      setData(res);
-    }).catch(err => {
-      console.log('err', err.message);
-    })
-  }
+    axios
+      .get("audios")
+      .then((res) => {
+        setData(res);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
   React.useEffect(() => {
     list();
   }, []);
@@ -72,10 +75,10 @@ const Audio = () => {
   };
   const deleteData = (_id) => {
     audio.delete(_id).then((res) => {
-      alert(res?.message)
+      alert(res?.message);
       list();
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -187,8 +190,9 @@ const Audio = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
-                  }`}
+                class={`nav-item nav-profile dropdown ${
+                  profileShow ? "show" : ""
+                }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -201,8 +205,9 @@ const Audio = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
-                    }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
+                    profileShow ? "show" : ""
+                  }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -235,16 +240,18 @@ const Audio = () => {
             <ul class="nav">
               {menuList.map((sMenu) => (
                 <li
-                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${sMenu?.isHover ? "hover-open" : ""
-                    }`}
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
+                    sMenu?.isHover ? "hover-open" : ""
+                  }`}
                   key={uuidv4()}
                   onClick={(e) => handleClickMenu(sMenu?.name)}
                   onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
                   onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
                 >
                   <a
-                    className={`nav-link ${sMenu.submenu.length > 0 ? "collapsed" : ""
-                      }`}
+                    className={`nav-link ${
+                      sMenu.submenu.length > 0 ? "collapsed" : ""
+                    }`}
                     href={`${sMenu?.link}`}
                     data-toggle="collapse"
                     aria-expanded={sMenu?.isActive ? true : false}
@@ -313,43 +320,49 @@ const Audio = () => {
                               <th>Audio</th>
                               <th> Audio Title</th>
                               <th> Audio Description</th>
+                              <th> Type</th>
+
                               <th>Audio Link</th>
                               <th>Date</th>
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {
-                              data.map((a, i) => (
-                                <tr key={i}>
-                                  <td>{i + 1}</td>
-                                  <td><img src={a.image} /></td>
-                                  <td>{a.title}</td>
-                                  <td>{a.description}</td>
+                            {data.map((a, i) => (
+                              <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>
+                                  <img src={a.image} />
+                                </td>
+                                <td>{a.title}</td>
+                                <td>{a.description}</td>
+                                <td>{a.type}</td>
 
-                                  <td>{a.audio_link}</td>
+                                <td>{a.audio_link}</td>
 
+                                <td>{a.created}</td>
 
-
-
-                                  <td>{a.created}</td>
-
-
-
-                                  <td>
-                                    <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
-                                      onClick={() => { formRef.current.openForm(a) }}>
-                                      <i class="ti-pencil"></i>
-                                    </button>
-                                    <button type="button" onClick={() => deleteData(a._id)} class="btn btn-sm btn-danger add-btn">
-                                      <i class="ti-trash"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                              ))
-                            }
+                                <td>
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-info border-radius-0 add-btn"
+                                    onClick={() => {
+                                      formRef.current.openForm(a);
+                                    }}
+                                  >
+                                    <i class="ti-pencil"></i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => deleteData(a._id)}
+                                    class="btn btn-sm btn-danger add-btn"
+                                  >
+                                    <i class="ti-trash"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
-
                         </table>
                       </div>
                     </div>
@@ -381,14 +394,9 @@ const Addform = forwardRef((props, ref) => {
   const [data, setData] = useState({});
   const { list } = props;
 
-
-
-
-
-  const handleChange = (a, k) => { setData({ ...data, [k]: a }) }
-
-
-
+  const handleChange = (a, k) => {
+    setData({ ...data, [k]: a });
+  };
 
   const handleVisible = (state) => {
     setShow(state);
@@ -408,15 +416,17 @@ const Addform = forwardRef((props, ref) => {
     for (let prop in data) {
       fd.append(prop, data[prop]);
     }
-    audio.save(fd).then((res) => {
-      alert(res.message)
-      handleVisible(false);
-      list();
-    }).catch(err => {
-      alert(err.message)
-    })
-
-  }
+    audio
+      .save(fd)
+      .then((res) => {
+        alert(res.message);
+        handleVisible(false);
+        list();
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
   return (
     <>
@@ -435,11 +445,17 @@ const Addform = forwardRef((props, ref) => {
             <div class="form-group">
               <div class="col-md-3  offset-9">
                 <label for="exampleInputUsername1">Audio Type</label>
-                <select class="form-control">
-                  <option>Mental Health</option>
-                  <option>Depression</option>
-                  <option>Anxiety</option>
-                  <option>Attention</option>
+                <select class="form-control"
+                 value={data.type || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "type");
+                  }}>
+                  <option disabled>Select</option>
+                  <option>Sleep</option>
+                  <option>Music</option>
+                  <option>Meditate</option>
+                  <option>Calm Masterclass</option>
+                  <option>Scenes</option>
                 </select>
               </div>
               <div class="form-group">
@@ -447,7 +463,10 @@ const Addform = forwardRef((props, ref) => {
                 <input
                   type="text"
                   class="form-control"
-                  value={data.title || ''} onChange={(e) => { handleChange(e.target.value, 'title') }}
+                  value={data.title || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "title");
+                  }}
                   placeholder="Audio  Title"
                 />
               </div>
@@ -457,8 +476,9 @@ const Addform = forwardRef((props, ref) => {
                   <input
                     type="file"
                     class="form-control file-upload-info"
-                   
-                    onChange={(e) => { handleChange(e.target.files[0], 'image') }}
+                    onChange={(e) => {
+                      handleChange(e.target.files[0], "image");
+                    }}
                     placeholder="Upload Audio"
                   />
                   <small></small>
@@ -469,7 +489,10 @@ const Addform = forwardRef((props, ref) => {
                   <input
                     type="text"
                     class="form-control file-upload-info"
-                    value={data.audio_link || ''} onChange={(e) => { handleChange(e.target.value, 'audio_link') }}
+                    value={data.audio_link || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "audio_link");
+                    }}
                     placeholder=" Audio Link"
                   />
                 </div>
@@ -479,7 +502,10 @@ const Addform = forwardRef((props, ref) => {
                 <textarea
                   class="form-control"
                   row={4}
-                  value={data.description || ''} onChange={(e) => { handleChange(e.target.value, 'description') }}
+                  value={data.description || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "description");
+                  }}
                   placeholder=" Audio Description"
                 />
               </div>
@@ -494,7 +520,6 @@ const Addform = forwardRef((props, ref) => {
             }}
           >
             Close
-
           </Button>
           <Button variant="primary" onClick={save}>
             Save Changes
