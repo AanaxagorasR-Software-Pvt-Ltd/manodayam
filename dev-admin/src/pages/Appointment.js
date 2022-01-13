@@ -16,7 +16,8 @@ import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import appointment from "../Store/Connect/appointment";
-// import { get } from "immer/dist/internal";
+import { Link } from "react-router-dom";
+import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
 const Appointment = () => {
@@ -343,7 +344,7 @@ const Appointment = () => {
                                   <strong>Name: </strong> {v.fullname}
                                   <br />
                                   <strong>Email:</strong> {v.email} <br />
-                                  <strong>Phone:</strong> {v.mobileNmb}{" "}
+                                  <strong>Phone:</strong> {v.mobileNmb}
                                 </td>
                                 <td>{v.disorder}</td>
 
@@ -447,23 +448,6 @@ const Addform = forwardRef((props, ref) => {
         alert(err.message);
       });
   }
-  // const statussave = () => {
-  //   let formadata = new FormData();
-  //   appointment
-  //     .save(data, data.id)
-  //     .then((res) => {
-  //       alert(res.message);
-  //       handleVisible(false);
-  //       list();
-  //     })
-  //     .catch((err) => {
-  //       alert(err.message);
-  //     });
-  // };
-
-
-
-
 
   return (
     <>
@@ -592,9 +576,4 @@ const Addform = forwardRef((props, ref) => {
     </>
   );
 });
-
-
-
-
-
 export default Appointment;
