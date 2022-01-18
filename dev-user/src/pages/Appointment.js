@@ -17,6 +17,7 @@ export default function Appointment() {
   const [appointDisorder, setappointDisorder] = useState("");
   const [appointMsg, setappointMsg] = useState("");
 
+
   //error
   const [appointNameError, setappointNameError] = useState("");
   const [appointMailError, setappointMailError] = useState("");
@@ -24,9 +25,11 @@ export default function Appointment() {
   const [appointmentScheduleError, setappointmentScheduleError] = useState("");
   const [appointDisorderError, setappointDisorderError] = useState("");
   const [appointMsgError, setappointMsgError] = useState("");
-
+  let params = new URLSearchParams(window.location.search);
+  console.log(params.get('docid'));
   // Appointments
   const Appointment = () => {
+    
     if (appointName == "") {
       setappointNameError("Please Enter Your Name");
     }
@@ -45,7 +48,7 @@ export default function Appointment() {
     if (appointMsg == "") {
       setappointMsgError("Enter Your Message");
     }
-    console.log("hhhhhhhhh", `${API_ADMIN_URL}${APPOINTMENT_API}`);
+    console.log( `${API_ADMIN_URL}${APPOINTMENT_API}`);
     const appointmentOptions = {
       fullname: appointName,
       email: appointMail,
@@ -53,6 +56,7 @@ export default function Appointment() {
       disorder: appointDisorder,
       schedule: appointmentSchedule,
       msg: appointMsg,
+      docid:params.get('docid')
     };
     axios
       .post(`${API_ADMIN_URL}${APPOINTMENT_API}`, appointmentOptions)
