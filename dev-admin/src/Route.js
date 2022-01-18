@@ -18,6 +18,7 @@ import Questions from "./pages/Questions";
 import Banner from "./pages/Banner";
 import Spirituality from "./pages/Spirituality";
 import YesNoQues from "./pages/YesNoQues";
+import Library from "./pages/Library";
 
 
 
@@ -42,7 +43,9 @@ const InternalRoute = (props) => {
           <Route path="/appointment-list" element={<AppointmentList />} exact />
           <Route path="/questions" element={<Questions />} exact />
           <Route path="/yes-no-questions" element={<YesNoQues />} exact />
+          <Route path="/library" element={<Library />} exact />
 
+          
           <Route path="/banner" element={<Banner />} exact />
 
           

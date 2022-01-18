@@ -159,6 +159,31 @@ const leftSideBarMenu = [
 
   },
   {
+    name: "Digital Human Library",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    iconClass: "icon-layout",
+    submenu: [
+      {
+        name: "Connect us",
+        isActive: true,
+        dataToggle: "",
+        link: "/questions",
+        isExpand: false,
+      },
+      {
+        name: "Library",
+        isActive: true,
+        dataToggle: "",
+        link: "/library",
+        isExpand: false,
+      },
+      
+    ],
+    isHover: false
+  },
+  {
     name: "Charts to be discuss?",
     isActive: false,
     dataToggle: "",
