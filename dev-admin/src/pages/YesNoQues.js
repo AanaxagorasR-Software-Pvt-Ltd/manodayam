@@ -318,6 +318,9 @@ const YesNoQues = () => {
                               <th style={{ width: "10px" }}>S.No</th>
                               <th>Questions</th>
                               <th>Right-Answer</th>
+                              <th>Select Category</th>
+                              <th>Select Type</th>
+
                               <th>Created Date</th>
 
                               <th style={{ width: "80px" }}>Action</th>
@@ -334,7 +337,10 @@ const YesNoQues = () => {
                                   <strong>Ans1:</strong> {v.ans1} <br />
                                   <strong>Ans2:</strong> {v.ans2} <br />
                                 </td>
+
                                 <td>{v.rytAns}</td>
+                                <td>{v.category}</td>
+                                <td>{v.type}</td>
                                 <td>{v.createdAt}</td>
 
                                 {/* <td>
@@ -487,6 +493,50 @@ const Addform = forwardRef((props, ref) => {
                 </option>
                 <option value="Answer-1">Answer-1</option>
                 <option value="Answer-2">Answer-2</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Select Category</label>
+              <select
+                class="form-control"
+                value={data.category || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "category");
+                }}
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                <option value="Anxiety">Anxiety</option>
+                <option value="Attention Disorder">Attention Disorder</option>
+                <option value="Psychosis">Psychosis</option>
+                <option value="Alcohol Abuse">Alcohol Abuse</option>
+                <option value="Dementia">Dementia</option>
+                <option value="Bipolar">Bipolar</option>
+                <option value="Obsessive Compulsive Disorder">Obsessive Compulsive Disorder</option>
+                <option value="Drug Addiction">Drug Addiction</option>
+                <option value="Schizophrenia">Schizophrenia</option>
+                <option value="Sexual Addiction">Sexual Addiction</option>
+                <option value="Hyperactivity">Hyperactivity</option>
+                <option value="Impulsivity">Impulsivity</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Select Type</label>
+              <select
+                class="form-control"
+                value={data.type || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "type");
+                }}
+              >
+                <option value="" disabled>
+                  Select Type
+                </option>
+                <option value="pq1">pq1</option>
+                <option value="pq2">pq2</option>
+                <option value="pq3">pq3</option>
+                <option value="pq4">pq4</option>
               </select>
             </div>
           </form>

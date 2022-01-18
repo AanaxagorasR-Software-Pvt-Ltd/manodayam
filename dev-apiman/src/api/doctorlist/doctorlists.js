@@ -1,49 +1,3 @@
-// const express = require("express");
-// const router = express.Router();
-// const { getDatabase } = require("../../db/mongo");
-
-// const validate = (req, res, next) => {
-//   console.log("=fgf===", req.body.collectiondoctorListing);
-//   if (req.body.collectiondoctorListing) {
-//     next();
-//   } else {
-//     res.status(400).json({
-//       status: false,
-//       message: "bad request",
-//     });
-//   }
-// };
-// router.post("/doctorListinglists",validate, async (req, res) => {
-//   const db = await getDatabase();
-
-//   try {
-//     const { collectiondoctorListing } = req.body;
-//     console.log('collectiondoctorListing', req.body);
-//     const data = await db.collection(`${collectiondoctorListing}`).find().toArray();
-//     // console.log('=====jfgjh', data);
-//     if (Array.isArray(data)) {
-//       res.status(200).json({
-//         data: data,
-//         status: true,
-//         message: "data fetched sucseccfully",
-//         id: "lllll",
-//       });
-//     } else {
-//       res.status(200).json({
-//         data: [],
-//         status: false,
-//         message: "no data found",
-//       });
-//     }
-//   } catch (e) {
-//     res.status(500).json({
-//       status: false,
-//       message: "server error",
-//     });
-//   }
-// });
-
-// module.exports = router;
 
 const express = require("express");
 const router = express.Router();
@@ -53,22 +7,6 @@ const multer = require("multer");
 const path = require("path");
 const { env } = process;
 const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
-
-// const validate = (req, res, next) => {
-//   const {
-//     query: { pid },
-//   } = req;
-//   if (query && pid) {
-//     next();
-//   } else {
-//     res.status(400).json({ status: false, message: "Please provide pid" });
-//   }
-//   //console.log(json.stringify(req.body))
-//   //const { media_type, parent_id, image } = req.body;
-//   //console.log("image media",media_type, parent_id, image);
-//   console.log("data", query);
-//   // next()
-// };
 
 const imageStorage = multer.diskStorage({
   destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
@@ -94,13 +32,8 @@ const imageUpload = multer({
 
 router.post(
   `/`,
-
   imageUpload.single("img_url"),
   async (req, res) => {
-
-
-
-
     try {
       const db = await getDatabase();
       const body = req.body;
@@ -154,9 +87,6 @@ router.post(
         .status(400)
         .json({ status: false, message: "please try again later try" });
     }
-
-
-
   },
   (error, req, res, next) => {
     console.log(error);
@@ -165,9 +95,7 @@ router.post(
   }
 );
 
-
 router.get('/', async (req, res) => {
-
   try {
     const db = await getDatabase();
     let dt = await db

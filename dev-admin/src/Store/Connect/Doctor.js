@@ -17,14 +17,7 @@ class doctor {
     delete(id) {
         return axios.delete(`/doctors/delete/${id}`);
     }
-    // update(data){
-    //     return  axios.put('/video/media',data)
 
-    // }
-    
-
-
-    
 }
 
 export default new doctor();

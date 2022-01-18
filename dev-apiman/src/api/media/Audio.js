@@ -55,6 +55,7 @@ router.post(
         title: body.title,
         audio_link: body.audio_link,
         description: body.description,
+        type: body.type,
       };
 
       if (typeof req.file !== "undefined") {

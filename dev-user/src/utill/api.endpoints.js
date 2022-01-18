@@ -13,6 +13,7 @@ export const PROFIL_API = "/auth/user/profil"
 export const ADD_CART_API = "/addcarts"
 export const CATEGORY_API = "/category-item/category/item";
 export const SPIRITUALITY_API = "/spirituality/spirituality/item";
+// export const BOOKED_API = "/appointed/booklistshow"
 export const BOOKED_API = "/appointments/booked";
 
 // export const MCQ = "/mcq/question"

@@ -59,27 +59,30 @@ const leftSideBarMenu = [
     submenu:[],
     isHover: false
   },
+  
   {
     name: "Questions Part",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "questions" ,
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu:[],
-    isHover: false
-  },
-
-  {
-    name: "Questions Part",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "questions" ,
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu:[],
+    iconClass: "icon-layout",
+    submenu: [
+      {
+        name: "MSQ",
+        isActive: true,
+        dataToggle: "",
+        link: "/questions",
+        isExpand: false,
+      },
+      {
+        name: "Yes No",
+        isActive: true,
+        dataToggle: "",
+        link: "/yes-no-questions",
+        isExpand: false,
+      },
+      
+    ],
     isHover: false
   },
 
