@@ -88,12 +88,12 @@ const Appointment = () => {
       let response = appointment.status({
         _id: id,
         status: status
-      }); 
+      });
       alert("Satuts updated sucessfully")
       list();
     } catch (error) {
       alert("Something went to  wrong")
-      
+
     }
 
   }
@@ -114,7 +114,7 @@ const Appointment = () => {
             <button
               class="navbar-toggler navbar-toggler align-self-center"
               type="button"
-            data-toggle="minimize"
+              data-toggle="minimize"
               onClick={handleSideBar}
             >
               <span class="icon-menu"></span>
@@ -328,6 +328,7 @@ const Appointment = () => {
                           <thead>
                             <tr>
                               <th>S.No</th>
+                             <th>Booked Doctor Details</th>
                               <th>Patient Details</th>
                               <th>Issue</th>
                               <th>Schedule Date</th>
@@ -341,6 +342,13 @@ const Appointment = () => {
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
+                                  <strong>Name: </strong> {v.doctor.name}
+                                  <br />
+                                  <strong>Email:</strong> {v.doctor. email} <br />
+                                
+                                </td>
+                               
+                                <td>
                                   <strong>Name: </strong> {v.fullname}
                                   <br />
                                   <strong>Email:</strong> {v.email} <br />
@@ -349,7 +357,7 @@ const Appointment = () => {
                                 <td>{v.disorder}</td>
 
                                 <td>
-                                  {new Date(v.schedule).toLocaleDateString()}
+                                {v.schedule }
                                 </td>
                                 {/* <td>
                                   {v.status === "pending"

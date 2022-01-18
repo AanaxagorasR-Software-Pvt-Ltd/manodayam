@@ -110,6 +110,7 @@ router.post(
 
 
         specialist: body.specialist,
+        email:body.email
       };
 
       if (typeof req.file !== 'undefined') {
@@ -241,4 +242,11 @@ router.post("/doctorlists",validate, async (req, res) => {
 
 
 module.exports = router;
+// if (body.status=="booked") {
+//   EmailService.sendEmailToPatient(body.email, body.doctor.name);
+//   EmailService.sendEmailToDoctor(body.email, body.fullname);
+
+
+
+// }
 

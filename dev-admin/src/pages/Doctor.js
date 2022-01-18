@@ -321,7 +321,7 @@ const Doctor = () => {
 
                               <th>Doctor experience</th>
                               <th>Doctor specialist</th>
-                              <th>Upload Date</th>
+                              <th>Email</th>
 
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
@@ -339,7 +339,7 @@ const Doctor = () => {
 
 
 
-                                  <td>{d.created}</td>
+                                  <td>{d.email}</td>
 
 
 
@@ -447,15 +447,28 @@ const Addform = forwardRef((props, ref) => {
 
 
               </div>
-              <div class="form-group">
-                <label for="exampleInputUsername1">Doctor Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  value={data.name || ''} onChange={(e) => { handleChange(e.target.value, 'name') }}
-                  placeholder="Doctor  Title"
-                />
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="exampleInputUsername1">Doctor Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={data.name || ''} onChange={(e) => { handleChange(e.target.value, 'name') }}
+                    placeholder="Doctor  name"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="exampleInputUsername1">Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={data.email || ''} onChange={(e) => { handleChange(e.target.value, 'email') }}
+                    placeholder="Doctor  email"
+                  />
+                </div>
+
               </div>
+
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="exampleInputUsername1">Doctor Upload</label>
