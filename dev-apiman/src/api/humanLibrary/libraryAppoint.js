@@ -4,16 +4,15 @@ const { getDatabase } = require("../../db/mongo");
 const ObjectID = require("mongodb").ObjectID;
 const EmailService = require("../Service/EmailService");
 const validate = (req, res, next) => {
-  const { fullname, email, mobileNmb, schedule, disorder, msg, docid } =
-    req.body;
-  if (fullname && email && mobileNmb && disorder && schedule && msg && docid) {
+  const { fullname, email, phone, date, msg } = req.body;
+  if (fullname && email && phone && date && msg) {
     next();
   } else {
     res.status(400).json({ status: false, message: "bad request" });
   }
 };
 
-router.post("/appoint", async (req, res) => {
+router.post("/library_appoint", validate, async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
   console.log("data", req.body);
@@ -22,12 +21,9 @@ router.post("/appoint", async (req, res) => {
     let data = {
       fullname: body.fullname,
       email: body.email,
-      mobileNmb: body.mobileNmb,
-      disorder: body.disorder,
-      schedule: body.schedule,
+      phone: body.phone,
+      date: body.date,
       msg: body.msg,
-      status: body.status,
-      docid: body.docid,
     };
     console.log(data);
     if (!body?._id) {
@@ -37,14 +33,14 @@ router.post("/appoint", async (req, res) => {
     }
 
     let insertedId = null;
-    let appointments = await db.collection("appointments");
+    let library_appoint = await db.collection("library_appoint");
     if (body._id) {
-      insertedId = await appointments.updateOne(
+      insertedId = await library_appoint.updateOne(
         { _id: new ObjectID(body._id) },
         { $set: data }
       ).insertedId;
     } else {
-      insertedId = await appointments.insertOne(data).insertedId;
+      insertedId = await library_appoint.insertOne(data).insertedId;
     }
 
     res.status(200).json({
@@ -67,40 +63,8 @@ router.post("/appoint", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const db = await getDatabase();
-
-    // let dt = await db
-    // 	.collection("appointments")
-    // 	.find({ status: { $nin: ["booked"] } })
-    // 	.sort({ _id: -1 })
-    // 	.toArray();
-    // res.send(dt);
-    let result = await db
-      .collection("appointments")
-      .aggregate([
-        {
-          $addFields: {
-            docid: {
-              $toObjectId: "$docid",
-            },
-          },
-        },
-        {
-          $lookup: {
-            from: "doctorListing",
-            localField: "docid",
-            foreignField: "_id",
-            as: "doctor",
-          },
-        },
-        {
-          $unwind: {
-            path: "$doctor",
-            preserveNullAndEmptyArrays: true,
-          },
-        },
-      ])
-      .toArray();
-    res.json(result);
+    let result = await db.collection("library_appoint").findOne().toArray();
+    res.send(result);
   } catch (err) {
     console.log("err", err.message);
   }
@@ -112,7 +76,7 @@ router.get("/booked", async (req, res) => {
   try {
     const db = await getDatabase();
     let dt = await db
-      .collection("appointments")
+      .collection("library_appoint")
       .find({ status: "booked" })
       .sort({ _id: -1 })
       .toArray();
@@ -127,17 +91,17 @@ router.post("/status", async (req, res) => {
   console.log(body);
   try {
     const db = await getDatabase();
-    let appointments = await db.collection("appointments");
-    insertedId = await appointments.updateOne(
+    let library_appoint = await db.collection("library_appoint");
+    insertedId = await library_appoint.updateOne(
       { _id: new ObjectID(body._id) },
       { $set: { status: body.status } }
     ).insertedId;
 
     // sed email to patient
-    // let details = await appointments.findOne({ _id: new ObjectID(body._id) });
+    // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
     if (body.status == "booked") {
       let result = await db
-        .collection("appointments")
+        .collection("library_appoint")
         .aggregate([
           {
             $match: { _id: { $eq: new ObjectID(body._id) } },
@@ -192,7 +156,7 @@ router.delete("/delete/:_id", async (req, res) => {
   try {
     const db = await getDatabase();
     const body = req.body;
-    let dt = await db.collection("appointments").deleteOne({ _id: _id });
+    let dt = await db.collection("library_appoint").deleteOne({ _id: _id });
     res.send({
       message: "data deleted",
     });
@@ -219,9 +183,9 @@ router.delete("/delete/:_id", async (req, res) => {
       }
 
       let insertedId = null;
-      let appointments = await db.collection("appointments");
+      let library_appoint = await db.collection("library_appoint");
       if (body._id) {
-        insertedId = await appointments.updateOne(
+        insertedId = await library_appoint.updateOne(
           { _id: new ObjectID(body._id) },
           { $set: data }
         ).insertedId;
@@ -261,9 +225,9 @@ router.delete("/delete/:_id", async (req, res) => {
       }
 
       let insertedId = null;
-      let appointments = await db.collection("appointments");
+      let library_appoint = await db.collection("library_appoint");
       if (body._id) {
-        insertedId = await appointments.updateOne(
+        insertedId = await library_appoint.updateOne(
           { _id: new ObjectID(body._id) },
           { $set: data }
         ).insertedId;

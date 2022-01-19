@@ -166,10 +166,17 @@ const leftSideBarMenu = [
     iconClass: "icon-layout",
     submenu: [
       {
-        name: "Connect us",
+        name: "Connectors",
         isActive: true,
         dataToggle: "",
-        link: "/questions",
+        link: "/library-appointment",
+        isExpand: false,
+      },
+      {
+        name: "Connection Done",
+        isActive: true,
+        dataToggle: "",
+        link: "/library-appointment-booked",
         isExpand: false,
       },
       {
