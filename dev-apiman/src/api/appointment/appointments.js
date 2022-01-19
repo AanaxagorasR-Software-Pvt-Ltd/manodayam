@@ -76,6 +76,15 @@ router.get("/", async (req, res) => {
 		// res.send(dt);
 		let result = await db.collection('appointments').aggregate([
 			{
+				"$match": {
+					$or: [
+						{ status: { $in: ["pending"] } },
+						{ status: { $in: ["canceled"] } },
+						{ status: { $in: [null] } }
+					]
+				}
+			},
+			{
 				$addFields: {
 					docid: {
 						$toObjectId: "$docid"
@@ -166,8 +175,8 @@ router.post('/status', async (req, res) => {
 			]).toArray();
 			res.json(result);
 			console.log(result);
-			EmailService.sendEmailToPatient(result[0].doctor.email, {name: result[0].doctor.name,schedule:result[0].schedule});
-			EmailService.sendEmailToDoctor(result[0].email,{name:result[0].fullname,created:result[0].created,disorder:result[0].disorder})
+			EmailService.sendEmailToPatient(result[0].doctor.email, { name: result[0].doctor.name, schedule: result[0].schedule, email:result[0].doctor.email });
+			EmailService.sendEmailToDoctor(result[0].email, { name: result[0].fullname, created: result[0].doctor.created, disorder: result[0].disorder,email:result[0].email })
 		}
 
 
@@ -215,7 +224,8 @@ router.delete("/delete/:_id", async (req, res) => {
 			}
 
 			let insertedId = null;
-			let appointments = await db.collection("appointments");
+			let appointments = await db.collection("appointments")
+			
 			if (body._id) {
 				insertedId = await appointments.updateOne(
 					{ _id: new ObjectID(body._id) },
@@ -234,6 +244,7 @@ router.delete("/delete/:_id", async (req, res) => {
 				status: true,
 				message: "Room created successfully!"
 			});
+			EmailService.sendEmailToDoctor(result[0].email, { name: result[0].fullname, created: result[0].created, disorder: result[0].disorder });
 		}
 
 		catch (e) {
