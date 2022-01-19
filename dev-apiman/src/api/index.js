@@ -36,6 +36,8 @@ router.use(`/banner`, require("./banner/banner"));
 router.use(`/doctors`, require("./doctorlist/doctorlists"));
 router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
+router.use(`/library`, require("./humanLibrary/libraryAppoint"));
+
 router.use(`/category`, require("./category"));
 router.use(`/spirituality`, require("./category/spirituality"));
 router.use(`/category-item`, require("./category/category"));

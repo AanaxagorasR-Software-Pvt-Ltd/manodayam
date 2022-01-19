@@ -13,14 +13,12 @@ import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
 import Button from "react-bootstrap/Button";
-import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
-import video from "../Store/Connect/video";
+import axios from "../utill/axios";
+import library_appoint from "../Store/Connect/library_appoint";
+import { Link } from "react-router-dom";
 import LeftSideBar from "../Layout/LeftSideBar";
-
-// let Button = new AA()
-
-const Video = () => {
+const LibraryAppoint = () => {
   const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
@@ -31,15 +29,16 @@ const Video = () => {
 
   const list = () => {
     axios
-      .get("videos")
+      .get("library_appoint")
       .then((res) => {
+        console.log("res", res, typeof res);
         setData(res);
       })
       .catch((err) => {
         console.log("err", err.message);
       });
   };
-  React.useEffect(() => {
+  useEffect(() => {
     list();
   }, []);
 
@@ -62,6 +61,7 @@ const Video = () => {
   const handleMouseOutkMenu = () => {
     setMenuList(menuList.map((li) => ({ ...li, isHover: false })));
   };
+
   const handleSideBar = () => {
     dispatch(isToggle());
   };
@@ -75,16 +75,26 @@ const Video = () => {
       });
   };
 
-  const deleteData = (_id) => {
-    video.delete(_id).then((res) => {
-      alert(res?.message);
+  // const deleteData = (_id) => {
+  //   appointment.delete(_id).then((res) => {
+  //     alert(res?.message);
+  //     list();
+  //   });
+  // };
+  const update_status = async (status, id) => {
+    try {
+      let response = library_appoint.status({
+        _id: id,
+        status: status,
+      });
+      alert("Satuts updated sucessfully");
       list();
-    });
+    } catch (error) {
+      alert("Something went to  wrong");
+    }
   };
-
   return (
     <>
-      <Addform ref={formRef} list={list} />
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -239,83 +249,123 @@ const Video = () => {
         </nav>
         <div class="container-fluid page-body-wrapper">
           <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <LeftSideBar />
+            <ul class="nav">
+              {menuList.map((sMenu) => (
+                <li
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
+                    sMenu?.isHover ? "hover-open" : ""
+                  }`}
+                  key={uuidv4()}
+                  onClick={(e) => handleClickMenu(sMenu?.name)}
+                  onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
+                  onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
+                >
+                  <a
+                    className={`nav-link ${
+                      sMenu.submenu.length > 0 ? "collapsed" : ""
+                    }`}
+                    href={`${sMenu?.link}`}
+                    data-toggle="collapse"
+                    aria-expanded={sMenu?.isActive ? true : false}
+                  >
+                    <i className={`${sMenu?.iconClass} menu-icon`}></i>
+                    <span className="menu-title">{sMenu?.name}</span>
+                    {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                      <i class="menu-arrow"></i>
+                    ) : null}
+                  </a>
+                  {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                    <div
+                      className={`collapse ${sMenu?.isActive ? " show" : ""}`}
+                      id="ui-basic"
+                    >
+                      <ul className="nav flex-column sub-menu">
+                        {sMenu.submenu.map((sub) => (
+                          <li class="nav-item">
+                            {" "}
+                            <a
+                              href={`${sub.link}`}
+                              class="nav-link"
+                              aria-expanded={sMenu?.isActive ? true : false}
+                            >
+                              {sub.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
           </nav>
           <div class="main-panel">
             <div class="content-wrapper">
               <div class="row">
-                <div class="col-md-12 grid-margin">
-                  <div class="row">
-                    <div class="col-12 col-xl-4 offset-10">
-                      <button
-                        type="button"
-                        class="btn btn-social-icon-text btn-info"
-                        onClick={() => {
-                          formRef.current.openForm();
-                        }}
-                      >
-                        <i class="ti-plus"></i>Add
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Video list</h4>
+                      <h4 class="card-title">library_appoint list</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
-                              <th>S.N</th>
+                              <th>S.No</th>
+                              <th>Booked Human Library </th>
+                              <th>Patient Details</th>
+                              {/* <th>Issue</th> */}
+                              <th>Schedule Date</th>
+                              <th> Status</th>
 
-                              {/* <th>Video </th> */}
-                              <th> Video Thumbnail</th>
-                              <th> Video Title</th>
-                              <th> Video Type</th>
-                              <th> Video Link</th>
-                              <th>Uploaded Date</th>
-                              <th style={{ width: "80px" }}>Action</th>
+                              {/* <th style={{ width: "80px" }}>Action</th> */}
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((v, i) => (
-                              <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td>
-                                  <img src={v.image} />
-                                </td>
-                                <td>{v.title}</td>
-                                <td>{v.video_type}</td>
-                                <td>{v.video_link}</td>
+                            {data &&
+                              data.map((v, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  <td>
+                                    <strong>Name: </strong> {v.doctor.name}
+                                    <br />
+                                    <strong>Email:</strong> {v.doctor.email}{" "}
+                                    <br />
+                                  </td>
 
-                                <td>{v.created}</td>
+                                  <td>
+                                    <strong>Name: </strong> {v.fullname}
+                                    <br />
+                                    <strong>Email:</strong> {v.email} <br />
+                                    <strong>Phone:</strong> {v.phone} <br />
+                                    <strong>Message:</strong> {v.msg}
+                                  </td>
+                                  <td>{v.date}</td>
 
-                                <td>
-                                  {" "}
-                                  {v.status === "1" ? "Active" : "Inactive"}
-                                </td>
-                                <td>
-                                  <button
-                                    type="button"
-                                    class="btn btn-sm btn-info border-radius-0 add-btn"
-                                    onClick={() => {
-                                      formRef.current.openForm(v);
-                                    }}
-                                  >
-                                    <i class="ti-pencil"></i>
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={() => deleteData(v._id)}
-                                    class="btn btn-sm btn-danger add-btn"
-                                  >
-                                    <i class="ti-trash"></i>
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
+                                  <td>{v.schedule}</td>
+                                  {/* <td>
+                                    {v.status === "pending"
+                                      ? "Pending"
+                                      : v.status === "booked"
+                                        ? "Booked"
+                                        : "Cancelled"}
+                                  </td> */}
+                                  <td>
+                                    <select
+                                      className="mt-2"
+                                      value={v.status || ""}
+                                      onChange={(e) => {
+                                        update_status(e.target.value, v._id);
+                                      }}
+                                    >
+                                      <option value="pending">Pending</option>
+                                      <option value="cancelled">
+                                        cancelled
+                                      </option>
+                                      <option value="booked">Booked</option>
+                                    </select>
+                                  </td>
+                                </tr>
+                              ))}
                           </tbody>
                         </table>
                       </div>
@@ -324,8 +374,7 @@ const Video = () => {
                 </div>
               </div>
             </div>
-            {/* content-wrapper ends */}
-            {/* partial:partials/_footer.html */}
+
             <footer class="footer">
               <div class="col-md-12 text-center">
                 <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
@@ -334,7 +383,6 @@ const Video = () => {
                 </span>
               </div>
             </footer>
-            {/* partial */}
           </div>
         </div>
       </div>
@@ -343,16 +391,16 @@ const Video = () => {
 };
 
 const Addform = forwardRef((props, ref) => {
-  const [options, setOptions] = React.useState([]);
   const [show, setShow] = useState(false);
-  const [media, setMedia] = useState([]);
   const [data, setData] = useState({});
   const { list } = props;
-
   const handleChange = (v, k) => {
     setData({ ...data, [k]: v });
   };
 
+  const handleVisible = (state) => {
+    setShow(state);
+  };
   useImperativeHandle(ref, () => ({
     openForm(dt) {
       if (dt?._id) {
@@ -364,17 +412,10 @@ const Addform = forwardRef((props, ref) => {
     },
   }));
 
-  const handleVisible = (state) => {
-    setShow(state);
-  };
-
   const save = () => {
     let fd = new FormData();
-    for (let prop in data) {
-      fd.append(prop, data[prop]);
-    }
-    video
-      .save(fd)
+    library_appoint
+      .save(data, data.id)
       .then((res) => {
         alert(res.message);
         handleVisible(false);
@@ -385,129 +426,113 @@ const Addform = forwardRef((props, ref) => {
       });
   };
 
-  React.useEffect(() => {
-    axios
-      .get("media-solutions")
-      .then((res) => {
-        setMedia(res);
-      })
-      .catch((err) => {
-        console.log("err", err.message);
-      });
-  }, []);
   return (
     <>
-      <Modal
+      {/* <Modal
         show={show}
-        size="xl"
         onHide={() => {
           handleVisible(false);
         }}
       >
         <Modal.Header>
-          <Modal.Title>Video Upload</Modal.Title>
+          <Modal.Title>Book library_appoint</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form class="forms-sample" encType="multipart/form-data">
-            <div class="row">
-              <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Video Type</label>
+          <form class="forms-sample">
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Name</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.fullname || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "fullname");
+                }}
+                placeholder="Enter Name"
+              />
+            </div>
 
-                {/* <select class="form-control">
-									<option value="-1">Select Video Type</option>
-									{
-										media.map(el => <option key={el._id} value={media.slug}>{el.name}</option>)
-									}</select> */}
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Email</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.email || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "email");
+                }}
+                placeholder="Enter Email"
+              />
+            </div>
 
-                <input
-                  type="text"
-                  class="form-control"
-                  value={data.video_type || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "video_type");
-                  }}
-                  placeholder="Video  type"
-                />
-              </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Phone</label>
+              <input
+                type="number"
+                class="form-control"
+                value={data.mobileNmb || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "mobileNmb");
+                }}
+                placeholder="Enter Phone"
+              />
+            </div>
 
-              <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Video Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  value={data.title || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "title");
-                  }}
-                  placeholder="Video  Title"
-                />
-              </div>
-              <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Video Link</label>
-                <input
-                  type="text"
-                  class="form-control file-upload-info"
-                  value={data.video_link || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "video_link");
-                  }}
-                  placeholder=" Video Link"
-                />
-              </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Issue</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.disorder || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "disorder");
+                }}
+                placeholder="Enter Issue"
+              />
+            </div>
 
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Video Upload</label>
-                <input
-                  type="file"
-                  class="form-control file-upload-info"
-                  onChange={(e) => {
-                    handleChange(e.target.files[0], "video");
-                  }}
-                  placeholder="Upload Video"
-                />
-              </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Schedule Date</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                value={data.schedule || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "schedule");
+                }}
+                placeholder="Enter Schedule Date"
+              />
+            </div>
 
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Video Thumbnail Image</label>
-                <input
-                  type="file"
-                  class="form-control file-upload-info"
-                  onChange={(e) => {
-                    handleChange(e.target.files[0], "image");
-                  }}
-                  placeholder="Video Thumbnail Image"
-                />
-              </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Message</label>
+              <textarea
+                class="form-control"
+                rows={4}
+                value={data.msg || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "msg");
+                }}
+                placeholder=" Message"
+              />
+            </div>
 
-              <div class="form-group col-md-12">
-                <label for="exampleInputUsername1">Video Description</label>
-                <textarea
-                  class="form-control"
-                  rows={4}
-                  value={data.description || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "description");
-                  }}
-                  placeholder=" Video Description"
-                />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1"> Status</label>
-                <select
-                  class="form-control"
-                  value={data.status || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "status");
-                  }}
-                >
-                  <option value="" disabled>
-                    Select Status
-                  </option>
-                  <option value="1">Active</option>
-                  <option value="0">Inactive</option>
-                </select>
-              </div>
+            <div class="form-group ">
+              <label for="exampleInputUsername1">Appointment Status</label>
+              <select
+                class="form-control"
+                value={data.status || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "status");
+                }}
+              >
+                <option value="" disabled>
+                  Select Appointment Status
+                </option>
+                <option value="pending">Pending</option>
+                <option value="booked">Booked</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
             </div>
           </form>
         </Modal.Body>
@@ -524,8 +549,8 @@ const Addform = forwardRef((props, ref) => {
             Save Changes
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </>
   );
 });
-export default Video;
+export default LibraryAppoint;

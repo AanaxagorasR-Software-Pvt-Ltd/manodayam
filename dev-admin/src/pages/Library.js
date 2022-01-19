@@ -15,12 +15,12 @@ import { useNavigate } from "react-router";
 import Button from "react-bootstrap/Button";
 import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
-import video from "../Store/Connect/video";
+import library from "../Store/Connect/library";
 import LeftSideBar from "../Layout/LeftSideBar";
 
 // let Button = new AA()
 
-const Video = () => {
+const Library = () => {
   const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
@@ -31,7 +31,7 @@ const Video = () => {
 
   const list = () => {
     axios
-      .get("videos")
+      .get("library")
       .then((res) => {
         setData(res);
       })
@@ -76,7 +76,7 @@ const Video = () => {
   };
 
   const deleteData = (_id) => {
-    video.delete(_id).then((res) => {
+    library.delete(_id).then((res) => {
       alert(res?.message);
       list();
     });
@@ -263,7 +263,7 @@ const Video = () => {
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Video list</h4>
+                      <h4 class="card-title">Digital Human Library</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
@@ -271,8 +271,10 @@ const Video = () => {
                               <th>S.N</th>
 
                               {/* <th>Video </th> */}
-                              <th> Video Thumbnail</th>
-                              <th> Video Title</th>
+                              <th>Library Thumbnail Image</th>
+                              <th>Library Auth Image</th>
+                              <th>Library Video Title</th>
+                              <th>Description</th>
                               <th> Video Type</th>
                               <th> Video Link</th>
                               <th>Uploaded Date</th>
@@ -286,7 +288,10 @@ const Video = () => {
                                 <td>
                                   <img src={v.image} />
                                 </td>
+                                <td>{v.auth_image}</td>
+
                                 <td>{v.title}</td>
+                                <td>{v.description}</td>
                                 <td>{v.video_type}</td>
                                 <td>{v.video_link}</td>
 
@@ -373,7 +378,7 @@ const Addform = forwardRef((props, ref) => {
     for (let prop in data) {
       fd.append(prop, data[prop]);
     }
-    video
+    library
       .save(fd)
       .then((res) => {
         alert(res.message);
@@ -414,10 +419,10 @@ const Addform = forwardRef((props, ref) => {
                 <label for="exampleInputUsername1">Video Type</label>
 
                 {/* <select class="form-control">
-									<option value="-1">Select Video Type</option>
-									{
-										media.map(el => <option key={el._id} value={media.slug}>{el.name}</option>)
-									}</select> */}
+                                      <option value="-1">Select Video Type</option>
+                                      {
+                                          media.map(el => <option key={el._id} value={media.slug}>{el.name}</option>)
+                                      }</select> */}
 
                 <input
                   type="text"
@@ -478,6 +483,18 @@ const Addform = forwardRef((props, ref) => {
                   placeholder="Video Thumbnail Image"
                 />
               </div>
+              <div class="form-group col-md-6">
+                <label for="exampleInputUsername1">Auth Image</label>
+                <input
+                  type="file"
+                  class="form-control file-upload-info"
+                  value={data.auth_image || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.files[0], "image");
+                  }}
+                  placeholder="Auth Image"
+                />
+              </div>
 
               <div class="form-group col-md-12">
                 <label for="exampleInputUsername1">Video Description</label>
@@ -528,4 +545,4 @@ const Addform = forwardRef((props, ref) => {
     </>
   );
 });
-export default Video;
+export default Library;
