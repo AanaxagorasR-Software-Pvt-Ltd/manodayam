@@ -60,13 +60,26 @@ router.post("/library_appoint", validate, async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+// router.get("/", async (req, res) => {
+//   try {
+//     const db = await getDatabase();
+//     let result = await db.collection("library_appoint").findOne().toArray();
+//     res.send(result);
+//   } catch (err) {
+//     console.log("err", err.message);
+//   }
+
+//   // res.send('hello')
+// });
+router.get('/library_appoint', async (req, res) => {
   try {
     const db = await getDatabase();
-    let result = await db.collection("library_appoint").findOne().toArray();
-    res.send(result);
+    let dt = await db
+      .collection("library_appoint")
+      .find().toArray()
+    res.send(dt)
   } catch (err) {
-    console.log("err", err.message);
+    console.log('err', err.message);
   }
 
   // res.send('hello')

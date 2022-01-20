@@ -3,7 +3,7 @@ import axios from "../../utill/axios";
 class library_appoint {
 
     list(data) {
-        return axios.get('/', { params: data });
+        return axios.get('/library/library_appoint', { params: data });
     }
     listBooked(data) {
         return axios.get('/booked', { parames: data });
