@@ -10,6 +10,7 @@ import {
   BANNER_API,
   CATEGORY_API,
   SPIRITUALITY_API,
+  DIGITAL_HUMAN_LIBRARY_DATA_API,
 } from "../utill/api.endpoints";
 
 export default function Home(props) {
@@ -17,6 +18,7 @@ export default function Home(props) {
   const [bannerData, setbannerData] = useState([]);
   const [categoryData, setcategoryData] = useState([]);
   const [SpritualityData, setSpritualityData] = useState([]);
+  const [libraryData, setlibraryData] = useState([]);
 
 
   // productlist
@@ -83,11 +85,27 @@ export default function Home(props) {
         console.log(error);
       });
   };
+  const libraryDatalist = () => {
+    console.log(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`);
+    const libraryDatalisting = {
+      collectiondata: "library_content",
+    };
+    axios
+      .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`, libraryDatalisting)
+      .then((res) => {
+        setlibraryData(res.data.data);
+        console.log("====libraryContent====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect((props) => {
     Productlist(props);
     BannerData();
     Categorylist();
     Spritualitylist();
+    libraryDatalist();
   }, []);
   var settings = {
     dots: false,

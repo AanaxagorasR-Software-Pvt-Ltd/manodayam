@@ -288,7 +288,9 @@ const Library = () => {
                                 <td>
                                   <img src={v.image} />
                                 </td>
-                                <td>{v.auth_image}</td>
+                                <td>
+                                  <img src={v.auth_image} />
+                                </td>
 
                                 <td>{v.title}</td>
                                 <td>{v.description}</td>
@@ -488,7 +490,6 @@ const Addform = forwardRef((props, ref) => {
                 <input
                   type="file"
                   class="form-control file-upload-info"
-                  value={data.auth_image || ""}
                   onChange={(e) => {
                     handleChange(e.target.files[0], "image");
                   }}

@@ -7,6 +7,7 @@ export const PRODUCT_API = "/products/lists";
 export const VIEW_PRODUCT = "/products";
 export const APPOINTMENT_API = "/appointments/appoint";
 export const DIGITAL_HUMAN_LIBRARY = "/library/library_appoint";
+export const DIGITAL_HUMAN_LIBRARY_DATA_API = "/library/library-data";
 export const BANNER_API = "/banner/bannertext";
 export const DOCTOR_LIST_API = "/doctors/doctorlists";
 export const PROFIL_API = "/auth/user/profil"

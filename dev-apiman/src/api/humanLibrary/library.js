@@ -82,6 +82,7 @@ router.post(
   imageUpload.fields([
     { name: "video", maxCount: 1 },
     { name: "image", maxCount: 1 },
+    { name: "auth_image", maxCount: 1 },
   ]),
   async (req, res) => {
     try {
@@ -92,6 +93,7 @@ router.post(
         title: body.title,
         video_link: body.video_link,
         description: body.description,
+        image: body.image,
         auth_image: body.auth_image,
         status: body.status,
       };
@@ -104,6 +106,14 @@ router.post(
         } else {
           data.image = body.image;
         }
+        if (typeof req.files.auth_image !== "undefined") {
+          const imagefile = req.files.auth_image[0].filename;
+          const imageurl =
+            DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
+          data.auth_image = imageurl;
+        } else {
+          data.auth_image = body.auth_image;
+        }
         if (typeof req.files.video !== "undefined") {
           const videofile = req.files.video[0].filename;
           const videourl =
@@ -114,6 +124,7 @@ router.post(
         }
       } else {
         data.image = body.image;
+        data.auth_image = body.auth_image;
         data.vedio = body.video;
       }
 
@@ -201,5 +212,47 @@ router.delete("/delete/:_id", async (req, res) => {
   }
 
   // res.send('hello')
+});
+
+////// display
+const validate = (req, res, next) => {
+  console.log("===library_data===", req.body.collectiondata);
+  if (req.body.collectiondata) {
+    next();
+  } else {
+    res.status(400).json({
+      status: false,
+      message: "bad request",
+    });
+  }
+};
+router.post("/library-data", validate, async (req, res) => {
+  const db = await getDatabase();
+
+  try {
+    const { collectiondata } = req.body;
+    console.log("collectiondata", req.body);
+    const data = await db.collection(`${collectiondata}`).find().toArray();
+    // console.log('=====jfgjh', data);
+    if (Array.isArray(data)) {
+      res.status(200).json({
+        data: data,
+        status: true,
+        message: "data fetched sucseccfully",
+        id: "kkkkk",
+      });
+    } else {
+      res.status(200).json({
+        data: [],
+        status: false,
+        message: "no data found",
+      });
+    }
+  } catch (e) {
+    res.status(500).json({
+      status: false,
+      message: "server error",
+    });
+  }
 });
 module.exports = router;
