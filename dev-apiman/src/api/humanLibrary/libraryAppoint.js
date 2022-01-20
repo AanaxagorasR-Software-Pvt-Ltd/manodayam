@@ -60,7 +60,7 @@ router.post("/library_appoint", validate, async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get('/library_appoint', async (req, res) => {
   try {
     const db = await getDatabase();
     let result = await db
@@ -70,7 +70,7 @@ router.get("/", async (req, res) => {
       .toArray();
     res.send(result);
   } catch (err) {
-    console.log("err", err.message);
+    console.log('err', err.message);
   }
 
   // res.send('hello')

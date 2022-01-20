@@ -357,7 +357,7 @@ const Appointment = () => {
                                 <td>{v.disorder}</td>
 
                                 <td>
-                                {v.schedule }
+                                {new Date(v.schedule).toLocaleDateString()}
                                 </td>
                                 {/* <td>
                                   {v.status === "pending"

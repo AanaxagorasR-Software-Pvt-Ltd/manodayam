@@ -29,7 +29,7 @@ const LibraryAppoint = () => {
 
   const list = () => {
     axios
-      .get("library_appoint")
+      .get('/library/library_appoint')
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
@@ -326,9 +326,9 @@ const LibraryAppoint = () => {
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>
-                                    <strong>Name: </strong> {v.doctor.name}
+                                    <strong>Name: </strong>
                                     <br />
-                                    <strong>Email:</strong> {v.doctor.email}{" "}
+                                    <strong>Email:</strong>
                                     <br />
                                   </td>
 
@@ -341,7 +341,7 @@ const LibraryAppoint = () => {
                                   </td>
                                   <td>{v.date}</td>
 
-                                  <td>{v.schedule}</td>
+                                
                                   {/* <td>
                                     {v.status === "pending"
                                       ? "Pending"
