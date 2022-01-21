@@ -76,7 +76,7 @@ export default function Library() {
                       <button
                         className="btn-web hvr-float-shadow"
                         data-toggle="modal"
-                        data-target="#library-modal"
+                        data-target="#library-modal" 
                       >
                         Talk With him
                       </button>
@@ -129,10 +129,7 @@ export default function Library() {
                       <button
                         className="btn-web hvr-float-shadow"
                         data-toggle="modal"
-                        data-target="#library-modal"
-                      >
-                        Talk With him
-                      </button>
+                        data-target="#library-modal" > Talk With him</button>
                       <button className="btn-web hvr-float-shadow">free</button>
                     </div>
                   </div>

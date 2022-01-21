@@ -131,66 +131,13 @@ router.get('/booked', async (req, res) => {
 
 });
 
-router.post('/status', async (req, res) => {
-	const body = req.body;
-	console.log(body)
-	try {
-		const db = await getDatabase();
-		let appointments = await db
-			.collection("appointments");
-		insertedId = await appointments.updateOne(
-			{ _id: new ObjectID(body._id) },
-			{ $set: { status: body.status } }
-		).insertedId;
-
-		// sed email to patient
-		// let details = await appointments.findOne({ _id: new ObjectID(body._id) });
-		if (body.status == "booked") {
-
-			let result = await db.collection('appointments').aggregate([
-				{
-					"$match": { "_id": { $eq: new ObjectID(body._id) } }
-				},
-				{
-					$addFields: {
-						docid: {
-							$toObjectId: "$docid"
-						}
-					}
-				},
-				{
-					$lookup: {
-						from: 'doctorListing',
-						localField: 'docid',
-						foreignField: '_id',
-						as: 'doctor'
-					}
-				},
-				{
-					$unwind: {
-						path: "$doctor",
-						preserveNullAndEmptyArrays: true
-					},
-
-				}
-			]).toArray();
-			res.json(result);
-			console.log(result);
-			EmailService.sendEmailToPatient(result[0].doctor.email, { name: result[0].doctor.name, schedule: result[0].schedule, email: result[0].doctor.email });
-			EmailService.sendEmailToDoctor(result[0].email, { name: result[0].fullname, created: result[0].doctor.created, disorder: result[0].disorder, email: result[0].email })
-		}
-
-
-	} catch (err) {
-		console.log('err', err.message);
-	}
-})
-// router.post("/status", async (req, res) => {
+// router.post('/status', async (req, res) => {
 // 	const body = req.body;
-// 	console.log(body);
+// 	console.log(body)
 // 	try {
 // 		const db = await getDatabase();
-// 		let appointments = await db.collection("appointments");
+// 		let appointments = await db
+// 			.collection("appointments");
 // 		insertedId = await appointments.updateOne(
 // 			{ _id: new ObjectID(body._id) },
 // 			{ $set: { status: body.status } }
@@ -199,55 +146,110 @@ router.post('/status', async (req, res) => {
 // 		// sed email to patient
 // 		// let details = await appointments.findOne({ _id: new ObjectID(body._id) });
 // 		if (body.status == "booked") {
-// 			let result = await db
-// 				.collection("appointments")
-// 				.aggregate([
-// 					{
-// 						$match: { _id: { $eq: new ObjectID(body._id) } },
+
+// 			let result = await db.collection('appointments').aggregate([
+// 				{
+// 					"$match": { "_id": { $eq: new ObjectID(body._id) } }
+// 				},
+// 				{
+// 					$addFields: {
+// 						docid: {
+// 							$toObjectId: "$docid"
+// 						}
+// 					}
+// 				},
+// 				{
+// 					$lookup: {
+// 						from: 'doctorListing',
+// 						localField: 'docid',
+// 						foreignField: '_id',
+// 						as: 'doctor'
+// 					}
+// 				},
+// 				{
+// 					$unwind: {
+// 						path: "$doctor",
+// 						preserveNullAndEmptyArrays: true
 // 					},
-// 					{
-// 						$addFields: {
-// 							docid: {
-// 								$toObjectId: "$docid",
-// 							},
-// 						},
-// 					},
-// 					{
-// 						$lookup: {
-// 							from: "doctorListing",
-// 							localField: "docid",
-// 							foreignField: "_id",
-// 							as: "doctor",
-// 						},
-// 					},
-// 					{
-// 						$unwind: {
-// 							path: "$doctor",
-// 							preserveNullAndEmptyArrays: true,
-// 						},
-// 					},
-// 				])
-// 				.toArray();
+
+// 				}
+// 			]).toArray();
 // 			res.json(result);
 // 			console.log(result);
-// 			EmailService.sendEmailToPatient(result[0].doctor.email, {
-// 				name: result[0].doctor.name,
-// 				schedule: result[0].schedule,
-// 			});
-// 			EmailService.sendEmailToDoctor(result[0].email, {
-// 				name: result[0].fullname,
-// 				created: result[0].created,
-// 				disorder: result[0].disorder,
-// 			});
+// 			EmailService.sendEmailToPatient(result[0].doctor.email, { name: result[0].doctor.name, schedule: result[0].schedule, email: result[0].doctor.email });
+// 			EmailService.sendEmailToDoctor(result[0].email, { name: result[0].fullname, created: result[0].doctor.created, disorder: result[0].disorder, email: result[0].email })
 // 		}
-// 	} catch (err) {
-// 		console.log("err", err.message);
-// 	}
 
-// 	res.json({
-// 		message: "Update successfull",
-// 	});
-// });
+
+// 	} catch (err) {
+// 		console.log('err', err.message);
+// 	}
+// })
+router.post("/status", async (req, res) => {
+	const body = req.body;
+	console.log(body);
+	try {
+		const db = await getDatabase();
+		let appointments = await db.collection("appointments");
+		insertedId = await appointments.updateOne(
+			{ _id: new ObjectID(body._id) },
+			{ $set: { status: body.status } }
+		).insertedId;
+
+		// sed email to patient
+		// let details = await appointments.findOne({ _id: new ObjectID(body._id) });
+		if (body.status == "booked") {
+			let result = await db
+				.collection("appointments")
+				.aggregate([
+					{
+						$match: { _id: { $eq: new ObjectID(body._id) } },
+					},
+					{
+						$addFields: {
+							docid: {
+								$toObjectId: "$docid",
+							},
+						},
+					},
+					{
+						$lookup: {
+							from: "doctorListing",
+							localField: "docid",
+							foreignField: "_id",
+							as: "doctor",
+						},
+					},
+					{
+						$unwind: {
+							path: "$doctor",
+							preserveNullAndEmptyArrays: true,
+						},
+					},
+				])
+				.toArray();
+			res.json(result);
+			console.log(result);
+			var date = new Date(result[0].schedule)
+			var dates=date.toLocaleString('en-IN');
+			EmailService.sendEmailToPatient(result[0].doctor.email, {
+				name: result[0].doctor.name,
+				schedule: dates,email: result[0].doctor.email
+			});
+			EmailService.sendEmailToDoctor(result[0].email, {
+				name: result[0].fullname,
+				schedule: dates,
+				disorder: result[0].disorder,email: result[0].email
+			});
+		}
+	} catch (err) {
+		console.log("err", err.message);
+	}
+
+	res.json({
+		message: "Update successfull",
+	});
+});
 router.delete("/delete/:_id", async (req, res) => {
 	const _id = new ObjectID(req.params._id);
 	console.log("delete", _id);
@@ -305,14 +307,16 @@ router.delete("/delete/:_id", async (req, res) => {
 				message: "Room created successfully!"
 			});
 
-			const db = await getDatabase();
-			let _id= body.docid
+			
+			
 			let appointmentdata = await db
-				.collection("doctorListing").find({_id}).toArray()
+				.collection("doctorListing").findOne({_id: new ObjectID(body.docid)})
+				var date = new Date(body.schedule)
+				var dates=date.toLocaleString('en-IN');
 				
 
-			EmailService.sendEmailToDoctorbooked(appointmentdata.doctor.email, { name: body.fullname, created: body.schedule, disorder: body.disorder });
-			EmailService.sendEmailToPatientbooked(body.email, { name: appointmentdata[0].name, created: appointmentdata[0].doctor.created, disorder: body.disorder, email: appointmentdata.doctor.email })
+			EmailService.sendEmailToDoctorbooked(appointmentdata.email, { name: body.fullname, created: dates, disorder: body.disorder ,email:body.email,room_no:body.room_no});
+			EmailService.sendEmailToPatientbooked(body.email, { name: appointmentdata.name, created:dates, disorder: body.disorder, email: appointmentdata.email })
 		}
 
 		catch (e) {

@@ -26,6 +26,7 @@ export default function Profile() {
         console.log(error);
       });
   };
+
   useEffect((props) => {
     ProfilData();
   }, []);
@@ -44,6 +45,12 @@ export default function Profile() {
   React.useEffect(() => {
     listBooked();
   }, []);
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+  }
+    
+  
 
   return (
     <>
@@ -397,7 +404,9 @@ export default function Profile() {
 
                                   <tr key={i}>
                                     <td>{i + 1}</td>
-                                    <td>{a.schedule}</td>
+                                    {/* {new Date(a.schedule).toLocaleDateString()} */}
+                                    
+                                    <td>{convertToDateTime(a.schedule)}</td>
                                     {/* <td>{a.title}</td> */}
                                     <td>{a.fullname}</td>
 

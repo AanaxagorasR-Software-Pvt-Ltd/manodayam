@@ -97,6 +97,11 @@ const Appointment = () => {
     }
 
   }
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+  }
+
   return (
     <>
       {/* <Addform ref={formRef} list={list} /> */}
@@ -342,9 +347,9 @@ const Appointment = () => {
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
-                                  <strong>Name: </strong> {v.doctor.name}
+                                  <strong>Name: </strong> {v.doctor && v.doctor.name}
                                   <br />
-                                  <strong>Email:</strong> {v.doctor. email} <br />
+                                  <strong>Email:</strong> {v.doctor && v.doctor.email} <br />
                                 
                                 </td>
                                
@@ -357,7 +362,7 @@ const Appointment = () => {
                                 <td>{v.disorder}</td>
 
                                 <td>
-                                {new Date(v.schedule).toLocaleDateString()}
+                                {convertToDateTime(v.schedule)}
                                 </td>
                                 {/* <td>
                                   {v.status === "pending"
