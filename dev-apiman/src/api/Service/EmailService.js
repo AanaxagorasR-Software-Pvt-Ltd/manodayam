@@ -2,19 +2,17 @@ const nodemailer = require("nodemailer");
 const env = require('../../config')
 
 class EmailService {
-
   constructor() {
     this.configure();
   }
 
   configure() {
-
     this.transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
         user: `yogitanegi888`,
-        pass: `mirabunny1998`
-      }
+        pass: `mirabunny1998`,
+      },
     });
   }
   async sendEmailToDoctor(email, details) {
@@ -22,7 +20,7 @@ class EmailService {
       let info = await this.transporter.sendMail({
         to: email,
         from: "yogitanegi888@gmail.com",
-        subject: 'Your appointment has been booked.',
+        subject: "Your appointment has been booked.",
         html: `
                     
 
@@ -59,27 +57,14 @@ class EmailService {
         
         </html>
                    
-                `
-
-
-
-
-      })
-
+                `,
+      });
     } catch (err) {
       console.log(err);
-
     }
-
-
-
-
-
   }
 
   async sendEmailToPatient(email, details) {
-
-
     let info = await this.transporter.sendMail({
       to: email,
       from: `yogitanegi888@gmai.com`,
@@ -123,17 +108,16 @@ class EmailService {
     
     </html>
                    
-                `
-    }); console.log(info);
-
-
+                `,
+    });
+    console.log(info);
   }
   async sendEmailToDoctorbooked(email, details) {
     try {
       let info = await this.transporter.sendMail({
         to: email,
         from: "yogitanegi888@gmail.com",
-        subject: 'Your appointment has been booked.',
+        subject: "Your appointment has been booked.",
         html: `
                     
         <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
@@ -169,22 +153,13 @@ class EmailService {
         </html>
 
                    
-                `
-
-
-
-
-      })
-
+                `,
+      });
     } catch (err) {
       console.log(err);
-
     }
-
   }
   async sendEmailToPatientbooked(email, details) {
-
-
     let info = await this.transporter.sendMail({
       to: email,
       from: `yogitanegi888@gmai.com`,
@@ -228,12 +203,10 @@ class EmailService {
     
     </html>
                    
-                `
-    }); console.log(info);
-
-
+                `,
+    });
+    console.log(info);
   }
-
 }
 module.exports = new EmailService();
 

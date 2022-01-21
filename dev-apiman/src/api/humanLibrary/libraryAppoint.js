@@ -60,26 +60,17 @@ router.post("/library_appoint", validate, async (req, res) => {
   }
 });
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const db = await getDatabase();
-//     let result = await db.collection("library_appoint").findOne().toArray();
-//     res.send(result);
-//   } catch (err) {
-//     console.log("err", err.message);
-//   }
-
-//   // res.send('hello')
-// });
-router.get('/library_appoint', async (req, res) => {
+router.get("/library_appoint", async (req, res) => {
   try {
     const db = await getDatabase();
-    let dt = await db
+    let result = await db
       .collection("library_appoint")
-      .find().toArray()
-    res.send(dt)
+      .find()
+      // .sort({ _id: -1 })
+      .toArray();
+    res.send(result);
   } catch (err) {
-    console.log('err', err.message);
+    console.log("err", err.message);
   }
 
   // res.send('hello')
@@ -115,44 +106,11 @@ router.post("/status", async (req, res) => {
     if (body.status == "booked") {
       let result = await db
         .collection("library_appoint")
-        .aggregate([
-          {
-            $match: { _id: { $eq: new ObjectID(body._id) } },
-          },
-          {
-            $addFields: {
-              docid: {
-                $toObjectId: "$docid",
-              },
-            },
-          },
-          {
-            $lookup: {
-              from: "doctorListing",
-              localField: "docid",
-              foreignField: "_id",
-              as: "doctor",
-            },
-          },
-          {
-            $unwind: {
-              path: "$doctor",
-              preserveNullAndEmptyArrays: true,
-            },
-          },
-        ])
+        .find({ status: "booked" })
+        .sort({ _id: -1 })
         .toArray();
       res.json(result);
       console.log(result);
-      EmailService.sendEmailToPatient(result[0].doctor.email, {
-        name: result[0].doctor.name,
-        schedule: result[0].schedule,
-      });
-      EmailService.sendEmailToDoctor(result[0].email, {
-        name: result[0].fullname,
-        created: result[0].created,
-        disorder: result[0].disorder,
-      });
     }
   } catch (err) {
     console.log("err", err.message);

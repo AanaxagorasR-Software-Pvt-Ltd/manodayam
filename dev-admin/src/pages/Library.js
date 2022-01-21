@@ -271,11 +271,10 @@ const Library = () => {
                               <th>S.N</th>
 
                               {/* <th>Video </th> */}
-                              <th>Library Thumbnail Image</th>
-                              <th>Library Auth Image</th>
-                              <th>Library Video Title</th>
+                              <th>Library Expert Image</th>
+                              <th>Expert Name</th>
                               <th>Description</th>
-                              <th> Video Type</th>
+                              <th> Expert Type</th>
                               <th> Video Link</th>
                               <th>Uploaded Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -288,8 +287,6 @@ const Library = () => {
                                 <td>
                                   <img src={v.image} />
                                 </td>
-                                <td>{v.auth_image}</td>
-
                                 <td>{v.title}</td>
                                 <td>{v.description}</td>
                                 <td>{v.video_type}</td>
@@ -416,7 +413,7 @@ const Addform = forwardRef((props, ref) => {
           <form class="forms-sample" encType="multipart/form-data">
             <div class="row">
               <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Video Type</label>
+                <label for="exampleInputUsername1">Expert Type</label>
 
                 {/* <select class="form-control">
                                       <option value="-1">Select Video Type</option>
@@ -436,7 +433,7 @@ const Addform = forwardRef((props, ref) => {
               </div>
 
               <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Video Title</label>
+                <label for="exampleInputUsername1">Expert Name</label>
                 <input
                   type="text"
                   class="form-control"
@@ -444,7 +441,7 @@ const Addform = forwardRef((props, ref) => {
                   onChange={(e) => {
                     handleChange(e.target.value, "title");
                   }}
-                  placeholder="Video  Title"
+                  placeholder="Name"
                 />
               </div>
               <div class="form-group col-md-4">
@@ -473,26 +470,14 @@ const Addform = forwardRef((props, ref) => {
               </div>
 
               <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Video Thumbnail Image</label>
+                <label for="exampleInputUsername1">Video Expert Image</label>
                 <input
                   type="file"
                   class="form-control file-upload-info"
                   onChange={(e) => {
                     handleChange(e.target.files[0], "image");
                   }}
-                  placeholder="Video Thumbnail Image"
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Auth Image</label>
-                <input
-                  type="file"
-                  class="form-control file-upload-info"
-                  value={data.auth_image || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.files[0], "image");
-                  }}
-                  placeholder="Auth Image"
+                  placeholder="Video Expert Image"
                 />
               </div>
 
