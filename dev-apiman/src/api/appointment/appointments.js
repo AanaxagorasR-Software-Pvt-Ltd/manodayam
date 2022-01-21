@@ -117,9 +117,6 @@ router.get("/", async (req, res) => {
   // res.send('hello')
 });
 
-<<<<<<< HEAD
-// router.post('/status', async (req, res) => {
-=======
 router.get("/booked", async (req, res) => {
   try {
     const db = await getDatabase();
@@ -196,7 +193,6 @@ router.post("/status", async (req, res) => {
   }
 });
 // router.post("/status", async (req, res) => {
->>>>>>> bccfd2964008084cd723a3b6df775f5ffbcb8557
 // 	const body = req.body;
 // 	console.log(body)
 // 	try {
