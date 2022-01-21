@@ -20,7 +20,6 @@ export default function Home(props) {
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
 
-
   // productlist
   const Productlist = () => {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
@@ -91,7 +90,10 @@ export default function Home(props) {
       collectiondata: "library_content",
     };
     axios
-      .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`, libraryDatalisting)
+      .post(
+        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`,
+        libraryDatalisting
+      )
       .then((res) => {
         setlibraryData(res.data.data);
         console.log("====libraryContent====", res.data.data);
@@ -551,162 +553,60 @@ export default function Home(props) {
               </div>
             </div>
             <div className="d-flex">
-              <div className="col-lg-4 ">
-                <div className="library-card">
-                  <div className="row">
-                    <div className="col-lg-6 offset-1">
-                      <div className="library-person">
-                        <div className="d-flex">
-                          <div className="">
-                            <div className="col-8">
-                              <img src="assets/image/doctor-img.jpg" alt="" />
+              {libraryData.map((element) => (
+                <div className="col-lg-4 ">
+                  <div className="library-card">
+                    <div className="row">
+                      <div className="col-lg-6 offset-1">
+                        <div className="library-person">
+                          <div className="d-flex">
+                            <div className="">
+                              <div className="col-8">
+                                <img src={element.image} alt="" />
+                              </div>
+                              <div className="col-9">
+                                <h3>{element.title}</h3>
+                                <h5>{element.video_type}</h5>
+                              </div>
                             </div>
-                            <div className="col-9">
-                              <h3>Jim Rohn</h3>
-                              <h5>Motivational Speaker</h5>
-                            </div>
-                          </div>
-                          <div className="col-lg-12 mr-2">
-                            <div className="library-video">
-                              <iframe
-                                width="140%"
-                                height="160"
-                                src="https://www.youtube.com/embed/sHO5bL02fOQ"
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                              ></iframe>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ml-3">
-                      <button className="btn-web col-11">
-                        <Link to="/library">View More</Link>
-                      </button>
-                      <button className="btn-web col-11 mt-2">
-                        Please Join
-                      </button>
-                      <button
-                        data-toggle="modal"
-                        data-target="#library-modal"
-                        className="btn-web col-11 mt-2"
-                      >
-                        Please Talk
-                      </button>
-                      <button className="btn-web col-11 mt-2">
-                        <Link to="/library">View Others</Link>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 ">
-                <div className="library-card">
-                  <div className="row">
-                    <div className="col-lg-6 offset-1">
-                      <div className="library-person">
-                        <div className="d-flex">
-                          <div className="">
-                            <div className="col-8">
-                              <img src="assets/image/doctor-img.jpg" alt="" />
-                            </div>
-                            <div className="col-9">
-                              <h3>Jim Rohn</h3>
-                              <h5>Motivational Speaker</h5>
-                            </div>
-                          </div>
-                          <div className="col-lg-12 mr-2">
-                            <div className="library-video">
-                              <iframe
-                                width="140%"
-                                height="160"
-                                src="https://www.youtube.com/embed/sHO5bL02fOQ"
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                              ></iframe>
+                            <div className="col-lg-12 mr-2">
+                              <div className="library-video">
+                                <iframe
+                                  width="140%"
+                                  height="160"
+                                  src={element.vedio}
+                                  title="YouTube video player"
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                ></iframe>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="ml-3">
-                      <button className="btn-web col-11">
-                        <Link to="/library">View More</Link>
-                      </button>
-                      <button className="btn-web col-11 mt-2">
-                        Please Join
-                      </button>
-                      <button
-                        data-toggle="modal"
-                        data-target="#library-modal"
-                        className="btn-web col-11 mt-2"
-                      >
-                        Please Talk
-                      </button>
-                      <button className="btn-web col-11 mt-2">
-                        <Link to="/library">View Others</Link>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 ">
-                <div className="library-card">
-                  <div className="row">
-                    <div className="col-lg-6 offset-1">
-                      <div className="library-person">
-                        <div className="d-flex">
-                          <div className="">
-                            <div className="col-8">
-                              <img src="assets/image/doctor-img.jpg" alt="" />
-                            </div>
-                            <div className="col-9">
-                              <h3>Jim Rohn</h3>
-                              <h5>Motivational Speaker</h5>
-                            </div>
-                          </div>
-                          <div className="col-lg-12 mr-2">
-                            <div className="library-video">
-                              <iframe
-                                width="140%"
-                                height="160"
-                                src="https://www.youtube.com/embed/sHO5bL02fOQ"
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                              ></iframe>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="ml-3">
+                        <button className="btn-web col-11">
+                          <Link to="/library">View More</Link>
+                        </button>
+                        <button className="btn-web col-11 mt-2">
+                          Please Join
+                        </button>
+                        <button
+                          data-toggle="modal"
+                          data-target="#library-modal"
+                          className="btn-web col-11 mt-2"
+                        >
+                          Please Talk
+                        </button>
+                        <button className="btn-web col-11 mt-2">
+                          <Link to="/library">View Others</Link>
+                        </button>
                       </div>
                     </div>
-                    <div className="ml-3">
-                      <button className="btn-web col-11">
-                        <Link to="/library">View More</Link>
-                      </button>
-                      <button className="btn-web col-11 mt-2">
-                        Please Join
-                      </button>
-                      <button
-                        data-toggle="modal"
-                        data-target="#library-modal"
-                        className="btn-web col-11 mt-2"
-                      >
-                        Please Talk
-                      </button>
-                      <button className="btn-web col-11 mt-2">
-                        <Link to="/library">View Others</Link>
-                      </button>
-                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -724,31 +624,24 @@ export default function Home(props) {
 
           <div className="service-slide">
             <Slider {...settingstwo}>
-            {SpritualityData.map((element)=> (
-
-              <div className="col-lg-12">
-                <div className="service-card spritual-card">
-                  <img src="assets/image//vedic.png" alt="" />
-                  {/* <img
+              {SpritualityData.map((element) => (
+                <div className="col-lg-12">
+                  <div className="service-card spritual-card">
+                    <img src="assets/image//vedic.png" alt="" />
+                    {/* <img
                     src="assets/image//vedic.png"
                     className="img-bfr"
                     alt=""
                   /> */}
-                   <img
-                    src={element.img}
-                    className="img-bfr"
-                    alt=""
-                  />
-                  <h3>{element.name}</h3>
-                  <p>
-                   {element.description}
-                  </p>
-                  <button className="qst-show btn-web hvr-float-shadow">
-                    <Link to="/spirituality">Get your solution</Link>
-                  </button>
+                    <img src={element.img} className="img-bfr" alt="" />
+                    <h3>{element.name}</h3>
+                    <p>{element.description}</p>
+                    <button className="qst-show btn-web hvr-float-shadow">
+                      <Link to="/spirituality">Get your solution</Link>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
             </Slider>
           </div>
         </div>

@@ -82,7 +82,6 @@ router.post(
   imageUpload.fields([
     { name: "video", maxCount: 1 },
     { name: "image", maxCount: 1 },
-    { name: "auth_image", maxCount: 1 },
   ]),
   async (req, res) => {
     try {
@@ -106,14 +105,7 @@ router.post(
         } else {
           data.image = body.image;
         }
-        if (typeof req.files.auth_image !== "undefined") {
-          const imagefile = req.files.auth_image[0].filename;
-          const imageurl =
-            DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
-          data.auth_image = imageurl;
-        } else {
-          data.auth_image = body.auth_image;
-        }
+       
         if (typeof req.files.video !== "undefined") {
           const videofile = req.files.video[0].filename;
           const videourl =

@@ -95,7 +95,6 @@ const Appointment = () => {
       alert("Something went to  wrong")
 
     }
-
   }
   return (
     <>

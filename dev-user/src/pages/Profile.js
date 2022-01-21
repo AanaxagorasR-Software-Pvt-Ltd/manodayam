@@ -2,14 +2,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, PROFIL_API ,BOOKED_API,} from "../utill/api.endpoints";
+import { API_ADMIN_URL, PROFIL_API, BOOKED_API } from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
   const [bookData, setbookData] = useState([]);
 
- 
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
     const profileData = {
@@ -31,7 +30,7 @@ export default function Profile() {
   }, []);
   const listBooked = () => {
     axios
-      
+
       .get(`${API_ADMIN_URL}${BOOKED_API}`)
       .then((res) => {
         console.log("res", res, typeof res);
@@ -392,54 +391,46 @@ export default function Profile() {
                               </tr>
                             </thead>
                             <tbody>
-                              {
-                                bookData.map((a, i) => (
+                              {bookData.map((a, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  <td>{a.schedule}</td>
+                                  {/* <td>{a.title}</td> */}
+                                  <td>{a.fullname}</td>
 
-                                  <tr key={i}>
-                                    <td>{i + 1}</td>
-                                    <td>{a.schedule}</td>
-                                    {/* <td>{a.title}</td> */}
-                                    <td>{a.fullname}</td>
-
-                                    <td>{a.disorder}</td>
-
-
-
-
-
-                                    <td>
-                                  {a.room_no == null ? (
-                                    <button 
-                                      type="button"
-                                      class="btn btn-sm btn-info border-radius-0 add-btn"
-                                      // onClick={() => {
-                                      //   createRoomRef.current.openForm(a);
-                                      // }}
-                                      title="Create Room" 
-                                    >
-                                      <i class="fas fa-video"></i>
-                                    </button>
-                                  ) : (
-                                    <a
-                                      href={
-                                        globalDataCall.videoCallLink + a.room_no
-                                      }
-                                      target="_blank"
-                                    >
+                                  <td>{a.disorder}</td>
+                                  <td>
+                                    {a.room_no == null ? (
                                       <button
                                         type="button"
-                                        class="btn btn-sm btn-success border-radius-0 add-btn"
+                                        class="btn btn-sm btn-info border-radius-0 add-btn"
+                                        // onClick={() => {
+                                        //   createRoomRef.current.openForm(a);
+                                        // }}
+                                        title="Create Room"
                                       >
-                                        <i class="ti-video-camera"></i>
+                                        <i class="fas fa-video"></i>
                                       </button>
-                                    </a>
-                                  )}
-                                </td>
-                                    <td>{a.status}</td>
+                                    ) : (
+                                      <a
+                                        href={
+                                          globalDataCall.videoCallLink +
+                                          a.room_no
+                                        }
+                                        target="_blank"
+                                      >
+                                        <button
+                                          type="button"
+                                          class="btn btn-sm btn-success border-radius-0 add-btn"
+                                        >
+                                          <i class="ti-video-camera"></i>
+                                        </button>
+                                      </a>
+                                    )}
+                                  </td>
+                                  <td>{a.status}</td>
 
-
-
-                                    {/* <td>
+                                  {/* <td>
                                     <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
                                       onClick={() => { formRef.current.openForm(a) }}>
                                       <i class="ti-pencil"></i>
@@ -448,11 +439,9 @@ export default function Profile() {
                                       <i class="ti-trash"></i>
                                     </button>
                                   </td> */}
-                                  </tr>
-                                ))
-                              }
+                                </tr>
+                              ))}
                             </tbody>
-
                           </table>
                         </div>
                       </div>

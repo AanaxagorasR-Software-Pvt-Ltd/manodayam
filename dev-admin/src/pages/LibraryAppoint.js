@@ -29,7 +29,7 @@ const LibraryAppoint = () => {
 
   const list = () => {
     axios
-      .get('/library/library_appoint')
+      .get("/library/library_appoint")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
@@ -74,13 +74,6 @@ const LibraryAppoint = () => {
         console.log("some error");
       });
   };
-
-  // const deleteData = (_id) => {
-  //   appointment.delete(_id).then((res) => {
-  //     alert(res?.message);
-  //     list();
-  //   });
-  // };
   const update_status = async (status, id) => {
     try {
       let response = library_appoint.status({
@@ -92,7 +85,8 @@ const LibraryAppoint = () => {
     } catch (error) {
       alert("Something went to  wrong");
     }
-  };
+  }
+  
   return (
     <>
       <div class="container-scroller">
@@ -341,7 +335,6 @@ const LibraryAppoint = () => {
                                   </td>
                                   <td>{v.date}</td>
 
-                                
                                   {/* <td>
                                     {v.status === "pending"
                                       ? "Pending"

@@ -32,7 +32,7 @@ const LibraryAppointBooked = () => {
 
   const listBooked = () => {
     axios
-      .get("library_appoint/booked")
+      .get("/library/library_appoint/booked")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);

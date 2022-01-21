@@ -60,17 +60,17 @@ router.post("/library_appoint", validate, async (req, res) => {
   }
 });
 
-router.get('/library_appoint', async (req, res) => {
+router.get("/library_appoint", async (req, res) => {
   try {
     const db = await getDatabase();
     let result = await db
       .collection("library_appoint")
-      .find({ status: "booked" })
+      .find()
       // .sort({ _id: -1 })
       .toArray();
     res.send(result);
   } catch (err) {
-    console.log('err', err.message);
+    console.log("err", err.message);
   }
 
   // res.send('hello')
