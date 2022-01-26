@@ -183,10 +183,15 @@ export default function Home(props) {
       // instead of a settings object
     ],
   };
-
+  const [humanId, setHumanId] = useState('');
+  const submitformdata = (_id) => {
+    setHumanId(_id);
+    console.log(_id)
+    console.log(humanId);
+  }
   return (
     <>
-      <Login />
+      <Login humanId={humanId} />
       <div className="web-banner-slider">
         <Slider {...settings}>
           <div className="web-banner web-banner3 mb-50">
@@ -592,7 +597,7 @@ export default function Home(props) {
                         <button className="btn-web col-11 mt-2">
                           Please Join
                         </button>
-                        <button
+                        <button onClick={() => submitformdata(element._id)}
                           data-toggle="modal"
                           data-target="#library-modal"
                           className="btn-web col-11 mt-2"

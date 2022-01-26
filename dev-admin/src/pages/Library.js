@@ -276,6 +276,7 @@ const Library = () => {
                               <th>Description</th>
                               <th> Expert Type</th>
                               <th> Video Link</th>
+                              <th> Expert Email</th>
                               <th>Uploaded Date</th>
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
@@ -291,6 +292,8 @@ const Library = () => {
                                 <td>{v.description}</td>
                                 <td>{v.video_type}</td>
                                 <td>{v.video_link}</td>
+                                <td>{v.expert_email}</td>
+
 
                                 <td>{v.created}</td>
 
@@ -407,7 +410,7 @@ const Addform = forwardRef((props, ref) => {
         }}
       >
         <Modal.Header>
-          <Modal.Title>Video Upload</Modal.Title>
+          <Modal.Title>Expert Upload</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample" encType="multipart/form-data">
@@ -445,19 +448,19 @@ const Addform = forwardRef((props, ref) => {
                 />
               </div>
               <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Video Link</label>
+                <label for="exampleInputUsername1">Expert Email</label>
                 <input
                   type="text"
-                  class="form-control file-upload-info"
-                  value={data.video_link || ""}
+                  class="form-control"
+                  value={data.expert_email || ""}
                   onChange={(e) => {
-                    handleChange(e.target.value, "video_link");
+                    handleChange(e.target.value, "expert_email");
                   }}
-                  placeholder=" Video Link"
+                  placeholder="expert email"
                 />
               </div>
 
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="exampleInputUsername1">Video Upload</label>
                 <input
                   type="file"
@@ -469,7 +472,7 @@ const Addform = forwardRef((props, ref) => {
                 />
               </div>
 
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="exampleInputUsername1">Video Expert Image</label>
                 <input
                   type="file"
@@ -478,6 +481,18 @@ const Addform = forwardRef((props, ref) => {
                     handleChange(e.target.files[0], "image");
                   }}
                   placeholder="Video Expert Image"
+                />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="exampleInputUsername1">Video Link</label>
+                <input
+                  type="text"
+                  class="form-control file-upload-info"
+                  value={data.video_link || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "video_link");
+                  }}
+                  placeholder=" Video Link"
                 />
               </div>
 

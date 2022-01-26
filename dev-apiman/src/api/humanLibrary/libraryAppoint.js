@@ -24,6 +24,7 @@ router.post("/library_appoint", validate, async (req, res) => {
       phone: body.phone,
       date: body.date,
       msg: body.msg,
+      humanId: body.humanId
     };
     console.log(data);
     if (!body?._id) {
@@ -64,11 +65,34 @@ router.get("/library_appoint", async (req, res) => {
   try {
     const db = await getDatabase();
     let result = await db
-      .collection("library_appoint")
-      .find()
-      // .sort({ _id: -1 })
+      .collection("library_appoint").aggregate([
+
+        {
+          $addFields: {
+            humanId: {
+              $toObjectId: "$humanId",
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "library_content",
+            localField: "humanId",
+            foreignField: "_id",
+            as: "library",
+          },
+        },
+        {
+          $unwind: {
+            path: "$library",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+      ])
       .toArray();
-    res.send(result);
+    res.json(result);
+    console.log(result);
+    
   } catch (err) {
     console.log("err", err.message);
   }
@@ -100,21 +124,20 @@ router.post("/status", async (req, res) => {
       { _id: new ObjectID(body._id) },
       { $set: { status: body.status } }
     ).insertedId;
-
-    // sed email to patient
-    // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
     if (body.status == "booked") {
       let result = await db
         .collection("library_appoint")
-        .find({ status: "booked" })
-        .sort({ _id: -1 })
-        .toArray();
-      res.json(result);
-      console.log(result);
+
+
     }
   } catch (err) {
     console.log("err", err.message);
   }
+
+
+  // sed email to patient
+  // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
+
 
   res.json({
     message: "Update successfull",

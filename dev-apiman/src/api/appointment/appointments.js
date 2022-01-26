@@ -131,67 +131,67 @@ router.get("/booked", async (req, res) => {
   }
 });
 
-router.post("/status", async (req, res) => {
-  const body = req.body;
-  console.log(body);
-  try {
-    const db = await getDatabase();
-    let appointments = await db.collection("appointments");
-    insertedId = await appointments.updateOne(
-      { _id: new ObjectID(body._id) },
-      { $set: { status: body.status } }
-    ).insertedId;
+// router.post("/status", async (req, res) => {
+//   const body = req.body;
+//   console.log(body);
+//   try {
+//     const db = await getDatabase();
+//     let appointments = await db.collection("appointments");
+//     insertedId = await appointments.updateOne(
+//       { _id: new ObjectID(body._id) },
+//       { $set: { status: body.status } }
+//     ).insertedId;
 
-    // sed email to patient
-    // let details = await appointments.findOne({ _id: new ObjectID(body._id) });
-    if (body.status == "booked") {
-      let result = await db
-        .collection("appointments")
-        .aggregate([
-          {
-            $match: { _id: { $eq: new ObjectID(body._id) } },
-          },
-          {
-            $addFields: {
-              docid: {
-                $toObjectId: "$docid",
-              },
-            },
-          },
-          {
-            $lookup: {
-              from: "doctorListing",
-              localField: "docid",
-              foreignField: "_id",
-              as: "doctor",
-            },
-          },
-          {
-            $unwind: {
-              path: "$doctor",
-              preserveNullAndEmptyArrays: true,
-            },
-          },
-        ])
-        .toArray();
-      res.json(result);
-      console.log(result);
-      EmailService.sendEmailToPatient(result[0].doctor.email, {
-        name: result[0].doctor.name,
-        schedule: result[0].schedule,
-        email: result[0].doctor.email,
-      });
-      EmailService.sendEmailToDoctor(result[0].email, {
-        name: result[0].fullname,
-        created: result[0].doctor.created,
-        disorder: result[0].disorder,
-        email: result[0].email,
-      });
-    }
-  } catch (err) {
-    console.log("err", err.message);
-  }
-});
+//     // sed email to patient
+//     // let details = await appointments.findOne({ _id: new ObjectID(body._id) });
+//     if (body.status == "booked") {
+//       let result = await db
+//         .collection("appointments")
+//         .aggregate([
+//           {
+//             $match: { _id: { $eq: new ObjectID(body._id) } },
+//           },
+//           {
+//             $addFields: {
+//               docid: {
+//                 $toObjectId: "$docid",
+//               },
+//             },
+//           },
+//           {
+//             $lookup: {
+//               from: "doctorListing",
+//               localField: "docid",
+//               foreignField: "_id",
+//               as: "doctor",
+//             },
+//           },
+//           {
+//             $unwind: {
+//               path: "$doctor",
+//               preserveNullAndEmptyArrays: true,
+//             },
+//           },
+//         ])
+//         .toArray();
+//       res.json(result);
+//       console.log(result);
+//       EmailService.sendEmailToPatient(result[0].doctor.email, {
+//         name: result[0].doctor.name,
+//         schedule: result[0].schedule,
+//         email: result[0].doctor.email,
+//       });
+//       EmailService.sendEmailToDoctor(result[0].email, {
+//         name: result[0].fullname,
+//         created: result[0].doctor.created,
+//         disorder: result[0].disorder,
+//         email: result[0].email,
+//       });
+//     }
+//   } catch (err) {
+//     console.log("err", err.message);
+//   }
+// });
 // router.post("/status", async (req, res) => {
 // 	const body = req.body;
 // 	console.log(body)
@@ -291,15 +291,15 @@ router.post("/status", async (req, res) => {
 				.toArray();
 			res.json(result);
 			console.log(result);
-			var date = new Date(result[0].schedule)
-			var dates=date.toLocaleString('en-IN');
+			var dat = new Date(result[0].schedule)
+			var datess=dat.toLocaleString('en-IN');
 			EmailService.sendEmailToPatient(result[0].doctor.email, {
 				name: result[0].doctor.name,
-				schedule: dates,email: result[0].doctor.email
+				schedule: datess,email: result[0].doctor.email
 			});
 			EmailService.sendEmailToDoctor(result[0].email, {
 				name: result[0].fullname,
-				schedule: dates,
+				schedule: datess,
 				disorder: result[0].disorder,email: result[0].email
 			});
 		}

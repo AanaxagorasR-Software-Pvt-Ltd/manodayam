@@ -18,16 +18,22 @@ import axios from "../utill/axios";
 import appointment from "../Store/Connect/appointment";
 import { Link } from "react-router-dom";
 import LeftSideBar from "../Layout/LeftSideBar";
+
 // let Button = new AA()
 
-const Appointment = () => {
+const Appointment = (props) => {
+  console.log(props)
   const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
-  const formRef = useRef();
+  const [searchField, setSearchField] = useState("");
+  const [filterdata, setfilerdata] = React.useState([]);
+
+
+  const formRef = useRef("");
 
   const list = () => {
     axios
@@ -35,6 +41,7 @@ const Appointment = () => {
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
+        setfilerdata(res);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -42,6 +49,7 @@ const Appointment = () => {
   };
   React.useEffect(() => {
     list();
+    console.log(list());
   }, []);
 
   const handleClickMenu = (name) => {
@@ -95,11 +103,50 @@ const Appointment = () => {
       alert("Something went to  wrong")
 
     }
+
   }
   const convertToDateTime = (time) => {
     const d = new Date(time);
     return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
   }
+  // const filterdata = list.filter((value) => {
+  //   if (searchField == "") {
+  //     return true
+
+
+  //   } else {
+  //     value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+  //     return value
+
+
+  //   }
+  // })
+  const onsubmit = (e) => {
+    e.preventDefault();
+    const searchlist = data.filter((value) => {
+      if (searchField == "") {
+        return true
+
+
+      } else {
+        return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) 
+        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+      }
+
+
+    })
+    setfilerdata(searchlist);
+
+
+  }
+
+
+
+
+
+
+
 
   return (
     <>
@@ -134,14 +181,23 @@ const Appointment = () => {
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  />
+                  <form onSubmit={onsubmit}>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="navbar-search-input"
+                      placeholder="Search now"
+                      aria-label="search"
+                      aria-describedby="search"
+                      value={data.status}
+
+
+                      onChange={(event) => { setSearchField(event.target.value) }}
+
+
+
+                    />
+                  </form>
                 </div>
               </li>
             </ul>
@@ -332,7 +388,7 @@ const Appointment = () => {
                           <thead>
                             <tr>
                               <th>S.No</th>
-                             <th>Booked Doctor Details</th>
+                              <th>Booked Doctor Details</th>
                               <th>Patient Details</th>
                               <th>Issue</th>
                               <th>Schedule Date</th>
@@ -342,18 +398,18 @@ const Appointment = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {data && data.map((v, i) => (
+                            {filterdata && filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
                                   <strong>Name: </strong> {v.doctor && v.doctor.name}
                                   <br />
                                   <strong>Email:</strong> {v.doctor && v.doctor.email} <br />
-                                
+
                                 </td>
-                               
+
                                 <td>
-                                  <strong>Name: </strong> {v.fullname}
+                                  <strong>Name: </strong>{v.fullname}
                                   <br />
                                   <strong>Email:</strong> {v.email} <br />
                                   <strong>Phone:</strong> {v.mobileNmb}
@@ -361,7 +417,7 @@ const Appointment = () => {
                                 <td>{v.disorder}</td>
 
                                 <td>
-                                {convertToDateTime(v.schedule)}
+                                  {convertToDateTime(v.schedule)}
                                 </td>
                                 {/* <td>
                                   {v.status === "pending"
@@ -428,6 +484,7 @@ const Appointment = () => {
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
+  const [searchField, setSearchField] = useState("");
   const { list } = props;
   const handleChange = (v, k) => {
     setData({ ...data, [k]: v });
@@ -460,6 +517,7 @@ const Addform = forwardRef((props, ref) => {
         alert(err.message);
       });
   }
+
 
   return (
     <>

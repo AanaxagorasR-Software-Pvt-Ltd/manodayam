@@ -67,7 +67,7 @@ class EmailService {
   async sendEmailToPatient(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `yogitanegi888@gmai.com`,
+      from: `yogitanegi888@gmail.com`,
       subject: 'Your appointment has been booked.',
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -162,7 +162,7 @@ class EmailService {
   async sendEmailToPatientbooked(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `yogitanegi888@gmai.com`,
+      from: `yogitanegi888@gmail.com`,
       subject: 'Your appointment has been booked.',
       // alternatives: [{ contentType: "text/html" }],
       html: `

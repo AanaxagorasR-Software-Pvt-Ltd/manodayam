@@ -29,6 +29,8 @@ const BookedAppointment = () => {
   const [profileShow, setProfileShow] = useToggle(false);
   const createRoomRef = useRef();
   const changeStatusRef = useRef();
+  const [searchField, setSearchField] = useState("");
+  const [filterdata, setfilerdata] = React.useState([]);
 
   const listBooked = () => {
     axios
@@ -36,6 +38,7 @@ const BookedAppointment = () => {
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
+        setfilerdata(res);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -84,6 +87,30 @@ const BookedAppointment = () => {
       listBooked();
     });
   };
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+  }
+
+  const onsubmit = (e) => {
+    e.preventDefault();
+    const searchlist = data.filter((value) => {
+      if (searchField == "") {
+        return true
+
+
+      } else {
+        return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+      }
+
+
+    })
+    setfilerdata(searchlist);
+
+
+  }
 
   return (
     <>
@@ -106,7 +133,7 @@ const BookedAppointment = () => {
               data-toggle="minimize"
               onClick={handleSideBar}
             >
-              <span class="icon-menu"></span>
+
             </button>
             <ul class="navbar-nav mr-lg-2">
               <li class="nav-item nav-search d-none d-lg-block">
@@ -119,14 +146,18 @@ const BookedAppointment = () => {
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  />
+                  <form onSubmit={onsubmit} >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="navbar-search-input"
+                      placeholder="Search now"
+                      aria-label="search"
+                      aria-describedby="search"
+                      value={data.status}
+                      onChange={(event) => { setSearchField(event.target.value) }}
+                    />
+                  </form>
                 </div>
               </li>
             </ul>
@@ -139,7 +170,7 @@ const BookedAppointment = () => {
                   data-toggle="dropdown"
                 >
                   <i class="icon-bell mx-0"></i>
-                  <span class="count"></span>
+
                 </a>
                 <div
                   class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -196,9 +227,8 @@ const BookedAppointment = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -211,9 +241,8 @@ const BookedAppointment = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -266,7 +295,7 @@ const BookedAppointment = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((v, i) => (
+                            {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
@@ -278,14 +307,14 @@ const BookedAppointment = () => {
                                 <td>{v.disorder}</td>
 
                                 <td>
-                                  {new Date(v.schedule).toLocaleDateString()}
+                                  {convertToDateTime(v.schedule)}
                                 </td>
                                 <td>
                                   {v.call_status === "pending"
                                     ? "Pending"
                                     : v.status === "success"
-                                    ? "Success"
-                                    : "Unsuccess"}
+                                      ? "Success"
+                                      : "Unsuccess"}
                                 </td>
                                 <td>
                                   {v.room_no == null ? (
@@ -339,7 +368,7 @@ const BookedAppointment = () => {
                         </table>
                       </div>
                     </div>
-                 
+
                   </div>
                 </div>
               </div>

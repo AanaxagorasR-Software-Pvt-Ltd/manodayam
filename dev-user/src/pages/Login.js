@@ -231,6 +231,7 @@ export default function Login(props) {
       phone: libraryNum,
       date: libraryDate,
       msg: libraryMsg,
+      humanId:props.humanId
     };
     axios
       .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY}`, humanLibraryOptions)
@@ -301,6 +302,7 @@ export default function Login(props) {
                     </p>
                   ) : null}
                 </div>
+               
 
                 <div className="form-inline">
                   <input type="checkbox" name="" id="" />
@@ -619,6 +621,16 @@ export default function Login(props) {
                   {libraryMail == "" ? (
                     <p className="text-danger">{libraryMailError}</p>
                   ) : null}
+                </div>
+                <div className="form-group">
+                  
+                  <input
+                    type="hidden"
+                    value={props.humanId}
+                   
+                   
+                  />
+                
                 </div>
                 <div className="form-group">
                   <label for="">Date</label>

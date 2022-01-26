@@ -393,7 +393,7 @@ export default function Profile() {
                                 <th>Time</th>
                                 <th>Name</th>
                                 <th>Condition</th>
-                                <th>Call</th>
+                                <th>Connect Here!</th>
                                 <th>Status</th>
                               </tr>
                             </thead>
@@ -415,7 +415,7 @@ export default function Profile() {
 
 
 
-                                  <td>{a.disorder}</td>
+                                  
                                   <td>
                                     {a.room_no == null ? (
                                       <button
