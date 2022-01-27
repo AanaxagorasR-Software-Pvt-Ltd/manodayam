@@ -27,15 +27,18 @@ const LibraryAppointBooked = () => {
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
+  const [searchField, setSearchField] = useState("");
+  const [filterdata, setfilerdata] = React.useState([]);
   const createRoomRef = useRef();
   const changeStatusRef = useRef();
 
   const listBooked = () => {
     axios
-      .get("/library/library_appoint/booked")
+      .get("/library/booked")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
+        setfilerdata(res);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -84,6 +87,25 @@ const LibraryAppointBooked = () => {
       listBooked();
     });
   };
+  const onsubmit = (e) => {
+    e.preventDefault();
+    const searchlist = data.filter((value) => {
+      if (searchField == "") {
+        return true
+
+
+      } else {
+        return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) 
+        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+      }
+
+
+    })
+    setfilerdata(searchlist);
+
+
+  }
 
   return (
     <>
@@ -119,14 +141,23 @@ const LibraryAppointBooked = () => {
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  />
+                  <form onSubmit={onsubmit}>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="navbar-search-input"
+                      placeholder="Search now"
+                      aria-label="search"
+                      aria-describedby="search"
+                      value={data.status}
+
+
+                      onChange={(event) => { setSearchField(event.target.value) }}
+
+
+
+                    />
+                  </form>
                 </div>
               </li>
             </ul>
@@ -196,9 +227,8 @@ const LibraryAppointBooked = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -211,9 +241,8 @@ const LibraryAppointBooked = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -258,25 +287,25 @@ const LibraryAppointBooked = () => {
                             <tr>
                               <th>S.No</th>
                               <th>Patient Details</th>
-                              <th>Issue</th>
+                              {/* <th>Issue</th> */}
                               <th>Schedule Date</th>
                               <th>Call Status</th>
                               <th>Connect Here!</th>
-                              <th style={{ width: "80px" }}>Action</th>
+                             
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((v, i) => (
+                            {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
                                   <strong>Name: </strong> {v.fullname}
                                   <br />
                                   <strong>Email:</strong> {v.email} <br />
-                                  <strong>Phone:</strong> {v.phone}{" "}
+                                  <strong>Phone:</strong> {v.phone}
                                 </td>
                                 <td>{v.date}</td>
-{/* 
+                                {/* 
                                 <td>
                                   {new Date(v.schedule).toLocaleDateString()}
                                 </td> */}
@@ -284,8 +313,8 @@ const LibraryAppointBooked = () => {
                                   {v.call_status === "pending"
                                     ? "Pending"
                                     : v.status === "success"
-                                    ? "Success"
-                                    : "Unsuccess"}
+                                      ? "Success"
+                                      : "Unsuccess"}
                                 </td>
                                 <td>
                                   {v.room_no == null ? (
@@ -315,7 +344,7 @@ const LibraryAppointBooked = () => {
                                     </a>
                                   )}
                                 </td>
-                                <td>
+                                {/* <td>
                                   <button
                                     type="button"
                                     class="btn btn-sm btn-info border-radius-0 add-btn"
@@ -332,136 +361,14 @@ const LibraryAppointBooked = () => {
                                   >
                                     <i class="ti-trash"></i>
                                   </button>
-                                </td>
+                                </td> */}
                               </tr>
                             ))}
                           </tbody>
                         </table>
                       </div>
                     </div>
-                    <div class="main-panel">
-                      <div class="content-wrapper">
-                        <div class="row">
-                          <div class="col-lg-12 grid-margin stretch-card">
-                            <div class="card">
-                              <div
-                                class="card-body"
-                                // data-bs-spy="scroll"
-                                // data-bs-target="#list-example"
-                                // data-bs-offset="0"
-                                // class="scrollspy-example"
-                                // tabindex="0"
-                              >
-                                <h4 class="card-title">
-                                  Booked Appointment list
-                                </h4>
-                                <div class="table-responsive pt-3">
-                                  <table class="table table-bordered">
-                                    <thead>
-                                      <tr>
-                                        <th>S.No</th>
-                                        <th>Patient Details</th>
-                                        <th>Issue</th>
-                                        <th>Schedule Date</th>
-                                        <th>Call Status</th>
-                                        <th>Connect Here!</th>
-                                        <th style={{ width: "80px" }}>
-                                          Action
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {data.map((v, i) => (
-                                        <tr key={i}>
-                                          <td>{i + 1}</td>
-                                          <td>
-                                            <strong>Name: </strong> {v.fullname}
-                                            <br />
-                                            <strong>Email:</strong> {v.email}{" "}
-                                            <br />
-                                            <strong>Phone:</strong>{" "}
-                                            {v.phone}{" "}
-                                          </td>
-                                          <td>{v.date}</td>
-
-                                          {/* <td>
-                                            {new Date(
-                                              v.schedule
-                                            ).toLocaleDateString()}
-                                          </td> */}
-                                          <td>
-                                            {v.call_status === "pending"
-                                              ? "Pending"
-                                              : v.call_status === "success"
-                                              ? "Success"
-                                              : "Unsuccess"}
-                                          </td>
-                                          <td>
-                                            {v.room_no == null ? (
-                                              <button
-                                                type="button"
-                                                class="btn btn-sm btn-info border-radius-0 add-btn"
-                                                onClick={() => {
-                                                  createRoomRef.current.openForm(
-                                                    v
-                                                  );
-                                                }}
-                                                title="Create Room"
-                                              >
-                                                <i class="ti-plus"></i>
-                                              </button>
-                                            ) : (
-                                              <a
-                                                href={
-                                                  globalData.videoCallLink +
-                                                  v.room_no
-                                                }
-                                                target="_blank"
-                                              >
-                                                <button
-                                                  type="button"
-                                                  class="btn btn-sm btn-success border-radius-0 add-btn"
-                                                >
-                                                  <i class="ti-video-camera"></i>
-                                                </button>
-                                              </a>
-                                            )}
-                                          </td>
-                                          <td>
-                                            <button
-                                              type="button"
-                                              class="btn btn-sm btn-info border-radius-0 add-btn"
-                                              onClick={() => {
-                                                changeStatusRef.current.openForm(
-                                                  v
-                                                );
-                                              }}
-                                            >
-                                              Change Call Status
-                                            </button>
-                                          </td>
-                                        </tr>
-                                      ))}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* content-wrapper ends */}
-                      {/* partial:partials/_footer.html */}
-                      <footer class="footer">
-                        <div class="col-md-12 text-center">
-                          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
-                            Copyright © 2021 All Right Reserved Aanaxagorasr
-                            Software Pvt. Ltd <a href="#" target="_blank"></a>{" "}
-                          </span>
-                        </div>
-                      </footer>
-                      {/* partial */}
-                    </div>
+                  
                   </div>
                 </div>
               </div>
@@ -560,7 +467,7 @@ const CreateRoomForm = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
-     
+
     </>
   );
 });

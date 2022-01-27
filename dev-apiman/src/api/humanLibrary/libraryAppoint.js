@@ -62,37 +62,45 @@ router.post("/library_appoint", validate, async (req, res) => {
 });
 
 router.get("/library_appoint", async (req, res) => {
-  try {
+  try { 
     const db = await getDatabase();
     let result = await db
-      .collection("library_appoint").aggregate([
+      .collection("library_appoint").aggregate([{
+        $match: {
+          $or: [
+            { status: { $in: ["pending"] } },
+            { status: { $in: ["canceled"] } },
+            { status: { $in: [null] } },
+          ],
+        }
+      },
 
-        {
-          $addFields: {
-            humanId: {
-              $toObjectId: "$humanId",
-            },
+      {
+        $addFields: {
+          humanId: {
+            $toObjectId: "$humanId",
           },
         },
-        {
-          $lookup: {
-            from: "library_content",
-            localField: "humanId",
-            foreignField: "_id",
-            as: "library",
-          },
+      },
+      {
+        $lookup: {
+          from: "library_content",
+          localField: "humanId",
+          foreignField: "_id",
+          as: "library",
         },
-        {
-          $unwind: {
-            path: "$library",
-            preserveNullAndEmptyArrays: true,
-          },
+      },
+      {
+        $unwind: {
+          path: "$library",
+          preserveNullAndEmptyArrays: true,
         },
+      },
       ])
       .toArray();
     res.json(result);
     console.log(result);
-    
+
   } catch (err) {
     console.log("err", err.message);
   }
@@ -157,6 +165,7 @@ router.post("/status", async (req, res) => {
     if (body.status == "booked") {
       let result = await db
         .collection("library_appoint")
+
         .aggregate([
           {
             $match: { _id: { $eq: new ObjectID(body._id) } },
@@ -164,14 +173,14 @@ router.post("/status", async (req, res) => {
           {
             $addFields: {
               docid: {
-                $toObjectId: "$docid",
+                $toObjectId: "$humanId",
               },
             },
           },
           {
             $lookup: {
               from: "library_content",
-              localField: "docid",
+              localField: "humanId",
               foreignField: "_id",
               as: "library",
             },
@@ -187,19 +196,25 @@ router.post("/status", async (req, res) => {
       res.json(result);
       console.log(result);
 
+
+
+
+
     }
   }catch (err) {
     console.log("err", err.message);
   }
+
+  res.json({
+    message: "Update successfull",
+  });
 
 
   // sed email to patient
   // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
 
 
-  res.json({
-    message: "Update successfull",
-  });
+
 });
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectID(req.params._id);
