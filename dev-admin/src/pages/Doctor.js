@@ -28,11 +28,14 @@ const Doctor = () => {
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
+  const [searchField, setSearchField] = useState("");
+  const [filterdata, setfilerdata] = React.useState([]);
   const formRef = useRef();
 
   const list = () => {
     axios.get('doctors').then(res => {
       setData(res);
+      setfilerdata(res);
     }).catch(err => {
       console.log('err', err.message);
     })
@@ -81,6 +84,29 @@ const Doctor = () => {
     })
 
   }
+  const onsubmit = (e) => {
+    e.preventDefault();
+    const searchlist = data.filter((value) => {
+      if (searchField == "") {
+        return true
+
+
+      } else {
+        return value.name.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.specialist.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.experience.toLowerCase().includes(searchField.toLocaleLowerCase())
+        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+      }
+
+
+    })
+    setfilerdata(searchlist);
+
+
+  }
+
+
+
+
 
   return (
     <>
@@ -115,14 +141,23 @@ const Doctor = () => {
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  />
+                  <form onSubmit={onsubmit}>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="navbar-search-input"
+                      placeholder="Search now"
+                      aria-label="search"
+                      aria-describedby="search"
+                      value={data.status}
+
+
+                      onChange={(event) => { setSearchField(event.target.value) }}
+
+
+
+                    />
+                  </form>
                 </div>
               </li>
             </ul>
@@ -328,7 +363,7 @@ const Doctor = () => {
                           </thead>
                           <tbody>
                             {
-                              data.map((d, i) => (
+                              filterdata.map((d, i) => (
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>{d.name}</td>

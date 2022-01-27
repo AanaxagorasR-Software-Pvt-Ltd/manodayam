@@ -185,10 +185,15 @@ export default function Home(props) {
       // instead of a settings object
     ],
   };
-
+  const [humanId, setHumanId] = useState('');
+  const submitformdata = (_id) => {
+    setHumanId(_id);
+    console.log(_id)
+    console.log(humanId);
+  }
   return (
     <>
-      <Login />
+      <Login humanId={humanId} />
       <div className="web-banner-slider">
         <Slider {...settings}>
           <div className="web-banner web-banner3 mb-50">
@@ -591,6 +596,7 @@ export default function Home(props) {
                         <button className="btn-web col-11">
                           <Link to="/library">View More</Link>
                         </button>
+<<<<<<< HEAD
                         <a
                           href={globalDataLiveCall.liveCallLink}
                           target="_blank"
@@ -600,6 +606,12 @@ export default function Home(props) {
                           </button>
                         </a>
                         <button
+=======
+                        <button className="btn-web col-11 mt-2">
+                          Please Join
+                        </button>
+                        <button onClick={() => submitformdata(element._id)}
+>>>>>>> ee0ebcead562e5c3f22c174ae268d369efa66da0
                           data-toggle="modal"
                           data-target="#library-modal"
                           className="btn-web col-11 mt-2"

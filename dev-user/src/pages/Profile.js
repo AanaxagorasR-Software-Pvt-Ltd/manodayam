@@ -25,6 +25,7 @@ export default function Profile() {
         console.log(error);
       });
   };
+
   useEffect((props) => {
     ProfilData();
   }, []);
@@ -43,6 +44,12 @@ export default function Profile() {
   React.useEffect(() => {
     listBooked();
   }, []);
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+  }
+    
+  
 
   return (
     <>
@@ -386,19 +393,29 @@ export default function Profile() {
                                 <th>Time</th>
                                 <th>Name</th>
                                 <th>Condition</th>
-                                <th>Call</th>
+                                <th>Connect Here!</th>
                                 <th>Status</th>
                               </tr>
                             </thead>
                             <tbody>
-                              {bookData.map((a, i) => (
-                                <tr key={i}>
-                                  <td>{i + 1}</td>
-                                  <td>{a.schedule}</td>
-                                  {/* <td>{a.title}</td> */}
-                                  <td>{a.fullname}</td>
+                              {
+                                bookData.map((a, i) => (
 
-                                  <td>{a.disorder}</td>
+                                  <tr key={i}>
+                                    <td>{i + 1}</td>
+                                    {/* {new Date(a.schedule).toLocaleDateString()} */}
+                                    
+                                    <td>{convertToDateTime(a.schedule)}</td>
+                                    {/* <td>{a.title}</td> */}
+                                    <td>{a.fullname}</td>
+
+                                    <td>{a.disorder}</td>
+
+
+
+
+
+                                  
                                   <td>
                                     {a.room_no == null ? (
                                       <button

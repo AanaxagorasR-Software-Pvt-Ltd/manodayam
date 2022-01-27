@@ -90,6 +90,7 @@ router.post(
       let data = {
         video_type: body.video_type,
         title: body.title,
+        expert_email:body.expert_email,
         video_link: body.video_link,
         description: body.description,
         image: body.image,

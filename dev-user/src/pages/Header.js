@@ -9,7 +9,7 @@ export default function Header() {
   const [update, setupdate] = useState(localStorage.getItem("Token"));
   return (
     <>
-      <Login />
+      {/* <Login /> */}
       <fixed className="fixed">
         <div className="header-top">
           <div className="container">

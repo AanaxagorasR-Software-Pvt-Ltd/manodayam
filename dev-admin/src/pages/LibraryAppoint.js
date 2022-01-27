@@ -320,9 +320,9 @@ const LibraryAppoint = () => {
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>
-                                    <strong>Name: </strong>
+                                    <strong>Name: </strong>{v.library && v.library.title}
                                     <br />
-                                    <strong>Email:</strong>
+                                    <strong>Email:</strong>{v.library && v.library.expert_email}
                                     <br />
                                   </td>
 

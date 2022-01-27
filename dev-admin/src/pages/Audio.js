@@ -26,6 +26,8 @@ const Audio = () => {
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
+  const [searchField, setSearchField] = useState("");
+  const [filterdata, setfilerdata] = React.useState([]);
   const formRef = useRef();
 
   const list = () => {
@@ -33,6 +35,7 @@ const Audio = () => {
       .get("audios")
       .then((res) => {
         setData(res);
+        setfilerdata(res)
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -79,7 +82,24 @@ const Audio = () => {
       list();
     });
   };
+  const onsubmit = (e) => {
+    e.preventDefault();
+    const searchlist = data.filter((value) => {
+      if (searchField == "") {
+        return true
 
+
+      } else {
+        return value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.type.toLowerCase().includes(searchField.toLocaleLowerCase()) 
+         
+      }
+
+
+    })
+    setfilerdata(searchlist);
+
+
+  }
   return (
     <>
       <Addform ref={formRef} list={list} />
@@ -113,14 +133,20 @@ const Audio = () => {
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  />
+                  <form onSubmit={onsubmit}>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="navbar-search-input"
+                      placeholder="Search now"
+                      aria-label="search"
+                      aria-describedby="search"
+                      value={data.status}
+
+
+                      onChange={(event) => { setSearchField(event.target.value) }}
+                    />
+                  </form>
                 </div>
               </li>
             </ul>
@@ -190,9 +216,8 @@ const Audio = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -205,9 +230,8 @@ const Audio = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -240,18 +264,16 @@ const Audio = () => {
             <ul class="nav">
               {menuList.map((sMenu) => (
                 <li
-                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
-                    sMenu?.isHover ? "hover-open" : ""
-                  }`}
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${sMenu?.isHover ? "hover-open" : ""
+                    }`}
                   key={uuidv4()}
                   onClick={(e) => handleClickMenu(sMenu?.name)}
                   onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
                   onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
                 >
                   <a
-                    className={`nav-link ${
-                      sMenu.submenu.length > 0 ? "collapsed" : ""
-                    }`}
+                    className={`nav-link ${sMenu.submenu.length > 0 ? "collapsed" : ""
+                      }`}
                     href={`${sMenu?.link}`}
                     data-toggle="collapse"
                     aria-expanded={sMenu?.isActive ? true : false}
@@ -328,7 +350,7 @@ const Audio = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((a, i) => (
+                            {filterdata.map((a, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
@@ -446,7 +468,7 @@ const Addform = forwardRef((props, ref) => {
               <div class="col-md-3  offset-9">
                 <label for="exampleInputUsername1">Audio Type</label>
                 <select class="form-control"
-                 value={data.type || ""}
+                  value={data.type || ""}
                   onChange={(e) => {
                     handleChange(e.target.value, "type");
                   }}>

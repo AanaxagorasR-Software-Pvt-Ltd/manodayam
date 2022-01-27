@@ -68,7 +68,9 @@ export default function Appointment() {
       .catch((error) => {
         console.log(error);
       });
+
   };
+ 
  
   
 

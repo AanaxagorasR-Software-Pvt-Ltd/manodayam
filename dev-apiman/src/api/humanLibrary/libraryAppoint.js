@@ -24,6 +24,7 @@ router.post("/library_appoint", validate, async (req, res) => {
       phone: body.phone,
       date: body.date,
       msg: body.msg,
+      humanId: body.humanId
     };
     console.log(data);
     if (!body?._id) {
@@ -64,11 +65,34 @@ router.get("/library_appoint", async (req, res) => {
   try {
     const db = await getDatabase();
     let result = await db
-      .collection("library_appoint")
-      .find()
-      // .sort({ _id: -1 })
+      .collection("library_appoint").aggregate([
+
+        {
+          $addFields: {
+            humanId: {
+              $toObjectId: "$humanId",
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "library_content",
+            localField: "humanId",
+            foreignField: "_id",
+            as: "library",
+          },
+        },
+        {
+          $unwind: {
+            path: "$library",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+      ])
       .toArray();
-    res.send(result);
+    res.json(result);
+    console.log(result);
+    
   } catch (err) {
     console.log("err", err.message);
   }
@@ -133,6 +157,7 @@ router.post("/status", async (req, res) => {
     if (body.status == "booked") {
       let result = await db
         .collection("library_appoint")
+<<<<<<< HEAD
         .aggregate([
           {
             $match: { _id: { $eq: new ObjectID(body._id) } },
@@ -162,6 +187,9 @@ router.post("/status", async (req, res) => {
         .toArray();
       res.json(result);
       console.log(result);
+=======
+
+>>>>>>> ee0ebcead562e5c3f22c174ae268d369efa66da0
 
     }
   }catch (err) {
