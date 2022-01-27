@@ -157,7 +157,6 @@ router.post("/status", async (req, res) => {
     if (body.status == "booked") {
       let result = await db
         .collection("library_appoint")
-<<<<<<< HEAD
         .aggregate([
           {
             $match: { _id: { $eq: new ObjectID(body._id) } },
@@ -187,9 +186,6 @@ router.post("/status", async (req, res) => {
         .toArray();
       res.json(result);
       console.log(result);
-=======
-
->>>>>>> ee0ebcead562e5c3f22c174ae268d369efa66da0
 
     }
   }catch (err) {

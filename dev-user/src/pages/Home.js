@@ -4,7 +4,8 @@ import axios from "axios";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import globalDataLiveCall from "../utill/rdxLiveCall";
+import globalDataGroupCall from "../utill/rdxGroupCall";
+import globalDataLive from "../utill/rdxLive";
 
 import {
   API_ADMIN_URL,
@@ -185,12 +186,12 @@ export default function Home(props) {
       // instead of a settings object
     ],
   };
-  const [humanId, setHumanId] = useState('');
+  const [humanId, setHumanId] = useState("");
   const submitformdata = (_id) => {
     setHumanId(_id);
-    console.log(_id)
+    console.log(_id);
     console.log(humanId);
-  }
+  };
   return (
     <>
       <Login humanId={humanId} />
@@ -402,13 +403,23 @@ export default function Home(props) {
               {categoryData.map((element) => (
                 <div className="col-lg-12">
                   <div className="service-card hvr-float-shadow">
-                    <img src={element.img} alt="" />
-                    <img src={element.img} className="img-bfr" alt="" />
+                    {/* <img src={element.img} alt="" /> */}
+                    <img src="assets/image//mentalhealth.png" alt="" />
+
+                    <img src="assets/image//mentalhealth.png" className="img-bfr" alt="" />
+
+                    {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
                     <p>{element.description}</p>
-                    <button className="btn-web hvr-float-shadow">
-                      <Link to="/anxiety">get solution</Link>
-                    </button>
+                    <Link
+                      to={{
+                        pathname: "/mentalHealth/" + element.slug,
+                      }}
+                    >
+                      <buttton className="btn-web hvr-float-shadow">
+                        get solution
+                      </buttton>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -548,90 +559,87 @@ export default function Home(props) {
       {/* Digital Human Library */}
       <div className="library-section mb-50">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="service-heading">
-                {/* <h5>Digital Human Library</h5> */}
-                <h2>Digital Human Library</h2>
-                <p>
-                  Find yourself mentor or coach, He/She can help you to overcome
-                  your inhibitions, learn from their experiences
-                </p>
-              </div>
+          {/* <div className="row"> */}
+          <div className="col-lg-12">
+            <div className="service-heading">
+              {/* <h5>Digital Human Library</h5> */}
+              <h2>Digital Human Library</h2>
+              <p>
+                Find yourself mentor or coach, He/She can help you to overcome
+                your inhibitions, learn from their experiences
+              </p>
             </div>
-            <div className="d-flex">
+          </div>
+          <div className="service-slide">
+            <Slider {...settingstwo}>
               {libraryData.map((element) => (
-                <div className="col-lg-4 ">
+                <div className="col-lg-12 ">
                   <div className="library-card">
-                    <div className="row">
-                      <div className="col-lg-6 offset-1">
-                        <div className="library-person">
-                          <div className="d-flex">
-                            <div className="">
-                              <div className="col-8">
-                                <img src={element.image} alt="" />
-                              </div>
-                              <div className="col-9">
-                                <h3>{element.title}</h3>
-                                <h5>{element.video_type}</h5>
-                              </div>
+                    {/* <div className="row"> */}
+                    <div className="col-lg-12 offset-1">
+                      <div className="library-person">
+                        <div className="d-flex">
+                          <div className="">
+                            <div className="col-8">
+                              <img src={element.image} alt="" />
                             </div>
-                            <div className="col-lg-12 mr-2">
-                              <div className="library-video">
-                                <iframe
-                                  width="140%"
-                                  height="160"
-                                  src={element.vedio}
-                                  title="YouTube video player"
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                ></iframe>
-                              </div>
+                            <div className="mr-8">
+                              <h3>{element.title}</h3>
+                              <h5>{element.video_type}</h5>
+                            </div>
+                          </div>
+                          <div className="col-lg-7 mr-6">
+                            <div className="library-video">
+                              <iframe
+                                width="120%"
+                                height="160"
+                                src={element.vedio}
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                              ></iframe>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="ml-3">
-                        <button className="btn-web col-11">
-                          <Link to="/library">View More</Link>
-                        </button>
-<<<<<<< HEAD
-                        <a
-                          href={globalDataLiveCall.liveCallLink}
-                          target="_blank"
-                        >
-                          <button className="btn-web col-11 mt-2">
-                            Please Join
-                          </button>
-                        </a>
-                        <button
-=======
+                    </div>
+                    <div className="ml-3">
+                      <button className="btn-web col-11">
+                        <Link to="/library">View More</Link>
+                      </button>
+                      <a href={globalDataLive.liveLink} target="_blank">
                         <button className="btn-web col-11 mt-2">
                           Please Join
                         </button>
-                        <button onClick={() => submitformdata(element._id)}
->>>>>>> ee0ebcead562e5c3f22c174ae268d369efa66da0
-                          data-toggle="modal"
-                          data-target="#library-modal"
-                          className="btn-web col-11 mt-2"
-                        >
-                          <Link to={`/library?docid=${element._id}`}>
-                            Please Talk
-                          </Link>
-                        </button>
+                      </a>
+                      <button
+                        onClick={() => submitformdata(element._id)}
+                        data-toggle="modal"
+                        data-target="#library-modal"
+                        className="btn-web col-11 mt-2"
+                      >
+                        Please Talk
+                      </button>
+                      <a
+                        href={globalDataGroupCall.groupCallLink}
+                        target="_blank"
+                      >
                         <button className="btn-web col-11 mt-2">
-                          <Link to="/library">Join Group</Link>
+                          Join Group
                         </button>
-                      </div>
+                      </a>
                     </div>
+                    {/* </div> */}
                   </div>
                 </div>
               ))}
-            </div>
+            </Slider>
           </div>
+          {/* </div> */}
         </div>
       </div>
+      <br />
       {/* Sprituality */}
       <div className="service-section mb-50">
         <div className="container">
@@ -648,13 +656,13 @@ export default function Home(props) {
               {SpritualityData.map((element) => (
                 <div className="col-lg-12">
                   <div className="service-card spritual-card">
-                    <img src="assets/image//vedic.png" alt="" />
-                    {/* <img
-                    src="assets/image//vedic.png"
-                    className="img-bfr"
-                    alt=""
-                  /> */}
-                    <img src={element.img} className="img-bfr" alt="" />
+                    <img src="assets/image//Spirituality.png" alt="" />
+                    <img
+                      src="assets/image//Spirituality.png"
+                      className="img-bfr"
+                      alt=""
+                    />
+                    {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
                     <p>{element.description}</p>
                     <button className="qst-show btn-web hvr-float-shadow">

@@ -13,6 +13,8 @@ import Modal from "react-modal";
 import FontAwesome from "react-fontawesome";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import { InstagramLogin } from "@amraneze/react-instagram-login";
+import { LinkedIn } from "react-linkedin-login-oauth2";
 import AppleSignin from "react-apple-signin-auth";
 import { Card, Image } from "react-bootstrap";
 var filter =
@@ -81,6 +83,7 @@ export default function Login(props) {
   const responseInstagram = (response) => {
     console.log(response);
   };
+
   const LoginApi = (props) => {
     if (logineMail == "") {
       setLoginmailError("Enter your mail");
@@ -218,7 +221,7 @@ export default function Login(props) {
       phone: libraryNum,
       date: libraryDate,
       msg: libraryMsg,
-      humanId:props.humanId
+      humanId: props.humanId,
     };
     axios
       .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY}`, humanLibraryOptions)
@@ -288,7 +291,6 @@ export default function Login(props) {
                     </p>
                   ) : null}
                 </div>
-               
 
                 <div className="form-inline">
                   <input type="checkbox" name="" id="" />
@@ -373,98 +375,7 @@ export default function Login(props) {
                   </button>
                 </div>
               </form>
-              <div className="signup-detail">
-                <p className="crt-btn">Create a New Account</p>
-                <p>Or sign up with</p>
-                {/* {showloginButton ? ( */}
-                <GoogleLogin
-                  clientId={clientId}
-                  className="rounded-circle"
-                  icon={true}
-                  buttonText="sign with google"
-                  onSuccess={onLoginSuccess}
-                  // onFailure={onLoginSuccess}
-                  // cookiePolicy={"single_host_origin"}
-                  render={(renderProps) => (
-                    <button
-                      onClick={renderProps.onClick}
-                      // style={{ width: 300, borderRadius: 50, height: 46 }}
-                    >
-                      <i className="fa fa-google-plus"
-                       style={{ width: 300, borderRadius: 50, height: 46 ,  }}
-                      >&nbsp;Continue with Google</i>
-                     
-                    </button>
-                  )}
-                  isSignedIn={true}
-                  // icon="fa-facebook"
-                  // style={{
-                  //   width: 30,
-                  //   height: 10,
 
-                  // }}
-                  style={{ width: 400, borderRadius: 50 }}
-                />
-                {/* <i className="fa fa-google"></i> */}
-                {/* </GoogleLogin> */}
-                {/* ) : null} */}
-                {/* <Card style={{ width: "90px", height: "10px" }}>
-                  <Card.Header>
-                    {!login && ( */}
-                <FacebookLogin
-                  appId="921201001964201"
-                  autoLoad={true}
-                  fields="email, password"
-                  scope="public_profile,user_friends"
-                  callback={responseFacebook}
-                  // icon="fa-facebook"
-                  // style={{ width: "20px", height: "0px" }}
-                  style={{ width: 300, borderRadius: 50, height: 20 }}
-                  icon={
-                    <i
-                      className="fa fa-facebook"
-                      style={{ width: 300, borderRadius: 50, height: 46 , marginLeft: 7 }}
-                    >&nbsp;Continue with Facebook</i>
-                  }
-                  textButton={false}
-                />
-                {/* <i className="fa fa-facebook"></i> */}
-                {/* </FacebookLogin> */}
-                {/* )} */}
-                {/* {login && <Image src={picture} roundedCircle />} */}
-                {/* </Card.Header>
-                  {login && (
-                    <Card.Body>
-                      <Card.Title>{data.name}</Card.Title>
-                      <Card.Text>{data.email}</Card.Text>
-                    </Card.Body>
-                  )}
-                </Card> */}
-                {/* <i className="fa fa-facebook"></i> */}
-                <AppleSignin
-                  /** Auth options passed to AppleID.auth.init() */
-                  authOptions={{
-                    clientId: "com.example.web",
-                    scope: "email name",
-                    redirectURI: "https://example.com",
-                    // https://www.example.com/apple/callback
-                    state: "state",
-                    nonce: "nonce",
-                  }}
-                  uiType="dark"
-                  className="apple-auth-btn"
-                  noDefaultStyle={false}
-                  buttonExtraChildren="Continue with Apple"
-                  onSuccess={(response) => console.log(response)}
-                  onError={(error) => console.error(error)}
-                  skipScript={false}
-                  iconProp={{ style: { marginTop: "10px" } }}
-                  // render={(props) => (
-                  //   <button {...props}>My Custom Button</button>
-                  // )}
-                  style={{ width: 300, borderRadius: 50 }}
-                />
-              </div>
               <div
                 className="g-recaptcha"
                 data-sitekey="6Ldbdg0TAAAAAI7KAf72Q6uagbWzWecTeBWmrCpJ"
@@ -662,14 +573,7 @@ export default function Login(props) {
                   ) : null}
                 </div>
                 <div className="form-group">
-                  
-                  <input
-                    type="hidden"
-                    value={props.humanId}
-                   
-                   
-                  />
-                
+                  <input type="hidden" value={props.humanId} />
                 </div>
                 <div className="form-group">
                   <label for="">Date</label>
@@ -799,8 +703,130 @@ export default function Login(props) {
                   </button>
                   {/* </Link> */}
                 </div>
-
                 <br />
+                <div className="signup-detail">
+                  <p className="crt-btn">Create a New Account</p>
+                  <p>Or sign up with</p>
+
+                  {/* {showloginButton ? ( */}
+                  <GoogleLogin
+                    clientId={clientId}
+                    // className="rounded-circle"
+                    className="btnGoogle"
+                    icon={true}
+                    buttonText="sign with google"
+                    onSuccess={onLoginSuccess}
+                    // onFailure={onLoginSuccess}
+                    // cookiePolicy={"single_host_origin"}
+                    render={(renderProps) => (
+                      <button
+                        onClick={renderProps.onClick}
+                        // style={{ width: 300, borderRadius: 50, height: 46 }}
+                      >
+                        <i
+                          className="fa fa-google-plus"
+                          style={{
+                            width: 300,
+                            borderRadius: 50,
+                            height: 46,
+                            marginLeft: 0,
+                            marginTop: -13,
+                            background: 'rgb(219, 50, 54)'
+                            // background: `linear-gradient(  rgb(60, 186, 84), rgb(244, 194, 13) 20%, rgb(219, 50, 54) 60%, rgb(72, 133, 237) 100%)`,
+                          }}
+                        >
+                          &nbsp;Continue with Google
+                        </i>
+                      </button>
+                    )}
+                    isSignedIn={true}
+                    // icon="fa-facebook"
+                    // style={{
+                    //   width: 30,
+                    //   height: 10,
+
+                    // }}
+                    style={{ width: 400, borderRadius: 50 }}
+                  />
+                  {/* <i className="fa fa-google"></i> */}
+                  {/* </GoogleLogin> */}
+                  {/* ) : null} */}
+                  {/* <Card style={{ width: "90px", height: "10px" }}>
+                  <Card.Header>
+                    {!login && ( */}
+
+                  <FacebookLogin
+                    appId="921201001964201"
+                    autoLoad={true}
+                    fields="email, password"
+                    scope="public_profile,user_friends"
+                    callback={responseFacebook}
+                    // icon="fa-facebook"
+                    // style={{ width: "20px", height: "0px" }}
+                    cssClass="btnFacebook"
+                    style={{ width: 300, borderRadius: 50, height: 20 }}
+                    icon={
+                      <i
+                        className="fa fa-facebook"
+                        style={{
+                          width: 300,
+                          borderRadius: 50,
+                          height: 46,
+                          paddingLeft: 83,
+                        }}
+                      >
+                        &nbsp;Continue with Facebook
+                      </i>
+                    }
+                    textButton={false}
+                  />
+                  {/* <i className="fa fa-facebook"></i> */}
+                  {/* </FacebookLogin> */}
+                  {/* )} */}
+                  {/* {login && <Image src={picture} roundedCircle />} */}
+                  {/* </Card.Header>
+                  {login && (
+                    <Card.Body>
+                      <Card.Title>{data.name}</Card.Title>
+                      <Card.Text>{data.email}</Card.Text>
+                    </Card.Body>
+                  )}
+                </Card> */}
+                  {/* <i className="fa fa-facebook"></i> */}
+                  <InstagramLogin
+                    clientId="CLIENT_ID"
+                    buttonText="Login"
+                    onSuccess={responseInstagram}
+                    onFailure={responseInstagram}
+                    cssClass="btninsta"
+                    // style={{marginLeft}}
+                  />
+
+                  <AppleSignin
+                    /** Auth options passed to AppleID.auth.init() */
+                    authOptions={{
+                      clientId: "com.example.web",
+                      scope: "email name",
+                      redirectURI: "https://example.com",
+                      // https://www.example.com/apple/callback
+                      state: "state",
+                      nonce: "nonce",
+                    }}
+                    uiType="dark"
+                    className="apple-auth-btn"
+                    noDefaultStyle={false}
+                    buttonExtraChildren="Continue with Apple"
+                    onSuccess={(response) => console.log(response)}
+                    onError={(error) => console.error(error)}
+                    skipScript={false}
+                    iconProp={{ style: { marginTop: "10px" } }}
+                    // render={(props) => (
+                    //   <button {...props}>My Custom Button</button>
+                    // )}
+                    style={{ width: 300, borderRadius: 50 }}
+                  />
+                </div>
+
                 <div
                   className="g-recaptcha"
                   data-sitekey="6Ldbdg0TAAAAAI7KAf72Q6uagbWzWecTeBWmrCpJ"

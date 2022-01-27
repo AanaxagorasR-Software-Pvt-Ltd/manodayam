@@ -19,6 +19,7 @@ router.post("/new", async (req, res) => {
       let data = {
         img: body.img,
         name: body.name,
+        slug: body.slug,
         description: body.description,
         status: body.status,
       };

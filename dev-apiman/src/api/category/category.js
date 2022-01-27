@@ -43,4 +43,38 @@ router.post("/category/item", validate, async (req, res) => {
   }
 });
 
+// mentalHealthData
+
+router.post("/:slug", async (req, res) => {
+  const slug = req.params.slug
+  const db = await getDatabase();
+
+  try {
+    const { collectiontypedata } = req.body;
+    console.log("collectiontypedata", req.body);
+    const data = await db.collection("mental_health_data").find({slug : slug}).toArray();
+    console.log("===category===", data);
+    if (Array.isArray(data)) {
+      res.status(200).json({
+        data: data,
+        status: true,
+        message: "data fetched sucseccfully",
+        id: "kkkkk",
+      });
+    } else {
+      res.status(200).json({
+        data: [],
+        status: false,
+        message: "no data found",
+      });
+    }
+  } catch (e) {
+    res.status(500).json({
+      status: false,
+      message: "server error",
+    });
+  }
+});
+
+
 module.exports = router;

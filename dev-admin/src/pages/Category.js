@@ -304,6 +304,8 @@ const Category = () => {
                               <th>Category Image </th>
 
                               <th>Category Name </th>
+                              <th>Category Slug </th>
+
                               <th> Description </th>
 
                               <th>Status</th>
@@ -318,6 +320,8 @@ const Category = () => {
                                 <td>{v.img}</td>
 
                                 <td>{v.name}</td>
+                                <td>{v.slug}</td>
+
                                 <td>{v.description}</td>
 
                                 <td>
@@ -431,6 +435,18 @@ const Addform = forwardRef((props, ref) => {
                   handleChange(e.target.value, "name");
                 }}
                 placeholder="Category Name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Category Slug</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.slug || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "slug");
+                }}
+                placeholder="Category Slug"
               />
             </div>
             <div class="form-group">

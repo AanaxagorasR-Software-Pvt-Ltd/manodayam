@@ -41,6 +41,8 @@ router.use(`/library`, require("./humanLibrary/libraryAppoint"));
 router.use(`/category`, require("./category"));
 router.use(`/spirituality`, require("./category/spirituality"));
 router.use(`/category-item`, require("./category/category"));
+router.use(`/category-data`, require("./category/category"));
+
 router.use(`/question`, require("./Mcq/objectiveMcq"));
 router.use(`/yesNo`, require("./Mcq/objectiveYesNo"));
 

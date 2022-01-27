@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import globalData from "../utill/rdx";
 export default function Header() {
   return (
     <>
@@ -7,7 +8,7 @@ export default function Header() {
         {/* Sidemenu */}
         <div class="main-sidebar main-sidebar-sticky side-menu">
           <div class="sidemenu-logo">
-            <a class="main-logo" href="manodayam.com">
+            <a class="main-logo" href={globalData.manodayamLink}>
               <img
                 src="assets/img/brand/logo.png"
                 class="header-brand-img desktop-logo"
