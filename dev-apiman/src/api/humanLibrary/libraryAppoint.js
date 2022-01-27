@@ -90,6 +90,36 @@ router.get("/booked", async (req, res) => {
   }
 });
 
+// router.post("/status", async (req, res) => {
+//   const body = req.body;
+//   console.log(body);
+//   try {
+//     const db = await getDatabase();
+//     let library_appoint = await db.collection("library_appoint");
+//     insertedId = await library_appoint.updateOne(
+//       { _id: new ObjectID(body._id) },
+//       { $set: { status: body.status } }
+//     ).insertedId;
+
+//     // sed email to patient
+//     // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
+//     if (body.status == "booked") {
+//       let result = await db
+//         .collection("library_appoint")
+//         .find({ status: "booked" })
+//         .sort({ _id: -1 })
+//         .toArray();
+//       res.json(result);
+//       console.log(result);
+//     }
+//   } catch (err) {
+//     console.log("err", err.message);
+//   }
+
+//   res.json({
+//     message: "Update successfull",
+//   });
+// });
 router.post("/status", async (req, res) => {
   const body = req.body;
   console.log(body);
@@ -100,21 +130,48 @@ router.post("/status", async (req, res) => {
       { _id: new ObjectID(body._id) },
       { $set: { status: body.status } }
     ).insertedId;
-
-    // sed email to patient
-    // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
     if (body.status == "booked") {
       let result = await db
         .collection("library_appoint")
-        .find({ status: "booked" })
-        .sort({ _id: -1 })
+        .aggregate([
+          {
+            $match: { _id: { $eq: new ObjectID(body._id) } },
+          },
+          {
+            $addFields: {
+              docid: {
+                $toObjectId: "$docid",
+              },
+            },
+          },
+          {
+            $lookup: {
+              from: "library_content",
+              localField: "docid",
+              foreignField: "_id",
+              as: "library",
+            },
+          },
+          {
+            $unwind: {
+              path: "$library",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+        ])
         .toArray();
       res.json(result);
       console.log(result);
+
     }
-  } catch (err) {
+  }catch (err) {
     console.log("err", err.message);
   }
+
+
+  // sed email to patient
+  // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
+
 
   res.json({
     message: "Update successfull",

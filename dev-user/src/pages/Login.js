@@ -6,16 +6,19 @@ import {
   DOCTOR_API,
   DIGITAL_HUMAN_LIBRARY,
 } from "../utill/api.endpoints";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
-// import FacebookLogin from "react-facebook-login";
-// import { Card, Image } from "react-bootstrap";
+import FontAwesome from "react-fontawesome";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
+import FacebookLogin from "react-facebook-login";
+import AppleSignin from "react-apple-signin-auth";
+import { Card, Image } from "react-bootstrap";
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
-const clientId = "Your-Client-Id";
+
+const clientId = "jyotiaanaxa@gmail.com";
 export default function Login(props) {
   const [login, setLogin] = useState(false);
   const [data, setData] = useState({});
@@ -67,31 +70,17 @@ export default function Login(props) {
   const [registrationMailError, setregistrationMailError] = useState("");
   const [registrationPasswordError, setregistrationPasswordError] =
     useState("");
-  // const [modalIsOpen, setmodalIsOpen] = useState();
-  // function handleCloseModal() {
-  //   // document.getElementByClassName("close-btn").onClick();
-  //   // alert('hhhhh');
-  //   return <div className="close-btn"></div>;
-  // }
+
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
   const onLoginSuccess = (res) => {
     console.log("Login Success:", res.profileObj);
-    setShowloginButton(true);
+    // setShowloginButton(true);
     // setShowlogoutButton(true);
   };
-
-  // const onLoginFailure = (res) => {
-  //   console.log("Login Failed:", res);
-  // };
-
-  // const onSignoutSuccess = () => {
-  //   alert("You have been logged out successfully");
-  //   console.clear();
-  //   setShowloginButton(true);
-  //   setShowlogoutButton(false);
-  // };
-  // Login
+  const responseInstagram = (response) => {
+    console.log(response);
+  };
   const LoginApi = (props) => {
     if (logineMail == "") {
       setLoginmailError("Enter your mail");
@@ -112,7 +101,7 @@ export default function Login(props) {
         if (res.status == 200) {
           // localStorage.setItem("Token", res.data.token);
           alert("Done");
-          window.$('#myModal').modal('hide')
+          window.$("#myModal").modal("hide");
 
           // handleCloseModal();
         } else {
@@ -141,14 +130,13 @@ export default function Login(props) {
       password: registrationPassword,
       name: registrationName,
     };
-   
+
     axios
       .post(`${API_ADMIN_URL}${REGISTER_API}`, RegisterationOptions)
       .then((res) => {
         console.log("====rrrr=====", res.data);
         alert("Account Created");
-        window.$('#registermodal').modal('hide')
-
+        window.$("#registermodal").modal("hide");
       })
       .catch((error) => {
         console.log(error);
@@ -193,8 +181,7 @@ export default function Login(props) {
       .then((res) => {
         console.log("====rrrr=====", res.data);
         alert("successfully Done");
-        window.$('#doctor-modal').modal('hide')
-
+        window.$("#doctor-modal").modal("hide");
       })
       .catch((error) => {
         console.log(error);
@@ -239,8 +226,7 @@ export default function Login(props) {
         alert("We Will Connect You Soon");
         if (res.status == 200) {
           // localStorage.setItem("Token", res.data.token);
-          window.$('#library-modal').modal('hide')
-
+          window.$("#library-modal").modal("hide");
         } else {
           alert("enter correct mail or password");
         }
@@ -388,30 +374,61 @@ export default function Login(props) {
               <div className="signup-detail">
                 <p className="crt-btn">Create a New Account</p>
                 <p>Or sign up with</p>
-                {showloginButton ? (
-                  <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Login with Google"
-                    onSuccess={onLoginSuccess}
-                    // onFailure={onLoginFailure}
-                    cookiePolicy={"single_host_origin"}
-                    isSignedIn={true}
-                    // icon="fa-facebook"
-                  />
-                ) : null}
-                {/* <Card style={{ width: "150px", height: "10px"}}> */}
-                {/* <Card.Header> */}
-                {/* {!login && (
-                  <FacebookLogin
-                    appId="921201001964201"
-                    autoLoad={true}
-                    fields="name,email"
-                    scope="public_profile,user_friends"
-                    callback={responseFacebook}
-                    // icon="fa-facebook"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                )} */}
+                {/* {showloginButton ? ( */}
+                <GoogleLogin
+                  clientId={clientId}
+                  className="rounded-circle"
+                  icon={true}
+                  buttonText="sign with google"
+                  onSuccess={onLoginSuccess}
+                  // onFailure={onLoginSuccess}
+                  // cookiePolicy={"single_host_origin"}
+                  render={(renderProps) => (
+                    <button
+                      onClick={renderProps.onClick}
+                      // style={{ width: 300, borderRadius: 50, height: 46 }}
+                    >
+                      <i className="fa fa-google-plus"
+                       style={{ width: 300, borderRadius: 50, height: 46 ,  }}
+                      >&nbsp;Continue with Google</i>
+                     
+                    </button>
+                  )}
+                  isSignedIn={true}
+                  // icon="fa-facebook"
+                  // style={{
+                  //   width: 30,
+                  //   height: 10,
+
+                  // }}
+                  style={{ width: 400, borderRadius: 50 }}
+                />
+                {/* <i className="fa fa-google"></i> */}
+                {/* </GoogleLogin> */}
+                {/* ) : null} */}
+                {/* <Card style={{ width: "90px", height: "10px" }}>
+                  <Card.Header>
+                    {!login && ( */}
+                <FacebookLogin
+                  appId="921201001964201"
+                  autoLoad={true}
+                  fields="email, password"
+                  scope="public_profile,user_friends"
+                  callback={responseFacebook}
+                  // icon="fa-facebook"
+                  // style={{ width: "20px", height: "0px" }}
+                  style={{ width: 300, borderRadius: 50, height: 20 }}
+                  icon={
+                    <i
+                      className="fa fa-facebook"
+                      style={{ width: 300, borderRadius: 50, height: 46 , marginLeft: 7 }}
+                    >&nbsp;Continue with Facebook</i>
+                  }
+                  textButton={false}
+                />
+                {/* <i className="fa fa-facebook"></i> */}
+                {/* </FacebookLogin> */}
+                {/* )} */}
                 {/* {login && <Image src={picture} roundedCircle />} */}
                 {/* </Card.Header>
                   {login && (
@@ -422,7 +439,29 @@ export default function Login(props) {
                   )}
                 </Card> */}
                 {/* <i className="fa fa-facebook"></i> */}
-                {/* <i className="fa fa-google"></i> */}
+                <AppleSignin
+                  /** Auth options passed to AppleID.auth.init() */
+                  authOptions={{
+                    clientId: "com.example.web",
+                    scope: "email name",
+                    redirectURI: "https://example.com",
+                    // https://www.example.com/apple/callback
+                    state: "state",
+                    nonce: "nonce",
+                  }}
+                  uiType="dark"
+                  className="apple-auth-btn"
+                  noDefaultStyle={false}
+                  buttonExtraChildren="Continue with Apple"
+                  onSuccess={(response) => console.log(response)}
+                  onError={(error) => console.error(error)}
+                  skipScript={false}
+                  iconProp={{ style: { marginTop: "10px" } }}
+                  // render={(props) => (
+                  //   <button {...props}>My Custom Button</button>
+                  // )}
+                  style={{ width: 300, borderRadius: 50 }}
+                />
               </div>
               <div
                 className="g-recaptcha"
@@ -656,7 +695,8 @@ export default function Login(props) {
                     type="button"
                     className="btn btn-web hvr-float-shadow"
                   >
-                    Confirm
+                    Continue
+                    {/* </Link> */}
                   </button>
                 </div>
               </form>

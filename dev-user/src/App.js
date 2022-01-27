@@ -9,7 +9,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Consult from "./pages/Consult";
 import Consultvideo from "./pages/Consultvideo";
-import Healthheal from "./pages/Healthheal";
+import Anxiety from "./pages/mentalHealth/Anxiety";
 import Profile from "./pages/Profile";
 import Spirituality from "./pages/Spirituality";
 import ViewProduct from "./pages/ViewProduct";
@@ -33,7 +33,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} exact />
           <Route path="/counsult" element={<Consult />} exact />
           <Route path="/counsultvideo" element={<Consultvideo />} exact />
-          <Route path="/healthheal" element={<Healthheal />} exact />
+          <Route path="/anxiety" element={<Anxiety />} exact />
           <Route path="/profile" element={<Profile />} exact />
           <Route path="/spirituality" element={<Spirituality />} exact />
           <Route path="/ViewProduct/:slug" element={<ViewProduct />} exact />
