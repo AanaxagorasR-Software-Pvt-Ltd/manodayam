@@ -122,15 +122,15 @@ const stopPlayVideo = () => {
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
 };
-const hello = {
-	collectiontypedata  : question_mcq
-}
-const urlAPI = `http://localhost:3020/api/question/questions`, hello;
-app.post(urlAPI, function async(req, res) {
+// const hello = {
+// 	collectiontypedata  : question_mcq
+// }
+// const urlAPI = `http://localhost:3020/api/question/questions`, hello;
+// app.post(urlAPI, function async(req, res) {
  
   
   
-     res.render("ques", { ques: ques });
+//      res.render("ques", { ques: ques });
   
-  });
+//   });
 

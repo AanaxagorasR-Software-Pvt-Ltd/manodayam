@@ -122,6 +122,36 @@ router.get("/booked", async (req, res) => {
   }
 });
 
+// router.post("/status", async (req, res) => {
+//   const body = req.body;
+//   console.log(body);
+//   try {
+//     const db = await getDatabase();
+//     let library_appoint = await db.collection("library_appoint");
+//     insertedId = await library_appoint.updateOne(
+//       { _id: new ObjectID(body._id) },
+//       { $set: { status: body.status } }
+//     ).insertedId;
+
+//     // sed email to patient
+//     // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
+//     if (body.status == "booked") {
+//       let result = await db
+//         .collection("library_appoint")
+//         .find({ status: "booked" })
+//         .sort({ _id: -1 })
+//         .toArray();
+//       res.json(result);
+//       console.log(result);
+//     }
+//   } catch (err) {
+//     console.log("err", err.message);
+//   }
+
+//   res.json({
+//     message: "Update successfull",
+//   });
+// });
 router.post("/status", async (req, res) => {
   const body = req.body;
   console.log(body);
@@ -135,6 +165,9 @@ router.post("/status", async (req, res) => {
     if (body.status == "booked") {
       let result = await db
         .collection("library_appoint")
+
+
+
         .aggregate([
           {
             $match: { _id: { $eq: new ObjectID(body._id) } },
@@ -168,8 +201,9 @@ router.post("/status", async (req, res) => {
 
 
 
+
     }
-  } catch (err) {
+  }catch (err) {
     console.log("err", err.message);
   }
 

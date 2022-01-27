@@ -12,23 +12,23 @@ export default function Footer() {
                 <img src="assets/image/logo.png" alt="" />
                 <ul>
                   <li class="hvr-float-shadow">
-                    <a href="">
-                      <i class="fa fa-facebook"></i>
+                    <a href="https://www.facebook.com" target="_blank">
+                      <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="hvr-float-shadow">
-                    <a href="">
-                      <i class="fa fa-instagram"></i>
+                    <a href="https://www.instagram.com" target="_blank">
+                      <i class="fa fa-instagram" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="hvr-float-shadow">
-                    <a href="">
-                      <i class="fa fa-twitter"></i>
+                    <a href="https://www.twitter.com" target="_blank">
+                      <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="hvr-float-shadow">
-                    <a href="">
-                      <i class="fa fa-pinterest"></i>
+                    <a href="https://www.linkedin.com" target="_blank">
+                      <i class="fa fa-linkedin" aria-hidden="true"></i>
                     </a>
                   </li>
                 </ul>

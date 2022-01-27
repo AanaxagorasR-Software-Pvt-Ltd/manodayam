@@ -92,7 +92,7 @@ const Main = () => {
 					</button>
 					<ul class="navbar-nav mr-lg-2">
 						<li class="nav-item nav-search d-none d-lg-block">
-							<div class="input-group">
+							{/* <div class="input-group">
 								<div
 									class="input-group-prepend hover-cursor"
 									id="navbar-search-icon"
@@ -109,7 +109,7 @@ const Main = () => {
 									aria-label="search"
 									aria-describedby="search"
 								/>
-							</div>
+							</div> */}
 						</li>
 					</ul>
 					<ul class="navbar-nav navbar-nav-right">

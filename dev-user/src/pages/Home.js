@@ -4,6 +4,8 @@ import axios from "axios";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import Login from "./Login";
+import globalDataLiveCall from "../utill/rdxLiveCall";
+
 import {
   API_ADMIN_URL,
   PRODUCT_API,
@@ -405,7 +407,7 @@ export default function Home(props) {
                     <h3>{element.name}</h3>
                     <p>{element.description}</p>
                     <button className="btn-web hvr-float-shadow">
-                      <Link to="/healthheal">get solution</Link>
+                      <Link to="/anxiety">get solution</Link>
                     </button>
                   </div>
                 </div>
@@ -594,18 +596,32 @@ export default function Home(props) {
                         <button className="btn-web col-11">
                           <Link to="/library">View More</Link>
                         </button>
+<<<<<<< HEAD
+                        <a
+                          href={globalDataLiveCall.liveCallLink}
+                          target="_blank"
+                        >
+                          <button className="btn-web col-11 mt-2">
+                            Please Join
+                          </button>
+                        </a>
+                        <button
+=======
                         <button className="btn-web col-11 mt-2">
                           Please Join
                         </button>
                         <button onClick={() => submitformdata(element._id)}
+>>>>>>> ee0ebcead562e5c3f22c174ae268d369efa66da0
                           data-toggle="modal"
                           data-target="#library-modal"
                           className="btn-web col-11 mt-2"
                         >
-                          Please Talk
+                          <Link to={`/library?docid=${element._id}`}>
+                            Please Talk
+                          </Link>
                         </button>
                         <button className="btn-web col-11 mt-2">
-                          <Link to="/library">View Others</Link>
+                          <Link to="/library">Join Group</Link>
                         </button>
                       </div>
                     </div>

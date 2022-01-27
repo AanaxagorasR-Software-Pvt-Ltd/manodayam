@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-export default function Library() {
+import axios from "axios";
+import {
+  API_ADMIN_URL,
+  DIGITAL_HUMAN_LIBRARY_DATA_API,
+} from "../utill/api.endpoints";
+export default function Library(props) {
+  const [libraryData, setlibraryData] = useState([]);
+  const libraryDatalist = () => {
+    console.log(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`);
+    const libraryDatalisting = {
+      collectiondata: "library_content",
+    };
+    axios
+      .post(
+        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`,
+        libraryDatalisting
+      )
+      .then((res) => {
+        setlibraryData(res.data.data);
+        console.log("====libraryContent====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    libraryDatalist();
+  }, []);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -36,7 +63,24 @@ export default function Library() {
             </div>
 
             <div className="col-lg-10 offset-1">
+            {libraryData.map((element) => (
+
               <div className="library-card">
+<<<<<<< HEAD
+                  <div className="row">
+                    <div className="col-lg-5">
+                      <div className="library-video">
+                        <iframe
+                          width="100%"
+                          height="315"
+                          src="https://www.youtube.com/embed/sHO5bL02fOQ"
+                          title="YouTube video player"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+=======
                 <div className="row">
                   <div className="col-lg-5">
                     <div className="library-video">
@@ -150,44 +194,45 @@ export default function Library() {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
                       ></iframe>
+>>>>>>> ee0ebcead562e5c3f22c174ae268d369efa66da0
                     </div>
-                  </div>
-                  <div className="col-lg-6 offset-1">
-                    <div className="library-person">
-                      <div className="row">
-                        <div className="col-3">
-                          <img src="image/doctor-img.jpg" alt="" />
+                    <div className="col-lg-6 offset-1">
+                      <div className="library-person">
+                        <div className="row">
+                          <div className="col-3">
+                            <img src="image/doctor-img.jpg" alt="" />
+                          </div>
+                          <div className="col-9">
+                            <h3>{element.title}</h3>
+                            <h5>Motivational Speaker</h5>
+                          </div>
                         </div>
-                        <div className="col-9">
-                          <h3>Jim Rohn</h3>
-                          <h5>Motivational Speaker</h5>
-                        </div>
+                        <p>
+                          Emanuel James "Jim" Rohn was born in Yakima,
+                          Washington, to Emmanuel and Clara Rohn. The Rohns
+                          owned and worked a farm in Caldwell, Idaho, where Jim
+                          grew up, being the only child.{" "}
+                        </p>
+                        <p>
+                          Rohn left college after just one year and started his
+                          professional life by working as a human resource
+                          manager for department store Sears.
+                        </p>
+                        <button
+                          className="btn-web hvr-float-shadow"
+                          data-toggle="modal"
+                          data-target="#library-modal"
+                        >
+                          Talk With him
+                        </button>
+                        <button className="btn-web hvr-float-shadow">
+                          <i className="fa fa-inr"></i> 1299
+                        </button>
                       </div>
-                      <p>
-                        Emanuel James "Jim" Rohn was born in Yakima, Washington,
-                        to Emmanuel and Clara Rohn. The Rohns owned and worked a
-                        farm in Caldwell, Idaho, where Jim grew up, being the
-                        only child.{" "}
-                      </p>
-                      <p>
-                        Rohn left college after just one year and started his
-                        professional life by working as a human resource manager
-                        for department store Sears.
-                      </p>
-                      <button
-                        className="btn-web hvr-float-shadow"
-                        data-toggle="modal"
-                        data-target="#library-modal"
-                      >
-                        Talk With him
-                      </button>
-                      <button className="btn-web hvr-float-shadow">
-                        <i className="fa fa-inr"></i> 1989
-                      </button>
                     </div>
                   </div>
-                </div>
               </div>
+                ))}
             </div>
           </div>
         </div>
