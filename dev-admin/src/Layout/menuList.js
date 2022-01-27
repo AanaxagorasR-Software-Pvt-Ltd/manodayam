@@ -125,39 +125,39 @@ const leftSideBarMenu = [
       ],
       isHover: false
   },
-  {
-    name: "E-com",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    // link: "javascript:void(0)" ,
-    iconClass: "icon-columns",
-    submenu: [
-      {
-        name: "Orders",
-        isActive: true,
-        dataToggle: "",
-        link: "/admin/order" ,
-        isExpand: false,
-      },
-      {
-        name: "Products",
-        isActive: true,
-        dataToggle: "",
-        link: "/admin/product" ,
-        isExpand: false,
-      },
-      {
-        name: "Sells",
-        isActive: true,
-        dataToggle: "",
-        link: "/admin/sells" ,
-        isExpand: false,
-      }
-    ],
-    isHover: false
+  // {
+  //   name: "E-com",
+  //   isActive: false,
+  //   dataToggle: "",
+  //   isExpand: false,
+  //   // link: "javascript:void(0)" ,
+  //   iconClass: "icon-columns",
+  //   submenu: [
+  //     {
+  //       name: "Orders",
+  //       isActive: true,
+  //       dataToggle: "",
+  //       link: "/admin/order" ,
+  //       isExpand: false,
+  //     },
+  //     {
+  //       name: "Products",
+  //       isActive: true,
+  //       dataToggle: "",
+  //       link: "/admin/product" ,
+  //       isExpand: false,
+  //     },
+  //     {
+  //       name: "Sells",
+  //       isActive: true,
+  //       dataToggle: "",
+  //       link: "/admin/sells" ,
+  //       isExpand: false,
+  //     }
+  //   ],
+  //   isHover: false
 
-  },
+  // },
   {
     name: "Digital Human Library",
     isActive: false,
@@ -166,21 +166,21 @@ const leftSideBarMenu = [
     iconClass: "icon-layout",
     submenu: [
       {
-        name: "Connectors",
+        name: "All Connectors",
         isActive: true,
         dataToggle: "",
         link: "/library-appointment",
         isExpand: false,
       },
       {
-        name: "Connection Done",
+        name: "Booked Connection ",
         isActive: true,
         dataToggle: "",
         link: "/library-appointment-booked",
         isExpand: false,
       },
       {
-        name: "Library",
+        name: "Create Library",
         isActive: true,
         dataToggle: "",
         link: "/library",
