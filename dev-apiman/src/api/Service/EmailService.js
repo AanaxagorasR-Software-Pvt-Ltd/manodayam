@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const env = require('../../config')
+const env = require("../../config");
 
 class EmailService {
   constructor() {
@@ -68,7 +68,7 @@ class EmailService {
     let info = await this.transporter.sendMail({
       to: email,
       from: `yogitanegi888@gmail.com`,
-      subject: 'Your appointment has been booked.',
+      subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
       <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
@@ -143,9 +143,17 @@ class EmailService {
             <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
               <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
               <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">congratulations Your appointment has been schedule on
-              <strong style="box-sizing: border-box;font-weight: bolder;">${details.created} </strong>. I hope you will be able to accept our invitation to attend this important session. your patient name <strong style="box-sizing: border-box;font-weight: bolder;">${details.name} </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${details.disorder}</strong>
+              <strong style="box-sizing: border-box;font-weight: bolder;">${
+                details.created
+              } </strong>. I hope you will be able to accept our invitation to attend this important session. your patient name <strong style="box-sizing: border-box;font-weight: bolder;">${
+          details.name
+        } </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${
+          details.disorder
+        }</strong>
                 ${details.email}</p>
-              <a href="${'http://localhost:5000/'+ details.room_no}" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a>
+              <a href="${
+                "http://localhost:5000/" + details.room_no
+              }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a>
             </div>
           </div>
         </body>
@@ -163,7 +171,7 @@ class EmailService {
     let info = await this.transporter.sendMail({
       to: email,
       from: `yogitanegi888@gmail.com`,
-      subject: 'Your appointment has been booked.',
+      subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
            
@@ -210,8 +218,6 @@ class EmailService {
 }
 module.exports = new EmailService();
 
-
-
 // <html lang="en">
 
 // <head>
@@ -235,7 +241,6 @@ module.exports = new EmailService();
 // </head>
 
 // <body>
-
 
 //   <div class="card" style="width: 24rem;">
 //     <img src="docter.jpg" class="card-img-top" style="width: 100%; height: auto;" alt="...">
