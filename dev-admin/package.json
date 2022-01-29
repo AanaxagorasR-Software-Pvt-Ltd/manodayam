@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && move build ../admin",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -54,5 +54,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "/manodayam/admin/"
+  "homepage": "."
 }

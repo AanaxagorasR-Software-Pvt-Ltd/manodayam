@@ -21,7 +21,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <BrowserRouter basename="/manodayam">
+      <BrowserRouter basename="/">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} exact />

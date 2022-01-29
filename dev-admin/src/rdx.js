@@ -1,4 +1,4 @@
 const globalData = {
-    videoCallLink: window.location.hostname === 'localhost' ? 'http://localhost:5000/' : 'http://52.15.159.16:5000/'
+    videoCallLink: window.location.hostname === 'localhost' ? 'http://localhost:5000/' : 'http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/dev-video-call'
 }
 export default globalData

@@ -16,7 +16,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 function App() {
   return (
     <>
-      <BrowserRouter basename="/manodayam/manodayam-ott">
+      <BrowserRouter basename="/">
         <Header />
         <Routes>
           <Route path="/" exact element={<Home />} exact />

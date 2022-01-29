@@ -1,5 +1,5 @@
 // api ott 
-export const API_HOST_URL = window.location.hostname === 'localhost' ? "http://localhost:3020" : 'http://52.15.159.16:3020';
+export const API_HOST_URL = window.location.hostname === 'localhost' ? "http://localhost:3020" : 'http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/dev-apiman';
 export const API_MIDD = "/api";
 export const SHAKTHI_SLEEP_API = "/shakthi-sleep/lists";
 export const SHAKTHI_MEDITATE_API = "/shakthi-meditate/lists";
