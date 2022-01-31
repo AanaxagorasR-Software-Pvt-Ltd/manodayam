@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const env = require('../../config');
+const env = require("../../config");
 
 class EmailService {
   constructor() {
@@ -10,8 +10,8 @@ class EmailService {
     this.transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: `yogitanegi888`,
-        pass: `mirabunny1998`,
+        user: `manodayampl`,
+        pass: `dhruvb@08`,
       },
     });
   }
@@ -19,7 +19,7 @@ class EmailService {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "yogitanegi888@gmail.com",
+        from: "manodayampl@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -67,7 +67,7 @@ class EmailService {
   async sendEmailToPatient(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `yogitanegi888@gmail.com`,
+      from: `manodayampl@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -97,10 +97,10 @@ class EmailService {
           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.schedule}</strong> . I hope you will be able to accept our invitation to attend this important session. Please
             confirm your participation by
             filling the on-line registration form available at:
-            <strong style="box-sizing: border-box;font-weight: bolder;">http://localhost:3006/manodayam</strong>. If you
+            <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/</strong>. If you
             have any questions or require further information, please do not hesitate to contact Doctor <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
            <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>  
-            please vist this link and in meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://localhost:3006/manodayam/profile</strong></p>
+            please vist this link and in meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/profile</strong></p>
           
         </div>
       </div>
@@ -116,7 +116,7 @@ class EmailService {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "yogitanegi888@gmail.com",
+        from: "manodayampl@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -152,7 +152,8 @@ class EmailService {
         }</strong>
                 ${details.email}</p>
               <a href="${
-                "http://localhost:5000/" + details.room_no
+                "http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/dev-video-call/" +
+                details.room_no
               }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a>
             </div>
           </div>
@@ -170,7 +171,7 @@ class EmailService {
   async sendEmailToPatientbooked(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `yogitanegi888@gmail.com`,
+      from: `manodayampl@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -201,9 +202,9 @@ class EmailService {
           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> . I hope you will be able to accept our invitation to attend this important session. Please
             confirm your participation by
             filling the on-line registration form available at:
-            <strong style="box-sizing: border-box;font-weight: bolder;">http://localhost:3006/manodayam</strong>. If you
+            <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/</strong>. If you
             have any questions or require further information, please do not hesitate to contact Docter <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
-           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://localhost:3006/manodayam/profile</strong> </p>
+           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/profile</strong> </p>
          
         </div>
       </div>

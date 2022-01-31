@@ -13,7 +13,7 @@ const validate = (req,res,next) => {
     next();
 }
 
-console.log("test");
+// console.log("test");
 router.get(`/`,  validate,async (req,res) => {
     const db = await getDatabase();
    const data = await db.collection("products").find().toArray();

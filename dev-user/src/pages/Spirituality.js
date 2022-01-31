@@ -50,7 +50,9 @@ export default function Spirituality() {
                   </li>
                 </ul>
                 <button className="ctn-btn btn btn-web cnt-btn hvr-float-shadow">
-                  <a href={globalData.ottLink}>Continue &nbsp;</a>
+                  {/* <a href={globalData.ottLink}>Continue &nbsp;</a> */}
+                  <a href="http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/shakthi-ott/">Continue &nbsp;</a>
+
                 </button>
               </div>
             </div>

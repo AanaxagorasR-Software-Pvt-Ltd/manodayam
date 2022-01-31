@@ -8,7 +8,9 @@ export default function Header() {
         {/* Sidemenu */}
         <div class="main-sidebar main-sidebar-sticky side-menu">
           <div class="sidemenu-logo">
-            <a class="main-logo" href={globalData.manodayamLink}>
+            {/* <a class="main-logo" href={globalData.manodayamLink}> */}
+            <a class="main-logo" href="http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/">
+
               <img
                 src="assets/img/brand/logo.png"
                 class="header-brand-img desktop-logo"

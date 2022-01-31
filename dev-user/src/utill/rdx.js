@@ -1,6 +1,6 @@
 const globalData = {
-    ottLink: window.location.hostname === 'localhost' ? 'http://localhost:3002/manodayam/manodayam-ott' : 'http://52.15.159.16/manodayam/manodayam-ott/'
+    ottLink: window.location.hostname === 'localhost' ? 'http://localhost:3002/manodayam/manodayam-ott' : 'http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/shakthi-ott/'
 
 }
 
-export default {globalData, };
+export default {globalData};

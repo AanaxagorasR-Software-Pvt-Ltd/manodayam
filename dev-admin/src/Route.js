@@ -31,7 +31,7 @@ const InternalRoute = (props) => {
   const { loading } = useSelector((store) => store.userLogin);
   console.log("isLoading", loading);
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/manodayam-admin">
       <Suspense fallback={<Loader type="spokes" color="red" />}>
         {loading ? <Loader type="spokes" color="red" /> : null}
 
@@ -46,12 +46,7 @@ const InternalRoute = (props) => {
           <Route path="/library" element={<Library />} exact />
           <Route path="/library-appointment" element={<LibraryAppoint />} exact />
           <Route path="/library-appointment-booked" element={<LibraryAppointBooked />} exact />
-
-          
-          
           <Route path="/banner" element={<Banner />} exact />
-
-          
           <Route
             path="/booked-appointment-list"
             element={<BookedAppointmentList />}
