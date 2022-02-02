@@ -2,9 +2,9 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 const { MongoClient } = require("mongodb");
 
 let database = null;
-// let db = "mongodb://localhost:27017/fitness";
+let db = "mongodb://localhost:27017/fitness";
 // let db = "mongodb+srv://fitness:Su100$Br@cluster0.hotl0.mongodb.net/fitness?retryWrites=true&w=majority";
-let db = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb";
+// let db = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb";
 
 async function startDatabase() {
   const mongo = new MongoMemoryServer();

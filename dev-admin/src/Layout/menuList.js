@@ -4,33 +4,33 @@ const leftSideBarMenu = [
     isActive: true,
     dataToggle: "",
     isExpand: false,
-    link: "javascript:void(0)" ,
+    link: "javascript:void(0)",
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
-    submenu:[],
-    isHover: false
+    submenu: [],
+    isHover: false,
   },
   {
     name: "Spirituality",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/spirituality" ,
+    link: "/spirituality",
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
-    submenu:[],
-    isHover: false
+    submenu: [],
+    isHover: false,
   },
   {
     name: "Category",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/category" ,
+    link: "/category",
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
-    submenu:[],
-    isHover: false
+    submenu: [],
+    isHover: false,
   },
   {
     name: "Appointments",
@@ -53,9 +53,8 @@ const leftSideBarMenu = [
         link: "/booked-appointment-list",
         isExpand: false,
       },
-      
     ],
-    isHover: false
+    isHover: false,
   },
 
   {
@@ -63,13 +62,13 @@ const leftSideBarMenu = [
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/doctor-list" ,
+    link: "/doctor-list",
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
-    submenu:[],
-    isHover: false
+    submenu: [],
+    isHover: false,
   },
-  
+
   {
     name: "Questions Part",
     isActive: false,
@@ -91,11 +90,9 @@ const leftSideBarMenu = [
         link: "/yes-no-questions",
         isExpand: false,
       },
-      
     ],
-    isHover: false
+    isHover: false,
   },
-
 
   {
     name: "Shakti",
@@ -109,31 +106,31 @@ const leftSideBarMenu = [
         name: "Media Solutions",
         isActive: true,
         dataToggle: "",
-        link: "/admin/media-solutions" ,
+        link: "/admin/media-solutions",
         isExpand: false,
       },
-        {
-          name: "Video",
-          isActive: true,
-          dataToggle: "",
-          link: "/admin/video" ,
-          isExpand: false,
-        },
-        {
-          name: "Audio",
-          isActive: true,
-          dataToggle: "",
-          link: "/admin/audio" ,
-          isExpand: false,
-        },
-        {
-          name: "Live",
-          isActive: true,
-          dataToggle: "",
-          isExpand: false,
-        }
-      ],
-      isHover: false
+      {
+        name: "Video",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/video",
+        isExpand: false,
+      },
+      {
+        name: "Audio",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/audio",
+        isExpand: false,
+      },
+      {
+        name: "Live",
+        isActive: true,
+        dataToggle: "",
+        isExpand: false,
+      },
+    ],
+    isHover: false,
   },
   // {
   //   name: "E-com",
@@ -196,9 +193,8 @@ const leftSideBarMenu = [
         link: "/library",
         isExpand: false,
       },
-      
     ],
-    isHover: false
+    isHover: false,
   },
   {
     name: "Charts to be discuss?",
@@ -208,8 +204,7 @@ const leftSideBarMenu = [
     // link: "javascript:void(0)" ,
     iconClass: "icon-bar-graph",
     submenu: [],
-    isHover: false
-
+    isHover: false,
   },
   {
     name: "Settings",
@@ -219,8 +214,7 @@ const leftSideBarMenu = [
     // link: "javascript:void(0)" ,
     iconClass: "icon-contract",
     submenu: [],
-    isHover: false
-
+    isHover: false,
   },
   {
     name: "Users List",
@@ -234,14 +228,14 @@ const leftSideBarMenu = [
         name: "Login",
         isActive: true,
         dataToggle: "",
-        link: "/admin/login" ,
+        link: "/admin/login",
         isExpand: false,
       },
       {
         name: "Regiser",
         isActive: true,
         dataToggle: "",
-        link: "/admin/register" ,
+        link: "/admin/register",
         isExpand: false,
       },
 
@@ -249,15 +243,11 @@ const leftSideBarMenu = [
         name: "Forgot Password",
         isActive: true,
         dataToggle: "",
-        link: "/admin/forgotpassword" ,
+        link: "/admin/forgotpassword",
         isExpand: false,
       },
-
-    
     ],
-    isHover: false
-  
-
+    isHover: false,
   },
 ];
 export { leftSideBarMenu };

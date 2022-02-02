@@ -1,49 +1,71 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { isToggle } from "../Store/slices/toggle.slice"
+import { isToggle } from "../Store/slices/toggle.slice";
 const Header = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleSideBar = () => {
-    console.log("testst")
-    isToggle(dispatch())
-  } 
-    return (
+    console.log("testst");
+    isToggle(dispatch());
+  };
+  return (
     <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      
         <a className="navbar-brand brand-logo mr-5">
-         
-          <img src="images/logo.png" className="mr-2" alt="logo"/>
-          </a>
-       
-         
-          
-        <a className="navbar-brand brand-logo-mini"><img src="images/logo.png" alt="logo"/></a>
+          <img src="images/logo.png" className="mr-2" alt="logo" />
+        </a>
+
+        <a className="navbar-brand brand-logo-mini">
+          <img src="images/logo.png" alt="logo" />
+        </a>
       </div>
       <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <button
+          className="navbar-toggler navbar-toggler align-self-center"
+          type="button"
+          data-toggle="minimize"
+        >
           <span className="icon-menu"></span>
         </button>
         <ul className="navbar-nav mr-lg-2">
           <li className="nav-item nav-search d-none d-lg-block">
             <div className="input-group">
-              <div className="input-group-prepend hover-cursor" id="navbar-search-icon">
+              <div
+                className="input-group-prepend hover-cursor"
+                id="navbar-search-icon"
+              >
                 <span className="input-group-text" id="search">
                   <i className="icon-search"></i>
                 </span>
               </div>
-              <input type="text" className="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search" />
+              <input
+                type="text"
+                className="form-control"
+                id="navbar-search-input"
+                placeholder="Search now"
+                aria-label="search"
+                aria-describedby="search"
+              />
             </div>
           </li>
         </ul>
         <ul className="navbar-nav navbar-nav-right">
           <li className="nav-item dropdown">
-            <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+            <a
+              className="nav-link count-indicator dropdown-toggle"
+              id="notificationDropdown"
+              // href=".navbar-dropdown"
+              data-toggle="dropdown"
+            >
               <i className="icon-bell mx-0"></i>
               <span className="count"></span>
             </a>
-            <div className="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-              <p className="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+            <div
+              className="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+              aria-labelledby="notificationDropdown"
+            >
+              <p className="mb-0 font-weight-normal float-left dropdown-header">
+                Notifications
+              </p>
               <a className="dropdown-item preview-item">
                 <div className="preview-thumbnail">
                   <div className="preview-icon bg-success">
@@ -51,7 +73,9 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="preview-item-content">
-                  <h6 className="preview-subject font-weight-normal">Application Error</h6>
+                  <h6 className="preview-subject font-weight-normal">
+                    Application Error
+                  </h6>
                   <p className="font-weight-light small-text mb-0 text-muted">
                     Just now
                   </p>
@@ -64,7 +88,9 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="preview-item-content">
-                  <h6 className="preview-subject font-weight-normal">Settings</h6>
+                  <h6 className="preview-subject font-weight-normal">
+                    Settings
+                  </h6>
                   <p className="font-weight-light small-text mb-0 text-muted">
                     Private message
                   </p>
@@ -77,7 +103,9 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="preview-item-content">
-                  <h6 className="preview-subject font-weight-normal">New user registration</h6>
+                  <h6 className="preview-subject font-weight-normal">
+                    New user registration
+                  </h6>
                   <p className="font-weight-light small-text mb-0 text-muted">
                     2 days ago
                   </p>
@@ -86,10 +114,18 @@ const Header = () => {
             </div>
           </li>
           <li className="nav-item nav-profile dropdown">
-            <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face28.jpg" alt="profile"/>
+            <a
+              className="nav-link dropdown-toggle"
+              // href=".navbar-dropdown"
+              data-toggle="dropdown"
+              id="profileDropdown"
+            >
+              <img src="images/faces/face28.jpg" alt="profile" />
             </a>
-            <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+            <div
+              className="dropdown-menu dropdown-menu-right navbar-dropdown"
+              aria-labelledby="profileDropdown"
+            >
               <a className="dropdown-item">
                 <i className="ti-settings text-primary"></i>
                 Settings
@@ -101,15 +137,23 @@ const Header = () => {
             </div>
           </li>
           <li className="nav-item nav-settings d-none d-lg-flex">
-            <a className="nav-link" href="#">
+            <a className="nav-link" 
+            // href=""
+            >
               <i className="icon-ellipsis"></i>
             </a>
           </li>
         </ul>
-        <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas" onClick = { handleSideBar }>
+        <button
+          className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+          type="button"
+          data-toggle="offcanvas"
+          onClick={handleSideBar}
+        >
           <span className="icon-menu"></span>
         </button>
       </div>
-    </nav>)
-}
+    </nav>
+  );
+};
 export default Header;

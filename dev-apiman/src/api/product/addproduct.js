@@ -4,7 +4,7 @@ const { getDatabase } = require("../../db/mongo");
 
 router.post("/add", async (req, res) => {
   const db = await getDatabase();
-  console.log("mmmmmmm", productname);
+  // console.log("mmmmmmm", productname);
   try {
     let resp = await db
       .collection("products")
