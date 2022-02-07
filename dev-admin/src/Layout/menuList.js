@@ -26,10 +26,23 @@ const leftSideBarMenu = [
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/category",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
+    iconClass: "icon-layout",
+    submenu: [
+      {
+        name: "Category List",
+        isActive: true,
+        dataToggle: "",
+        link: "/category",
+        isExpand: false,
+      },
+      {
+        name: "About Category",
+        isActive: true,
+        dataToggle: "",
+        link: "/booked-appointment-list",
+        isExpand: false,
+      },
+    ],
     isHover: false,
   },
   {
