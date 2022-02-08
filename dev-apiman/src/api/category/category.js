@@ -62,7 +62,7 @@ router.post("/new", async (req, res) => {
   }
 });
 
-router.get("/about_category", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const db = await getDatabase();
     let dt = await db.collection("mental_health_data").find().toArray();
