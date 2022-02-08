@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
+import { useNavigate } from 'react-router-dom';
 
 import {
   API_ADMIN_URL,
@@ -22,6 +23,9 @@ export default function Home(props) {
   const [categoryData, setcategoryData] = useState([]);
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
+  const [isLoggedIn, setisLoggedIn] = useState(true);
+
+  let hist = useNavigate();
 
   // productlist
   const Productlist = () => {
@@ -33,7 +37,10 @@ export default function Home(props) {
       .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
       .then((res) => {
         setResponseData(res.data.data);
+
         console.log("====pppppp====", res.data.data);
+        { window.localStorage.getItem('Token') }
+        // localStorage.setItem('Name', name);
       })
       .catch((error) => {
         console.log(error);
@@ -50,6 +57,7 @@ export default function Home(props) {
       .then((res) => {
         setbannerData(res.data.data);
         console.log("====bannerData====", res.data.data);
+        { window.localStorage.getItem('Token') }
       })
       .catch((error) => {
         console.log(error);
@@ -66,6 +74,7 @@ export default function Home(props) {
       .then((res) => {
         setcategoryData(res.data.data);
         console.log("====category====", res.data.data);
+        { window.localStorage.getItem('Token') }
       })
       .catch((error) => {
         console.log(error);
@@ -82,6 +91,7 @@ export default function Home(props) {
       .then((res) => {
         setSpritualityData(res.data.data);
         console.log("====Sprituality====", res.data.data);
+        { window.localStorage.getItem('Token') }
       })
       .catch((error) => {
         console.log(error);
@@ -100,12 +110,16 @@ export default function Home(props) {
       .then((res) => {
         setlibraryData(res.data.data);
         console.log("====libraryContent====", res.data.data);
+        { window.localStorage.getItem('Token') }
+
+
       })
       .catch((error) => {
         console.log(error);
       });
   };
   useEffect((props) => {
+
     Productlist(props);
     BannerData();
     Categorylist();
@@ -192,6 +206,21 @@ export default function Home(props) {
     console.log(_id);
     console.log(humanId);
   };
+  const loginsubmit = (url = 0) => {
+
+    let local = localStorage.getItem("Token")
+    if (local) {
+      if (url !== 0) {
+        hist(url)
+      }
+
+     
+    } else {
+      alert("please Register & Login first")
+    }
+  }
+
+
   return (
     <>
       <Login humanId={humanId} />
@@ -204,8 +233,8 @@ export default function Home(props) {
                 <button className="btn-web">
                   <a href="">register for assessment</a>
                 </button>
-                <button className="btn-web">
-                  <Link to="/support">your support network</Link>
+                <button className="btn-web" onClick={() => loginsubmit("/support")}>
+                  your support networks
                 </button>
               </div>
             </div>
@@ -242,12 +271,12 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 <h1>{bannerData?.[3]?.bannerText}</h1>
-                <button className="btn-web">
+                <button className="btn-web" onClick={() => loginsubmit()}>
                   <a href="">register for assessment</a>
                 </button>
-                <button className="btn-web">
-                  {" "}
-                  <Link to="/support">your support network</Link>
+                <button className="btn-web" onClick={() => loginsubmit("/support")}>
+
+                  your support network
                 </button>
               </div>
             </div>
@@ -310,27 +339,28 @@ export default function Home(props) {
               <div className="video-question">
                 <ul>
                   <li>
-                    <Link to="./bookingAppoint">
-                      <button className="btn">Social Gathering?</button>
-                    </Link>
+                    {/* <Link to="./bookingAppoint"> */}
+                    <button className="btn" onClick={() => loginsubmit('./bookingAppoint')} >Social Gathering?
+                    </button>
+                    {/* </Link> */}
                   </li>
                   <li>
-                    <Link to="./bookingAppoint">
-                      <button className="btn">
-                        Having a problem related to study/job?
-                      </button>
-                    </Link>
+                    {/* <Link to="./bookingAppoint"> */}
+                    <button className="btn" onClick={() => loginsubmit("./bookingAppoint")}>
+                      Having a problem related to study/job?
+                    </button>
+                    {/* </Link> */}
                   </li>
                   <li>
-                    <Link to="./bookingAppoint">
-                      <button className="btn">Drugs</button>
-                    </Link>
+                    {/* <Link to="./bookingAppoint"> */}
+                    <button className="btn" onClick={() => loginsubmit("./bookingAppoint")} >Drugs</button>
+                    {/* </Link> */}
                   </li>
 
                   <li>
-                    <Link to="./bookingAppoint">
-                      <button className="btn">Fear of something</button>
-                    </Link>
+                    {/* <Link to="./bookingAppoint"> */}
+                    <button className="btn" onClick={() => loginsubmit("./bookingAppoint")}>Fear of something</button>
+                    {/* </Link> */}
                   </li>
                 </ul>
               </div>
@@ -411,15 +441,15 @@ export default function Home(props) {
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
                     <p>{element.description}</p>
-                    <Link
+                    {/* <Link
                       to={{
                         pathname: "/mentalHealth/" + element.slug,
                       }}
-                    >
-                      <buttton className="btn-web hvr-float-shadow">
-                        get solution
-                      </buttton>
-                    </Link>
+                    > */}
+                    <buttton className="btn-web hvr-float-shadow" onClick={() => loginsubmit("/mentalHealth" + element.slug,)}>
+                      get solution
+                    </buttton>
+                    {/* </Link> */}
                   </div>
                 </div>
               ))}
@@ -524,7 +554,7 @@ export default function Home(props) {
                       </select>
                     </div>
                   </div>
-                  <div className="col-lg-12">
+                  {/* <div className="col-lg-12">
                     <div className="form-group ">
                       <select name="" id="">
                         <option value=""> Depression</option>
@@ -540,13 +570,13 @@ export default function Home(props) {
                         <option value="">schizophrenia</option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="col-lg-12">
-                    <buttton className="btn hvr-float-shadow">
-                      <Link to="/bookingAppoint" style={{ color: "#23adba" }}>
+                    <buttton className="btn hvr-float-shadow" onClick={() => loginsubmit("/bookingAppoint")}>
+                      <span style={{ color: "#23adba" }}>
                         Submit
-                      </Link>
+                      </span>
                     </buttton>
                   </div>
                 </form>
@@ -605,30 +635,32 @@ export default function Home(props) {
                       </div>
                     </div>
                     <div className="ml-3">
-                      <button className="btn-web col-11">
-                        <Link to="/library">View More</Link>
+                      <button className="btn-web col-11" onClick={() => loginsubmit("/library")}>
+                        View More
                       </button>
-                      <a href={globalDataLive.liveLink} target="_blank">
-                        <button className="btn-web col-11 mt-2">
-                          Please Join
-                        </button>
-                      </a>
+                      {/* <a href={globalDataLive.liveLink} target="_blank"> */}
+                      <button className="btn-web col-11 mt-2" onClick={() => loginsubmit(globalDataLive.liveLink)}>
+                        Please Join
+                      </button>
+                      {/* </a> */}
                       <button
+                        // onClick={() =>loginsubmit()}
                         onClick={() => submitformdata(element._id)}
                         data-toggle="modal"
                         data-target="#library-modal"
                         className="btn-web col-11 mt-2"
+
                       >
                         Please Talk
                       </button>
-                      <a
+                      {/* <a
                         href={globalDataGroupCall.groupCallLink}
                         target="_blank"
-                      >
-                        <button className="btn-web col-11 mt-2">
-                          Join Group
-                        </button>
-                      </a>
+                      > */}
+                      <button className="btn-web col-11 mt-2" onClick={() => loginsubmit("globalDataGroupCall.groupCallLink")}>
+                        Join Group
+                      </button>
+                      {/* </a> */}
                     </div>
                     {/* </div> */}
                   </div>
@@ -665,8 +697,8 @@ export default function Home(props) {
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
                     <p>{element.description}</p>
-                    <button className="qst-show btn-web hvr-float-shadow">
-                      <Link to="/spirituality">Get your solution</Link>
+                    <button className="qst-show btn-web hvr-float-shadow" onClick={() => loginsubmit("/spirituality" )}>
+                      Get your solution
                     </button>
                   </div>
                 </div>
@@ -705,8 +737,8 @@ export default function Home(props) {
                     Psychotherapy
                   </li>
                 </ul>
-                <button className="btn-web hvr-float-shadow">
-                  <Link to="/support">know more</Link>
+                <button className="btn-web hvr-float-shadow" onClick={() => loginsubmit("/support")}>
+                  know more
                 </button>
               </div>
             </div>

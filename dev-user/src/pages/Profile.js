@@ -8,6 +8,7 @@ import globalDataCall from "../utill/rdxcall";
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
   const [bookData, setbookData] = useState([]);
+  const [data,setdatta]=useState([]);
 
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -20,6 +21,7 @@ export default function Profile() {
       .then((res) => {
         setprofilData(res.data.data);
         console.log("====profileData====", res.data.data);
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -86,7 +88,7 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h3>Simran Raturi</h3>
-                      {/* {localStorage.getItem('Token')} */}
+                      {localStorage.getItem('Token')}
 
                       <p>
                         <i className="fa fa-phone"></i> +91 123245 567
@@ -234,7 +236,7 @@ export default function Profile() {
                                 </div>
                               </div>
                               <div class="col-lg-12">
-                                <buttton class="btn hvr-float-shadow">
+                                <buttton class="btn hvr-float-shadow" >
                                   Save
                                 </buttton>
                               </div>
