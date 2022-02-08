@@ -48,7 +48,6 @@ router.post("/category/item", validate, async (req, res) => {
 router.post("/:slug", async (req, res) => {
   const slug = req.params.slug
   const db = await getDatabase();
-
   try {
     const { collectiontypedata } = req.body;
     console.log("collectiontypedata", req.body);
