@@ -21,7 +21,7 @@ import YesNoQues from "./pages/YesNoQues";
 import Library from "./pages/Library";
 import LibraryAppoint from "./pages/LibraryAppoint";
 import LibraryAppointBooked from "./pages/LibraryAppointBooked";
-
+import AboutCategory from "./pages/AboutCategory";
 const Login = React.lazy(() => import("./pages/Login"));
 const ProtectedRoute = React.lazy(() => import("./Auth/Protected"));
 const Register = React.lazy(() => import("./pages/Register"));
@@ -54,6 +54,9 @@ const InternalRoute = (props) => {
           />
 
           <Route path="/category" element={<Category />} exact/>
+          <Route path="/about-category" element={<AboutCategory />} exact/>
+
+          AboutCategory
           <Route path="/spirituality" element={<Spirituality />} exact/>
 
           <Route

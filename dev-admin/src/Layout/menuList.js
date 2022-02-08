@@ -39,7 +39,7 @@ const leftSideBarMenu = [
         name: "About Category",
         isActive: true,
         dataToggle: "",
-        link: "/booked-appointment-list",
+        link: "/about-category",
         isExpand: false,
       },
     ],
