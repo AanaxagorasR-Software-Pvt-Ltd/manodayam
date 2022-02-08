@@ -3,7 +3,7 @@ import axios from "../../utill/axios";
 class aboutCategory {
 
     list(data) {
-        return axios.get( '/jfhkgvkfj/about_category', { params: data });
+        return axios.get( '/about_category', { params: data });
     }
     listAll() {
         return axios.get( "/all");
