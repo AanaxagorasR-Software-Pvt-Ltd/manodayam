@@ -86,7 +86,7 @@ export default function Login(props) {
 
   const LoginApi = (props) => {
     if (logineMail == "") {
-      setLoginmailError("Enter your mail");
+      setLoginmailError("Enter yours mail");
     }
     if (loginPassword == "") {
       setloginPasswordError("Enter Your Password");
@@ -99,11 +99,11 @@ export default function Login(props) {
     axios
       .post(`${API_ADMIN_URL}${LOGIN_API}`, loginOptions)
       .then((res) => {
-        // console.log("====llll=====", ((typeof res.data, res.data)));
-        console.log("**********", res.data.token);
-        if (res.status == 200) {
-          // localStorage.setItem("Token", res.data.token);
-          alert("Done");
+        console.log("login", ((typeof res.data, res.data)));
+        // console.log("**********", res.data.token);
+        if (res.data.status) {
+          localStorage.setItem("Token",res.data.Token);
+          alert("Login successfully ");
           window.$("#myModal").modal("hide");
 
           // handleCloseModal();
@@ -137,8 +137,8 @@ export default function Login(props) {
     axios
       .post(`${API_ADMIN_URL}${REGISTER_API}`, RegisterationOptions)
       .then((res) => {
-        console.log("====rrrr=====", res.data);
-        alert("Account Created");
+        console.log(res.data);
+        alert("Registation successfully");
         window.$("#registermodal").modal("hide");
       })
       .catch((error) => {

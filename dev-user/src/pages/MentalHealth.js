@@ -19,6 +19,7 @@ export default function MentalHealth() {
       .then((res) => {
         setmentalHealth(res.data.data);
         console.log("====mentalHealthData====", res.data.data);
+        
       })
       .catch((error) => {
         console.log(error);

@@ -34,7 +34,7 @@ router.post("/user/login", validate, async (req, res) => {
       // res.write("=======this is your");
       // console.log("[[[[[[[[");
     } else {
-      res.status(300).json({ message: "bad credentails", status: false });
+      res.send({ message: "bad credentails", status: false });
       console.log("======");
     }
   } catch (e) {
@@ -42,4 +42,6 @@ router.post("/user/login", validate, async (req, res) => {
     // res.status(500).json({ message: "please try again taler", status: false, data:JSON.stringify(e)});
   }
 });
+
+
 module.exports = router;

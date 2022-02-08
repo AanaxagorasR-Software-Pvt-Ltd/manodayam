@@ -29,9 +29,9 @@ router.post("/library_appoint", validate, async (req, res) => {
     console.log(data);
     if (!body?._id) {
       data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
-    } else {
+ } else {
       data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
-    }
+ }
 
     let insertedId = null;
     let library_appoint = await db.collection("library_appoint");

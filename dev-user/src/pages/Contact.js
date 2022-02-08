@@ -35,17 +35,17 @@ export default function Contact() {
 
                 <div className="pd-add">
                   <h4>Address</h4>
-                  <p>703 Sterling Pl Brooklyn, NY 11216, United States</p>
+                  <p>MEDTECH Incubation Center 3rd Floor, New library building , Sanjay Gandhi Postgraduate Institute of Medical Sciences (SGPGI) New PMSSY Rd, Raibareli Rd,Lucknow,Uttar Pradesh</p>
                 </div>
                 <div className="pd-add">
                   <h4>Phone Number & Email</h4>
-                  <a href="">+1 310 500 7834</a>
+                  <a href="">+91 8882832500</a>
                   <br />
-                  <a href="">kamila-stone@gmail.com</a>
+                  <a href="">info@manodsyam.com</a>
                 </div>
                 <div className="pd-add">
-                  <h4>Follow Us On-</h4>
-                  <ul>
+                  {/* <h4>Follow Us On-</h4> */}
+                  {/* <ul>
                     <li className="hvr-float-shadow">
                       <a href="">
                         <i className="fa fa-facebook"></i>
@@ -66,12 +66,12 @@ export default function Contact() {
                         <i className="fa fa-pinterest"></i>
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>
 
-            <div className="col-lg-6">
+            {/* <div className="col-lg-6">
               <div className="contact-form">
                 <h4>Send me a message!</h4>
                 <form action="">
@@ -113,7 +113,7 @@ export default function Contact() {
                   </div>
                 </form>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

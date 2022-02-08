@@ -2,11 +2,38 @@ import React from "react";
 import { useState } from "react";
 import Login from "./Login";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 export default function Header() {
+  let hist = useNavigate();
   {
     console.log("******j*", localStorage.getItem("Token"));
   }
   const [update, setupdate] = useState(localStorage.getItem("Token"));
+
+
+  
+  const  logoutfunction=()=> {
+    let decision = window.confirm('Are you sure');
+    if (decision) {
+        localStorage.removeItem("Token")
+        hist.push('/');
+    }
+}
+const loginsubmit = (url = 0) => {
+
+  let local = localStorage.getItem("Token")
+  if (local) {
+    if (url !== 0) {
+      hist(url)
+    }
+
+   
+  } else {
+    alert("please Register & Login first")
+  }
+}
+
+
   return (
     <>
       {/* <Login /> */}
@@ -27,10 +54,11 @@ export default function Header() {
                     className="btn-web hvr-float-shadow"
                     data-toggle="tooltip"
                     title="Profile!"
+                    onClick={() => loginsubmit("/profile")}
                   >
-                    <Link to="/profile">
+                    {/* <Link to="/profile"> */}
                       <i className="fa fa-user-circle-o" aria-hidden="true"></i>
-                    </Link>
+                    {/* </Link> */}
                   </button>
                   <button
                     className="btn-web hvr-float-shadow"
@@ -132,6 +160,16 @@ export default function Header() {
                       data-target="#registermodal"
                     >
                       Register
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn-web hvr-float-shadow ipad-none"
+
+
+                      onClick={ logoutfunction}
+                    >
+                      Logout
                     </button>
                   </li>
                   {/* <li className="nav-item">

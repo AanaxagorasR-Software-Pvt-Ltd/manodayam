@@ -37,9 +37,9 @@ export default function Footer() {
             <div class="col-lg-7">
               <div class="footer-navs">
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to="/Home">Home</Link>
-                  </li>
+                  </li> */}
                   <li>
                     <a href="#about">About Us</a>
                   </li>

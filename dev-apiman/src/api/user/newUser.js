@@ -59,4 +59,17 @@ router.post("/user/new", validate, async (req, res) => {
       .json({ message: "please try again later!", status: false, e: e });
   }
 });
+router.get("/", async (req, res) => {
+  try {
+    const db = await getDatabase();
+    let dt = await db
+      .collection("users")
+      .find().toArray()
+    res.json(dt);
+    
+   
+  } catch (err) {
+    console.log("err", err.message);
+  }
+});
 module.exports = router;
