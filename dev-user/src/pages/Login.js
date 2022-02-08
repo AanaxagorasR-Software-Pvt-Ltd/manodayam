@@ -108,7 +108,7 @@ export default function Login(props) {
 
           // handleCloseModal();
         } else {
-          alert("enter correct mail or password");
+          alert("enter a valid mail or password");
         }
       })
       .catch((error) => {
