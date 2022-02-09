@@ -34,7 +34,7 @@ const AboutCategory = () => {
 
   const list = () => {
     axios
-      .get("category-data/about_category")
+      .get("/about-category")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
