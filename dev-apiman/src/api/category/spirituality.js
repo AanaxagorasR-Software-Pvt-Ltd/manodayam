@@ -3,7 +3,32 @@ const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 const ObjectID = require("mongodb").ObjectID;
 
-router.post("/new", async (req, res) => {
+
+
+const imageStorage = multer.diskStorage({
+  destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+const imageUpload = multer({
+  storage: imageStorage,
+  limits: {
+    fieldSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(png|jpg)$/)) {
+      return cb(new Error("Please upload a Image"));
+    }
+    cb(undefined, true);
+  },
+});
+
+router.post("/new", imageUpload.single("img_url"), 
+ async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
   console.log("data", req.body);
@@ -22,6 +47,13 @@ router.post("/new", async (req, res) => {
         description: body.description,
         status: body.status,
       };
+      if (typeof req.file !== 'undefined') {
+        const imagefile = req.file.filename;
+        const imageurl = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
+        data.img_url = imageurl;
+      } else {
+        data.img_url = body.img_url
+      } 
       if (!body?._id) {
         data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
       } else {

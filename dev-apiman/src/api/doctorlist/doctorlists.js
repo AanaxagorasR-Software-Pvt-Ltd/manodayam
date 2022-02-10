@@ -108,6 +108,7 @@ router.get('/', async (req, res) => {
 
   // res.send('hello')
 });
+
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectId(req.params._id);
   console.log("delete", _id);
