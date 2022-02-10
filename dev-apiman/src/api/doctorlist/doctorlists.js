@@ -5,6 +5,7 @@ const { getDatabase } = require("../../db/mongo");
 const multer = require("multer");
 const path = require("path");
 const { env } = process;
+
 const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
 
 const imageStorage = multer.diskStorage({
@@ -102,6 +103,7 @@ router.get("/", async (req, res) => {
 
   // res.send('hello')
 });
+
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectId(req.params._id);
   console.log("delete", _id);

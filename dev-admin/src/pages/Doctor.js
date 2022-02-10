@@ -17,6 +17,7 @@ import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import doctor from "../Store/Connect/Doctor";
 import LeftSideBar from "../Layout/LeftSideBar";
+
 // let Button = new AA()
 
 const Doctor = () => {

@@ -167,9 +167,8 @@ const Product = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -182,9 +181,8 @@ const Product = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -251,9 +249,9 @@ const Product = () => {
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody>{
                             <tr>
-                              <td>1</td>
+                              <td></td>
                               <td>Fidget Cube</td>
                               <td>
                                 <img
@@ -282,6 +280,7 @@ const Product = () => {
                                 </button>
                               </td>
                             </tr>
+                          }
                           </tbody>
                         </table>
                       </div>

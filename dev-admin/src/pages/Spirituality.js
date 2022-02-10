@@ -284,7 +284,7 @@ import React, {
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>
-                                  <img src={v.img} />
+                                  <img src={v.img_url} />
                                 </td>
   
                                   <td>{v.name}</td>
@@ -365,8 +365,12 @@ import React, {
   
     const save = () => {
       let fd = new FormData();
+     
+        for (let prop in data) {
+          fd.append(prop, data[prop]);
+        }
       spirituality
-        .save(data, data.id)
+        .save(fd, data.id)
         .then((res) => {
           alert(res.message);
           handleVisible(false);
@@ -420,9 +424,10 @@ import React, {
                 <input
                   type="file"
                   class="form-control"
-                  value={data.img || ""}
+                  // file={data.img || ""}
+                  // file="file"
                   onChange={(e) => {
-                    handleChange(e.target.value, "img");
+                    handleChange(e.target.files[0], "img_url");
                   }}
                   placeholder="Spirituality img"
                 />
