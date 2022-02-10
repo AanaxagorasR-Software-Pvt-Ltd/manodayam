@@ -89,32 +89,7 @@ export default function MentalHealth() {
                         </li>
                       </ul>
                     </div>
-                    {/* <div className="research-content-detail">
-                    <h4>{element.disorder_head}</h4>
-                    <ul>
-                      <li>
-                        <i className="fa fa-caret-right"></i>{" "}
-                        {element.disorders.disord_1}
-                      </li>
-                      <li>
-                        <i className="fa fa-caret-right"></i>
-                        {element.disorders.disord_2}
-                        meals.{" "}
-                      </li>
-                      <li>
-                        <i className="fa fa-caret-right"></i>{" "}
-                        {element.disorders.disord_3}
-                      </li>
-                      <li>
-                        <i className="fa fa-caret-right"></i>
-                        {element.disorders.disord_4}
-                      </li>
-                      <li>
-                        <i className="fa fa-caret-right"></i>
-                        {element.disorders.disord_5}
-                      </li>
-                    </ul>
-                  </div> */}
+              
                   </div>
                 </div>
               </div>

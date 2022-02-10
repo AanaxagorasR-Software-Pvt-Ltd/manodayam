@@ -446,7 +446,7 @@ export default function Home(props) {
                         pathname: "/mentalHealth/" + element.slug,
                       }}
                     > */}
-                    <buttton className="btn-web hvr-float-shadow" onClick={() => loginsubmit("/mentalHealth" + element.slug,)}>
+                    <buttton className="btn-web hvr-float-shadow" onClick={() => loginsubmit("/mentalHealth/" + element.slug,)}>
                       get solution
                     </buttton>
                     {/* </Link> */}

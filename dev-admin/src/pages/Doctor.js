@@ -1,5 +1,3 @@
-
-
 import React, {
   useEffect,
   useState,
@@ -17,7 +15,7 @@ import { useNavigate } from "react-router";
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
-import doctor from "../Store/Connect/Doctor"
+import doctor from "../Store/Connect/Doctor";
 import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
@@ -33,17 +31,19 @@ const Doctor = () => {
   const formRef = useRef();
 
   const list = () => {
-    axios.get('doctors').then(res => {
-      setData(res);
-      setfilerdata(res);
-    }).catch(err => {
-      console.log('err', err.message);
-    })
-  }
+    axios
+      .get("doctors")
+      .then((res) => {
+        setData(res);
+        setfilerdata(res);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
   React.useEffect(() => {
     list();
   }, []);
-
 
   const handleClickMenu = (name) => {
     setMenuList(
@@ -77,36 +77,33 @@ const Doctor = () => {
       });
   };
   const deleteData = (_id) => {
-
     doctor.delete(_id).then((res) => {
-      alert(res?.message)
+      alert(res?.message);
       list();
-    })
-
-  }
+    });
+  };
   const onsubmit = (e) => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.name.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.specialist.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.experience.toLowerCase().includes(searchField.toLocaleLowerCase())
+        return (
+          value.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+          value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+          value.specialist
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase()) ||
+          value.experience
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase())
+        );
         // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
-
-
-  }
-
-
-
-
+  };
 
   return (
     <>
@@ -150,12 +147,9 @@ const Doctor = () => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
-
-
-
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -227,8 +221,9 @@ const Doctor = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
-                  }`}
+                class={`nav-item nav-profile dropdown ${
+                  profileShow ? "show" : ""
+                }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -241,8 +236,9 @@ const Doctor = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
-                    }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
+                    profileShow ? "show" : ""
+                  }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -275,16 +271,18 @@ const Doctor = () => {
             <ul class="nav">
               {menuList.map((sMenu) => (
                 <li
-                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${sMenu?.isHover ? "hover-open" : ""
-                    }`}
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
+                    sMenu?.isHover ? "hover-open" : ""
+                  }`}
                   key={uuidv4()}
                   onClick={(e) => handleClickMenu(sMenu?.name)}
                   onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
                   onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
                 >
                   <a
-                    className={`nav-link ${sMenu.submenu.length > 0 ? "collapsed" : ""
-                      }`}
+                    className={`nav-link ${
+                      sMenu.submenu.length > 0 ? "collapsed" : ""
+                    }`}
                     href={`${sMenu?.link}`}
                     data-toggle="collapse"
                     aria-expanded={sMenu?.isActive ? true : false}
@@ -350,7 +348,6 @@ const Doctor = () => {
                             <tr>
                               <th>S.N</th>
 
-
                               <th>Doctor Name</th>
                               <th>Doctor Image</th>
 
@@ -362,34 +359,38 @@ const Doctor = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {
-                              filterdata.map((d, i) => (
-                                <tr key={i}>
-                                  <td>{i + 1}</td>
-                                  <td>{d.name}</td>
-                                  <td><img src={d.img_url} /></td>
-                                  <td>{d.experience}</td>
-                                  <td>{d.specialist}</td>
+                            {filterdata.map((d, i) => (
+                              <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{d.name}</td>
+                                <td>
+                                  <img src={d.img_url} />
+                                </td>
+                                <td>{d.experience}</td>
+                                <td>{d.specialist}</td>
 
+                                <td>{d.email}</td>
 
-
-
-                                  <td>{d.email}</td>
-
-
-
-                                  <td>
-                                    <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
-                                      onClick={() => { formRef.current.openForm(d) }}>
-                                      <i class="ti-pencil"></i>
-                                    </button>
-                                    <button type="button" onClick={() => deleteData(d._id)} class="btn btn-sm btn-danger add-btn">
-                                      <i class="ti-trash"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                              ))
-                            }
+                                <td>
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-info border-radius-0 add-btn"
+                                    onClick={() => {
+                                      formRef.current.openForm(d);
+                                    }}
+                                  >
+                                    <i class="ti-pencil"></i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => deleteData(d._id)}
+                                    class="btn btn-sm btn-danger add-btn"
+                                  >
+                                    <i class="ti-trash"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
@@ -414,8 +415,6 @@ const Doctor = () => {
       </div>
     </>
   );
-
-
 };
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
@@ -426,22 +425,26 @@ const Addform = forwardRef((props, ref) => {
   const handleVisible = (state) => {
     setShow(state);
   };
-  const handleChange = (d, k) => { setData({ ...data, [k]: d }) }
+  const handleChange = (d, k) => {
+    setData({ ...data, [k]: d });
+  };
 
   const save = () => {
     let fd = new FormData();
     for (let prop in data) {
       fd.append(prop, data[prop]);
     }
-    doctor.save(fd).then((res) => {
-      alert(res.message)
-      handleVisible(false);
-      list();
-    }).catch(err => {
-      alert(err.message)
-    })
-
-  }
+    doctor
+      .save(fd)
+      .then((res) => {
+        alert(res.message);
+        handleVisible(false);
+        list();
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
   useImperativeHandle(ref, () => ({
     openForm(dt) {
       if (dt?._id) {
@@ -453,7 +456,6 @@ const Addform = forwardRef((props, ref) => {
       handleVisible(true);
     },
   }));
-
 
   // React.useEffect(() => {
   // 	axios.get('doctorlist').then(res => {
@@ -478,17 +480,17 @@ const Addform = forwardRef((props, ref) => {
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <div class="col-md-3  offset-9">
-
-
-              </div>
+              <div class="col-md-3  offset-9"></div>
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="exampleInputUsername1">Doctor Name</label>
                   <input
                     type="text"
                     class="form-control"
-                    value={data.name || ''} onChange={(e) => { handleChange(e.target.value, 'name') }}
+                    value={data.name || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "name");
+                    }}
                     placeholder="Doctor  name"
                   />
                 </div>
@@ -497,11 +499,13 @@ const Addform = forwardRef((props, ref) => {
                   <input
                     type="text"
                     class="form-control"
-                    value={data.email || ''} onChange={(e) => { handleChange(e.target.value, 'email') }}
+                    value={data.email || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "email");
+                    }}
                     placeholder="Doctor  email"
                   />
                 </div>
-
               </div>
 
               <div class="row">
@@ -510,18 +514,22 @@ const Addform = forwardRef((props, ref) => {
                   <input
                     type="file"
                     class="form-control file-upload-info"
-                    onChange={(e) => { handleChange(e.target.files[0], 'img_url') }}
+                    onChange={(e) => {
+                      handleChange(e.target.files[0], "img_url");
+                    }}
                     placeholder="Upload Doctor"
                   />
                 </div>
-
 
                 <div class="form-group col-md-6">
                   <label for="exampleInputUsername1">Docter specialist</label>
                   <input
                     type="text"
                     class="form-control file-upload-info"
-                    value={data.specialist || ''} onChange={(e) => { handleChange(e.target.value, 'specialist') }}
+                    value={data.specialist || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "specialist");
+                    }}
                     placeholder=" Audio Link"
                   />
                 </div>
@@ -530,7 +538,10 @@ const Addform = forwardRef((props, ref) => {
                 <label for="exampleInputUsername1">Doctor Experience</label>
                 <textarea
                   class="form-control"
-                  value={data.experience || ''} onChange={(e) => { handleChange(e.target.value, 'experience') }}
+                  value={data.experience || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "experience");
+                  }}
                   placeholder=" Doctor Description"
                 />
               </div>
@@ -549,7 +560,6 @@ const Addform = forwardRef((props, ref) => {
           <Button variant="primary" onClick={save}>
             Save Changes
           </Button>
-
         </Modal.Footer>
       </Modal>
     </>
@@ -557,5 +567,3 @@ const Addform = forwardRef((props, ref) => {
 });
 
 export default Doctor;
-
-

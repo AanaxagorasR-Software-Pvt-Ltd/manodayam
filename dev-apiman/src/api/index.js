@@ -39,8 +39,8 @@ router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/library`, require("./humanLibrary/libraryAppoint"));
 
 router.use(`/category`, require("./category"));
-router.use(`/about-category`, require("./category"));
 router.use(`/spirituality`, require("./category/spirituality"));
+router.use(`/aboutCategory`, require("./category/category"));
 router.use(`/category-item`, require("./category/category"));
 router.use(`/category-data`, require("./category/category"));
 

@@ -8,14 +8,10 @@ const { env } = process;
 const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
 
 const validate = (req, res, next) => {
-  const {
-    query: { pid },
-  } = req;
-  if (query && pid) {
-    next();
-  } else {
+  console.log("88888", req);
+  console.log( 'text123',req.file)
     res.status(400).json({ status: false, message: "Please provide pid" });
-  }
+  
   //console.log(json.stringify(req.body))
   //const { media_type, parent_id, image } = req.body;
   //console.log("image media",media_type, parent_id, image);
@@ -26,6 +22,7 @@ const validate = (req, res, next) => {
 const imageStorage = multer.diskStorage({
   destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
   filename: (req, file, cb) => {
+    console.log("+++++++", req, file)
     cb(
       null,
       file.fieldname + "_" + Date.now() + path.extname(file.originalname)
@@ -38,6 +35,7 @@ const imageUpload = multer({
     fieldSize: 1000000,
   },
   fileFilter(req, file, cb) {
+    console.log("000000", req, file);
     if (!file.originalname.match(/\.(png|jpg)$/)) {
       return cb(new Error("Please upload a Image"));
     }
@@ -52,9 +50,10 @@ router.post(
     if(typeof req.file !== "undefined") {
       const { filename } = req.file;
       const { pid } = req.query;
-      const url = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + filename;
+      const url = DOMAIN_NAME + "/" + MEDIA_PATH + "/images/" + filename;
       try {
         const db = await getDatabase();
+        console.log("pid....", pid);
         const { insertedId }  = await db
         .collection("media")
         .insertOne({
@@ -76,27 +75,30 @@ router.post(
             .catch(e => {
               res
               .status(200)
-              .json({ status: false, message: "please try again " });
+              .json({ status: false, message: "please try again 1" });
             })
         } else {
           res
           .status(200)
-          .json({ status: false, message: "please try again later" });
+          .json({ status: false, message: "please try again later 2" });
         }
           
       } catch(e2) {
+        console.log("hhhhhhh", e2)
       res
         .status(400)
-        .json({ status: false, message: "please try again later " }); 
+        .json({ status: false, message: "please try again later 3" }); 
       }
       
     } else {
-      res.status(200).json({ status: false, message: "please try again " });
+      res.status(200).json({ status: false, message: "please try again 4" });
     }
 
   },
+
   (error, req, res, next) => {
-    res.status(500).json({ status: false, message: "please try again " });
+    console.log("error@@@@@", error);
+    res.status(500).json({ status: false, message: "please try again 5" });
 
   }
 );

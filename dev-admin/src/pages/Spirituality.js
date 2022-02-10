@@ -283,7 +283,9 @@ import React, {
                               {data.map((v, i) => (
                                 <tr key={i}>
                                   <td>{i + 1}</td>
-                                  <td>{v.img}</td>
+                                  <td>
+                                  <img src={v.img} />
+                                </td>
   
                                   <td>{v.name}</td>
                                   <td>{v.description}</td>

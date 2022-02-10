@@ -1,4 +1,3 @@
-
 const express = require("express");
 const router = express.Router();
 const ObjectId = require("mongodb").ObjectId;
@@ -40,18 +39,17 @@ router.post(
       let data = {
         name: body.name,
         experience: body.experience,
-
-
         specialist: body.specialist,
-        email:body.email
+        email: body.email,
       };
 
-      if (typeof req.file !== 'undefined') {
+      if (typeof req.file !== "undefined") {
         const imagefile = req.file.filename;
-        const imageurl = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
+        const imageurl =
+          DOMAIN_NAME + "/" + MEDIA_PATH + "/images/" + imagefile;
         data.img_url = imageurl;
       } else {
-        data.img_url = body.img_url
+        data.img_url = body.img_url;
       }
 
       console.log(data);
@@ -81,7 +79,6 @@ router.post(
         status: true,
         message: "data inserted",
       });
-
     } catch (e2) {
       res
         .status(400)
@@ -91,19 +88,16 @@ router.post(
   (error, req, res, next) => {
     console.log(error);
     res.status(500).json({ status: false, message: "please try again2 " });
-
   }
 );
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const db = await getDatabase();
-    let dt = await db
-      .collection("doctorListing")
-      .find().toArray()
-    res.send(dt)
+    let dt = await db.collection("doctorListing").find().toArray();
+    res.send(dt);
   } catch (err) {
-    console.log('err', err.message);
+    console.log("err", err.message);
   }
 
   // res.send('hello')
@@ -138,12 +132,12 @@ const validate = (req, res, next) => {
     });
   }
 };
-router.post("/doctorlists",validate, async (req, res) => {
+router.post("/doctorlists", validate, async (req, res) => {
   const db = await getDatabase();
 
   try {
     const { collectionDoctor } = req.body;
-    console.log('collectionDoctor', req.body);
+    console.log("collectionDoctor", req.body);
     const data = await db.collection(`${collectionDoctor}`).find().toArray();
     // console.log('=====jfgjh', data);
     if (Array.isArray(data)) {
@@ -168,13 +162,9 @@ router.post("/doctorlists",validate, async (req, res) => {
   }
 });
 
-
 module.exports = router;
 // if (body.status=="booked") {
 //   EmailService.sendEmailToPatient(body.email, body.doctor.name);
 //   EmailService.sendEmailToDoctor(body.email, body.fullname);
 
-
-
 // }
-

@@ -7,7 +7,7 @@ import { API_ADMIN_URL, DOCTOR_LIST_API } from "../utill/api.endpoints";
 export default function BookingAppoint() {
   const [doctorData, setdoctorData] = useState([]);
 
-  const Productlist = () => {
+  const doctorlist = () => {
     console.log(`${API_ADMIN_URL}${DOCTOR_LIST_API}`);
     const doctorlisting = {
       collectionDoctor: "doctorListing",
@@ -23,7 +23,7 @@ export default function BookingAppoint() {
       });
   };
   useEffect((props) => {
-    Productlist(props);
+    doctorlist(props);
   }, []);
   
   return (

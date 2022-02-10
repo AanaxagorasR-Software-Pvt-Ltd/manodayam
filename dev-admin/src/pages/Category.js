@@ -90,21 +90,17 @@ const Category = () => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.name.toLowerCase().includes(searchField.toLocaleLowerCase())
+        return value.name
+          .toLowerCase()
+          .includes(searchField.toLocaleLowerCase());
         // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
-
-
-  }
+  };
 
   return (
     <>
@@ -148,12 +144,9 @@ const Category = () => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
-
-
-
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -317,8 +310,9 @@ const Category = () => {
                             {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td>{v.img}</td>
-
+                                <td>
+                                  <img src={v.img} />
+                                </td>
                                 <td>{v.name}</td>
                                 <td>{v.slug}</td>
 
