@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 const ObjectID = require("mongodb").ObjectID;
-
-
+const { env } = process;
+const multer = require("multer");
+const path = require("path");
+const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
 
 const imageStorage = multer.diskStorage({
   destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
@@ -47,6 +49,7 @@ router.post("/new", imageUpload.single("img_url"),
         description: body.description,
         status: body.status,
       };
+      console.log(req.file);
       if (typeof req.file !== 'undefined') {
         const imagefile = req.file.filename;
         const imageurl = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;

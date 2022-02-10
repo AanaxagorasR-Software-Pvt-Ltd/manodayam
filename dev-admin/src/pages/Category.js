@@ -311,7 +311,7 @@ const Category = () => {
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>
-                                  <img src={v.img} />
+                                  <img src={v.img_url} />
                                 </td>
                                 <td>{v.name}</td>
                                 <td>{v.slug}</td>
@@ -393,8 +393,12 @@ const Addform = forwardRef((props, ref) => {
 
   const save = () => {
     let fd = new FormData();
+     
+    for (let prop in data) {
+      fd.append(prop, data[prop]);
+    }
     category
-      .save(data, data.id)
+      .save(fd, data.id)
       .then((res) => {
         alert(res.message);
         handleVisible(false);
@@ -460,9 +464,9 @@ const Addform = forwardRef((props, ref) => {
               <input
                 type="file"
                 class="form-control"
-                value={data.img || ""}
+                // value={data.img || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "img");
+                  handleChange(e.target.files[0], "img_url");
                 }}
                 placeholder="Category img"
               />
