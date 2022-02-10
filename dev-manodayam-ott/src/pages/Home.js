@@ -2,32 +2,33 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_SCENE_API } from "./api-link/api.endpoints";
+import { API_ADMIN_URL, HOME_API } from "./api-link/api.endpoints";
 
 export default function Home() {
   const [resData, setResData] = useState([]);
-  const SleepApi = () => {
-    console.log(`${API_ADMIN_URL}${SHAKTHI_SCENE_API}`);
-    const scenelisting = {
+  const HomeApi = () => {
+    console.log(`${API_ADMIN_URL}${HOME_API}`);
+    const homelisting = {
       collectiontype: "audio",
     };
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_SCENE_API}`, scenelisting)
+      .post(`${API_ADMIN_URL}${HOME_API}`, homelisting)
       .then((res) => {
         setResData(res.data.data);
-        console.log("====scene-listing====", res.data.data);
+        console.log("====home-listing====", res.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
   useEffect(() => {
-    SleepApi();
+    HomeApi();
   }, []);
 
   const filterType = resData.filter((element) =>
-  element.type.includes((element = "Home"))
-);
+    element?.type?.includes((element = "Home"))
+  );
+
   return (
     <>
       <div>

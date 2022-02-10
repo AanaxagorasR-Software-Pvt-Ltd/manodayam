@@ -36,7 +36,7 @@ const Library = () => {
       .get("library")
       .then((res) => {
         setData(res);
-        setfilerdata(res)
+        setfilerdata(res);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -88,20 +88,21 @@ const Library = () => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.expert_email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.video_type.toLowerCase().includes(searchField.toLocaleLowerCase())
-
+        return (
+          value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+          value.expert_email
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase()) ||
+          value.video_type
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase())
+        );
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
-
-
-  }
+  };
 
   return (
     <>
@@ -145,12 +146,9 @@ const Library = () => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
-
-
-
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -222,8 +220,9 @@ const Library = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
-                  }`}
+                class={`nav-item nav-profile dropdown ${
+                  profileShow ? "show" : ""
+                }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -236,8 +235,9 @@ const Library = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
-                    }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
+                    profileShow ? "show" : ""
+                  }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -321,7 +321,6 @@ const Library = () => {
                                 <td>{v.video_type}</td>
                                 <td>{v.video_link}</td>
                                 <td>{v.expert_email}</td>
-
 
                                 <td>{v.created}</td>
 
@@ -487,7 +486,7 @@ const Addform = forwardRef((props, ref) => {
                   placeholder="expert email"
                 />
               </div>
-
+{/* 
               <div class="form-group col-md-4">
                 <label for="exampleInputUsername1">Video Upload</label>
                 <input
@@ -498,7 +497,7 @@ const Addform = forwardRef((props, ref) => {
                   }}
                   placeholder="Upload Video"
                 />
-              </div>
+              </div> */}
 
               <div class="form-group col-md-4">
                 <label for="exampleInputUsername1">Video Expert Image</label>

@@ -9,7 +9,8 @@ export default function Body() {
   const SleepApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`);
     const bodylisting = {
-      collectiontype: "videos",
+      collectiontype: "audio",
+
     };
     axios
       .post(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`, bodylisting)
@@ -24,6 +25,11 @@ export default function Body() {
   useEffect(() => {
     SleepApi();
   }, []);
+
+  const filterType = resData.filter((element) =>
+    element?.type?.includes((element = "Body"))
+  );
+
   return (
     <>
       <div>
@@ -39,7 +45,7 @@ export default function Body() {
               <section class="video-cards">
                 <div class="container">
                   <div class="row">
-                    {resData.map((element) => (
+                    {filterType.map((element) => (
                       <div class="col-lg-3 col-sm-5">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>

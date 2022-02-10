@@ -24,7 +24,7 @@ export default function Meditate() {
     MeditateApi();
   }, []);
   const filterType = resData.filter((element) =>
-    element.type.includes((element = "Meditate"))
+    element?.type?.includes((element = "Meditate"))
   );
   return (
     <>

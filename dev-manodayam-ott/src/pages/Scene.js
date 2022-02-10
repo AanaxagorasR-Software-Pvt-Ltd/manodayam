@@ -25,7 +25,7 @@ export default function Scene() {
     SleepApi();
   }, []);
   const filterType = resData.filter((element) =>
-  element.type.includes((element = "Scene"))
+  element?.type?.includes((element = "Scene"))
 );
   return (
     <>

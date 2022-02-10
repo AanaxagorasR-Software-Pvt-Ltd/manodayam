@@ -71,7 +71,7 @@ router.post(
         if (typeof req.files.image !== "undefined") {
           const imagefile = req.files.image[0].filename;
           const imageurl =
-            DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
+            DOMAIN_NAME + "/" + MEDIA_PATH + "/images/" + imagefile;
           data.image = imageurl;
         } else {
           data.image = body.image;
@@ -79,7 +79,7 @@ router.post(
         if (typeof req.files.video !== "undefined") {
           const videofile = req.files.video[0].filename;
           const videourl =
-            DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + videofile;
+            DOMAIN_NAME  + "/" + MEDIA_PATH + "/images/" + videofile;
           data.vedio = videourl;
         } else {
           data.video = body.video;

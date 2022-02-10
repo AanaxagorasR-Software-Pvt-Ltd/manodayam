@@ -37,11 +37,6 @@ router.post("/new", async (req, res) => {
           { $set: data }
         ).insertedId;
 
-        // axios.post(`api/upload/media?pid=${insertedId}`,{
-        //   image: img
-        // })
-        // .then(e => console.log("test"))
-        // .catch(e => console.log("te"))
       } else {
         insertedId = await category.insertOne(data).insertedId;
       }
