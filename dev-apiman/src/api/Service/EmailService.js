@@ -8,18 +8,22 @@ class EmailService {
 
   configure() {
     this.transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
       service: "gmail",
+      secure: true,
       auth: {
-        user: `manodayampl`,
-        pass: `dhruvb@08`,
+        user: `yogitanegi888`,
+        pass: `@[1509510088]@`,
       },
     });
   }
+
   async sendEmailToDoctor(email, details) {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "manodayampl@gmail.com",
+        from: "yogitanegi888@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -67,7 +71,7 @@ class EmailService {
   async sendEmailToPatient(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `manodayampl@gmail.com`,
+      from: `yogitanegi888@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -116,7 +120,7 @@ class EmailService {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "manodayampl@gmail.com",
+        from: "yogitanegi888@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -159,10 +163,7 @@ class EmailService {
           </div>
         </body>
 
-        </html>
-
-                   
-                `,
+        </html> `,
       });
     } catch (err) {
       console.log(err);
@@ -171,7 +172,7 @@ class EmailService {
   async sendEmailToPatientbooked(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `manodayampl@gmail.com`,
+      from: `yogitanegi888@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `

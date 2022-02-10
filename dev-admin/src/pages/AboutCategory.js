@@ -34,7 +34,7 @@ const AboutCategory = () => {
 
   const list = () => {
     axios
-      .get("/about-category")
+      .get("/aboutCategory")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
@@ -295,7 +295,12 @@ const AboutCategory = () => {
                               <th>S.No</th>
                               <th>AboutCategory Name </th>
                               <th>AboutCategory Slug </th>
-                              <th> Description </th>
+                              <th> Ques </th>
+                              <th> Heading </th>
+                              <th> para_1 </th>
+                              <th> para_2 </th>
+                              <th> symptoms </th>
+
                               <th>Status</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -307,7 +312,20 @@ const AboutCategory = () => {
                                 <td>{i + 1}</td>
                                 <td>{v.name}</td>
                                 <td>{v.slug}</td>
-                                <td>{v.description}</td>
+                                <td>{v.ques}</td>
+                                <td>{v.heading}</td>
+                                <td>{v.para_1}</td>
+                                <td>{v.para_2}</td>
+                                <td>
+                                  <strong>**</strong> {v.symptoms}
+                                  {/* <br /> */}
+                                  <hr />
+                                  <strong></strong> {v.sympt.sym_1} <br />
+                                  <strong></strong> {v.sympt.sym_2} <br />
+                                  <strong></strong> {v.sympt.sym_3} <br />
+                                  <strong></strong> {v.sympt.sym_4} <br />
+                                  <strong></strong> {v.sympt.sym_5} <br />
+                                </td>
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
                                 </td>

@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
+const ObjectID = require("mongodb").ObjectID;
+const axios = require("axios");
 
 router.post("/new", async (req, res) => {
   const db = await getDatabase();
@@ -19,7 +21,17 @@ router.post("/new", async (req, res) => {
         // img: body.img,
         name: body.name,
         slug: body.slug,
-        description: body.description,
+        heading: body.heading,
+        ques: body.ques,
+        symptoms: body.symptoms,
+        sym_1: body.sympt.sym_1,
+        sym_2: body.sympt.sym_2,
+        sym_3: body.sympt.sym_3,
+        sym_4: body.sympt.sym_4,
+        sym_5: body.sympt.sym_5,
+        para_1: body.para_1,
+        para_2: body.para_2,
+
         status: body.status,
       };
       if (!body?._id) {
@@ -35,6 +47,12 @@ router.post("/new", async (req, res) => {
           { _id: new ObjectID(body._id) },
           { $set: data }
         ).insertedId;
+
+        // axios.post(`api/upload/media?pid=${insertedId}`,{
+        //   image:"test"
+        // })
+        // .then(e => console.log("test")) 
+        // .catch(e => console.log("te"))
       } else {
         insertedId = await aboutCategory.insertOne(data).insertedId;
       }
@@ -77,7 +95,6 @@ router.get("/", async (req, res) => {
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectID(req.params._id);
   console.log("delete", _id);
-
   try {
     const db = await getDatabase();
     const body = req.body;
@@ -88,10 +105,9 @@ router.delete("/delete/:_id", async (req, res) => {
   } catch (err) {
     console.log("err", err.message);
   }
-
   // res.send('hello')
 });
-// display
+// category display
 
 const validate = (req, res, next) => {
   console.log("=cate===", req.body.collectiontypedata);
