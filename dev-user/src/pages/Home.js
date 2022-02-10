@@ -471,10 +471,10 @@ export default function Home(props) {
                 <div className="col-lg-12">
                   <div className="service-card hvr-float-shadow">
                     {/* <img src={element.img} alt="" /> */}
-                    <img src="assets/image//mentalhealth.png" alt="" />
+                    <img src={element.img_url} alt="" />
 
                     <img
-                      src="assets/image//mentalhealth.png"
+                      src={element.img_url}
                       className="img-bfr"
                       alt=""
                     />
@@ -747,9 +747,9 @@ export default function Home(props) {
               {SpritualityData.map((element) => (
                 <div className="col-lg-12">
                   <div className="service-card spritual-card">
-                    <img src="assets/image//Spirituality.png" alt="" />
+                    <img src={element.img_url} alt="" />
                     <img
-                      src="assets/image//Spirituality.png"
+                      src={element.img_url}
                       className="img-bfr"
                       alt=""
                     />
