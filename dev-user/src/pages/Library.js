@@ -69,7 +69,9 @@ export default function Library(props) {
                   <div className="row">
                     <div className="col-lg-5">
                       <div className="library-video">
-                        <iframe
+                      <img src={element.image} alt="" />
+
+                        {/* <iframe
                           width="100%"
                           height="315"
                           src={element.vedio}
@@ -77,7 +79,7 @@ export default function Library(props) {
                           frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowfullscreen
-                        ></iframe>
+                        ></iframe> */}
                       </div>
                     </div>
                     <div className="col-lg-6 offset-1">

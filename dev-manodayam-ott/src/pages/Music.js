@@ -25,7 +25,7 @@ export default function Music() {
     MusicApi();
   }, []);
   const filterType = resData.filter((element) =>
-  element.type.includes((element = "Music"))
+  element?.type?.includes((element = "Music"))
 );
   return (
     <>

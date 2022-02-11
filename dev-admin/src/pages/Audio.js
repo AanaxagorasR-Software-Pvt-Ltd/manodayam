@@ -343,7 +343,6 @@ const Audio = () => {
                               <th> Audio Title</th>
                               <th> Audio Description</th>
                               <th> Type</th>
-
                               <th>Audio Link</th>
                               <th>Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -472,12 +471,14 @@ const Addform = forwardRef((props, ref) => {
                   onChange={(e) => {
                     handleChange(e.target.value, "type");
                   }}>
-                  <option disabled>Select</option>
+                  <option>Select</option>
+                  <option>Home</option>
                   <option>Sleep</option>
                   <option>Music</option>
                   <option>Meditate</option>
                   <option>Calm Masterclass</option>
                   <option>Scenes</option>
+                  <option>Body</option>
                 </select>
               </div>
               <div class="form-group">

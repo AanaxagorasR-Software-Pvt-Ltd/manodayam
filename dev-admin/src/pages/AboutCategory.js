@@ -293,14 +293,13 @@ const AboutCategory = () => {
                           <thead>
                             <tr>
                               <th>S.No</th>
-                              <th>AboutCategory Name </th>
+                              {/* <th>AboutCategory Name </th> */}
                               <th>AboutCategory Slug </th>
                               <th> Ques </th>
                               <th> Heading </th>
                               <th> para_1 </th>
                               <th> para_2 </th>
                               <th> symptoms </th>
-
                               <th>Status</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -310,7 +309,7 @@ const AboutCategory = () => {
                             {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td>{v.name}</td>
+                                {/* <td>{v.name}</td> */}
                                 <td>{v.slug}</td>
                                 <td>{v.ques}</td>
                                 <td>{v.heading}</td>
@@ -320,11 +319,11 @@ const AboutCategory = () => {
                                   <strong>**</strong> {v.symptoms}
                                   {/* <br /> */}
                                   <hr />
-                                  <strong></strong> {v.sympt.sym_1} <br />
-                                  <strong></strong> {v.sympt.sym_2} <br />
-                                  <strong></strong> {v.sympt.sym_3} <br />
-                                  <strong></strong> {v.sympt.sym_4} <br />
-                                  <strong></strong> {v.sympt.sym_5} <br />
+                                  <strong></strong> {v.sym_1} <br />
+                                  <strong></strong> {v.sym_2} <br />
+                                  <strong></strong> {v.sym_3} <br />
+                                  <strong></strong> {v.sym_4} <br />
+                                  <strong></strong> {v.sym_5} <br />
                                 </td>
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
@@ -427,7 +426,7 @@ const Addform = forwardRef((props, ref) => {
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
-            <div class="form-group">
+            {/* <div class="form-group">
               <label for="exampleInputUsername1">Category Name</label>
               <input
                 type="text"
@@ -438,9 +437,9 @@ const Addform = forwardRef((props, ref) => {
                 }}
                 placeholder="Category Name"
               />
-            </div>
+            </div> */}
             <div class="form-group">
-              <label for="exampleInputUsername1">Category Slug</label>
+              <label for="exampleInputUsername1">Slug</label>
               <input
                 type="text"
                 class="form-control"
@@ -452,20 +451,125 @@ const Addform = forwardRef((props, ref) => {
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputUsername1">
-                AboutCategory description
-              </label>
+              <label for="exampleInputUsername1">Question</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.description || ""}
+                value={data.ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "description");
+                  handleChange(e.target.value, "ques");
                 }}
-                placeholder="Category description"
+                placeholder="Category ques"
               />
             </div>
-
+            <div class="form-group">
+              <label for="exampleInputUsername1">Heading</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.heading || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "heading");
+                }}
+                placeholder="Category Heading"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">First Paragraph</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.para_1 || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "para_1");
+                }}
+                placeholder="Category para 1"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Second Paragraph</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.para_2 || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "para_2");
+                }}
+                placeholder="Category para 2"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">About Symptoms ?</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.symptoms || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "symptoms");
+                }}
+                placeholder="About symptoms"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Symtoms list</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.sym_1 || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "sym_1");
+                }}
+                placeholder="About symptoms"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Symtoms list</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.sym_2 || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "sym_2");
+                }}
+                placeholder="About symptoms"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Symtoms list</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.sym_3 || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "sym_3");
+                }}
+                placeholder="About symptoms"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Symtoms list</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.sym_4 || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "sym_4");
+                }}
+                placeholder="About symptoms"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Symtoms list</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.sym_5 || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "sym_5");
+                }}
+                placeholder="About symptoms"
+              />
+            </div>
             <div class="form-group ">
               <label for="exampleInputUsername1">Category Status</label>
               <select

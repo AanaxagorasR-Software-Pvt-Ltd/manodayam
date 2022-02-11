@@ -4,7 +4,7 @@ const leftSideBarMenu = [
     isActive: true,
     dataToggle: "",
     isExpand: false,
-    link: "javascript:void(0)",
+    link: "/Main",
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
     submenu: [],
@@ -115,13 +115,13 @@ const leftSideBarMenu = [
     // link: "javascript:void(0)" ,
     iconClass: "icon-layout",
     submenu: [
-      {
-        name: "Media Solutions",
-        isActive: true,
-        dataToggle: "",
-        link: "/admin/media-solutions",
-        isExpand: false,
-      },
+      // {
+      //   name: "Media Solutions",
+      //   isActive: true,
+      //   dataToggle: "",
+      //   link: "/admin/media-solutions",
+      //   isExpand: false,
+      // },
       {
         name: "Video",
         isActive: true,

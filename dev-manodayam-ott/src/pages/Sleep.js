@@ -25,7 +25,7 @@ export default function Sleep() {
     SleepApi();
   }, []);
   const filterType = resData.filter((element) =>
-    element.type.includes((element = "Sleep"))
+    element?.type?.includes((element = "Sleep"))
   );
   return (
     <>

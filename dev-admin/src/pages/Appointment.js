@@ -22,7 +22,7 @@ import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
 const Appointment = (props) => {
-  console.log(props)
+  console.log(props);
   const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
@@ -31,7 +31,6 @@ const Appointment = (props) => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
-
 
   const formRef = useRef("");
 
@@ -95,29 +94,25 @@ const Appointment = (props) => {
     try {
       let response = appointment.status({
         _id: id,
-        status: status
+        status: status,
       });
-      alert("Satuts updated sucessfully")
+      alert("Satuts updated sucessfully");
       list();
     } catch (error) {
-      alert("Something went to  wrong")
-
+      alert("Something went to  wrong");
     }
-
-  }
+  };
   const convertToDateTime = (time) => {
     const d = new Date(time);
-    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
-  }
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+  };
   // const filterdata = list.filter((value) => {
   //   if (searchField == "") {
   //     return true
 
-
   //   } else {
   //     value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
   //     return value
-
 
   //   }
   // })
@@ -125,28 +120,21 @@ const Appointment = (props) => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) 
+        return (
+          value.fullname
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase()) ||
+          value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+          value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+        );
         // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
-
-
-  }
-
-
-
-
-
-
-
+  };
 
   return (
     <>
@@ -190,12 +178,9 @@ const Appointment = (props) => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
-
-
-
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -267,8 +252,9 @@ const Appointment = (props) => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
-                  }`}
+                class={`nav-item nav-profile dropdown ${
+                  profileShow ? "show" : ""
+                }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -281,8 +267,9 @@ const Appointment = (props) => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
-                    }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
+                    profileShow ? "show" : ""
+                  }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -315,16 +302,18 @@ const Appointment = (props) => {
             <ul class="nav">
               {menuList.map((sMenu) => (
                 <li
-                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${sMenu?.isHover ? "hover-open" : ""
-                    }`}
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
+                    sMenu?.isHover ? "hover-open" : ""
+                  }`}
                   key={uuidv4()}
                   onClick={(e) => handleClickMenu(sMenu?.name)}
                   onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
                   onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
                 >
                   <a
-                    className={`nav-link ${sMenu.submenu.length > 0 ? "collapsed" : ""
-                      }`}
+                    className={`nav-link ${
+                      sMenu.submenu.length > 0 ? "collapsed" : ""
+                    }`}
                     href={`${sMenu?.link}`}
                     data-toggle="collapse"
                     aria-expanded={sMenu?.isActive ? true : false}
@@ -398,28 +387,27 @@ const Appointment = (props) => {
                             </tr>
                           </thead>
                           <tbody>
-                            {filterdata && filterdata.map((v, i) => (
-                              <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td>
-                                  <strong>Name: </strong> {v.doctor && v.doctor.name}
-                                  <br />
-                                  <strong>Email:</strong> {v.doctor && v.doctor.email} <br />
-
-                                </td>
-
-                                <td>
-                                  <strong>Name: </strong>{v.fullname}
-                                  <br />
-                                  <strong>Email:</strong> {v.email} <br />
-                                  <strong>Phone:</strong> {v.mobileNmb}
-                                </td>
-                                <td>{v.disorder}</td>
-
-                                <td>
-                                  {convertToDateTime(v.schedule)}
-                                </td>
-                                {/* <td>
+                            {filterdata &&
+                              filterdata.map((v, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  <td>
+                                    <strong>Name: </strong>{" "}
+                                    {v.doctor && v.doctor.name}
+                                    <br />
+                                    <strong>Email:</strong>{" "}
+                                    {v.doctor && v.doctor.email} <br />
+                                  </td>
+                                  <td>
+                                    <strong>Name: </strong>
+                                    {v.fullname}
+                                    <br />
+                                    <strong>Email:</strong> {v.email} <br />
+                                    <strong>Phone:</strong> {v.mobileNmb}
+                                  </td>
+                                  <td>{v.disorder}</td>
+                                  <td>{convertToDateTime(v.schedule)}</td>
+                                  {/* <td>
                                   {v.status === "pending"
                                     ? "Pending"
                                     : v.status === "booked"
@@ -453,8 +441,8 @@ const Appointment = (props) => {
                                     <i class="ti-trash"></i>
                                   </button>
                                 </td> */}
-                              </tr>
-                            ))}
+                                </tr>
+                              ))}
                           </tbody>
                         </table>
                       </div>
@@ -516,8 +504,7 @@ const Addform = forwardRef((props, ref) => {
       .catch((err) => {
         alert(err.message);
       });
-  }
-
+  };
 
   return (
     <>

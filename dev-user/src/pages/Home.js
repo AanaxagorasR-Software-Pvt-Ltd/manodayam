@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   API_ADMIN_URL,
@@ -39,7 +39,9 @@ export default function Home(props) {
         setResponseData(res.data.data);
 
         console.log("====pppppp====", res.data.data);
-        { window.localStorage.getItem('Token') }
+        {
+          window.localStorage.getItem("Token");
+        }
         // localStorage.setItem('Name', name);
       })
       .catch((error) => {
@@ -57,7 +59,9 @@ export default function Home(props) {
       .then((res) => {
         setbannerData(res.data.data);
         console.log("====bannerData====", res.data.data);
-        { window.localStorage.getItem('Token') }
+        {
+          window.localStorage.getItem("Token");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -74,7 +78,9 @@ export default function Home(props) {
       .then((res) => {
         setcategoryData(res.data.data);
         console.log("====category====", res.data.data);
-        { window.localStorage.getItem('Token') }
+        {
+          window.localStorage.getItem("Token");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -91,7 +97,9 @@ export default function Home(props) {
       .then((res) => {
         setSpritualityData(res.data.data);
         console.log("====Sprituality====", res.data.data);
-        { window.localStorage.getItem('Token') }
+        {
+          window.localStorage.getItem("Token");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -110,16 +118,15 @@ export default function Home(props) {
       .then((res) => {
         setlibraryData(res.data.data);
         console.log("====libraryContent====", res.data.data);
-        { window.localStorage.getItem('Token') }
-
-
+        {
+          window.localStorage.getItem("Token");
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
   useEffect((props) => {
-
     Productlist(props);
     BannerData();
     Categorylist();
@@ -207,19 +214,15 @@ export default function Home(props) {
     console.log(humanId);
   };
   const loginsubmit = (url = 0) => {
-
-    let local = localStorage.getItem("Token")
+    let local = localStorage.getItem("Token");
     if (local) {
       if (url !== 0) {
-        hist(url)
+        hist(url);
       }
-
-     
     } else {
-      alert("please Register & Login first")
+      alert("please Register & Login first");
     }
-  }
-
+  };
 
   return (
     <>
@@ -230,10 +233,16 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 <h1>{bannerData?.[0]?.bannerText}</h1>
-                <button className="btn-web">
-                  <a href="">register for assessment</a>
+                <button
+                  className="qst-show btn-web hvr-float-shadow btn-web"
+                  onClick={() => loginsubmit("/spirituality")}
+                >
+                  register for assessment
                 </button>
-                <button className="btn-web" onClick={() => loginsubmit("/support")}>
+                <button
+                  className="btn-web"
+                  onClick={() => loginsubmit("/support")}
+                >
                   your support networks
                 </button>
               </div>
@@ -243,12 +252,15 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 <h1>{bannerData?.[1]?.bannerText}</h1>
-                <button className="btn-web">
-                  <a href="">register for assessment</a>
+                <button
+                  className="qst-show btn-web hvr-float-shadow btn-web"
+                  onClick={() => loginsubmit("/spirituality")}
+                >
+                  register for assessment
                 </button>
                 <button className="btn-web">
                   {" "}
-                  <Link to="/support">your support network</Link>
+                  <Link to="/support">your support networks</Link>
                 </button>
               </div>
             </div>
@@ -257,12 +269,15 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 <h1>{bannerData?.[2]?.bannerText}</h1>
-                <button className="btn-web">
-                  <a href="">register for assessment</a>
+                <button
+                  className="qst-show btn-web hvr-float-shadow btn-web"
+                  onClick={() => loginsubmit("/spirituality")}
+                >
+                  register for assessment
                 </button>
                 <button className="btn-web">
                   {" "}
-                  <Link to="/support">your support network</Link>
+                  <Link to="/support">your support networks</Link>
                 </button>
               </div>
             </div>
@@ -271,12 +286,17 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 <h1>{bannerData?.[3]?.bannerText}</h1>
-                <button className="btn-web" onClick={() => loginsubmit()}>
-                  <a href="">register for assessment</a>
+                <button
+                  className="qst-show btn-web hvr-float-shadow btn-web"
+                  onClick={() => loginsubmit("/spirituality")}
+                >
+                  register for assessment
                 </button>
-                <button className="btn-web" onClick={() => loginsubmit("/support")}>
-
-                  your support network
+                <button
+                  className="btn-web"
+                  onClick={() => loginsubmit("/support")}
+                >
+                  your support networks
                 </button>
               </div>
             </div>
@@ -340,26 +360,43 @@ export default function Home(props) {
                 <ul>
                   <li>
                     {/* <Link to="./bookingAppoint"> */}
-                    <button className="btn" onClick={() => loginsubmit('./bookingAppoint')} >Social Gathering?
+                    <button
+                      className="btn"
+                      onClick={() => loginsubmit("./bookingAppoint")}
+                    >
+                      Social Gathering?
                     </button>
                     {/* </Link> */}
                   </li>
                   <li>
                     {/* <Link to="./bookingAppoint"> */}
-                    <button className="btn" onClick={() => loginsubmit("./bookingAppoint")}>
+                    <button
+                      className="btn"
+                      onClick={() => loginsubmit("./bookingAppoint")}
+                    >
                       Having a problem related to study/job?
                     </button>
                     {/* </Link> */}
                   </li>
                   <li>
                     {/* <Link to="./bookingAppoint"> */}
-                    <button className="btn" onClick={() => loginsubmit("./bookingAppoint")} >Drugs</button>
+                    <button
+                      className="btn"
+                      onClick={() => loginsubmit("./bookingAppoint")}
+                    >
+                      Drugs
+                    </button>
                     {/* </Link> */}
                   </li>
 
                   <li>
                     {/* <Link to="./bookingAppoint"> */}
-                    <button className="btn" onClick={() => loginsubmit("./bookingAppoint")}>Fear of something</button>
+                    <button
+                      className="btn"
+                      onClick={() => loginsubmit("./bookingAppoint")}
+                    >
+                      Fear of something
+                    </button>
                     {/* </Link> */}
                   </li>
                 </ul>
@@ -434,9 +471,13 @@ export default function Home(props) {
                 <div className="col-lg-12">
                   <div className="service-card hvr-float-shadow">
                     {/* <img src={element.img} alt="" /> */}
-                    <img src="assets/image//mentalhealth.png" alt="" />
+                    <img src={element.img_url} alt="" />
 
-                    <img src="assets/image//mentalhealth.png" className="img-bfr" alt="" />
+                    <img
+                      src={element.img_url}
+                      className="img-bfr"
+                      alt=""
+                    />
 
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
@@ -446,7 +487,12 @@ export default function Home(props) {
                         pathname: "/mentalHealth/" + element.slug,
                       }}
                     > */}
-                    <buttton className="btn-web hvr-float-shadow" onClick={() => loginsubmit("/mentalHealth/" + element.slug,)}>
+                    <buttton
+                      className="btn-web hvr-float-shadow"
+                      onClick={() =>
+                        loginsubmit("/mentalHealth/" + element.slug)
+                      }
+                    >
                       get solution
                     </buttton>
                     {/* </Link> */}
@@ -573,10 +619,11 @@ export default function Home(props) {
                   </div> */}
 
                   <div className="col-lg-12">
-                    <buttton className="btn hvr-float-shadow" onClick={() => loginsubmit("/bookingAppoint")}>
-                      <span style={{ color: "#23adba" }}>
-                        Submit
-                      </span>
+                    <buttton
+                      className="btn hvr-float-shadow"
+                      onClick={() => loginsubmit("/bookingAppoint")}
+                    >
+                      <span style={{ color: "#23adba" }}>Submit</span>
                     </buttton>
                   </div>
                 </form>
@@ -611,7 +658,7 @@ export default function Home(props) {
                         <div className="d-flex">
                           <div className="">
                             <div className="col-8">
-                              <img src={element.image} alt="" />
+                              {/* <img src={element.image} alt="" /> */}
                             </div>
                             <div className="mr-8">
                               <h3>{element.title}</h3>
@@ -620,47 +667,59 @@ export default function Home(props) {
                           </div>
                           <div className="col-lg-7 mr-6">
                             <div className="library-video">
+                            <img src={element.image} alt="" />
+{/* 
                               <iframe
                                 width="120%"
                                 height="160"
-                                src={element.vedio}
+                                src={element.image}
                                 title="YouTube video player"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen
-                              ></iframe>
+                              ></iframe> */}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="ml-3">
-                      <button className="btn-web col-11" onClick={() => loginsubmit("/library")}>
+                      <button
+                        className="btn-web col-11"
+                        onClick={() => loginsubmit("/library")}
+                      >
                         View More
                       </button>
-                      {/* <a href={globalDataLive.liveLink} target="_blank"> */}
-                      <button className="btn-web col-11 mt-2" onClick={() => loginsubmit(globalDataLive.liveLink)}>
+                      <a href={globalDataLive.liveLink} target="_blank">
+                      <button
+                        className="btn-web col-11 mt-2"
+                        // onClick={() => loginsubmit(globalDataLive.liveLink)}
+                      >
                         Please Join
                       </button>
-                      {/* </a> */}
+                      </a>
                       <button
                         // onClick={() =>loginsubmit()}
                         onClick={() => submitformdata(element._id)}
                         data-toggle="modal"
                         data-target="#library-modal"
                         className="btn-web col-11 mt-2"
-
                       >
                         Please Talk
                       </button>
-                      {/* <a
+                      <a
                         href={globalDataGroupCall.groupCallLink}
                         target="_blank"
-                      > */}
-                      <button className="btn-web col-11 mt-2" onClick={() => loginsubmit("globalDataGroupCall.groupCallLink")}>
+                      >
+                      <button
+                        className="btn-web col-11 mt-2"
+                        // onClick={() =>
+                        //   loginsubmit("globalDataGroupCall.groupCallLink")
+                        // }
+                      >
                         Join Group
                       </button>
-                      {/* </a> */}
+                      </a>
                     </div>
                     {/* </div> */}
                   </div>
@@ -688,16 +747,19 @@ export default function Home(props) {
               {SpritualityData.map((element) => (
                 <div className="col-lg-12">
                   <div className="service-card spritual-card">
-                    <img src="assets/image//Spirituality.png" alt="" />
+                    <img src={element.img_url} alt="" />
                     <img
-                      src="assets/image//Spirituality.png"
+                      src={element.img_url}
                       className="img-bfr"
                       alt=""
                     />
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
                     <p>{element.description}</p>
-                    <button className="qst-show btn-web hvr-float-shadow" onClick={() => loginsubmit("/spirituality" )}>
+                    <button
+                      className="qst-show btn-web hvr-float-shadow"
+                      onClick={() => loginsubmit("/spirituality")}
+                    >
                       Get your solution
                     </button>
                   </div>
@@ -737,7 +799,10 @@ export default function Home(props) {
                     Psychotherapy
                   </li>
                 </ul>
-                <button className="btn-web hvr-float-shadow" onClick={() => loginsubmit("/support")}>
+                <button
+                  className="btn-web hvr-float-shadow"
+                  onClick={() => loginsubmit("/support")}
+                >
                   know more
                 </button>
               </div>

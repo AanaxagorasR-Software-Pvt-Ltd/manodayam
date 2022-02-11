@@ -88,26 +88,24 @@ const LibraryAppoint = () => {
     } catch (error) {
       alert("Something went to  wrong");
     }
-  }
+  };
   const onsubmit = (e) => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) 
- 
+        return (
+          value.fullname
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase()) ||
+          value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+        );
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
+  };
 
-
-  }
-  
   return (
     <>
       <div class="container-scroller">
@@ -149,12 +147,9 @@ const LibraryAppoint = () => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
-
-
-
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -350,9 +345,11 @@ const LibraryAppoint = () => {
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>
-                                    <strong>Name: </strong>{v.library && v.library.title}
+                                    <strong>Name: </strong>
+                                    {v.library && v.library.title}
                                     <br />
-                                    <strong>Email:</strong>{v.library && v.library.expert_email}
+                                    <strong>Email:</strong>
+                                    {v.library && v.library.expert_email}
                                     <br />
                                   </td>
 
@@ -375,7 +372,10 @@ const LibraryAppoint = () => {
                                   <td>
                                     <select
                                       className="mt-2"
-                                      value={v.status || ''} onChange={(e) => { update_status(e.target.value, v._id) }}
+                                      value={v.status || ""}
+                                      onChange={(e) => {
+                                        update_status(e.target.value, v._id);
+                                      }}
                                     >
                                       <option value="pending">Pending</option>
                                       <option value="cancelled">

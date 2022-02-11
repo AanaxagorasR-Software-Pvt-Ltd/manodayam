@@ -14,7 +14,7 @@ router.post("/new",
   console.log("data", req.body);
 
   try {
-    let resp = await db.collection("mental_health_data").findOne({ name: body.name });
+    let resp = await db.collection("mental_health_data").findOne({ heading: body.heading });
     if (resp) {
       if (resp._id == body._id) {
         resp = null;
@@ -23,16 +23,16 @@ router.post("/new",
     if (!resp) {
       let data = {
         // img: body.img,
-        name: body.name,
+        // name: body.name,
         slug: body.slug,
         heading: body.heading,
         ques: body.ques,
         symptoms: body.symptoms,
-        sym_1: body.sympt.sym_1,
-        sym_2: body.sympt.sym_2,
-        sym_3: body.sympt.sym_3,
-        sym_4: body.sympt.sym_4,
-        sym_5: body.sympt.sym_5,
+        sym_1: body.sym_1,
+        sym_2: body.sym_2,
+        sym_3: body.sym_3,
+        sym_4: body.sym_4,
+        sym_5: body.sym_5,
         para_1: body.para_1,
         para_2: body.para_2,
 
@@ -51,12 +51,7 @@ router.post("/new",
           { _id: new ObjectID(body._id) },
           { $set: data }
         ).insertedId;
-
-        // axios.post(`api/upload/media?pid=${insertedId}`,{
-        //   image:"test"
-        // })
-        // .then(e => console.log("test")) 
-        // .catch(e => console.log("te"))
+        
       } else {
         insertedId = await aboutCategory.insertOne(data).insertedId;
       }
