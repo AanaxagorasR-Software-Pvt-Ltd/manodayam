@@ -414,7 +414,6 @@ const Appointment = (props) => {
                                       ? "Booked"
                                       : "Cancelled"}
                                 </td> */}
-                                  z
                                   <td>
                                     <select
                                       className="mt-2"

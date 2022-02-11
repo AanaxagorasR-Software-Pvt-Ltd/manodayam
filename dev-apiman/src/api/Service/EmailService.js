@@ -13,8 +13,8 @@ class EmailService {
       service: "gmail",
       secure: true,
       auth: {
-        user: `yogitanegi888`,
-        pass: `@[1509510088]@`,
+        user: `infomanodayamshakthi6`,
+        pass: `Mano@321`,
       },
     });
   }
@@ -23,7 +23,7 @@ class EmailService {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "yogitanegi888@gmail.com",
+        from: "infomanodayamshakthi6@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -71,7 +71,7 @@ class EmailService {
   async sendEmailToPatient(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `yogitanegi888@gmail.com`,
+      from: `infomanodayamshakthi6@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -120,7 +120,7 @@ class EmailService {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "yogitanegi888@gmail.com",
+        from: "infomanodayamshakthi6@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -172,7 +172,7 @@ class EmailService {
   async sendEmailToPatientbooked(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `yogitanegi888@gmail.com`,
+      from: `infomanodayamshakthi6@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `

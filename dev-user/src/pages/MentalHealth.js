@@ -19,7 +19,6 @@ export default function MentalHealth() {
       .then((res) => {
         setmentalHealth(res.data.data);
         console.log("====mentalHealthData====", res.data.data);
-        
       })
       .catch((error) => {
         console.log(error);
@@ -68,28 +67,26 @@ export default function MentalHealth() {
                       <ul>
                         <li>
                           <i className="fa fa-caret-right"></i>
-                          {element.sympt.sym_1}
+                          {element.sym_1}
                         </li>
                         <li>
                           <i className="fa fa-caret-right mt-2"></i>
-                          {element.sympt.sym_2}
-                          meals.
+                          {element.sym_2}
                         </li>
                         <li>
                           <i className="fa fa-caret-right mt-2"></i>
-                          {element.sympt.sym_3}
+                          {element.sym_3}
                         </li>
                         <li>
                           <i className="fa fa-caret-right mt-2"></i>
-                          {element.sympt.sym_4}
+                          {element.sym_4}
                         </li>
                         <li>
                           <i className="fa fa-caret-right mt-2"></i>
-                          {element.sympt.sym_5}
+                          {element.sym_5}
                         </li>
                       </ul>
                     </div>
-              
                   </div>
                 </div>
               </div>

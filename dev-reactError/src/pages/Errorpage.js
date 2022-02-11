@@ -1,42 +1,47 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect } from "react";
 
 const Errorpage = () => {
-   useEffect(()=>{
-    let oh = document.querySelector('.circle.oh');
+  useEffect(() => {
+    let oh = document.querySelector(".circle.oh");
 
-    document.addEventListener('mousemove', event => {
-     let domainX = [0, document.body.clientWidth],
-     domainY = [0, document.body.clientHeight],
-     range = [-10, 10];
-    
-     let translate = {
-       x: range[0] + (event.clientX - domainX[0]) * (range[1] - range[0]) / (domainX[1] - domainX[0]),
-       y: range[0] + (event.clientY - domainY[0]) * (range[1] - range[0]) / (domainY[1] - domainY[0]) };
-    
-    
-     oh.style.animation = 'none';
-     oh.style.transform = `translate(${translate.x}px, ${translate.y}px)`;
+    document.addEventListener("mousemove", (event) => {
+      let domainX = [0, document.body.clientWidth],
+        domainY = [0, document.body.clientHeight],
+        range = [-10, 10];
+
+      let translate = {
+        x:
+          range[0] +
+          ((event.clientX - domainX[0]) * (range[1] - range[0])) /
+            (domainX[1] - domainX[0]),
+        y:
+          range[0] +
+          ((event.clientY - domainY[0]) * (range[1] - range[0])) /
+            (domainY[1] - domainY[0]),
+      };
+
+      oh.style.animation = "none";
+      oh.style.transform = `translate(${translate.x}px, ${translate.y}px)`;
     });
-    
-    document.addEventListener('mouseleave', event => {
-     oh.style.animation = 'floating 3s linear infinite';
+
+    document.addEventListener("mouseleave", (event) => {
+      oh.style.animation = "floating 3s linear infinite";
     });
-   },[])
-    return (
-        <>
-            <header>
+  }, []);
+  return (
+    <>
+      <header>
         <div className="container">
-            <div className="row">
-                <div className="col-lg-12">
-                    <nav>
-                        <img src="img/logo.png" alt="img not found" />
-                    </nav>
-                </div>
+          <div className="row">
+            <div className="col-lg-12">
+              <nav>
+                <img src="img/logo.png" alt="img not found" />
+              </nav>
             </div>
+          </div>
         </div>
-    </header>
-    <div className="stars">
+      </header>
+      <div className="stars">
         <div className="star"></div>
         <div className="star"></div>
         <div className="star"></div>
@@ -119,7 +124,6 @@ const Errorpage = () => {
         <div className="star"></div>
       </div>
 
-
       <div className="center">
         <div className="circle circle--outer"></div>
         <div className="circle circle--inner">
@@ -148,8 +152,18 @@ const Errorpage = () => {
               </div>
               <div className="astronaut-body"></div>
             </div>
-            <svg className="astronaut-wire" viewBox="-9 -9 259 823" width="259" height="823">
-              <path d="M241 0c-24 54-30 113-78 148S63 159 27 215c-35 55 32 102 73 141s103 94 98 166c-6 97-169 66-192 157-10 43-8 84 9 126" fill="none" strokeWidth="6" stroke="#FFF"></path>
+            <svg
+              className="astronaut-wire"
+              viewBox="-9 -9 259 823"
+              width="259"
+              height="823"
+            >
+              <path
+                d="M241 0c-24 54-30 113-78 148S63 159 27 215c-35 55 32 102 73 141s103 94 98 166c-6 97-169 66-192 157-10 43-8 84 9 126"
+                fill="none"
+                strokeWidth="6"
+                stroke="#FFF"
+              ></path>
             </svg>
             <div className="circle planet">
               <div className="craters">
@@ -164,10 +178,16 @@ const Errorpage = () => {
             <div className="astronaut-hands">
               <div className="astronaut-hand hand--left">
                 <svg width="35" height="75">
-                  <path d="M30.23 17.209c-7.925 5.118-11.657 12.786-11.226 22.975-7.113.934-12.948 4.345-18.44 5.117C-1.951 26.539 3.92 9.346 18.635 1.369 30.66-4.39 39.53 9.398 30.23 17.209z" fill="#D2D2D2"></path>
+                  <path
+                    d="M30.23 17.209c-7.925 5.118-11.657 12.786-11.226 22.975-7.113.934-12.948 4.345-18.44 5.117C-1.951 26.539 3.92 9.346 18.635 1.369 30.66-4.39 39.53 9.398 30.23 17.209z"
+                    fill="#D2D2D2"
+                  ></path>
                   <g fill="none" stroke="#999" strokeLinecap="round">
                     <path d="M11.78 6.977c7.983.129 13.547 3.968 16.308 11.111M4.67 17.161c7.307-.379 13.1 1.924 17.93 6.94"></path>
-                    <path d="M.816 31.334c6.439-2.441 12.295-1.746 18.149 2.488" strokeLinejoin="round"></path>
+                    <path
+                      d="M.816 31.334c6.439-2.441 12.295-1.746 18.149 2.488"
+                      strokeLinejoin="round"
+                    ></path>
                   </g>
                   <g fill="#fff">
                     <path d="M7.721 37.171c5.875-1.994 12.264 1.156 14.258 7.031l1.218 3.588c1.995 5.875-1.156 12.264-7.03 14.258-5.875 1.995-12.264-1.156-14.259-7.031L.69 51.429c-1.994-5.875 1.156-12.263 7.031-14.258z"></path>
@@ -178,10 +198,16 @@ const Errorpage = () => {
               </div>
               <div className="astronaut-hand hand--right">
                 <svg width="35" height="75">
-                  <path d="M30.23 17.209c-7.925 5.118-11.657 12.786-11.226 22.975-7.113.934-12.948 4.345-18.44 5.117C-1.951 26.539 3.92 9.346 18.635 1.369 30.66-4.39 39.53 9.398 30.23 17.209z" fill="#D2D2D2"></path>
+                  <path
+                    d="M30.23 17.209c-7.925 5.118-11.657 12.786-11.226 22.975-7.113.934-12.948 4.345-18.44 5.117C-1.951 26.539 3.92 9.346 18.635 1.369 30.66-4.39 39.53 9.398 30.23 17.209z"
+                    fill="#D2D2D2"
+                  ></path>
                   <g fill="none" stroke="#999" strokeLinecap="round">
                     <path d="M11.78 6.977c7.983.129 13.547 3.968 16.308 11.111M4.67 17.161c7.307-.379 13.1 1.924 17.93 6.94"></path>
-                    <path d="M.816 31.334c6.439-2.441 12.295-1.746 18.149 2.488" strokeLinejoin="round"></path>
+                    <path
+                      d="M.816 31.334c6.439-2.441 12.295-1.746 18.149 2.488"
+                      strokeLinejoin="round"
+                    ></path>
                   </g>
                   <g fill="#fff">
                     <path d="M7.721 37.171c5.875-1.994 12.264 1.156 14.258 7.031l1.218 3.588c1.995 5.875-1.156 12.264-7.03 14.258-5.875 1.995-12.264-1.156-14.259-7.031L.69 51.429c-1.994-5.875 1.156-12.263 7.031-14.258z"></path>
@@ -192,15 +218,26 @@ const Errorpage = () => {
               </div>
             </div>
           </div>
-          <div className="button" >GO HOME</div>
+          <a
+            className="button"
+            href="http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/"
+            target="_blank"
+          >
+            GO HOME
+          </a>
         </div>
         <div className="sorry">Oops! Sorry, page not found.</div>
-      </div><a className="inspiration" href="https://dribbble.com/shots/4571035-Error-404" target="_blank" rel="noopener">inspiration</a>
-
-
-
-        </>
-    );
+      </div>
+      <a
+        className="inspiration"
+        href="https://dribbble.com/shots/4571035-Error-404"
+        target="_blank"
+        rel="noopener"
+      >
+        inspiration
+      </a>
+    </>
+  );
 };
 
 export default Errorpage;
