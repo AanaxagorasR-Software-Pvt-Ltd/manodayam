@@ -22,17 +22,6 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Spirituality",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "/spirituality",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
-  },
-  {
     name: "Banner",
     isActive: false,
     dataToggle: "",

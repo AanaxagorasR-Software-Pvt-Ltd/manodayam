@@ -232,7 +232,9 @@ export default function Home(props) {
           <div className="web-banner web-banner3 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[0]?.bannerText}</h1>
+                {/* <h1>{bannerData?.[0]?.bannerText}</h1> */}
+                <h1>Your Data is Secured</h1>
+
                 <button
                   className="qst-show btn-web hvr-float-shadow btn-web"
                   onClick={() => loginsubmit("/spirituality")}
@@ -251,7 +253,8 @@ export default function Home(props) {
           <div className="web-banner web-banner1 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[1]?.bannerText}</h1>
+                {/* <h1>{bannerData?.[1]?.bannerText}</h1> */}
+                <h1>Mental Health for Longevity-Swayam</h1>
                 <button
                   className="qst-show btn-web hvr-float-shadow btn-web"
                   onClick={() => loginsubmit("/spirituality")}
@@ -268,7 +271,8 @@ export default function Home(props) {
           <div className="web-banner web-banner2 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[2]?.bannerText}</h1>
+                {/* <h1>{bannerData?.[2]?.bannerText}</h1> */}
+                <h1>Solutions available as Meditation, Spirituality, Video games-Shakthi</h1>
                 <button
                   className="qst-show btn-web hvr-float-shadow btn-web"
                   onClick={() => loginsubmit("/spirituality")}
@@ -286,6 +290,7 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 <h1>{bannerData?.[3]?.bannerText}</h1>
+                <h1>Meet, Your Mentor or Coach-Digital Human Library</h1>
                 <button
                   className="qst-show btn-web hvr-float-shadow btn-web"
                   onClick={() => loginsubmit("/spirituality")}
