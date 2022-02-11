@@ -11,11 +11,13 @@ class EmailService {
       host: 'smtp.gmail.com',
       port: 465,
       service: "gmail",
-      secure: true,
+      secure: false,
       auth: {
         user: `infomanodayamshakthi6`,
         pass: `Mano@321`,
+        
       },
+      tls: {rejectUnauthorized: false},
     });
   }
 
@@ -50,9 +52,9 @@ class EmailService {
             <img src="https://i.imgur.com/AHmU15k.jpg" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
             <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
               <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
-              <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">congratulations Your appointment has been schedule on
-              <strong style="box-sizing: border-box;font-weight: bolder;">${details.schedule} </strong>. I hope you will be able to accept our invitation to attend this important session. your patient name <strong style="box-sizing: border-box;font-weight: bolder;">${details.name} </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${details.disorder}</strong>
-                ${details.email}</p>
+              <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;"> Hello Doctor ! We Would  like to inform you that we have booked  your schedule  on 
+              <strong style="box-sizing: border-box;font-weight: bolder;">${details.schedule} </strong>. pls acknowledge this appointment !! your patient name  is <strong style="box-sizing: border-box;font-weight: bolder;">${details.name} </strong> Problem statement  <strong style="box-sizing: border-box;font-weight: bolder;">${details.disorder}</strong>
+                
                
                                 
             </div>
@@ -97,14 +99,13 @@ class EmailService {
         <img src="https://i.imgur.com/AHmU15k.jpg" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
         <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
           <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
-          <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">congratulations Your appointment has been schedule on
-          <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.schedule}</strong> . I hope you will be able to accept our invitation to attend this important session. Please
-            confirm your participation by
-            filling the on-line registration form available at:
+          <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> on 
+          <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.schedule}</strong> Please confirm your acceptance via on-line registration available 
+           
             <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/</strong>. If you
-            have any questions or require further information, please do not hesitate to contact Doctor <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
+            have any questions or queries before or after thw session ,pls feel free to  mail <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
            <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>  
-            please vist this link and in meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/profile</strong></p>
+            We Manodayam <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/profile</strong> Wish you good health !! warm regards Team Manodayam </p>
           
         </div>
       </div>
@@ -146,10 +147,10 @@ class EmailService {
             <img src="https://i.imgur.com/AHmU15k.jpg" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
             <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
               <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
-              <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">congratulations Your appointment has been schedule on
+              <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;"> Hello Doctor ! We Would  like to inform you that we have booked  your schedule  on 
               <strong style="box-sizing: border-box;font-weight: bolder;">${
                 details.created
-              } </strong>. I hope you will be able to accept our invitation to attend this important session. your patient name <strong style="box-sizing: border-box;font-weight: bolder;">${
+              } </strong>. pls acknowledge this appointment !! your patient name  is  <strong style="box-sizing: border-box;font-weight: bolder;">${
           details.name
         } </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${
           details.disorder
@@ -199,12 +200,11 @@ class EmailService {
         <img src="https://i.imgur.com/AHmU15k.jpg" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
         <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
           <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
-          <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">congratulations Your appointment has been schedule on
-          <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> . I hope you will be able to accept our invitation to attend this important session. Please
-            confirm your participation by
-            filling the on-line registration form available at:
-            <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/</strong>. If you
-            have any questions or require further information, please do not hesitate to contact Docter <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
+          <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with
+          <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> .Please confirm your acceptance via on-line registration available 
+ 
+            <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/</strong>.
+            If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
            <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/profile</strong> </p>
          
         </div>
@@ -244,8 +244,8 @@ module.exports = new EmailService();
 
 // <body>
 
-//   <div class="card" style="width: 24rem;">
-//     <img src="docter.jpg" class="card-img-top" style="width: 100%; height: auto;" alt="...">
+//   <div class="card" style="width: 24rem; border:none">
+//     <img src="docter.jpg" class="card-img-top" st=yle="width: 100%; height: auto;" alt="...">
 //     <div class="card-body">
 //       <h5 class="card-title">Vedio meeting</h5>
 //       <p class="card-text font-italic text-info">congratulations Your appointment has been schedule on
@@ -255,5 +255,5 @@ module.exports = new EmailService();
 //     </div>
 //   </div>
 // </body>
-
+// border-box;position: relative;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;
 // </html>
