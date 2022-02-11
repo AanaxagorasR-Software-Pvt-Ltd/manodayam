@@ -20,7 +20,10 @@ const validate = (req, res, next) => {
 };
 
 const imageStorage = multer.diskStorage({
-  destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+  // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "../../../uploads/images"))
+  },
   filename: (req, file, cb) => {
     console.log("+++++++", req, file)
     cb(

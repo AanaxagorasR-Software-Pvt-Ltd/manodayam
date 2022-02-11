@@ -4,17 +4,15 @@ const { getDatabase } = require("../../db/mongo");
 const ObjectID = require("mongodb").ObjectID;
 const axios = require("axios");
 
-
-
-
-router.post("/new",
- async (req, res) => {
+router.post("/new", async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
   console.log("data", req.body);
 
   try {
-    let resp = await db.collection("mental_health_data").findOne({ heading: body.heading });
+    let resp = await db
+      .collection("mental_health_data")
+      .findOne({ heading: body.heading });
     if (resp) {
       if (resp._id == body._id) {
         resp = null;
@@ -51,7 +49,6 @@ router.post("/new",
           { _id: new ObjectID(body._id) },
           { $set: data }
         ).insertedId;
-        
       } else {
         insertedId = await aboutCategory.insertOne(data).insertedId;
       }
@@ -152,12 +149,15 @@ router.post("/category/item", validate, async (req, res) => {
 // mentalHealthData
 
 router.post("/:slug", async (req, res) => {
-  const slug = req.params.slug
+  const slug = req.params.slug;
   const db = await getDatabase();
   try {
     const { collectiontypedata } = req.body;
     console.log("collectiontypedata", req.body);
-    const data = await db.collection("mental_health_data").find({slug : slug}).toArray();
+    const data = await db
+      .collection("mental_health_data")
+      .find({ slug: slug })
+      .toArray();
     console.log("===category===", data);
     if (Array.isArray(data)) {
       res.status(200).json({
@@ -180,6 +180,5 @@ router.post("/:slug", async (req, res) => {
     });
   }
 });
-
 
 module.exports = router;

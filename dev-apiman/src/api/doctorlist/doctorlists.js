@@ -9,8 +9,10 @@ const { env } = process;
 const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
 
 const imageStorage = multer.diskStorage({
-  destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
-  
+  // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "../../../uploads/images"))
+  },
   filename: (req, file, cb) => {
     cb(
       null,

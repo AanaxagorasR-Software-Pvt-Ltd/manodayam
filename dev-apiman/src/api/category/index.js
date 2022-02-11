@@ -5,15 +5,20 @@ const ObjectID = require("mongodb").ObjectID;
 const { env } = process;
 const multer = require("multer");
 const path = require("path");
-const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
+const { DOMAIN_NAME, PORT, MEDIA_PATH, MEDIA_TYEP_1 } = require("../../config");
 
 // const axios = require("axios");
 
 
 
 
+console.log("skjfhcklxckj", path.join(__dirname, "../../../uploads/images"))
 const imageStorage = multer.diskStorage({
-  destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+  // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "../../../uploads/images"))
+  },
+
   filename: (req, file, cb) => {
     cb(
       null,
@@ -58,7 +63,7 @@ router.post("/new",imageUpload.single("img_url"), async (req, res) => {
       console.log(req.file);
       if (typeof req.file !== 'undefined') {
         const imagefile = req.file.filename;
-        const imageurl = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
+        const imageurl = DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/" + MEDIA_TYEP_1 + "/" + imagefile;
         data.img_url = imageurl;
       } else {
         data.img_url = body.img_url
