@@ -425,7 +425,7 @@ const Appointment = (props) => {
                                     : v.status === "booked"
                                       ? "Booked"
                                       : "Cancelled"}
-                                </td> */}z
+                                </td> */}
                                 <td>
                                   <select className="mt-2" value={v.status || ''} onChange={(e) => { update_status(e.target.value, v._id) }}>
                                     <option value="pending">Pending</option>

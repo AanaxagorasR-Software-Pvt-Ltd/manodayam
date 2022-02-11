@@ -307,9 +307,9 @@ router.post("/status", async (req, res) => {
 		console.log("err", err.message);
 	}
 
-	res.json({
-		message: "Update successfull",
-	});
+	// res.json({
+	// 	message: "Update successfull",
+	// });
 });
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectID(req.params._id);
