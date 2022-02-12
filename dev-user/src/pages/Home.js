@@ -709,7 +709,7 @@ useEffect(()=>{
                               <h5>{element.video_type}</h5>
                             </div>
                           </div>
-                          <div className="col-lg-7 mr-4">
+                          <div className="col-lg-6 mr-4">
                             {/* <div className="library-video"> */}
                             <video
                               id="my-library-video"
