@@ -8,16 +8,15 @@ class EmailService {
 
   configure() {
     this.transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
+      host: "smtp.gmail.com",
       port: 465,
       service: "gmail",
       secure: false,
       auth: {
         user: `infomanodayamshakthi6`,
         pass: `Mano@321`,
-        
       },
-      tls: {rejectUnauthorized: false},
+      tls: { rejectUnauthorized: false },
     });
   }
 
@@ -102,10 +101,10 @@ class EmailService {
           <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> on 
           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.schedule}</strong> Please confirm your acceptance via on-line registration available 
            
-            <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/</strong>. If you
+            <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>. If you
             have any questions or queries before or after thw session ,pls feel free to  mail <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
            <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>  
-            We Manodayam <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/profile</strong> Wish you good health !! warm regards Team Manodayam </p>
+            We Manodayam <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/profile</strong> Wish you good health !! warm regards Team Manodayam </p>
           
         </div>
       </div>
@@ -157,8 +156,7 @@ class EmailService {
         }</strong>
                 ${details.email}</p>
               <a href="${
-                "http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/dev-video-call/" +
-                details.room_no
+                "https://swarnratnaindia.com/dev-video-call/" + details.room_no
               }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a>
             </div>
           </div>
@@ -203,9 +201,9 @@ class EmailService {
           <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with
           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> .Please confirm your acceptance via on-line registration available 
  
-            <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/</strong>.
+            <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
             If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
-           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/profile</strong> </p>
+           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://swarnratnaindia.com/profile</strong> </p>
          
         </div>
       </div>
