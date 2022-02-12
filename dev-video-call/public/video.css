@@ -39,6 +39,7 @@ video {
   color: #020202;
   padding: 5px;
   justify-content: space-between;
+  margin-top: 500px;
 }
 .main__controls__blocks {
   display: flex;

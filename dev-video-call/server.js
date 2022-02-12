@@ -13,11 +13,13 @@ app.use('/peerjs', peer);
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.get('/', (req, res) => {
-	res.send(uuidv4());
+	res.redirect(`/${uuidv4()}`)
 });
 app.get('/:room', (req, res) => {
 	console.log(8798798798797979);
-	axios.get('http://localhost:3020/api/question').then(response => {
+	// res.render('index', { RoomId: req.params.room, });
+
+	axios.get('http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/dev-apiman/api/question').then(response => {
 		console.log(9999999, response.data)
 		res.render('index', { RoomId: req.params.room, data: response.data });
 	}).catch(err => {
