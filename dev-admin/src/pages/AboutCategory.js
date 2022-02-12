@@ -92,7 +92,7 @@ const AboutCategory = () => {
       if (searchField == "") {
         return true;
       } else {
-        return value.name
+        return value.slug
           .toLowerCase()
           .includes(searchField.toLocaleLowerCase());
         // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
@@ -602,6 +602,18 @@ const Addform = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* <Bmodal show={shows} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+         ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal> */}
     </>
   );
 });

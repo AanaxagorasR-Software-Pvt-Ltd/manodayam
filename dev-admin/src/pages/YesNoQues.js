@@ -25,6 +25,8 @@ const YesNoQues = () => {
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
+  const [searchField, setSearchField] = useState("");
+  const [filterdata, setfilerdata] = React.useState([]);
   const formRef = useRef();
   const list = () => {
     axios
@@ -32,6 +34,7 @@ const YesNoQues = () => {
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
+        setfilerdata(res);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -80,6 +83,24 @@ const YesNoQues = () => {
       list();
     });
   };
+  const onsubmit = (e) => {
+    e.preventDefault();
+    const searchlist = data.filter((value) => {
+      if (searchField == "") {
+        return true
+
+
+      } else {
+        return value.category.toLowerCase().includes(searchField.toLocaleLowerCase()) 
+   
+      }
+
+
+    })
+    setfilerdata(searchlist);
+
+
+  }
 
   return (
     <>
@@ -114,14 +135,18 @@ const YesNoQues = () => {
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  />
+                  <form onSubmit={onsubmit} >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="navbar-search-input"
+                      placeholder="Search now"
+                      aria-label="search"
+                      aria-describedby="search"
+                      value={data.status}
+                      onChange={(event) => { setSearchField(event.target.value) }}
+                    />
+                  </form>
                 </div>
               </li>
             </ul>
@@ -327,7 +352,7 @@ const YesNoQues = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((v, i) => (
+                            {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>

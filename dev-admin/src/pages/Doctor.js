@@ -17,6 +17,8 @@ import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import doctor from "../Store/Connect/Doctor";
 import LeftSideBar from "../Layout/LeftSideBar";
+// import { Modal as Bmodal } from "react-bootstrap";
+
 
 // let Button = new AA()
 
@@ -29,6 +31,7 @@ const Doctor = () => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
+
   const formRef = useRef();
 
   const list = () => {
@@ -105,7 +108,7 @@ const Doctor = () => {
     });
     setfilerdata(searchlist);
   };
-
+ 
   return (
     <>
       <Addform ref={formRef} list={list} />
@@ -414,6 +417,7 @@ const Doctor = () => {
           {/* partial */}
         </div>
       </div>
+    
     </>
   );
 };
@@ -421,6 +425,10 @@ const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [media, setMedia] = useState([]);
   const [data, setData] = useState({});
+  // const[shows,setshows]=useState(false);
+
+
+  // const[alertData,setAlerdata]=useState({title:"",body:""})
   const { list } = props;
 
   const handleVisible = (state) => {
@@ -439,11 +447,15 @@ const Addform = forwardRef((props, ref) => {
       .save(fd)
       .then((res) => {
         alert(res.message);
+        // setAlerdata({title:"Docter",body:res.message})
+        // setshows(true)
         handleVisible(false);
         list();
       })
       .catch((err) => {
         alert(err.message);
+        // setAlerdata({title:"Sorry",body:err.message})
+        // setshows(true)
       });
   };
   useImperativeHandle(ref, () => ({
@@ -465,6 +477,7 @@ const Addform = forwardRef((props, ref) => {
   // 		console.log('err', err.message);
   // 	})
   // }, []);
+  // const handleClose = () => setshows(false);
 
   return (
     <>
@@ -563,6 +576,18 @@ const Addform = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* <Bmodal show={shows} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+         ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal> */}
     </>
   );
 });

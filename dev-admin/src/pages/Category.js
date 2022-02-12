@@ -17,6 +17,7 @@ import category from "../Store/Services/category";
 import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
 import LeftSideBar from "../Layout/LeftSideBar";
+// import { Modal as Bmodal } from "react-bootstrap";
 
 // let Button = new AA()
 
@@ -101,6 +102,7 @@ const Category = () => {
     });
     setfilerdata(searchlist);
   };
+  
 
   return (
     <>
@@ -371,6 +373,11 @@ const Category = () => {
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
+  // const[shows,setshows]=useState(false);
+
+
+  // const[alertData,setAlerdata]=useState({title:"",body:""})
+
   const { list } = props;
 
   const handleChange = (v, k) => {
@@ -401,13 +408,18 @@ const Addform = forwardRef((props, ref) => {
       .save(fd, data.id)
       .then((res) => {
         alert(res.message);
+        // setAlerdata({title:"Docter",body:res.message})
+        // setshows(true)
         handleVisible(false);
         list();
       })
       .catch((err) => {
         alert(err.message);
+        // setAlerdata({title:"Docter",body:err.message})
+        // setshows(true)
       });
   };
+  // const handleClose = () => setshows(false);
 
   return (
     <>
@@ -503,6 +515,19 @@ const Addform = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* <Bmodal show={shows} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+         ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal> */}
+
     </>
   );
 });

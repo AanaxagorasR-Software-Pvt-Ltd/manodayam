@@ -96,7 +96,7 @@ const Appointment = (props) => {
         _id: id,
         status: status,
       });
-      alert("Satuts updated sucessfully");
+      alert("Status updated sucessfully");
       list();
     } catch (error) {
       alert("Something went to  wrong");
@@ -126,8 +126,8 @@ const Appointment = (props) => {
           value.fullname
             .toLowerCase()
             .includes(searchField.toLocaleLowerCase()) ||
-          value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
           value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+         
         );
         // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
         //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())

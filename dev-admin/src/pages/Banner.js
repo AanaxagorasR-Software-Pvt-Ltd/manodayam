@@ -23,6 +23,9 @@ const Banner = () => {
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
+  // const [searchField, setSearchField] = useState("");
+  // const [filterdata, setfilerdata] = React.useState([]);
+
   const formRef = useRef();
 
   const handleClickMenu = (name) => {
@@ -56,6 +59,25 @@ const Banner = () => {
         console.log("some error");
       });
   };
+  // const onsubmit = (e) => {
+  //   e.preventDefault();
+  //   const searchlist = data.filter((value) => {
+  //     if (searchField == "") {
+  //       return true
+
+
+  //     } else {
+  //       return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+  //       // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+  //       //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+  //     }
+
+
+  //   })
+  //   setfilerdata(searchlist);
+
+
+  // }
 
   return (
     <>

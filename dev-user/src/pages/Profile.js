@@ -426,7 +426,7 @@ export default function Profile() {
                                     <td>
                                       {a.room_no == null ? (
                                         <button onClick={() => {
-                                          setAlerdata({ title: " Please Wait !!", body: " Your Room is not created yet" });
+                                          setAlerdata({ title: " Please Wait !!", body: "please waiting for meeting schedule" });
                                           setshow(true)
                                         }}
                                           type="button"
