@@ -72,7 +72,7 @@ export default function Appointment() {
 
       .then((res) => {
         // console.log("====llll=====", res.data.data);
-        alert("Appointment Successfully");
+        // alert("Appointment Successfully");
         //  pathname="/counsultvideo"
 
         setAlerdata({ title: "booked Appointment", body: "Appointment booked successfully" })

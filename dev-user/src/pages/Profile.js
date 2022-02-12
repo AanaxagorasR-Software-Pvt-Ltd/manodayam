@@ -9,9 +9,10 @@ import { Modal as Bmodal, Button } from "react-bootstrap";
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
   const [bookData, setbookData] = useState([]);
-  const [data,setdatta]=useState([]);
+  const [data, setdatta] = useState([]);
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" })
+
 
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -41,8 +42,7 @@ export default function Profile() {
       .then((res) => {
         console.log("res", res, typeof res);
         setbookData(res.data);
-        setAlerdata({ title: "Wait", body: "Connect your booking time" })
-        setshow(true)
+
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -55,8 +55,8 @@ export default function Profile() {
     const d = new Date(time);
     return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
   }
-    
-  
+  const handleClose = () => setshow(false);
+
 
   return (
     <>
@@ -411,7 +411,7 @@ export default function Profile() {
                                   <tr key={i}>
                                     <td>{i + 1}</td>
                                     {/* {new Date(a.schedule).toLocaleDateString()} */}
-                                    
+
                                     <td>{convertToDateTime(a.schedule)}</td>
                                     {/* <td>{a.title}</td> */}
                                     <td>{a.fullname}</td>
@@ -422,39 +422,42 @@ export default function Profile() {
 
 
 
-                                  
-                                  <td>
-                                    {a.room_no == null ? (
-                                      <button
-                                        type="button"
-                                        class="btn btn-sm btn-info border-radius-0 add-btn"
-                                        // onClick={() => {
-                                        //   createRoomRef.current.openForm(a);
-                                        // }}
-                                        title="Create Room"
-                                      >
-                                        <i class="fas fa-video"></i>
-                                      </button>
-                                    ) : (
-                                      <a
-                                        href={
-                                          globalDataCall.videoCallLink +
-                                          a.room_no
-                                        }
-                                        target="_blank"
-                                      >
-                                        <button
-                                          type="button"
-                                          class="btn btn-sm btn-success border-radius-0 add-btn"
-                                        >
-                                          <i class="ti-video-camera"></i>
-                                        </button>
-                                      </a>
-                                    )}
-                                  </td>
-                                  <td>{a.status}</td>
 
-                                  {/* <td>
+                                    <td>
+                                      {a.room_no == null ? (
+                                        <button onClick={() => {
+                                          setAlerdata({ title: " Please Wait !!", body: " Your Room is not created yet" });
+                                          setshow(true)
+                                        }}
+                                          type="button"
+                                          class="btn btn-sm btn-info border-radius-0 add-btn"
+                                          // onClick={() => {
+                                          //   createRoomRef.current.openForm(a);
+                                          // }}
+                                          title="Create Room"
+                                        >
+                                          <i class="fas fa-video"></i>
+                                        </button>
+                                      ) : (
+                                        <a
+                                          href={
+                                            globalDataCall.videoCallLink +
+                                            a.room_no
+                                          }
+                                          target="_blank"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn btn-sm btn-success border-radius-0 add-btn"
+                                          >
+                                            <i class="ti-video-camera"></i>
+                                          </button>
+                                        </a>
+                                      )}
+                                    </td>
+                                    <td>{a.status}</td>
+
+                                    {/* <td>
                                     <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
                                       onClick={() => { formRef.current.openForm(a) }}>
                                       <i class="ti-pencil"></i>
@@ -463,8 +466,8 @@ export default function Profile() {
                                       <i class="ti-trash"></i>
                                     </button>
                                   </td> */}
-                                </tr>
-                              ))}
+                                  </tr>
+                                ))}
                             </tbody>
                           </table>
                         </div>
