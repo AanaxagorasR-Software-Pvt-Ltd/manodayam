@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Login from "./Login";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { Modal as Bmodal , Button} from "react-bootstrap";
 export default function Header() {
   let hist = useNavigate();
   {
     console.log("******j*", localStorage.getItem("Token"));
   }
   const [update, setupdate] = useState(localStorage.getItem("Token"));
+  const[show,setshow]=useState(false);
+  const[alertData,setAlerdata]=useState({title:"",body:""})
+  const[loginhide,setloginhide]=useState(false);
 
 
+useEffect(()=>{
+  let token = localStorage.getItem("Token")
+  if(token)
+  setloginhide(true);
+
+})
   
   const  logoutfunction=()=> {
     let decision = window.confirm('Are you sure');
     if (decision) {
         localStorage.removeItem("Token")
+        window.location.reload();
         hist.push('/');
+      
     }
 }
 const loginsubmit = (url = 0) => {
@@ -29,9 +41,11 @@ const loginsubmit = (url = 0) => {
 
    
   } else {
-    alert("please Register & Login first")
+    setAlerdata({title:"Sorry",body:"Login and Resignation First"})
+    setshow(true)
   }
 }
+const handleClose = () => setshow(false);
 
 
   return (
@@ -134,15 +148,17 @@ const loginsubmit = (url = 0) => {
                   </li>
                 </ul>
                 <ul className="navbar-nav nav-custom ml-auto btn-nav">
-                  <li className="nav-item">
+                 { !loginhide && <li className="nav-item" >
                     <button
                       className="btn-web hvr-float-shadow ipad-none"
                       data-toggle="modal"
                       data-target="#myModal"
+
+                      
                     >
                       Login
                     </button>
-                  </li>
+                  </li>}
 
                   {/* <li className="nav-item">
                     <button
@@ -153,7 +169,7 @@ const loginsubmit = (url = 0) => {
                       Login
                     </button>
                   </li> */}
-                  <li className="nav-item">
+                   { ! loginhide && <li className="nav-item">
                     <button
                       className="btn-web hvr-float-shadow ipad-none"
                       data-toggle="modal"
@@ -161,8 +177,10 @@ const loginsubmit = (url = 0) => {
                     >
                       Register
                     </button>
-                  </li>
-                  <li className="nav-item">
+                  </li>}
+
+
+                { loginhide && <li className="nav-item">
                     <button
                       className="btn-web hvr-float-shadow ipad-none"
 
@@ -171,7 +189,7 @@ const loginsubmit = (url = 0) => {
                     >
                       Logout
                     </button>
-                  </li>
+                  </li>}
                   {/* <li className="nav-item">
                     <button
                       className="btn-web hvr-float-shadow"
@@ -191,6 +209,18 @@ const loginsubmit = (url = 0) => {
       <a href="#" className="scrollToTop">
         <i className="fa fa-hand-pointer-o" aria-hidden="true"></i>
       </a>
+      <Bmodal show={show} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+         ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 }

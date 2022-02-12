@@ -1,8 +1,8 @@
 import React from "react";
-import { useEffect, useState ,forwardRef,formRef} from "react";
+import { useEffect, useState, forwardRef, formRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Modal ,Button} from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 import {
   API_ADMIN_URL,
@@ -26,8 +26,8 @@ export default function Appointment() {
   const [appointmentScheduleError, setappointmentScheduleError] = useState("");
   const [appointDisorderError, setappointDisorderError] = useState("");
   const [appointMsgError, setappointMsgError] = useState("");
-  const[show,setshow]=useState(false);
-  const[alertData,setAlerdata]=useState({title:"",body:""})
+  const [show, setshow] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" })
 
   let params = new URLSearchParams(window.location.search);
   console.log(params.get('docid'));
@@ -62,15 +62,30 @@ export default function Appointment() {
       msg: appointMsg,
       docid: params.get('docid')
     };
+    if(!validate(appointmentOptions)){
+     return; 
+    }
+    
+
     axios
       .post(`${API_ADMIN_URL}${APPOINTMENT_API}`, appointmentOptions)
+
       .then((res) => {
         // console.log("====llll=====", res.data.data);
         // alert("Appointment Successfully");
         //  pathname="/counsultvideo"
 
-       setAlerdata({title:"booked Appointment",body:"Appointment booked successfully"})
-       setshow(true)
+        setAlerdata({ title: "booked Appointment", body: "Appointment booked successfully" })
+        setshow(true)
+        document.getElementById("appointform").reset();
+        setappointName("");
+        setappointMail("");
+        setappointNum("");
+        setappointmentScheduleError("");
+        setappointDisorderError("");
+        setappointMsgError("")
+
+        
 
       })
       .catch((error) => {
@@ -79,8 +94,16 @@ export default function Appointment() {
       });
 
   };
+  function validate(payload) {
+    if (!payload)
+      return false;
+    if (payload.fullname && payload.email && payload.mobileNmb && payload.disorder && payload.schedule && payload.msg && payload.docid) {
+      return true
+    }
+    return false
+  }
   const handleClose = () => setshow(false);
-  
+
 
 
 
@@ -110,7 +133,7 @@ export default function Appointment() {
             <div className="col-lg-7">
               <div className="doctor-form">
                 <h3>Consult With Us</h3>
-                <form action="">
+                <form action="" id="appointform">
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group">
@@ -277,9 +300,9 @@ export default function Appointment() {
         </Modal.Header>
         <Modal.Body>{alertData.body}</Modal.Body>
         <Modal.Footer>
-          
+
           <Button variant="primary" onClick={handleClose}>
-         ok
+            ok
           </Button>
         </Modal.Footer>
       </Modal>

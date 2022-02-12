@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_ADMIN_URL, PROFIL_API, BOOKED_API } from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
+import { Modal as Bmodal, Button } from "react-bootstrap";
 
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
   const [bookData, setbookData] = useState([]);
   const [data,setdatta]=useState([]);
+  const [show, setshow] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" })
 
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -38,6 +41,8 @@ export default function Profile() {
       .then((res) => {
         console.log("res", res, typeof res);
         setbookData(res.data);
+        setAlerdata({ title: "Wait", body: "Connect your booking time" })
+        setshow(true)
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -472,6 +477,18 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      <Bmodal show={show} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+
+          <Button variant="primary" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 }

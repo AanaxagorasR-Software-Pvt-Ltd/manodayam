@@ -10,6 +10,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
+import { Modal as Bmodal ,Button} from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
@@ -75,6 +76,8 @@ export default function Login(props) {
 
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
+  const[show,setshow]=useState(false);
+  const[alertData,setAlerdata]=useState({title:"",body:""})
   const onLoginSuccess = (res) => {
     console.log("Login Success:", res.profileObj);
     // setShowloginButton(true);
@@ -103,12 +106,15 @@ export default function Login(props) {
         // console.log("**********", res.data.token);
         if (res.data.status) {
           localStorage.setItem("Token",res.data.Token);
-          alert("Login successfully ");
+          setAlerdata({title:"Login",body:"User Login Successfully"})
+       setshow(true)
           window.$("#myModal").modal("hide");
+          window.location.reload();
 
           // handleCloseModal();
         } else {
-          alert("enter a valid mail or password");
+          setAlerdata({title:"Sorry",body:"Invalid user and Password"})
+       setshow(true)
         }
       })
       .catch((error) => {
@@ -138,8 +144,10 @@ export default function Login(props) {
       .post(`${API_ADMIN_URL}${REGISTER_API}`, RegisterationOptions)
       .then((res) => {
         console.log(res.data);
-        alert("Registation successfully");
+        setAlerdata({title:"Registration",body:"Uesr Registration successfully"})
+       setshow(true)
         window.$("#registermodal").modal("hide");
+        
       })
       .catch((error) => {
         console.log(error);
@@ -223,22 +231,45 @@ export default function Login(props) {
       msg: libraryMsg,
       humanId: props.humanId,
     };
+    if(!validate(humanLibraryOptions)){
+      return; 
+     }
     axios
       .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY}`, humanLibraryOptions)
       .then((res) => {
         // console.log("====llll=====", res.data.data);
-        alert("We Will Connect You Soon");
+        setAlerdata({ title: "Connect", body: "We are Connect you soon" })
+        setshow(true)
+        document.getElementById("humandigital").reset();
+        setlibraryName("");
+        setlibraryNum("");
+        setlibraryMail("");
+        
+        setlibraryDate("");
+       setlibraryMsg("");
+      
+
         if (res.status == 200) {
           // localStorage.setItem("Token", res.data.token);
           window.$("#library-modal").modal("hide");
         } else {
-          alert("enter correct mail or password");
+          setAlerdata({title:"Sorry",body:"Invalid Email and Password"})
+          setshow(true)
         }
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  function validate(payload) {
+    if (!payload)
+      return false;
+    if (payload.fullname && payload.email && payload.phone && payload.date && payload.msg && payload.msg && payload.humanId) {
+      return true
+    }
+    return false
+  }
+  const handleClose = () => setshow(false);
   return (
     <>
       <div className="modal fade" id="myModal">
@@ -376,10 +407,10 @@ export default function Login(props) {
                 </div>
               </form>
 
-              <div
+              {/* <div
                 className="g-recaptcha"
                 data-sitekey="6Ldbdg0TAAAAAI7KAf72Q6uagbWzWecTeBWmrCpJ"
-              ></div>
+              ></div> */}
             </div>
           </div>
         </div>
@@ -523,7 +554,7 @@ export default function Login(props) {
             </button>
 
             <div className="modal-body md-custom">
-              <form action="">
+              <form action="" id="humandigital">
                 <h3>Talk with Us</h3>
                 <div className="form-group">
                   <label for="">Your Name</label>
@@ -827,15 +858,27 @@ export default function Login(props) {
                   />
                 </div>
 
-                <div
+                {/* <div
                   className="g-recaptcha"
                   data-sitekey="6Ldbdg0TAAAAAI7KAf72Q6uagbWzWecTeBWmrCpJ"
-                ></div>
+                ></div> */}
               </form>
             </div>
           </div>
         </div>
       </div>
+      <Bmodal show={show} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+         ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 }

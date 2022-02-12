@@ -7,6 +7,8 @@ import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
+import { Modal as Bmodal, Button } from "react-bootstrap";
+
 
 import {
   API_ADMIN_URL,
@@ -24,6 +26,8 @@ export default function Home(props) {
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
   const [isLoggedIn, setisLoggedIn] = useState(true);
+  const [show, setshow] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" })
 
   let hist = useNavigate();
 
@@ -220,10 +224,34 @@ export default function Home(props) {
         hist(url);
       }
     } else {
-      alert("please Register & Login first");
+      setAlerdata({ title: "Sorry", body: "Login and Resignation First" })
+      setshow(true)
     }
   };
+  const handleClose = () => setshow(false);
 
+  const loginsubmits = (url = 0) => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      if (url !== 0) {
+        window.open(url, '_blank');
+      }
+    } else {
+      setAlerdata({ title: "Sorry", body: "Login and Resignation First" })
+      setshow(true)
+    }
+  };
+  // const loginmodel = (url = 0) => {
+  //   let local = localStorage.getItem("Token");
+  //   if (local) {
+  //     if (url !== 0) {
+  //       $("#library-modal").modal("show");
+  //     }
+  //   } else {
+  //     setAlerdata({ title: "Sorry", body: "Login and Resignation First" })
+  //     setshow(true)
+  //   }
+  // };
   return (
     <>
       <Login humanId={humanId} />
@@ -672,8 +700,8 @@ export default function Home(props) {
                           </div>
                           <div className="col-lg-7 mr-6">
                             <div className="library-video">
-                            <img src={element.image} alt="" />
-{/* 
+                              <img src={element.image} alt="" />
+                              {/* 
                               <iframe
                                 width="120%"
                                 height="160"
@@ -695,36 +723,37 @@ export default function Home(props) {
                       >
                         View More
                       </button>
-                      <a href={globalDataLive.liveLink} target="_blank">
+                      {/* <a href={globalDataLive.liveLink} target="_blank"> */}
                       <button
                         className="btn-web col-11 mt-2"
-                        // onClick={() => loginsubmit(globalDataLive.liveLink)}
+                        onClick={() => loginsubmits(globalDataLive.liveLink)}
                       >
                         Please Join
                       </button>
-                      </a>
+                      {/* </a> */}
                       <button
                         // onClick={() =>loginsubmit()}
                         onClick={() => submitformdata(element._id)}
                         data-toggle="modal"
                         data-target="#library-modal"
                         className="btn-web col-11 mt-2"
+
                       >
                         Please Talk
                       </button>
-                      <a
+                      {/* <a
                         href={globalDataGroupCall.groupCallLink}
                         target="_blank"
-                      >
+                      > */}
                       <button
                         className="btn-web col-11 mt-2"
-                        // onClick={() =>
-                        //   loginsubmit("globalDataGroupCall.groupCallLink")
-                        // }
+                        onClick={() =>
+                          loginsubmits(globalDataGroupCall.groupCallLink)
+                        }
                       >
                         Join Group
                       </button>
-                      </a>
+                      {/* </a> */}
                     </div>
                     {/* </div> */}
                   </div>
@@ -858,6 +887,18 @@ export default function Home(props) {
           </div>
         </div>
       </div>
+      <Bmodal show={show} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+
+          <Button variant="primary" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 }

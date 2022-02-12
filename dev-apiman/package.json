@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "find-or-create": "^2.0.0",
+    "formik": "^2.2.9",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^7.5.1",
