@@ -272,7 +272,10 @@ export default function Home(props) {
             <div className="container">
               <div className="web-banner-content">
                 {/* <h1>{bannerData?.[2]?.bannerText}</h1> */}
-                <h1>Solutions available as Meditation, Spirituality, Video games-Shakthi</h1>
+                <h1>
+                  Solutions available as Meditation, Spirituality, Video
+                  games-Shakthi
+                </h1>
                 <button
                   className="qst-show btn-web hvr-float-shadow btn-web"
                   onClick={() => loginsubmit("/spirituality")}
@@ -289,7 +292,7 @@ export default function Home(props) {
           <div className="web-banner mb-50">
             <div className="container">
               <div className="web-banner-content">
-                <h1>{bannerData?.[3]?.bannerText}</h1>
+                {/* <h1>{bannerData?.[3]?.bannerText}</h1> */}
                 <h1>Meet, Your Mentor or Coach-Digital Human Library</h1>
                 <button
                   className="qst-show btn-web hvr-float-shadow btn-web"
@@ -478,11 +481,7 @@ export default function Home(props) {
                     {/* <img src={element.img} alt="" /> */}
                     <img src={element.img_url} alt="" />
 
-                    <img
-                      src={element.img_url}
-                      className="img-bfr"
-                      alt=""
-                    />
+                    <img src={element.img_url} className="img-bfr" alt="" />
 
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
@@ -655,35 +654,35 @@ export default function Home(props) {
           <div className="service-slide">
             <Slider {...settingstwo}>
               {libraryData.map((element) => (
-                <div className="col-lg-12 ">
+                <div className="col-lg-13">
                   <div className="library-card">
                     {/* <div className="row"> */}
-                    <div className="col-lg-12 offset-1">
+                    <div className="col-lg-16 offset-1">
                       <div className="library-person">
                         <div className="d-flex">
                           <div className="">
-                            <div className="col-8">
-                              {/* <img src={element.image} alt="" /> */}
+                            <div className="col-9">
+                              <img src={element.image} alt="" />
                             </div>
                             <div className="mr-8">
                               <h3>{element.title}</h3>
                               <h5>{element.video_type}</h5>
                             </div>
                           </div>
-                          <div className="col-lg-7 mr-6">
-                            <div className="library-video">
-                            <img src={element.image} alt="" />
-{/* 
-                              <iframe
-                                width="120%"
-                                height="160"
-                                src={element.image}
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                              ></iframe> */}
-                            </div>
+                          <div className="col-lg-7 mr-4">
+                            {/* <div className="library-video"> */}
+                              <video
+                                id="my-library-video"
+                                class="video-js"
+                                controls
+                                preload="auto"
+                                poster={element.thumbnail_image}
+                                data-setup=""
+                                loop="auto"
+                              >
+                                <source src={element.video} type="video/mp4" />
+                              </video>
+                            {/* </div> */}
                           </div>
                         </div>
                       </div>
@@ -696,12 +695,12 @@ export default function Home(props) {
                         View More
                       </button>
                       <a href={globalDataLive.liveLink} target="_blank">
-                      <button
-                        className="btn-web col-11 mt-2"
-                        // onClick={() => loginsubmit(globalDataLive.liveLink)}
-                      >
-                        Please Join
-                      </button>
+                        <button
+                          className="btn-web col-11 mt-2"
+                          // onClick={() => loginsubmit(globalDataLive.liveLink)}
+                        >
+                          Please Join
+                        </button>
                       </a>
                       <button
                         // onClick={() =>loginsubmit()}
@@ -716,14 +715,14 @@ export default function Home(props) {
                         href={globalDataGroupCall.groupCallLink}
                         target="_blank"
                       >
-                      <button
-                        className="btn-web col-11 mt-2"
-                        // onClick={() =>
-                        //   loginsubmit("globalDataGroupCall.groupCallLink")
-                        // }
-                      >
-                        Join Group
-                      </button>
+                        <button
+                          className="btn-web col-11 mt-2"
+                          // onClick={() =>
+                          //   loginsubmit("globalDataGroupCall.groupCallLink")
+                          // }
+                        >
+                          Join Group
+                        </button>
                       </a>
                     </div>
                     {/* </div> */}
@@ -753,11 +752,7 @@ export default function Home(props) {
                 <div className="col-lg-12">
                   <div className="service-card spritual-card">
                     <img src={element.img_url} alt="" />
-                    <img
-                      src={element.img_url}
-                      className="img-bfr"
-                      alt=""
-                    />
+                    <img src={element.img_url} className="img-bfr" alt="" />
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
                     <p>{element.description}</p>

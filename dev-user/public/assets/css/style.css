@@ -964,6 +964,17 @@ footer {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+#my-video{
+  width: 300px;
+  height: 245px;
+  margin-right: 50px;
+}
+#my-library-video{
+  width: 175px;
+  height: 150px;
+  border-radius: 5px;
+  /* border: 2px solid black; */
+}
 .library-person button {
   margin-top: 20px;
 }

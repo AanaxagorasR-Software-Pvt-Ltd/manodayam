@@ -492,6 +492,7 @@ const Addform = forwardRef((props, ref) => {
                 <input
                   type="file"
                   class="form-control file-upload-info"
+
                   onChange={(e) => {
                     handleChange(e.target.files[0], "video");
                   }}

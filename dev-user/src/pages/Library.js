@@ -28,7 +28,7 @@ export default function Library(props) {
   useEffect(() => {
     libraryDatalist();
   }, []);
-  return ( 
+  return (
     <>
       <div className="contact-banner mb-50">
         <div className="container">
@@ -63,25 +63,29 @@ export default function Library(props) {
             </div>
 
             <div className="col-lg-10 offset-1">
-            {libraryData.map((element) => (
-
-              <div className="library-card">
+              {libraryData.map((element) => (
+                <div className="library-card">
                   <div className="row">
                     <div className="col-lg-5">
                       <div className="library-video">
-                      <img src={element.image} alt="" />
-
-                        {/* <iframe
-                          width="100%"
-                          height="315"
-                          src={element.vedio}
-                          title="YouTube video player"
-                          frameborder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowfullscreen
-                        ></iframe> */}
+                    
+                        <video
+                          id="my-video"
+                          class="video-js"
+                          controls
+                          preload="auto"
+                          poster={element.thumbnail_image}
+                          data-setup=""
+                          loop="auto"
+                        >
+                          <source
+                            src={element.video}
+                            type="video/mp4"
+                          />
+                        </video>
                       </div>
                     </div>
+
                     <div className="col-lg-6 offset-1">
                       <div className="library-person">
                         <div className="row">
@@ -93,9 +97,7 @@ export default function Library(props) {
                             <h5>Motivational Speaker</h5>
                           </div>
                         </div>
-                        <p>
-                         {element.description}
-                        </p>
+                        <p>{element.description}</p>
                         {/* <button
                           className="btn-web hvr-float-shadow"
                           data-toggle="modal"
@@ -109,8 +111,8 @@ export default function Library(props) {
                       </div>
                     </div>
                   </div>
-              </div>
-                ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
