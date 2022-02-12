@@ -251,9 +251,12 @@ useEffect(()=>{
       setshow(true)
     }
   };
-  const pleasetalk = () => {
+  const pleasetalk = (_id) => {
     let local = localStorage.getItem("Token");
     if (local) {
+      setHumanId(_id);
+      console.log(_id);
+      console.log(humanId);
       return true;
     } else {
       setAlerdata({ title: "Sorry", body: "Login and Resignation First" })
@@ -740,8 +743,9 @@ useEffect(()=>{
                       </button>
                       {/* </a> */}
                       <button
+                      
                         // onClick={() =>loginsubmit()}
-                        onClick={() => pleasetalk()}
+                        onClick={() => pleasetalk(element._id)}
                         data-toggle="modal"
                         data-target={isLoggedIn ? "#library-modal" : ""}
                         className="btn-web col-11 mt-2"
@@ -749,6 +753,15 @@ useEffect(()=>{
                       >
                         Please Talk
                       </button>
+                      {/* <button
+                        // onClick={() =>loginsubmit()}
+                        onClick={() => submitformdata(element._id)}
+                        data-toggle="modal"
+                        data-target="#library-modal"
+                        className="btn-web col-11 mt-2"
+                      >
+                        Please Talk
+                      </button> */}
                       {/* <a
                         href={globalDataGroupCall.groupCallLink}
                         target="_blank"
