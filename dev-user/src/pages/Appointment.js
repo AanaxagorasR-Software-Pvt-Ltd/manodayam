@@ -1,7 +1,8 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,forwardRef,formRef} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Modal ,Button} from "react-bootstrap";
 
 import {
   API_ADMIN_URL,
@@ -25,11 +26,14 @@ export default function Appointment() {
   const [appointmentScheduleError, setappointmentScheduleError] = useState("");
   const [appointDisorderError, setappointDisorderError] = useState("");
   const [appointMsgError, setappointMsgError] = useState("");
+  const[show,setshow]=useState(false);
+  const[alertData,setAlerdata]=useState({title:"",body:""})
+
   let params = new URLSearchParams(window.location.search);
   console.log(params.get('docid'));
   // Appointments
   const Appointment = () => {
-    
+
     if (appointName == "") {
       setappointNameError("Please Enter Your Name");
     }
@@ -48,7 +52,7 @@ export default function Appointment() {
     if (appointMsg == "") {
       setappointMsgError("Enter Your Message");
     }
-    console.log( `${API_ADMIN_URL}${APPOINTMENT_API}`);
+    console.log(`${API_ADMIN_URL}${APPOINTMENT_API}`);
     const appointmentOptions = {
       fullname: appointName,
       email: appointMail,
@@ -56,23 +60,30 @@ export default function Appointment() {
       disorder: appointDisorder,
       schedule: appointmentSchedule,
       msg: appointMsg,
-      docid:params.get('docid')
+      docid: params.get('docid')
     };
     axios
       .post(`${API_ADMIN_URL}${APPOINTMENT_API}`, appointmentOptions)
       .then((res) => {
         // console.log("====llll=====", res.data.data);
-        alert("Appointment Successfully");
+        // alert("Appointment Successfully");
         //  pathname="/counsultvideo"
+
+       setAlerdata({title:"booked Appointment",body:"Appointment booked successfully"})
+       setshow(true)
+
       })
       .catch((error) => {
         console.log(error);
+
       });
 
   };
- 
- 
+  const handleClose = () => setshow(false);
   
+
+
+
 
   return (
     <>
@@ -260,6 +271,24 @@ export default function Appointment() {
           </div>
         </div>
       </div>
+      <Modal show={show} >
+        <Modal.Header closeButton>
+          <Modal.Title>{alertData.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{alertData.body}</Modal.Body>
+        <Modal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+         ok
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
+
+
+
+
+
+
