@@ -203,7 +203,7 @@ class EmailService {
  
             <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
             If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
-           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">http://swarnratnaindia.com/profile</strong> </p>
+           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/profile</strong> </p>
          
         </div>
       </div>

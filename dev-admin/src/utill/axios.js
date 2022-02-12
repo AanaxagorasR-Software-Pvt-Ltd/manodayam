@@ -4,7 +4,7 @@ const defaultModules = ['login'];
 let axiosBaseUrl = 'http://localhost:3020/api';
 
 if (window.location.hostname !== 'localhost') {
-    axiosBaseUrl = 'http://swarnratnaindia.com/dev-apiman/api';
+    axiosBaseUrl = 'https://swarnratnaindia.com/dev-apiman/api';
 }
 
 const axiosInstance = axios.create({

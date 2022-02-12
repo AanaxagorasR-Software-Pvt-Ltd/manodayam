@@ -19,7 +19,7 @@ app.get('/:room', (req, res) => {
 	console.log(8798798798797979);
 	// res.render('index', { RoomId: req.params.room, });
 
-	axios.get('http://ec2-3-139-87-143.us-east-2.compute.amazonaws.com/dev-apiman/api/question').then(response => {
+	axios.get('https://swarnratnaindia.com/dev-apiman/api/question').then(response => {
 		console.log(9999999, response.data)
 		res.render('index', { RoomId: req.params.room, data: response.data });
 	}).catch(err => {
