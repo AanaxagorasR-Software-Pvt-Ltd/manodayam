@@ -23,13 +23,18 @@ useEffect(()=>{
 })
   
   const  logoutfunction=()=> {
-    let decision = window.confirm('Are you sure');
-    if (decision) {
+    // let decision = window.confirm('Are you sure');
+    setAlerdata({title:"Logout",body:"Login out !!"})
+    setshow(true)
+  
+    // setshow(true)
+    // if (decision) {
         localStorage.removeItem("Token")
+        localStorage.removeItem("user")
         window.location.reload();
         hist.push('/');
       
-    }
+    // }
 }
 const loginsubmit = (url = 0) => {
 
@@ -41,8 +46,9 @@ const loginsubmit = (url = 0) => {
 
    
   } else {
-    setAlerdata({title:"Sorry",body:"Login and Resignation First"})
-    setshow(true)
+    setAlerdata({title:"Sorry",body:"Login and registration First"})
+    setshow(false)
+    
   }
 }
 const handleClose = () => setshow(false);
@@ -214,13 +220,16 @@ const handleClose = () => setshow(false);
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>
         </Bmodal.Header>
         <Bmodal.Body className="modal-body">{alertData.body}</Bmodal.Body>
+
         <Bmodal.Footer>
           
           <Button className="modal-btn-ok" onClick={handleClose}>
          ok
           </Button>
         </Bmodal.Footer>
+  
       </Bmodal>
+   
     </>
   );
 }

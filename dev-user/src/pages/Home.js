@@ -234,7 +234,7 @@ useEffect(()=>{
         hist(url);
       }
     } else {
-      setAlerdata({ title: "Sorry", body: "Login and Resignation First" })
+      setAlerdata({ title: "Sorry", body: "Login and registration First" })
       setshow(true)
     }
   };
@@ -247,7 +247,7 @@ useEffect(()=>{
         window.open(url, '_blank');
       }
     } else {
-      setAlerdata({ title: "Sorry", body: "Login and Resignation First" })
+      setAlerdata({ title: "Sorry", body: "Login and registration First" })
       setshow(true)
     }
   };
@@ -259,7 +259,7 @@ useEffect(()=>{
       console.log(humanId);
       return true;
     } else {
-      setAlerdata({ title: "Sorry", body: "Login and Resignation First" })
+      setAlerdata({ title: "Sorry", body: "Login and registration First" })
       setshow(true)
       return false;
     }

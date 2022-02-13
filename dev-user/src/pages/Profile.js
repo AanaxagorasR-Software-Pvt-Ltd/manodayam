@@ -12,6 +12,7 @@ export default function Profile() {
   const [data, setdatta] = useState([]);
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" })
+  const [user,setUser]=useState({})
 
 
   const ProfilData = () => {
@@ -34,6 +35,8 @@ export default function Profile() {
 
   useEffect((props) => {
     ProfilData();
+    setUser(JSON.parse(localStorage.getItem("user")));
+    console.log(JSON.parse(localStorage.getItem("user")))
   }, []);
   const listBooked = () => {
     axios
@@ -87,24 +90,24 @@ export default function Profile() {
                 <div className="row">
                   <div className="col-lg-3 col-sm-3">
                     <div className="profile-img">
+                      {/* <img src="assets/image/profile.jpg" alt="" /> */}
                       <img src="assets/image/profile.jpg" alt="" />
                     </div>
                   </div>
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
-                      <h3>Simran Raturi</h3>
-                      {localStorage.getItem('Token')}
-
-                      <p>
-                        <i className="fa fa-phone"></i> +91 123245 567
-                      </p>
-                      <p>
-                        <i className="fa fa-envelope"></i> abc@gmail.com
-                      </p>
-                      <p>
-                        <i className="fa fa-map-marker"></i> G-130, Sector 63,
-                        Noida, Uttar Pradesh
-                      </p>
+                      <h3>{user && user.name}</h3>
+                      
+                      {/* {
+                        <p>
+                          <i className="fa fa-phone"></i>
+                        </p>} */}
+                     { <p>
+                        <i className="fa fa-envelope"></i> {user && user.email}
+                      </p>}
+                      {/* <p>
+                        <i className="fa fa-map-marker"></i> 
+                      </p> */}
                       <ul className="nav nav-tabs">
                         <li className="nav-item">
                           <a
