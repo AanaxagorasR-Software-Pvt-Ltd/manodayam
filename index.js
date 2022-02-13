@@ -12,7 +12,7 @@
 // ========================prod==========
  const SUPPORT_EMAIL = "supprot.virtuladoc@gmail.com"
  const EMAIL_PASSWORD = "Su100$Br"
- const DOMAIN_NAME =  "https://swarnratnaindia.com/dev-apiman"
+ const DOMAIN_NAME =  "http://swarnratnaindia.com/dev-apiman"
 //  const DOMAIN_NAME =  " http://localhost:3020"
  const PORT = ""
  const MEDIA_PATH = "uploads"

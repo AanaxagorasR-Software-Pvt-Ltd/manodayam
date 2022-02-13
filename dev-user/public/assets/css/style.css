@@ -37,7 +37,17 @@ img {
   background-size: cover;
   padding: 158px 0 60px 0;
 }
+.modal-btn-ok{
+  background: linear-gradient(45deg, #23adba, #9d1892);
+  width: 60px;
 
+}
+.modal-body{
+  color:  #a752a0;
+}
+.modal-head{
+  color: #389ca5;
+}
 .btn-web {
   border: 2px solid #fff;
   padding: 8px 35px;
@@ -970,8 +980,8 @@ footer {
   margin-right: 50px;
 }
 #my-library-video{
-  width: 175px;
-  height: 150px;
+  width: 155px;
+  height: 130px;
   border-radius: 5px;
   /* border: 2px solid black; */
 }

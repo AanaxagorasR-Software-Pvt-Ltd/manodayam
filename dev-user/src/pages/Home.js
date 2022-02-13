@@ -905,13 +905,13 @@ useEffect(()=>{
         </div>
       </div>
       <Bmodal show={show} >
-        <Bmodal.Header closeButton>
-          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        <Bmodal.Header closeButton >
+          <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>
         </Bmodal.Header>
-        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Body className="modal-body">{alertData.body}</Bmodal.Body>
         <Bmodal.Footer>
 
-          <Button variant="primary" onClick={handleClose}>
+          <Button className="modal-btn-ok" onClick={handleClose}>
             ok
           </Button>
         </Bmodal.Footer>

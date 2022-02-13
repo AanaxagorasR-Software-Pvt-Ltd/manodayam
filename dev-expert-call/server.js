@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 app.get("/:room", (req, res) => {
   console.log(8798798798797979);
   axios
-    .get("http://localhost:3020/api/question")
+    .get("https://swarnratnaindia.com/dev-apiman/api")
     .then((response) => {
       console.log(9999999, response.data);
       res.render("index", { RoomId: req.params.room });
