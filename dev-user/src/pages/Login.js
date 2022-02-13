@@ -429,7 +429,7 @@ export default function Login(props) {
 
             <div className="modal-body md-custom">
               <form action="">
-                <h3>Register Here</h3>
+                <h3>Resignation Here</h3>
                 <div className="form-group">
                   <label for="">Your Name</label>
                   <input
@@ -533,7 +533,7 @@ export default function Login(props) {
                     type="button"
                     className="btn btn-web hvr-float-shadow"
                   >
-                    Register
+                    Resignation
                   </button>
                 </div>
               </form>
