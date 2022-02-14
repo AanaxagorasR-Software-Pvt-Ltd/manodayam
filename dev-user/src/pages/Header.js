@@ -36,7 +36,7 @@ useEffect(()=>{
       
     // }
 }
-const loginsubmit = (url = 0) => {
+const loginsubmit =(url = 0) => {
 
   let local = localStorage.getItem("Token")
   if (local) {
@@ -47,7 +47,7 @@ const loginsubmit = (url = 0) => {
    
   } else {
     setAlerdata({title:"Sorry",body:"Login and registration First"})
-    setshow(false)
+    setshow(true)
     
   }
 }
