@@ -14,8 +14,6 @@ import LeftSideBar from "../Layout/LeftSideBar";
 
 // let Button = new AA()
 
-
-
 const MediaSolutions = () => {
 	const [data, setData] = React.useState([]);
 	const dispatch = useDispatch();
