@@ -1090,7 +1090,14 @@ footer {
   font-weight: 600;
   font-family: cursive;
   font-size: 20px;
-  margin-bottom: 17px;
+  margin-bottom: 20px;
+}
+.profile-name{
+  margin-top: 55px;
+}
+.profile-hello{
+  color: #23adba;
+
 }
 .profile-content p {
   margin-bottom: 7px;

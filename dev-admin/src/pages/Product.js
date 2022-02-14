@@ -325,7 +325,8 @@ const Product = () => {
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
                                 </td>
-                                <td>{v.createdAt}</td>
+                                <td>{v.updatedAt}</td>
+
                                 <td>
                                   <button
                                     type="button"
