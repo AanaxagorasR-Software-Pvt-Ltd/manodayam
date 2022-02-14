@@ -106,6 +106,7 @@ export default function Login(props) {
         // console.log("**********", res.data.token);
         if (res.data.status) {
           localStorage.setItem("Token",res.data.Token);
+          localStorage.setItem("user",JSON.stringify(res.data.user))
           setAlerdata({title:"Login",body:"User Login Successfully"})
        setshow(true)
           window.$("#myModal").modal("hide");
@@ -144,7 +145,7 @@ export default function Login(props) {
       .post(`${API_ADMIN_URL}${REGISTER_API}`, RegisterationOptions)
       .then((res) => {
         console.log(res.data);
-        setAlerdata({title:"Registration",body:"Uesr Registration successfully"})
+        setAlerdata({title:"Registration",body:"User Registration successfully"})
        setshow(true)
         window.$("#registermodal").modal("hide");
         

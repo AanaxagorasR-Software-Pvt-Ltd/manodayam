@@ -53,6 +53,7 @@ export default function Appointment() {
       setappointMsgError("Enter Your Message");
     }
     console.log(`${API_ADMIN_URL}${APPOINTMENT_API}`);
+    let user = JSON.parse(localStorage.getItem("user"));
     const appointmentOptions = {
       fullname: appointName,
       email: appointMail,
@@ -60,7 +61,9 @@ export default function Appointment() {
       disorder: appointDisorder,
       schedule: appointmentSchedule,
       msg: appointMsg,
-      docid: params.get('docid')
+      docid: params.get('docid'),
+      userId:user._id
+
     };
     if(!validate(appointmentOptions)){
      return; 

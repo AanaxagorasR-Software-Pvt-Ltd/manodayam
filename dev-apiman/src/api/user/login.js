@@ -30,12 +30,12 @@ router.post("/user/login", validate, async (req, res) => {
         { expiresIn: 9860 }
       );
 
-      res.send({ message: "login sucessfully", status: true, token: token });
+      res.send({ message: "login sucessfully", status: true, token: token ,user});
       // res.write("=======this is your");
       // console.log("[[[[[[[[");
     } else {
       res.send({ message: "bad credentails", status: false });
-      console.log("======");
+      
     }
   } catch (e) {
     res.send(e);

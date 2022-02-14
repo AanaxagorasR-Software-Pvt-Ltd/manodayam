@@ -28,6 +28,7 @@ router.post("/appoint", async (req, res) => {
       msg: body.msg,
       status: body.status,
       docid: body.docid,
+	  userId:body.userId
     };
     console.log(data);
     if (!body?._id) {
@@ -119,10 +120,17 @@ router.get("/", async (req, res) => {
 
 router.get("/booked", async (req, res) => {
   try {
+	  let filter = {
+		status: "booked"
+	  };
+	  if (req.query.userId)  {
+		filter.userId = req.query.userId
+	  }
+	// ('id: ' + req.query.id);
     const db = await getDatabase();
     let dt = await db
       .collection("appointments")
-      .find({ status: "booked" })
+      .find(filter)
       .sort({ _id: -1 })
       .toArray();
     res.send(dt);
