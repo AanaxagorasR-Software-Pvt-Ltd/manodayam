@@ -421,12 +421,6 @@ export default function Profile() {
                                     <td>{a.fullname}</td>
 
                                     <td>{a.disorder}</td>
-
-
-
-
-
-
                                     <td>
                                       {a.room_no == null ? (
                                         <button onClick={() => {
@@ -460,16 +454,6 @@ export default function Profile() {
                                       )}
                                     </td>
                                     <td>{a.status}</td>
-
-                                    {/* <td>
-                                    <button type="button" class="btn btn-sm btn-info border-radius-0 add-btn"
-                                      onClick={() => { formRef.current.openForm(a) }}>
-                                      <i class="ti-pencil"></i>
-                                    </button>
-                                    <button type="button" onClick={() => deleteData(a._id)} class="btn btn-sm btn-danger add-btn">
-                                      <i class="ti-trash"></i>
-                                    </button>
-                                  </td> */}
                                   </tr>
                                 ))}
                             </tbody>
