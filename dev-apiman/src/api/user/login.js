@@ -35,7 +35,7 @@ router.post("/user/login", validate, async (req, res) => {
       // console.log("[[[[[[[[");
     } else {
       res.send({ message: "bad credentails", status: false });
-      console.log("======");
+      
     }
   } catch (e) {
     res.send(e);

@@ -39,9 +39,10 @@ export default function Profile() {
     console.log(JSON.parse(localStorage.getItem("user")))
   }, []);
   const listBooked = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
     axios
 
-      .get(`${API_ADMIN_URL}${BOOKED_API}`)
+      .get(`${API_ADMIN_URL}${BOOKED_API}?userId=${user._id}`)
       .then((res) => {
         console.log("res", res, typeof res);
         setbookData(res.data);
@@ -110,13 +111,13 @@ export default function Profile() {
                       </p> */}
                       <ul className="nav nav-tabs">
                         <li className="nav-item">
-                          <a
+                          {/* <a
                             className="nav-link active"
                             data-toggle="tab"
                             href="#home"
                           >
                             Edit Profile
-                          </a>
+                          </a> */}
                         </li>
                         <li className="nav-item">
                           <a

@@ -156,7 +156,7 @@ const handleClose = () => setshow(false);
                 <ul className="navbar-nav nav-custom ml-auto btn-nav">
                  { !loginhide && <li className="nav-item" >
                     <button
-                      className="btn-web hvr-float-shadow ipad-none"
+                      className="btn-web hvr-float-shadow "
                       data-toggle="modal"
                       data-target="#myModal"
 
@@ -177,7 +177,7 @@ const handleClose = () => setshow(false);
                   </li> */}
                    { ! loginhide && <li className="nav-item">
                     <button
-                      className="btn-web hvr-float-shadow ipad-none"
+                      className="btn-web hvr-float-shadow"
                       data-toggle="modal"
                       data-target="#registermodal"
                     >
@@ -188,7 +188,7 @@ const handleClose = () => setshow(false);
 
                 { loginhide && <li className="nav-item">
                     <button
-                      className="btn-web hvr-float-shadow ipad-none"
+                      className="btn-web hvr-float-shadow"
 
 
                       onClick={ logoutfunction}
