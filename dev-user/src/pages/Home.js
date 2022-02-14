@@ -883,9 +883,9 @@ useEffect(()=>{
               <div className="col-lg-3 col-sm-6">
                 {console.log("element", element)}
                 <div className="product-card">
-                  <img src={element.pic_url} alt="" />
-                  <h3>{element.productname}</h3>
-                  <p>{element.pdescription}</p>
+                  <img src={element.img_url} alt="" />
+                  <h3>{element.product_name}</h3>
+                  <p>{element.description}</p>
                   <span>
                     <i className="fa fa-inr"></i>
                     {element.mrp}

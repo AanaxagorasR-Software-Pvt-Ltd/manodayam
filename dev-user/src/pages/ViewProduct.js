@@ -83,7 +83,7 @@ export default function ViewProduct(props) {
                         <div className="row">
                           <div className="col-lg-5">
                             <div className="ml-2 library-video ">
-                              <img src={element.pic_url} alt="" />
+                              <img src={element.img_url} alt="" />
                             </div>
                             <Link
                               to={{ pathname: "/Cart/" + slug }}
@@ -98,8 +98,8 @@ export default function ViewProduct(props) {
                             <div className="library-person">
                               <div className="row">
                                 <div className="col-9">
-                                  <h3>{element.productname}</h3>
-                                  <h5>{element.pdescription}</h5>
+                                  <h3>{element.product_name}</h3>
+                                  <h5>{element.description}</h5>
                                   <h5>{element.details}</h5>
                                   <div className="service-heading d-inline-flex">
                                     <h5 className="ml-1 bg-light text-dark rounded-bottom rounded-top border p-1">

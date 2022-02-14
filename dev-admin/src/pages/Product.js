@@ -13,17 +13,41 @@ import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
 import Button from "react-bootstrap/Button";
+import products from "../Store/Services/products";
+import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
 import LeftSideBar from "../Layout/LeftSideBar";
+// import { Modal as Bmodal } from "react-bootstrap";
+
 // let Button = new AA()
 
 const Product = () => {
+  const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
+  const [searchField, setSearchField] = useState("");
+  const [filterdata, setfilerdata] = React.useState([]);
+
   const formRef = useRef();
+
+  const list = () => {
+    axios
+      .get("products")
+      .then((res) => {
+        console.log("res", res, typeof res);
+        setData(res);
+        setfilerdata(res);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
+  React.useEffect(() => {
+    list();
+  }, []);
 
   const handleClickMenu = (name) => {
     setMenuList(
@@ -56,10 +80,32 @@ const Product = () => {
         console.log("some error");
       });
   };
+  const deleteCat = (_id) => {
+    products.delete(_id).then((res) => {
+      // console.log('res', res);
+      alert(res?.message);
+      list();
+    });
+  };
+  const onsubmit = (e) => {
+    e.preventDefault();
+    const searchlist = data.filter((value) => {
+      if (searchField == "") {
+        return true;
+      } else {
+        return value.name
+          .toLowerCase()
+          .includes(searchField.toLocaleLowerCase());
+        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+      }
+    });
+    setfilerdata(searchlist);
+  };
 
   return (
     <>
-      <Addform ref={formRef} />
+      <Addform ref={formRef} list={list} />
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -90,14 +136,20 @@ const Product = () => {
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  />
+                  <form onSubmit={onsubmit}>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="navbar-search-input"
+                      placeholder="Search now"
+                      aria-label="search"
+                      aria-describedby="search"
+                      value={data.status}
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
+                    />
+                  </form>
                 </div>
               </li>
             </ul>
@@ -167,8 +219,9 @@ const Product = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
-                  }`}
+                class={`nav-item nav-profile dropdown ${
+                  profileShow ? "show" : ""
+                }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -181,8 +234,9 @@ const Product = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
-                    }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
+                    profileShow ? "show" : ""
+                  }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -232,55 +286,66 @@ const Product = () => {
                     </div>
                   </div>
                 </div>
-
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Product list</h4>
+                      <h4 class="card-title">Product list (Eco System)</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
-                              <th>S.N</th>
-                              <th>Product Title</th>
-                              <th>Product Image</th>
-                              <th>Product Description</th>
-                              <th>Product Price</th>
+                              <th>S.No</th>
+                              <th>Name</th>
+                              <th>Image</th>
+                              <th>Slug</th>
+                              <th>Short Description</th>
+                              <th>Details</th>
+                              <th>Sellprice</th>
+                              <th>MRP</th>
+                              <th>Shipping</th>
+                              <th>Status</th>
+                              <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
                           </thead>
-                          <tbody>{
-                            <tr>
-                              <td></td>
-                              <td>Fidget Cube</td>
-                              <td>
-                                <img
-                                  src="../images/product/pr.png"
-                                  class="mr-2"
-                                  alt="pr"
-                                />
-                              </td>
-
-                              <td>
-                                dolor sit amet consectetur, adipisicing elit.1
-                              </td>
-                              <td> ₹ 399/-</td>
-                              <td>
-                                <button
-                                  type="button"
-                                  class="btn btn-sm btn-info border-radius-0 add-btn"
-                                >
-                                  <i class="ti-pencil"></i>
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-sm btn-danger add-btn"
-                                >
-                                  <i class="ti-plus"></i>
-                                </button>
-                              </td>
-                            </tr>
-                          }
+                          <tbody>
+                            {filterdata.map((v, i) => (
+                              <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{v.product_name}</td>
+                                <td>
+                                  <img src={v.img_url} />
+                                </td>
+                                <td>{v.slug}</td>
+                                <td>{v.description}</td>
+                                <td>{v.details}</td>
+                                <td>{v.sellprice}</td>
+                                <td>{v.mrp}</td>
+                                <td>{v.shipping}</td>
+                                <td>
+                                  {v.status === "1" ? "Active" : "Inactive"}
+                                </td>
+                                <td>{v.createdAt}</td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-info border-radius-0 add-btn"
+                                    onClick={() => {
+                                      formRef.current.openForm(v);
+                                    }}
+                                  >
+                                    <i class="ti-pencil"></i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-danger add-btn"
+                                    onClick={() => deleteCat(v._id)}
+                                  >
+                                    <i class="ti-trash"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
@@ -309,64 +374,180 @@ const Product = () => {
 
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
+  const [data, setData] = useState({});
+  // const[shows,setshows]=useState(false);
+
+  // const[alertData,setAlerdata]=useState({title:"",body:""})
+
+  const { list } = props;
+
+  const handleChange = (v, k) => {
+    setData({ ...data, [k]: v });
+  };
 
   const handleVisible = (state) => {
     setShow(state);
   };
   useImperativeHandle(ref, () => ({
-    openForm() {
+    openForm(dt) {
+      if (dt?._id) {
+        setData(dt);
+      } else {
+        setData({});
+      }
       handleVisible(true);
     },
   }));
+
+  const save = () => {
+    let fd = new FormData();
+
+    for (let prop in data) {
+      fd.append(prop, data[prop]);
+    }
+    products
+      .save(fd, data.id)
+      .then((res) => {
+        alert(res.message);
+        // setAlerdata({title:"Docter",body:res.message})
+        // setshows(true)
+        handleVisible(false);
+        list();
+      })
+      .catch((err) => {
+        alert(err.message);
+        // setAlerdata({title:"Docter",body:err.message})
+        // setshows(true)
+      });
+  };
+  // const handleClose = () => setshows(false);
 
   return (
     <>
       <Modal
         show={show}
-        size="xl"
+        // size="sm"
         onHide={() => {
           handleVisible(false);
         }}
       >
         <Modal.Header>
-          <Modal.Title>Product Add</Modal.Title>
+          <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Product Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Product Title"
-                />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Product Upload</label>
-                <input
-                  type="file"
-                  class="form-control file-upload-info"
-                  placeholder="Product Image"
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Product Description</label>
-                <textarea
-                  class="form-control"
-                  placeholder=" Product Description"
-                />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Product Price</label>
-                <input
-                  type="text"
-                  class="form-control file-upload-info"
-                  placeholder="Product Price"
-                />
-              </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.product_name || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "product_name");
+                }}
+                placeholder="Product Name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Image</label>
+              <input
+                type="file"
+                class="form-control"
+                // value={data.img || ""}
+                onChange={(e) => {
+                  handleChange(e.target.files[0], "img_url");
+                }}
+                placeholder="Product img"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Slug</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.slug || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "slug");
+                }}
+                placeholder="Product slug"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Short description</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.description || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "description");
+                }}
+                placeholder="Product description"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Details</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.details || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "details");
+                }}
+                placeholder="Product details"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Sellprice</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.sellprice || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "sellprice");
+                }}
+                placeholder="Product sellprice"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">MRP</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.mrp || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "mrp");
+                }}
+                placeholder="Product MRP"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Shipping</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.shipping || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "shipping");
+                }}
+                placeholder="Product shipping"
+              />
+            </div>
+           
+            <div class="form-group ">
+              <label for="exampleInputUsername1">Category Status</label>
+              <select
+                class="form-control"
+                value={data.status || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "status");
+                }}
+              >
+                <option value="" disabled>
+                  Select Status
+                </option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </select>
             </div>
           </form>
         </Modal.Body>
@@ -379,16 +560,23 @@ const Addform = forwardRef((props, ref) => {
           >
             Close
           </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleVisible(false);
-            }}
-          >
+          <Button variant="primary" onClick={save}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* <Bmodal show={shows} >
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertData.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+        <Bmodal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+         ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal> */}
     </>
   );
 });
