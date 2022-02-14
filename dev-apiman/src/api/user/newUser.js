@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const { getDatabase } = require("../../db/mongo");
 
 const validate = (req, res, next ) => {
-  const { email, password, name, type } = req.body;
+  const { email, password, name } = req.body;
 console.log('888888', );
   if (email && password && name) {
     next();
@@ -16,14 +16,14 @@ console.log('888888', );
 router.post("/user/new", validate, async (req, res) => {
   try {
     const db = await getDatabase();
-    const { email, password, name, type } = req.body;
+    const { email, password, name } = req.body;
     const encryptedPassword = await bcrypt.hash(password, 10);
-    const user = await db.collection("users").findOne({ email: email });
+    const user = await db.collection("user").findOne({ email: email });
 	  console.log("user ragister", user);
 
     if (!user) {
       console.log('7777777');
-      db.collection("users")
+      db.collection("user")
         .insertOne({
           name: name,
           email: email,
@@ -59,11 +59,11 @@ router.post("/user/new", validate, async (req, res) => {
       .json({ message: "please try again later!", status: false, e: e });
   }
 });
-router.get("/", async (req, res) => {
+router.get("/user/list", async (req, res) => {
   try {
     const db = await getDatabase();
     let dt = await db
-      .collection("users")
+      .collection("user")
       .find().toArray()
     res.json(dt);
     

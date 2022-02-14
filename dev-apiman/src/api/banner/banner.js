@@ -2,6 +2,17 @@ const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 
+
+
+
+
+
+
+
+
+
+
+// display banner
 const validate = (req, res, next) => {
   console.log("=fgf===", req.body.collectiontypedata);
   if (req.body.collectiontypedata) {

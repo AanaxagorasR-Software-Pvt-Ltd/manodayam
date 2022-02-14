@@ -16,25 +16,23 @@ import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import appointment from "../Store/Connect/appointment";
-import globalData from "../rdx";
-import LeftSideBar from "../Layout/LeftSideBar";
-// let Button = new AA()
 
-const BookedAppointment = () => {
+const Userslist = (props) => {
+  console.log(props);
   const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
-  const createRoomRef = useRef();
-  const changeStatusRef = useRef();
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
 
-  const listBooked = () => {
+  const formRef = useRef("");
+
+  const list = () => {
     axios
-      .get("appointments/booked")
+      .get("/auth/user/list")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
@@ -45,7 +43,8 @@ const BookedAppointment = () => {
       });
   };
   React.useEffect(() => {
-    listBooked();
+    list();
+    console.log(list());
   }, []);
 
   const handleClickMenu = (name) => {
@@ -81,16 +80,12 @@ const BookedAppointment = () => {
       });
   };
 
-  const deleteData = (_id) => {
-    appointment.delete(_id).then((res) => {
-      alert(res?.message);
-      listBooked();
-    });
-  };
-  const convertToDateTime = (time) => {
-    const d = new Date(time);
-    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
-  };
+  // const deleteData = (_id) => {
+  //   appointment.delete(_id).then((res) => {
+  //     alert(res?.message);
+  //     list();
+  //   });
+  // };
 
   const onsubmit = (e) => {
     e.preventDefault();
@@ -104,8 +99,6 @@ const BookedAppointment = () => {
             .includes(searchField.toLocaleLowerCase()) ||
           value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
         );
-        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
       }
     });
     setfilerdata(searchlist);
@@ -113,8 +106,7 @@ const BookedAppointment = () => {
 
   return (
     <>
-      <CreateRoomForm ref={createRoomRef} list={listBooked} />
-      <CreateRoomForm ref={changeStatusRef} list={listBooked} />
+      {/* <Addform ref={formRef} list={list} /> */}
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -131,7 +123,9 @@ const BookedAppointment = () => {
               type="button"
               data-toggle="minimize"
               onClick={handleSideBar}
-            ></button>
+            >
+              <span class="icon-menu"></span>
+            </button>
             <ul class="navbar-nav mr-lg-2">
               <li class="nav-item nav-search d-none d-lg-block">
                 <div class="input-group">
@@ -169,6 +163,7 @@ const BookedAppointment = () => {
                   data-toggle="dropdown"
                 >
                   <i class="icon-bell mx-0"></i>
+                  <span class="count"></span>
                 </a>
                 <div
                   class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -272,7 +267,55 @@ const BookedAppointment = () => {
         </nav>
         <div class="container-fluid page-body-wrapper">
           <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <LeftSideBar />
+            <ul class="nav">
+              {menuList.map((sMenu) => (
+                <li
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
+                    sMenu?.isHover ? "hover-open" : ""
+                  }`}
+                  key={uuidv4()}
+                  onClick={(e) => handleClickMenu(sMenu?.name)}
+                  onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
+                  onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
+                >
+                  <a
+                    className={`nav-link ${
+                      sMenu.submenu.length > 0 ? "collapsed" : ""
+                    }`}
+                    href={`${sMenu?.link}`}
+                    data-toggle="collapse"
+                    aria-expanded={sMenu?.isActive ? true : false}
+                  >
+                    <i className={`${sMenu?.iconClass} menu-icon`}></i>
+                    <span className="menu-title">{sMenu?.name}</span>
+                    {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                      <i class="menu-arrow"></i>
+                    ) : null}
+                  </a>
+                  {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                    <div
+                      className={`collapse ${sMenu?.isActive ? " show" : ""}`}
+                      id="ui-basic"
+                    >
+                      <ul className="nav flex-column sub-menu">
+                        {sMenu.submenu.map((sub) => (
+                          <li class="nav-item">
+                            {" "}
+                            <a
+                              href={`${sub.link}`}
+                              class="nav-link"
+                              aria-expanded={sMenu?.isActive ? true : false}
+                            >
+                              {sub.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
           </nav>
           <div class="main-panel">
             <div class="content-wrapper">
@@ -280,88 +323,29 @@ const BookedAppointment = () => {
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Booked Appointment list</h4>
+                      <h4 class="card-title">Users who Ragister</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
                               <th>S.No</th>
-                              <th>Patient Details</th>
-                              <th>Issue</th>
-                              <th>Schedule Date</th>
-                              <th>Call Status</th>
-                              <th>Connect Here!</th>
-                              <th style={{ width: "80px" }}>Action</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Created Date</th>
+                              {/* <th> Status</th> */}
                             </tr>
                           </thead>
                           <tbody>
-                            {filterdata.map((v, i) => (
-                              <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td>
-                                  <strong>Name: </strong> {v.fullname}
-                                  <br />
-                                  <strong>Email:</strong> {v.email} <br />
-                                  <strong>Phone:</strong> {v.mobileNmb}{" "}
-                                </td>
-                                <td>{v.disorder}</td>
+                            {filterdata &&
+                              filterdata.map((v, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  <td>{v.name}</td>
+                                  <td>{v.email}</td>
 
-                                <td>{convertToDateTime(v.schedule)}</td>
-                                <td>
-                                  {v.call_status === "pending"
-                                    ? "Pending"
-                                    : v.status === "success"
-                                    ? "Success"
-                                    : "Unsuccess"}
-                                </td>
-                                <td>
-                                  {v.room_no == null ? (
-                                    <button
-                                      type="button"
-                                      class="btn btn-sm btn-info border-radius-0 add-btn"
-                                      onClick={() => {
-                                        createRoomRef.current.openForm(v);
-                                      }}
-                                      title="Create Room"
-                                    >
-                                      <i class="ti-plus"></i>
-                                    </button>
-                                  ) : (
-                                    <a
-                                      href={
-                                        globalData.videoCallLink + v.room_no
-                                      }
-                                      target="_blank"
-                                    >
-                                      <button
-                                        type="button"
-                                        class="btn btn-sm btn-success border-radius-0 add-btn"
-                                      >
-                                        <i class="ti-video-camera"></i>
-                                      </button>
-                                    </a>
-                                  )}
-                                </td>
-                                <td>
-                                  <button
-                                    type="button"
-                                    class="btn btn-sm btn-info border-radius-0 add-btn"
-                                    onClick={() => {
-                                      createRoomRef.current.openForm(v);
-                                    }}
-                                  >
-                                    <i class="ti-pencil"></i>
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger add-btn"
-                                    onClick={() => deleteData(v._id)}
-                                  >
-                                    <i class="ti-trash"></i>
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
+                                  <td>{new Date().toJSON().slice(0, 10).replace(/-/g, "-")}  </td>
+                                </tr>
+                              ))}
                           </tbody>
                         </table>
                       </div>
@@ -388,15 +372,16 @@ const BookedAppointment = () => {
   );
 };
 
-const CreateRoomForm = forwardRef((props, ref) => {
+const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
+  const [searchField, setSearchField] = useState("");
   const { list } = props;
   const handleChange = (v, k) => {
     setData({ ...data, [k]: v });
   };
 
-  const handleVisibleRoom = (state) => {
+  const handleVisible = (state) => {
     setShow(state);
   };
   useImperativeHandle(ref, () => ({
@@ -406,16 +391,17 @@ const CreateRoomForm = forwardRef((props, ref) => {
       } else {
         setData({});
       }
-      handleVisibleRoom(true);
+      handleVisible(true);
     },
   }));
 
-  const saveRoom = () => {
+  const save = () => {
+    let fd = new FormData();
     appointment
-      .saveRoom(data, data.id)
+      .save(data, data.id)
       .then((res) => {
-        alert(res?.message);
-        handleVisibleRoom(false);
+        alert(res.message);
+        handleVisible(false);
         list();
       })
       .catch((err) => {
@@ -428,148 +414,121 @@ const CreateRoomForm = forwardRef((props, ref) => {
       <Modal
         show={show}
         onHide={() => {
-          handleVisibleRoom(false);
+          handleVisible(false);
         }}
       >
         <Modal.Header>
-          <Modal.Title>Create Room</Modal.Title>
+          <Modal.Title>Book Appointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <label for="exampleInputUsername1"> Room No</label>
+              <label for="exampleInputUsername1"> Name</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.room_no || ""}
+                value={data.fullname || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "room_no");
+                  handleChange(e.target.value, "fullname");
                 }}
-                placeholder="Enter Room No"
+                placeholder="Enter Name"
               />
             </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              handleVisibleRoom(false);
-            }}
-          >
-            Close
-          </Button>
-          <Button variant="primary" onClick={saveRoom}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      {/* 
-      <div class="form-group">
-        <label for="exampleInputUsername1"> Phone</label>
-        <input
-          type="number"
-          class="form-control"
-          value={data.mobileNmb || ""}
-          onChange={(e) => {
-            handleChange(e.target.value, "mobileNmb");
-          }}
-          placeholder="Enter Phone"
-        />
-      </div> */}
-    </>
-  );
-});
-const ChangeStatusForm = forwardRef((props, ref) => {
-  const [show1, setShow1] = useState(false);
-  const [data, setData] = useState({});
-  const { list } = props;
-  const handleChange = (v, k) => {
-    setData({ ...data, [k]: v });
-  };
 
-  const handleVisibleStatus = (state) => {
-    setShow1(state);
-  };
-  useImperativeHandle(ref, () => ({
-    openForm(dt) {
-      if (dt?._id) {
-        setData(dt);
-      } else {
-        setData({});
-      }
-      handleVisibleStatus(true);
-    },
-  }));
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Email</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.email || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "email");
+                }}
+                placeholder="Enter Email"
+              />
+            </div>
 
-  const saveCallStatus = () => {
-    appointment
-      .saveCallStatus(data, data.id)
-      .then((res) => {
-        alert(res?.message);
-        handleVisibleStatus(false);
-        list();
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  };
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Phone</label>
+              <input
+                type="number"
+                class="form-control"
+                value={data.mobileNmb || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "mobileNmb");
+                }}
+                placeholder="Enter Phone"
+              />
+            </div>
 
-  return (
-    <>
-      <Modal
-        show={show1}
-        onHide={() => {
-          handleVisibleStatus(false);
-        }}
-      >
-        <Modal.Header>
-          <Modal.Title>Change Call Status</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form class="forms-sample">
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Issue</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.disorder || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "disorder");
+                }}
+                placeholder="Enter Issue"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Schedule Date</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                value={data.schedule || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "schedule");
+                }}
+                placeholder="Enter Schedule Date"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Message</label>
+              <textarea
+                class="form-control"
+                rows={4}
+                value={data.msg || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "msg");
+                }}
+                placeholder=" Message"
+              />
+            </div>
+
             <div class="form-group ">
-              <label for="exampleInputUsername1">Call Status</label>
+              <label for="exampleInputUsername1">Appointment Status</label>
               <select
                 class="form-control"
-                value={data.call_status || ""}
+                value={data.status || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "call_status");
+                  handleChange(e.target.value, "status");
                 }}
               >
                 <option value="" disabled>
-                  Change Call Status
+                  Select Appointment Status
                 </option>
                 <option value="pending">Pending</option>
-                <option value="success">Success</option>
-                <option value="unsuccess">Unsuccess</option>
+                <option value="booked">Booked</option>
+                <option value="cancelled">Cancelled</option>
               </select>
             </div>
           </form>
-
-          <div class="form-group">
-            <label for="exampleInputUsername1"> Message</label>
-            <textarea
-              class="form-control"
-              rows={4}
-              value={data.msg || ""}
-              onChange={(e) => {
-                handleChange(e.target.value, "msg");
-              }}
-              placeholder=" Message"
-            />
-          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button
             variant="secondary"
             onClick={() => {
-              handleVisibleStatus(false);
+              handleVisible(false);
             }}
           >
             Close
           </Button>
-          <Button variant="primary" onClick={saveCallStatus}>
+          <Button variant="primary" onClick={save}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -577,4 +536,4 @@ const ChangeStatusForm = forwardRef((props, ref) => {
     </>
   );
 });
-export default BookedAppointment;
+export default Userslist;

@@ -26,7 +26,7 @@ const leftSideBarMenu = [
   //   isActive: false,
   //   dataToggle: "",
   //   isExpand: false,
-  //   link: "/spirituality",
+  //   link: "/admin/media-solutions",
   //   iconClass: "icon-grid",
   //   subMenuid: "ui-basic",
   //   submenu: [],
@@ -156,39 +156,18 @@ const leftSideBarMenu = [
     ],
     isHover: false,
   },
-  // {
-  //   name: "E-com",
-  //   isActive: false,
-  //   dataToggle: "",
-  //   isExpand: false,
-  //   // link: "javascript:void(0)" ,
-  //   iconClass: "icon-columns",
-  //   submenu: [
-  //     {
-  //       name: "Orders",
-  //       isActive: true,
-  //       dataToggle: "",
-  //       link: "/admin/order" ,
-  //       isExpand: false,
-  //     },
-  //     {
-  //       name: "Products",
-  //       isActive: true,
-  //       dataToggle: "",
-  //       link: "/admin/product" ,
-  //       isExpand: false,
-  //     },
-  //     {
-  //       name: "Sells",
-  //       isActive: true,
-  //       dataToggle: "",
-  //       link: "/admin/sells" ,
-  //       isExpand: false,
-  //     }
-  //   ],
-  //   isHover: false
+  {
+    name: "Product",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/product" ,
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
 
-  // },
   {
     name: "Digital Human Library",
     isActive: false,
@@ -245,7 +224,7 @@ const leftSideBarMenu = [
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    // link: "javascript:void(0)" ,
+    link: "/users-list",
     iconClass: "icon-contract",
     submenu: [],
     isHover: false,
