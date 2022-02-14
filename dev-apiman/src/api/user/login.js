@@ -4,7 +4,7 @@ const { getDatabase } = require("../../db/mongo");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validate = (req, res, next) => {
-  const { email, password, type } = req.body;
+  const { email, password } = req.body;
   if (email && password) {
     next();
     // res.redirect("/");
@@ -17,7 +17,7 @@ router.post("/user/login", validate, async (req, res) => {
   try {
     const { email, password } = req.body;
     const db = await getDatabase();
-    const user = await db.collection("users").findOne({ email: email });
+    const user = await db.collection("user").findOne({ email: email });
     console.log("user login", user);
     if (user && (await bcrypt.compare(password, user.password))) {
       const { type, name, age, _id, email, password } = user;

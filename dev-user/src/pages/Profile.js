@@ -18,8 +18,8 @@ export default function Profile() {
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
     const profileData = {
-      // collectiontypedata: "banner",
-      token: "token",
+      collectiontypedata: "banner",
+      // token: "token",
     };
     axios
       .post(`${API_ADMIN_URL}${PROFIL_API}`, profileData)
