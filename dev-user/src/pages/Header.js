@@ -70,7 +70,7 @@ const handleClose = () => setshow(false);
               </div>
               <div className="col-lg-6 col-sm-8">
                 <div className="header-contact">
-                  <button
+                  <button 
                     className="btn-web hvr-float-shadow"
                     data-toggle="tooltip"
                     title="Profile!"
