@@ -18,7 +18,7 @@ router.post("/user/login", validate, async (req, res) => {
 
     const { email, password } = req.body;
     const db = await getDatabase();
-    const user = await db.collection("user").findOne({ email: email });
+    const user = await db.collection("users").findOne({ email: email });
     console.log("user login", user);
     if (user && (await bcrypt.compare(password, user.password))) {
       const { type, name, age, _id, email, password } = user;
