@@ -485,10 +485,8 @@ const Addform = forwardRef((props, ref) => {
                   placeholder="expert email"
                 />
               </div>
-
-
               <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Video Motivator Image</label>
+                <label for="exampleInputUsername1">Motivator Image</label>
                 <input
                   type="file"
                   class="form-control file-upload-info"

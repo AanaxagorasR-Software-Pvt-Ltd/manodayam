@@ -11,9 +11,8 @@ export default function Profile() {
   const [bookData, setbookData] = useState([]);
   const [data, setdatta] = useState([]);
   const [show, setshow] = useState(false);
-  const [alertData, setAlerdata] = useState({ title: "", body: "" })
-  const [user,setUser]=useState({})
-
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
+  const [user, setUser] = useState({});
 
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -36,7 +35,7 @@ export default function Profile() {
   useEffect((props) => {
     ProfilData();
     setUser(JSON.parse(localStorage.getItem("user")));
-    console.log(JSON.parse(localStorage.getItem("user")))
+    console.log(JSON.parse(localStorage.getItem("user")));
   }, []);
   const listBooked = () => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -46,7 +45,6 @@ export default function Profile() {
       .then((res) => {
         console.log("res", res, typeof res);
         setbookData(res.data);
-
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -57,10 +55,9 @@ export default function Profile() {
   }, []);
   const convertToDateTime = (time) => {
     const d = new Date(time);
-    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
-  }
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+  };
   const handleClose = () => setshow(false);
-
 
   return (
     <>
@@ -82,7 +79,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
-
+     
       <div className="profile-section mb-50">
         <div className="container">
           <div className="row">
@@ -92,20 +89,24 @@ export default function Profile() {
                   <div className="col-lg-3 col-sm-3">
                     <div className="profile-img">
                       {/* <img src="assets/image/profile.jpg" alt="" /> */}
-                      <img src="assets/image/profile.jpg" alt="" />
+                      <img src="assets/image/profile.png" alt="" />
                     </div>
                   </div>
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
-                      <h3>{user && user.name}</h3>
-                      
+                      <h4 className="profile-name">
+                       <span className="profile-hello">Hello</span> {user && user.name}
+                      </h4>
                       {/* {
                         <p>
                           <i className="fa fa-phone"></i>
                         </p>} */}
-                     { <p>
-                        <i className="fa fa-envelope"></i> {user && user.email}
-                      </p>}
+                      {
+                        <p>
+                          <i className="fa fa-envelope"></i>{" "}
+                          {user && user.email}
+                        </p>
+                      }
                       {/* <p>
                         <i className="fa fa-map-marker"></i> 
                       </p> */}
@@ -156,7 +157,7 @@ export default function Profile() {
             <div className="col-lg-12">
               <div className="profile-setting">
                 <div className="tab-content">
-                  <div class="tab-pane active" id="home">
+                  {/* <div class="tab-pane active" id="home">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="profile-form checkout-form doctor-form">
@@ -245,7 +246,7 @@ export default function Profile() {
                                 </div>
                               </div>
                               <div class="col-lg-12">
-                                <buttton class="btn hvr-float-shadow" >
+                                <buttton class="btn hvr-float-shadow">
                                   Save
                                 </buttton>
                               </div>
@@ -254,7 +255,7 @@ export default function Profile() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="tab-pane fade" id="menu1">
                     <div className="row">
                       <div className="col-lg-12">
@@ -409,53 +410,55 @@ export default function Profile() {
                               </tr>
                             </thead>
                             <tbody>
-                              {
-                                bookData.map((a, i) => (
+                              {bookData.map((a, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  {/* {new Date(a.schedule).toLocaleDateString()} */}
 
-                                  <tr key={i}>
-                                    <td>{i + 1}</td>
-                                    {/* {new Date(a.schedule).toLocaleDateString()} */}
+                                  <td>{convertToDateTime(a.schedule)}</td>
+                                  {/* <td>{a.title}</td> */}
+                                  <td>{a.fullname}</td>
 
-                                    <td>{convertToDateTime(a.schedule)}</td>
-                                    {/* <td>{a.title}</td> */}
-                                    <td>{a.fullname}</td>
-
-                                    <td>{a.disorder}</td>
-                                    <td>
-                                      {a.room_no == null ? (
-                                        <button onClick={() => {
-                                          setAlerdata({ title: " Please Wait !!", body: "please waiting for meeting schedule" });
-                                          setshow(true)
+                                  <td>{a.disorder}</td>
+                                  <td>
+                                    {a.room_no == null ? (
+                                      <button
+                                        onClick={() => {
+                                          setAlerdata({
+                                            title: " Please Wait !!",
+                                            body: "please waiting for meeting schedule",
+                                          });
+                                          setshow(true);
                                         }}
+                                        type="button"
+                                        class="btn btn-sm btn-info border-radius-0 add-btn"
+                                        // onClick={() => {
+                                        //   createRoomRef.current.openForm(a);
+                                        // }}
+                                        title="Create Room"
+                                      >
+                                        <i class="fas fa-video"></i>
+                                      </button>
+                                    ) : (
+                                      <a
+                                        href={
+                                          globalDataCall.videoCallLink +
+                                          a.room_no
+                                        }
+                                        target="_blank"
+                                      >
+                                        <button
                                           type="button"
-                                          class="btn btn-sm btn-info border-radius-0 add-btn"
-                                          // onClick={() => {
-                                          //   createRoomRef.current.openForm(a);
-                                          // }}
-                                          title="Create Room"
+                                          class="btn btn-sm btn-success border-radius-0 add-btn"
                                         >
-                                          <i class="fas fa-video"></i>
+                                          <i class="ti-video-camera"></i>
                                         </button>
-                                      ) : (
-                                        <a
-                                          href={
-                                            globalDataCall.videoCallLink +
-                                            a.room_no
-                                          }
-                                          target="_blank"
-                                        >
-                                          <button
-                                            type="button"
-                                            class="btn btn-sm btn-success border-radius-0 add-btn"
-                                          >
-                                            <i class="ti-video-camera"></i>
-                                          </button>
-                                        </a>
-                                      )}
-                                    </td>
-                                    <td>{a.status}</td>
-                                  </tr>
-                                ))}
+                                      </a>
+                                    )}
+                                  </td>
+                                  <td>{a.status}</td>
+                                </tr>
+                              ))}
                             </tbody>
                           </table>
                         </div>
@@ -468,13 +471,12 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <Bmodal show={show} >
+      <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title>{alertData.title}</Bmodal.Title>
         </Bmodal.Header>
         <Bmodal.Body>{alertData.body}</Bmodal.Body>
         <Bmodal.Footer>
-
           <Button variant="primary" onClick={handleClose}>
             ok
           </Button>
