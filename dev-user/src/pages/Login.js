@@ -10,7 +10,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
-import { Modal as Bmodal ,Button} from "react-bootstrap";
+import { Modal as Bmodal, Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
@@ -76,8 +76,8 @@ export default function Login(props) {
 
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
-  const[show,setshow]=useState(false);
-  const[alertData,setAlerdata]=useState({title:"",body:""})
+  const [show, setshow] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" })
   const onLoginSuccess = (res) => {
     console.log("Login Success:", res.profileObj);
     // setShowloginButton(true);
@@ -105,17 +105,21 @@ export default function Login(props) {
         console.log("login", ((typeof res.data, res.data)));
         // console.log("**********", res.data.token);
         if (res.data.status) {
-          localStorage.setItem("Token",res.data.Token);
-          localStorage.setItem("user",JSON.stringify(res.data.user))
-          setAlerdata({title:"Login",body:"User Login Successfully"})
-       setshow(true)
+          localStorage.setItem("Token", res.data.Token);
+          localStorage.setItem("user", JSON.stringify(res.data.user))
+          setAlerdata({ title: "Login", body: "User Login Successfully" })
+          setshow(true)
+         
+          document.getElementById("loginvalidation").reset();
+          setLoginmailError("");
+          setloginPasswordError("");
           window.$("#myModal").modal("hide");
           window.location.reload();
 
           // handleCloseModal();
         } else {
-          setAlerdata({title:"Sorry",body:"Invalid user and Password"})
-       setshow(true)
+          setAlerdata({ title: "Sorry", body: "Invalid user and Password" })
+          setshow(true)
         }
       })
       .catch((error) => {
@@ -124,6 +128,7 @@ export default function Login(props) {
   };
   // Registration
   const RegisterationApi = () => {
+
     if (registrationName == "") {
       setregistrationNameError("Enter your name");
     }
@@ -145,10 +150,20 @@ export default function Login(props) {
       .post(`${API_ADMIN_URL}${REGISTER_API}`, RegisterationOptions)
       .then((res) => {
         console.log(res.data);
-        setAlerdata({title:"Registration",body:"User Registration successfully"})
-       setshow(true)
-        window.$("#registermodal").modal("hide");
-        
+        if (res.data.status) {
+          setAlerdata({ title: "Registration", body: "User Registration successfully" })
+          setshow(true)
+          document.getElementById("registrationvalidation").reset();
+          setregistrationNameError("");
+          setregistrationMailError("");
+          setregistrationPasswordError("");
+
+        } else {
+          setAlerdata({ title: "Sorry", body: "User Registration already  Exist" })
+          setshow(true)
+          window.$("#registermodal").modal("hide");
+        }
+
       })
       .catch((error) => {
         console.log(error);
@@ -232,9 +247,9 @@ export default function Login(props) {
       msg: libraryMsg,
       humanId: props.humanId,
     };
-    if(!validate(humanLibraryOptions)){
-      return; 
-     }
+    if (!validate(humanLibraryOptions)) {
+      return;
+    }
     axios
       .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY}`, humanLibraryOptions)
       .then((res) => {
@@ -245,16 +260,16 @@ export default function Login(props) {
         setlibraryName("");
         setlibraryNum("");
         setlibraryMail("");
-        
+
         setlibraryDate("");
-       setlibraryMsg("");
-      
+        setlibraryMsg("");
+
 
         if (res.status == 200) {
           // localStorage.setItem("Token", res.data.token);
           window.$("#library-modal").modal("hide");
         } else {
-          setAlerdata({title:"Sorry",body:"Invalid Email and Password"})
+          setAlerdata({ title: "Sorry", body: "Invalid Email and Password" })
           setshow(true)
         }
       })
@@ -285,7 +300,7 @@ export default function Login(props) {
             </button>
 
             <div className="modal-body md-custom">
-              <form className="login-hide" action="">
+              <form className="login-hide" action="" id="loginvalidation">
                 <h3>Log in</h3>
                 <div className="form-group">
                   <label for="">Email</label>
@@ -665,7 +680,7 @@ export default function Login(props) {
             </button>
 
             <div className="modal-body md-custom">
-              <form action="">
+              <form action="" id="registrationvalidation">
                 <h3>Create A New Account</h3>
                 <div className="form-group">
                   <label for="">Full Name</label>
@@ -753,7 +768,7 @@ export default function Login(props) {
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
-                        // style={{ width: 300, borderRadius: 50, height: 46 }}
+                      // style={{ width: 300, borderRadius: 50, height: 46 }}
                       >
                         <i
                           className="fa fa-google-plus"
@@ -831,7 +846,7 @@ export default function Login(props) {
                     onSuccess={responseInstagram}
                     onFailure={responseInstagram}
                     cssClass="btninsta"
-                    // style={{marginLeft}}
+                  // style={{marginLeft}}
                   />
 
                   <AppleSignin
@@ -874,9 +889,9 @@ export default function Login(props) {
         </Bmodal.Header>
         <Bmodal.Body>{alertData.body}</Bmodal.Body>
         <Bmodal.Footer>
-          
+
           <Button variant="primary" onClick={handleClose}>
-         ok
+            ok
           </Button>
         </Bmodal.Footer>
       </Bmodal>

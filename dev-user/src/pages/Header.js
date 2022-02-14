@@ -84,14 +84,15 @@ const handleClose = () => setshow(false);
                     className="btn-web hvr-float-shadow"
                     data-toggle="tooltip"
                     title="Cart!"
+                    onClick={() => loginsubmit("/cart")}
                   >
-                    {" "}
-                    <Link to="/cart">
+                   
+                    {/* <Link to="/cart"> */}
                       <i
                         className="fa fa-cart-arrow-down"
                         aria-hidden="true"
                       ></i>
-                    </Link>
+                    {/* </Link> */}
                   </button>
                   <i className="fa fa-mobile" aria-hidden="true"></i>
                   <a href="telto:+91 7428409721">+91 7428409721</a>

@@ -18,12 +18,12 @@ router.post("/user/new", validate, async (req, res) => {
     const db = await getDatabase();
     const { email, password, name } = req.body;
     const encryptedPassword = await bcrypt.hash(password, 10);
-    const user = await db.collection("user").findOne({ email: email });
+    const user = await db.collection("users").findOne({ email: email });
 	  console.log("user ragister", user);
 
     if (!user) {
-      console.log('7777777');
-      db.collection("user")
+   
+      db.collection("users")
         .insertOne({
           name: name,
           email: email,
@@ -37,10 +37,10 @@ router.post("/user/new", validate, async (req, res) => {
             data: resp,
           });
           
-          alert('New user created')
-
+        
         })
         .catch((e) => {
+          console.error(e);
           res.status(200).json({
             message: "please try again later ",
             status: false,

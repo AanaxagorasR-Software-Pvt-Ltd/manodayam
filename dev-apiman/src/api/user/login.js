@@ -15,6 +15,7 @@ const validate = (req, res, next) => {
 router.post("/user/login", validate, async (req, res) => {
   // res.send({kk: 1111});
   try {
+
     const { email, password } = req.body;
     const db = await getDatabase();
     const user = await db.collection("users").findOne({ email: email });
