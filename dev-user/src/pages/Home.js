@@ -885,13 +885,13 @@ export default function Home(props) {
                     {element.mrp}
                   </span>
 
-                  <Link
+                  {/* <Link
                     to={{
                       pathname: "/ViewProduct/" + element.slug,
                     }}
-                  >
-                    <buttton className="btn-web cart-btn">View</buttton>
-                  </Link>
+                  > */}
+                    <buttton className="btn-web cart-btn" onClick={() => loginsubmit("/ViewProduct/" + element.slug)}>View</buttton>
+                  {/* </Link> */}
                 </div>
               </div>
             ))}
