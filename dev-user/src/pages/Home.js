@@ -735,7 +735,7 @@ export default function Home(props) {
                         className="btn-web col-11 mt-2"
                         onClick={() => loginsubmits(globalDataLive.liveLink)}
                       >
-                        Please Join
+                        Please Join Live Session
                       </button>
                       {/* </a> */}
                       <button
