@@ -13,20 +13,34 @@ import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
 import Button from "react-bootstrap/Button";
+import banner from "../Store/Services/banner";
+import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
 import LeftSideBar from "../Layout/LeftSideBar";
-// let Button = new AA()
 
 const Banner = () => {
+  const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
-  // const [searchField, setSearchField] = useState("");
-  // const [filterdata, setfilerdata] = React.useState([]);
-
   const formRef = useRef();
+
+  const list = () => {
+    axios
+      .get("banner")
+      .then((res) => {
+        console.log("res", res, typeof res);
+        setData(res);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
+  React.useEffect(() => {
+    list();
+  }, []);
 
   const handleClickMenu = (name) => {
     setMenuList(
@@ -59,29 +73,17 @@ const Banner = () => {
         console.log("some error");
       });
   };
-  // const onsubmit = (e) => {
-  //   e.preventDefault();
-  //   const searchlist = data.filter((value) => {
-  //     if (searchField == "") {
-  //       return true
-
-
-  //     } else {
-  //       return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
-  //       // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-  //       //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
-  //     }
-
-
-  //   })
-  //   setfilerdata(searchlist);
-
-
-  // }
+  const deleteCat = (_id) => {
+    banner.delete(_id).then((res) => {
+      // console.log('res', res);
+      alert(res?.message);
+      list();
+    });
+  };
 
   return (
     <>
-      <Addform ref={formRef} />
+      <Addform ref={formRef} list={list} />
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -256,49 +258,53 @@ const Banner = () => {
                     </div>
                   </div>
                 </div>
-
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Banner list</h4>
+                      <h4 class="card-title">Banner Text</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
-                              <th>S.N</th>
-                              <th>Banner Image</th>
-                              <th>Banner Description</th>
+                              <th>S.No</th>
+
+                              <th>Text (Thought)</th>
+                              {/* <th>Solution Slug </th> */}
+                              <th>Status</th>
+                              <th>Created Date</th>
+                              <th style={{ width: "80px" }}>Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>
-                                <img
-                                  src="../images/product/pr.png"
-                                  class="mr-2"
-                                  alt="pr"
-                                />
-                              </td>
-
-                              <td>
-                                dolor sit amet consectetur, adipisicing elit.1
-                              </td>
-                              <td>
-                                <button
-                                  type="button"
-                                  class="btn btn-sm btn-info border-radius-0 add-btn"
-                                >
-                                  <i class="ti-pencil"></i>
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-sm btn-danger add-btn"
-                                >
-                                  <i class="ti-plus"></i>
-                                </button>
-                              </td>
-                            </tr>
+                            {data.map((v, i) => (
+                              <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{v.banner_text}</td>
+                                {/* <td>{v.slug}</td> */}
+                                <td>
+                                  {v.status === "1" ? "Active" : "Inactive"}
+                                </td>
+                                <td>{v.createdAt}</td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-info border-radius-0 add-btn"
+                                    onClick={() => {
+                                      formRef.current.openForm(v);
+                                    }}
+                                  >
+                                    <i class="ti-pencil"></i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-danger add-btn"
+                                    onClick={() => deleteCat(v._id)}
+                                  >
+                                    <i class="ti-trash"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
@@ -327,64 +333,83 @@ const Banner = () => {
 
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
+  const [data, setData] = useState({});
+  const { list } = props;
+
+  const handleChange = (v, k) => {
+    setData({ ...data, [k]: v });
+  };
 
   const handleVisible = (state) => {
     setShow(state);
   };
   useImperativeHandle(ref, () => ({
-    openForm() {
+    openForm(dt) {
+      if (dt?._id) {
+        setData(dt);
+      } else {
+        setData({});
+      }
       handleVisible(true);
     },
   }));
+
+  const save = () => {
+    let fd = new FormData();
+    banner
+      .save(data, data.id)
+      .then((res) => {
+        alert(res.message);
+        handleVisible(false);
+        list();
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
   return (
     <>
       <Modal
         show={show}
-        size="xl"
+        // size="sm"
         onHide={() => {
           handleVisible(false);
         }}
       >
         <Modal.Header>
-          <Modal.Title>Banner Add</Modal.Title>
+          <Modal.Title>Add Media Solution</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Banner Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Banner Title"
-                />
-              </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Media Solution Name</label>
+              <input
+                type="text"
+                class="form-control"
+                value={data.banner_text || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "banner_text");
+                }}
+                placeholder="Banner text here"
+              />
+            </div>
 
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Banner Upload</label>
-                <input
-                  type="file"
-                  class="form-control file-upload-info"
-                  placeholder="Banner Image"
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Banner Description</label>
-                <textarea
-                  class="form-control"
-                  placeholder=" Banner Description"
-                />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="exampleInputUsername1">Banner Price</label>
-                <input
-                  type="text"
-                  class="form-control file-upload-info"
-                  placeholder="Banner Price"
-                />
-              </div>
+            <div class="form-group ">
+              <label for="exampleInputUsername1">Media Solution Status</label>
+              <select
+                class="form-control"
+                value={data.status || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "status");
+                }}
+              >
+                <option value="" disabled>
+                  Select Status
+                </option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </select>
             </div>
           </form>
         </Modal.Body>
@@ -397,12 +422,7 @@ const Addform = forwardRef((props, ref) => {
           >
             Close
           </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleVisible(false);
-            }}
-          >
+          <Button variant="primary" onClick={save}>
             Save Changes
           </Button>
         </Modal.Footer>

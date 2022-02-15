@@ -81,9 +81,9 @@ export default function Cart(props) {
                     {responseData.map((element) => (
                       <tr>
                         <td>
-                          <img src={element.pic_url} alt="" />
+                          <img src={element.img_url} alt="" />
                         </td>
-                        <td>{element.productname}</td>
+                        <td>{element.product_name}</td>
                         <td>
                           <i className="fa fa-inr"></i> {element.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}

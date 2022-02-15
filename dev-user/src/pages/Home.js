@@ -9,7 +9,6 @@ import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 
-
 import {
   API_ADMIN_URL,
   PRODUCT_API,
@@ -27,20 +26,17 @@ export default function Home(props) {
   const [libraryData, setlibraryData] = useState([]);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [show, setshow] = useState(false);
-  const [alertData, setAlerdata] = useState({ title: "", body: "" })
-  
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
   let hist = useNavigate();
-useEffect(()=>{
-  let local = localStorage.getItem("Token");
-  if(local){
-  setisLoggedIn(true)
-
-  }else{
-    setisLoggedIn(false)
-  }
- 
-},[])
+  useEffect(() => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      setisLoggedIn(true);
+    } else {
+      setisLoggedIn(false);
+    }
+  }, []);
   // productlist
   const Productlist = () => {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
@@ -234,8 +230,8 @@ useEffect(()=>{
         hist(url);
       }
     } else {
-      setAlerdata({ title: "Sorry", body: "Login and registration First" })
-      setshow(true)
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true);
     }
   };
   const handleClose = () => setshow(false);
@@ -244,11 +240,11 @@ useEffect(()=>{
     let local = localStorage.getItem("Token");
     if (local) {
       if (url !== 0) {
-        window.open(url, '_blank');
+        window.open(url, "_blank");
       }
     } else {
-      setAlerdata({ title: "Sorry", body: "Login and registration First" })
-      setshow(true)
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true);
     }
   };
   const pleasetalk = (_id) => {
@@ -259,8 +255,8 @@ useEffect(()=>{
       console.log(humanId);
       return true;
     } else {
-      setAlerdata({ title: "Sorry", body: "Login and registration First" })
-      setshow(true)
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true);
       return false;
     }
   };
@@ -269,10 +265,9 @@ useEffect(()=>{
       <Login humanId={humanId} />
       <div className="web-banner-slider">
         <Slider {...settings}>
-          <div className="web-banner web-banner3 mb-50">
+          {/* <div className="web-banner web-banner3 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                {/* <h1>{bannerData?.[0]?.bannerText}</h1> */}
                 <h1>Your Data is Secured</h1>
 
                 <button
@@ -289,11 +284,10 @@ useEffect(()=>{
                 </button>
               </div>
             </div>
-          </div>
-          <div className="web-banner web-banner1 mb-50">
+          </div> */}
+          {/* <div className="web-banner web-banner1 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                {/* <h1>{bannerData?.[1]?.bannerText}</h1> */}
                 <h1>Mental Health for Longevity-Swayam</h1>
                 <button
                   className="qst-show btn-web hvr-float-shadow btn-web"
@@ -307,11 +301,10 @@ useEffect(()=>{
                 </button>
               </div>
             </div>
-          </div>
-          <div className="web-banner web-banner2 mb-50">
+          </div> */}
+          {/* <div className="web-banner web-banner2 mb-50">
             <div className="container">
               <div className="web-banner-content">
-                {/* <h1>{bannerData?.[2]?.bannerText}</h1> */}
                 <h1>
                   Solutions available as Meditation, Spirituality, Video
                   games-Shakthi
@@ -328,27 +321,30 @@ useEffect(()=>{
                 </button>
               </div>
             </div>
-          </div>
-          <div className="web-banner mb-50">
-            <div className="container">
-              <div className="web-banner-content">
-                {/* <h1>{bannerData?.[3]?.bannerText}</h1> */}
-                <h1>Meet, Your Mentor or Coach-Digital Human Library</h1>
-                <button
-                  className="qst-show btn-web hvr-float-shadow btn-web"
-                  onClick={() => loginsubmit("/spirituality")}
-                >
-                  register for assessment
-                </button>
-                <button
-                  className="btn-web"
-                  onClick={() => loginsubmit("/support")}
-                >
-                  your support networks
-                </button>
+          </div> */}
+
+          {bannerData.map((element) => (
+            <div className="web-banner mb-50">
+              <div className="container">
+                <div className="web-banner-content">
+                  <h1>{element.banner_text}</h1>
+                  {/* <h1>Meet, Your Mentor or Coach-Digital Human Library</h1> */}
+                  <button
+                    className="qst-show btn-web hvr-float-shadow btn-web"
+                    onClick={() => loginsubmit("/spirituality")}
+                  >
+                    register for assessment
+                  </button>
+                  <button
+                    className="btn-web"
+                    onClick={() => loginsubmit("/support")}
+                  >
+                    your support networks
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </Slider>
       </div>
       <div className="video-section mb-50">
@@ -743,13 +739,11 @@ useEffect(()=>{
                       </button>
                       {/* </a> */}
                       <button
-                      
                         // onClick={() =>loginsubmit()}
                         onClick={() => pleasetalk(element._id)}
                         data-toggle="modal"
                         data-target={isLoggedIn ? "#library-modal" : ""}
                         className="btn-web col-11 mt-2"
-
                       >
                         Please Talk
                       </button>
@@ -904,13 +898,12 @@ useEffect(()=>{
           </div>
         </div>
       </div>
-      <Bmodal show={show} >
-        <Bmodal.Header closeButton >
+      <Bmodal show={show}>
+        <Bmodal.Header closeButton>
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>
         </Bmodal.Header>
         <Bmodal.Body className="modal-body">{alertData.body}</Bmodal.Body>
         <Bmodal.Footer>
-
           <Button className="modal-btn-ok" onClick={handleClose}>
             ok
           </Button>
