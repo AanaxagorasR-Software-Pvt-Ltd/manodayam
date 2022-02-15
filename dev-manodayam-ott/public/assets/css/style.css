@@ -9194,7 +9194,14 @@ modal-backdrop {
     color: #3c4858;
     border-radius: 3px;
 }
-
+.a-tag{
+    text-decoration: none;
+    color: white;
+}
+.a-tag:hover{
+    text-decoration: none;
+    color: white;
+}
 .nav-pills .nav-link:hover,
 .nav-pills .nav-link:focus {
     color: #8f9cc0;
@@ -11615,6 +11622,7 @@ height: 523px
     margin-left: auto;
     margin-top: 3px;
     opacity: .5;
+
 }
 
 .main-header-menu .nav-item>.nav-link .typcn {

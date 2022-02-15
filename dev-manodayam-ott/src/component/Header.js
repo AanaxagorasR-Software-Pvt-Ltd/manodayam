@@ -86,7 +86,7 @@ export default function Header() {
 
               <li class="nav-item nav-link">
                 {/* <Link class="nav-link " to="vdolist"> */}
-                  <a href="https://swarnratnaindia.com/dev-live/dev-live" class="nav-link">
+                  <a href="https://swarnratnaindia.com/dev-live/dev-live" class="a-tag">
                   <i class="fas fa-stream"></i>
                   <span class="sidemenu-label">Live</span>
                   </a>
