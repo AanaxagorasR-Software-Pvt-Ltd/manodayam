@@ -52,10 +52,8 @@ class EmailService {
             <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
               <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
               <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;"> Hello Doctor ! We Would  like to inform you that we have booked  your schedule  on 
-              <strong style="box-sizing: border-box;font-weight: bolder;">${details.schedule} </strong>. pls acknowledge this appointment !! your patient name  is <strong style="box-sizing: border-box;font-weight: bolder;">${details.name} </strong> Problem statement  <strong style="box-sizing: border-box;font-weight: bolder;">${details.disorder}</strong>
-                
-               
-                                
+              <strong style="box-sizing: border-box;font-weight: bolder;">${details.schedule} </strong>. please acknowledge this appointment !! your patient name  is <strong style="box-sizing: border-box;font-weight: bolder;">${details.name} </strong> and Problem statement  <strong style="box-sizing: border-box;font-weight: bolder;">${details.disorder}</strong>
+                     
             </div>
           </div>
         </body>
@@ -102,7 +100,7 @@ class EmailService {
           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.schedule}</strong> Please confirm your acceptance via on-line registration available 
            
             <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>. If you
-            have any questions or queries before or after thw session ,pls feel free to  mail <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
+            have any questions or queries before or after the session ,please feel free to  mail <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
            <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>  
             We Manodayam <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/profile</strong> Wish you good health !! warm regards Team Manodayam </p>
           
@@ -149,7 +147,7 @@ class EmailService {
               <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;"> Hello Doctor ! We Would  like to inform you that we have booked  your schedule  on 
               <strong style="box-sizing: border-box;font-weight: bolder;">${
                 details.created
-              } </strong>. pls acknowledge this appointment !! your patient name  is  <strong style="box-sizing: border-box;font-weight: bolder;">${
+              } </strong>. please acknowledge this appointment !! your patient name  is  <strong style="box-sizing: border-box;font-weight: bolder;">${
           details.name
         } </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${
           details.disorder
@@ -202,7 +200,7 @@ class EmailService {
           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> .Please confirm your acceptance via on-line registration available 
  
             <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
-            If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
+            If you have any questions or queries before or after the session ,please feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
            <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please vist this link and join meeting <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/profile</strong> </p>
          
         </div>

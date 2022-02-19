@@ -2,57 +2,49 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Login from "./Login";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-import { Modal as Bmodal , Button} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Modal as Bmodal, Button } from "react-bootstrap";
 export default function Header() {
   let hist = useNavigate();
   {
     console.log("******j*", localStorage.getItem("Token"));
   }
   const [update, setupdate] = useState(localStorage.getItem("Token"));
-  const[show,setshow]=useState(false);
-  const[alertData,setAlerdata]=useState({title:"",body:""})
-  const[loginhide,setloginhide]=useState(false);
+  const [show, setshow] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
+  const [loginhide, setloginhide] = useState(false);
 
+  useEffect(() => {
+    let token = localStorage.getItem("Token");
+    if (token) setloginhide(true);
+  });
 
-useEffect(()=>{
-  let token = localStorage.getItem("Token")
-  if(token)
-  setloginhide(true);
-
-})
-  
-  const  logoutfunction=()=> {
+  const logoutfunction = () => {
     // let decision = window.confirm('Are you sure');
-    setAlerdata({title:"Logout",body:"Login out !!"})
-    setshow(true)
-  
+    setAlerdata({ title: "Logout", body: "Login out !!" });
+    setshow(true);
+
     // setshow(true)
     // if (decision) {
-        localStorage.removeItem("Token")
-        localStorage.removeItem("user")
-        window.location.reload();
-        hist.push('/');
-      
+    localStorage.removeItem("Token");
+    localStorage.removeItem("user");
+    window.location.reload();
+    hist.push("/");
+
     // }
-}
-const loginsubmit =(url = 0) => {
-
-  let local = localStorage.getItem("Token")
-  if (local) {
-    if (url !== 0) {
-      hist(url)
+  };
+  const loginsubmit = (url = 0) => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      if (url !== 0) {
+        hist(url);
+      }
+    } else {
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true);
     }
-
-   
-  } else {
-    setAlerdata({title:"Sorry",body:"Login and registration First"})
-    setshow(true)
-    
-  }
-}
-const handleClose = () => setshow(false);
-
+  };
+  const handleClose = () => setshow(false);
 
   return (
     <>
@@ -70,14 +62,14 @@ const handleClose = () => setshow(false);
               </div>
               <div className="col-lg-6 col-sm-8">
                 <div className="header-contact">
-                  <button 
+                  <button
                     className="btn-web hvr-float-shadow"
                     data-toggle="tooltip"
                     title="Profile!"
                     onClick={() => loginsubmit("/profile")}
                   >
                     {/* <Link to="/profile"> */}
-                      <i className="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                     {/* </Link> */}
                   </button>
                   <button
@@ -86,12 +78,8 @@ const handleClose = () => setshow(false);
                     title="Cart!"
                     onClick={() => loginsubmit("/cart")}
                   >
-                   
                     {/* <Link to="/cart"> */}
-                      <i
-                        className="fa fa-cart-arrow-down"
-                        aria-hidden="true"
-                      ></i>
+                    <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                     {/* </Link> */}
                   </button>
                   <i className="fa fa-mobile" aria-hidden="true"></i>
@@ -131,6 +119,9 @@ const handleClose = () => setshow(false);
                     <a href="#about" className="nav-link">
                       About Us
                     </a>
+                    {/* <Link to="/about" className="nav-link">
+                    About Us
+                    </Link> */}
                   </li>
                   <li className="nav-item">
                     <Link to="/support" className="nav-link">
@@ -155,17 +146,17 @@ const handleClose = () => setshow(false);
                   </li>
                 </ul>
                 <ul className="navbar-nav nav-custom ml-auto btn-nav">
-                 { !loginhide && <li className="nav-item" >
-                    <button
-                      className="btn-web hvr-float-shadow "
-                      data-toggle="modal"
-                      data-target="#myModal"
-
-                      
-                    >
-                      Login
-                    </button>
-                  </li>}
+                  {!loginhide && (
+                    <li className="nav-item">
+                      <button
+                        className="btn-web hvr-float-shadow "
+                        data-toggle="modal"
+                        data-target="#myModal"
+                      >
+                        Login
+                      </button>
+                    </li>
+                  )}
 
                   {/* <li className="nav-item">
                     <button
@@ -176,27 +167,28 @@ const handleClose = () => setshow(false);
                       Login
                     </button>
                   </li> */}
-                   { ! loginhide && <li className="nav-item">
-                    <button
-                      className="btn-web hvr-float-shadow"
-                      data-toggle="modal"
-                      data-target="#registermodal"
-                    >
-                      Register
-                    </button>
-                  </li>}
+                  {!loginhide && (
+                    <li className="nav-item">
+                      <button
+                        className="btn-web hvr-float-shadow"
+                        data-toggle="modal"
+                        data-target="#registermodal"
+                      >
+                        Register
+                      </button>
+                    </li>
+                  )}
 
-
-                { loginhide && <li className="nav-item">
-                    <button
-                      className="btn-web hvr-float-shadow"
-
-
-                      onClick={ logoutfunction}
-                    >
-                      Logout
-                    </button>
-                  </li>}
+                  {loginhide && (
+                    <li className="nav-item">
+                      <button
+                        className="btn-web hvr-float-shadow"
+                        onClick={logoutfunction}
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  )}
                   {/* <li className="nav-item">
                     <button
                       className="btn-web hvr-float-shadow"
@@ -216,21 +208,18 @@ const handleClose = () => setshow(false);
       <a href="#" className="scrollToTop">
         <i className="fa fa-hand-pointer-o" aria-hidden="true"></i>
       </a>
-      <Bmodal show={show} >
+      <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>
         </Bmodal.Header>
         <Bmodal.Body className="modal-body">{alertData.body}</Bmodal.Body>
 
         <Bmodal.Footer>
-          
           <Button className="modal-btn-ok" onClick={handleClose}>
-         ok
+            ok
           </Button>
         </Bmodal.Footer>
-  
       </Bmodal>
-   
     </>
   );
 }

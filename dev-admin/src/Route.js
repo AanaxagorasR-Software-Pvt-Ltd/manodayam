@@ -46,22 +46,25 @@ const InternalRoute = (props) => {
           <Route path="/yes-no-questions" element={<YesNoQues />} exact />
           <Route path="/library" element={<Library />} exact />
           <Route path="/users-list" element={<Userslist />} exact />
-
-          <Route path="/library-appointment" element={<LibraryAppoint />} exact />
-          <Route path="/library-appointment-booked" element={<LibraryAppointBooked />} exact />
+          <Route
+            path="/library-appointment"
+            element={<LibraryAppoint />}
+            exact
+          />
+          <Route
+            path="/library-appointment-booked"
+            element={<LibraryAppointBooked />}
+            exact
+          />
           <Route path="/banner" element={<Banner />} exact />
           <Route
             path="/booked-appointment-list"
             element={<BookedAppointmentList />}
             exact
           />
-
-          <Route path="/category" element={<Category />} exact/>
-          <Route path="/about-category" element={<AboutCategory />} exact/>
-
-          AboutCategory
-          <Route path="/spirituality" element={<Spirituality />} exact/>
-
+          <Route path="/category" element={<Category />} exact />
+          <Route path="/about-category" element={<AboutCategory />} exact />
+          <Route path="/spirituality" element={<Spirituality />} exact />
           <Route
             path="admin/media-solutions"
             element={<MediaSolutions />}
@@ -73,7 +76,7 @@ const InternalRoute = (props) => {
           <Route path="/admin/product" element={<Product />} exact />
           <Route path="/admin/sells" element={<Sells />} exact />
           <Route exact path="/admin/login" element={<ProtectedRoute />}></Route>
-          <Route path="/doctor-list" element={<Doctor />} exact/>
+          <Route path="/doctor-list" element={<Doctor />} exact />
           <Route path="/" element={<ProtectedRoute />}>
             <Route exact path="/admin/Main" element={<Main />} />
           </Route>
