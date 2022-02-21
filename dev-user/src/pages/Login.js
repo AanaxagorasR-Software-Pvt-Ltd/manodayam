@@ -71,8 +71,7 @@ export default function Login(props) {
   const [loginPasswordError, setloginPasswordError] = useState("");
   const [registrationNameError, setregistrationNameError] = useState("");
   const [registrationMailError, setregistrationMailError] = useState("");
-  const [registrationPasswordError, setregistrationPasswordError] =
-    useState("");
+  const [registrationPasswordError, setregistrationPasswordError] = useState("");
 
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
@@ -105,7 +104,7 @@ export default function Login(props) {
         console.log("login", ((typeof res.data, res.data)));
         // console.log("**********", res.data.token);
         if (res.data.status) {
-          localStorage.setItem("Token", res.data.Token);
+          localStorage.setItem("Token", res.data.Token); 
           localStorage.setItem("user", JSON.stringify(res.data.user))
           setAlerdata({ title: "Login", body: "User Login Successfully" })
           setshow(true)
@@ -113,7 +112,7 @@ export default function Login(props) {
           document.getElementById("loginvalidation").reset();
           setLoginmailError("");
           setloginPasswordError("");
-          window.$("#myModal").modal("hide");
+          window.$("#myModal").modal("hide");  
           window.location.reload();
 
           // handleCloseModal();
@@ -277,7 +276,7 @@ export default function Login(props) {
         console.log(error);
       });
   };
-  function validate(payload) {
+  function validate(payload) { //  null, iuu{}
     if (!payload)
       return false;
     if (payload.fullname && payload.email && payload.phone && payload.date && payload.msg && payload.msg && payload.humanId) {
@@ -285,6 +284,9 @@ export default function Login(props) {
     }
     return false
   }
+  // if (!validate(humanLibraryOptions)) {
+  //   return;
+  // }
   const handleClose = () => setshow(false);
   return (
     <>

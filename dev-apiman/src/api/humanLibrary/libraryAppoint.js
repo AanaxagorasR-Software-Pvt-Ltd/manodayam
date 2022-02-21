@@ -172,7 +172,7 @@ router.post("/status", async (req, res) => {
           },
           {
             $addFields: {
-              docid: {
+              humanId: {
                 $toObjectId: "$humanId",
               },
             },
@@ -193,8 +193,20 @@ router.post("/status", async (req, res) => {
           },
         ])
         .toArray();
-      res.json(result);
+      // res.json(result);
       console.log(result);
+      console.log(result);
+			var dat = new Date(result[0].date)
+			var datess=dat.toLocaleString('en-IN');
+			EmailService.sendEmailToUser(result[0].email, {
+				name: result[0].library.title,
+				date: datess,email: result[0].library.expert_email
+			});
+			EmailService.sendEmailToExpert(result[0].library.expert_email, {
+				name: result[0].fullname,
+				created: datess,
+			email: result[0].email
+			});
 
 
 
@@ -267,7 +279,15 @@ router.delete("/delete/:_id", async (req, res) => {
         },
         status: true,
         message: "Room created successfully!",
+      
       });
+       let  digitalhumandata = await db
+      .collection("library_content").findOne({_id: new ObjectID(body.humanId)})
+      var date = new Date(body.date)
+      var dates=date.toLocaleString('en-IN')
+      EmailService.sendEmailToexpertbooked(digitalhumandata.expert_email, { name: body.fullname, created: dates,email:body.email,room_no:body.room_no});
+			EmailService.sendEmailToUserbooked(body.email, { name: digitalhumandata.title, created:dates,  email: digitalhumandata.expert_email ,room_no:body.room_no})
+    
     } catch (e) {
       console.log("error", e);
       res.status(500).json({

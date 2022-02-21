@@ -301,11 +301,11 @@ router.post("/status", async (req, res) => {
 			console.log(result);
 			var dat = new Date(result[0].schedule)
 			var datess=dat.toLocaleString('en-IN');
-			EmailService.sendEmailToPatient(result[0].doctor.email, {
+			EmailService.sendEmailToPatient(result[0].email, {
 				name: result[0].doctor.name,
 				schedule: datess,email: result[0].doctor.email
 			});
-			EmailService.sendEmailToDoctor(result[0].email, {
+			EmailService.sendEmailToDoctor(result[0].doctor.email, {
 				name: result[0].fullname,
 				schedule: datess,
 				disorder: result[0].disorder,email: result[0].email

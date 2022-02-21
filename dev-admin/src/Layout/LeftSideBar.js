@@ -42,12 +42,16 @@ export default function LeftSideBar() {
               className={`nav-link ${
                 sMenu.submenu.length > 0 ? "collapsed" : ""
               }`}
-              to={
-                sMenu.link
+              to={                () => {
+                  console.log(sMenu);
+                  return sMenu.link
                   ? sMenu?.link
                   : (e) => {
                       e.preventDefault();
+                      console.log(e);
+                      
                     }
+                }
               }
               data-toggle="collapse"
               aria-expanded={sMenu?.isActive ? true : false}
@@ -73,6 +77,7 @@ export default function LeftSideBar() {
                             ? sub.link
                             : (e) => {
                                 e.preventDefault();
+                                console.log(e);
                               }
                         }
                         class="nav-link"
