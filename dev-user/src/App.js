@@ -14,7 +14,7 @@ import Profile from "./pages/Profile";
 import Spirituality from "./pages/Spirituality";
 import ViewProduct from "./pages/ViewProduct";
 import BookingAppoint from "./pages/BookAppoint";
-import Appointment from './pages/Appointment';
+import Appointment from "./pages/Appointment";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -39,7 +39,6 @@ function App() {
           <Route path="/ViewProduct/:slug" element={<ViewProduct />} exact />
           <Route path="/bookingAppoint" element={<BookingAppoint />} exact />
           <Route path="/appointment" element={<Appointment />} exact />
-
         </Routes>
 
         <Footer />

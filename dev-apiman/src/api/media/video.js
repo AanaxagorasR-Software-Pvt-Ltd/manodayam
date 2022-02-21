@@ -26,7 +26,7 @@ const validate = (req, res, next) => {
 const imageStorage = multer.diskStorage({
   // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../../../uploads/images"))
+    cb(null, path.join(__dirname, "../../../uploads/images"));
   },
   filename: (req, file, cb) => {
     cb(
@@ -82,14 +82,14 @@ router.post(
         if (typeof req.files.video !== "undefined") {
           const videofile = req.files.video[0].filename;
           const videourl =
-            DOMAIN_NAME  + "/" + MEDIA_PATH + "/images/" + videofile;
-          data.vedio = videourl;
+            DOMAIN_NAME + "/" + MEDIA_PATH + "/images/" + videofile;
+          data.video = videourl;
         } else {
           data.video = body.video;
         }
       } else {
         data.image = body.image;
-        data.vedio = body.video;
+        data.video = body.video;
       }
 
       console.log(data);
@@ -118,8 +118,6 @@ router.post(
         status: true,
         message: "data inserted",
       });
-
-     
     } catch (e2) {
       res
         .status(400)
@@ -147,6 +145,7 @@ router.get("/", async (req, res) => {
 
   // res.send('hello')
 });
+
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectId(req.params._id);
   console.log("delete", _id);
@@ -165,24 +164,5 @@ router.delete("/delete/:_id", async (req, res) => {
 
   // res.send('hello')
 });
-router.delete("/delete/:_id", async (req, res) => {
-	const _id = new ObjectId(req.params._id);
-	console.log("delete", _id);
-
-	try {
-		const db = await getDatabase();
-		const body = req.body;
-		let dt = await db.collection("videos").deleteOne({ _id: _id });
-		res.send({
-			message: "data deleted",
-		});
-	} catch (err) {
-		console.log("err", err.message);
-		res.end();
-	}
-
-	// res.send('hello')
-});
-
 
 module.exports = router;

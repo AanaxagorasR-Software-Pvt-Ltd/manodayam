@@ -199,16 +199,7 @@ const leftSideBarMenu = [
     ],
     isHover: false,
   },
-  {
-    name: "Charts to be discuss?",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    // link: "javascript:void(0)" ,
-    iconClass: "icon-bar-graph",
-    submenu: [],
-    isHover: false,
-  },
+
   // {
   //   name: "Settings",
   //   isActive: false,

@@ -18,7 +18,6 @@ import { Modal } from "react-bootstrap";
 import video from "../Store/Connect/video";
 import LeftSideBar from "../Layout/LeftSideBar";
 
-
 // let Button = new AA()
 
 const Video = () => {
@@ -89,21 +88,23 @@ const Video = () => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.video_type.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.video_link.toLowerCase().includes(searchField.toLocaleLowerCase()) 
+        return (
+          value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+          value.video_type
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase()) ||
+          value.video_link
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase())
+        );
         // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
-
-
-  }
+  };
 
   return (
     <>
@@ -147,12 +148,9 @@ const Video = () => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
-
-
-
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -492,7 +490,6 @@ const Addform = forwardRef((props, ref) => {
                 <input
                   type="file"
                   class="form-control file-upload-info"
-
                   onChange={(e) => {
                     handleChange(e.target.files[0], "video");
                   }}
