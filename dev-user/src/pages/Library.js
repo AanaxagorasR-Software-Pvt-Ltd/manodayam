@@ -20,8 +20,7 @@ export default function Library(props) {
       .then((res) => {
         setlibraryData(res.data.data);
         console.log("====libraryContent====", res.data.data);
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.log(error);
       });
   };
@@ -68,7 +67,7 @@ export default function Library(props) {
                   <div className="row">
                     <div className="col-lg-5">
                       <div className="library-video">
-                    
+
                         <video
                           id="my-video"
                           class="video-js"

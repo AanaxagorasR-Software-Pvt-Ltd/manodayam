@@ -42,12 +42,16 @@ console.log('888888888', menuList);
               className={`nav-link ${
                 sMenu.submenu.length > 0 ? "collapsed" : ""
               }`}
-              to={
-                sMenu.link
+              to={                () => {
+                  console.log(sMenu);
+                  return sMenu.link
                   ? sMenu?.link
                   : (e) => {
                       e.preventDefault();
+                      console.log(e);
+                      
                     }
+                }
               }
               data-toggle="collapse"
               aria-expanded={sMenu?.isActive ? true : false}
@@ -73,6 +77,7 @@ console.log('888888888', menuList);
                             ? sub.link
                             : (e) => {
                                 e.preventDefault();
+                                console.log(e);
                               }
                         }
                         class="nav-link"
