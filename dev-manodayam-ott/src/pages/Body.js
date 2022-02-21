@@ -9,7 +9,7 @@ export default function Body() {
   const SleepApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`);
     const bodylisting = {
-      collectiontype: "audio",
+      collectiontype: "videos",
 
     };
     axios
@@ -26,9 +26,9 @@ export default function Body() {
     SleepApi();
   }, []);
 
-  const filterType = resData.filter((element) =>
-    element?.type?.includes((element = "Body"))
-  );
+  // const filterType = resData.filter((element) =>
+  //   element?.type?.includes((element = "Body"))
+  // );
 
   return (
     <>
@@ -45,7 +45,7 @@ export default function Body() {
               <section class="video-cards">
                 <div class="container">
                   <div class="row">
-                    {filterType.map((element) => (
+                    {resData.map((element) => (
                       <div class="col-lg-3 col-sm-5">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>

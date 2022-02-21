@@ -10,8 +10,6 @@ const session = require("express-session");
 const { env } = process;
 const app = express();
 app.use(`${env.MEDIA_PATH}`, express.static(`${env.MEDIA_PATH}`));
-
-
 // allow to use body as json file
 app.use(express.json({ limit: "50mb" }));
 // adding Helmet to enhance your API's security
@@ -31,12 +29,10 @@ app.use(morgan("combined"));
 
 app.use("/uploads", express.static("uploads"));
 
-
-
-/**
- * Social media login
- */
-app.use(
+  /**
+   * Social media login
+   */
+  app.use(
   session({
     secret: "s3cr3t",
     resave: true,
@@ -52,9 +48,9 @@ app.get(`/test`, (req, res) => {
 });
 
 app.use(`/api`, require(`./api`));
-app.get('/', (req, res)=>{
-  res.send('hello');
-})
+app.get("/", (req, res) => {
+  res.send("hello");
+});
 startDatabase().then(async () => {
   try {
     const db = await getDatabase();
@@ -64,6 +60,6 @@ startDatabase().then(async () => {
 });
 
 // start the server
-app.listen( 3020, async () => {
-  console.log(`listening on port ${ 3020}`);
+app.listen(3020, async () => {
+  console.log(`listening on port ${3020}`);
 });

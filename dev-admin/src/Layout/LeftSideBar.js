@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function LeftSideBar() {
   const [menuList, setMenuList] = useState(leftSideBarMenu);
-
+console.log('888888888', menuList);
   const handleClickMenu = (name) => {
     setMenuList(
       menuList.map((li) =>

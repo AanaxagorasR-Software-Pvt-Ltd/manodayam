@@ -77,21 +77,20 @@ export default function Header() {
                   <span class="sidemenu-label">Scenes</span>
                 </Link>
               </li>
-              <li class="nav-item">
+              {/* <li class="nav-item">
                 <Link class="nav-link " to="profile">
                   <i class="fas fa-user"></i>
                   <span class="sidemenu-label">Profile</span>
                 </Link>
-              </li>
+              </li> */}
 
-              <li class="nav-item">
-                <Link class="nav-link " to="vdolist">
-                  {/* <a href="http://localhost:4000" class="nav-link"> */}
+              <li class="nav-item nav-link">
+                {/* <Link class="nav-link " to="vdolist"> */}
+                  <a href="https://swarnratnaindia.com/dev-live/dev-live" class="a-tag">
                   <i class="fas fa-stream"></i>
-
                   <span class="sidemenu-label">Live</span>
-                  {/* </a> */}
-                </Link>
+                  </a>
+                {/* </Link> */}
               </li>
             </ul>
           </div>
