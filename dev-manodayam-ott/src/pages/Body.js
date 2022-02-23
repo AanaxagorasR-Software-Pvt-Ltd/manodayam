@@ -10,7 +10,6 @@ export default function Body() {
     console.log(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`);
     const bodylisting = {
       collectiontype: "videos",
-
     };
     axios
       .post(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`, bodylisting)
@@ -49,7 +48,17 @@ export default function Body() {
                       <div class="col-lg-3 col-sm-5">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>
-                          <Link to="/videoplayer">
+                          {/* <Link
+                    to={{
+                      pathname: "/ViewProduct/" + element.slug,
+                    }}
+                  > */}
+                          <Link
+                            // to="/videoplayer"
+                            to={{
+                              pathname: "/videoplayer" 
+                            }}
+                          >
                             <img
                               style={{ borderRadius: "25px" }}
                               src={element.image}
@@ -68,7 +77,6 @@ export default function Body() {
                       </div>
                     ))}
                   </div>
-                 
                 </div>
               </section>
             </div>

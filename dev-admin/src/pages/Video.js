@@ -300,7 +300,7 @@ const Video = () => {
                             <tr>
                               <th>S.N</th>
 
-                              {/* <th>Video </th> */}
+                              <th>Video Image</th>
                               <th> Video Thumbnail</th>
                               <th> Video Title</th>
                               <th> Video Type</th>
@@ -315,6 +315,9 @@ const Video = () => {
                                 <td>{i + 1}</td>
                                 <td>
                                   <img src={v.image} />
+                                </td>
+                                <td>
+                                  <img src={v.thumbnail_image} />
                                 </td>
                                 <td>{v.title}</td>
                                 <td>{v.video_type}</td>
@@ -485,6 +488,7 @@ const Addform = forwardRef((props, ref) => {
                 />
               </div>
 
+             
               <div class="form-group col-md-6">
                 <label for="exampleInputUsername1">Video Upload</label>
                 <input
@@ -496,16 +500,27 @@ const Addform = forwardRef((props, ref) => {
                   placeholder="Upload Video"
                 />
               </div>
-
               <div class="form-group col-md-6">
                 <label for="exampleInputUsername1">Video Thumbnail Image</label>
                 <input
                   type="file"
                   class="form-control file-upload-info"
                   onChange={(e) => {
-                    handleChange(e.target.files[0], "image");
+                    handleChange(e.target.files[0], "thumbnail_image");
                   }}
                   placeholder="Video Thumbnail Image"
+                />
+              </div>
+              
+              <div class="form-group col-md-6">
+                <label for="exampleInputUsername1">Video Image</label>
+                <input
+                  type="file"
+                  class="form-control file-upload-info"
+                  onChange={(e) => {
+                    handleChange(e.target.files[0], "image");
+                  }}
+                  placeholder="Video Image"
                 />
               </div>
 

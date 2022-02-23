@@ -50,6 +50,8 @@ router.post(
   imageUpload.fields([
     { name: "video", maxCount: 1 },
     { name: "image", maxCount: 1 },
+    { name: "thumbnail_image", maxCount: 1 },
+
   ]),
   async (req, res) => {
     // if (typeof req.files !== "undefined") {
@@ -68,6 +70,7 @@ router.post(
         title: body.title,
         video_link: body.video_link,
         description: body.description,
+        thumbnail_image: body.thumbnail_image,
         status: body.status,
       };
       if (typeof req.files !== "undefined") {
@@ -78,6 +81,14 @@ router.post(
           data.image = imageurl;
         } else {
           data.image = body.image;
+        }
+        if (typeof req.files.thumbnail_image !== "undefined") {
+          const imagefile = req.files.thumbnail_image[0].filename;
+          const thumbnail_imageurl =
+            DOMAIN_NAME  + "/" + MEDIA_PATH + "/images/" + imagefile;
+          data.thumbnail_image = thumbnail_imageurl;
+        } else {
+          data.thumbnail_image = body.thumbnail_image;
         }
         if (typeof req.files.video !== "undefined") {
           const videofile = req.files.video[0].filename;
