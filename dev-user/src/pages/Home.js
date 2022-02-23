@@ -625,6 +625,7 @@ export default function Home(props) {
                       {/* <a href={globalDataLive.liveLink} target="_blank"> */}
                       <button
                         className="btn-web col-11 mt-2"
+                        
                         onClick={() => loginsubmits(globalDataLive.liveLink)}
                       >
                         Please Join Live Session

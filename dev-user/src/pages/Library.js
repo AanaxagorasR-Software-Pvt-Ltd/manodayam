@@ -7,7 +7,7 @@ import {
 } from "../utill/api.endpoints";
 export default function Library(props) {
   const [libraryData, setlibraryData] = useState([]);
-  const libraryDatalist = () => {
+  const libraryDatalist = () => {   
     console.log(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`);
     const libraryDatalisting = {
       collectiondata: "library_content",
@@ -62,7 +62,7 @@ export default function Library(props) {
             </div>
 
             <div className="col-lg-10 offset-1">
-              {libraryData.map((element) => (
+              {/* {libraryData.map((element) => ( */}
                 <div className="library-card">
                   <div className="row">
                     <div className="col-lg-5">
@@ -111,7 +111,7 @@ export default function Library(props) {
                     </div>
                   </div>
                 </div>
-              ))}
+              {/* ))} */}
             </div>
           </div>
         </div>
