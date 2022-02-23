@@ -265,64 +265,6 @@ export default function Home(props) {
       <Login humanId={humanId} />
       <div className="web-banner-slider">
         <Slider {...settings}>
-          {/* <div className="web-banner web-banner3 mb-50">
-            <div className="container">
-              <div className="web-banner-content">
-                <h1>Your Data is Secured</h1>
-
-                <button
-                  className="qst-show btn-web hvr-float-shadow btn-web"
-                  onClick={() => loginsubmit("/spirituality")}
-                >
-                  register for assessment
-                </button>
-                <button
-                  className="btn-web"
-                  onClick={() => loginsubmit("/support")}
-                >
-                  your support networks
-                </button>
-              </div>
-            </div>
-          </div> */}
-          {/* <div className="web-banner web-banner1 mb-50">
-            <div className="container">
-              <div className="web-banner-content">
-                <h1>Mental Health for Longevity-Swayam</h1>
-                <button
-                  className="qst-show btn-web hvr-float-shadow btn-web"
-                  onClick={() => loginsubmit("/spirituality")}
-                >
-                  register for assessment
-                </button>
-                <button className="btn-web">
-                  {" "}
-                  <Link to="/support">your support networks</Link>
-                </button>
-              </div>
-            </div>
-          </div> */}
-          {/* <div className="web-banner web-banner2 mb-50">
-            <div className="container">
-              <div className="web-banner-content">
-                <h1>
-                  Solutions available as Meditation, Spirituality, Video
-                  games-Shakthi
-                </h1>
-                <button
-                  className="qst-show btn-web hvr-float-shadow btn-web"
-                  onClick={() => loginsubmit("/spirituality")}
-                >
-                  register for assessment
-                </button>
-                <button className="btn-web">
-                  {" "}
-                  <Link to="/support">your support networks</Link>
-                </button>
-              </div>
-            </div>
-          </div> */}
-
           {bannerData.map((element) => (
             <div className="web-banner mb-50">
               <div className="container">
@@ -347,117 +289,14 @@ export default function Home(props) {
           ))}
         </Slider>
       </div>
-      <div className="video-section mb-50">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8">
-              <div className="video-heading">
-                <h2>Mental Health Counseling</h2>
-              </div>
-              <div className="row">
-                <div className="col-lg-4">
-                  <div className="video-card">
-                    <iframe
-                      width="100%"
-                      height="250"
-                      src="https://www.youtube.com/embed/BVJkf8IuRjE"
-                      title="YouTube video player"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="video-card">
-                    <iframe
-                      width="100%"
-                      height="250"
-                      src="https://www.youtube.com/embed/xsEJ6GeAGb0"
-                      title="YouTube video player"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="video-card">
-                    <iframe
-                      width="100%"
-                      height="250"
-                      src="https://www.youtube.com/embed/lhlw44iN-LA"
-                      title="YouTube video player"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="video-heading mt-30">
-                <h2>Mental Health Counseling</h2>
-              </div>
-              <div className="video-question">
-                <ul>
-                  <li>
-                    {/* <Link to="./bookingAppoint"> */}
-                    <button
-                      className="btn"
-                      onClick={() => loginsubmit("./bookingAppoint")}
-                    >
-                      Social Gathering?
-                    </button>
-                    {/* </Link> */}
-                  </li>
-                  <li>
-                    {/* <Link to="./bookingAppoint"> */}
-                    <button
-                      className="btn"
-                      onClick={() => loginsubmit("./bookingAppoint")}
-                    >
-                      Having a problem related to study/job?
-                    </button>
-                    {/* </Link> */}
-                  </li>
-                  <li>
-                    {/* <Link to="./bookingAppoint"> */}
-                    <button
-                      className="btn"
-                      onClick={() => loginsubmit("./bookingAppoint")}
-                    >
-                      Drugs
-                    </button>
-                    {/* </Link> */}
-                  </li>
-
-                  <li>
-                    {/* <Link to="./bookingAppoint"> */}
-                    <button
-                      className="btn"
-                      onClick={() => loginsubmit("./bookingAppoint")}
-                    >
-                      Fear of something
-                    </button>
-                    {/* </Link> */}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr />
       <div id="about" className="about-section mb-50">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6">
+            {/* <div className="col-lg-6">
               <div className="about-img">
                 <img src="assets/image/about-img.png" alt="" />
               </div>
-            </div>
+            </div> */}
 
             <div className="col-lg-6">
               <div className="about-content">
@@ -494,6 +333,59 @@ export default function Home(props) {
                 </p>
                 <img src="assets/image/rose.png" alt="" />
               </div>
+            </div>
+            <div className="col-lg-6">
+              {/* <div className="about-img"> */}
+              {/* <img src="assets/image/about-img.png" alt="" /> */}
+              <h6>jhsgdjkcx</h6>
+              <video
+                id="about-us-video"
+                class="video-js"
+                controls
+                preload="auto"
+                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
+                data-setup=""
+                loop="auto"
+              >
+                <source
+                  src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+                  //  src={element.video}
+                  type="video/mp4"
+                />
+              </video>
+              <h6>jhsgdjkcx</h6>
+              <video
+                id="about-us-video"
+                class="video-js"
+                controls
+                preload="auto"
+                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
+                data-setup=""
+                loop="auto"
+              >
+                <source
+                  src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+                  //  src={element.video}
+                  type="video/mp4"
+                />
+              </video>
+              <h6>jhsgdjkcx</h6>
+              <video
+                id="about-us-video"
+                class="video-js"
+                controls
+                preload="auto"
+                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
+                data-setup=""
+                loop="auto"
+              >
+                <source
+                  src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+                  //  src={element.video}
+                  type="video/mp4"
+                />
+              </video>
+              {/* </div> */}
             </div>
           </div>
         </div>
@@ -890,7 +782,12 @@ export default function Home(props) {
                       pathname: "/ViewProduct/" + element.slug,
                     }}
                   > */}
-                    <buttton className="btn-web cart-btn" onClick={() => loginsubmit("/ViewProduct/" + element.slug)}>View</buttton>
+                  <buttton
+                    className="btn-web cart-btn"
+                    onClick={() => loginsubmit("/ViewProduct/" + element.slug)}
+                  >
+                    View
+                  </buttton>
                   {/* </Link> */}
                 </div>
               </div>

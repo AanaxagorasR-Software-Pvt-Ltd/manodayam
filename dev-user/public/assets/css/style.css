@@ -1175,3 +1175,8 @@ footer {
   color: #d6d6d6;
   font-size: 19px;
 }
+#about-us-video{
+  height: 150px;
+  width: 265px;
+  margin-left: 100px
+}
