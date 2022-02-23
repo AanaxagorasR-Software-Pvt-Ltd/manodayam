@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
