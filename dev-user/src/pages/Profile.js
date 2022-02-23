@@ -13,6 +13,7 @@ export default function Profile() {
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [user, setUser] = useState({});
+  const [editData, setEditData] = useState([]);
 
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -23,9 +24,12 @@ export default function Profile() {
     axios
       .post(`${API_ADMIN_URL}${PROFIL_API}`, profileData)
       .then((res) => {
+        
         setprofilData(res.data.data);
         console.log("====profileData====", res.data.data);
         console.log(res.data);
+        setAlerdata({ title: "Login", body: "User Login Successfully" })
+        setshow(true)
       })
       .catch((error) => {
         console.log(error);
@@ -50,13 +54,48 @@ export default function Profile() {
         console.log("err", err.message);
       });
   };
+  const Editprofile = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    axios
+
+      .get(`${API_ADMIN_URL}${PROFIL_API}?userId=${user._id}`)
+      .then((res) => {
+        console.log("res", res, typeof res);
+
+        setEditData(res.data)
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  }
   React.useEffect(() => {
     listBooked();
+    Editprofile();
   }, []);
   const convertToDateTime = (time) => {
     const d = new Date(time);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
+const saveData =()=>{
+  
+
+  axios
+  .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
+  .then((res) => {
+    
+    setprofilData(res.data.data);
+  
+    console.log(res.data);
+    setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
+    setshow(true)
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+const handleChange = (v, k) => {
+  setEditData({ ...editData, [k]: v });
+};
   const handleClose = () => setshow(false);
 
   return (
@@ -79,7 +118,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
-     
+
       <div className="profile-section mb-50">
         <div className="container">
           <div className="row">
@@ -95,7 +134,7 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h4 className="profile-name">
-                       <span className="profile-hello">Hello</span> {user && user.name}
+                        <span className="profile-hello">Hello</span> {user && user.name}
                       </h4>
                       {/* {
                         <p>
@@ -112,13 +151,13 @@ export default function Profile() {
                       </p> */}
                       <ul className="nav nav-tabs">
                         <li className="nav-item">
-                          {/* <a
+                          <a
                             className="nav-link active"
                             data-toggle="tab"
                             href="#home"
                           >
                             Edit Profile
-                          </a> */}
+                          </a>
                         </li>
                         <li className="nav-item">
                           <a
@@ -157,7 +196,7 @@ export default function Profile() {
             <div className="col-lg-12">
               <div className="profile-setting">
                 <div className="tab-content">
-                  {/* <div class="tab-pane active" id="home">
+                  <div class="tab-pane active" id="home">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="profile-form checkout-form doctor-form">
@@ -166,17 +205,21 @@ export default function Profile() {
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="form-group">
-                                  <label for="">First Name</label>
+                                  <label for="">Name</label>
                                   <input
                                     type="text"
-                                    name=""
-                                    id=""
+                                    value={user.name || ""}
+                                    onChange={(e) => {
+                                      handleChange(e.target.value, "name");
+                                    }}
+                                    name="name"
+                                    id="name"
                                     placeholder="First name"
-                                    disabled
+
                                   />
                                 </div>
                               </div>
-                              <div class="col-lg-6">
+                              {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Last Name</label>
                                   <input
@@ -187,8 +230,8 @@ export default function Profile() {
                                     disabled
                                   />
                                 </div>
-                              </div>
-                              <div class="col-lg-6">
+                              </div> */}
+                              {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Phone No.</label>
                                   <input
@@ -199,16 +242,20 @@ export default function Profile() {
                                     disabled
                                   />
                                 </div>
-                              </div>
+                              </div> */}
                               <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Email Address</label>
                                   <input
+                                   value={user.email || ""}
+                                   onChange={(e) => {
+                                    handleChange(e.target.value, "email");
+                                   }}
                                     type="email"
-                                    name=""
+                                    name="email"
                                     id=""
                                     placeholder="Email address"
-                                    disabled
+
                                   />
                                 </div>
                               </div>
@@ -216,6 +263,7 @@ export default function Profile() {
                                 <div class="form-group">
                                   <label for="">Old Password</label>
                                   <input
+                                   
                                     type="password"
                                     name=""
                                     id=""
@@ -245,7 +293,7 @@ export default function Profile() {
                                   />
                                 </div>
                               </div>
-                              <div class="col-lg-12">
+                              <div class="col-lg-12"  onClick={saveData}>
                                 <buttton class="btn hvr-float-shadow">
                                   Save
                                 </buttton>
@@ -255,7 +303,7 @@ export default function Profile() {
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                   <div className="tab-pane fade" id="menu1">
                     <div className="row">
                       <div className="col-lg-12">
