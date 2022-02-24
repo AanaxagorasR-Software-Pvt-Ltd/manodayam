@@ -23,6 +23,7 @@ import LibraryAppoint from "./pages/LibraryAppoint";
 import LibraryAppointBooked from "./pages/LibraryAppointBooked";
 import AboutCategory from "./pages/AboutCategory";
 import Userslist from "./pages/Userslist";
+import AboutUs from "./pages/AboutUs";
 const Login = React.lazy(() => import("./pages/Login"));
 const ProtectedRoute = React.lazy(() => import("./Auth/Protected"));
 const Register = React.lazy(() => import("./pages/Register"));
@@ -65,6 +66,9 @@ const InternalRoute = (props) => {
           <Route path="/category" element={<Category />} exact />
           <Route path="/about-category" element={<AboutCategory />} exact />
           <Route path="/spirituality" element={<Spirituality />} exact />
+          <Route path="/about-us" element={<AboutUs />} exact />
+
+          
           <Route
             path="admin/media-solutions"
             element={<MediaSolutions />}

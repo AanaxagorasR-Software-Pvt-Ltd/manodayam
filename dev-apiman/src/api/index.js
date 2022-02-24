@@ -49,6 +49,7 @@ router.use(`/upload`, require("./media"));
 router.use('/videos', require("./media/video"));
 router.use(`/media-solutions`, require("./media-solutions"));
 router.use(`./profile`,require("./user/profile"))
+router.use(`/about`,require("./media/aboutus"))
 
 // shakthi
 

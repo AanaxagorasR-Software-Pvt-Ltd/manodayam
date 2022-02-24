@@ -417,7 +417,7 @@ header {
   background-size: cover;
   background-position-y: 30%;
 }
-.about-img img {
+.about-img {
   border-radius: 15px;
 }
 .about-content h5 {
@@ -499,6 +499,9 @@ header {
   border-radius: 5px;
   box-shadow: 1px 1px 6px 0px #e6e6e6;
   position: relative;
+  width: 350px;
+  height: 210px;
+
 }
 .service-card .img-bfr {
   position: absolute;
@@ -513,7 +516,7 @@ header {
   margin-bottom: 15px;
 }
 .service-card h3 {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 500;
   font-family: cursive;
   margin-bottom: 18px;
@@ -1153,6 +1156,7 @@ footer {
 }
 .running-question h4 {
   color: #d6d6d6;
+
 }
 .running-question .zoom-question h5 {
   color: #d6d6d6;
@@ -1176,7 +1180,15 @@ footer {
   font-size: 19px;
 }
 #about-us-video{
-  height: 150px;
-  width: 265px;
-  margin-left: 100px
+  height: 250px;
+  width: 230px;
+  margin-top: 38px;
+}
+.about_title{
+position: relative;
+left: 180px;
+top: 40px;
+font-weight: 300;
+font-size: 23px;
+color: #23adba;
 }

@@ -62,7 +62,7 @@ export default function Library(props) {
             </div>
 
             <div className="col-lg-10 offset-1">
-              {/* {libraryData.map((element) => ( */}
+               {libraryData.map((element) => (
                 <div className="library-card">
                   <div className="row">
                     <div className="col-lg-5">
@@ -111,7 +111,7 @@ export default function Library(props) {
                     </div>
                   </div>
                 </div>
-              {/* ))} */}
+              ))} 
             </div>
           </div>
         </div>
