@@ -11,7 +11,6 @@ const { env } = process;
 const app = express();
 app.use(`${env.MEDIA_PATH}`, express.static(`${env.MEDIA_PATH}`));
 
-
 // allow to use body as json file
 app.use(express.json({ limit: "50mb" }));
 // adding Helmet to enhance your API's security

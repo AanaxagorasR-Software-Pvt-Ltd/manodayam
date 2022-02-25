@@ -64,6 +64,7 @@ router.use(`/shakthi-masterclass`, require("./shakthi/masterclass"));
 router.use(`/shakthi-body`, require("./shakthi/body"));
 router.use(`/shakthi-scene`, require("./shakthi/scene"));
 router.use(`/shakthi-home`, require("./shakthi/home"));
+router.use(`/social-login`, require("./social-login"));
 
 
 module.exports = router;

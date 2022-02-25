@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect} from "react";
 import {
   API_ADMIN_URL,
   LOGIN_API,
@@ -16,7 +16,7 @@ import FacebookLogin from "react-facebook-login";
 import { InstagramLogin } from "@amraneze/react-instagram-login";
 import { LinkedIn } from "react-linkedin-login-oauth2";
 import AppleSignin from "react-apple-signin-auth";
-import { Card, Image } from "react-bootstrap";
+import { facebookLoginUrl } from "../utill/index"
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
 
@@ -241,6 +241,7 @@ export default function Login(props) {
   };
   return (
     <>
+     
       <div className="modal fade" id="myModal">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -631,11 +632,14 @@ export default function Login(props) {
             >
               &times;
             </button>
-
+         
             <div className="modal-body md-custom">
               <form action="">
                 <h3>Create A New Account</h3>
                 <div className="form-group">
+                <a href={facebookLoginUrl} >
+    Login with Facebook
+  </a>
                   <label for="">Full Name</label>
                   <input
                     type="text"
@@ -721,7 +725,7 @@ export default function Login(props) {
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
-                        // style={{ width: 300, borderRadius: 50, height: 46 }}
+                      // style={{ width: 300, borderRadius: 50, height: 46 }}
                       >
                         <i
                           className="fa fa-google-plus"
@@ -754,7 +758,7 @@ export default function Login(props) {
                   {/* <Card style={{ width: "90px", height: "10px" }}>
                   <Card.Header>
                     {!login && ( */}
-
+                   
                   <FacebookLogin
                     appId="921201001964201"
                     autoLoad={true}
@@ -799,7 +803,7 @@ export default function Login(props) {
                     onSuccess={responseInstagram}
                     onFailure={responseInstagram}
                     cssClass="btninsta"
-                    // style={{marginLeft}}
+                  // style={{marginLeft}}
                   />
 
                   <AppleSignin

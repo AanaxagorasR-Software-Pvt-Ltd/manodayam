@@ -15,13 +15,13 @@ import Spirituality from "./pages/Spirituality";
 import ViewProduct from "./pages/ViewProduct";
 import BookingAppoint from "./pages/BookAppoint";
 import Appointment from './pages/Appointment';
-
+import SocialLogin from "./pages/SocialLogin"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <BrowserRouter basename="/manodayam">
+      <BrowserRouter >
         <Header />
         <Routes>
           <Route path="/" element={<Home />} exact />
@@ -39,6 +39,7 @@ function App() {
           <Route path="/ViewProduct/:slug" element={<ViewProduct />} exact />
           <Route path="/bookingAppoint" element={<BookingAppoint />} exact />
           <Route path="/appointment" element={<Appointment />} exact />
+          <Route path="/authenticate/facebook/" element={<SocialLogin />} exact />
 
         </Routes>
 

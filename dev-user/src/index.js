@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+require('dotenv').config()
+console.log(process.env) // remove this after you've confirmed it working
 ReactDOM.render(
   <React.StrictMode>
     <App />

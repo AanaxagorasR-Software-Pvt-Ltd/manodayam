@@ -4,8 +4,8 @@
   "description": "bill desk api ",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon -r dotenv/config src/app.js",
+    "start": "nodemon  src/app.js",
+    "dev": "nodemon NODE_ENV=production -r dotenv/config src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brijbhan",
