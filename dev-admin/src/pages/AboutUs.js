@@ -302,8 +302,8 @@ const AboutUs = () => {
                               <th> Video Thumbnail</th>
                               <th> Video Title</th>
                               <th>Uploaded Date</th>
+                              <th style={{ width: "80px" }}>Status</th>
                               <th style={{ width: "80px" }}>Action</th>
-                              <th style={{ width: "80px" }}>Edit/Delete</th>
                             </tr>
                           </thead>
                           <tbody>

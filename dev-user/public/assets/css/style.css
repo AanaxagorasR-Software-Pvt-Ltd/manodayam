@@ -503,6 +503,7 @@ header {
   height: 210px;
 
 }
+
 .service-card .img-bfr {
   position: absolute;
   width: 33%;
@@ -1191,4 +1192,8 @@ top: 40px;
 font-weight: 300;
 font-size: 23px;
 color: #23adba;
+}
+#mental-health-video{
+  width: 470px;
+    height: 277px;
 }

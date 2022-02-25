@@ -417,7 +417,6 @@ export default function Home(props) {
 
                     <img src={element.img_url} className="img-bfr" alt="" />
 
-                    {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
                     {/* <Link
                       to={{
@@ -692,7 +691,7 @@ export default function Home(props) {
             <Slider {...settingstwo}>
               {SpritualityData.map((element) => (
                 <div className="col-lg-12">
-                  <div className="service-card spritual-card">
+                  <div className="service-card spritual-card h-100">
                     <img src={element.img_url} alt="" />
                     <img src={element.img_url} className="img-bfr" alt="" />
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
