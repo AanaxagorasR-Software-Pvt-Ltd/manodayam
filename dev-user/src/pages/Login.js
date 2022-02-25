@@ -5,6 +5,8 @@ import {
   REGISTER_API,
   DOCTOR_API,
   DIGITAL_HUMAN_LIBRARY,
+  FORGOTPASSWORD_URL,
+  RESETPASSWORD_URL
 } from "../utill/api.endpoints";
 import { useState } from "react";
 import axios from "axios";
@@ -17,7 +19,9 @@ import FacebookLogin from "react-facebook-login";
 import { InstagramLogin } from "@amraneze/react-instagram-login";
 import { LinkedIn } from "react-linkedin-login-oauth2";
 import AppleSignin from "react-apple-signin-auth";
-import { Card, Image } from "react-bootstrap";
+
+import { useFormik } from "formik";
+
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
 
@@ -72,6 +76,7 @@ export default function Login(props) {
   const [registrationNameError, setregistrationNameError] = useState("");
   const [registrationMailError, setregistrationMailError] = useState("");
   const [registrationPasswordError, setregistrationPasswordError] = useState("");
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
 
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
@@ -102,17 +107,18 @@ export default function Login(props) {
       .post(`${API_ADMIN_URL}${LOGIN_API}`, loginOptions)
       .then((res) => {
         console.log("login", ((typeof res.data, res.data)));
+
         // console.log("**********", res.data.token);
         if (res.data.status) {
-          localStorage.setItem("Token", res.data.Token); 
+          localStorage.setItem("Token", res.data.Token);
           localStorage.setItem("user", JSON.stringify(res.data.user))
           setAlerdata({ title: "Login", body: "User Login Successfully" })
           setshow(true)
-         
+
           document.getElementById("loginvalidation").reset();
           setLoginmailError("");
           setloginPasswordError("");
-          window.$("#myModal").modal("hide");  
+          window.$("#myModal").modal("hide");
           window.location.reload();
 
           // handleCloseModal();
@@ -287,6 +293,64 @@ export default function Login(props) {
   // if (!validate(humanLibraryOptions)) {
   //   return;
   // }
+  const formiks = useFormik({
+    initialValues: {
+      password: "",
+      confirmPassword: "",
+      otp: "",
+      email: ""
+    },
+    onSubmit: async (values) => {
+      console.log(values)
+      try {
+        let resp = await axios.post(`${API_ADMIN_URL}${RESETPASSWORD_URL} `, values)
+        if (resp.data.status) {
+         formiks.resetForm();
+          setAlerdata({ title: "Reset", body: "your Password reset Successfully" })
+          setshow(true)
+
+        } else {
+         
+          setAlerdata({ title: "Sorry!!", body: "Sorry incorrect otp " })
+          setshow(true)
+
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  })
+  const formik = useFormik({
+    initialValues: {
+
+      email: ""
+
+    },
+    onSubmit: async (values) => {
+      console.log(values)
+      try {
+
+
+        let resp = await axios.get(`${API_ADMIN_URL}${FORGOTPASSWORD_URL}?email=${values.email}`);
+        if (resp.data.status) {
+          setShowPasswordForm(true)
+          formiks.setValues({ email: values.email })
+          
+          setAlerdata({ title: "Sucessfully", body: "Your otp send on your email" })
+          setshow(true)
+          formik.resetForm();
+        } else {
+         
+          setAlerdata({ title: "Sorry!!", body: "User is not found" })
+          setshow(true)
+        }
+      } catch (err) {
+        console.log(err);
+
+      }
+    }
+  })
+
   const handleClose = () => setshow(false);
   return (
     <>
@@ -344,8 +408,12 @@ export default function Login(props) {
                 <div className="form-inline">
                   <input type="checkbox" name="" id="" />
                   <p>Remember Me</p>
-
-                  <p className="fgt-btn">Forgot Password?</p>
+                  <button type="button" class="btn btn-link"
+                    data-toggle="modal"
+                    data-target="#myModals"
+                    data-dismiss="modal"
+                  >Forgot Password</button>
+                  {/* <p className="fgt-btn">Forgot Password?</p> */}
                 </div>
                 <div className="signup-btn">
                   <div
@@ -424,11 +492,124 @@ export default function Login(props) {
                   </button>
                 </div>
               </form>
+              <form className="signup-hide" action="">
+                <h3>Create A New Account</h3>
+                <div className="form-group">
+                  <label for="">Full Name</label>
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder="Enter your name here"
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="">Email</label>
+                  <input
+                    type="email"
+                    name=""
+                    id=""
+                    placeholder="Type your email here"
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="">Password</label>
+                  <input
+                    type="password"
+                    name=""
+                    id=""
+                    placeholder="Type your password here"
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="">Confirm Password</label>
+                  <input
+                    type="password"
+                    name=""
+                    id=""
+                    placeholder="Confirm your password"
+                  />
+                </div>
+                <div className="signup-btn">
+                  <button className="sgn-btn btn btn-web hvr-float-shadow">
+                    Create Account
+                  </button>
+                  &nbsp;&nbsp;
+                  <button className="lgn-btn sgn-btn btn btn-web hvr-float-shadow">
+                    Log in
+                  </button>
+                </div>
+              </form>
 
               {/* <div
                 className="g-recaptcha"
                 data-sitekey="6Ldbdg0TAAAAAI7KAf72Q6uagbWzWecTeBWmrCpJ"
               ></div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="modal fade" id="myModals">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <button
+              type="button"
+              className="close close-btn"
+              data-dismiss="modal"
+            >
+              &times;
+            </button>
+
+            <div className="modal-body md-custom">
+              {!showPasswordForm && <form className="login-hide" action="" id="loginvalidation" onSubmit={formik.handleSubmit}>
+                <h3>Forgot Password </h3>
+                <div className="form-group">
+                  <label for=""> Email</label>
+                  <input
+                    type="email"
+                    name=""
+                    id=""
+                    placeholder="Enter your email here"
+                    {...formik.getFieldProps('email')} />
+                </div>
+                <div className="signup-btn">
+                  <div>
+                    <button className="signup-btn sgn-btn btn btn-web
+                    hvr-float-shadow" type="submit">Submit</button></div>
+                </div>
+              </form>}
+              {showPasswordForm && <form className="login-hide" action="" id="loginvalidation" onSubmit={formiks.handleSubmit}>
+                <h3>Reset Password </h3>
+                <div className="form-group">
+                  <label for="">New Password</label>
+                  <input
+                    type="password"
+
+                    placeholder="Enter your  New password here"
+                    {...formiks.getFieldProps('password')} />
+                </div>
+                <div className="form-group">
+                  <label for="">Confirm Password</label>
+                  <input
+                    type="Password"
+
+                    placeholder="Enter your  Confirm Password here"
+                    {...formiks.getFieldProps('confirmPassword')} />
+                </div>
+                <div className="form-group">
+                  <label for="">Otp Code</label>
+                  <input
+                    type="text"
+
+                    placeholder="Enter your otp  code"
+                    {...formiks.getFieldProps('otp')} />
+                </div>
+                <div className="signup-btn">
+                  <div>
+                    <button className="signup-btn sgn-btn btn btn-web
+                    hvr-float-shadow" type="submit">Submit</button></div>
+                </div>
+              </form>}
             </div>
           </div>
         </div>
@@ -899,4 +1080,5 @@ export default function Login(props) {
       </Bmodal>
     </>
   );
+
 }

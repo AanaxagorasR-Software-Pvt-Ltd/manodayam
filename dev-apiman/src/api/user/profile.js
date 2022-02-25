@@ -8,7 +8,7 @@ router.get("/profil", async (req, res) => {
   const db = await getDatabase();
   try {
     // const { collectiontype } = req.body;
-    const data = await db.collection("users").find({_id : _id}).toArray();
+    const data = await db.collection("user").find({_id : _id}).toArray();
     console.log('|||||||||', data);
     if (Array.isArray(data)) {
       res.status(200).json({

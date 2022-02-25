@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Login from "./Login";
+import globalDataGroupCall from "../utill/rdxGroupCall";
+import globalDataLive from "../utill/rdxLive";
+import { useNavigate } from "react-router-dom";
+
+
+
 import {
   API_ADMIN_URL,
   DIGITAL_HUMAN_LIBRARY_DATA_API,
 } from "../utill/api.endpoints";
 export default function Library(props) {
   const [libraryData, setlibraryData] = useState([]);
-  const libraryDatalist = () => {   
+  const [show, setshow] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [humanId, setHumanId] = useState("");
+
+  let params = new URLSearchParams(window.location.search);
+  console.log(params.get('humanId'));
+  let hist = useNavigate();
+  const libraryDatalist = () => {
     console.log(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`);
     const libraryDatalisting = {
       collectiondata: "library_content",
     };
     axios
       .post(
-        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`,
-        libraryDatalisting
-      )
+        // ?humanId=${}`
+        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}?humanId=${params.get('humanId')}`, libraryDatalisting)
       .then((res) => {
         setlibraryData(res.data.data);
         console.log("====libraryContent====", res.data.data);
@@ -24,11 +37,40 @@ export default function Library(props) {
         console.log(error);
       });
   };
+  
   useEffect(() => {
+    let local = localStorage.getItem("Token");
     libraryDatalist();
+    if (local) {
+      setisLoggedIn(true);
+    } else {
+      setisLoggedIn(false);
+    }
   }, []);
+  const loginsubmits = (url = 0) => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      if (url !== 0) {
+        window.open(url, "_blank");
+      }
+    }
+  };
+  const pleasetalk = (_id) => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      setHumanId(_id);
+      console.log(_id);
+      console.log(humanId);
+      return true;
+    } else {
+     
+      return false;
+    }
+  };
+ 
   return (
     <>
+    <Login humanId={humanId} />
       <div className="contact-banner mb-50">
         <div className="container">
           <div className="row">
@@ -54,15 +96,12 @@ export default function Library(props) {
               <div className="service-heading">
                 <h5>Library</h5>
                 <h2>Digital Human Library</h2>
-                <p>
-                  Commodo tempus sapien sit bibendum sit morbi auctor molestie
-                  rutrum pellentesque eget vitae justo congue amet malesuada.
-                </p>
+                 
               </div>
             </div>
 
-            <div className="col-lg-10 offset-1">
-              {/* {libraryData.map((element) => ( */}
+            <div className="col-lg-10 offset-1 ">
+              {libraryData.map((element) => (
                 <div className="library-card">
                   <div className="row">
                     <div className="col-lg-5">
@@ -82,6 +121,55 @@ export default function Library(props) {
                             type="video/mp4"
                           />
                         </video>
+                      </div>
+                      <div className="ml-3 mt-3">
+                        {/* <button
+                          className="btn-web col-11"
+                          onClick={() => loginsubmits(`/library?humanId=${element._id}`)}
+
+                        >
+                          View More
+                        </button> */}
+                        {/* <a href={globalDataLive.liveLink} target="_blank"> */}
+                        <button
+                          className="btn-web col-11 mt-2"
+
+                          onClick={() => loginsubmits(globalDataLive.liveLink)}
+                        >
+                          Please Join Live Session
+                        </button>
+                        {/* </a> */}
+                        <button
+                          // onClick={() =>loginsubmit()}
+                          onClick={() => pleasetalk(element._id)}
+                          data-toggle="modal"
+                          data-target={isLoggedIn ? "#library-modal" : ""}
+                          className="btn-web col-11 mt-2"
+                        >
+                          Please Talk
+                        </button>
+                        {/* <button
+                        // onClick={() =>loginsubmit()}
+                        onClick={() => submitformdata(element._id)}
+                        data-toggle="modal"
+                        data-target="#library-modal"
+                        className="btn-web col-11 mt-2"
+                      >
+                        Please Talk
+                      </button> */}
+                        {/* <a
+                        href={globalDataGroupCall.groupCallLink}
+                        target="_blank"
+                      > */}
+                        <button
+                          className="btn-web col-11 mt-2"
+                          onClick={() =>
+                            loginsubmits(globalDataGroupCall.groupCallLink)
+                          }
+                        >
+                          Join Group
+                        </button>
+                        {/* </a> */}
                       </div>
                     </div>
 
@@ -111,7 +199,7 @@ export default function Library(props) {
                     </div>
                   </div>
                 </div>
-              {/* ))} */}
+              ))}
             </div>
           </div>
         </div>

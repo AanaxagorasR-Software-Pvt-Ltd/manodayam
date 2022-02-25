@@ -45,6 +45,7 @@ router.use(`/yesNo`, require("./Mcq/objectiveYesNo"));
 router.use(`/audios`,require("./media/Audio"))
 router.use(`/appointed`, require("./appointment/appointments"));
 router.use(`/upload`, require("./media"));
+router.use('/otp',require("./user/forgot"));
 // router.use(`/audios`,require("./media/Audio"))
 router.use('/videos', require("./media/video"));
 router.use(`/media-solutions`, require("./media-solutions"));
