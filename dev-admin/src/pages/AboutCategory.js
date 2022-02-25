@@ -297,9 +297,11 @@ const AboutCategory = () => {
                               <th>AboutCategory Slug </th>
                               <th> Ques </th>
                               <th> Heading </th>
-                              <th> para_1 </th>
-                              <th> para_2 </th>
+                              <th> I para </th>
+                              <th> II para </th>
                               <th> symptoms </th>
+                              <th> Thumbnail Image </th>
+
                               <th>Status</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -316,14 +318,17 @@ const AboutCategory = () => {
                                 <td>{v.para_1}</td>
                                 <td>{v.para_2}</td>
                                 <td>
-                                  <strong>**</strong> {v.symptoms}
+                                  <strong className="fa fa-circle "></strong> {v.symptoms}
                                   {/* <br /> */}
                                   <hr />
-                                  <strong></strong> {v.sym_1} <br />
-                                  <strong></strong> {v.sym_2} <br />
-                                  <strong></strong> {v.sym_3} <br />
-                                  <strong></strong> {v.sym_4} <br />
-                                  <strong></strong> {v.sym_5} <br />
+                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_1} <br />
+                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_2} <br />
+                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_3} <br />
+                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_4} <br />
+                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_5} <br />
+                                </td>
+                                <td>
+                                  <img src={v.thumbnail_image} />
                                 </td>
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
@@ -570,6 +575,29 @@ const Addform = forwardRef((props, ref) => {
                 placeholder="About symptoms"
               />
             </div>
+            <div class="form-group">
+            <label for="exampleInputUsername1">Video Upload</label>
+            <input
+              type="file"
+              class="form-control"
+              onChange={(e) => {
+                handleChange(e.target.files[0], "video");
+              }}
+              placeholder="Upload Video"
+            />
+          </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Video Thumbnail Image</label>
+              <input
+                type="file"
+                class="form-control"
+                onChange={(e) => {
+                  handleChange(e.target.files[0], "thumbnail_image");
+                }}
+                placeholder="Video thumbnail Image"
+              />
+            </div>
+          
             <div class="form-group ">
               <label for="exampleInputUsername1">Category Status</label>
               <select

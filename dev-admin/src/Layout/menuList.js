@@ -32,6 +32,17 @@ const leftSideBarMenu = [
     submenu: [],
     isHover: false,
   },
+   {
+    name: "About manodayam",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/about-us",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
   {
     name: "Category",
     isActive: false,

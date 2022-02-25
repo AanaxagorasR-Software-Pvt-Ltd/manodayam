@@ -2,22 +2,23 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button } from "react-bootstrap";
-
+import SimpleImageSlider from "react-simple-image-slider";
 import {
   API_ADMIN_URL,
   PRODUCT_API,
   BANNER_API,
   CATEGORY_API,
   SPIRITUALITY_API,
+  ABOUT_API,
   DIGITAL_HUMAN_LIBRARY_DATA_API,
 } from "../utill/api.endpoints";
-
+const images = [];
 export default function Home(props) {
   const [responseData, setResponseData] = useState([]);
   const [bannerData, setbannerData] = useState([]);
@@ -27,7 +28,7 @@ export default function Home(props) {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
-
+  const [data, setData] = useState([]);
   let hist = useNavigate();
   useEffect(() => {
     let local = localStorage.getItem("Token");
@@ -37,6 +38,27 @@ export default function Home(props) {
       setisLoggedIn(false);
     }
   }, []);
+  // aboutlist
+  const aboutlist = () => {
+    console.log(`${API_ADMIN_URL}${ABOUT_API}`);
+    const aboutlisting = {
+      collectionAboutData: "about_us",
+    };
+    axios
+      .post(`${API_ADMIN_URL}${ABOUT_API}`, aboutlisting)
+      .then((res) => {
+        setData(res.data.data);
+
+        console.log("====pppppp====", res.data.data);
+        {
+          window.localStorage.getItem("Token");
+        }
+        // localStorage.setItem('Name', name);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   // productlist
   const Productlist = () => {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
@@ -144,6 +166,7 @@ export default function Home(props) {
     Categorylist();
     Spritualitylist();
     libraryDatalist();
+    aboutlist();
   }, []);
   var settings = {
     dots: false,
@@ -295,15 +318,14 @@ export default function Home(props) {
         <div className="container">
           <div className="row">
             {/* <div className="col-lg-6">
-              <div className="about-img">
-                <img src="assets/image/about-img.png" alt="" />
-              </div>
-            </div> */}
+        <div className="about-img">
+        <img src="assets/image/about-img.png" alt="" />
+        </div>
+      </div> */}
 
             <div className="col-lg-6">
               <div className="about-content">
                 <h5>about Us</h5>
-                <h2>Mental Health Counseling</h2>
                 <p>
                   Manodayam is a Mental Health and Wellnessorganization
                   providing Holistic solutions. It has Unique Value proposition
@@ -337,58 +359,42 @@ export default function Home(props) {
               </div>
             </div>
             <div className="col-lg-6">
-              {/* <div className="about-img"> */}
-              {/* <img src="assets/image/about-img.png" alt="" /> */}
-              <h6>jhsgdjkcx</h6>
-              <video
-                id="about-us-video"
-                class="video-js"
-                controls
-                preload="auto"
-                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
-                data-setup=""
-                loop="auto"
-              >
-                <source
-                  src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
-                  //  src={element.video}
-                  type="video/mp4"
+              <div className="about-img">
+                <SimpleImageSlider
+                  width={600}
+                  height={430}
+                  images={[
+                    { url: "assets/image/about-img.png" },
+                    { url: "assets/image/about-img.jpg" },
+                    { url: "assets/image/support.jpg" },
+                  ]}
+                  showBullets={true}
+                  showNavs={true}
+                  bgColor="white"
                 />
-              </video>
-              <h6>jhsgdjkcx</h6>
-              <video
-                id="about-us-video"
-                class="video-js"
-                controls
-                preload="auto"
-                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
-                data-setup=""
-                loop="auto"
-              >
-                <source
-                  src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
-                  //  src={element.video}
-                  type="video/mp4"
-                />
-              </video>
-              <h6>jhsgdjkcx</h6>
-              <video
-                id="about-us-video"
-                class="video-js"
-                controls
-                preload="auto"
-                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
-                data-setup=""
-                loop="auto"
-              >
-                <source
-                  src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
-                  //  src={element.video}
-                  type="video/mp4"
-                />
-              </video>
-              {/* </div> */}
+              </div>
             </div>
+            {data.map((element) => (
+              <div style={{ display: "flex", textAlign: "center" }}>
+                <h6 className="about_title">{element.title}</h6>
+
+                <video
+                  id="about-us-video"
+                  class="video-js"
+                  controls
+                  preload="auto"
+                  poster={element.image}
+                  data-setup=""
+                  loop="auto"
+                >
+                  <source
+                    src={element.video}
+                    //  src={element.video}
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -413,9 +419,7 @@ export default function Home(props) {
 
                     <img src={element.img_url} className="img-bfr" alt="" />
 
-                    {/* <img src={element.img} className="img-bfr" alt="" /> */}
                     <h3>{element.name}</h3>
-                    <p>{element.description}</p>
                     {/* <Link
                       to={{
                         pathname: "/mentalHealth/" + element.slug,
@@ -628,7 +632,6 @@ export default function Home(props) {
                       {/* <a href={globalDataLive.liveLink} target="_blank"> */}
                       <button
                         className="btn-web col-11 mt-2"
-
                         onClick={() => loginsubmits(globalDataLive.liveLink)}
                       >
                         Please Join Live Session
@@ -691,7 +694,7 @@ export default function Home(props) {
             <Slider {...settingstwo}>
               {SpritualityData.map((element) => (
                 <div className="col-lg-12">
-                  <div className="service-card spritual-card">
+                  <div className="service-card spritual-card h-100">
                     <img src={element.img_url} alt="" />
                     <img src={element.img_url} className="img-bfr" alt="" />
                     {/* <img src={element.img} className="img-bfr" alt="" /> */}
