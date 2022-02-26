@@ -162,6 +162,8 @@ export default function Login(props) {
           setregistrationNameError("");
           setregistrationMailError("");
           setregistrationPasswordError("");
+          window.$("#registermodal").modal("hide");
+          window.location.reload();
 
         } else {
           setAlerdata({ title: "Sorry", body: "User Registration already  Exist" })

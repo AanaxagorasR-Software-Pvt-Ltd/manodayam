@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
   const [bookData, setbookData] = useState([]);
-  const [data, setdatta] = useState([]);
+  // const [data, setdatta] = useState([]);
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [user, setUser] = useState({});
@@ -79,23 +79,23 @@ export default function Profile() {
     const d = new Date(time);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
-const saveData =()=>{
+// const saveData =()=>{
   
 
-  axios
-  .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
-  .then((res) => {
+//   axios
+//   .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
+//   .then((res) => {
     
-    setprofilData(res.data.data);
+//     setprofilData(res.data.data);
   
-    console.log(res.data);
-    setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
-    setshow(true)
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+//     console.log(res.data);
+//     setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
+//     setshow(true)
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+// }
 // const handleChange = (v, k) => {
 //   setEditData({ ...editData, [k]: v });
 // };
@@ -164,7 +164,7 @@ const saveData =()=>{
                         <i className="fa fa-map-marker"></i> 
                       </p> */}
                       <ul className="nav nav-tabs">
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                           <a
                             className="nav-link active"
                             data-toggle="tab"
@@ -172,7 +172,7 @@ const saveData =()=>{
                           >
                             Edit Profile
                           </a>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                           <a
                             className="nav-link"
@@ -213,9 +213,9 @@ const saveData =()=>{
                   <div class="tab-pane active" id="home">
                     <div class="row">
                       <div class="col-lg-12">
-                        <div class="profile-form checkout-form doctor-form">
-                          <h3>Edit Your Profile Here</h3>
-                          <form action="" onSubmit={formik.handleSubmit} >
+                        {/* <div class="profile-form checkout-form doctor-form"> */}
+                          {/* <h3>Edit Your Profile Here</h3> */}
+                          {/* <form action="" onSubmit={formik.handleSubmit} >
                             <div class="row"> 
                               <div class="col-lg-6">
                                 <div class="form-group">
@@ -256,7 +256,7 @@ const saveData =()=>{
                                   />
                                 </div>
                               </div> */}
-                              <div class="col-lg-6">
+                              {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Email Address</label>
                                   <input
@@ -269,7 +269,7 @@ const saveData =()=>{
 
                                   />
                                 </div>
-                              </div>
+                              </div> */}
                               {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Old Password</label>
@@ -305,13 +305,13 @@ const saveData =()=>{
                                 </div>
                               </div> */}
                               
-                                <button class="btn hvr-float-shadow" type="submit" >
+                                {/* <button class="btn hvr-float-shadow" type="submit" >
                                   Save
                                 </button>
                               
                             </div>
-                          </form>
-                        </div>
+                          // </form> */}
+                        {/* </div> */}
                       </div>
                     </div>
                   </div>

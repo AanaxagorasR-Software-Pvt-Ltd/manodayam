@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import globalData from "../utill/rdx";
+// import globalData from "../utill/rdx";
 export default function Spirituality() {
   return (
     <>
