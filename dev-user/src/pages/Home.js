@@ -482,9 +482,9 @@ export default function Home(props) {
                 <h3>Search Doctors For Appointment</h3>
                 <form action="">
                   <div className="col-lg-12">
-                    <div className="form-group">
+                    {/* <div className="form-group">
                       <input type="text" name="" id="" placeholder="Country" />
-                    </div>
+                    </div> */}
                   </div>
                   <div className="col-lg-12">
                     <div className="form-group">
@@ -793,7 +793,8 @@ export default function Home(props) {
                     className="btn-web cart-btn"
                     onClick={() => loginsubmit("/ViewProduct/" + element.slug)}
                   >
-                    View
+                    Search Doctors For Appointment
+
                   </buttton>
                   {/* </Link> */}
                 </div>

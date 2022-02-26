@@ -310,6 +310,7 @@ export default function Login(props) {
          formiks.resetForm();
           setAlerdata({ title: "Reset", body: "your Password reset Successfully" })
           setshow(true)
+          window.location.reload();
 
         } else {
          
