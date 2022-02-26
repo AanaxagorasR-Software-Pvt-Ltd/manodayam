@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-
+import { facebookLoginUrl } from "../utill/index"
 export default function Footer() {
+  
   return (
     <>
       <footer>
@@ -12,7 +13,7 @@ export default function Footer() {
                 <img src="assets/image/logo.png" alt="" />
                 <ul>
                   <li class="hvr-float-shadow">
-                    <a href="https://www.facebook.com" target="_blank">
+                    <a href={facebookLoginUrl} target='_blank' >
                       <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
                   </li>
@@ -55,6 +56,11 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
+            {
+              faceBookRef ? (<FacebookLogin
+                ref={faceBookRef}
+              />) : null
+            }
 
             <div class="col-lg-12">
               <div class="copyright-section">

@@ -16,7 +16,7 @@ import FacebookLogin from "react-facebook-login";
 import { InstagramLogin } from "@amraneze/react-instagram-login";
 import { LinkedIn } from "react-linkedin-login-oauth2";
 import AppleSignin from "react-apple-signin-auth";
-import { facebookLoginUrl } from "../utill/index"
+
 var filter =
   /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
 
@@ -26,6 +26,7 @@ export default function Login(props) {
   const [data, setData] = useState({});
   const [picture, setPicture] = useState("");
 
+ 
   const responseFacebook = (response) => {
     console.log(response);
     setData(response);
@@ -637,9 +638,7 @@ export default function Login(props) {
               <form action="">
                 <h3>Create A New Account</h3>
                 <div className="form-group">
-                <a href={facebookLoginUrl} >
-    Login with Facebook
-  </a>
+                
                   <label for="">Full Name</label>
                   <input
                     type="text"
@@ -839,6 +838,7 @@ export default function Login(props) {
             </div>
           </div>
         </div>
+       
       </div>
     </>
   );

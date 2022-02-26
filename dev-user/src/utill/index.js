@@ -1,6 +1,7 @@
 import * as queryString from 'query-string';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { createBrowserHistory  } from 'history';
 export const notify = (state,msg) => {
     switch(state) {
         case "success":
@@ -31,6 +32,7 @@ export const notify = (state,msg) => {
     }
 }
 
+export const history = createBrowserHistory();
 
 const stringifiedParams = queryString.stringify({
   client_id: process.env.REACT_APP_FB_ID,
@@ -38,7 +40,7 @@ const stringifiedParams = queryString.stringify({
   scope: ['email','public_profile','user_friends'].join(','), // comma seperated string
   response_type: 'code',
   auth_type: 'rerequest',
-  display: 'touch',
+  display: 'popup',
 });
 
 
@@ -57,3 +59,13 @@ export async function  getAccessTokenFromCode(code) {
   return data
 };
 export const facebookLoginUrl = `${process.env.REACT_APP_FB_AUTH_URL}${stringifiedParams}`;
+
+
+
+
+{/*
+
+#'347702149071304'
+#'7dcd3ade1e7116c301adf4279114fb18'
+
+*/}

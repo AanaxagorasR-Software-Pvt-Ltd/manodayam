@@ -6,7 +6,7 @@ import {
     API_ADMIN_URL,
     SOCIAL_FB_LOGIN
   } from "../utill/api.endpoints";
-import history from 'history' 
+import { history } from '../utill/index' 
 const SocialLogin = () => {
 
     const urlParams = queryString.parse(window.location.search);
@@ -21,16 +21,17 @@ const SocialLogin = () => {
                 "expires_in": data.expires_in,
                 "token_type": "bearer"})
                 .then((res) => {
-                    console.log("====rrrr=====", res.data);
-                    
+                    localStorage.setItem('userData',JSON.stringify(res.data))
                     alert("successfully Done");
-                    history.push('/')
-                
+                    // history.go(-1)
+                   setTimeout(() => {
+                    window.close()
+                   },1000) 
                    
                 })
                 .catch((error) => {
-                    history.push('/')
-
+                    // history.go(-1)
+                    window.history.go(-1)
                     console.log(error);
                 });
             }
