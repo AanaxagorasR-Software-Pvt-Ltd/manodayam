@@ -5,7 +5,7 @@ import axios from "axios";
 import {
   API_ADMIN_URL,
   SHAKTHI_MASTERCLASS_API,
-} from "./api-link/api.endpoints";
+} from "../utill/api.endpoints";
 
 export default function Masterclass() {
   const [resData, setResData] = useState([]);

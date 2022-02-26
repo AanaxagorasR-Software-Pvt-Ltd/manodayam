@@ -114,7 +114,6 @@ export default function Login(props) {
           setloginPasswordError("");
           window.$("#myModal").modal("hide");  
           window.location.reload();
-
           // handleCloseModal();
         } else {
           setAlerdata({ title: "Sorry", body: "Invalid user and Password" })

@@ -19,5 +19,5 @@ export const ABOUT_API = "/about/about-us"
 // export const BOOKED_API = "/appointed/booklistshow"
 export const BOOKED_API = "/appointments/booked";
 export const MENTALHEALTH_DATA_API = "/category-data";
-// export const MCQ = "/mcq/question"
+export const SHAKTHI_QUESTION_API = "/shakthi-ques/shakthi-asking"
 export const API_ADMIN_URL = API_HOST_URL + API_MIDD 

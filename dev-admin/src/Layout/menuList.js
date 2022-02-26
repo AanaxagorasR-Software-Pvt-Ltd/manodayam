@@ -44,6 +44,17 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
+    name: "Shakthi Asking",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/shakthi-ques",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
+  {
     name: "Category",
     isActive: false,
     dataToggle: "",
