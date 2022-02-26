@@ -5,6 +5,8 @@ import axios from "axios";
 import { API_ADMIN_URL, PROFIL_API, BOOKED_API } from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
+import { useFormik } from "formik";
+
 
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
@@ -61,7 +63,7 @@ export default function Profile() {
       .get(`${API_ADMIN_URL}${PROFIL_API}?userId=${user._id}`)
       .then((res) => {
         console.log("res", res, typeof res);
-
+        formik.setValues({name:res.data.name,email:res.data.email})
         setEditData(res.data)
       })
       .catch((err) => {
@@ -71,6 +73,7 @@ export default function Profile() {
   React.useEffect(() => {
     listBooked();
     Editprofile();
+ 
   }, []);
   const convertToDateTime = (time) => {
     const d = new Date(time);
@@ -93,10 +96,21 @@ const saveData =()=>{
     console.log(error);
   });
 }
-const handleChange = (v, k) => {
-  setEditData({ ...editData, [k]: v });
-};
+// const handleChange = (v, k) => {
+//   setEditData({ ...editData, [k]: v });
+// };
   const handleClose = () => setshow(false);
+
+  const formik=useFormik({
+    initialValues:{
+      name:"name",
+      email:"email"
+      
+    },
+    onSubmit:(values)=>{
+      console.log(values)
+    }
+  })
 
   return (
     <>
@@ -201,20 +215,19 @@ const handleChange = (v, k) => {
                       <div class="col-lg-12">
                         <div class="profile-form checkout-form doctor-form">
                           <h3>Edit Your Profile Here</h3>
-                          <form action="">
-                            <div class="row">
+                          <form action="" onSubmit={formik.handleSubmit} >
+                            <div class="row"> 
                               <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Name</label>
                                   <input
                                     type="text"
-                                    value={user.name || ""}
-                                    onChange={(e) => {
-                                      handleChange(e.target.value, "name");
-                                    }}
+                                  
+                                   
                                     name="name"
                                     id="name"
-                                    placeholder="First name"
+                                    placeholder="name"
+                                    {...formik.getFieldProps("name")}
 
                                   />
                                 </div>
@@ -247,19 +260,17 @@ const handleChange = (v, k) => {
                                 <div class="form-group">
                                   <label for="">Email Address</label>
                                   <input
-                                   value={user.email || ""}
-                                   onChange={(e) => {
-                                    handleChange(e.target.value, "email");
-                                   }}
+                                   
                                     type="email"
                                     name="email"
                                     id=""
                                     placeholder="Email address"
+                                    {...formik.getFieldProps("email")}
 
                                   />
                                 </div>
                               </div>
-                              <div class="col-lg-6">
+                              {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Old Password</label>
                                   <input
@@ -270,8 +281,8 @@ const handleChange = (v, k) => {
                                     placeholder="Old password"
                                   />
                                 </div>
-                              </div>
-                              <div class="col-lg-6">
+                              </div> */}
+                              {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">New Password</label>
                                   <input
@@ -281,8 +292,8 @@ const handleChange = (v, k) => {
                                     placeholder="New password"
                                   />
                                 </div>
-                              </div>
-                              <div class="col-lg-12">
+                              </div> */}
+                              {/* <div class="col-lg-12">
                                 <div class="form-group">
                                   <label for="">Confirm Password</label>
                                   <input
@@ -292,12 +303,12 @@ const handleChange = (v, k) => {
                                     placeholder="Confirm password"
                                   />
                                 </div>
-                              </div>
-                              <div class="col-lg-12"  onClick={saveData}>
-                                <buttton class="btn hvr-float-shadow">
+                              </div> */}
+                              
+                                <button class="btn hvr-float-shadow" type="submit" >
                                   Save
-                                </buttton>
-                              </div>
+                                </button>
+                              
                             </div>
                           </form>
                         </div>

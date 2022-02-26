@@ -3,6 +3,7 @@ const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 const validate = (req, res, next) => {
   const { email, password } = req.body;
   if (email && password) {

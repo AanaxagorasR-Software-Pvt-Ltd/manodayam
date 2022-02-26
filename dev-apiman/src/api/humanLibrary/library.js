@@ -44,7 +44,7 @@ router.post(
       let data = {
         video_type: body.video_type,
         title: body.title,
-        expert_email:body.expert_email,
+        expert_email: body.expert_email,
         video_link: body.video_link,
         description: body.description,
         image: body.image,
@@ -55,7 +55,7 @@ router.post(
         if (typeof req.files.image !== "undefined") {
           const imagefile = req.files.image[0].filename;
           const imageurl =
-            DOMAIN_NAME  + "/" + MEDIA_PATH + "/images/" + imagefile;
+            DOMAIN_NAME + "/" + MEDIA_PATH + "/images/" + imagefile;
           data.image = imageurl;
         } else {
           data.image = body.image;
@@ -63,16 +63,16 @@ router.post(
         if (typeof req.files.thumbnail_image !== "undefined") {
           const imagefile = req.files.thumbnail_image[0].filename;
           const thumbnail_imageurl =
-            DOMAIN_NAME  + "/" + MEDIA_PATH + "/images/" + imagefile;
+            DOMAIN_NAME + "/" + MEDIA_PATH + "/images/" + imagefile;
           data.thumbnail_image = thumbnail_imageurl;
         } else {
           data.thumbnail_image = body.thumbnail_image;
         }
-       
+
         if (typeof req.files.video !== "undefined") {
           const videofile = req.files.video[0].filename;
           const videourl =
-            DOMAIN_NAME  + "/" + MEDIA_PATH + "/images/" + videofile;
+            DOMAIN_NAME + "/" + MEDIA_PATH + "/images/" + videofile;
           data.video = videourl;
         } else {
           data.video = body.video;
@@ -122,13 +122,17 @@ router.post(
 );
 
 router.get("/", async (req, res) => {
+
+
   try {
     const db = await getDatabase();
+
     let dt = await db.collection("library_content").find().toArray();
     res.send(dt);
   } catch (err) {
     console.log("err", err.message);
   }
+
 
   // res.send('hello')
 });
@@ -182,12 +186,20 @@ const validate = (req, res, next) => {
   }
 };
 router.post("/library-data", validate, async (req, res) => {
+  let filter = {
+
+
+  };
+  if (req.query.humanId) {
+    filter._id = new ObjectId(req.query.humanId)
+
+  }
   const db = await getDatabase();
 
   try {
     const { collectiondata } = req.body;
     console.log("collectiondata", req.body);
-    const data = await db.collection(`${collectiondata}`).find().toArray();
+    const data = await db.collection(`${collectiondata}`).find(filter).toArray();
     // console.log('=====jfgjh', data);
     if (Array.isArray(data)) {
       res.status(200).json({
@@ -209,5 +221,7 @@ router.post("/library-data", validate, async (req, res) => {
       message: "server error",
     });
   }
+
 });
+
 module.exports = router;

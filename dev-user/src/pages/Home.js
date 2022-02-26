@@ -64,6 +64,7 @@ export default function Home(props) {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
     const productlisting = {
       collectiontype: "products",
+
     };
     axios
       .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
@@ -104,6 +105,7 @@ export default function Home(props) {
     console.log(`${API_ADMIN_URL}${CATEGORY_API}`);
     const categorylisting = {
       collectiontypedata: "categories",
+
     };
     axios
       .post(`${API_ADMIN_URL}${CATEGORY_API}`, categorylisting)
@@ -622,7 +624,8 @@ export default function Home(props) {
                     <div className="ml-3">
                       <button
                         className="btn-web col-11"
-                        onClick={() => loginsubmit("/library")}
+                        onClick={() => loginsubmit(`/library?humanId=${element._id}`)}
+
                       >
                         View More
                       </button>
