@@ -318,14 +318,20 @@ const AboutCategory = () => {
                                 <td>{v.para_1}</td>
                                 <td>{v.para_2}</td>
                                 <td>
-                                  <strong className="fa fa-circle "></strong> {v.symptoms}
+                                  <strong className="fa fa-circle "></strong>{" "}
+                                  {v.symptoms}
                                   {/* <br /> */}
                                   <hr />
-                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_1} <br />
-                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_2} <br />
-                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_3} <br />
-                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_4} <br />
-                                  <p className="fas fa-arrow-circle-right" ></p> {v.sym_5} <br />
+                                  <p className="fas fa-arrow-circle-right"></p>{" "}
+                                  {v.sym_1} <br />
+                                  <p className="fas fa-arrow-circle-right"></p>{" "}
+                                  {v.sym_2} <br />
+                                  <p className="fas fa-arrow-circle-right"></p>{" "}
+                                  {v.sym_3} <br />
+                                  <p className="fas fa-arrow-circle-right"></p>{" "}
+                                  {v.sym_4} <br />
+                                  <p className="fas fa-arrow-circle-right"></p>{" "}
+                                  {v.sym_5} <br />
                                 </td>
                                 <td>
                                   <img src={v.thumbnail_image} />
@@ -333,7 +339,7 @@ const AboutCategory = () => {
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
                                 </td>
-                                <td>{v.createdAt}</td>
+                                <td>{v.created}</td>
                                 <td>
                                   <button
                                     type="button"
@@ -576,17 +582,18 @@ const Addform = forwardRef((props, ref) => {
               />
             </div>
             <div class="form-group">
-            <label for="exampleInputUsername1">Video Upload</label>
-            <input
-              type="file"
-              class="form-control"
-              onChange={(e) => {
-                handleChange(e.target.files[0], "video");
-              }}
-              placeholder="Upload Video"
-            />
-          </div>
-            <div class="form-group">
+              <label for="exampleInputUsername1">Video Upload</label>
+              <input
+                type="file"
+                class="form-control"
+                onChange={(e) => {
+                  handleChange(e.target.files[0], "video");
+                }}
+                placeholder="Upload Video"
+              />
+            </div>
+
+            <div class="form-group ">
               <label for="exampleInputUsername1">Video Thumbnail Image</label>
               <input
                 type="file"
@@ -594,10 +601,9 @@ const Addform = forwardRef((props, ref) => {
                 onChange={(e) => {
                   handleChange(e.target.files[0], "thumbnail_image");
                 }}
-                placeholder="Video thumbnail Image"
+                placeholder="Video Thumbnail Image"
               />
             </div>
-          
             <div class="form-group ">
               <label for="exampleInputUsername1">Category Status</label>
               <select

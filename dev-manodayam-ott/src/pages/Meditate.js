@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_MEDITATE_API } from "./api-link/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_MEDITATE_API } from "../utill/api.endpoints";
 export default function Meditate() {
   const [resData, setResData] = useState([]);
   const MeditateApi = () => {

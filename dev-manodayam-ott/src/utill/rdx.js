@@ -1,5 +1,5 @@
 const globalData = {
-    manodayamLink: window.location.hostname === 'localhost' ? 'http://localhost:3000/manodayam/' : 'https://swarnratnaindia.com/'
+    manodayamLink: window.location.hostname === 'localhost' ? 'http://localhost:3000/' : 'https://swarnratnaindia.com/'
 
 }
 

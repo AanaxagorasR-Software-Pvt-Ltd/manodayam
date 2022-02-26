@@ -2,7 +2,7 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_SCENE_API } from "./api-link/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_SCENE_API } from "../utill/api.endpoints";
 import "bootstrap/dist/css/bootstrap.css";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";

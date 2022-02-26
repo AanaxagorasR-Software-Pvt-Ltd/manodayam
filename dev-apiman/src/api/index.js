@@ -42,6 +42,8 @@ router.use(`/category-item`, require("./category/category"));
 router.use(`/category-data`, require("./category/category"));
 router.use(`/question`, require("./Mcq/objectiveMcq"));
 router.use(`/yesNo`, require("./Mcq/objectiveYesNo"));
+router.use(`/shakthi-ques`, require("./Mcq/shakthiQuestion"));
+
 router.use(`/audios`,require("./media/Audio"))
 router.use(`/appointed`, require("./appointment/appointments"));
 router.use(`/upload`, require("./media"));

@@ -10,7 +10,7 @@ export default function Header() {
           <div class="sidemenu-logo">
             {/* <a class="main-logo" href={globalData.manodayamLink}> */}
             <a class="main-logo" href="https://swarnratnaindia.com/">
-
+            {/* <a class="main-logo" href="http://localhost:3000/"> */}
               <img
                 src="assets/img/brand/logo.png"
                 class="header-brand-img desktop-logo"

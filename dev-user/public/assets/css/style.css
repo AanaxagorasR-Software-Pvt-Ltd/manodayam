@@ -487,9 +487,9 @@ header {
 }
 .service-heading p {
   color: gray;
-  font-size: 18px;
+  font-size: 20px;
   width: 70%;
-  padding-bottom: 32px;
+  padding-bottom: 15px;
   margin: auto;
 }
 .service-card {
@@ -1197,3 +1197,4 @@ color: #23adba;
   width: 470px;
     height: 277px;
 }
+
