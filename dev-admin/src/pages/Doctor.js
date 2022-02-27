@@ -108,7 +108,7 @@ const Doctor = () => {
     });
     setfilerdata(searchlist);
   };
- 
+
   return (
     <>
       <Addform ref={formRef} list={list} />
@@ -225,9 +225,8 @@ const Doctor = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -240,9 +239,8 @@ const Doctor = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -275,18 +273,16 @@ const Doctor = () => {
             <ul class="nav">
               {menuList.map((sMenu) => (
                 <li
-                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
-                    sMenu?.isHover ? "hover-open" : ""
-                  }`}
+                  className={`nav-item ${sMenu?.isActive ? "active" : ""} ${sMenu?.isHover ? "hover-open" : ""
+                    }`}
                   key={uuidv4()}
                   onClick={(e) => handleClickMenu(sMenu?.name)}
                   onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
                   onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
                 >
                   <a
-                    className={`nav-link ${
-                      sMenu.submenu.length > 0 ? "collapsed" : ""
-                    }`}
+                    className={`nav-link ${sMenu.submenu.length > 0 ? "collapsed" : ""
+                      }`}
                     href={`${sMenu?.link}`}
                     data-toggle="collapse"
                     aria-expanded={sMenu?.isActive ? true : false}
@@ -356,6 +352,7 @@ const Doctor = () => {
                               <th>Doctor Image</th>
 
                               <th>Doctor experience</th>
+                              <th>Doctor location</th>
                               <th>Doctor specialist</th>
                               <th>Email</th>
 
@@ -370,7 +367,9 @@ const Doctor = () => {
                                 <td>
                                   <img src={d.img_url} />
                                 </td>
+
                                 <td>{d.experience}</td>
+                                <td>{d.location}</td>
                                 <td>{d.specialist}</td>
 
                                 <td>{d.email}</td>
@@ -417,7 +416,7 @@ const Doctor = () => {
           {/* partial */}
         </div>
       </div>
-    
+
     </>
   );
 };
@@ -533,6 +532,64 @@ const Addform = forwardRef((props, ref) => {
                     }}
                     placeholder="Upload Doctor"
                   />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="exampleInputUsername1">Doctor location</label>
+                  <select 
+                    class="form-control"
+                    placeholder=" Doctor location"
+                    value={data.location || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "location");
+                    }}
+                  >
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Andaman and Nicobar Islands">
+                      Andaman and Nicobar Islands
+                    </option>
+                    <option value="Arunachal Pradesh">
+                      Arunachal Pradesh
+                    </option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Dadar and Nagar Haveli">
+                      Dadar and Nagar Haveli
+                    </option>
+                    <option value="Daman and Diu">Daman and Diu</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Puducherry">Puducherry</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">
+                      Himachal Pradesh
+                    </option>
+                    <option value="Jammu and Kashmir">
+                      Jammu and Kashmir
+                    </option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                  </select>
                 </div>
 
                 <div class="form-group col-md-6">

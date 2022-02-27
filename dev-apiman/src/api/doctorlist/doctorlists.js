@@ -45,6 +45,7 @@ router.post(
         experience: body.experience,
         specialist: body.specialist,
         email: body.email,
+        location:body.location
       };
 
       if (typeof req.file !== "undefined") {
