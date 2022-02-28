@@ -45,7 +45,7 @@ router.post(
         experience: body.experience,
         specialist: body.specialist,
         email: body.email,
-        location:body.location
+        location: body.location
       };
 
       if (typeof req.file !== "undefined") {
@@ -139,12 +139,14 @@ const validate = (req, res, next) => {
   }
 };
 router.post("/doctorlists", validate, async (req, res) => {
+
+  const state = req.query.state;
   const db = await getDatabase();
 
   try {
     const { collectionDoctor } = req.body;
     console.log("collectionDoctor", req.body);
-    const data = await db.collection(`${collectionDoctor}`).find().toArray();
+    const data = await db.collection(`${collectionDoctor}`).find({location:state}).toArray();
     // console.log('=====jfgjh', data);
     if (Array.isArray(data)) {
       res.status(200).json({
@@ -152,6 +154,7 @@ router.post("/doctorlists", validate, async (req, res) => {
         status: true,
         message: "data fetched sucseccfully",
         id: "lllll",
+        location:state
       });
     } else {
       res.status(200).json({

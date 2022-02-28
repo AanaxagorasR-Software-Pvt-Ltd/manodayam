@@ -7,13 +7,14 @@ import { API_ADMIN_URL, DOCTOR_LIST_API } from "../utill/api.endpoints";
 export default function BookingAppoint() {
   const [doctorData, setdoctorData] = useState([]);
 
+  let params = new URLSearchParams(window.location.search);
   const doctorlist = () => {
     console.log(`${API_ADMIN_URL}${DOCTOR_LIST_API}`);
     const doctorlisting = {
       collectionDoctor: "doctorListing",
     };
     axios
-      .post(`${API_ADMIN_URL}${DOCTOR_LIST_API}`, doctorlisting)
+      .post(`${API_ADMIN_URL}${DOCTOR_LIST_API}?state=${params.get('State')}`, doctorlisting)
       .then((res) => {
         setdoctorData(res.data.data);
         console.log("====pppppp====", res.data.data);

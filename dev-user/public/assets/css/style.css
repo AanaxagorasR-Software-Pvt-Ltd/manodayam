@@ -421,7 +421,7 @@ header {
   border-radius: 15px;
 }
 .about-content h5 {
-  font-weight: 300;
+  /* font-weight: 300; */
   text-transform: capitalize;
   font-size: 23px;
   color: #23adba;
@@ -432,9 +432,10 @@ header {
   margin-bottom: 10px;
 }
 .about-content h2 {
-  font-family: cursive;
-  font-size: 29px;
+  /* font-family: cursive; */
+  font-size: 30px;
   margin-bottom: 26px;
+  font-weight: 400;
 }
 .about-content {
   position: relative;
@@ -475,15 +476,16 @@ header {
   text-align: center;
 }
 .service-heading h5 {
-  font-weight: 300;
+  /* font-weight: 300; */
   text-transform: capitalize;
   font-size: 23px;
   color: #23adba;
 }
 .service-heading h2 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
   margin-bottom: 15px;
+  color: #23adba;
 }
 .service-heading p {
   color: gray;
@@ -519,7 +521,7 @@ header {
 .service-card h3 {
   font-size: 18px;
   font-weight: 500;
-  font-family: cursive;
+  /* font-family: cursive; */
   margin-bottom: 18px;
 }
 .service-card p {
@@ -567,7 +569,7 @@ header {
   text-align: center;
 }
 .video-heading h2 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
   margin-bottom: 26px;
 }
@@ -577,8 +579,9 @@ header {
   font-size: 23px;
 }
 .doctor-heading h2 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
+  font-weight: 500;
 }
 .doctor-heading p {
   margin-bottom: 30px;
@@ -597,7 +600,7 @@ header {
 }
 .doctor-form h3 {
   color: #fff;
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
   margin-bottom: 25px;
 }
@@ -653,7 +656,7 @@ header {
   color: #23adba;
 }
 .product-card h3 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 21px;
   font-weight: 600;
 }
@@ -680,7 +683,7 @@ header {
   font-weight: 600;
 }
 .spritual-question h3 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-weight: 600;
   font-size: 22px;
   margin-bottom: 16px;
@@ -708,7 +711,7 @@ header {
 }
 .contact-breadcrumb h3 {
   text-transform: capitalize;
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 33px;
   color: #fff;
   font-weight: 700;
@@ -727,7 +730,7 @@ header {
   color: #23adba;
 }
 .contact-details h2 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
   margin-bottom: 12px;
 }
@@ -785,7 +788,7 @@ header {
   margin: 17px 0 0 0 !important;
 }
 .contact-form h4 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
   margin-bottom: 25px;
   color: #23adba;
@@ -823,7 +826,7 @@ footer {
 }
 .research-content h3 {
   text-align: center;
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
   margin-bottom: 30px;
 }
@@ -906,7 +909,7 @@ footer {
   padding: 70px 0px;
 }
 .related-video-heading h2 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 29px;
   margin-bottom: 15px;
 }
@@ -958,7 +961,7 @@ footer {
   width: 100%;
 }
 .library-person h3 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-weight: 600;
   font-size: 24px;
   margin-top: 11px;
@@ -1038,7 +1041,7 @@ footer {
 }
 .checkout-form h2 {
   color: #fff;
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 27px;
   margin-bottom: 25px;
 }
@@ -1068,7 +1071,7 @@ footer {
   border-radius: 5px;
 }
 .checkout-detail h2 {
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 27px;
   margin-bottom: 25px;
   text-align: center;
@@ -1092,7 +1095,7 @@ footer {
 }
 .profile-content h3 {
   font-weight: 600;
-  font-family: cursive;
+  /* font-family: cursive; */
   font-size: 20px;
   margin-bottom: 20px;
 }
