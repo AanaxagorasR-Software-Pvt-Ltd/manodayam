@@ -379,9 +379,9 @@ export default function Home(props) {
                   width={600}
                   height={430}
                   images={[
-                    { url: "assets/image/about-img.png" },
-                    { url: "assets/image/about-img.jpg" },
-                    { url: "assets/image/support.jpg" },
+                    { url: "assets/image/yogas.jpg" },
+                    { url: "assets/image/helps.jpeg" },
+                    { url: "assets/image/helpssir.jpg" },
                   ]}
                   showBullets={true}
                   showNavs={true}
