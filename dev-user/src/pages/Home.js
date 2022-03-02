@@ -643,10 +643,11 @@ export default function Home(props) {
 
                       <button
                         className="btn-web col-11 mt-2"
+                        data-toggle="modal"
+                        data-target={isLoggedIn ? "#library-modal" : ""}
+                        
                         onClick={() =>
-                          loginsubmits(globalDataGroupCall.groupCallLink)
-                        }
-                      >
+                          pleasetalk(element._id)}>
                         Join Group
                       </button>
                       {/* </a> */}
