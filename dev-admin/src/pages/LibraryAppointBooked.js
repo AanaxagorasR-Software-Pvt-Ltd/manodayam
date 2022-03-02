@@ -344,7 +344,7 @@ const LibraryAppointBooked = () => {
                                     </a>
                                   )}
                                 </td>
-                                {/* <td>
+                                <td>
                                   <button
                                     type="button"
                                     class="btn btn-sm btn-info border-radius-0 add-btn"
@@ -361,7 +361,7 @@ const LibraryAppointBooked = () => {
                                   >
                                     <i class="ti-trash"></i>
                                   </button>
-                                </td> */}
+                                </td>
                               </tr>
                             ))}
                           </tbody>

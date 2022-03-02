@@ -24,17 +24,17 @@ router.post("/library_appoint", validate, async (req, res) => {
       phone: body.phone,
       date: body.date,
       msg: body.msg,
-      humanId: body.humanId
+      humanId: body.humanId,
     };
     console.log(data);
     if (!body?._id) {
       data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
- } else {
+    } else {
       data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
- }
+    }
 
     let insertedId = null;
-    let library_appoint = await db.collection("library_appoint");
+    let library_appoint = await db.collection("library_group_appoint");
     if (body._id) {
       insertedId = await library_appoint.updateOne(
         { _id: new ObjectID(body._id) },
@@ -62,45 +62,46 @@ router.post("/library_appoint", validate, async (req, res) => {
 });
 
 router.get("/library_appoint", async (req, res) => {
-  try { 
+  try {
     const db = await getDatabase();
     let result = await db
-      .collection("library_appoint").aggregate([{
-        $match: {
-          $or: [
-            { status: { $in: ["pending"] } },
-            { status: { $in: ["canceled"] } },
-            { status: { $in: [null] } },
-          ],
-        }
-      },
-
-      {
-        $addFields: {
-          humanId: {
-            $toObjectId: "$humanId",
+      .collection("library_group_appoint")
+      .aggregate([
+        {
+          $match: {
+            $or: [
+              { status: { $in: ["pending"] } },
+              { status: { $in: ["canceled"] } },
+              { status: { $in: [null] } },
+            ],
           },
         },
-      },
-      {
-        $lookup: {
-          from: "library_content",
-          localField: "humanId",
-          foreignField: "_id",
-          as: "library",
+
+        {
+          $addFields: {
+            humanId: {
+              $toObjectId: "$humanId",
+            },
+          },
         },
-      },
-      {
-        $unwind: {
-          path: "$library",
-          preserveNullAndEmptyArrays: true,
+        {
+          $lookup: {
+            from: "library_content",
+            localField: "humanId",
+            foreignField: "_id",
+            as: "library",
+          },
         },
-      },
+        {
+          $unwind: {
+            path: "$library",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
       ])
       .toArray();
     res.json(result);
     console.log(result);
-
   } catch (err) {
     console.log("err", err.message);
   }
@@ -112,7 +113,7 @@ router.get("/booked", async (req, res) => {
   try {
     const db = await getDatabase();
     let dt = await db
-      .collection("library_appoint")
+      .collection("library_group_appoint")
       .find({ status: "booked" })
       .sort({ _id: -1 })
       .toArray();
@@ -127,14 +128,14 @@ router.post("/status", async (req, res) => {
   console.log(body);
   try {
     const db = await getDatabase();
-    let library_appoint = await db.collection("library_appoint");
+    let library_appoint = await db.collection("library_group_appoint");
     insertedId = await library_appoint.updateOne(
       { _id: new ObjectID(body._id) },
       { $set: { status: body.status } }
     ).insertedId;
     if (body.status == "booked") {
       let result = await db
-        .collection("library_appoint")
+        .collection("library_group_appoint")
 
         .aggregate([
           {
@@ -166,24 +167,20 @@ router.post("/status", async (req, res) => {
       // res.json(result);
       console.log(result);
       console.log(result);
-			var dat = new Date(result[0].date)
-			var datess=dat.toLocaleString('en-IN');
-			EmailService.sendEmailToUser(result[0].email, {
-				name: result[0].library.title,
-				date: datess,email: result[0].library.expert_email
-			});
-			EmailService.sendEmailToExpert(result[0].library.expert_email, {
-				name: result[0].fullname,
-				created: datess,
-			email: result[0].email
-			});
-
-
-
-
-
+      var dat = new Date(result[0].date);
+      var datess = dat.toLocaleString("en-IN");
+      EmailService.sendEmailToUser(result[0].email, {
+        name: result[0].library.title,
+        date: datess,
+        email: result[0].library.expert_email,
+      });
+      EmailService.sendEmailToExpert(result[0].library.expert_email, {
+        name: result[0].fullname,
+        created: datess,
+        email: result[0].email,
+      });
     }
-  }catch (err) {
+  } catch (err) {
     console.log("err", err.message);
   }
 
@@ -191,12 +188,8 @@ router.post("/status", async (req, res) => {
     message: "Update successfull",
   });
 
-
   // sed email to patient
   // let details = await library_appoint.findOne({ _id: new ObjectID(body._id) });
-
-
-
 });
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectID(req.params._id);
@@ -205,7 +198,9 @@ router.delete("/delete/:_id", async (req, res) => {
   try {
     const db = await getDatabase();
     const body = req.body;
-    let dt = await db.collection("library_appoint").deleteOne({ _id: _id });
+    let dt = await db
+      .collection("library_group_appoint")
+      .deleteOne({ _id: _id });
     res.send({
       message: "data deleted",
     });
@@ -232,7 +227,7 @@ router.delete("/delete/:_id", async (req, res) => {
       }
 
       let insertedId = null;
-      let library_appoint = await db.collection("library_appoint");
+      let library_appoint = await db.collection("library_group_appoint");
       if (body._id) {
         insertedId = await library_appoint.updateOne(
           { _id: new ObjectID(body._id) },
@@ -249,15 +244,24 @@ router.delete("/delete/:_id", async (req, res) => {
         },
         status: true,
         message: "Room created successfully!",
-      
       });
-       let  digitalhumandata = await db
-      .collection("library_content").findOne({_id: new ObjectID(body.humanId)})
-      var date = new Date(body.date)
-      var dates=date.toLocaleString('en-IN')
-      EmailService.sendEmailToexpertbooked(digitalhumandata.expert_email, { name: body.fullname, created: dates,email:body.email,room_no:body.room_no});
-			EmailService.sendEmailToUserbooked(body.email, { name: digitalhumandata.title, created:dates,  email: digitalhumandata.expert_email ,room_no:body.room_no})
-    
+      let digitalhumandata = await db
+        .collection("library_content")
+        .findOne({ _id: new ObjectID(body.humanId) });
+      var date = new Date(body.date);
+      var dates = date.toLocaleString("en-IN");
+      EmailService.sendEmailToexpertbooked(digitalhumandata.expert_email, {
+        name: body.fullname,
+        created: dates,
+        email: body.email,
+        room_no: body.room_no,
+      });
+      EmailService.sendEmailToUserbooked(body.email, {
+        name: digitalhumandata.title,
+        created: dates,
+        email: digitalhumandata.expert_email,
+        room_no: body.room_no,
+      });
     } catch (e) {
       console.log("error", e);
       res.status(500).json({
@@ -282,7 +286,7 @@ router.delete("/delete/:_id", async (req, res) => {
       }
 
       let insertedId = null;
-      let library_appoint = await db.collection("library_appoint");
+      let library_appoint = await db.collection("library_group_appoint");
       if (body._id) {
         insertedId = await library_appoint.updateOne(
           { _id: new ObjectID(body._id) },
