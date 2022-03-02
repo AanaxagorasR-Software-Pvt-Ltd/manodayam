@@ -64,7 +64,6 @@ export default function Home(props) {
     console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
     const productlisting = {
       collectiontype: "products",
-
     };
     axios
       .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
@@ -105,7 +104,6 @@ export default function Home(props) {
     console.log(`${API_ADMIN_URL}${CATEGORY_API}`);
     const categorylisting = {
       collectiontypedata: "categories",
-
     };
     axios
       .post(`${API_ADMIN_URL}${CATEGORY_API}`, categorylisting)
@@ -579,8 +577,10 @@ export default function Home(props) {
             <div className="service-heading">
               {/* <h5>Digital Human Library</h5> */}
               <h2>Digital Human Library</h2>
+              <h5>Life Coaches</h5>
+
               <p>
-                Find yourself mentor or coach, He/She can help you to overcome
+                Find yourself coach, He/She can help you to overcome
                 your inhibitions, learn from their experiences
               </p>
             </div>
@@ -624,19 +624,12 @@ export default function Home(props) {
                     <div className="ml-3">
                       <button
                         className="btn-web col-11"
-                        onClick={() => loginsubmit(`/library?humanId=${element._id}`)}
-
+                        onClick={() =>
+                          loginsubmit(`/library?humanId=${element._id}`)
+                        }
                       >
                         View More
                       </button>
-                      {/* <a href={globalDataLive.liveLink} target="_blank"> */}
-                      <button
-                        className="btn-web col-11 mt-2"
-                        onClick={() => loginsubmits(globalDataLive.liveLink)}
-                      >
-                        Please Join Live Session
-                      </button>
-                      {/* </a> */}
                       <button
                         // onClick={() =>loginsubmit()}
                         onClick={() => pleasetalk(element._id)}
@@ -646,19 +639,7 @@ export default function Home(props) {
                       >
                         Please Talk
                       </button>
-                      {/* <button
-                        // onClick={() =>loginsubmit()}
-                        onClick={() => submitformdata(element._id)}
-                        data-toggle="modal"
-                        data-target="#library-modal"
-                        className="btn-web col-11 mt-2"
-                      >
-                        Please Talk
-                      </button> */}
-                      {/* <a
-                        href={globalDataGroupCall.groupCallLink}
-                        target="_blank"
-                      > */}
+
                       <button
                         className="btn-web col-11 mt-2"
                         onClick={() =>
@@ -666,6 +647,83 @@ export default function Home(props) {
                         }
                       >
                         Join Group
+                      </button>
+                      {/* </a> */}
+                    </div>
+                    {/* </div> */}
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+          {/* </div> */}
+        </div>
+      </div>
+      <hr/>
+      <div className="library-section mb-50">
+        <div className="container">
+          {/* <div className="row"> */}
+          <div className="col-lg-12">
+            <div className="service-heading">
+              {/* <h5>Digital Human Library</h5> */}
+              <h5>Mentors</h5>
+              <p>
+                Find yourself mentor, He/She can help you to overcome
+                your inhibitions, learn from their experiences
+              </p>
+            </div>
+          </div>
+          <div className="service-slide">
+            <Slider {...settingstwo}>
+              {libraryData.map((element) => (
+                <div className="col-lg-13">
+                  <div className="library-card">
+                    {/* <div className="row"> */}
+                    <div className="col-lg-16 offset-1">
+                      <div className="library-person">
+                        <div className="d-flex">
+                          <div className="">
+                            <div className="col-9">
+                              <img src={element.image} alt="" />
+                            </div>
+                            <div className="mr-8">
+                              <h3>{element.title}</h3>
+                              <h5>{element.video_type}</h5>
+                            </div>
+                          </div>
+                          <div className="col-lg-7 mr-4">
+                            {/* <div className="library-video"> */}
+                            <video
+                              id="my-library-video"
+                              class="video-js"
+                              controls
+                              preload="auto"
+                              poster={element.thumbnail_image}
+                              data-setup=""
+                              loop="auto"
+                            >
+                              <source src={element.video} type="video/mp4" />
+                            </video>
+                            {/* </div> */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <button
+                        className="btn-web col-11"
+                        onClick={() =>
+                          loginsubmit(`/library?humanId=${element._id}`)
+                        }
+                      >
+                        View More
+                      </button>
+                      {/* <a href={globalDataLive.liveLink} target="_blank"> */}
+                      <button
+                        className="btn-web col-11 mt-2"
+                        onClick={() => loginsubmits(globalDataLive.liveLink)}
+                      >
+                        Please Join Live Session
                       </button>
                       {/* </a> */}
                     </div>
@@ -794,7 +852,6 @@ export default function Home(props) {
                     onClick={() => loginsubmit("/ViewProduct/" + element.slug)}
                   >
                     Search Doctors For Appointment
-
                   </buttton>
                   {/* </Link> */}
                 </div>
