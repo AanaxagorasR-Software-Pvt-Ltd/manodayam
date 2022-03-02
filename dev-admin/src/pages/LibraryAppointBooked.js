@@ -291,6 +291,7 @@ const LibraryAppointBooked = () => {
                               <th>Schedule Date</th>
                               <th>Call Status</th>
                               <th>Connect Here!</th>
+                              <th>Action</th>
                              
                             </tr>
                           </thead>

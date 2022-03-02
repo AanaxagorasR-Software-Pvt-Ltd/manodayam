@@ -24,7 +24,7 @@ class library_appoint {
         return axios.post(`/library_appoint/changecallstatus`, data);
     }
     delete(id) {
-        return axios.delete(`/library_appoint/delete/${id}`);
+        return axios.delete(`/library/delete/${id}`);
     }
     status(data) {
         return axios.post(`/library/status`, data);

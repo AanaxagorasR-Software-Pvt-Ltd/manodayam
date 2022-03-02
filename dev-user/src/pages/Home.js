@@ -813,7 +813,7 @@ export default function Home(props) {
             </div>
             <div className="col-lg-5 mt-25">
               <div className="about-img mt-30">
-                <img src="assets/image/support.jpg" alt="" />
+                <img src="assets/image/supportss.jpg" alt="" />
               </div>
             </div>
           </div>
