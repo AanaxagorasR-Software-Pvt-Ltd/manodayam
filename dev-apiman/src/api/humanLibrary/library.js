@@ -42,10 +42,11 @@ router.post(
       const db = await getDatabase();
       const body = req.body;
       let data = {
-        video_type: body.video_type,
+        motivator_status: body.motivator_status,
         title: body.title,
         expert_email: body.expert_email,
-        video_link: body.video_link,
+        // video_link: body.video_link,
+        type: body.type,
         description: body.description,
         image: body.image,
         thumbnail_image: body.thumbnail_image,

@@ -105,19 +105,16 @@
 //   }
 //   // res.send('hello')
 // });
-
-
 const express = require("express");
 const router = express.Router();
-const { getDatabase } = require("../../db/mongo");
 const ObjectId = require("mongodb").ObjectId;
+const { getDatabase } = require("../../db/mongo");
 const multer = require("multer");
 const path = require("path");
 const { env } = process;
-const { DOMAIN_NAME, MEDIA_PATH } = require("../../config");
+const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
 
 const imageStorage = multer.diskStorage({
-  // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "../../../uploads/images"));
   },
@@ -172,7 +169,6 @@ router.post(
         } else {
           data.thumbnail_image = body.thumbnail_image;
         }
-
         if (typeof req.files.video !== "undefined") {
           const videofile = req.files.video[0].filename;
           const videourl =
@@ -182,8 +178,8 @@ router.post(
           data.video = body.video;
         }
       } else {
-        data.thumbnail_image = body.thumbnail_image;
         data.video = body.video;
+        data.thumbnail_image = body.thumbnail_image;
       }
 
       console.log(data);
@@ -217,6 +213,10 @@ router.post(
         .status(400)
         .json({ status: false, message: "please try again later try" });
     }
+
+    // } else {
+    // 	res.status(200).json({ status: false, message: "please try again1 " });
+    // }
   },
   (error, req, res, next) => {
     console.log(error);
@@ -235,24 +235,7 @@ router.get("/", async (req, res) => {
 
   // res.send('hello')
 });
-router.delete("/delete/:_id", async (req, res) => {
-  const _id = new ObjectId(req.params._id);
-  console.log("delete", _id);
 
-  try {
-    const db = await getDatabase();
-    const body = req.body;
-    let dt = await db.collection("mental_health_data").deleteOne({ _id: _id });
-    res.send({
-      message: "data deleted",
-    });
-  } catch (err) {
-    console.log("err", err.message);
-    res.end();
-  }
-
-  // res.send('hello')
-});
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectId(req.params._id);
   console.log("delete", _id);

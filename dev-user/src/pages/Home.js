@@ -30,7 +30,7 @@ export default function Home(props) {
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
-  const [state,setState] =useState("All")
+  const [state, setState] = useState("All");
   let hist = useNavigate();
   useEffect(() => {
     let local = localStorage.getItem("Token");
@@ -287,6 +287,12 @@ export default function Home(props) {
       return false;
     }
   };
+  const filtermentor = libraryData.filter((element) =>
+    element?.type?.includes((element = "Mentor"))
+  );
+  const filtercoach = libraryData.filter((element) =>
+  element?.type?.includes((element = "Life Coach"))
+);
   const joingroup= (_id) => {
     let local = localStorage.getItem("Token");
     if (local) {
@@ -503,7 +509,11 @@ export default function Home(props) {
                   </div>
                   <div className="col-lg-12">
                     <div className="form-group">
-                      < select name="" id="" onChange={(event)=>setState(event.target.value)}>
+                      <select
+                        name=""
+                        id=""
+                        onChange={(event) => setState(event.target.value)}
+                      >
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Andaman and Nicobar Islands">
                           Andaman and Nicobar Islands
@@ -574,7 +584,9 @@ export default function Home(props) {
                   <div className="col-lg-12">
                     <buttton
                       className="btn hvr-float-shadow"
-                      onClick={() => loginsubmit("/bookingAppoint?State="+state)}
+                      onClick={() =>
+                        loginsubmit("/bookingAppoint?State=" + state)
+                      }
                     >
                       <span style={{ color: "#23adba" }}>Submit</span>
                     </buttton>
@@ -593,18 +605,18 @@ export default function Home(props) {
           <div className="col-lg-12">
             <div className="service-heading">
               {/* <h5>Digital Human Library</h5> */}
-              <h2>Digital Human Library</h2>
+              <h3>Digital Human Library</h3>
               <h5>Life Coaches</h5>
 
               <p>
-                Find yourself coach, He/She can help you to overcome
-                your inhibitions, learn from their experiences
+                Find yourself coach, He/She can help you to overcome your
+                inhibitions, learn from their experiences
               </p>
             </div>
           </div>
           <div className="service-slide">
             <Slider {...settingstwo}>
-              {libraryData.map((element) => (
+              {filtercoach.map((element) => (
                 <div className="col-lg-13">
                   <div className="library-card">
                     {/* <div className="row"> */}
@@ -617,11 +629,10 @@ export default function Home(props) {
                             </div>
                             <div className="mr-8">
                               <h3>{element.title}</h3>
-                              <h5>{element.video_type}</h5>
+                              <h5>{element.motivator_status}</h5>
                             </div>
                           </div>
                           <div className="col-lg-7 mr-4">
-                            {/* <div className="library-video"> */}
                             <video
                               id="my-library-video"
                               class="video-js"
@@ -633,7 +644,6 @@ export default function Home(props) {
                             >
                               <source src={element.video} type="video/mp4" />
                             </video>
-                            {/* </div> */}
                           </div>
                         </div>
                       </div>
@@ -654,7 +664,7 @@ export default function Home(props) {
                         data-target={isLoggedIn ? "#library-modal" : ""}
                         className="btn-web col-11 mt-2"
                       >
-                        Please Talk
+                        One to One
                       </button>
 
                       <button
@@ -666,9 +676,7 @@ export default function Home(props) {
                           joingroup(element._id)}>
                         Join Group
                       </button>
-                      {/* </a> */}
                     </div>
-                    {/* </div> */}
                   </div>
                 </div>
               ))}
@@ -677,23 +685,22 @@ export default function Home(props) {
           {/* </div> */}
         </div>
       </div>
-      <hr/>
+      <hr />
       <div className="library-section mb-50">
         <div className="container">
           {/* <div className="row"> */}
           <div className="col-lg-12">
             <div className="service-heading">
-              {/* <h5>Digital Human Library</h5> */}
               <h5>Mentors</h5>
               <p>
-                Find yourself mentor, He/She can help you to overcome
-                your inhibitions, learn from their experiences
+                Find yourself mentor, He/She can help you to overcome your
+                inhibitions, learn from their experiences
               </p>
             </div>
           </div>
           <div className="service-slide">
             <Slider {...settingstwo}>
-              {libraryData.map((element) => (
+              {filtermentor.map((element) => (
                 <div className="col-lg-13">
                   <div className="library-card">
                     {/* <div className="row"> */}
@@ -741,7 +748,7 @@ export default function Home(props) {
                         className="btn-web col-11 mt-2"
                         onClick={() => loginsubmits(globalDataLive.liveLink)}
                       >
-                        Please Join Live Session
+                        Join Live Session
                       </button>
                       {/* </a> */}
                     </div>
