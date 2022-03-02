@@ -3,10 +3,10 @@ import axios from "../../utill/axios";
 class library_appoint {
 
     list(data) {
-        return axios.get('/library/library_appoint', { params: data });
+        return axios.get('/', { params: data });
     }
     listBooked(data) {
-        return axios.get('/library/booked', { parames: data });
+        return axios.get('/booked', { parames: data });
     }
     listAll() {
         return axios.get("/all");
@@ -15,19 +15,19 @@ class library_appoint {
         return axios.get("/all/ignore-status");
     }
     save(data) {
-        return axios.post('library_appoint/appoint', data);
+        return axios.post('library-singlecall/appoint', data);
     }
     saveRoom(data) {
-        return axios.post(`/library/saveroom`, data);
+        return axios.post(`/library-singlecall/saveroom`, data);
     }
     saveCallStatus(data) {
-        return axios.post(`/library_appoint/changecallstatus`, data);
+        return axios.post(`/library-singlecall/changecallstatus`, data);
     }
     delete(id) {
-        return axios.delete(`/library/delete/${id}`);
+        return axios.delete(`/library-singlecall/delete/${id}`);
     }
     status(data) {
-        return axios.post(`/library/status`, data);
+        return axios.post(`/library-singlecall/status`, data);
     }
     // booked(){
     //     return axios.get(`/booked/appointments/booked`)

@@ -4,7 +4,7 @@ import {
   LOGIN_API,
   REGISTER_API,
   DOCTOR_API,
-  DIGITAL_HUMAN_LIBRARY,
+  LIBRARY_SINGLE_CALL_API,
   FORGOTPASSWORD_URL,
   RESETPASSWORD_URL
 } from "../utill/api.endpoints";
@@ -244,7 +244,7 @@ export default function Login(props) {
     if (libraryMsg == "") {
       setlibraryMsgError("Enter Your Message");
     }
-    console.log("hhhhhhhhh", `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY}`);
+    console.log("hhhhhhhhh", `${API_ADMIN_URL}${LIBRARY_SINGLE_CALL_API}`);
     const humanLibraryOptions = {
       fullname: libraryName,
       email: libraryMail,
@@ -257,7 +257,7 @@ export default function Login(props) {
       return;
     }
     axios
-      .post(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY}`, humanLibraryOptions)
+      .post(`${API_ADMIN_URL}${LIBRARY_SINGLE_CALL_API}`, humanLibraryOptions)
       .then((res) => {
         // console.log("====llll=====", res.data.data);
         setAlerdata({ title: "Connect", body: "We are Connect you soon" })

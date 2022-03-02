@@ -31,7 +31,7 @@ const LibraryAppoint = () => {
 
   const list = () => {
     axios
-      .get("/library/library_appoint")
+      .get("/library-singlecall")
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
