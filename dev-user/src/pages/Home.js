@@ -29,6 +29,7 @@ export default function Home(props) {
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
+  const [state,setState] =useState("All")
   let hist = useNavigate();
   useEffect(() => {
     let local = localStorage.getItem("Token");
@@ -323,7 +324,7 @@ export default function Home(props) {
 
             <div className="col-lg-6">
               <div className="about-content">
-                <h5>about Us</h5>
+                <h5>ABOUT AS</h5>
                 <p>
                   Manodayam is a Mental Health and Wellnessorganization
                   providing Holistic solutions. It has Unique Value proposition
@@ -486,7 +487,7 @@ export default function Home(props) {
                   </div>
                   <div className="col-lg-12">
                     <div className="form-group">
-                      <select name="" id="">
+                      < select name="" id="" onChange={(event)=>setState(event.target.value)}>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Andaman and Nicobar Islands">
                           Andaman and Nicobar Islands
@@ -557,7 +558,7 @@ export default function Home(props) {
                   <div className="col-lg-12">
                     <buttton
                       className="btn hvr-float-shadow"
-                      onClick={() => loginsubmit("/bookingAppoint")}
+                      onClick={() => loginsubmit("/bookingAppoint?State="+state)}
                     >
                       <span style={{ color: "#23adba" }}>Submit</span>
                     </buttton>
