@@ -198,24 +198,39 @@ const leftSideBarMenu = [
     iconClass: "icon-layout",
     submenu: [
       {
-        name: "All Connectors",
+        name: "Create Library",
+        isActive: true,
+        dataToggle: "",
+        link: "/library",
+        isExpand: false,
+      },
+      {
+        name: "Single connectors",
         isActive: true,
         dataToggle: "",
         link: "/library-appointment",
         isExpand: false,
       },
       {
-        name: "Booked Connection ",
+        name: "Single call Booked",
         isActive: true,
         dataToggle: "",
         link: "/library-appointment-booked",
         isExpand: false,
       },
+      
       {
-        name: "Create Library",
+        name: "Group connectors",
         isActive: true,
         dataToggle: "",
-        link: "/library",
+        link: "/group-appoint",
+        isExpand: false,
+      },
+      {
+        name: "Group Booked",
+        isActive: true,
+        dataToggle: "",
+        link: "/group-appoint-book",
         isExpand: false,
       },
     ],

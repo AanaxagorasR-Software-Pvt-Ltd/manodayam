@@ -25,6 +25,10 @@ import AboutCategory from "./pages/AboutCategory";
 import Userslist from "./pages/Userslist";
 import AboutUs from "./pages/AboutUs";
 import ShakthiQuestion from "./pages/ShakthiQuestion";
+import LibraryGroupAppoint from "./pages/LibraryGroupAppoint";
+import LibraryGroupBooked from "./pages/LibraryGroupBooked";
+
+
 
 
 const Login = React.lazy(() => import("./pages/Login"));
@@ -85,7 +89,11 @@ const InternalRoute = (props) => {
           <Route exact path="/admin/login" element={<ProtectedRoute />}></Route>
           <Route path="/doctor-list" element={<Doctor />} exact />
           <Route path="/shakthi-ques" element={<ShakthiQuestion />} exact />
+          <Route path="/group-appoint" element={<LibraryGroupAppoint />} exact />
+          <Route path="/group-appoint-book" element={<LibraryGroupBooked />} exact />
 
+
+          
           <Route path="/" element={<ProtectedRoute />}>
             <Route exact path="/admin/Main" element={<Main />} />
           </Route>
