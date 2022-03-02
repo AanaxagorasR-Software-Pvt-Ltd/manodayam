@@ -6,7 +6,8 @@ import {
   DOCTOR_API,
   LIBRARY_SINGLE_CALL_API,
   FORGOTPASSWORD_URL,
-  RESETPASSWORD_URL
+  RESETPASSWORD_URL,
+  LIBRARY_GROUP_CALL_API
 } from "../utill/api.endpoints";
 import { useState } from "react";
 import axios from "axios";
@@ -60,17 +61,30 @@ export default function Login(props) {
   const [libraryDate, setlibraryDate] = useState("");
   const [libraryMsg, setlibraryMsg] = useState("");
 
+  const [libraryNamesgroup, setlibraryNamesgroup] = useState("");
+  const [libraryNumsgroup, setlibraryNumsgroup] = useState("");
+  const [libraryMailsgroup, setlibraryMailsgroup] = useState("");
+  const [libraryDatesgroup, setlibraryDatesgroup] = useState("");
+  const [libraryMsgsgroup, setlibraryMsgsgroup] = useState("");
   // validation Error
   const [doctorNameError, setdoctorNameError] = useState("");
   const [doctoraddressError, setdoctoraddressError] = useState("");
   const [doctoremailError, setdoctoremailError] = useState("");
   const [doctorspecialityError, setdoctorspecialityError] = useState("");
   const [doctorpasswordError, setdoctorpasswordError] = useState("");
+
+  const [libraryNameErrorgroup, setlibraryNameErrorgroup] = useState("");
+  const [libraryNumErrorgroup, setlibraryNumErrorgroup] = useState("");
+  const [libraryMailErrorgroup, setlibraryMailErrorgroup] = useState("");
+  const [libraryDateErrorgroup, setlibraryDateErrorgroup] = useState("");
+  const [libraryMsgErrorgroup, setlibraryMsgErrorgroup] = useState("");
+
   const [libraryNameError, setlibraryNameError] = useState("");
   const [libraryNumError, setlibraryNumError] = useState("");
   const [libraryMailError, setlibraryMailError] = useState("");
   const [libraryDateError, setlibraryDateError] = useState("");
   const [libraryMsgError, setlibraryMsgError] = useState("");
+
   const [LoginmailError, setLoginmailError] = useState("");
   const [loginPasswordError, setloginPasswordError] = useState("");
   const [registrationNameError, setregistrationNameError] = useState("");
@@ -283,6 +297,68 @@ export default function Login(props) {
         console.log(error);
       });
   };
+  const HumanLibrarygroup = () => {
+    if (libraryName == "") {
+      setlibraryNameErrorgroup("Please Enter Your Fullname");
+    }
+    if (libraryMail == "") {
+      setlibraryMailErrorgroup("Please Enter Your Email");
+    }
+    if (libraryNum == "") {
+      setlibraryNumErrorgroup("Please Enter Mobile Number");
+    }
+    if (filter.test(libraryNum)) {
+      if (libraryNum.length == 10) {
+      } else {
+        alert("Please put 10  digit mobile number");
+      }
+    }
+    if (libraryDate == "") {
+      setlibraryDateErrorgroup("Please Enter Date");
+    }
+    if (libraryMsg == "") {
+      setlibraryMsgErrorgroup("Enter Your Message");
+    }
+    console.log("hhhhhhhhh", `${API_ADMIN_URL}${LIBRARY_GROUP_CALL_API}`);
+    const humanLibraryOptions = {
+      fullname: libraryNamesgroup,
+      email: libraryMailsgroup,
+      phone: libraryNumsgroup,
+      date: libraryDatesgroup,
+      msg: libraryMsgsgroup,
+      humanId: props.humanId,
+    };
+    if (!validate(humanLibraryOptions)) {
+      return;
+    }
+    axios
+      .post(`${API_ADMIN_URL}${LIBRARY_GROUP_CALL_API}`, humanLibraryOptions)
+      .then((res) => {
+        // console.log("====llll=====", res.data.data);
+        setAlerdata({ title: "Connect", body: "We are Connect you soon for Group call" })
+        setshow(true)
+        document.getElementById("humandigitalgroup").reset();
+        setlibraryNamesgroup("");
+        setlibraryNumsgroup("");
+        setlibraryMailsgroup("");
+
+        setlibraryDatesgroup("");
+        setlibraryMsgsgroup("");
+
+
+        if (res.status == 200) {
+          // localStorage.setItem("Token", res.data.token);
+          window.$("#library-modalgroup").modal("hide");
+        } else {
+          setAlerdata({ title: "Sorry", body: "Invalid Email and Password" })
+          setshow(true)
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   function validate(payload) { //  null, iuu{}
     if (!payload)
       return false;
@@ -306,13 +382,13 @@ export default function Login(props) {
       try {
         let resp = await axios.post(`${API_ADMIN_URL}${RESETPASSWORD_URL} `, values)
         if (resp.data.status) {
-         formiks.resetForm();
+          formiks.resetForm();
           setAlerdata({ title: "Reset", body: "your Password reset Successfully" })
           setshow(true)
           window.location.reload();
 
         } else {
-         
+
           setAlerdata({ title: "Sorry!!", body: "Sorry incorrect otp " })
           setshow(true)
 
@@ -337,12 +413,12 @@ export default function Login(props) {
         if (resp.data.status) {
           setShowPasswordForm(true)
           formiks.setValues({ email: values.email })
-          
+
           setAlerdata({ title: "Sucessfully", body: "Your otp send on your email" })
           setshow(true)
           formik.resetForm();
         } else {
-         
+
           setAlerdata({ title: "Sorry!!", body: "User is not found" })
           setshow(true)
         }
@@ -849,10 +925,129 @@ export default function Login(props) {
                 </div>
               </form>
             </div>
+
+
+
+
           </div>
         </div>
       </div>
+      {/* --------------------------------------------------- */}
 
+      <div className="modal fade" id="library-modalgroup">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <button
+              type="button"
+              className="close close-btn"
+              data-dismiss="modal"
+            >
+              &times;
+            </button>
+            <div className="modal-body md-custom">
+              <form action="" id="humandigitalgroup">
+                <h3>Talk with Us</h3>
+                <div className="form-group">
+                  <label for="">Your Name</label>
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder="Your full name"
+                    onChange={(libraryNamesgroup) =>
+                      setlibraryNamesgroup(libraryNamesgroup.target.value)
+                    }
+                  />
+                  {libraryNamesgroup == "" ? (
+                    <p className="text-danger">{libraryNameErrorgroup}</p>
+                  ) : null}
+                </div>
+                <div className="form-group">
+                  <label for="">Your Phone No.</label>
+                  <input
+                    type="tel"
+                    name=""
+                    id="mobile"
+                    placeholder="Phone no."
+                    minLength="10"
+                    maxLength="10"
+                    onChange={(libraryNumsgroup) =>
+                      setlibraryNumsgroup(libraryNumsgroup.target.value)
+                    }
+                  />
+                  {libraryNumsgroup == "" ? (
+                    <p className="text-danger">{libraryNumErrorgroup}</p>
+                  ) : null}
+                </div>
+                <div className="form-group">
+                  <label for="">Your Email</label>
+                  <input
+                    type="email"
+                    name=""
+                    id=""
+                    placeholder="Email"
+                    onChange={(libraryMailsgroup) =>
+                      setlibraryMailsgroup(libraryMailsgroup.target.value)
+                    }
+                  />
+                  {libraryMailsgroup == "" ? (
+                    <p className="text-danger">{libraryMailErrorgroup}</p>
+                  ) : null}
+                </div>
+                <div className="form-group">
+                  <input type="hidden" value={props.humanId} />
+                </div>
+                <div className="form-group">
+                  <label for="">Date</label>
+                  <input
+                    type="date"
+                    name=""
+                    id=""
+                    placeholder="DD/MM/YYYY"
+                    onChange={(libraryDatesgroup) =>
+                      setlibraryDatesgroup(libraryDatesgroup.target.value)
+                    }
+                  />
+                  {libraryDatesgroup == "" ? (
+                    <p className="text-danger">{libraryDateErrorgroup}</p>
+                  ) : null}
+                </div>
+                <div className="form-group schedule-msg ">
+                  <textarea
+                    className="border border-secondary"
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="1"
+                    placeholder="Enter your message here"
+                    onChange={(libraryMsgsgroup) =>
+                      setlibraryMsgsgroup(libraryMsgsgroup.target.value)
+                    }
+                  ></textarea>
+                  {libraryMsgsgroup == "" ? (
+                    <p className="text-danger">{libraryMsgErrorgroup}</p>
+                  ) : null}
+                </div>
+                <div className="Register text-center" onClick={HumanLibrarygroup}>
+                  <button
+                    type="button"
+                    className="btn btn-web hvr-float-shadow"
+                  >
+                    Continue
+                    {/* </Link> */}
+                  </button>
+                </div>
+              </form>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      {/* --------------------------------------------------------------- */}
       <div className="modal fade" id="registermodal">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -1084,3 +1279,5 @@ export default function Login(props) {
   );
 
 }
+
+
