@@ -26,6 +26,7 @@ export default function Home(props) {
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
@@ -35,8 +36,10 @@ export default function Home(props) {
     let local = localStorage.getItem("Token");
     if (local) {
       setisLoggedIn(true);
+    
     } else {
       setisLoggedIn(false);
+      
     }
   }, []);
   // aboutlist
@@ -272,6 +275,19 @@ export default function Home(props) {
     }
   };
   const pleasetalk = (_id) => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      setHumanId(_id);
+      console.log(_id);
+      console.log(humanId);
+      return true;
+    } else {
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true);
+      return false;
+    }
+  };
+  const joingroup= (_id) => {
     let local = localStorage.getItem("Token");
     if (local) {
       setHumanId(_id);
@@ -644,10 +660,10 @@ export default function Home(props) {
                       <button
                         className="btn-web col-11 mt-2"
                         data-toggle="modal"
-                        data-target={isLoggedIn ? "#library-modal" : ""}
+                        data-target={isLoggedIn ? "#library-modalgroup" : ""}
                         
                         onClick={() =>
-                          pleasetalk(element._id)}>
+                          joingroup(element._id)}>
                         Join Group
                       </button>
                       {/* </a> */}
