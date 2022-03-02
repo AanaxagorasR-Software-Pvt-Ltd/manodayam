@@ -304,9 +304,9 @@ const Library = () => {
                               <th>Video Thumbnail Image</th>
                               <th>Motivator Name</th>
                               <th>Motivator Description</th>
-                              <th> Motivator Type</th>
-                              <th> Video Link</th>
-                              <th> Motivator Email</th>
+                              <th>Motivator Status</th>
+                              <th>Motivator Type</th>
+                              <th>Motivator Email</th>
                               <th>Uploaded Date</th>
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
@@ -323,8 +323,8 @@ const Library = () => {
                                 </td>
                                 <td>{v.title}</td>
                                 <td>{v.description}</td>
-                                <td>{v.video_type}</td>
-                                <td>{v.video_link}</td>
+                                <td>{v.motivator_status}</td>
+                                <td>{v.type}</td>
                                 <td>{v.expert_email}</td>
 
                                 <td>{v.created}</td>
@@ -447,17 +447,18 @@ const Addform = forwardRef((props, ref) => {
         <Modal.Body>
           <form class="forms-sample" encType="multipart/form-data">
             <div class="row">
+            
               <div class="form-group col-md-4">
-                <label for="exampleInputUsername1">Motivator Type</label>
+                <label for="exampleInputUsername1">Motivator Status</label>
 
                 <input
                   type="text"
                   class="form-control"
-                  value={data.video_type || ""}
+                  value={data.motivator_status || ""}
                   onChange={(e) => {
-                    handleChange(e.target.value, "video_type");
+                    handleChange(e.target.value, "motivator_status");
                   }}
-                  placeholder="Video  type"
+                  placeholder="Motivator Status"
                 />
               </div>
 
@@ -470,7 +471,7 @@ const Addform = forwardRef((props, ref) => {
                   onChange={(e) => {
                     handleChange(e.target.value, "title");
                   }}
-                  placeholder="Name"
+                  placeholder="Motivator Name"
                 />
               </div>
               <div class="form-group col-md-4">
@@ -482,7 +483,7 @@ const Addform = forwardRef((props, ref) => {
                   onChange={(e) => {
                     handleChange(e.target.value, "expert_email");
                   }}
-                  placeholder="expert email"
+                  placeholder="Motivator email"
                 />
               </div>
               <div class="form-group col-md-4">
@@ -519,8 +520,8 @@ const Addform = forwardRef((props, ref) => {
                   placeholder="Video Expert Image"
                 />
               </div>
-              
-              <div class="form-group col-md-4">
+
+              {/* <div class="form-group col-md-4">
                 <label for="exampleInputUsername1">Video Link</label>
                 <input
                   type="text"
@@ -531,7 +532,7 @@ const Addform = forwardRef((props, ref) => {
                   }}
                   placeholder=" Video Link"
                 />
-              </div>
+              </div> */}
 
               <div class="form-group col-md-12">
                 <label for="exampleInputUsername1">Motivator Description</label>
@@ -545,7 +546,18 @@ const Addform = forwardRef((props, ref) => {
                   placeholder=" Video Description"
                 />
               </div>
-
+              <div class="form-group col-md-6">
+                <label for="exampleInputUsername1"> Motivator Type</label>
+                <select class="form-control"
+                  value={data.type || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "type");
+                  }}>
+                  <option>Select</option>
+                  <option>Life Coach</option>
+                  <option>Mentor</option>
+                </select>
+              </div>
               <div class="form-group col-md-6">
                 <label for="exampleInputUsername1"> Status</label>
                 <select

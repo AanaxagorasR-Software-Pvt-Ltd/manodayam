@@ -37,15 +37,14 @@ img {
   background-size: cover;
   padding: 158px 0 60px 0;
 }
-.modal-btn-ok{
+.modal-btn-ok {
   background: linear-gradient(45deg, #23adba, #9d1892);
   width: 60px;
-
 }
-.modal-body{
-  color:  #a752a0;
+.modal-body {
+  color: #a752a0;
 }
-.modal-head{
+.modal-head {
   color: #389ca5;
 }
 .btn-web {
@@ -124,9 +123,8 @@ header {
   margin-left: -67px;
   margin-bottom: 1px;
   margin-top: -3px;
-
 }
-.btninsta{
+.btninsta {
   display: inline-block;
   background: linear-gradient(
     rgb(101, 89, 202),
@@ -142,12 +140,12 @@ header {
   border-radius: 25px;
   margin-bottom: 2px;
 }
-.btnFacebook { 
-  height:45px;  
+.btnFacebook {
+  height: 45px;
   border-radius: 25px;
   background: #3b5998;
-  color:white;
-  border:0px transparent;  
+  color: white;
+  border: 0px transparent;
   text-align: center;
   /* margin:5px; */
   margin-top: 1px;
@@ -156,13 +154,13 @@ header {
   color: rgb(255, 255, 255);
   width: 300px !important;
 }
-.btnGoogle { 
-  margin:5px;
-  height:2px;
+.btnGoogle {
+  margin: 5px;
+  height: 2px;
   border-radius: 50%;
-  background: #db3236 ;
-  color:white;
-  border:0px transparent;
+  background: #db3236;
+  color: white;
+  border: 0px transparent;
   text-align: center;
   width: 300px !important;
 }
@@ -503,7 +501,6 @@ header {
   position: relative;
   width: 350px;
   height: 210px;
-
 }
 
 .service-card .img-bfr {
@@ -981,12 +978,12 @@ footer {
   border-radius: 5px;
   margin-bottom: 20px;
 }
-#my-video{
+#my-video {
   width: 100%;
   height: 245px;
   margin-right: 50px;
 }
-#my-library-video{
+#my-library-video {
   width: 155px;
   height: 130px;
   border-radius: 5px;
@@ -1099,12 +1096,11 @@ footer {
   font-size: 20px;
   margin-bottom: 20px;
 }
-.profile-name{
+.profile-name {
   margin-top: 55px;
 }
-.profile-hello{
+.profile-hello {
   color: #23adba;
-
 }
 .profile-content p {
   margin-bottom: 7px;
@@ -1160,7 +1156,6 @@ footer {
 }
 .running-question h4 {
   color: #d6d6d6;
-
 }
 .running-question .zoom-question h5 {
   color: #d6d6d6;
@@ -1183,21 +1178,20 @@ footer {
   color: #d6d6d6;
   font-size: 19px;
 }
-#about-us-video{
+#about-us-video {
   height: 250px;
   width: 230px;
   margin-top: 38px;
 }
-.about_title{
-position: relative;
-left: 180px;
-top: 40px;
-font-weight: 300;
-font-size: 23px;
-color: #23adba;
+.about_title {
+  position: relative;
+  left: 180px;
+  top: 40px;
+  font-weight: 300;
+  font-size: 23px;
+  color: #23adba;
 }
-#mental-health-video{
-  width: 470px;
-    height: 277px;
+#mental-health-video {
+  width: 372px;
+  height: 210px;
 }
-

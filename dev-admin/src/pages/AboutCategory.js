@@ -13,9 +13,11 @@ import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
 import Button from "react-bootstrap/Button";
-import aboutCategory from "../Store/Services/aboutCategory";
 import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
+// import library from "../Store/Connect/library";
+import aboutCategory from "../Store/Services/aboutCategory";
+
 import LeftSideBar from "../Layout/LeftSideBar";
 
 // let Button = new AA()
@@ -29,14 +31,12 @@ const AboutCategory = () => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
-
   const formRef = useRef();
 
   const list = () => {
     axios
-      .get("/aboutCategory")
+      .get("aboutCategory")
       .then((res) => {
-        console.log("res", res, typeof res);
         setData(res);
         setfilerdata(res);
       })
@@ -79,9 +79,9 @@ const AboutCategory = () => {
         console.log("some error");
       });
   };
-  const deleteCat = (_id) => {
+
+  const deleteData = (_id) => {
     aboutCategory.delete(_id).then((res) => {
-      // console.log('res', res);
       alert(res?.message);
       list();
     });
@@ -92,15 +92,20 @@ const AboutCategory = () => {
       if (searchField == "") {
         return true;
       } else {
-        return value.slug
-          .toLowerCase()
-          .includes(searchField.toLocaleLowerCase());
-        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+        return (
+          value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+          value.expert_email
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase()) ||
+          value.video_type
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase())
+        );
       }
     });
     setfilerdata(searchlist);
   };
+
   return (
     <>
       <Addform ref={formRef} list={list} />
@@ -203,7 +208,7 @@ const AboutCategory = () => {
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-info">
                         <i class="ti-user mx-0"></i>
-                      </div>
+                        </div>
                     </div>
                     <div class="preview-item-content">
                       <h6 class="preview-subject font-weight-normal">
@@ -284,24 +289,23 @@ const AboutCategory = () => {
                     </div>
                   </div>
                 </div>
+
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">AboutCategory list</h4>
+                      <h4 class="card-title">About Category</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
                               <th>S.No</th>
-                              {/* <th>AboutCategory Name </th> */}
-                              <th>AboutCategory Slug </th>
+                              <th>Slug </th>
                               <th> Ques </th>
                               <th> Heading </th>
                               <th> I para </th>
                               <th> II para </th>
                               <th> symptoms </th>
-                              <th> Thumbnail Image </th>
-
+                              <th>Video Thumbnail Image </th>
                               <th>Status</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -311,7 +315,6 @@ const AboutCategory = () => {
                             {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
-                                {/* <td>{v.name}</td> */}
                                 <td>{v.slug}</td>
                                 <td>{v.ques}</td>
                                 <td>{v.heading}</td>
@@ -336,6 +339,7 @@ const AboutCategory = () => {
                                 <td>
                                   <img src={v.thumbnail_image} />
                                 </td>
+
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
                                 </td>
@@ -352,8 +356,8 @@ const AboutCategory = () => {
                                   </button>
                                   <button
                                     type="button"
+                                    onClick={() => deleteData(v._id)}
                                     class="btn btn-sm btn-danger add-btn"
-                                    onClick={() => deleteCat(v._id)}
                                   >
                                     <i class="ti-trash"></i>
                                   </button>
@@ -387,7 +391,9 @@ const AboutCategory = () => {
 };
 
 const Addform = forwardRef((props, ref) => {
+  const [options, setOptions] = React.useState([]);
   const [show, setShow] = useState(false);
+  const [media, setMedia] = useState([]);
   const [data, setData] = useState({});
   const { list } = props;
 
@@ -395,9 +401,6 @@ const Addform = forwardRef((props, ref) => {
     setData({ ...data, [k]: v });
   };
 
-  const handleVisible = (state) => {
-    setShow(state);
-  };
   useImperativeHandle(ref, () => ({
     openForm(dt) {
       if (dt?._id) {
@@ -409,10 +412,17 @@ const Addform = forwardRef((props, ref) => {
     },
   }));
 
+  const handleVisible = (state) => {
+    setShow(state);
+  };
+
   const save = () => {
     let fd = new FormData();
+    for (let prop in data) {
+      fd.append(prop, data[prop]);
+    }
     aboutCategory
-      .save(data, data.id)
+      .save(fd)
       .then((res) => {
         alert(res.message);
         handleVisible(false);
@@ -423,6 +433,16 @@ const Addform = forwardRef((props, ref) => {
       });
   };
 
+  React.useEffect(() => {
+    axios
+      .get("media-solutions")
+      .then((res) => {
+        setMedia(res);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  }, []);
   return (
     <>
       <Modal
@@ -438,17 +458,17 @@ const Addform = forwardRef((props, ref) => {
         <Modal.Body>
           <form class="forms-sample">
             {/* <div class="form-group">
-              <label for="exampleInputUsername1">Category Name</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.name || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "name");
-                }}
-                placeholder="Category Name"
-              />
-            </div> */}
+            <label for="exampleInputUsername1">Category Name</label>
+            <input
+              type="text"
+              class="form-control"
+              value={data.name || ""}
+              onChange={(e) => {
+                handleChange(e.target.value, "name");
+              }}
+              placeholder="Category Name"
+            />
+          </div> */}
             <div class="form-group">
               <label for="exampleInputUsername1">Slug</label>
               <input
@@ -585,25 +605,25 @@ const Addform = forwardRef((props, ref) => {
               <label for="exampleInputUsername1">Video Upload</label>
               <input
                 type="file"
-                class="form-control"
+                class="form-control file-upload-info"
                 onChange={(e) => {
                   handleChange(e.target.files[0], "video");
                 }}
                 placeholder="Upload Video"
               />
             </div>
-
-            <div class="form-group ">
+            <div class="form-group">
               <label for="exampleInputUsername1">Video Thumbnail Image</label>
               <input
                 type="file"
-                class="form-control"
+                class="form-control file-upload-info"
                 onChange={(e) => {
                   handleChange(e.target.files[0], "thumbnail_image");
                 }}
-                placeholder="Video Thumbnail Image"
+                placeholder="Video Expert Image"
               />
             </div>
+
             <div class="form-group ">
               <label for="exampleInputUsername1">Category Status</label>
               <select
@@ -637,17 +657,17 @@ const Addform = forwardRef((props, ref) => {
         </Modal.Footer>
       </Modal>
       {/* <Bmodal show={shows} >
-        <Bmodal.Header closeButton>
-          <Bmodal.Title>{alertData.title}</Bmodal.Title>
-        </Bmodal.Header>
-        <Bmodal.Body>{alertData.body}</Bmodal.Body>
-        <Bmodal.Footer>
-          
-          <Button variant="primary" onClick={handleClose}>
-         ok
-          </Button>
-        </Bmodal.Footer>
-      </Bmodal> */}
+      <Bmodal.Header closeButton>
+        <Bmodal.Title>{alertData.title}</Bmodal.Title>
+      </Bmodal.Header>
+      <Bmodal.Body>{alertData.body}</Bmodal.Body>
+      <Bmodal.Footer>
+
+        <Button variant="primary" onClick={handleClose}>
+       ok
+        </Button>
+      </Bmodal.Footer>
+    </Bmodal> */}
     </>
   );
 });

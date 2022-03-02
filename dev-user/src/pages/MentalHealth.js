@@ -55,13 +55,13 @@ export default function MentalHealth() {
                 <div className="col-lg-12">
                   <div className="research-content">
                     <h3> {element.heading}</h3>
-                    <div style={{ display: "flex" }}>
+                    <div style={{ textAlign: "center" }}>
                       <video
                         id="mental-health-video"
                         // class="video-js"
                         controls
                         preload="auto"
-                        poster={element.image}
+                        poster={element.thumbnail_image}
                         data-setup=""
                         loop="auto"
                       >
@@ -71,7 +71,6 @@ export default function MentalHealth() {
                           type="video/mp4"
                         />
                       </video>
-                      <h5>jsfdncbdkjsdhicdcn</h5>
                     </div>
                     <div className="research-content-detail">
                       <h4>{element.ques}</h4>
