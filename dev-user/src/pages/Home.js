@@ -385,9 +385,11 @@ export default function Home(props) {
                   width={600}
                   height={430}
                   images={[
-                    { url: "assets/image/yogas.jpg" },
-                    { url: "assets/image/helps.jpeg" },
-                    { url: "assets/image/helpssir.jpg" },
+                    { url: "assets/image/first.jpeg" },
+                    { url: "assets/image/fourth.jpeg" },
+                    // { url: "assets/image/second.jpeg" },
+                    { url: "assets/image/third.jpeg" },
+
                   ]}
                   showBullets={true}
                   showNavs={true}
@@ -665,7 +667,7 @@ export default function Home(props) {
                         data-target={isLoggedIn ? "#library-modal" : ""}
                         className="btn-web col-11 mt-2"
                       >
-                        One to One
+                        Personal therapy
                       </button>
 
                       <button
@@ -675,7 +677,7 @@ export default function Home(props) {
                         
                         onClick={() =>
                           joingroup(element._id)}>
-                        Join Group
+                        Group therapy
                       </button>
                     </div>
                   </div>

@@ -20,7 +20,7 @@ import React, {
   import LeftSideBar from "../Layout/LeftSideBar";
   // let Button = new AA()
   
-  const BookedAppointment = () => {
+  const LibraryGroupBooked = () => {
     const [data, setData] = React.useState([]);
     const dispatch = useDispatch();
     const { logout } = useAuth();
@@ -34,7 +34,7 @@ import React, {
   
     const listBooked = () => {
       axios
-        .get("library-group/booked")
+        .get("/library-group/booked")
         .then((res) => {
           console.log("res", res, typeof res);
           setData(res);
@@ -287,7 +287,6 @@ import React, {
                               <tr>
                                 <th>S.No</th>
                                 <th>Patient Details</th>
-                                <th>Issue</th>
                                 <th>Schedule Date</th>
                                 <th>Call Status</th>
                                 <th>Connect Here!</th>
@@ -302,11 +301,12 @@ import React, {
                                     <strong>Name: </strong> {v.fullname}
                                     <br />
                                     <strong>Email:</strong> {v.email} <br />
-                                    <strong>Phone:</strong> {v.mobileNmb}{" "}
+                                    <strong>Phone:</strong> {v.phone}{" "}
                                   </td>
-                                  <td>{v.disorder}</td>
   
-                                  <td>{convertToDateTime(v.schedule)}</td>
+                                  {/* <td>{convertToDateTime(v.date)}</td> */}
+                                  <td>{v.date}</td>
+
                                   <td>
                                     {v.call_status === "pending"
                                       ? "Pending"
@@ -577,5 +577,5 @@ import React, {
       </>
     );
   });
-  export default BookedAppointment;
+  export default LibraryGroupBooked;
   

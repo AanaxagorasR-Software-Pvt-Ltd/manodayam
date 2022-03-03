@@ -886,7 +886,7 @@ export default function Login(props) {
                 <div className="form-group">
                   <label for="">Date</label>
                   <input
-                    type="date"
+                    type="datetime-local"
                     name=""
                     id=""
                     placeholder="DD/MM/YYYY"

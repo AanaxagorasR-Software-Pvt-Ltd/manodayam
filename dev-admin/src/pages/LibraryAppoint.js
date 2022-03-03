@@ -105,7 +105,10 @@ const LibraryAppoint = () => {
     });
     setfilerdata(searchlist);
   };
-
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+  };
   return (
     <>
       <div class="container-scroller">
@@ -360,7 +363,9 @@ const LibraryAppoint = () => {
                                     <strong>Phone:</strong> {v.phone} <br />
                                     <strong>Message:</strong> {v.msg}
                                   </td>
-                                  <td>{v.date}</td>
+                                  {/* <td>{v.date}</td> */}
+                                  <td>{convertToDateTime(v.date)}</td>
+
 
                                   {/* <td>
                                     {v.status === "pending"

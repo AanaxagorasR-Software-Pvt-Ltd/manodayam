@@ -21,7 +21,7 @@ import LeftSideBar from "../Layout/LeftSideBar";
 
 // let Button = new AA()
 
-const Appointment = (props) => {
+const LibraryGroupAppoint = (props) => {
   console.log(props);
   const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
@@ -378,7 +378,6 @@ const Appointment = (props) => {
                               <th>S.No</th>
                               <th>Booked Motivator Details</th>
                               <th>Patient Details</th>
-                              <th>Issue</th>
                               <th>Schedule Date</th>
                               <th> Status</th>
 
@@ -405,8 +404,9 @@ const Appointment = (props) => {
                                     <strong>Email:</strong> {v.email} <br />
                                     <strong>Phone:</strong> {v.phone}
                                   </td>
-                                  <td>{v.disorder}</td>
-                                  <td>{convertToDateTime(v.schedule)}</td>
+                                  {/* <td>{convertToDateTime(v.date)}</td> */}
+                                  <td>{v.date}</td>
+
                                   {/* <td>
                                     {v.status === "pending"
                                       ? "Pending"
@@ -639,4 +639,4 @@ const Addform = forwardRef((props, ref) => {
     </>
   );
 });
-export default Appointment;
+export default LibraryGroupAppoint;
