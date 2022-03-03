@@ -18,8 +18,8 @@ export default function Library(props) {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [humanId, setHumanId] = useState("");
 
-  let params = new URLSearchParams(window.location.search);
-  console.log(params.get('humanId'));
+ 
+  // console.log(params.get('humanId'));
   let hist = useNavigate();
   const libraryDatalist = () => {
     console.log(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`);
@@ -29,7 +29,7 @@ export default function Library(props) {
     axios
       .post(
         // ?humanId=${}`
-        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}?humanId=${params.get('humanId')}`, libraryDatalisting)
+        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`, libraryDatalisting)
       .then((res) => {
         setlibraryData(res.data.data);
         console.log("====libraryContent====", res.data.data);

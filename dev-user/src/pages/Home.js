@@ -30,7 +30,7 @@ export default function Home(props) {
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
-  const [state, setState] = useState("All");
+  // const [state, setState] = useState("All");
   let hist = useNavigate();
   useEffect(() => {
     let local = localStorage.getItem("Token");
@@ -511,8 +511,9 @@ export default function Home(props) {
                       <select
                         name=""
                         id=""
-                        onChange={(event) => setState(event.target.value)}
+                        // onChange={(event) => setState(event.target.value)}
                       >
+                        <option value="All State">All State</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Andaman and Nicobar Islands">
                           Andaman and Nicobar Islands
@@ -584,7 +585,7 @@ export default function Home(props) {
                     <buttton
                       className="btn hvr-float-shadow"
                       onClick={() =>
-                        loginsubmit("/bookingAppoint?State=" + state)
+                        loginsubmit("/bookingAppoint")
                       }
                     >
                       <span style={{ color: "#23adba" }}>Submit</span>
