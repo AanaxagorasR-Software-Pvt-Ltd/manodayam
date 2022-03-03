@@ -30,6 +30,7 @@ export default function Appointment() {
   const [alertData, setAlerdata] = useState({ title: "", body: "" })
 
   let params = new URLSearchParams(window.location.search);
+  
   console.log(params.get('docid'));
   // Appointments
   const Appointment = () => {

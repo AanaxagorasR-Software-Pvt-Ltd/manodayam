@@ -245,21 +245,21 @@ router.delete("/delete/:_id", async (req, res) => {
         status: true,
         message: "Room created successfully!",
       });
-      let digitalhumandata = await db
+      let digitalhumandatagroupjoin = await db
         .collection("library_content")
         .findOne({ _id: new ObjectID(body.humanId) });
       var date = new Date(body.date);
       var dates = date.toLocaleString("en-IN");
-      EmailService.sendEmailToExpertjoingroupbooked(digitalhumandata.expert_email, {
+      EmailService.sendEmailToExpertjoingroupbooked(digitalhumandatagroupjoin.expert_email, {
         name: body.fullname,
         created: dates,
         email: body.email,
         room_no: body.room_no,
       });
       EmailService.sendEmailToUserJoingroupbooked(body.email, {
-        name: digitalhumandata.title,
+        name: digitalhumandatagroupjoin.title,
         created: dates,
-        email: digitalhumandata.expert_email,
+        email: digitalhumandatagroupjoin.expert_email,
         room_no: body.room_no,
       });
     } catch (e) {
