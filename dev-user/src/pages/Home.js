@@ -26,7 +26,7 @@ export default function Home(props) {
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
   const [isLoggedIn, setisLoggedIn] = useState(false);
-  
+
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
@@ -36,10 +36,8 @@ export default function Home(props) {
     let local = localStorage.getItem("Token");
     if (local) {
       setisLoggedIn(true);
-    
     } else {
       setisLoggedIn(false);
-      
     }
   }, []);
   // aboutlist
@@ -291,9 +289,9 @@ export default function Home(props) {
     element?.type?.includes((element = "Mentor"))
   );
   const filtercoach = libraryData.filter((element) =>
-  element?.type?.includes((element = "Life Coach"))
-);
-  const joingroup= (_id) => {
+    element?.type?.includes((element = "Life Coach"))
+  );
+  const joingroup = (_id) => {
     let local = localStorage.getItem("Token");
     if (local) {
       setHumanId(_id);
@@ -389,7 +387,6 @@ export default function Home(props) {
                     { url: "assets/image/fourth.jpeg" },
                     // { url: "assets/image/second.jpeg" },
                     { url: "assets/image/third.jpeg" },
-
                   ]}
                   showBullets={true}
                   showNavs={true}
@@ -673,9 +670,8 @@ export default function Home(props) {
                         className="btn-web col-11 mt-2"
                         data-toggle="modal"
                         data-target={isLoggedIn ? "#library-modalgroup" : ""}
-                        
-                        onClick={() =>
-                          joingroup(element._id)}>
+                        onClick={() => joingroup(element._id)}
+                      >
                         Group therapy
                       </button>
                     </div>
