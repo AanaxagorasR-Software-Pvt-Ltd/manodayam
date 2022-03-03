@@ -352,7 +352,7 @@ const Doctor = () => {
                               <th>Doctor Image</th>
 
                               <th>Doctor experience</th>
-                              <th>Doctor location</th>
+                              {/* <th>Doctor location</th> */}
                               <th>Doctor specialist</th>
                               <th>Email</th>
 
@@ -369,7 +369,7 @@ const Doctor = () => {
                                 </td>
 
                                 <td>{d.experience}</td>
-                                <td>{d.location}</td>
+                                {/* <td>{d.location}</td> */}
                                 <td>{d.specialist}</td>
 
                                 <td>{d.email}</td>
@@ -533,7 +533,7 @@ const Addform = forwardRef((props, ref) => {
                     placeholder="Upload Doctor"
                   />
                 </div>
-                <div class="form-group col-md-6">
+                {/* <div class="form-group col-md-6">
                   <label for="exampleInputUsername1">Doctor location</label>
                   <select 
                     class="form-control"
@@ -590,7 +590,7 @@ const Addform = forwardRef((props, ref) => {
                     <option value="Uttarakhand">Uttarakhand</option>
                     <option value="West Bengal">West Bengal</option>
                   </select>
-                </div>
+                </div> */}
 
                 <div class="form-group col-md-6">
                   <label for="exampleInputUsername1">Docter specialist</label>

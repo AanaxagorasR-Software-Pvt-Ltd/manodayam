@@ -14,7 +14,8 @@ export default function BookingAppoint() {
       collectionDoctor: "doctorListing",
     };
     axios
-      .post(`${API_ADMIN_URL}${DOCTOR_LIST_API}?state=${params.get('State')}`, doctorlisting)
+    .post(`${API_ADMIN_URL}${DOCTOR_LIST_API}`, doctorlisting)
+      //  
       .then((res) => {
         setdoctorData(res.data.data);
         console.log("====pppppp====", res.data.data);
@@ -61,11 +62,11 @@ export default function BookingAppoint() {
                   <h5>{element.name}</h5>
                   <h2>{element.specialist}</h2>
                   <p>{element.experience}</p>
-                  <p>{element.location}</p>
+                  {/* <p>{element.location}</p> */}
                   <h2>{element.email}</h2>
 
                   <button className="btn-web hvr-float-shadow">
-                    <Link to={`/appointment?docid=${element._id}`}>Book Your Appointment</Link>
+                    <Link to={`/appointment`}>Book Your Appointment</Link>
                   </button>
                 </div>
               </div>
