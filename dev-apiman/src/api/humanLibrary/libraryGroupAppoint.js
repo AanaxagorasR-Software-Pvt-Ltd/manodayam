@@ -246,7 +246,7 @@ router.delete("/delete/:_id", async (req, res) => {
         message: "Room created successfully!",
       });
       let digitalhumandata = await db
-        .collection("library_content")
+        .collection("library_group_appoint")
         .findOne({ _id: new ObjectID(body.humanId) });
       var date = new Date(body.date);
       var dates = date.toLocaleString("en-IN");

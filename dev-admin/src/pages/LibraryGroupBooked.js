@@ -104,8 +104,6 @@ import React, {
               .includes(searchField.toLocaleLowerCase()) ||
             value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
           );
-          // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-          //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
         }
       });
       setfilerdata(searchlist);

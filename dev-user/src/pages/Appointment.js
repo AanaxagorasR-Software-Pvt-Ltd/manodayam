@@ -18,7 +18,6 @@ export default function Appointment() {
   const [appointDisorder, setappointDisorder] = useState("");
   const [appointMsg, setappointMsg] = useState("");
 
-
   //error
   const [appointNameError, setappointNameError] = useState("");
   const [appointMailError, setappointMailError] = useState("");
@@ -27,13 +26,12 @@ export default function Appointment() {
   const [appointDisorderError, setappointDisorderError] = useState("");
   const [appointMsgError, setappointMsgError] = useState("");
   const [show, setshow] = useState(false);
-  const [alertData, setAlerdata] = useState({ title: "", body: "" })
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
   let params = new URLSearchParams(window.location.search);
-  console.log(params.get('docid'));
+  console.log(params.get("docid"));
   // Appointments
   const Appointment = () => {
-
     if (appointName == "") {
       setappointNameError("Please Enter Your Name");
     }
@@ -61,14 +59,12 @@ export default function Appointment() {
       disorder: appointDisorder,
       schedule: appointmentSchedule,
       msg: appointMsg,
-      docid: params.get('docid'),
-      userId:user._id
-
+      docid: params.get("docid"),
+      userId: user._id,
     };
-    if(!validate(appointmentOptions)){
-     return; 
+    if (!validate(appointmentOptions)) {
+      return;
     }
-    
 
     axios
       .post(`${API_ADMIN_URL}${APPOINTMENT_API}`, appointmentOptions)
@@ -78,38 +74,39 @@ export default function Appointment() {
         // alert("Appointment Successfully");
         //  pathname="/counsultvideo"
 
-        setAlerdata({ title: "booked Appointment", body: "Appointment booked successfully" })
-        setshow(true)
+        setAlerdata({
+          title: "booked Appointment",
+          body: "Appointment booked successfully",
+        });
+        setshow(true);
         document.getElementById("appointform").reset();
         setappointName("");
         setappointMail("");
         setappointNum("");
         setappointmentScheduleError("");
         setappointDisorderError("");
-        setappointMsgError("")
-
-        
-
+        setappointMsgError("");
       })
       .catch((error) => {
         console.log(error);
-
       });
-
   };
   function validate(payload) {
-    if (!payload)
-      return false;
-    if (payload.fullname && payload.email && payload.mobileNmb && payload.disorder && payload.schedule && payload.msg && payload.docid) {
-      return true
+    if (!payload) return false;
+    if (
+      payload.fullname &&
+      payload.email &&
+      payload.mobileNmb &&
+      payload.disorder &&
+      payload.schedule &&
+      payload.msg &&
+      payload.docid
+    ) {
+      return true;
     }
-    return false
+    return false;
   }
   const handleClose = () => setshow(false);
-
-
-
-
 
   return (
     <>
@@ -297,13 +294,12 @@ export default function Appointment() {
           </div>
         </div>
       </div>
-      <Modal show={show} >
+      <Modal show={show}>
         <Modal.Header closeButton>
           <Modal.Title>{alertData.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{alertData.body}</Modal.Body>
         <Modal.Footer>
-
           <Button variant="primary" onClick={handleClose}>
             ok
           </Button>
@@ -312,9 +308,3 @@ export default function Appointment() {
     </>
   );
 }
-
-
-
-
-
-
