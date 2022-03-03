@@ -66,7 +66,7 @@ export default function BookingAppoint() {
                   <h2>{element.email}</h2>
 
                   <button className="btn-web hvr-float-shadow">
-                    <Link to={`/appointment`}>Book Your Appointment</Link>
+                  <Link to={`/appointment?docid=${element._id}`}>Book Your Appointment</Link>
                   </button>
                 </div>
               </div>
