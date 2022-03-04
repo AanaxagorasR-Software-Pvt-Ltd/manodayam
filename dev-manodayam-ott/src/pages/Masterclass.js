@@ -2,10 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  API_ADMIN_URL,
-  SHAKTHI_MASTERCLASS_API,
-} from "../utill/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_MASTERCLASS_API } from "../utill/api.endpoints";
 
 export default function Masterclass() {
   const [resData, setResData] = useState([]);
@@ -28,8 +25,8 @@ export default function Masterclass() {
     MusicApi();
   }, []);
   const filterType = resData.filter((element) =>
-  element?.type?.includes((element = "Calm Masterclass"))
-);
+    element?.date?.includes((element = ""))
+  );
   return (
     <>
       <div>
