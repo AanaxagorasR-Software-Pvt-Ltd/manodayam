@@ -431,7 +431,7 @@ header {
 }
 .about-content h2 {
   /* font-family: cursive; */
-  font-size: 30px;
+  font-size: 23px;
   margin-bottom: 26px;
   font-weight: 400;
 }
@@ -845,7 +845,7 @@ footer {
   padding: 25px 0 0 47px;
 }
 .support-content p {
-  font-size: 17px;
+  font-size: 20px;
 }
 .support-content ul li i {
   color: #23adba;
