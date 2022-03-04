@@ -327,13 +327,13 @@ const LibraryAppoint = () => {
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">library_appoint list</h4>
+                      <h4 class="card-title">One to one Appointment list</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
                               <th>S.No</th>
-                              <th>Booked Human Library </th>
+                              <th>Motivator Details</th>
                               <th>Patient Details</th>
                               {/* <th>Issue</th> */}
                               <th>Schedule Date</th>

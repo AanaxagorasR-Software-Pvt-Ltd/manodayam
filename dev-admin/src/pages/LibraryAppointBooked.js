@@ -91,21 +91,20 @@ const LibraryAppointBooked = () => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) 
+        return (
+          value.fullname
+            .toLowerCase()
+            .includes(searchField.toLocaleLowerCase()) ||
+          value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
+        );
         // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())  
+        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
-
-
-  }
+  };
 
   return (
     <>
@@ -150,12 +149,9 @@ const LibraryAppointBooked = () => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
-
-
-
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -227,8 +223,9 @@ const LibraryAppointBooked = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
-                  }`}
+                class={`nav-item nav-profile dropdown ${
+                  profileShow ? "show" : ""
+                }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -241,8 +238,9 @@ const LibraryAppointBooked = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
-                    }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
+                    profileShow ? "show" : ""
+                  }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -280,25 +278,35 @@ const LibraryAppointBooked = () => {
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Booked Library list</h4>
+                      <h4 class="card-title">
+                        One to one Appointment Booked List
+                      </h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
                               <th>S.No</th>
+                              <th>Motivator Details</th>
+
                               <th>Patient Details</th>
-                              {/* <th>Issue</th> */}
                               <th>Schedule Date</th>
                               <th>Call Status</th>
                               <th>Connect Here!</th>
                               <th>Action</th>
-                             
                             </tr>
                           </thead>
                           <tbody>
                             {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
+                                <td>
+                                  <strong>Name: </strong>
+                                  {v.library && v.library.title}
+                                  <br />
+                                  <strong>Email:</strong>
+                                  {v.library && v.library.expert_email}
+                                  <br />
+                                </td>
                                 <td>
                                   <strong>Name: </strong> {v.fullname}
                                   <br />
@@ -314,8 +322,8 @@ const LibraryAppointBooked = () => {
                                   {v.call_status === "pending"
                                     ? "Pending"
                                     : v.status === "success"
-                                      ? "Success"
-                                      : "Unsuccess"}
+                                    ? "Success"
+                                    : "Unsuccess"}
                                 </td>
                                 <td>
                                   {v.room_no == null ? (
@@ -369,7 +377,6 @@ const LibraryAppointBooked = () => {
                         </table>
                       </div>
                     </div>
-                  
                   </div>
                 </div>
               </div>
@@ -468,7 +475,6 @@ const CreateRoomForm = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </>
   );
 });

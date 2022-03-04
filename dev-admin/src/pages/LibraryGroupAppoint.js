@@ -106,16 +106,6 @@ const LibraryGroupAppoint = (props) => {
     const d = new Date(time);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
-  // const filterdata = list.filter((value) => {
-  //   if (searchField == "") {
-  //     return true
-
-  //   } else {
-  //     value.fullname.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
-  //     return value
-
-  //   }
-  // })
   const onsubmit = (e) => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
@@ -128,8 +118,6 @@ const LibraryGroupAppoint = (props) => {
             .includes(searchField.toLocaleLowerCase()) ||
           value.email.toLowerCase().includes(searchField.toLocaleLowerCase())
         );
-        // value.doctor.name.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
-        //  value.doctor.email.toLowerCase().includes(searchField.toLocaleLowerCase())
       }
     });
     setfilerdata(searchlist);
@@ -351,22 +339,6 @@ const LibraryGroupAppoint = (props) => {
           <div class="main-panel">
             <div class="content-wrapper">
               <div class="row">
-                {/* <div class="col-md-12 grid-margin">
-                    <div class="row">
-                      <div class="col-12 col-xl-4 offset-10">
-                        <button
-                          type="button"
-                          class=""
-                          onClick={() => {
-                            formRef.current.openForm();
-                          }}
-                        >
-                          <i class="ti-plus"></i>Add
-                        </button>
-                      </div>
-                    </div>
-                  </div> */}
-
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
