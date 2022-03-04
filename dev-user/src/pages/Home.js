@@ -344,7 +344,7 @@ export default function Home(props) {
 
             <div className="col-lg-6">
               <div className="about-content">
-                <h5>ABOUT AS</h5>
+                <h5>ABOUT US</h5>
                 <p>
                   Manodayam is a Mental Health and Wellnessorganization
                   providing Holistic solutions. It has Unique Value proposition
