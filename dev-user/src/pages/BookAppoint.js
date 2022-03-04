@@ -14,7 +14,7 @@ export default function BookingAppoint() {
       collectionDoctor: "doctorListing",
     };
     axios
-    .post(`${API_ADMIN_URL}${DOCTOR_LIST_API}`, doctorlisting)
+      .post(`${API_ADMIN_URL}${DOCTOR_LIST_API}`, doctorlisting)
       //  
       .then((res) => {
         setdoctorData(res.data.data);
@@ -27,7 +27,7 @@ export default function BookingAppoint() {
   useEffect((props) => {
     doctorlist(props);
   }, []);
-  
+
   return (
     <>
       <div className="contact-banner mb-50">
@@ -64,9 +64,9 @@ export default function BookingAppoint() {
                   <p>{element.experience}</p>
                   {/* <p>{element.location}</p> */}
                   <h2>{element.email}</h2>
-
-                  <button className="btn-web hvr-float-shadow">
                   <Link to={`/appointment?docid=${element._id}`}>Book Your Appointment</Link>
+                  <button className="btn-web hvr-float-shadow">
+
                   </button>
                 </div>
               </div>
