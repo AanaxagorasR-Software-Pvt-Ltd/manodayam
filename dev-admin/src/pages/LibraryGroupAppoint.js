@@ -124,7 +124,7 @@ const LibraryGroupAppoint = (props) => {
   };
   // filter;
   const filterData = resData.filter((element) =>
-    element?.library.title?.includes((element = "ggggg"))
+    element?.library.title?.includes((element = "gggggg"))
   );
   return (
     <>
