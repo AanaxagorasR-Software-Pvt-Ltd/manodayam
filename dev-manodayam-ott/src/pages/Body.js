@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_ADMIN_URL, SHAKTHI_BODY_API } from "../utill/api.endpoints";
+const params = new URLSearchParams(window.location.search);
 
 export default function Body() {
   const [resData, setResData] = useState([]);
@@ -56,10 +57,10 @@ export default function Body() {
                           <Link
                             // to="/videoplayer"
                             to={{
-                              pathname: "/videoplayer" 
+                              pathname: "/videoplayer?videoid="+ element._id 
                             }}
                           >
-                            <img
+                            <img className="video"
                               style={{ borderRadius: "25px" }}
                               src={element.image}
                               alt=""

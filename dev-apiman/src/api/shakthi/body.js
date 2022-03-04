@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getDatabase } = require("../../db/mongo");
+const ObjectId = require("mongodb").ObjectId;
 // const product = require('./data');
 
 const validate = (req, res, next) => {
@@ -17,16 +18,25 @@ const validate = (req, res, next) => {
 router.post("/lists", validate, async (req, res) => {
   // res.send('hello');
   const db = await getDatabase();
+  // const videoid = new ObjectId(req.params.videoid);
+ const bodyimage={}
+ console.log(req.query)
+  if(req.query.id && req.query.id != "null" ){
+     bodyimage._id =  ObjectId(req.query.id);
 
+  }
+  
   try {
     const { collectiontype } = req.body;
-    const data = await db.collection(`${collectiontype}`).find().toArray();
+
+    const data = await db.collection(`${collectiontype}`).find(bodyimage).toArray();
     if (Array.isArray(data)) {
       res.status(200).json({
         data: data,
         status: true,
         message: "data fetched sucseccfully",
         id: "kkkkk",
+
       });
     } else {
       res.status(200).json({

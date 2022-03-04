@@ -1,18 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_ADMIN_URL, SHAKTHI_BODY_API } from "../utill/api.endpoints";
 
 export default function Videoplayer() {
+ 
   const [resData, setResData] = useState([]);
   const SleepApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`);
     const bodylisting = {
       collectiontype: "videos",
+      
     };
+    const params = new URLSearchParams(window.location.search);
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`, bodylisting)
+      .post(`${API_ADMIN_URL}${SHAKTHI_BODY_API}?id=${params.get(`videoid`)}`, bodylisting)
+     
       .then((res) => {
         setResData(res.data.data);
         console.log("====body-listing====", res.data.data);

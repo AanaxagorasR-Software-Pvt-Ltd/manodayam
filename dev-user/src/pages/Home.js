@@ -384,9 +384,14 @@ export default function Home(props) {
                   height={430}
                   images={[
                     { url: "assets/image/first.jpeg" },
-                    { url: "assets/image/fourth.jpeg" },
+                    { url: "assets/image/girls.jpeg" },
                     // { url: "assets/image/second.jpeg" },
-                    { url: "assets/image/third.jpeg" },
+                    { url: "assets/image/well.jpeg" },
+                    { url: "assets/image/topimage.jpeg" },
+                    { url: "assets/image/ai.jpeg" },
+                    { url: "assets/image/boy.jpeg" },
+                    { url: "assets/image/hello.jpeg" },
+                    { url: "assets/image/butter.jpeg" },
                   ]}
                   showBullets={true}
                   showNavs={true}

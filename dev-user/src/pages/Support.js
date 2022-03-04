@@ -26,7 +26,7 @@ export default function Support() {
           <div className="row">
             <div className="col-lg-5">
               <div className="about-img">
-                <img src="assets/image/doctorhelp.png" alt="" />
+                <img src="assets/image/MentalHealth.jpg" alt="" />
               </div>
             </div>
 

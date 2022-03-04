@@ -173,7 +173,12 @@ html {
 .top-color h3{
     color: #fff;
 }
+img.video{
+    width: 100%;
+    height: 200px;
+}
 img{
+    
     width: 100%;
 }
 .featured-card{
@@ -416,7 +421,7 @@ option:hover{
 
 body, html { margin: 0; padding: 0; }
 
-@charset "UTF-8";
+/* @charset "UTF-8"; */
 
 .video-js .vjs-big-play-button:before,
 .video-js .vjs-control:before,
