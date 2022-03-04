@@ -880,7 +880,7 @@ export default function Home(props) {
                     className="btn-web cart-btn"
                     onClick={() => loginsubmit("/ViewProduct/" + element.slug)}
                   >
-                    Search Doctors For Appointment
+                    View More
                   </buttton>
                   {/* </Link> */}
                 </div>

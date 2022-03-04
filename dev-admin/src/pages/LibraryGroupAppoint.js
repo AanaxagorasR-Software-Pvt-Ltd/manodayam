@@ -30,7 +30,7 @@ const LibraryGroupAppoint = (props) => {
   const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
-  const [filterdata, setfilerdata] = React.useState([]);
+  const [resData, setresData] = React.useState([]);
 
   const formRef = useRef("");
 
@@ -40,7 +40,7 @@ const LibraryGroupAppoint = (props) => {
       .then((res) => {
         console.log("res", res, typeof res);
         setData(res);
-        setfilerdata(res);
+        setresData(res);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -120,9 +120,12 @@ const LibraryGroupAppoint = (props) => {
         );
       }
     });
-    setfilerdata(searchlist);
+    setresData(searchlist);
   };
-
+  // filter;
+  const filterData = resData.filter((element) =>
+    element?.library.title?.includes((element = "ggggg"))
+  );
   return (
     <>
       {/* <Addform ref={formRef} list={list} /> */}
@@ -356,9 +359,9 @@ const LibraryGroupAppoint = (props) => {
                               {/* <th style={{ width: "80px" }}>Action</th> */}
                             </tr>
                           </thead>
-                          <tbody>
-                            {filterdata &&
-                              filterdata.map((v, i) => (
+                          {filterData &&
+                            filterData.map((v, i) => (
+                              <tbody>
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>
@@ -420,8 +423,8 @@ const LibraryGroupAppoint = (props) => {
                                     </button>
                                   </td> */}
                                 </tr>
-                              ))}
-                          </tbody>
+                              </tbody>
+                            ))}
                         </table>
                       </div>
                     </div>
