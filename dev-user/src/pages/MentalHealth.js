@@ -104,6 +104,11 @@ export default function MentalHealth() {
                         </li>
                       </ul>
                     </div>
+                    <div className="col-lg-12">
+                      <button className="btn-web hvr-float-shadow">
+                        <Link to="/bookingAppoint">Get Solutions</Link>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

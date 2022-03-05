@@ -6,8 +6,6 @@ import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
 
-
-
 import {
   API_ADMIN_URL,
   DIGITAL_HUMAN_LIBRARY_DATA_API,
@@ -18,7 +16,6 @@ export default function Library(props) {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [humanId, setHumanId] = useState("");
 
- 
   // console.log(params.get('humanId'));
   let params = new URLSearchParams(window.location.search);
   let hist = useNavigate();
@@ -30,17 +27,22 @@ export default function Library(props) {
     axios
       .post(
         // ?humanId=${}`
-       
-        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}?humanId=${params.get('humanId')}`, libraryDatalisting)
-     
+
+        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}?humanId=${params.get(
+          "humanId"
+        )}`,
+        libraryDatalisting
+      )
+
       .then((res) => {
         setlibraryData(res.data.data);
         console.log("====libraryContent====", res.data.data);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error);
       });
   };
-  
+
   useEffect(() => {
     let local = localStorage.getItem("Token");
     libraryDatalist();
@@ -66,14 +68,29 @@ export default function Library(props) {
       console.log(humanId);
       return true;
     } else {
-     
       return false;
     }
   };
- 
+  const joingroup = (_id) => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      setHumanId(_id);
+      console.log(_id);
+      console.log(humanId);
+      return true;
+    } else {
+      return false;
+    }
+  };
+//   const filtermentor = libraryData.filter((element) =>
+//   element?.type?.includes((element = "Mentor"))
+// );
+// const filtercoach = libraryData.filter((element) =>
+//   element?.type?.includes((element = "Life Coach"))
+// );
   return (
     <>
-    <Login humanId={humanId} />
+      <Login humanId={humanId} />
       <div className="contact-banner mb-50">
         <div className="container">
           <div className="row">
@@ -99,7 +116,6 @@ export default function Library(props) {
               <div className="service-heading">
                 <h5>Library</h5>
                 <h2>Digital Human Library</h2>
-                 
               </div>
             </div>
 
@@ -109,7 +125,6 @@ export default function Library(props) {
                   <div className="row">
                     <div className="col-lg-5">
                       <div className="library-video">
-
                         <video
                           id="my-video"
                           class="video-js"
@@ -119,10 +134,7 @@ export default function Library(props) {
                           data-setup=""
                           loop="auto"
                         >
-                          <source
-                            src={element.video}
-                            type="video/mp4"
-                          />
+                          <source src={element.video} type="video/mp4" />
                         </video>
                       </div>
                       <div className="ml-3 mt-3">
@@ -149,8 +161,7 @@ export default function Library(props) {
                           data-target={isLoggedIn ? "#library-modal" : ""}
                           className="btn-web col-11 mt-2"
                         >
-                        Personal therapy
-
+                          Personal therapy
                         </button>
                         {/* <button
                         // onClick={() =>loginsubmit()}
@@ -167,13 +178,19 @@ export default function Library(props) {
                       > */}
                         <button
                           className="btn-web col-11 mt-2"
-                          onClick={() =>
-                            loginsubmits(globalDataGroupCall.groupCallLink)
-                          }
+                          data-toggle="modal"
+                          data-target={isLoggedIn ? "#library-modalgroup" : ""}
+                          onClick={() => joingroup(element._id)}
                         >
-                           Group therapy
+                          Group therapy
                         </button>
-                        {/* </a> */}
+
+                        <button
+                          className="btn-web col-11 mt-2"
+                          onClick={() => loginsubmits(globalDataLive.liveLink)}
+                        >
+                          Join Live Session
+                        </button>
                       </div>
                     </div>
 

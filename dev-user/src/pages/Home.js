@@ -456,7 +456,13 @@ export default function Home(props) {
                         loginsubmit("/mentalHealth/" + element.slug)
                       }
                     >
-                      get solution
+                      Find Solution
+                    </buttton>
+                    <buttton
+                      className="btn-web hvr-float-shadow"
+                      onClick={() => loginsubmit("/all-mental-wellness")}
+                    >
+                      View More
                     </buttton>
                     {/* </Link> */}
                   </div>
@@ -589,9 +595,7 @@ export default function Home(props) {
                   <div className="col-lg-12">
                     <buttton
                       className="btn hvr-float-shadow"
-                      onClick={() =>
-                        loginsubmit("/bookingAppoint")
-                      }
+                      onClick={() => loginsubmit("/bookingAppoint")}
                     >
                       <span style={{ color: "#23adba" }}>Submit</span>
                     </buttton>
@@ -680,6 +684,7 @@ export default function Home(props) {
                       >
                         Group therapy
                       </button>
+                    
                     </div>
                   </div>
                 </div>
@@ -817,21 +822,8 @@ export default function Home(props) {
                   and Neuro simulations.
                 </p>
 
-                <h4>The support network consists of </h4>
-                <ul>
-                  <li>
-                    <i className="fa fa-caret-right"></i> Science and Technology
-                  </li>
-                  <li>
-                    <i className="fa fa-caret-right"></i> Vedic Methods
-                  </li>
-                  <li>
-                    <i className="fa fa-caret-right"></i> Equine Assisted
-                    Psychotherapy
-                  </li>
-                </ul>
                 <button
-                  className="btn-web hvr-float-shadow"
+                  className="btn-web hvr-float-shadow mt-3"
                   onClick={() => loginsubmit("/support")}
                 >
                   know more
