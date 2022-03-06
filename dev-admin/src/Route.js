@@ -38,9 +38,8 @@ const Forgotpassword = React.lazy(() => import("./pages/Forgotpassword"));
 
 const InternalRoute = (props) => {
   const { loading } = useSelector((store) => store.userLogin);
-  console.log("isLoading", loading);
   return (
-    <BrowserRouter basename="/manodayam-admin">
+    <BrowserRouter basename="/">
       <Suspense fallback={<Loader type="spokes" color="red" />}>
         {loading ? <Loader type="spokes" color="red" /> : null}
 
@@ -48,36 +47,36 @@ const InternalRoute = (props) => {
           <Route path="/admin/register" element={<Register />} />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/forgotpassword" element={<Forgotpassword />} />
-          <Route path="/Main" element={<Main />} exact />
-          <Route path="/appointment-list" element={<AppointmentList />} exact />
-          <Route path="/questions" element={<Questions />} exact />
-          <Route path="/yes-no-questions" element={<YesNoQues />} exact />
-          <Route path="/library" element={<Library />} exact />
-          <Route path="/users-list" element={<Userslist />} exact />
+          <Route path="/admin/dashboard" element={<Main />} exact />
+          <Route path="/admin/appointment-list" element={<AppointmentList />} exact />
+          <Route path="/admin/questions" element={<Questions />} exact />
+          <Route path="/admin/yes-no-questions" element={<YesNoQues />} exact />
+          <Route path="/admin/library" element={<Library />} exact />
+          <Route path="/admin/users-list" element={<Userslist />} exact />
           <Route
-            path="/library-appointment"
+            path="/admin/library-appointment"
             element={<LibraryAppoint />}
             exact
           />
           <Route
-            path="/library-appointment-booked"
+            path="/admin/library-appointment-booked"
             element={<LibraryAppointBooked />}
             exact
           />
-          <Route path="/banner" element={<Banner />} exact />
+          <Route path="/admin/banner" element={<Banner />} exact />
           <Route
-            path="/booked-appointment-list"
+            path="/admin/booked-appointment-list"
             element={<BookedAppointmentList />}
             exact
           />
-          <Route path="/category" element={<Category />} exact />
-          <Route path="/about-category" element={<AboutCategory />} exact />
-          <Route path="/spirituality" element={<Spirituality />} exact />
-          <Route path="/about-us" element={<AboutUs />} exact />
+          <Route path="/admin/category" element={<Category />} exact />
+          <Route path="/admin/about-category" element={<AboutCategory />} exact />
+          <Route path="/admin/spirituality" element={<Spirituality />} exact />
+          <Route path="/admin/about-us" element={<AboutUs />} exact />
 
           
           <Route
-            path="admin/media-solutions"
+            path="/admin/media-solutions"
             element={<MediaSolutions />}
             exact
           />
@@ -87,15 +86,15 @@ const InternalRoute = (props) => {
           <Route path="/admin/product" element={<Product />} exact />
           <Route path="/admin/sells" element={<Sells />} exact />
           <Route exact path="/admin/login" element={<ProtectedRoute />}></Route>
-          <Route path="/doctor-list" element={<Doctor />} exact />
-          <Route path="/shakthi-ques" element={<ShakthiQuestion />} exact />
-          <Route path="/group-appoint" element={<LibraryGroupAppoint />} exact />
-          <Route path="/group-appoint-book" element={<LibraryGroupBooked />} exact />
+          <Route path="/admin/doctor-list" element={<Doctor />} exact />
+          <Route path="/admin/shakthi-ques" element={<ShakthiQuestion />} exact />
+          <Route path="/admin/group-appoint" element={<LibraryGroupAppoint />} exact />
+          <Route path="/admin/group-appoint-book" element={<LibraryGroupBooked />} exact />
 
 
           
           <Route path="/" element={<ProtectedRoute />}>
-            <Route exact path="/admin/Main" element={<Main />} />
+            <Route exact path="/admin/dashboard"  element={<Main />} />
           </Route>
         </Routes>
       </Suspense>

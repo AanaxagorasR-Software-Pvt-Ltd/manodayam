@@ -34,32 +34,7 @@ const Main = () => {
 	const handleSideBar = () => {
 		dispatch(isToggle());
 	};
-	const handleDropDown = () => {
-		dispatch(isDropDown());
-	};
-	const handleClickMenu = (name) => {
-		setMenuList(
-			menuList.map((li) =>
-				li.name === name
-					? { ...li, isActive: !li.isActive }
-					: { ...li, isActive: false }
-			)
-		);
-	};
-	const handleMouseOverkMenu = (name) => {
-		setMenuList(
-			menuList.map((li) =>
-				li.name === name
-					? { ...li, isHover: true }
-					: { ...li, isHover: false }
-			)
-		);
-	}
-	const handleMouseOutkMenu = () => {
-
-		setMenuList(
-			menuList.map((li) => ({ ...li, isHover: false })))
-	}
+	
 	const logoutUser = () => {
 		logout()
 			.then(re => {

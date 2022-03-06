@@ -83,7 +83,7 @@ const Forgotpassword = (props) => {
                 </div>
                 <div className="mt-3">
 
-                  <Link to="/Main">
+                  <Link to="/admin/dashboard" >
                     <button
                       className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                     >
