@@ -43,7 +43,7 @@ export default function Support() {
                   and Neuro simulations.
                 </p>
 
-                <h4>The support network consists of </h4>
+                {/* <h4>The support network consists of </h4>
                 <ul>
                   <li>
                     <i className="fa fa-caret-right"></i> Science and Technology
@@ -59,8 +59,28 @@ export default function Support() {
                 <p>
                   The underlying mathematical algorithm provides you very
                   personalized therapy for your mental health requirements
-                </p>
+                </p> */}
+                {/* <div className="col-lg-12"> */}
+                {/* <buttton className="col-lg-2 text-center btn-web hvr-float-shadow">
+                 */}
+                <buttton className="btn-web hvr-float-shadow mt-4">
+                  <a
+                    href="https://tawk.to/chat/6223154a1ffac05b1d7d102d/1ftcgmbnt"
+                    target="_blank"
+                  >
+                    Chat
+                  </a>
+
+                  {/* <Link to="https://tawk.to/chat/6223154a1ffac05b1d7d102d/1ftcgmbnt">Chat</Link> */}
+                </buttton>
+                <buttton className="btn-web hvr-float-shadow mt-4">
+                  {/* <buttton className="col-lg-2 text-center btn-web hvr-float-shadow"> */}
+
+                  <Link to="">IVR</Link>
+                </buttton>
               </div>
+
+              {/* </div> */}
             </div>
           </div>
         </div>

@@ -105,8 +105,9 @@ const LibraryGroupAppoint = (props) => {
   };
   // filter;
   const filterData = resData.filter((element) =>
-    element?.library.title?.includes((element = "gggggg"))
+    element?.library?._id?.includes((element = element.library._id))
   );
+  // const filterData = resData.filter(color => color.id !== id);
   return (
     <>
       {/* <Addform ref={formRef} list={list} /> */}
@@ -305,7 +306,10 @@ const LibraryGroupAppoint = (props) => {
                                     <br />
                                     <strong>Email:</strong>
                                     {v.library && v.library.expert_email}
+
                                     <br />
+                                    <strong>Email:</strong>
+                                    {v.library && v.library._id}
                                   </td>
                                   <td>
                                     <strong>Name: </strong>
