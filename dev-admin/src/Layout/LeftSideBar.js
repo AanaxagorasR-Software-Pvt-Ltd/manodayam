@@ -1,10 +1,10 @@
 import { leftSideBarMenu } from "./menuList";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import { useState } from "react";
 
 export default function LeftSideBar() {
   const [menuList, setMenuList] = useState(leftSideBarMenu);
-// console.log('888888888', menuList);
+  const location  = useLocation();
   const handleClickMenu = (name) => {
     setMenuList(
       menuList.map((li) =>
@@ -42,17 +42,7 @@ export default function LeftSideBar() {
               className={`nav-link ${
                 sMenu.submenu.length > 0 ? "collapsed" : ""
               }`}
-              to={                () => {
-                  console.log(sMenu);
-                  return sMenu.link
-                  ? sMenu?.link
-                  : (e) => {
-                      e.preventDefault();
-                      console.log(e);
-                      
-                    }
-                }
-              }
+              to={ sMenu.link ? sMenu.link : location.pathname }
               data-toggle="collapse"
               aria-expanded={sMenu?.isActive ? true : false}
             >
@@ -72,14 +62,7 @@ export default function LeftSideBar() {
                     <li class="nav-item" key={i}>
                       {" "}
                       <Link
-                        to={
-                          sub.link
-                            ? sub.link
-                            : (e) => {
-                                e.preventDefault();
-                                console.log(e);
-                              }
-                        }
+                        to={sub.link ? sub.link :location.pathname  }
                         class="nav-link"
                         aria-expanded={sMenu?.isActive ? true : false}
                       >

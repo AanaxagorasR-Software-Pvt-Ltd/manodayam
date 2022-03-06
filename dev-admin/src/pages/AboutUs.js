@@ -25,7 +25,6 @@ const AboutUs = () => {
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const [menuList, setMenuList] = useState(leftSideBarMenu);
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
@@ -46,25 +45,6 @@ const AboutUs = () => {
     list();
   }, []);
 
-  const handleClickMenu = (name) => {
-    setMenuList(
-      menuList.map((li) =>
-        li.name === name
-          ? { ...li, isActive: !li.isActive }
-          : { ...li, isActive: false }
-      )
-    );
-  };
-  const handleMouseOverkMenu = (name) => {
-    setMenuList(
-      menuList.map((li) =>
-        li.name === name ? { ...li, isHover: true } : { ...li, isHover: false }
-      )
-    );
-  };
-  const handleMouseOutkMenu = () => {
-    setMenuList(menuList.map((li) => ({ ...li, isHover: false })));
-  };
   const handleSideBar = () => {
     dispatch(isToggle());
   };
