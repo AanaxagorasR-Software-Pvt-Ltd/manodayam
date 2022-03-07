@@ -1965,6 +1965,23 @@ img {
     border-style: none;
     max-width: 100%;
 }
+img.scene{
+    width: 100%;
+    height: 200px;
+}
+img.audio{
+    width:100%;
+    height: 200px;
+}
+img.music{
+    width: 100%;
+    height: 200px;
+}
+img.meditate{
+    width: 100%;
+    height: 200px;  
+}
+
 
 svg {
     overflow: hidden;

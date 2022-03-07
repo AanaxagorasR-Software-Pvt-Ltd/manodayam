@@ -56,8 +56,10 @@ export default function Meditate() {
                       <div class="col-lg-3 col-sm-6">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>
-                          <Link to="/musicplayer">
-                            <img
+                          <Link to={{
+                              pathname: "/musicplayer?audioid=" + element._id
+                            }}>
+                            <img className="meditate"
                               style={{ borderRadius: "25px" }}
                               src={element.image}
                               alt=""

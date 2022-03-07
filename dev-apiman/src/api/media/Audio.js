@@ -39,7 +39,7 @@ const imageUpload = multer({
     fieldSize: 1000000,
   },
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg)$/)) {
+    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
       return cb(new Error("Please upload a Image"));
     }
     cb(undefined, true);
@@ -110,10 +110,20 @@ router.post(
 );
 
 router.get("/", async (req, res) => {
+  const db = await getDatabase();
+  let filter = {
+
+
+  };
+  if(req.query.id && req.query.id != "null" ){
+    filter._id =  ObjectId(req.query.id);
+
+  }
   try {
-    const db = await getDatabase();
-    let dt = await db.collection("audio").find().toArray();
-    res.send(dt);
+  
+    // const { collectiontype } = req.body;
+    let dt = await db.collection("audio").find(filter).toArray();
+    res.json(dt);
   } catch (err) {
     console.log("err", err.message);
   }
@@ -138,5 +148,6 @@ router.delete("/delete/:_id", async (req, res) => {
 
   // res.send('hello')
 });
+
 
 module.exports = router;

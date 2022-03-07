@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import ReactAudioPlayer from "react-audio-player";
 import song from "./music/first.mp3";
 import img from "./music/img.jpeg";
+import { API_ADMIN_URL, MUSICALL} from "../utill/api.endpoints";
 
 export default function Musicplayer() {
   const main = {
@@ -11,6 +14,30 @@ export default function Musicplayer() {
   const image = {
   height: "530px"
   };
+  const [resData, setResData] = useState([]);
+  const audioAll = () => {
+    console.log(`${API_ADMIN_URL}${MUSICALL}`);
+    const bodylisting = {
+      collectiontype: "audio",
+      
+    };
+    const params = new URLSearchParams(window.location.search);
+    axios
+    
+      .get(`${API_ADMIN_URL}${MUSICALL}?id=${params.get(`audioid`)}`, bodylisting)
+     
+      .then((res) => {
+        setResData(res.data);
+        console.log("====body-listing====", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    audioAll();
+  }, []);
+  
   return (
     <>
       <div>
@@ -66,7 +93,7 @@ export default function Musicplayer() {
                       <i id="next" class="next-btn fas fa-forward"></i>
                     </div> */}
                 <ReactAudioPlayer
-                  src={song}
+                  src={resData && resData.length > 0 && resData[0].audio_link}
                   autoPlay={false}
                   controls
                   style={{ color: "red" }}

@@ -9,5 +9,6 @@ export const SHAKTHI_MASTERCLASS_API = "/shakthi-masterclass/lists";
 export const SHAKTHI_BODY_API = "/shakthi-body/lists";
 export const SHAKTHI_SCENE_API = "/shakthi-scene/lists";
 export const PROFIL_API = "/auth/user/profil"
+export const MUSICALL="/shakthi-all"
 
 export const API_ADMIN_URL = API_HOST_URL + API_MIDD 
