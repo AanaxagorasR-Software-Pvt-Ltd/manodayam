@@ -333,15 +333,10 @@ export default function Home(props) {
           ))}
         </Slider>
       </div>
+
       <div id="about" className="about-section mb-50">
         <div className="container">
           <div className="row">
-            {/* <div className="col-lg-6">
-        <div className="about-img">
-        <img src="assets/image/about-img.png" alt="" />
-        </div>
-      </div> */}
-
             <div className="col-lg-6">
               <div className="about-content">
                 <h5>ABOUT US</h5>
@@ -377,11 +372,16 @@ export default function Home(props) {
                 <img src="assets/image/rose.png" alt="" />
               </div>
             </div>
+            {/* <div className="col-lg-6">
+              <div className="about-img">
+                <img src="assets/image/about-img.png" alt="" />
+              </div>
+            </div> */}
             <div className="col-lg-6">
               <div className="about-img">
                 <SimpleImageSlider
-                  width={600}
-                  height={430}
+                  width={390}
+                  height={460}
                   images={[
                     { url: "assets/image/first.jpeg" },
                     { url: "assets/image/girls.jpeg" },
@@ -400,24 +400,24 @@ export default function Home(props) {
               </div>
             </div>
             {data.map((element) => (
-              <div style={{ display: "flex", textAlign: "center" }}>
-                <h6 className="about_title">{element.title}</h6>
-
-                <video
-                  id="about-us-video"
-                  class="video-js"
-                  controls
-                  preload="auto"
-                  poster={element.image}
-                  data-setup=""
-                  loop="auto"
-                >
-                  <source
-                    src={element.video}
-                    //  src={element.video}
-                    type="video/mp4"
-                  />
-                </video>
+              <div className="col-lg-4">
+                <div>
+                  {/* <h6 className="about_title">{element.title}</h6> */}
+                  <video
+                    id="about-us-video"
+                    controls
+                    preload="auto"
+                    poster={element.image}
+                    data-setup=""
+                    loop="auto"
+                  >
+                    <source
+                      src={element.video}
+                      //  src={element.video}
+                      type="video/mp4"
+                    />
+                  </video>
+                </div>
               </div>
             ))}
           </div>
@@ -684,7 +684,6 @@ export default function Home(props) {
                       >
                         Group therapy
                       </button>
-                    
                     </div>
                   </div>
                 </div>

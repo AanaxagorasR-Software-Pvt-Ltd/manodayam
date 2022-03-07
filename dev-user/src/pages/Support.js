@@ -1,6 +1,14 @@
 import React from "react";
+import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
+import { Modal as Bmodal, Button } from "react-bootstrap";
+
 export default function Support() {
+const [show, setshow] = useState(false);
+const handleClose = () => setshow(false);
+const handleShow = () => setshow(true);
+
   return (
     <>
       <div className="contact-banner mb-50">
@@ -73,10 +81,10 @@ export default function Support() {
 
                   {/* <Link to="https://tawk.to/chat/6223154a1ffac05b1d7d102d/1ftcgmbnt">Chat</Link> */}
                 </buttton>
-                <buttton className="btn-web hvr-float-shadow mt-4">
-                  {/* <buttton className="col-lg-2 text-center btn-web hvr-float-shadow"> */}
-
-                  <Link to="">IVR</Link>
+                <buttton className="btn-web hvr-float-shadow mt-4"
+                onClick={handleShow}>
+                  IVR
+                  {/* <Link to="">IVR</Link> */}
                 </buttton>
               </div>
 
@@ -85,6 +93,18 @@ export default function Support() {
           </div>
         </div>
       </div>
+      <Bmodal show={show}>
+        <Bmodal.Header closeButton>
+          <Bmodal.Title className="modal-head">Customer Support Number</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body className="modal-body">India: +91 7428409721  </Bmodal.Body>
+        <Bmodal.Body className="modal-body">India: +91 8882832500 </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 }

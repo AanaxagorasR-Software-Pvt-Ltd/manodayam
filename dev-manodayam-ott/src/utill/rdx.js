@@ -3,4 +3,4 @@ const globalData = {
 
 }
 
-export default {globalData, };
+export default {globalData};

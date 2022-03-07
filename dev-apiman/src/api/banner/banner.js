@@ -57,7 +57,7 @@ router.post("/new", async (req, res) => {
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
-      message: "server error",
+      message: "server error 1",
       error: e,
     });
   }
@@ -129,7 +129,7 @@ router.post("/bannertext",validate, async (req, res) => {
   } catch (e) {
     res.status(500).json({
       status: false,
-      message: "server error",
+      message: "server error 9",
     });
   }
 });
