@@ -2,7 +2,7 @@ const globalDataLive = {
     liveLink:
       window.location.hostname === "localhost"
         ? "http://localhost:4000/manodayam"
-        : "https://swarnratnaindia.com/dev-live/dev-live",
+        : "https://confrecall.herokuapp.com/",
   };
   export default globalDataLive;
   
