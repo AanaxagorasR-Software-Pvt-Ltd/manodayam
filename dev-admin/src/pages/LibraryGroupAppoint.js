@@ -104,10 +104,9 @@ const LibraryGroupAppoint = (props) => {
     setresData(searchlist);
   };
   // filter;
-  const filterData = resData.filter((element) =>
-    element?.library?._id?.includes((element = element.library._id))
-  );
-  // const filterData = resData.filter(color => color.id !== id);
+  // const filterData = resData.filter((element) =>
+  //   element?.library?._id?.includes((element = "621f4c89313a02119f4ca861"))
+  // );
   return (
     <>
       {/* <Addform ref={formRef} list={list} /> */}
@@ -295,8 +294,8 @@ const LibraryGroupAppoint = (props) => {
                               {/* <th style={{ width: "80px" }}>Action</th> */}
                             </tr>
                           </thead>
-                          {filterData &&
-                            filterData.map((v, i) => (
+                          {resData &&
+                            resData.map((v, i) => (
                               <tbody>
                                 <tr key={i}>
                                   <td>{i + 1}</td>
@@ -307,9 +306,9 @@ const LibraryGroupAppoint = (props) => {
                                     <strong>Email:</strong>
                                     {v.library && v.library.expert_email}
 
-                                    <br />
-                                    <strong>Email:</strong>
-                                    {v.library && v.library._id}
+                                    {/* <br /> */}
+                                    {/* <strong>Id:</strong> */}
+                                    {/* {v.library && v.library._id} */}
                                   </td>
                                   <td>
                                     <strong>Name: </strong>

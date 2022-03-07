@@ -25,7 +25,7 @@ export default function Masterclass() {
     MusicApi();
   }, []);
   const filterType = resData.filter((element) =>
-    element?.date?.includes((element = ""))
+    element?.date?.includes((element = "Calm Masterclass"))
   );
   return (
     <>
