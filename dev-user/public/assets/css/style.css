@@ -645,8 +645,9 @@ header {
   position: relative;
 }
 .product-card img {
-  width: 37%;
+  width: 33%;
   margin-bottom: 20px;
+  margin-left: 89px;
 }
 .product-card span {
   font-size: 22px;
@@ -1183,11 +1184,11 @@ footer {
   height: 270px;
   width: 280px;
   margin-left: 43px;
+
 }
 .about_title {
-  position: relative;
-  left: 180px;
-  top: 40px;
+
+  margin-left: 43px;
   font-weight: 300;
   font-size: 23px;
   color: #23adba;
@@ -1195,4 +1196,7 @@ footer {
 #mental-health-video {
   width: 372px;
   height: 210px;
+}
+.product-img{
+  margin-left: 10px;
 }
