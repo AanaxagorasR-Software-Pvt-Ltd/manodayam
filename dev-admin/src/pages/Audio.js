@@ -431,14 +431,14 @@ const Addform = forwardRef((props, ref) => {
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">Audio Upload</label>
+                  <label for="exampleInputUsername1">Audio Image Upload</label>
                   <input
                     type="file"
                     class="form-control file-upload-info"
                     onChange={(e) => {
                       handleChange(e.target.files[0], "image");
                     }}
-                    placeholder="Upload Audio"
+                    placeholder="Upload image Audio"
                   />
                   <small></small>
                 </div>

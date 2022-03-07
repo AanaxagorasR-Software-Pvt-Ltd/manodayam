@@ -39,7 +39,7 @@ const Forgotpassword = React.lazy(() => import("./pages/Forgotpassword"));
 const InternalRoute = (props) => {
   const { loading } = useSelector((store) => store.userLogin);
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/manodayam-admin">
       <Suspense fallback={<Loader type="spokes" color="red" />}>
         {loading ? <Loader type="spokes" color="red" /> : null}
 
