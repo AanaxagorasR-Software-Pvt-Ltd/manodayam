@@ -204,6 +204,42 @@ export default function Home(props) {
       },
     ],
   };
+  var settingsnext = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    autoplay: true,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          infinite: true,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          infinite: true,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   //service slider
   const settingstwo = {
     dots: true,
@@ -372,37 +408,22 @@ export default function Home(props) {
                 <img src="assets/image/rose.png" alt="" />
               </div>
             </div>
-            {/* <div className="col-lg-6">
-              <div className="about-img">
-                <img src="assets/image/about-img.png" alt="" />
-              </div>
-            </div> */}
+
             <div className="col-lg-6">
               <div className="about-img">
-                <SimpleImageSlider
-                  width={390}
-                  height={460}
-                  images={[
-                    { url: "assets/image/first.jpeg" },
-                    { url: "assets/image/girls.jpeg" },
-                    // { url: "assets/image/second.jpeg" },
-                    { url: "assets/image/well.jpeg" },
-                    { url: "assets/image/topimage.jpeg" },
-                    { url: "assets/image/ai.jpeg" },
-                    { url: "assets/image/boy.jpeg" },
-                    { url: "assets/image/hello.jpeg" },
-                    { url: "assets/image/butter.jpeg" },
-                  ]}
-                  showBullets={true}
-                  showNavs={true}
-                  bgColor="white"
-                />
+                <Slider {...settingsnext}>
+                  <img src="assets/image/white9.jpeg" alt="" />
+                  <img src="assets/image/seen1.jpeg" alt="" />
+                  <img src="assets/image/seen3.jpeg" alt="" />
+                  <img src="assets/image/seen4.jpg" alt="" />
+                  <img src="assets/image/seen5.webp" alt="" />
+                  <img src="assets/image/seen7.webp" alt="" />
+                </Slider>
               </div>
             </div>
             {data.map((element) => (
               <div className="col-lg-4">
                 <div>
-                  {/* <h6 className="about_title">{element.title}</h6> */}
                   <video
                     id="about-us-video"
                     controls
@@ -411,12 +432,9 @@ export default function Home(props) {
                     data-setup=""
                     loop="auto"
                   >
-                    <source
-                      src={element.video}
-                      //  src={element.video}
-                      type="video/mp4"
-                    />
+                    <source src={element.video} type="video/mp4" />
                   </video>
+                  <h6 className="about_title">{element.title}</h6>
                 </div>
               </div>
             ))}
@@ -430,7 +448,7 @@ export default function Home(props) {
             <div className="service-heading">
               {/* <h5>Advantages</h5> */}
               <h5>Swayam- Do It Yourself</h5>
-              <p>Shakthi gives you power to heal and get you to wellness</p>
+              <p>Swayam gives you power to heal and get you to wellness</p>
             </div>
           </div>
 
@@ -479,7 +497,7 @@ export default function Home(props) {
             <div className="col-lg-6">
               <div className="doctor-heading">
                 <br />
-                <h2>Consult with Experts-Swayam</h2>
+                <h2>Swayam - Consult with Experts</h2>
                 {/* <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
                   ad repellendus laboriosam ea, dolorem odio culpa.
@@ -608,7 +626,7 @@ export default function Home(props) {
       </div>
       <hr />
       {/* Digital Human Library */}
-      <div className="library-section mb-50">
+      <div id="humanlibrary" className="library-section mb-50">
         <div className="container">
           {/* <div className="row"> */}
           <div className="col-lg-12">
@@ -805,7 +823,7 @@ export default function Home(props) {
         </div>
       </div>
       {/* support */}
-      <div className="about-section mb-50">
+      <div id="support" className="about-section mb-50">
         <div className="container">
           <div className="row">
             <div className="col-lg-7">

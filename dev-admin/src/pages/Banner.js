@@ -359,12 +359,12 @@ const Addform = forwardRef((props, ref) => {
         }}
       >
         <Modal.Header>
-          <Modal.Title>Add Media Solution</Modal.Title>
+          <Modal.Title>Add Banner</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <label for="exampleInputUsername1">Media Solution Name</label>
+              <label for="exampleInputUsername1">Banner Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -377,7 +377,7 @@ const Addform = forwardRef((props, ref) => {
             </div>
 
             <div class="form-group ">
-              <label for="exampleInputUsername1">Media Solution Status</label>
+              <label for="exampleInputUsername1">Banner Status</label>
               <select
                 class="form-control"
                 value={data.status || ""}
