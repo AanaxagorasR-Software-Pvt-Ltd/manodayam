@@ -428,7 +428,6 @@ export default function Home(props) {
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              {/* <h5>Advantages</h5> */}
               <h5>Swayam- Do It Yourself</h5>
               <p>Shakthi gives you power to heal and get you to wellness</p>
             </div>
