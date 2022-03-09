@@ -645,8 +645,10 @@ header {
   position: relative;
 }
 .product-card img {
-  width: 37%;
+  width: 36%;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .product-card span {
   font-size: 22px;

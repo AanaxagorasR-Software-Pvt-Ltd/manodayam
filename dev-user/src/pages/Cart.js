@@ -34,6 +34,18 @@ export default function Cart(props) {
   useEffect((props) => {
     ProductCart(props);
   }, []);
+
+  const [quantity, setquantity] = useState(1);
+  const plus = () => {
+    setquantity(quantity + 1);
+    // const quen = quantity * 3
+  };
+  localStorage.setItem("quent", quantity);
+  const Minus = () => {
+    if (quantity >= 2) setquantity(quantity - 1);
+
+    setSlug(slug);
+  };
   return (
     <>
       <div className="contact-banner mb-50">
@@ -88,7 +100,35 @@ export default function Cart(props) {
                           <i className="fa fa-inr"></i> {element.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}
                         </td>
-                        <td>{localStorage.getItem("quent")}</td>
+                        <td>
+                          <div className="d-inline-flex">
+                            <div
+                              className="bg-light rounded-bottom rounded-top border h-25 p-1"
+                              onClick={Minus}
+                            >
+                              {quantity !== 1 ? (
+                                <div>
+                                  <i className="fa fa-minus"></i>
+                                </div>
+                              ) : (
+                                <div>
+                                  <Link to="/">
+                                    <i className="fa fa-minus text-dark"></i>
+                                  </Link>
+                                </div>
+                              )}
+                            </div>
+                            <h5 className="ml-3 mt-2 text-dark font-weight-bold">
+                              {quantity}
+                            </h5>
+                            <div
+                              className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
+                              onClick={plus}
+                            >
+                              <i className="fa fa-plus"></i>
+                            </div>
+                          </div>
+                        </td>
                         <td>
                           <i className="fa fa-inr"></i> {element.shipping}
                         </td>

@@ -855,46 +855,44 @@ export default function Home(props) {
           </div>
         </div>
       </div>
+      {/* {ecosystem product} */}
+
       <div className="service-section mb-50">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="service-heading">
-                <h5>Manodayam Ecosystem</h5>
-                <p>
-                  Please see your support system such as genetics support, find
-                  brain mapping centers
-                </p>
-              </div>
+          <div className="col-lg-12">
+            <div className="service-heading">
+              <h5>Manodayam Ecosystem</h5>
+              <p>
+                Please see your support system such as genetics support, find
+                brain mapping centers
+              </p>
             </div>
+          </div>
 
-            {responseData.map((element) => (
-              <div className="col-lg-3 col-sm-6">
-                {console.log("element", element)}
-                <div className="product-card">
-                  <img src={element.img_url} alt="" />
-                  <h3>{element.product_name}</h3>
-                  <p>{element.description}</p>
-                  <span>
-                    <i className="fa fa-inr"></i>
-                    {element.mrp}
-                  </span>
-
-                  {/* <Link
-                    to={{
-                      pathname: "/ViewProduct/" + element.slug,
-                    }}
-                  > */}
-                  <buttton
-                    className="btn-web cart-btn"
-                    onClick={() => loginsubmit("/ViewProduct/" + element.slug)}
-                  >
-                    View More
-                  </buttton>
-                  {/* </Link> */}
+          <div className="service-slide">
+            <Slider {...settingstwo}>
+              {responseData.map((element) => (
+                <div className="col-lg-11">
+                  <div className="product-card h-100">
+                    <img src={element.img_url} alt="" />
+                    <h3>{element.product_name}</h3>
+                    <p>{element.description}</p>
+                    <span>
+                      <i className="fa fa-inr"></i>&nbsp;
+                      {element.mrp}
+                    </span>
+                    <buttton
+                      className="btn-web cart-btn"
+                      onClick={() =>
+                        loginsubmit("/ViewProduct/" + element.slug)
+                      }
+                    >
+                      View More
+                    </buttton>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </Slider>
           </div>
         </div>
       </div>

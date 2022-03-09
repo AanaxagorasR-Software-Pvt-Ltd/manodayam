@@ -110,27 +110,10 @@ export default function ViewProduct(props) {
                                     </h5>
                                   </div>
                                   <div className="mb-3">
-                                    <i className="fa fa-inr"></i>
+                                    <i className="fa fa-inr"></i>&nbsp;
                                     <span>{element.mrp}</span>
                                   </div>
-                                  <h3 className="text-dark">Quantity:</h3>
-                                  <div className="d-inline-flex">
-                                    <div
-                                      className="bg-light rounded-bottom rounded-top border h-25 p-1"
-                                      onClick={Minus}
-                                    >
-                                      <i className="fa fa-minus"></i>
-                                    </div>
-                                    <h5 className="ml-3 mt-2 text-dark font-weight-bold">
-                                      {quantity}
-                                    </h5>
-                                    <div
-                                      className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
-                                      onClick={plus}
-                                    >
-                                      <i className="fa fa-plus"></i>
-                                    </div>
-                                  </div>
+                                 
                                 </div>
                               </div>
                               {/* <p>{responseData?.[0]?.para}</p> */}
