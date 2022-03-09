@@ -86,7 +86,7 @@ export default function Header() {
 
               <li class="nav-item nav-link">
                 {/* <Link class="nav-link " to="vdolist"> */}
-                  <a href="https://confrecall.herokuapp.com/" class="a-tag">
+                  <a href="https://confrecall.herokuapp.com/" target="_blank" class="a-tag">
                   <i class="fas fa-stream"></i>
                   <span class="sidemenu-label">Live</span>
                   </a>
