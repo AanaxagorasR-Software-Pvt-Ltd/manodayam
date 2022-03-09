@@ -36,7 +36,7 @@ export default function Videoplayer() {
           {resData.map((element) => (
             <div class="container-fluid">
               <div class="inner-body">
-                <div class="col-lg-8">
+                <div class="col-lg-11">
                   <div class="music-player-custom">
                     <video
                       id="my-video"

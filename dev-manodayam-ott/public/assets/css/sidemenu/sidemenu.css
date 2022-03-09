@@ -253,8 +253,9 @@
         line-height: 2.1;
     }
     .main-sidebar-body {
-        background: url("https://i.pinimg.com/originals/de/f6/62/def662098133f62d53a5615388201054.jpg");
-
+        background: url("../../img/seen1.jpeg");
+        background-repeat: repeat-x;
+        height: 140%;
     }
     .main-sidebar-hide .nav-header {
         margin: 0;

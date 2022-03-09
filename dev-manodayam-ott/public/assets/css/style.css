@@ -288,7 +288,7 @@ option:hover{
 }
 .thumbnail {
 	width: 145px;
-	height: 145px;
+	height: 155px;
 	border-radius: 50%;
 	position: absolute;
 	top: 8px;
