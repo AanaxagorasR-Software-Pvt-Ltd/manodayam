@@ -46,7 +46,9 @@ export default function Masterclass() {
                       <div class="col-lg-5 col-sm-14 ">
                         <div class="display-card ">
                           {/* <i class="fas fa-lock"></i> */}
-                          <Link to="/musicplayer">
+                          <Link to={{
+                              pathname: "/musicplayer?audioid=" + element._id
+                            }}>
                             <img
                               style={{ borderRadius: "25px" }}
                               src={element.image}

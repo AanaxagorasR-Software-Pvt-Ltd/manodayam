@@ -207,21 +207,21 @@ export default function Checkout() {
                   <div className="checkout-detail">
                     <h2>Payment Method</h2>
                     <div className="form-inline">
-                      <label for="">Cash On Delivery</label>
+                      <label for="option_1">Cash On Delivery</label>
                       <span>
-                        <input type="radio" name="" id="" />
+                        <input type="radio" name="option" id="option_1" />
                       </span>
                     </div>
                     <div className="form-inline">
-                      <label for="">Direct Bank Transfer</label>
+                      <label for="option_2">Direct Bank Transfer</label>
                       <span>
-                        <input type="radio" name="" id="" />
+                        <input type="radio" name="option" id="option_2" />
                       </span>
                     </div>
                     <div className="form-inline">
-                      <label for="">Paypal</label>
+                      <label for="option_3">Paypal</label>
                       <span>
-                        <input type="radio" name="" id="" />
+                        <input type="radio" name="option" id="option_3" />
                       </span>
                     </div>
                     <hr />

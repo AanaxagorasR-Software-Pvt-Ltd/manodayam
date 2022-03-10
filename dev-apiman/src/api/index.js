@@ -55,6 +55,7 @@ router.use('/videos', require("./media/video"));
 router.use(`/media-solutions`, require("./media-solutions"));
 router.use(`./profile`,require("./user/profile"))
 router.use(`/about`,require("./media/aboutus"))
+router.use(`/shakthi-all`,require("./media/Audio"))
 
 // shakthi
 
