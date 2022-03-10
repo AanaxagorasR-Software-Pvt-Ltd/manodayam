@@ -430,7 +430,7 @@ export default function Home(props) {
             <div className="service-heading">
               {/* <h5>Advantages</h5> */}
               <h5>Swayam- Do It Yourself</h5>
-              <p>Shakthi gives you power to heal and get you to wellness</p>
+              <p>Swayam gives you power to heal and get you to wellness</p>
             </div>
           </div>
 
@@ -479,7 +479,7 @@ export default function Home(props) {
             <div className="col-lg-6">
               <div className="doctor-heading">
                 <br />
-                <h2>Consult with Experts-Swayam</h2>
+                <h2>Swayam- Consult with Experts </h2>
                 {/* <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
                   ad repellendus laboriosam ea, dolorem odio culpa.
