@@ -14,16 +14,7 @@ export default function ViewProduct(props) {
     console.log("slug", slug);
   }, []);
 
-  const [quantity, setquantity] = useState(1);
-  const plus = () => {
-    setquantity(quantity + 1);
-    // const quen = quantity * 3
-  };
-  localStorage.setItem("quent", quantity);
-  const Minus = () => {
-    if (quantity >= 2) setquantity(quantity - 1);
-    setSlug(slug);
-  };
+
   // productlist
   const [responseData, setResponseData] = useState([]);
   const ViewProjuct = () => {
@@ -111,9 +102,26 @@ export default function ViewProduct(props) {
                                   </div>
                                   <div className="mb-3">
                                     <i className="fa fa-inr"></i>&nbsp;
-                                    <span>{element.mrp}</span>
+                                    <span style={{fontSize: "20px"}}>{element.mrp}</span>
                                   </div>
-                                 
+                                  {/* <h3 className="text-dark">Quantity:</h3>
+                                  <div className="d-inline-flex">
+                                    <div
+                                      className="bg-light rounded-bottom rounded-top border h-25 p-1"
+                                      onClick={Minus}
+                                    >
+                                      <i className="fa fa-minus"></i>
+                                    </div>
+                                    <h5 className="ml-3 mt-2 text-dark font-weight-bold">
+                                      {quantity}
+                                    </h5>
+                                    <div
+                                      className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
+                                      onClick={plus}
+                                    >
+                                      <i className="fa fa-plus"></i>
+                                    </div>
+                                  </div> */}
                                 </div>
                               </div>
                               {/* <p>{responseData?.[0]?.para}</p> */}

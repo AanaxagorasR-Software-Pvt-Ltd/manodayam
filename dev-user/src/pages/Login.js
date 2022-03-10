@@ -7,7 +7,7 @@ import {
   LIBRARY_SINGLE_CALL_API,
   FORGOTPASSWORD_URL,
   RESETPASSWORD_URL,
-  LIBRARY_GROUP_CALL_API
+  LIBRARY_GROUP_CALL_API,
 } from "../utill/api.endpoints";
 import { useState } from "react";
 import axios from "axios";
@@ -89,13 +89,14 @@ export default function Login(props) {
   const [loginPasswordError, setloginPasswordError] = useState("");
   const [registrationNameError, setregistrationNameError] = useState("");
   const [registrationMailError, setregistrationMailError] = useState("");
-  const [registrationPasswordError, setregistrationPasswordError] = useState("");
+  const [registrationPasswordError, setregistrationPasswordError] =
+    useState("");
   const [showPasswordForm, setShowPasswordForm] = useState(false);
 
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
   const [show, setshow] = useState(false);
-  const [alertData, setAlerdata] = useState({ title: "", body: "" })
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const onLoginSuccess = (res) => {
     console.log("Login Success:", res.profileObj);
     // setShowloginButton(true);
@@ -120,14 +121,14 @@ export default function Login(props) {
     axios
       .post(`${API_ADMIN_URL}${LOGIN_API}`, loginOptions)
       .then((res) => {
-        console.log("login", ((typeof res.data, res.data)));
+        console.log("login", (typeof res.data, res.data));
 
         // console.log("**********", res.data.token);
         if (res.data.status) {
           localStorage.setItem("Token", res.data.Token);
-          localStorage.setItem("user", JSON.stringify(res.data.user))
-          setAlerdata({ title: "Login", body: "User Login Successfully" })
-          setshow(true)
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          setAlerdata({ title: "Login", body: "User Login Successfully" });
+          setshow(true);
 
           document.getElementById("loginvalidation").reset();
           setLoginmailError("");
@@ -136,8 +137,8 @@ export default function Login(props) {
           window.location.reload();
           // handleCloseModal();
         } else {
-          setAlerdata({ title: "Sorry", body: "Invalid user and Password" })
-          setshow(true)
+          setAlerdata({ title: "Sorry", body: "Invalid user and Password" });
+          setshow(true);
         }
       })
       .catch((error) => {
@@ -146,7 +147,6 @@ export default function Login(props) {
   };
   // Registration
   const RegisterationApi = () => {
-
     if (registrationName == "") {
       setregistrationNameError("Enter your name");
     }
@@ -169,21 +169,25 @@ export default function Login(props) {
       .then((res) => {
         console.log(res.data);
         if (res.data.status) {
-          setAlerdata({ title: "Registration", body: "User Registration successfully" })
-          setshow(true)
+          setAlerdata({
+            title: "Registration",
+            body: "User Registration successfully",
+          });
+          setshow(true);
           document.getElementById("registrationvalidation").reset();
           setregistrationNameError("");
           setregistrationMailError("");
           setregistrationPasswordError("");
           window.$("#registermodal").modal("hide");
           window.location.reload();
-
         } else {
-          setAlerdata({ title: "Sorry", body: "User Registration already  Exist" })
-          setshow(true)
+          setAlerdata({
+            title: "Sorry",
+            body: "User Registration already  Exist",
+          });
+          setshow(true);
           window.$("#registermodal").modal("hide");
         }
-
       })
       .catch((error) => {
         console.log(error);
@@ -274,8 +278,8 @@ export default function Login(props) {
       .post(`${API_ADMIN_URL}${LIBRARY_SINGLE_CALL_API}`, humanLibraryOptions)
       .then((res) => {
         // console.log("====llll=====", res.data.data);
-        setAlerdata({ title: "Connect", body: "We are Connect you soon" })
-        setshow(true)
+        setAlerdata({ title: "Connect", body: "We are Connect you soon" });
+        setshow(true);
         document.getElementById("humandigital").reset();
         setlibraryName("");
         setlibraryNum("");
@@ -284,13 +288,12 @@ export default function Login(props) {
         setlibraryDate("");
         setlibraryMsg("");
 
-
         if (res.status == 200) {
           // localStorage.setItem("Token", res.data.token);
           window.$("#library-modal").modal("hide");
         } else {
-          setAlerdata({ title: "Sorry", body: "Invalid Email and Password" })
-          setshow(true)
+          setAlerdata({ title: "Sorry", body: "Invalid Email and Password" });
+          setshow(true);
         }
       })
       .catch((error) => {
@@ -335,8 +338,11 @@ export default function Login(props) {
       .post(`${API_ADMIN_URL}${LIBRARY_GROUP_CALL_API}`, humanLibraryOptions)
       .then((res) => {
         // console.log("====llll=====", res.data.data);
-        setAlerdata({ title: "Connect", body: "We are Connect you soon for Group call" })
-        setshow(true)
+        setAlerdata({
+          title: "Connect",
+          body: "We are Connect you soon for Group call",
+        });
+        setshow(true);
         document.getElementById("humandigitalgroup").reset();
         setlibraryNamesgroup("");
         setlibraryNumsgroup("");
@@ -345,13 +351,12 @@ export default function Login(props) {
         setlibraryDatesgroup("");
         setlibraryMsgsgroup("");
 
-
         if (res.status == 200) {
           // localStorage.setItem("Token", res.data.token);
           window.$("#library-modalgroup").modal("hide");
         } else {
-          setAlerdata({ title: "Sorry", body: "Invalid Email and Password" })
-          setshow(true)
+          setAlerdata({ title: "Sorry", body: "Invalid Email and Password" });
+          setshow(true);
         }
       })
       .catch((error) => {
@@ -359,13 +364,21 @@ export default function Login(props) {
       });
   };
 
-  function validate(payload) { //  null, iuu{}
-    if (!payload)
-      return false;
-    if (payload.fullname && payload.email && payload.phone && payload.date && payload.msg && payload.msg && payload.humanId) {
-      return true
+  function validate(payload) {
+    //  null, iuu{}
+    if (!payload) return false;
+    if (
+      payload.fullname &&
+      payload.email &&
+      payload.phone &&
+      payload.date &&
+      payload.msg &&
+      payload.msg &&
+      payload.humanId
+    ) {
+      return true;
     }
-    return false
+    return false;
   }
   // if (!validate(humanLibraryOptions)) {
   //   return;
@@ -375,59 +388,61 @@ export default function Login(props) {
       password: "",
       confirmPassword: "",
       otp: "",
-      email: ""
+      email: "",
     },
     onSubmit: async (values) => {
-      console.log(values)
+      console.log(values);
       try {
-        let resp = await axios.post(`${API_ADMIN_URL}${RESETPASSWORD_URL} `, values)
+        let resp = await axios.post(
+          `${API_ADMIN_URL}${RESETPASSWORD_URL} `,
+          values
+        );
         if (resp.data.status) {
           formiks.resetForm();
-          setAlerdata({ title: "Reset", body: "your Password reset Successfully" })
-          setshow(true)
+          setAlerdata({
+            title: "Reset",
+            body: "your Password reset Successfully",
+          });
+          setshow(true);
           window.location.reload();
-
         } else {
-
-          setAlerdata({ title: "Sorry!!", body: "Sorry incorrect otp " })
-          setshow(true)
-
+          setAlerdata({ title: "Sorry!!", body: "Sorry incorrect otp " });
+          setshow(true);
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-  })
+    },
+  });
   const formik = useFormik({
     initialValues: {
-
-      email: ""
-
+      email: "",
     },
     onSubmit: async (values) => {
-      console.log(values)
+      console.log(values);
       try {
-
-
-        let resp = await axios.get(`${API_ADMIN_URL}${FORGOTPASSWORD_URL}?email=${values.email}`);
+        let resp = await axios.get(
+          `${API_ADMIN_URL}${FORGOTPASSWORD_URL}?email=${values.email}`
+        );
         if (resp.data.status) {
-          setShowPasswordForm(true)
-          formiks.setValues({ email: values.email })
+          setShowPasswordForm(true);
+          formiks.setValues({ email: values.email });
 
-          setAlerdata({ title: "Sucessfully", body: "Your otp send on your email" })
-          setshow(true)
+          setAlerdata({
+            title: "Sucessfully",
+            body: "Your otp send on your email",
+          });
+          setshow(true);
           formik.resetForm();
         } else {
-
-          setAlerdata({ title: "Sorry!!", body: "User is not found" })
-          setshow(true)
+          setAlerdata({ title: "Sorry!!", body: "User is not found" });
+          setshow(true);
         }
       } catch (err) {
         console.log(err);
-
       }
-    }
-  })
+    },
+  });
 
   const handleClose = () => setshow(false);
   return (
@@ -486,11 +501,15 @@ export default function Login(props) {
                 <div className="form-inline">
                   <input type="checkbox" name="" id="" />
                   <p>Remember Me</p>
-                  <button type="button" class="btn btn-link"
+                  <button
+                    type="button"
+                    class="btn btn-link"
                     data-toggle="modal"
                     data-target="#myModals"
                     data-dismiss="modal"
-                  >Forgot Password</button>
+                  >
+                    Forgot Password
+                  </button>
                   {/* <p className="fgt-btn">Forgot Password?</p> */}
                 </div>
                 <div className="signup-btn">
@@ -639,55 +658,82 @@ export default function Login(props) {
             </button>
 
             <div className="modal-body md-custom">
-              {!showPasswordForm && <form className="login-hide" action="" id="loginvalidation" onSubmit={formik.handleSubmit}>
-                <h3>Forgot Password </h3>
-                <div className="form-group">
-                  <label for=""> Email</label>
-                  <input
-                    type="email"
-                    name=""
-                    id=""
-                    placeholder="Enter your email here"
-                    {...formik.getFieldProps('email')} />
-                </div>
-                <div className="signup-btn">
-                  <div>
-                    <button className="signup-btn sgn-btn btn btn-web
-                    hvr-float-shadow" type="submit">Submit</button></div>
-                </div>
-              </form>}
-              {showPasswordForm && <form className="login-hide" action="" id="loginvalidation" onSubmit={formiks.handleSubmit}>
-                <h3>Reset Password </h3>
-                <div className="form-group">
-                  <label for="">New Password</label>
-                  <input
-                    type="password"
-
-                    placeholder="Enter your  New password here"
-                    {...formiks.getFieldProps('password')} />
-                </div>
-                <div className="form-group">
-                  <label for="">Confirm Password</label>
-                  <input
-                    type="Password"
-
-                    placeholder="Enter your  Confirm Password here"
-                    {...formiks.getFieldProps('confirmPassword')} />
-                </div>
-                <div className="form-group">
-                  <label for="">Otp Code</label>
-                  <input
-                    type="text"
-
-                    placeholder="Enter your otp  code"
-                    {...formiks.getFieldProps('otp')} />
-                </div>
-                <div className="signup-btn">
-                  <div>
-                    <button className="signup-btn sgn-btn btn btn-web
-                    hvr-float-shadow" type="submit">Submit</button></div>
-                </div>
-              </form>}
+              {!showPasswordForm && (
+                <form
+                  className="login-hide"
+                  action=""
+                  id="loginvalidation"
+                  onSubmit={formik.handleSubmit}
+                >
+                  <h3>Forgot Password </h3>
+                  <div className="form-group">
+                    <label for=""> Email</label>
+                    <input
+                      type="email"
+                      name=""
+                      id=""
+                      placeholder="Enter your email here"
+                      {...formik.getFieldProps("email")}
+                    />
+                  </div>
+                  <div className="signup-btn">
+                    <div>
+                      <button
+                        className="signup-btn sgn-btn btn btn-web
+                    hvr-float-shadow"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              )}
+              {showPasswordForm && (
+                <form
+                  className="login-hide"
+                  action=""
+                  id="loginvalidation"
+                  onSubmit={formiks.handleSubmit}
+                >
+                  <h3>Reset Password </h3>
+                  <div className="form-group">
+                    <label for="">New Password</label>
+                    <input
+                      type="password"
+                      placeholder="Enter your  New password here"
+                      {...formiks.getFieldProps("password")}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label for="">Confirm Password</label>
+                    <input
+                      type="Password"
+                      placeholder="Enter your  Confirm Password here"
+                      {...formiks.getFieldProps("confirmPassword")}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label for="">Otp Code</label>
+                    <input
+                      type="text"
+                      placeholder="Enter your otp  code"
+                      {...formiks.getFieldProps("otp")}
+                    />
+                  </div>
+                  <div className="signup-btn">
+                    <div>
+                      <button
+                        className="signup-btn sgn-btn btn btn-web
+                    hvr-float-shadow"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>
@@ -925,10 +971,6 @@ export default function Login(props) {
                 </div>
               </form>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
@@ -1028,7 +1070,10 @@ export default function Login(props) {
                     <p className="text-danger">{libraryMsgErrorgroup}</p>
                   ) : null}
                 </div>
-                <div className="Register text-center" onClick={HumanLibrarygroup}>
+                <div
+                  className="Register text-center"
+                  onClick={HumanLibrarygroup}
+                >
                   <button
                     type="button"
                     className="btn btn-web hvr-float-shadow"
@@ -1039,11 +1084,6 @@ export default function Login(props) {
                 </div>
               </form>
             </div>
-
-
-
-
-
           </div>
         </div>
       </div>
@@ -1148,7 +1188,7 @@ export default function Login(props) {
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
-                      // style={{ width: 300, borderRadius: 50, height: 46 }}
+                        // style={{ width: 300, borderRadius: 50, height: 46 }}
                       >
                         <i
                           className="fa fa-google-plus"
@@ -1158,7 +1198,7 @@ export default function Login(props) {
                             height: 46,
                             marginLeft: 0,
                             marginTop: -13,
-                            background: 'rgb(219, 50, 54)'
+                            background: "rgb(219, 50, 54)",
                             // background: `linear-gradient(  rgb(60, 186, 84), rgb(244, 194, 13) 20%, rgb(219, 50, 54) 60%, rgb(72, 133, 237) 100%)`,
                           }}
                         >
@@ -1226,7 +1266,7 @@ export default function Login(props) {
                     onSuccess={responseInstagram}
                     onFailure={responseInstagram}
                     cssClass="btninsta"
-                  // style={{marginLeft}}
+                    // style={{marginLeft}}
                   />
 
                   <AppleSignin
@@ -1263,13 +1303,12 @@ export default function Login(props) {
           </div>
         </div>
       </div>
-      <Bmodal show={show} >
+      <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title>{alertData.title}</Bmodal.Title>
         </Bmodal.Header>
         <Bmodal.Body>{alertData.body}</Bmodal.Body>
         <Bmodal.Footer>
-
           <Button variant="primary" onClick={handleClose}>
             ok
           </Button>
@@ -1277,7 +1316,4 @@ export default function Login(props) {
       </Bmodal>
     </>
   );
-
 }
-
-

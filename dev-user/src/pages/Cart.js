@@ -4,19 +4,11 @@ import axios from "axios";
 import { API_ADMIN_URL, ADD_CART_API } from "../utill/api.endpoints";
 
 // var quen = 2;
-{
-  localStorage.getItem("quent");
-}
+// {
+//   localStorage.getItem("quent");
+// }
 export default function Cart(props) {
-  const [slug, setSlug] = useState(useParams().slug);
-  // const {slug} = useParams();
-  useEffect(() => {
-    // alert(slug);
-    setSlug(slug);
-    console.log("slug", slug);
-
-    // console.log("0000000",  localStorage.getItem("quent"));
-  }, []);
+ 
   const [responseData, setResponseData] = useState([]);
   const ProductCart = () => {
     console.log(`${API_ADMIN_URL}${ADD_CART_API}`);

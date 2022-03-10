@@ -364,7 +364,7 @@ const Addform = forwardRef((props, ref) => {
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <label for="exampleInputUsername1">Banner Name</label>
+              <label for="exampleInputUsername1">Banner Text</label>
               <input
                 type="text"
                 class="form-control"

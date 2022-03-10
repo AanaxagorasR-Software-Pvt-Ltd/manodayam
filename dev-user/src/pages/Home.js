@@ -446,7 +446,6 @@ export default function Home(props) {
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              {/* <h5>Advantages</h5> */}
               <h5>Swayam- Do It Yourself</h5>
               <p>Swayam gives you power to heal and get you to wellness</p>
             </div>
@@ -497,7 +496,7 @@ export default function Home(props) {
             <div className="col-lg-6">
               <div className="doctor-heading">
                 <br />
-                <h2>Swayam - Consult with Experts</h2>
+                <h2>Swayam- Consult with Experts </h2>
                 {/* <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
                   ad repellendus laboriosam ea, dolorem odio culpa.
@@ -869,16 +868,16 @@ export default function Home(props) {
             </div>
           </div>
 
-          <div className="service-slide">
+          <div className="service-slide mb-50">
             <Slider {...settingstwo}>
               {responseData.map((element) => (
                 <div className="col-lg-11">
-                  <div className="product-card h-100">
-                    <img src={element.img_url} alt="" />
+                  <div className="product-card">
+                    <img className="product-img" src={element.img_url} alt="" />
                     <h3>{element.product_name}</h3>
                     <p>{element.description}</p>
                     <span>
-                      <i className="fa fa-inr"></i>&nbsp;
+                      <i className="fa fa-inr"></i>
                       {element.mrp}
                     </span>
                     <buttton
