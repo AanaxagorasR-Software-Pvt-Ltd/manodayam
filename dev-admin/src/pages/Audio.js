@@ -414,7 +414,6 @@ const Addform = forwardRef((props, ref) => {
                   <option>Meditate</option>
                   <option>Calm Masterclass</option>
                   <option>Scenes</option>
-                  <option>Body</option>
                 </select>
               </div>
               <div class="form-group">

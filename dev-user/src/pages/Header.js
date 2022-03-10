@@ -119,20 +119,23 @@ export default function Header() {
                     <a href="#about" className="nav-link">
                       About Us
                     </a>
-                    {/* <Link to="/about" className="nav-link">
-                    About Us
-                    </Link> */}
                   </li>
                   <li className="nav-item">
-                    <Link to="/support" className="nav-link">
+                    {/* <Link to="/support" className="nav-link">
+                    Support
+                    </Link> */}
+                    <a href="#support" className="nav-link">
                       Support
-                    </Link>
+                    </a>
                   </li>
 
                   <li className="nav-item">
-                    <Link to="/library" className="nav-link">
+                    <a href="#humanlibrary" className="nav-link">
                       Digital Human Library
-                    </Link>
+                    </a>
+                    {/* <Link to="/library" className="nav-link">
+                      Digital Human Library
+                    </Link> */}
                   </li>
                   <li className="nav-item">
                     <Link to="/research" className="nav-link">

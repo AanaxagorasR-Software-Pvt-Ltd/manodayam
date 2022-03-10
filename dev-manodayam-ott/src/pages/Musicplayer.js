@@ -5,27 +5,29 @@ import axios from "axios";
 import ReactAudioPlayer from "react-audio-player";
 import song from "./music/first.mp3";
 import img from "./music/img.jpeg";
-import { API_ADMIN_URL, MUSICALL} from "../utill/api.endpoints";
+import { API_ADMIN_URL, MUSICALL } from "../utill/api.endpoints";
 
 export default function Musicplayer() {
   const main = {
     height: "360px",
   };
   const image = {
-  height: "530px"
+    height: "530px",
   };
   const [resData, setResData] = useState([]);
   const audioAll = () => {
     console.log(`${API_ADMIN_URL}${MUSICALL}`);
     const bodylisting = {
       collectiontype: "audio",
-      
     };
     const params = new URLSearchParams(window.location.search);
     axios
-    
-      .get(`${API_ADMIN_URL}${MUSICALL}?id=${params.get(`audioid`)}`, bodylisting)
-     
+
+      .get(
+        `${API_ADMIN_URL}${MUSICALL}?id=${params.get(`audioid`)}`,
+        bodylisting
+      )
+
       .then((res) => {
         setResData(res.data);
         console.log("====body-listing====", res.data);
@@ -37,7 +39,7 @@ export default function Musicplayer() {
   useEffect(() => {
     audioAll();
   }, []);
-  
+
   return (
     <>
       <div>
