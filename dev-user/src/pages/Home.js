@@ -402,7 +402,6 @@ export default function Home(props) {
             {data.map((element) => (
               <div className="col-lg-4">
                 <div>
-                  {/* <h6 className="about_title">{element.title}</h6> */}
                   <video
                     id="about-us-video"
                     controls
@@ -417,6 +416,7 @@ export default function Home(props) {
                       type="video/mp4"
                     />
                   </video>
+                  <h6 className="about_title">{element.title}</h6>
                 </div>
               </div>
             ))}
@@ -428,7 +428,6 @@ export default function Home(props) {
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              {/* <h5>Advantages</h5> */}
               <h5>Swayam- Do It Yourself</h5>
               <p>Swayam gives you power to heal and get you to wellness</p>
             </div>
@@ -837,46 +836,43 @@ export default function Home(props) {
           </div>
         </div>
       </div>
+      {/* Ecosystem */}
       <div className="service-section mb-50">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="service-heading">
-                <h5>Manodayam Ecosystem</h5>
-                <p>
-                  Please see your support system such as genetics support, find
-                  brain mapping centers
-                </p>
-              </div>
+          <div className="col-lg-12">
+            <div className="service-heading">
+              <h5>Manodayam Ecosystem</h5>
+              <p>
+                Please see your support system such as genetics support, find
+                brain mapping centers
+              </p>
             </div>
+          </div>
 
-            {responseData.map((element) => (
-              <div className="col-lg-3 col-sm-6">
-                {console.log("element", element)}
-                <div className="product-card">
-                  <img src={element.img_url} alt="" />
-                  <h3>{element.product_name}</h3>
-                  <p>{element.description}</p>
-                  <span>
-                    <i className="fa fa-inr"></i>
-                    {element.mrp}
-                  </span>
-
-                  {/* <Link
-                    to={{
-                      pathname: "/ViewProduct/" + element.slug,
-                    }}
-                  > */}
-                  <buttton
-                    className="btn-web cart-btn"
-                    onClick={() => loginsubmit("/ViewProduct/" + element.slug)}
-                  >
-                    View More
-                  </buttton>
-                  {/* </Link> */}
+          <div className="service-slide mb-50">
+            <Slider {...settingstwo}>
+              {responseData.map((element) => (
+                <div className="col-lg-11">
+                  <div className="product-card">
+                    <img className="product-img" src={element.img_url} alt="" />
+                    <h3>{element.product_name}</h3>
+                    <p>{element.description}</p>
+                    <span>
+                      <i className="fa fa-inr"></i>
+                      {element.mrp}
+                    </span>
+                    <buttton
+                      className="btn-web cart-btn"
+                      onClick={() =>
+                        loginsubmit("/ViewProduct/" + element.slug)
+                      }
+                    >
+                      View More
+                    </buttton>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </Slider>
           </div>
         </div>
       </div>
