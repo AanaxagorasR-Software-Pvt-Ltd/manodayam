@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_MEDITATE_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_DATA_API } from "../utill/api.endpoints";
 export default function Meditate() {
   const [resData, setResData] = useState([]);
   const MeditateApi = () => {
-    console.log(`${API_ADMIN_URL}${SHAKTHI_MEDITATE_API}`);
+    console.log(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`);
     const meditatelisting = {
       collectiontype: "audio",
     };
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_MEDITATE_API}`, meditatelisting)
+      .post(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`, meditatelisting)
       .then((res) => {
         setResData(res.data.data);
         console.log("====meditate-listing====", res.data.data);
@@ -35,16 +35,7 @@ export default function Meditate() {
               <div class="page-header">
                 <div class="page-header-1">
                   <h1 class="main-content-title tx-30">Meditate</h1>
-                  {/* <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <select name="" id="">
-                        <option value="">All</option>
-                        <option value="">For me</option>
-                        <option value="">Sleep</option>
-                        <option value="">Anxiety</option>
-                      </select>
-                    </li>
-                  </ol> */}
+                
                 </div>
               </div>
 

@@ -2,17 +2,17 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, HOME_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_DATA_API } from "../utill/api.endpoints";
 
 export default function Home() {
   const [resData, setResData] = useState([]);
   const HomeApi = () => {
-    console.log(`${API_ADMIN_URL}${HOME_API}`);
+    console.log(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`);
     const homelisting = {
       collectiontype: "audio",
     };
     axios
-      .post(`${API_ADMIN_URL}${HOME_API}`, homelisting)
+      .post(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`, homelisting)
       .then((res) => {
         setResData(res.data.data);
         console.log("====home-listing====", res.data.data);

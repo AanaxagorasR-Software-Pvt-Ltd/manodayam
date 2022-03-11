@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_SCENE_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_DATA_API } from "../utill/api.endpoints";
 
 export default function Scene() {
   const [resData, setResData] = useState([]);
   const SleepApi = () => {
-    console.log(`${API_ADMIN_URL}${SHAKTHI_SCENE_API}`);
+    console.log(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`);
     const scenelisting = {
       collectiontype: "audio",
     };
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_SCENE_API}`, scenelisting)
+      .post(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`, scenelisting)
       .then((res) => {
         setResData(res.data.data);
         console.log("====scene-listing====", res.data.data);
