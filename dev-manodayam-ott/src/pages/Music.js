@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_MUSIC_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_DATA_API } from "../utill/api.endpoints";
 
 export default function Music() {
   const [resData, setResData] = useState([]);
   const MusicApi = () => {
-    console.log(`${API_ADMIN_URL}${SHAKTHI_MUSIC_API}`);
+    console.log(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`);
     const musiclisting = {
       collectiontype: "audio",
     };
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_MUSIC_API}`, musiclisting)
+      .post(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`, musiclisting)
       .then((res) => {
         setResData(res.data.data);
         console.log("====sleep-listing====", res.data.data);

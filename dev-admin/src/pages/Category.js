@@ -276,12 +276,9 @@ const Category = () => {
                             <tr>
                               <th>S.No</th>
                               <th>Category Image </th>
-
                               <th>Category Name </th>
                               <th>Category Slug </th>
-
-                              <th> Description </th>
-
+                              {/* <th> Description </th> */}
                               <th>Status</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -297,7 +294,7 @@ const Category = () => {
                                 <td>{v.name}</td>
                                 <td>{v.slug}</td>
 
-                                <td>{v.description}</td>
+                                {/* <td>{v.description}</td> */}
 
                                 <td>
                                   {v.status === "1" ? "Active" : "Inactive"}
@@ -438,7 +435,7 @@ const Addform = forwardRef((props, ref) => {
                 placeholder="Category Slug"
               />
             </div>
-            <div class="form-group">
+            {/* <div class="form-group">
               <label for="exampleInputUsername1">Category description</label>
               <input
                 type="text"
@@ -449,7 +446,7 @@ const Addform = forwardRef((props, ref) => {
                 }}
                 placeholder="Category description"
               />
-            </div>
+            </div> */}
             <div class="form-group">
               <label for="exampleInputUsername1">Category Image</label>
               <input

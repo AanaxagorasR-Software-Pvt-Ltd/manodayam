@@ -428,7 +428,7 @@ export default function Home(props) {
                     id="about-us-video"
                     controls
                     preload="auto"
-                    poster={element.image}
+                    poster={element.thumbnail_image}
                     data-setup=""
                     loop="auto"
                   >

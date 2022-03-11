@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_SLEEP_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_DATA_API } from "../utill/api.endpoints";
 
 export default function Sleep() {
   const [resData, setResData] = useState([]);
   const SleepApi = () => {
-    console.log(`${API_ADMIN_URL}${SHAKTHI_SLEEP_API}`);
+    console.log(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`);
     const sleeplisting = {
       collectiontype: "audio",
     };
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_SLEEP_API}`, sleeplisting)
+      .post(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`, sleeplisting)
       .then((res) => {
         setResData(res.data.data);
         console.log("====sleep-listing====", res.data.data);

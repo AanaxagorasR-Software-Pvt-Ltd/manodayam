@@ -53,7 +53,7 @@ router.post("/new",imageUpload.single("img_url"), async (req, res) => {
         img: body.img,
         name: body.name,
         slug: body.slug,
-        description: body.description,
+        // description: body.description,
         status: body.status,
       };
 

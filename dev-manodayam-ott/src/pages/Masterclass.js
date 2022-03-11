@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ADMIN_URL, SHAKTHI_MASTERCLASS_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, SHAKTHI_DATA_API } from "../utill/api.endpoints";
 
 export default function Masterclass() {
   const [resData, setResData] = useState([]);
-  const MusicApi = () => {
-    console.log(`${API_ADMIN_URL}${SHAKTHI_MASTERCLASS_API}`);
+  const MasterApi = () => {
+    console.log(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`);
     const musiclisting = {
       collectiontype: "audio",
     };
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_MASTERCLASS_API}`, musiclisting)
+      .post(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`, musiclisting)
       .then((res) => {
         setResData(res.data.data);
         console.log("====sleep-listing====", res.data.data);
@@ -22,11 +22,11 @@ export default function Masterclass() {
       });
   };
   useEffect(() => {
-    MusicApi();
+    MasterApi();
   }, []);
   const filterType = resData.filter((element) =>
-    element?.date?.includes((element = "Calm Masterclass"))
-  );
+  element?.type?.includes((element = "Calm Masterclass"))
+);
   return (
     <>
       <div>
@@ -43,7 +43,7 @@ export default function Masterclass() {
                 <div class="container">
                   <div class="row">
                     {filterType.map((element) => (
-                      <div class="col-lg-5 col-sm-14 ">
+                      <div class="col-lg-3 col-sm-6 ">
                         <div class="display-card ">
                           {/* <i class="fas fa-lock"></i> */}
                           <Link to={{
@@ -72,13 +72,13 @@ export default function Masterclass() {
                                 src={element.image}
                                 alt=""
                               />
-                              <span
+                              {/* <span
                                 style={{
                                   fontSize: "14px",
                                 }}
                               >
                                 {element.author}
-                              </span>
+                              </span> */}
                             </h4>
                           </Link>
                         </div>

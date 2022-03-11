@@ -36,7 +36,6 @@ router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
 router.use(`/library-singlecall`, require("./humanLibrary/libraryAppoint"));
 router.use(`/library-group`, require("./humanLibrary/libraryGroupAppoint"));
-
 router.use(`/category`, require("./category"));
 router.use(`/spirituality`, require("./category/spirituality"));
 router.use(`/aboutCategory`, require("./category/category"));
@@ -45,27 +44,21 @@ router.use(`/category-data`, require("./category/category"));
 router.use(`/question`, require("./Mcq/objectiveMcq"));
 router.use(`/yesNo`, require("./Mcq/objectiveYesNo"));
 router.use(`/shakthi-ques`, require("./Mcq/shakthiQuestion"));
-
-router.use(`/audios`,require("./media/Audio"))
 router.use(`/appointed`, require("./appointment/appointments"));
 router.use(`/upload`, require("./media"));
 router.use('/otp',require("./user/forgot"));
+router.use(`/audios`,require("./media/Audio"))
+
 // router.use(`/audios`,require("./media/Audio"))
-router.use('/videos', require("./media/video"));
 router.use(`/media-solutions`, require("./media-solutions"));
 router.use(`./profile`,require("./user/profile"))
 router.use(`/about`,require("./media/aboutus"))
-router.use(`/shakthi-all`,require("./media/Audio"))
 
 // shakthi
-
-router.use(`/shakthi-sleep`, require("./shakthi/sleep"));
-router.use(`/shakthi-meditate`, require("./shakthi/meditate"));
-router.use(`/shakthi-music`, require("./shakthi/music"));
-router.use(`/shakthi-masterclass`, require("./shakthi/masterclass"));
+router.use(`/shakthi-all`,require("./media/Audio"))
+router.use('/videos', require("./media/video"));
 router.use(`/shakthi-body`, require("./shakthi/body"));
-router.use(`/shakthi-scene`, require("./shakthi/scene"));
-router.use(`/shakthi-home`, require("./shakthi/home"));
+router.use(`/shakthi-ott-music`, require("./shakthi/musicData"));
 
 
 module.exports = router;
