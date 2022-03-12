@@ -85,7 +85,8 @@ export default function Cart(props) {
                       <th>Product name</th>
                       <th>Price</th>
                       <th>Quantity</th>
-                      <th>Shipping charges</th>
+                      {/* <th>Shipping charges</th> */}
+                      <th>Subtotal {quantity} item</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -121,6 +122,7 @@ export default function Cart(props) {
                             <h5 className="ml-3 mt-2 text-dark font-weight-bold">
                               {quantity}
                             </h5>
+                          
                             <div
                               className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
                               onClick={plus}
@@ -129,12 +131,17 @@ export default function Cart(props) {
                             </div>
                           </div>
                         </td>
-                        <td>
+                        
+                        {/* <td>
                           <i className="fa fa-inr"></i> {element.shipping}
+                        </td> */}
+                        <td>
+                          <i className="fa fa-inr"></i> {quantity* element.mrp}
+                          {/* {element.mrp * localStorage.getItem("Password")} */}
                         </td>
                         <td>
-                          <button className="del-btn">
-                            <i className="fa fa-trash-o" aria-hidden="true"></i>
+                          <button className="btn">
+                          <i class="fas fa-trash-alt"></i>
                           </button>
                         </td>
                       </tr>

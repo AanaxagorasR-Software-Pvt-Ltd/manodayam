@@ -34,5 +34,24 @@ router.get("/:slug", async (req, res) => {
     });
   }
 });
+router.post("/addtocart", validate, async (req, res) => {
+  // res.send('hello');
+  const db = await getDatabase();
+
+  try {
+    const cart= req.body;
+    const data = await db.collection("Add_to_cartlist").insertOne(cart)
+    res.status(200).json({
+    
+      message: "sucessfully  add",
+    })
+  } catch (e) {
+    res.status(500).json({
+      status: false,
+      message: "server error",
+    });
+  }
+});
+
 
 module.exports = router;

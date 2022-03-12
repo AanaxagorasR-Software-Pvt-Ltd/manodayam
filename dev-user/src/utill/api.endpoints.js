@@ -6,6 +6,7 @@ export const REGISTER_API = "/auth/user/new";
 export const DOCTOR_API = "/auth/user/doctor";
 export const PRODUCT_API = "/products/lists";
 export const VIEW_PRODUCT = "/products";
+export const AAD_TO_CARTLIST="/products/addtocart"
 export const APPOINTMENT_API = "/appointments/appoint";
 export const DIGITAL_HUMAN_LIBRARY_DATA_API = "/library/library-data";
 export const LIBRARY_SINGLE_CALL_API = "/library-singlecall/single_appoint";

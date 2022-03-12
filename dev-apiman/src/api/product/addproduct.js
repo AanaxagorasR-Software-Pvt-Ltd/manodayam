@@ -61,7 +61,8 @@ router.post("/new", imageUpload.single("img_url"), async (req, res) => {
         details: body.details,
         shipping: body.shipping,
         status: body.status,
-      };
+        productId:body.productId
+      };;
 
       console.log(req.file);
       if (typeof req.file !== "undefined") {

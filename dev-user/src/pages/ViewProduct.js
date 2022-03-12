@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 // import ReadMoreReact from "read-more-react";
-import { API_ADMIN_URL, VIEW_PRODUCT } from "../utill/api.endpoints";
+import { API_ADMIN_URL, VIEW_PRODUCT, AAD_TO_CARTLIST } from "../utill/api.endpoints";
 export default function ViewProduct(props) {
   // const {_id} = useParams();
   // console.log("*****###", useParams()._id);
@@ -33,9 +33,35 @@ export default function ViewProduct(props) {
         console.log(error);
       });
   };
+  const addtocart = (productId) => {
+
+    console.log(`${API_ADMIN_URL}${AAD_TO_CARTLIST}`);
+   
+    let user = JSON.parse(localStorage.getItem("user"));
+    const cart = {
+   
+      productId:productId,
+      userId:user._id,
+      quantity:1
+    }
+    // const productlisting = {
+    //   collectiontype: "products",
+    //   // slug: slug,
+    // };
+    axios
+      .post(`${API_ADMIN_URL}${AAD_TO_CARTLIST}`,cart )
+      .then((res) => {
+        setResponseData(res.data.data);
+        console.log("----View----", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect((props) => {
     ViewProjuct(props);
   }, []);
+
   return (
     <>
       <div className="contact-banner mb-50">
@@ -76,15 +102,24 @@ export default function ViewProduct(props) {
                             <div className="ml-2 library-video ">
                               <img src={element.img_url} alt="" />
                             </div>
+                            {/* <Link */}
+                            {/* to={{ pathname: "/Cart/" + slug }}
+                              className="ml-4 mt-4"
+                            > */}
+                            <button className=" mt-4 ml-4 btn-web hvr-float-shadow" onClick={()=>addtocart(element._id)}>
+                              Add to Cart
+                            </button>
+                            {/* </Link> */}
                             <Link
                               to={{ pathname: "/Cart/" + slug }}
                               className="ml-4 mt-4"
                             >
                               <button className=" mt-4 ml-4 btn-web hvr-float-shadow">
-                                Add to Cart
+                                Go  to Cart
                               </button>
                             </Link>
                           </div>
+
                           <div className="col-lg-6 offset-1">
                             <div className="library-person">
                               <div className="row">
@@ -102,7 +137,7 @@ export default function ViewProduct(props) {
                                   </div>
                                   <div className="mb-3">
                                     <i className="fa fa-inr"></i>&nbsp;
-                                    <span style={{fontSize: "20px"}}>{element.mrp}</span>
+                                    <span style={{ fontSize: "20px" }}>{element.mrp}</span>
                                   </div>
                                   {/* <h3 className="text-dark">Quantity:</h3>
                                   <div className="d-inline-flex">

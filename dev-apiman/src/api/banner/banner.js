@@ -7,6 +7,7 @@ router.post("/new", async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
   console.log("data", req.body);
+  
 
   try {
     let resp = await db
