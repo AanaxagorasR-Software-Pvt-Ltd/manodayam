@@ -8,10 +8,11 @@ import React, {
 
 import { useToggle } from "../hooks";
 
-import { useDispatch,  } from "react-redux";
+import { useDispatch } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
+import { Modal as Bmodal, Button } from "react-bootstrap";
 
 import axios from "../utill/axios";
 import library_appoint from "../Store/Connect/library_appoint";
@@ -25,7 +26,11 @@ const LibraryAppoint = () => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
+  const [showdata, setshowdata] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
+  const handleClose = () => setshowdata(false);
+  const handleShow = () => setshowdata(true);
   const list = () => {
     axios
       .get("/library-singlecall")
@@ -41,7 +46,6 @@ const LibraryAppoint = () => {
   useEffect(() => {
     list();
   }, []);
-
 
   const handleSideBar = () => {
     dispatch(isToggle());
@@ -61,10 +65,14 @@ const LibraryAppoint = () => {
         _id: id,
         status: status,
       });
-      alert("Satuts updated sucessfully");
+      // alert("Satuts updated sucessfully");
+      handleShow(setAlerdata);
+      setAlerdata({ title: "Done", body: "Status updated sucessfully" });
       list();
     } catch (error) {
-      alert("Something went to  wrong");
+      // alert("Something went to  wrong");
+      handleShow(setAlerdata);
+      setAlerdata({ title: "Sorry", body: "Something went to  wrong" });
     }
   };
   const onsubmit = (e) => {
@@ -250,8 +258,7 @@ const LibraryAppoint = () => {
         <div class="container-fluid page-body-wrapper">
           <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
-                    <LeftSideBar />
-              
+              <LeftSideBar />
             </ul>
           </nav>
           <div class="main-panel">
@@ -299,7 +306,6 @@ const LibraryAppoint = () => {
                                   {/* <td>{v.date}</td> */}
                                   <td>{convertToDateTime(v.date)}</td>
 
-
                                   {/* <td>
                                     {v.status === "pending"
                                       ? "Pending"
@@ -344,171 +350,27 @@ const LibraryAppoint = () => {
           </div>
         </div>
       </div>
+      <Bmodal show={showdata} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 };
 
-const Addform = forwardRef((props, ref) => {
-  const [show, setShow] = useState(false);
-  const [data, setData] = useState({});
-  const { list } = props;
-  const handleChange = (v, k) => {
-    setData({ ...data, [k]: v });
-  };
 
-  const handleVisible = (state) => {
-    setShow(state);
-  };
-  useImperativeHandle(ref, () => ({
-    openForm(dt) {
-      if (dt?._id) {
-        setData(dt);
-      } else {
-        setData({});
-      }
-      handleVisible(true);
-    },
-  }));
-
-  const save = () => {
-    let fd = new FormData();
-    library_appoint
-      .save(data, data.id)
-      .then((res) => {
-        alert(res.message);
-        handleVisible(false);
-        list();
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  };
-
-  return (
-    <>
-      {/* <Modal
-        show={show}
-        onHide={() => {
-          handleVisible(false);
-        }}
-      >
-        <Modal.Header>
-          <Modal.Title>Book library_appoint</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form class="forms-sample">
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Name</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.fullname || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "fullname");
-                }}
-                placeholder="Enter Name"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Email</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.email || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "email");
-                }}
-                placeholder="Enter Email"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Phone</label>
-              <input
-                type="number"
-                class="form-control"
-                value={data.mobileNmb || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "mobileNmb");
-                }}
-                placeholder="Enter Phone"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Issue</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.disorder || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "disorder");
-                }}
-                placeholder="Enter Issue"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Schedule Date</label>
-              <input
-                type="datetime-local"
-                class="form-control"
-                value={data.schedule || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "schedule");
-                }}
-                placeholder="Enter Schedule Date"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Message</label>
-              <textarea
-                class="form-control"
-                rows={4}
-                value={data.msg || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "msg");
-                }}
-                placeholder=" Message"
-              />
-            </div>
-
-            <div class="form-group ">
-              <label for="exampleInputUsername1">Appointment Status</label>
-              <select
-                class="form-control"
-                value={data.status || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "status");
-                }}
-              >
-                <option value="" disabled>
-                  Select Appointment Status
-                </option>
-                <option value="pending">Pending</option>
-                <option value="booked">Booked</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              handleVisible(false);
-            }}
-          >
-            Close
-          </Button>
-          <Button variant="primary" onClick={save}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
-    </>
-  );
-});
 export default LibraryAppoint;

@@ -12,8 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
+import { Modal as Bmodal, Button } from "react-bootstrap";
+
 import axios from "../utill/axios";
 import yesNo from "../Store/Connect/yesNo";
 import LeftSideBar from "../Layout/LeftSideBar";
@@ -29,6 +31,13 @@ const YesNoQues = () => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
+  const [showDeleteData, setshowDeleteData] = useState(false);
+  const [alertDeleteData, setAlerDeleteData] = useState({
+    title: "",
+    body: "",
+  });
+  const handleClose = () => setshowDeleteData(false);
+  const handleShow = () => setshowDeleteData(true);
   const formRef = useRef();
   const list = () => {
     axios
@@ -62,7 +71,9 @@ const YesNoQues = () => {
 
   const deleteData = (_id) => {
     yesNo.delete(_id).then((res) => {
-      alert(res?.message);
+      // alert(res?.message);
+      handleShow(res?.message);
+      setAlerDeleteData({ title: "Done", body: "Data Deleted" });
       list();
     });
   };
@@ -351,6 +362,24 @@ const YesNoQues = () => {
           </div>
         </div>
       </div>
+      <Bmodal show={showDeleteData} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertDeleteData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertDeleteData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 };
@@ -358,6 +387,11 @@ const YesNoQues = () => {
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
+  const [showdata, setshowdata] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
+
+  const handleClose = () => setshowdata(false);
+  const handleShow = () => setshowdata(true);
   const { list } = props;
   const handleChange = (v, k) => {
     setData({ ...data, [k]: v });
@@ -382,12 +416,16 @@ const Addform = forwardRef((props, ref) => {
     yesNo
       .save(data, data.id)
       .then((res) => {
-        alert(res.message);
+        // alert(res.message);
+        handleShow(res.message);
         handleVisible(false);
+        setAlerdata({ title: "Done", body: "Data Inserted" });
         list();
       })
       .catch((err) => {
-        alert(err.message);
+        // alert(err.message);
+        handleShow(err.message);
+        setAlerdata({ title: "Sorry", body: "Server Error" });
       });
   };
 
@@ -517,6 +555,25 @@ const Addform = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
+       {/* add alert modal */}
+       <Bmodal show={showdata} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 });

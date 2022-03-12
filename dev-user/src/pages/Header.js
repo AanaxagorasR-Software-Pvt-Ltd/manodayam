@@ -63,7 +63,7 @@ export default function Header() {
               <div className="col-lg-6 col-sm-8">
                 <div className="header-contact">
                   <button
-                    className="btn-web hvr-float-shadow"
+                    className="btn-web hvr-float-shadow mr-3"
                     data-toggle="tooltip"
                     title="Profile!"
                     onClick={() => loginsubmit("/profile")}
@@ -71,15 +71,18 @@ export default function Header() {
                     {/* <Link to="/profile"> */}
                     <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                     {/* </Link> */}
+                    <h6 className="profile-head-text">Profile</h6>
+
                   </button>
                   <button
                     className="btn-web hvr-float-shadow"
                     data-toggle="tooltip"
                     title="Cart!"
-                    onClick={() => loginsubmit("/cart")}
+                    onClick={() => loginsubmit("/Cart")}
                   >
                     {/* <Link to="/cart"> */}
                     <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                    <h6 className="cart-head-text">Cart</h6>
                     {/* </Link> */}
                   </button>
                   <i className="fa fa-mobile" aria-hidden="true"></i>

@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReactAudioPlayer from "react-audio-player";
 import song from "./music/first.mp3";
-import img from "./music/img.jpeg";
+import img_1 from "./music/img.jpeg";
+import img_2 from "./music/musicimg.jpeg";
 import { API_ADMIN_URL, MUSICALL } from "../utill/api.endpoints";
 
 export default function Musicplayer() {
@@ -51,7 +52,7 @@ export default function Musicplayer() {
                   <h1 class="main-content-title tx-30">Manodayam</h1>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a href="#">Music</a>
+                      <a>Music</a>
                     </li>
                     <li class="breadcrumb-item">
                       <select name="" id="">
@@ -71,12 +72,17 @@ export default function Musicplayer() {
                   </ol>
                 </div>
               </div> */}
+
               <img
                 style={image}
-                src="https://media.istockphoto.com/photos/stones-in-the-ocean-at-sunrise-picture-id1264258168?b=1&k=20&m=1264258168&s=170667a&w=0&h=R0PyemIlBRgiEO6I3bZi7ixQ-JM66ejYOaKh_5wTF9g="
+                src={img_2}
+                // src={resData && resData.length > 0 && resData[0].image}
                 alt="img"
               />
-              <div class="player">
+
+              <div className="player mt-5">
+              <h2 className="mb-3 text-center text-info display-5">{resData && resData.length > 0 && resData[0].type}</h2>
+
                 {/* <div class="player-track">
                       <div class="artist-name"></div>
                       <div class="music-name"></div>
@@ -94,6 +100,7 @@ export default function Musicplayer() {
                       <i id="play" class="play-btn fas fa-play"></i>
                       <i id="next" class="next-btn fas fa-forward"></i>
                     </div> */}
+                <h4 className="text-center ">{resData && resData.length > 0 && resData[0].title}</h4>
                 <ReactAudioPlayer
                   src={resData && resData.length > 0 && resData[0].audio_link}
                   autoPlay={false}

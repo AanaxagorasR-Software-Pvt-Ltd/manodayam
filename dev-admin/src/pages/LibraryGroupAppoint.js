@@ -12,8 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
+import { Modal as Bmodal, Button } from "react-bootstrap";
+
 import axios from "../utill/axios";
 import libraryGroup from "../Store/Connect/libraryGroup";
 import { Link } from "react-router-dom";
@@ -31,7 +33,11 @@ const LibraryGroupAppoint = (props) => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [resData, setresData] = React.useState([]);
+  const [showdata, setshowdata] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
+  const handleClose = () => setshowdata(false);
+  const handleShow = () => setshowdata(true);
   const formRef = useRef("");
 
   const list = () => {
@@ -77,10 +83,14 @@ const LibraryGroupAppoint = (props) => {
         _id: id,
         status: status,
       });
-      alert("Status updated sucessfully");
+      // alert("Status updated sucessfully");
+      handleShow(setAlerdata);
+      setAlerdata({ title: "Done", body: "Status updated sucessfully" });
       list();
     } catch (error) {
-      alert("Something went to  wrong");
+      // alert("Something went to  wrong");
+      handleShow(setAlerdata);
+      setAlerdata({ title: "Sorry", body: "Something went to  wrong" });
     }
   };
   const convertToDateTime = (time) => {
@@ -384,172 +394,27 @@ const LibraryGroupAppoint = (props) => {
           </div>
         </div>
       </div>
+      <Bmodal show={showdata} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 };
 
-const Addform = forwardRef((props, ref) => {
-  const [show, setShow] = useState(false);
-  const [data, setData] = useState({});
-  const [searchField, setSearchField] = useState("");
-  const { list } = props;
-  const handleChange = (v, k) => {
-    setData({ ...data, [k]: v });
-  };
 
-  const handleVisible = (state) => {
-    setShow(state);
-  };
-  useImperativeHandle(ref, () => ({
-    openForm(dt) {
-      if (dt?._id) {
-        setData(dt);
-      } else {
-        setData({});
-      }
-      handleVisible(true);
-    },
-  }));
-
-  const save = () => {
-    let fd = new FormData();
-    libraryGroup
-      .save(data, data.id)
-      .then((res) => {
-        alert(res.message);
-        handleVisible(false);
-        list();
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  };
-
-  return (
-    <>
-      <Modal
-        show={show}
-        onHide={() => {
-          handleVisible(false);
-        }}
-      >
-        <Modal.Header>
-          <Modal.Title>Book Appointment</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form class="forms-sample">
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Name</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.fullname || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "fullname");
-                }}
-                placeholder="Enter Name"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Email</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.email || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "email");
-                }}
-                placeholder="Enter Email"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Phone</label>
-              <input
-                type="number"
-                class="form-control"
-                value={data.mail || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "mail");
-                }}
-                placeholder="Enter Phone"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Issue</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.disorder || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "disorder");
-                }}
-                placeholder="Enter Issue"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Schedule Date</label>
-              <input
-                type="datetime-local"
-                class="form-control"
-                value={data.schedule || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "schedule");
-                }}
-                placeholder="Enter Schedule Date"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Message</label>
-              <textarea
-                class="form-control"
-                rows={4}
-                value={data.msg || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "msg");
-                }}
-                placeholder=" Message"
-              />
-            </div>
-
-            <div class="form-group ">
-              <label for="exampleInputUsername1">Appointment Status</label>
-              <select
-                class="form-control"
-                value={data.status || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "status");
-                }}
-              >
-                <option value="" disabled>
-                  Select Appointment Status
-                </option>
-                <option value="pending">Pending</option>
-                <option value="booked">Booked</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              handleVisible(false);
-            }}
-          >
-            Close
-          </Button>
-          <Button variant="primary" onClick={save}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-});
 export default LibraryGroupAppoint;

@@ -12,8 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
+import { Modal as Bmodal, Button } from "react-bootstrap";
 import axios from "../utill/axios";
 import doctor from "../Store/Connect/Doctor";
 import LeftSideBar from "../Layout/LeftSideBar";
@@ -33,7 +34,13 @@ const Doctor = () => {
   const [filterdata, setfilerdata] = React.useState([]);
 
   const formRef = useRef();
-
+  const [showDeleteData, setshowDeleteData] = useState(false);
+  const [alertDeleteData, setAlerDeleteData] = useState({
+    title: "",
+    body: "",
+  });
+  const handleClose = () => setshowDeleteData(false);
+  const handleShow = () => setshowDeleteData(true);
   const list = () => {
     axios
       .get("doctors")
@@ -64,7 +71,9 @@ const Doctor = () => {
   };
   const deleteData = (_id) => {
     doctor.delete(_id).then((res) => {
-      alert(res?.message);
+      // alert(res?.message);
+      handleShow(res?.message);
+      setAlerDeleteData({ title: "Done", body: "Data Deleted" });
       list();
     });
   };
@@ -354,7 +363,24 @@ const Doctor = () => {
           {/* partial */}
         </div>
       </div>
-
+      <Bmodal show={showDeleteData} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertDeleteData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertDeleteData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 };
@@ -363,7 +389,11 @@ const Addform = forwardRef((props, ref) => {
   const [media, setMedia] = useState([]);
   const [data, setData] = useState({});
   // const[shows,setshows]=useState(false);
+  const [showdata, setshowdata] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
+  const handleClose = () => setshowdata(false);
+  const handleShow = () => setshowdata(true);
 
   // const[alertData,setAlerdata]=useState({title:"",body:""})
   const { list } = props;
@@ -383,16 +413,20 @@ const Addform = forwardRef((props, ref) => {
     doctor
       .save(fd)
       .then((res) => {
-        alert(res.message);
+        // alert(res.message);
         // setAlerdata({title:"Docter",body:res.message})
         // setshows(true)
+        handleShow(res.message);
         handleVisible(false);
+        setAlerdata({ title: "Done", body: "Data Inserted" });
         list();
       })
       .catch((err) => {
-        alert(err.message);
+        // alert(err.message);
         // setAlerdata({title:"Sorry",body:err.message})
         // setshows(true)
+        handleShow(err.message);
+        setAlerdata({ title: "Sorry", body: "Server Error" });  
       });
   };
   useImperativeHandle(ref, () => ({
@@ -571,18 +605,25 @@ const Addform = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      {/* <Bmodal show={shows} >
-        <Bmodal.Header closeButton>
-          <Bmodal.Title>{alertData.title}</Bmodal.Title>
-        </Bmodal.Header>
-        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+      {/* add alert modal */}
+      <Bmodal show={showdata} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
         <Bmodal.Footer>
-          
-          <Button variant="primary" onClick={handleClose}>
-         ok
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
           </Button>
         </Bmodal.Footer>
-      </Bmodal> */}
+      </Bmodal>
     </>
   );
 });
