@@ -11031,7 +11031,7 @@ div.dataTables_wrapper div.dataTables_length select {
     padding-left: 25px;
     padding-right: 25px;
     background: linear-gradient(45deg, #23adba, #9d1892);
-height: 523px
+height: 600px;
 }
 
 @media (max-width: 575px) {
@@ -12540,6 +12540,7 @@ height: 523px
         border-bottom: 0px solid rgba(240, 240, 255, 0.1) !important;
         border-right: 0px solid rgba(240, 240, 255, 0.1) !important;
         background: transparent !important;
+
     }
 }
 
@@ -72740,6 +72741,7 @@ ul.inbox-pagination {
     .sidemenu-logo .main-logo {
         display: none;
         /* z-index: 0; */
+
     }
 
     .main-header {
@@ -72841,6 +72843,7 @@ ul.inbox-pagination {
     .sidemenu-logo,
     .main-calendar .fc-header-toolbar {
         padding: 0 !important;
+
     }
 
     .mapcontainer.mapael svg,
@@ -73213,6 +73216,7 @@ ul.inbox-pagination {
     .main-sidebar-hide .sidemenu-logo {
         padding: 5px;
         display: none;
+
     }
 
     .main-sidebar-hide .main-sidebar .main-sidebar-body {
@@ -77645,6 +77649,7 @@ html.fullscreen .main-content {
 *::-ms-backdrop,
 .sidemenu-logo .main-logo {
     display: block !important;
+
 }
 
 /* ###### IE STYLES ###### */

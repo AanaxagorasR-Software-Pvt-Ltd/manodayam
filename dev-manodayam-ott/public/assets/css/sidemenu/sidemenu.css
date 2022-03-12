@@ -89,6 +89,7 @@
     -webkit-transition: left 0.3s ease, width 0.3s ease;
     transition: left 0.3s ease, width 0.3s ease;
     width: 240px;
+    background: linear-gradient( 45deg, #23adba, #9d1892);
 }
 .main-sidebar-hide .side-menu {
     left: 0;

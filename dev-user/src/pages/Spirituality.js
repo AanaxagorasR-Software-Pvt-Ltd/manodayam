@@ -37,12 +37,12 @@ export default function Spirituality() {
           <div className="row">
             <div className="col-lg-6">
               <div className="contact-breadcrumb">
-                <h3>Spirituality</h3>
+                <h3>Self Assessment</h3>
                 <ol className="breadcrumb">
                   <li>
                     <Link to="/home">Home / &nbsp;</Link>
                   </li>
-                  <li>spirituality</li>
+                  <li>Self Assessment</li>
                 </ol>
               </div>
             </div>
@@ -55,7 +55,7 @@ export default function Spirituality() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="service-heading">
-                  <h5>Sprituality</h5>
+                  <h5>Self Assessment</h5>
                   {/* <h3>{element.ques}</h3> */}
                   <p>{element.ques}</p>
                 </div>

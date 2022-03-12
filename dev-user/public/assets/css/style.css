@@ -1201,3 +1201,13 @@ width: 200px;
 .product-img{
   margin-left: 10px;
 }
+.profile-head-text{
+  color: #23adba;
+  margin-top: 13px;
+  margin-left: -15px;
+}
+.cart-head-text{
+  color: #23adba;
+  margin-top: 13px;
+  margin-left: -8px;
+}

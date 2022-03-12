@@ -5,18 +5,26 @@ import axios from "axios";
 import { API_ADMIN_URL, SHAKTHI_BODY_API } from "../utill/api.endpoints";
 
 export default function Videoplayer() {
- 
+  const main = {
+    height: "340px",
+    width: "1200px"
+  };
+  const image = {
+    height: "530px",
+  };
   const [resData, setResData] = useState([]);
   const SleepApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_BODY_API}`);
     const bodylisting = {
       collectiontype: "videos",
-      
     };
     const params = new URLSearchParams(window.location.search);
     axios
-      .post(`${API_ADMIN_URL}${SHAKTHI_BODY_API}?id=${params.get(`videoid`)}`, bodylisting)
-     
+      .post(
+        `${API_ADMIN_URL}${SHAKTHI_BODY_API}?id=${params.get(`videoid`)}`,
+        bodylisting
+      )
+
       .then((res) => {
         setResData(res.data.data);
         console.log("====body-listing====", res.data.data);
@@ -31,11 +39,12 @@ export default function Videoplayer() {
 
   return (
     <>
+    
       <div>
         <div class="main-content side-content pt-0">
-          {resData.map((element) => (
-            <div class="container-fluid">
-              <div class="inner-body">
+          <div style={main}>
+            {resData.map((element) => (
+              <div class="">
                 <div class="col-lg-11">
                   <div class="music-player-custom">
                     <video
@@ -52,8 +61,8 @@ export default function Videoplayer() {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </>

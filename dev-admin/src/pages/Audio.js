@@ -444,7 +444,7 @@ const Addform = forwardRef((props, ref) => {
                     handleChange(e.target.value, "type");
                   }}>
                   <option>Select</option>
-                  <option>Home</option>
+                  <option>Latest updates</option>
                   <option>Sleep</option>
                   <option>Music</option>
                   <option>Meditate</option>

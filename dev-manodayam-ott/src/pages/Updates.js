@@ -1,10 +1,10 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_ADMIN_URL, SHAKTHI_DATA_API } from "../utill/api.endpoints";
 
-export default function Home() {
+export default function Updates() {
   const [resData, setResData] = useState([]);
   const HomeApi = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_DATA_API}`);
@@ -26,7 +26,7 @@ export default function Home() {
   }, []);
 
   const filterType = resData.filter((element) =>
-    element?.type?.includes((element = "Home"))
+    element?.type?.includes((element = "Latest updates"))
   );
 
   return (
@@ -50,6 +50,9 @@ export default function Home() {
                   <div class="row">
                     {filterType.map((element) => (
                       <div class="col-lg-9 col-sm-6 ">
+                      <Link to={{
+                              pathname: "/musicplayer?audioid=" + element._id
+                            }}>
                         <div class="featured-card rounded-right rounded-left">
                           <div class="row">
                             <div class="col-lg-2">
@@ -59,10 +62,10 @@ export default function Home() {
                                 alt=""
                               />
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-8 mt-2">
                               <div class="featured-text">
                                 <h4>{element.title}</h4>
-                                <p>{element.date}</p>
+                                <p>{element.updatedAt}</p>
                               </div>
                             </div>
                             <div class="col-lg-2">
@@ -72,6 +75,8 @@ export default function Home() {
                             </div>
                           </div>
                         </div>
+                        </Link>
+
                       </div>
                     ))}
                   </div>

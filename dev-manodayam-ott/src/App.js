@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./component/Header";
-import Home from "./pages/Home";
+import Updates from "./pages/Updates";
 import Sleep from "./pages/Sleep";
 import Music from "./pages/Music";
 import Masterclass from "./pages/Masterclass";
@@ -19,8 +19,8 @@ function App() {
       <BrowserRouter basename="/shakthi-ott">
         <Header />
         <Routes>
-          <Route path="/" exact element={<Home />} exact />
-          <Route path="/home" element={<Home />} exact />
+          <Route path="/" exact element={<Updates />} exact />
+          <Route path="/updates" element={<Updates />} exact />
           <Route path="/sleep" element={<Sleep />} exact />
           <Route path="/music" element={<Music />} exact />
           <Route path="/masterclass" element={<Masterclass />} exact />

@@ -9,7 +9,7 @@ export default function Header() {
         <div class="main-sidebar main-sidebar-sticky side-menu">
           <div class="sidemenu-logo">
             {/* <a class="main-logo" href={globalData.manodayamLink}> */}
-            <a class="main-logo" href="https://swarnratnaindia.com/">
+            <a class="main-logo" >
             {/* <a class="main-logo" href="http://localhost:3000/"> */}
               <img
                 src="assets/img/brand/logo.png"
@@ -35,10 +35,16 @@ export default function Header() {
           </div>
           <div class="main-sidebar-body overflow-auto">
             <ul class="nav">
-              <li class="nav-item">
-                <Link class="nav-link " to="home">
+            <li class="nav-item">
+                <a class="nav-link " href="https://swarnratnaindia.com/">
                   <i class="fas fa-home"></i>
-                  <span class="sidemenu-label">Home</span>
+                  <span class="sidemenu-label">Manodayam</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link " to="updates">
+                  <i class="fa fa-smile-o"></i>
+                  <span class="sidemenu-label">Latest update</span>
                 </Link>
               </li>
               <li class="nav-item">
@@ -86,7 +92,7 @@ export default function Header() {
 
               <li class="nav-item nav-link">
                 {/* <Link class="nav-link " to="vdolist"> */}
-                  <a href="https://confrecall.herokuapp.com/" class="a-tag">
+                  <a href="https://confrecall.herokuapp.com/" target="_blank" class="a-tag">
                   <i class="fas fa-stream"></i>
                   <span class="sidemenu-label">Live</span>
                   </a>
