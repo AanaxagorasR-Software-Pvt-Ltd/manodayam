@@ -12,10 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import category from "../Store/Services/category";
 import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
+import { Modal as Bmodal, Button } from "react-bootstrap";
 import LeftSideBar from "../Layout/LeftSideBar";
 // import { Modal as Bmodal } from "react-bootstrap";
 
@@ -29,7 +30,13 @@ const Category = () => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
-
+  const [showDeleteData, setshowDeleteData] = useState(false);
+  const [alertDeleteData, setAlerDeleteData] = useState({
+    title: "",
+    body: "",
+  });
+  const handleClose = () => setshowDeleteData(false);
+  const handleShow = () => setshowDeleteData(true);
   const formRef = useRef();
 
   const list = () => {
@@ -62,7 +69,9 @@ const Category = () => {
   const deleteCat = (_id) => {
     category.delete(_id).then((res) => {
       // console.log('res', res);
-      alert(res?.message);
+      // alert(res?.message);
+      handleShow(res?.message);
+      setAlerDeleteData({ title: "Done", body: "Data Deleted" });
       list();
     });
   };
@@ -342,6 +351,24 @@ const Category = () => {
           </div>
         </div>
       </div>
+      <Bmodal show={showDeleteData} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertDeleteData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertDeleteData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 };
@@ -350,7 +377,11 @@ const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
   // const[shows,setshows]=useState(false);
+  const [showdata, setshowdata] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
+  const handleClose = () => setshowdata(false);
+  const handleShow = () => setshowdata(true);
 
   // const[alertData,setAlerdata]=useState({title:"",body:""})
 
@@ -383,16 +414,20 @@ const Addform = forwardRef((props, ref) => {
     category
       .save(fd, data.id)
       .then((res) => {
-        alert(res.message);
+        // alert(res.message);
         // setAlerdata({title:"Docter",body:res.message})
         // setshows(true)
+        handleShow(res.message);
         handleVisible(false);
+        setAlerdata({ title: "Done", body: "Data Inserted" });
         list();
       })
       .catch((err) => {
-        alert(err.message);
+        // alert(err.message);
         // setAlerdata({title:"Docter",body:err.message})
         // setshows(true)
+        handleShow(err.message);
+        setAlerdata({ title: "Sorry", body: "Server Error" });
       });
   };
   // const handleClose = () => setshows(false);
@@ -491,19 +526,26 @@ const Addform = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      {/* <Bmodal show={shows} >
-        <Bmodal.Header closeButton>
-          <Bmodal.Title>{alertData.title}</Bmodal.Title>
-        </Bmodal.Header>
-        <Bmodal.Body>{alertData.body}</Bmodal.Body>
+    
+   {/* add alert modal */}
+   <Bmodal show={showdata} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
         <Bmodal.Footer>
-          
-          <Button variant="primary" onClick={handleClose}>
-         ok
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
           </Button>
         </Bmodal.Footer>
-      </Bmodal> */}
-
+      </Bmodal>
     </>
   );
 });

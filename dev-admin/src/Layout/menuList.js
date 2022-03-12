@@ -34,7 +34,7 @@ const leftSideBarMenu = [
     isHover: false,
   },
    {
-    name: "About manodayam",
+    name: "About us manodayam",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -176,13 +176,7 @@ const leftSideBarMenu = [
         link: "/admin/audio",
         isExpand: false,
       },
-      {
-        name: "Live",
-        isActive: true,
-        dataToggle: "",
-        link: "/admin/audio",
-        isExpand: false,
-      },
+    
     ],
     isHover: false,
   },

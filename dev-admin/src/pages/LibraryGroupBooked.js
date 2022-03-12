@@ -12,8 +12,9 @@ import React, {
   import { isToggle } from "../Store/slices/toggle.slice";
   import useAuth from "../hooks/Auth";
   import { useNavigate } from "react-router";
-  import Button from "react-bootstrap/Button";
+  // import Button from "react-bootstrap/Button";
   import { Modal } from "react-bootstrap";
+import { Modal as Bmodal, Button } from "react-bootstrap";
   import axios from "../utill/axios";
   import libraryGroup from "../Store/Connect/libraryGroup";
   import globalData from "../rdx";
@@ -30,7 +31,13 @@ import React, {
     const changeStatusRef = useRef();
     const [searchField, setSearchField] = useState("");
     const [filterdata, setfilerdata] = React.useState([]);
-  
+    const [showDeleteData, setshowDeleteData] = useState(false);
+    const [alertDeleteData, setAlerDeleteData] = useState({
+      title: "",
+      body: "",
+    });
+    const handleClose = () => setshowDeleteData(false);
+    const handleShow = () => setshowDeleteData(true);
     const listBooked = () => {
       axios
         .get("/library-group/booked")
@@ -64,7 +71,9 @@ import React, {
   
     const deleteData = (_id) => {
         libraryGroup.delete(_id).then((res) => {
-        alert(res?.message);
+        // alert(res?.message);
+        handleShow(res?.message);
+        setAlerDeleteData({ title: "Done", body: "Appointment Deleted" });
         listBooked();
       });
     };
@@ -363,6 +372,24 @@ import React, {
             </div>
           </div>
         </div>
+        <Bmodal show={showDeleteData} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertDeleteData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertDeleteData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
       </>
     );
   };
@@ -370,6 +397,11 @@ import React, {
   const CreateRoomForm = forwardRef((props, ref) => {
     const [show, setShow] = useState(false);
     const [data, setData] = useState({});
+    const [showdata, setshowdata] = useState(false);
+    const [alertData, setAlerdata] = useState({ title: "", body: "" });
+  
+    const handleClose = () => setshowdata(false);
+    const handleShow = () => setshowdata(true);
     const { list } = props;
     const handleChange = (v, k) => {
       setData({ ...data, [k]: v });
@@ -393,12 +425,16 @@ import React, {
         libraryGroup
         .saveRoom(data, data.id)
         .then((res) => {
-          alert(res?.message);
+          // alert(res?.message);
           handleVisibleRoom(false);
+          handleShow(res.message);
+          setAlerdata({ title: "Done", body: "Room Created" });
           list();
         })
         .catch((err) => {
-          alert(err.message);
+          // alert(err.message);
+          handleShow(err.message);
+          setAlerdata({ title: "Sorry", body: "Server Error" });
         });
     };
   
@@ -443,19 +479,25 @@ import React, {
             </Button>
           </Modal.Footer>
         </Modal>
-        {/* 
-        <div class="form-group">
-          <label for="exampleInputUsername1"> Phone</label>
-          <input
-            type="number"
-            class="form-control"
-            value={data.mobileNmb || ""}
-            onChange={(e) => {
-              handleChange(e.target.value, "mobileNmb");
-            }}
-            placeholder="Enter Phone"
-          />
-        </div> */}
+         {/* room create */}
+         <Bmodal show={showdata} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
       </>
     );
   });
