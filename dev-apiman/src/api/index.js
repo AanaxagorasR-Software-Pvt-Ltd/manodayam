@@ -5,6 +5,7 @@ const { startDatabase, getDatabase } = require("../db/mongo");
 
 const multer = require('multer');
 const path = require('path');
+const { request } = require('http');
 const validate = (req,res,next) => {
     const { query:{ id } } = req;
     if(typeof id === `undefined` | id === ``) {
@@ -30,6 +31,7 @@ router.use(`/products`, require("./product/product.list"));
 router.use(`/products`, require("./product/addproduct"));
 router.use(`/products`, require("./product/productDetails"));
 router.use(`/addcarts`, require("./addToCart/aaToCarts"));
+router.use(`/products`,require("./product/productDetails"))
 router.use(`/banner`, require("./banner/banner"));
 router.use(`/doctors`, require("./doctorlist/doctorlists"));
 router.use(`/appointments`, require("./appointment/appointments"));
