@@ -6,7 +6,10 @@ export const REGISTER_API = "/auth/user/new";
 export const DOCTOR_API = "/auth/user/doctor";
 export const PRODUCT_API = "/products/lists";
 export const VIEW_PRODUCT = "/products";
-export const AAD_TO_CARTLIST="/products/addtocart"
+
+export const AAD_TO_CARTLIST="/products/addtocarts"
+
+export const ADD_ALL_CART="/products/allcart"
 export const APPOINTMENT_API = "/appointments/appoint";
 export const DIGITAL_HUMAN_LIBRARY_DATA_API = "/library/library-data";
 export const LIBRARY_SINGLE_CALL_API = "/library-singlecall/single_appoint";
@@ -14,7 +17,7 @@ export const LIBRARY_GROUP_CALL_API = "/library-group/group_appoint";
 export const BANNER_API = "/banner/bannertext";
 export const DOCTOR_LIST_API = "/doctors/doctorlists";
 export const PROFIL_API = "/auth/user/profil"
-export const ADD_CART_API = "/addcarts"
+// export const ADD_CART_API = "/addtocarts"
 export const CATEGORY_API = "/category-item/category/item";
 export const SPIRITUALITY_API = "/spirituality/spirituality/item";
 export const ABOUT_API = "/about/about-us"

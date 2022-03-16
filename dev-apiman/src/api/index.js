@@ -29,9 +29,12 @@ router.use(`/auth`, require("./user/login"));
 router.use(`/auth`, require("./user/profile"));
 router.use(`/products`, require("./product/product.list"));
 router.use(`/products`, require("./product/addproduct"));
+
 router.use(`/products`, require("./product/productDetails"));
-router.use(`/addcarts`, require("./addToCart/aaToCarts"));
-router.use(`/products`,require("./product/productDetails"))
+
+router.use(`/addtocarts`, require("./addToCart/aaToCarts"));
+
+// router.use(`/products`,require("./product/productDetails"))
 router.use(`/banner`, require("./banner/banner"));
 router.use(`/doctors`, require("./doctorlist/doctorlists"));
 router.use(`/appointments`, require("./appointment/appointments"));

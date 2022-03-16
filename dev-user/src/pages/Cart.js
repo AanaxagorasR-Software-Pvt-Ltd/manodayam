@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, ADD_CART_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, ADD_CART_API ,ADD_ALL_CART} from "../utill/api.endpoints";
 
 // var quen = 2;
 // {
@@ -9,6 +9,8 @@ import { API_ADMIN_URL, ADD_CART_API } from "../utill/api.endpoints";
 // }
 export default function Cart(props) {
   const [slug, setSlug] = useState(useParams().slug);
+  const [responseData, setResponseData] = useState([]);
+  const [quantity, setquantity] = useState(1);
   // const {slug} = useParams();
   useEffect(() => {
     // alert(slug);
@@ -17,25 +19,26 @@ export default function Cart(props) {
 
     // console.log("0000000",  localStorage.getItem("quent"));
   }, []);
-  const [responseData, setResponseData] = useState([]);
-  const ProductCart = () => {
-    console.log(`${API_ADMIN_URL}${ADD_CART_API}`);
 
-    axios
-      .post(`${API_ADMIN_URL}/${ADD_CART_API}/${slug}`)
-      .then((res) => {
-        setResponseData(res.data.data);
-        console.log("----Cart----", res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const ProductCart = () => {
+  //   console.log(`${API_ADMIN_URL}${ADD_CART_API}`);
+
+  //   axios
+  //     .post(`${API_ADMIN_URL}${ADD_CART_API}/${slug}`)
+  //     .then((res) => {
+  //       setResponseData(res.data.data);
+  //       console.log("----Cart----", res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   useEffect((props) => {
-    ProductCart(props);
+    // ProductCart(props);
+    allproduct();
   }, []);
 
-  const [quantity, setquantity] = useState(1);
+ 
   const plus = () => {
     setquantity(quantity + 1);
     // const quen = quantity * 3
@@ -45,7 +48,23 @@ export default function Cart(props) {
     if (quantity >= 2) setquantity(quantity - 1);
 
     setSlug(slug);
+
   };
+  const allproduct = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+   axios
+     .post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}` )
+     .then((res) => {
+       setResponseData(res.data.data);
+       console.log("new", res.data);
+  
+      
+       
+     })
+     .catch((error) => {
+       console.log(error);
+     });
+ };
   return (
     <>
       <div className="contact-banner mb-50">
@@ -91,14 +110,14 @@ export default function Cart(props) {
                     </tr>
                   </thead>
                   <tbody>
-                    {responseData.map((element) => (
-                      <tr>
+                    {responseData && responseData.map((element) => (
+                      <tr key={element._id}>
                         <td>
-                          <img src={element.img_url} alt="" />
+                          <img src={element.products.img_url} alt="" />
                         </td>
-                        <td>{element.product_name}</td>
+                        <td>{element.products.product_name}</td>
                         <td>
-                          <i className="fa fa-inr"></i> {element.mrp}
+                          <i className="fa fa-inr"></i> {element.products.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}
                         </td>
                         <td>
@@ -136,12 +155,12 @@ export default function Cart(props) {
                           <i className="fa fa-inr"></i> {element.shipping}
                         </td> */}
                         <td>
-                          <i className="fa fa-inr"></i> {quantity* element.mrp}
+                          <i className="fa fa-inr"></i> {quantity* element.products.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}
                         </td>
                         <td>
                           <button className="btn">
-                          <i class="fas fa-trash-alt"></i>
+                          <i className="fas fa-trash-alt"></i>
                           </button>
                         </td>
                       </tr>
@@ -154,7 +173,7 @@ export default function Cart(props) {
                       <td></td>
 
                       <td>
-                        <button class="btn-web hvr-float-shadow">
+                        <button className="btn-web hvr-float-shadow">
                           {" "}
                           <Link to="/checkout">Checkout</Link>
                         </button>

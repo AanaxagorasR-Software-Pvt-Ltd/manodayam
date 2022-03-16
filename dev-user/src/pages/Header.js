@@ -49,7 +49,7 @@ export default function Header() {
   return (
     <>
       {/* <Login /> */}
-      <fixed className="fixed">
+      <div className="fixed">
         <div className="header-top">
           <div className="container">
             <div className="row">
@@ -209,7 +209,7 @@ export default function Header() {
             </nav>
           </div>
         </header>
-      </fixed>
+      </div>
 
       <a href="#" className="scrollToTop">
         <i className="fa fa-hand-pointer-o" aria-hidden="true"></i>
