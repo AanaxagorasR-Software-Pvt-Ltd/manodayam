@@ -8,7 +8,7 @@ export const PRODUCT_API = "/products/lists";
 export const VIEW_PRODUCT = "/products";
 
 export const AAD_TO_CARTLIST="/products/addtocarts"
-
+export const UPDATE_QUANTITY="/products/quantity"
 export const ADD_ALL_CART="/products/allcart"
 export const DELETE_DATA="/products/deletecart"
 export const APPOINTMENT_API = "/appointments/appoint";

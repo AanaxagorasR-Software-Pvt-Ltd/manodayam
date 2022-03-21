@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, ADD_CART_API, ADD_ALL_CART, DELETE_DATA } from "../utill/api.endpoints";
+import { API_ADMIN_URL, ADD_CART_API, ADD_ALL_CART, DELETE_DATA, UPDATE_QUANTITY } from "../utill/api.endpoints";
 
 
 // var quen = 2;
@@ -40,17 +40,17 @@ export default function Cart(props) {
   }, []);
 
 
-  const plus = () => {
-    setquantity(quantity + 1);
-    // const quen = quantity * 3
-  };
+  // const plus = () => {
+  //   setquantity(quantity + 1);
+  //   // const quen = quantity * 3
+  // };
   localStorage.setItem("quent", quantity);
-  const Minus = () => {
-    if (quantity >= 2) setquantity(quantity - 1);
+  // const Minus = () => {
+  //   if (quantity >= 2) setquantity(quantity - 1);
 
-    setSlug(slug);
+  //   setSlug(slug);
 
-  };
+  // };
   const allproduct = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     axios
@@ -66,6 +66,30 @@ export default function Cart(props) {
         console.log(error);
       });
   };
+  const updateQuantity = (quantity, _id ,index) => {
+    let copy = [...responseData];
+    copy[index].quantity = quantity;
+    setResponseData(copy);
+    const addlist = {
+
+      quantity: quantity,
+
+      _id: _id,
+
+    }
+    axios
+      .post(`${API_ADMIN_URL}${UPDATE_QUANTITY}`, addlist)
+      .then((res) => {
+        setResponseData(res.data.data);
+        console.log("new", res.data);
+
+
+        allproduct();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const deleteData = (_id) => {
     axios.delete(`${API_ADMIN_URL}${DELETE_DATA}/${_id}`).then((res) => {
       // alert(res?.message);
@@ -75,6 +99,7 @@ export default function Cart(props) {
       console.log(error);
     });
   };
+
   return (
     <>
       <div className="contact-banner mb-50">
@@ -120,7 +145,7 @@ export default function Cart(props) {
                     </tr>
                   </thead>
                   <tbody>
-                    {responseData && responseData.map((element) => (
+                    {responseData && responseData.map((element,index) => (
                       <tr key={element._id}>
                         <td>
                           <img src={element.products.img_url} alt="" />
@@ -134,27 +159,28 @@ export default function Cart(props) {
                           <div className="d-inline-flex">
                             <div
                               className="bg-light rounded-bottom rounded-top border h-25 p-1"
-                              onClick={Minus}
+                              onClick={() => updateQuantity(element.quantity - 1, element._id,index)}
+
                             >
-                              {quantity !== 1 ? (
+                             
                                 <div>
                                   <i className="fa fa-minus"></i>
                                 </div>
-                              ) : (
-                                <div>
+                            
+                                {/* <div>
                                   <Link to="/">
                                     <i className="fa fa-minus text-dark"></i>
                                   </Link>
-                                </div>
-                              )}
+                                </div> */}
+                             
                             </div>
                             <h5 className="ml-3 mt-2 text-dark font-weight-bold">
-                              {quantity}
+                              {element.quantity}
                             </h5>
 
                             <div
                               className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
-                              onClick={plus}
+                              onClick={() => updateQuantity(element.quantity + 1, element._id,index)}
                             >
                               <i className="fa fa-plus"></i>
                             </div>
@@ -165,7 +191,7 @@ export default function Cart(props) {
                           <i className="fa fa-inr"></i> {element.shipping}
                         </td> */}
                         <td>
-                          <i className="fa fa-inr"></i> {quantity * element.products.mrp}
+                          <i className="fa fa-inr"></i> {element.quantity * element.products.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}
                         </td>
                         <td>
@@ -180,7 +206,7 @@ export default function Cart(props) {
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>Subtotal item:{}</td>
+                      <td></td>
 
                       <td>
                         <button className="btn-web hvr-float-shadow">

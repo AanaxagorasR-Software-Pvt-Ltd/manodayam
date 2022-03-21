@@ -126,6 +126,29 @@ router.delete("/deletecart/:_id", async (req, res) => {
 
   // res.send('hello')
 });
+
+router.post("/quantity", async (req, res) => {
+  const db = await getDatabase();
+  const body = req.body;
+
+
+  try {
+    let insertedId = null;
+    let Addcartlist = await db.collection("Add_to_cartlist");
+  
+      insertedId = await Addcartlist.updateOne(
+        { _id: new ObjectId(body._id) },
+        { $set: {quantity: body.quantity} }
+      )
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error",
+      error: e,
+    });
+  }
+});
+
 module.exports = router;
 // try {
 //   let result = await db

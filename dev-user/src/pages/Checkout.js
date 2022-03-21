@@ -5,11 +5,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 import { Modal, Button } from "react-bootstrap";
+import { UPDATE_QUANTITY,API_ADMIN_URL ,ADD_ALL_CART} from "../utill/api.endpoints";
 
 export default function Checkout() {
 
   const [show, setshow] = useState(false);
+  const [totalamount, settotalamount] = useState(0);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
+  const [responseData, setResponseData] = useState([]);
   const formiks = useFormik({
     initialValues: {
       Fullname: "",
@@ -47,7 +50,63 @@ export default function Checkout() {
       }
     },
   });
+  const allproduct = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    axios.post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
+      .then((res) => {
+       
+        let items = res.data.data
+        let sum= 0;
+        for (let i = 0; i < items.length; i++) {
+      
+       
+        sum = sum + (items[i].products.mrp * items[i].quantity);
+        }
+        settotalamount(sum);
+
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  // const totalQuantity = (quantity,productsmrp, _id) => {
+  //   const addlist = {
+
+  //     quantity: quantity,
+
+  //     _id: _id,
+
+  //   }
+  //   axios
+   
+  //     .then((res) => {
+  //       setResponseData(res.data.data);
+  //       const sum=0;
+  //         for(var i=0; i<Array.length;i++){
+  //           sum=sum+(quantity * productsmrp)
+  //         }
+
+
+  //         settotalamount()
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+    
+  // };
   const handleClose = () => setshow(false);
+  // const totalproduct=()=>{
+  //   const sum=0;
+  //   for(var i=0; i<Array.length;i++){
+  //     sum=sum+(quantity * products.mrp)
+  //   }
+  // }
+  useEffect((props) => {
+ 
+    allproduct();
+  }, []);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -210,30 +269,16 @@ export default function Checkout() {
                       </span>
                     </div>
                     <div className="form-inline">
-                      <label for="">Fidget Cube</label>
+                      <label for="">Total Product Price</label>
                       <span>
-                        <i className="fa fa-inr"></i> 799
+                        <i className="fa fa-inr"></i> {totalamount}
+                        
                       </span>
                     </div>
-                    <div className="form-inline">
-                      <label for="">Fidget Cube</label>
-                      <span>
-                        <i className="fa fa-inr"></i> 799
-                      </span>
-                    </div>
-                    <div className="form-inline">
-                      <label for="">Fidget Cube</label>
-                      <span>
-                        <i className="fa fa-inr"></i> 799
-                      </span>
-                    </div>
+                   
+                    
                     <hr />
-                    <div className="form-inline">
-                      <label for="">Sub Total</label>
-                      <span>
-                        <i className="fa fa-inr"></i> 2100
-                      </span>
-                    </div>
+                   
                     <div className="form-inline">
                       <label for="">Shipping Fee</label>
                       <span>
@@ -242,11 +287,11 @@ export default function Checkout() {
                     </div>
                     <div className="form-inline">
                       <label for="">
-                        <h3>Grand Total</h3>
+                        <h3>Payable Amount</h3>
                       </label>
                       <span>
                         <h3>
-                          <i className="fa fa-inr"></i> 2100
+                          <i className="fa fa-inr"></i> {totalamount}
                         </h3>
                       </span>
                     </div>
