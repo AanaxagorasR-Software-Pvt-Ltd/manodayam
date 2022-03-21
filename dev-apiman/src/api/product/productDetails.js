@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ObjectID = require("mongodb").ObjectID;
+const ObjectId = require("mongodb").ObjectId;
 const { getDatabase } = require("../../db/mongo");
 // const projectDetails = require('./data2');
 
@@ -106,6 +106,26 @@ router.post('/allcart', async (req, res) => {
     });
   }
 })
+router.delete("/deletecart/:_id", async (req, res) => {
+  const _id = new ObjectId(req.params._id);
+  console.log("deletes fsdf", _id);
+
+  try {
+    const db = await getDatabase();
+   
+    const body = req.body;
+    let dt = await db.collection("Add_to_cartlist").deleteOne({ _id: _id });
+    console.log("Log ", dt);
+    res.send({
+      message: "data deleted",
+    });
+  } catch (err) {
+    console.log("err", err.message);
+    res.end();
+  }
+
+  // res.send('hello')
+});
 module.exports = router;
 // try {
 //   let result = await db

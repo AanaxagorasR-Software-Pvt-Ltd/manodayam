@@ -1188,7 +1188,7 @@ export default function Login(props) {
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
-                        // style={{ width: 300, borderRadius: 50, height: 46 }}
+                      // style={{ width: 300, borderRadius: 50, height: 46 }}
                       >
                         <i
                           className="fa fa-google-plus"
@@ -1266,7 +1266,7 @@ export default function Login(props) {
                     onSuccess={responseInstagram}
                     onFailure={responseInstagram}
                     cssClass="btninsta"
-                    // style={{marginLeft}}
+                  // style={{marginLeft}}
                   />
 
                   <AppleSignin

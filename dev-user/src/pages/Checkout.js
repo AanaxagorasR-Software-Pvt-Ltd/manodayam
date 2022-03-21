@@ -1,6 +1,53 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+
+import { Modal, Button } from "react-bootstrap";
+
 export default function Checkout() {
+
+  const [show, setshow] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
+  const formiks = useFormik({
+    initialValues: {
+      Fullname: "",
+      Contact: "",
+      Companyname: "",
+      email: "",
+      Address1: "",
+      Address2: "",
+      Country: "",
+      TownCity: "",
+      State: "",
+      PostalCode: ""
+    },
+    onSubmit: async (values) => {
+      console.log(values);
+      try {
+        let resp = await axios.post(
+        
+          values
+        );
+        if (resp.data.status) {
+          formiks.resetForm();
+          setAlerdata({
+            title: "Congratulations",
+            body: "your order  is confirm Successfully",
+          });
+          setshow(true);
+          window.location.reload();
+        } else {
+
+          setshow(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+  const handleClose = () => setshow(false);
   return (
     <>
       <div className="contact-banner mb-50">
@@ -136,10 +183,13 @@ export default function Checkout() {
                       </div>
                     </div>
                     <div className="col-lg-12">
-                      <div className="form-inline">
-                        <input type="radio" name="" id="" />
-                        <p>G-130, Sector 63, Noida, Uttar Pradesh</p>
-                      </div>
+                      <buttton
+                        className="btn hvr-float-shadow"
+                      // onClick={() => loginsubmit("/bookingAppoint")}
+                      // onclick={()=>(checkout)}
+                      >
+                        <span style={{ color: "#23adba" }}>Submit</span>
+                      </buttton>
                     </div>
                   </div>
                 </form>
@@ -150,7 +200,7 @@ export default function Checkout() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="checkout-detail">
-                    <h2>Cart Total</h2>
+                    <h2>Order Detail</h2>
                     <div className="form-inline">
                       <label for="">
                         <h3>Product</h3>
@@ -244,6 +294,17 @@ export default function Checkout() {
           </div>
         </div>
       </div>
+      <Modal show={show}>
+        <Modal.Header closeButton>
+          <Modal.Title>{alertData.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{alertData.body}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            ok
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
