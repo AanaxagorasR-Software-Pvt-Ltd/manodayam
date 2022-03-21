@@ -323,7 +323,7 @@ export default function Checkout() {
                     <div className="form-inline">
                       <label for="">Sub Total</label>
                       <span>
-                        <i className="fa fa-inr"></i> 2100
+                        <i className="fa fa-inr"></i> {totalamount}
                       </span>
                     </div>
 
