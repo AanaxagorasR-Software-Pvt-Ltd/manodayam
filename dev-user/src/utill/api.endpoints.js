@@ -10,6 +10,7 @@ export const VIEW_PRODUCT = "/products";
 export const AAD_TO_CARTLIST="/products/addtocarts"
 export const UPDATE_QUANTITY="/products/quantity"
 export const ADD_ALL_CART="/products/allcart"
+export const ORDER_LIST="/products/orderdetails"
 export const DELETE_DATA="/products/deletecart"
 export const APPOINTMENT_API = "/appointments/appoint";
 export const DIGITAL_HUMAN_LIBRARY_DATA_API = "/library/library-data";

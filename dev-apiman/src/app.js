@@ -17,15 +17,6 @@ app.use(helmet());
 app.use(compression());
 
 // enabling CORS for all requests
-app.use(cors());
-app.options("*", cors());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-
-// adding morgan to log HTTP requests
-app.use(morgan("combined"));
 
 app.use("/uploads", express.static("uploads"));
 

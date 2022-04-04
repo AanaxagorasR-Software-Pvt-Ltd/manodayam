@@ -20,6 +20,7 @@ router.post("/appoint", async (req, res) => {
 
   try {
     let data = {
+
       fullname: body.fullname,
       email: body.email,
       mobileNmb: body.mobileNmb,
@@ -29,6 +30,7 @@ router.post("/appoint", async (req, res) => {
       status: body.status,
       docid: body.docid,
 	  userId:body.userId
+
     };
     console.log(data);
     if (!body?._id) {
@@ -59,7 +61,7 @@ router.post("/appoint", async (req, res) => {
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
-      message: "server error",
+      message: "server error", 
       error: e,
     });
   }

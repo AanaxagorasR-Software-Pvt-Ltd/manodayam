@@ -72,7 +72,7 @@ router.post('/allcart', async (req, res) => {
       .collection("Add_to_cartlist")
       .aggregate([
         {
-          $match: { userId: { $eq: req.query.userId} },
+          $match: { userId: { $eq: req.query.userId } },
         },
 
         {
@@ -85,7 +85,7 @@ router.post('/allcart', async (req, res) => {
         {
           $lookup: {
             from: "products",
-            localField:"productId",
+            localField: "productId",
             foreignField: "_id",
             as: "products",
           },
@@ -98,7 +98,7 @@ router.post('/allcart', async (req, res) => {
         },
       ])
       .toArray();
-    res.json({data:result,status:true});
+    res.json({ data: result, status: true });
   } catch (e) {
     res.status(500).json({
       status: false,
@@ -112,7 +112,7 @@ router.delete("/deletecart/:_id", async (req, res) => {
 
   try {
     const db = await getDatabase();
-   
+
     const body = req.body;
     let dt = await db.collection("Add_to_cartlist").deleteOne({ _id: _id });
     console.log("Log ", dt);
@@ -135,11 +135,11 @@ router.post("/quantity", async (req, res) => {
   try {
     let insertedId = null;
     let Addcartlist = await db.collection("Add_to_cartlist");
-  
-      insertedId = await Addcartlist.updateOne(
-        { _id: new ObjectId(body._id) },
-        { $set: {quantity: body.quantity} }
-      )
+
+    insertedId = await Addcartlist.updateOne(
+      { _id: new ObjectId(body._id) },
+      { $set: { quantity: body.quantity } }
+    )
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
@@ -148,7 +148,27 @@ router.post("/quantity", async (req, res) => {
     });
   }
 });
+router.post("/orderdetails", async (req, res) => {
+  const db = await getDatabase();
 
+  try {
+    const cart = req.body
+    cart.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+    const data = await db.collection("Order_list").insertOne(cart)
+    console.log('orderlist', data);
+    res.json({
+      status: true,
+      message: "successfully add",
+    })
+
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).json({
+      message: "server error",
+      error: err,
+    });
+  }
+});
 module.exports = router;
 // try {
 //   let result = await db
@@ -175,7 +195,7 @@ module.exports = router;
 //       },
 //       {
 //         $unwind: {
-//           path: "$products",
+//            path: "$products",
 //           preserveNullAndEmptyArrays: true,
 //         },
 //       },

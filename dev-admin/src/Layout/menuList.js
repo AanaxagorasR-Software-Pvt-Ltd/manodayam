@@ -181,7 +181,18 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Product",
+    name: "Product List",
+    isActive: false,
+    dataToggle: "", 
+    isExpand: false,
+    // link: "javascript:void(0)" ,
+    link: "",
+
+    iconClass: "icon-layout",
+    
+    submenu: [
+      {
+      name: "Product",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -190,6 +201,16 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    iconClass: "icon-layout",
+  },
+    {
+      name: "Order List",
+      isActive: true,
+      dataToggle: "",
+      link: "",
+      isExpand: false,
+    },
+    ]
   },
 
   {

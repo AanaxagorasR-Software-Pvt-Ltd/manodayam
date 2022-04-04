@@ -125,7 +125,7 @@ export default function Cart(props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="service-heading">
-                <h2>Products In Your Cart</h2>
+                <h2>My Cart</h2>
                 <br />
               </div>
             </div>
@@ -139,8 +139,8 @@ export default function Cart(props) {
                       <th>Product name</th>
                       <th>Price</th>
                       <th>Quantity</th>
-                      {/* <th>Shipping charges</th> */}
-                      <th>Total  Price</th>
+                      <th>Shipping charges</th>
+                      <th>Total Price</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -150,7 +150,16 @@ export default function Cart(props) {
                         <td>
                           <img src={element.products.img_url} alt="" />
                         </td>
-                        <td>{element.products.product_name}</td>
+                        {/* <td>{element.products.product_name}</td> */}
+                      
+                                 
+                                    <td>
+                                    <Link to={"/ViewProduct/" + element.products.slug}>
+                                      {element.products.product_name}
+                                      </Link>
+                                      </td>
+                                  
+                               
                         <td>
                           <i className="fa fa-inr"></i> {element.products.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}
@@ -187,14 +196,14 @@ export default function Cart(props) {
                           </div>
                         </td>
 
-                        {/* <td>
-                          <i className="fa fa-inr"></i> {element.shipping}
-                        </td> */}
                         <td>
-                          <i className="fa fa-inr"></i> {element.quantity * element.products.mrp}
-                          {/* {element.mrp * localStorage.getItem("Password")} */}
+                          <i className="fa fa-inr"></i> {element.products.shipping}
                         </td>
                         <td>
+                          <i className="fa fa-inr"></i> {(element.quantity * element.products.mrp) + parseFloat(element.products.shipping) }
+                          {/* {element.mrp * localStorage.getItem("Password")} */}
+                        </td>
+                        <td> 
                           <button className="btn" onClick={() => deleteData(element._id)}>
                             <i className="fas fa-trash-alt"></i>
                           </button>
@@ -202,6 +211,7 @@ export default function Cart(props) {
                       </tr>
                     ))}
                     <tr>
+                      <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
