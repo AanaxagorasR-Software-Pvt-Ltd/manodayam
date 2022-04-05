@@ -9,6 +9,8 @@ const passport = require("passport");
 const session = require("express-session");
 const { env } = process;
 const app = express();
+
+app.use(cors());
 app.use(`${env.MEDIA_PATH}`, express.static(`${env.MEDIA_PATH}`));
 // allow to use body as json file
 app.use(express.json({ limit: "50mb" }));
@@ -23,6 +25,7 @@ app.use("/uploads", express.static("uploads"));
   /**
    * Social media login
    */
+  
   app.use(
   session({
     secret: "s3cr3t",
