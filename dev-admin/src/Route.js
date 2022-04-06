@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import ToastNote from "./Components/ToastNotification";
 import AppointmentList from "./pages/Appointment";
 import BookedAppointmentList from "./pages/BookedAppointment";
+import Mastercategory from "./pages/MasterCategory";
 import Category from "./pages/Category";
 import Doctor from "./pages/Doctor";
 import Video from "./pages/Video";
@@ -69,6 +70,7 @@ const InternalRoute = (props) => {
             element={<BookedAppointmentList />}
             exact
           />
+           <Route path="/admin/master-category" element={<Mastercategory />} exact />
           <Route path="/admin/category" element={<Category />} exact />
           <Route path="/admin/about-category" element={<AboutCategory />} exact />
           <Route path="/admin/spirituality" element={<Spirituality />} exact />

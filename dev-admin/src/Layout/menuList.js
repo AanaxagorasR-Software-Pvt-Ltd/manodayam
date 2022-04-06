@@ -56,6 +56,17 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
+    name: "Master Category",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/master-category",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
+  {
     name: "Category",
     isActive: false,
     dataToggle: "",
