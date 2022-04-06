@@ -3,7 +3,7 @@ import axios from "../../utill/axios";
 class mastercategory {
 
     list(data) {
-        return axios.get( '/mastercategory', { params: data });
+        return axios.get( '/', { params: data });
     }
     listAll() {
         return axios.get( "/all");
@@ -12,7 +12,7 @@ class mastercategory {
         return axios.get( "/all/ignore-status");
     }
     save(data) {
-        return axios.post( '/mastercategory', data);
+        return axios.post( '/mastercategory/new', data);
     }
     delete(id) {
         return axios.delete(`/mastercategory/delete/${id}`);
