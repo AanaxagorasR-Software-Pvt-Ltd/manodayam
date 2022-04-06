@@ -252,6 +252,17 @@ const leftSideBarMenu = [
   //   isHover: false,
   // },
   {
+    name: "Voice Chat",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/voice-chat",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
+  {
     name: "User List",
     isActive: false,
     dataToggle: "",
