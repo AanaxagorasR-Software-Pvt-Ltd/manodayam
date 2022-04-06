@@ -115,6 +115,7 @@ export default function Profile() {
   return (
     <>
       <div className="contact-banner mb-50">
+        
         <div className="container">
           <div className="row">
             <div className="col-lg-6">

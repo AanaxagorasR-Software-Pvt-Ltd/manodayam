@@ -17,7 +17,8 @@ ul {
   list-style: none;
 }
 a {
-  color: #fff;
+  color:black;
+  
 }
 p {
   color: gray;
@@ -26,7 +27,7 @@ p {
   margin-bottom: 50px;
 }
 a:hover {
-  color: #fff;
+  color:black;
   text-decoration: none;
 }
 img {

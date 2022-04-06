@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, ADD_CART_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, ADD_CART_API, ADD_ALL_CART, DELETE_DATA, UPDATE_QUANTITY } from "../utill/api.endpoints";
+
 
 // var quen = 2;
 // {
@@ -9,6 +10,8 @@ import { API_ADMIN_URL, ADD_CART_API } from "../utill/api.endpoints";
 // }
 export default function Cart(props) {
   const [slug, setSlug] = useState(useParams().slug);
+  const [responseData, setResponseData] = useState([]);
+  const [quantity, setquantity] = useState(1);
   // const {slug} = useParams();
   useEffect(() => {
     // alert(slug);
@@ -17,35 +20,86 @@ export default function Cart(props) {
 
     // console.log("0000000",  localStorage.getItem("quent"));
   }, []);
-  const [responseData, setResponseData] = useState([]);
-  const ProductCart = () => {
-    console.log(`${API_ADMIN_URL}${ADD_CART_API}`);
 
+  // const ProductCart = () => {
+  //   console.log(`${API_ADMIN_URL}${ADD_CART_API}`);
+
+  //   axios
+  //     .post(`${API_ADMIN_URL}${ADD_CART_API}/${slug}`)
+  //     .then((res) => {
+  //       setResponseData(res.data.data);
+  //       console.log("----Cart----", res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  useEffect((props) => {
+    // ProductCart(props);
+    allproduct();
+  }, []);
+
+
+  // const plus = () => {
+  //   setquantity(quantity + 1);
+  //   // const quen = quantity * 3
+  // };
+  localStorage.setItem("quent", quantity);
+  // const Minus = () => {
+  //   if (quantity >= 2) setquantity(quantity - 1);
+
+  //   setSlug(slug);
+
+  // };
+  const allproduct = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
     axios
-      .post(`${API_ADMIN_URL}/${ADD_CART_API}/${slug}`)
+      .post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
       .then((res) => {
         setResponseData(res.data.data);
-        console.log("----Cart----", res.data);
+        console.log("new", res.data);
+
+
+
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  useEffect((props) => {
-    ProductCart(props);
-  }, []);
+  const updateQuantity = (quantity, _id ,index) => {
+    let copy = [...responseData];
+    copy[index].quantity = quantity;
+    setResponseData(copy);
+    const addlist = {
 
-  const [quantity, setquantity] = useState(1);
-  const plus = () => {
-    setquantity(quantity + 1);
-    // const quen = quantity * 3
-  };
-  localStorage.setItem("quent", quantity);
-  const Minus = () => {
-    if (quantity >= 2) setquantity(quantity - 1);
+      quantity: quantity,
 
-    setSlug(slug);
+      _id: _id,
+
+    }
+    axios
+      .post(`${API_ADMIN_URL}${UPDATE_QUANTITY}`, addlist)
+      .then((res) => {
+        setResponseData(res.data.data);
+        console.log("new", res.data);
+
+
+        allproduct();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  const deleteData = (_id) => {
+    axios.delete(`${API_ADMIN_URL}${DELETE_DATA}/${_id}`).then((res) => {
+      // alert(res?.message);
+
+      allproduct();
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+
   return (
     <>
       <div className="contact-banner mb-50">
@@ -71,7 +125,7 @@ export default function Cart(props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="service-heading">
-                <h2>Products In Your Cart</h2>
+                <h2>My Cart</h2>
                 <br />
               </div>
             </div>
@@ -85,63 +139,73 @@ export default function Cart(props) {
                       <th>Product name</th>
                       <th>Price</th>
                       <th>Quantity</th>
-                      {/* <th>Shipping charges</th> */}
-                      <th>Subtotal {quantity} item</th>
+                      <th>Shipping charges</th>
+                      <th>Total Price</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {responseData.map((element) => (
-                      <tr>
+                    {responseData && responseData.map((element,index) => (
+                      <tr key={element._id}>
                         <td>
-                          <img src={element.img_url} alt="" />
+                          <img src={element.products.img_url} alt="" />
                         </td>
-                        <td>{element.product_name}</td>
+                        {/* <td>{element.products.product_name}</td> */}
+                      
+                                 
+                                    <td>
+                                    <Link to={"/ViewProduct/" + element.products.slug}>
+                                      {element.products.product_name}
+                                      </Link>
+                                      </td>
+                                  
+                               
                         <td>
-                          <i className="fa fa-inr"></i> {element.mrp}
+                          <i className="fa fa-inr"></i> {element.products.mrp}
                           {/* {element.mrp * localStorage.getItem("Password")} */}
                         </td>
                         <td>
                           <div className="d-inline-flex">
                             <div
                               className="bg-light rounded-bottom rounded-top border h-25 p-1"
-                              onClick={Minus}
+                              onClick={() => updateQuantity(element.quantity - 1, element._id,index)}
+
                             >
-                              {quantity !== 1 ? (
+                             
                                 <div>
                                   <i className="fa fa-minus"></i>
                                 </div>
-                              ) : (
-                                <div>
+                            
+                                {/* <div>
                                   <Link to="/">
                                     <i className="fa fa-minus text-dark"></i>
                                   </Link>
-                                </div>
-                              )}
+                                </div> */}
+                             
                             </div>
                             <h5 className="ml-3 mt-2 text-dark font-weight-bold">
-                              {quantity}
+                              {element.quantity}
                             </h5>
-                          
+
                             <div
                               className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
-                              onClick={plus}
+                              onClick={() => updateQuantity(element.quantity + 1, element._id,index)}
                             >
                               <i className="fa fa-plus"></i>
                             </div>
                           </div>
                         </td>
-                        
-                        {/* <td>
-                          <i className="fa fa-inr"></i> {element.shipping}
-                        </td> */}
+
                         <td>
-                          <i className="fa fa-inr"></i> {quantity* element.mrp}
-                          {/* {element.mrp * localStorage.getItem("Password")} */}
+                          <i className="fa fa-inr"></i> {element.products.shipping}
                         </td>
                         <td>
-                          <button className="btn">
-                          <i class="fas fa-trash-alt"></i>
+                          <i className="fa fa-inr"></i> {(element.quantity * element.products.mrp) + parseFloat(element.products.shipping) }
+                          {/* {element.mrp * localStorage.getItem("Password")} */}
+                        </td>
+                        <td> 
+                          <button className="btn" onClick={() => deleteData(element._id)}>
+                            <i className="fas fa-trash-alt"></i>
                           </button>
                         </td>
                       </tr>
@@ -152,9 +216,10 @@ export default function Cart(props) {
                       <td></td>
                       <td></td>
                       <td></td>
+                      <td></td>
 
                       <td>
-                        <button class="btn-web hvr-float-shadow">
+                        <button className="btn-web hvr-float-shadow">
                           {" "}
                           <Link to="/checkout">Checkout</Link>
                         </button>

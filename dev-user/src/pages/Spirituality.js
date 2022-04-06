@@ -7,6 +7,9 @@ import { API_ADMIN_URL, SHAKTHI_QUESTION_API } from "../utill/api.endpoints";
 export default function Spirituality() {
   const [responseData, setResponseData] = useState([]);
 
+  const [count, setCount] = useState(0);
+
+
   // ShakthiQuestionlist
   const ShakthiQuestion = () => {
     console.log(`${API_ADMIN_URL}${SHAKTHI_QUESTION_API}`);
@@ -30,6 +33,15 @@ export default function Spirituality() {
   useEffect(() => {
     ShakthiQuestion();
   }, []);
+  let element = responseData[count] || {};
+  const incrementNextQuestion = ()=>{
+    if (count == responseData.length - 1){
+      
+    } else {
+      setCount(count + 1)
+    }
+    
+  } 
   return (
     <>
       <div className="contact-banner mb-50">
@@ -51,7 +63,7 @@ export default function Spirituality() {
       </div>
       <div className="about-section mb-50">
         <div className="container">
-          {responseData.map((element) => (
+          {
             <div className="row">
               <div className="col-lg-12">
                 <div className="service-heading">
@@ -76,19 +88,20 @@ export default function Spirituality() {
                       <button className="btn spr-btn">{element.ans4}</button>
                     </li>
                   </ul>
-                  <button className="ctn-btn btn btn-web cnt-btn hvr-float-shadow">
-                    <a href={globalData.ottLink}>Continue &nbsp;</a>
+                  <button className="ctn-btn btn btn-web cnt-btn hvr-float-shadow" onClick={() => incrementNextQuestion()}>
+                  Continue 
                     {/* <a href="https://swarnratnaindia.com/shakthi-ott/"> */}
                     {/* Continue &nbsp; */}
                     {/* </a> */}
+                    {/* {globalData.ottLink} */}
                   </button>
-              <form>
-                
-              </form>
+                  <form>
+
+                  </form>
                 </div>
               </div>
             </div>
-          ))}
+          }
         </div>
       </div>
     </>

@@ -9,6 +9,8 @@ const passport = require("passport");
 const session = require("express-session");
 const { env } = process;
 const app = express();
+
+app.use(cors());
 app.use(`${env.MEDIA_PATH}`, express.static(`${env.MEDIA_PATH}`));
 // allow to use body as json file
 app.use(express.json({ limit: "50mb" }));
@@ -17,21 +19,13 @@ app.use(helmet());
 app.use(compression());
 
 // enabling CORS for all requests
-app.use(cors());
-app.options("*", cors());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-
-// adding morgan to log HTTP requests
-app.use(morgan("combined"));
 
 app.use("/uploads", express.static("uploads"));
 
   /**
    * Social media login
    */
+  
   app.use(
   session({
     secret: "s3cr3t",
