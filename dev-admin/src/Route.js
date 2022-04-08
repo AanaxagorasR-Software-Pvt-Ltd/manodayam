@@ -7,6 +7,7 @@ import ToastNote from "./Components/ToastNotification";
 import AppointmentList from "./pages/Appointment";
 import BookedAppointmentList from "./pages/BookedAppointment";
 import MasterCategory from "./pages/MasterCategory";
+import Subscription from "./pages/Subscription";
 import Category from "./pages/Category";
 import Doctor from "./pages/Doctor";
 import Video from "./pages/Video";
@@ -75,6 +76,7 @@ const InternalRoute = (props) => {
             exact
           />
            <Route path="/admin/master-category" element={<MasterCategory />} exact />
+           <Route path="/admin/subscription-plan" element={<Subscription />} exact />
           <Route path="/admin/category" element={<Category />} exact />
           <Route
             path="/admin/about-category"

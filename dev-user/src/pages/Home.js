@@ -7,7 +7,7 @@ import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
-import { Modal as Bmodal, Button } from "react-bootstrap";
+import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
 import SimpleImageSlider from "react-simple-image-slider";
 import {
   API_ADMIN_URL,
@@ -17,6 +17,7 @@ import {
   SPIRITUALITY_API,
   ABOUT_API,
   DIGITAL_HUMAN_LIBRARY_DATA_API,
+  MASTERCATEGORY_API
 } from "../utill/api.endpoints";
 const images = [];
 export default function Home(props) {
@@ -26,6 +27,7 @@ export default function Home(props) {
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [ mastercategorys,setmastercategorys]=useState([])
 
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
@@ -340,6 +342,21 @@ export default function Home(props) {
       return false;
     }
   };
+  const mastercategory = () => {
+    console.log(`${API_ADMIN_URL}${MASTERCATEGORY_API}`);
+    axios
+      .get(`${API_ADMIN_URL}${MASTERCATEGORY_API}`)
+      .then((res) => {
+        setmastercategorys(res.data);
+        console.log("====mentalHealthData====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect((props) => {
+    mastercategory();
+  }, []);
   return (
     <>
       <Login humanId={humanId} />
@@ -351,6 +368,9 @@ export default function Home(props) {
                 <div className="web-banner-content">
                   <h1>{element.banner_text}</h1>
                   {/* <h1>Meet, Your Mentor or Coach-Digital Human Library</h1> */}
+                  <div className="d-flex">
+
+                
                   <button
                     className="qst-show btn-web hvr-float-shadow btn-web"
                     onClick={() => loginsubmit("/spirituality")}
@@ -363,6 +383,19 @@ export default function Home(props) {
                   >
                     your support networks
                   </button>
+                
+
+                    <Dropdown >
+                      <Dropdown.Toggle id="dropdown-basic" className="qst-show btn-web hvr-float-shadow btn-web">
+                        your subscription plan
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu className="scrollable-menu">
+                      { mastercategorys.map(element =>(<Dropdown.Item href="#/action-1">{element.mastercategory}</Dropdown.Item>))}
+                        
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    </div>
                 </div>
               </div>
             </div>
@@ -539,7 +572,7 @@ export default function Home(props) {
                       <select
                         name=""
                         id=""
-                        // onChange={(event) => setState(event.target.value)}
+                      // onChange={(event) => setState(event.target.value)}
                       >
                         <option value="All State">All State</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>

@@ -37,6 +37,7 @@ router.use(`/addtocarts`, require("./addToCart/aaToCarts"));
 // router.use(`/products`,require("./product/productDetails"))
 router.use(`/banner`, require("./banner/banner"));
 router.use(`/mastercategory`, require("./mastercategory/MasterCategory"));
+router.use(`/subscription`, require("./subscription/subscription"));
 router.use(`/doctors`, require("./doctorlist/doctorlists"));
 router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
