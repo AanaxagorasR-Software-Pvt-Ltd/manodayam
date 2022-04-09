@@ -408,7 +408,8 @@ const Addform = forwardRef((props, ref) => {
             fd.append(prop, data[prop]);
         }
         subscription            
-        .save(data)
+        .save( data ,data.id)
+        
             .then((res) => {
                 // alert(res.message);
                 handleShow(res.message);

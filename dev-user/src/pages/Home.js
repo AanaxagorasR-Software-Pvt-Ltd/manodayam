@@ -297,6 +297,17 @@ export default function Home(props) {
       setshow(true);
     }
   };
+  const subchange = (url = 0) => {
+    let local = localStorage.getItem("Token");
+    if (local) {
+      if (url !== 0) {
+        hist(url);
+      }
+    } else {
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true);
+    }
+  };
   const handleClose = () => setshow(false);
 
   const loginsubmits = (url = 0) => {
@@ -390,7 +401,7 @@ export default function Home(props) {
                         your subscription plan
                       </Dropdown.Toggle>
 
-                      <Dropdown.Menu className="scrollable-menu">
+                      <Dropdown.Menu className="scrollable-menu"  onChange={()=> subchange("/profile") } >
                       { mastercategorys.map(element =>(<Dropdown.Item href="#/action-1">{element.mastercategory}</Dropdown.Item>))}
                         
                       </Dropdown.Menu>
