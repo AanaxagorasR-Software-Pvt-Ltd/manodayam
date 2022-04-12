@@ -408,13 +408,13 @@ export default function Home(props) {
                       className="qst-show btn-web hvr-float-shadow btn-web"
                       onClick={() => loginsubmit("/spirituality")}
                     >
-                      register for assessment
+                      Register For Assessment
                     </button>
                     <button
                       className="btn-web"
                       onClick={() => loginsubmit("/support")}
                     >
-                      your support networks
+                      Your Support Networks
                     </button>
 
 
