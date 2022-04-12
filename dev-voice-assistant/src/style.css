@@ -28,7 +28,6 @@ body {
   outline: 0;
   border: 0;
   background: linear-gradient(45deg, #23adba, #9d1892);
-
   padding: 7px 12px;
   color: #fff;
   font-size: 16px;
@@ -40,7 +39,6 @@ body {
 
 .simple-btn:hover {
   background: linear-gradient(45deg, #23adba, #9d1892);
-
 }
 
 #visualizer-container {
