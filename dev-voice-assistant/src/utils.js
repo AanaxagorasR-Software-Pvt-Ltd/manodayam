@@ -48,21 +48,6 @@ export const runAudio = () => {
     recorder.start();
     await sleep(3000);
     const audio = await recorder.stop();
-    // put api here to save audio in data base
-    // const save = () => {
-    // let fd = new FormData();
-    // for (let prop in data) {
-    //   fd.append(prop, data[prop]);
-    // }
-    // "http://localhost:3020/api/audioUpload/voicechat"
-    //   .save(fd)
-    //   .then((res) => {
-    //     alert(res.message);
-    //   })
-    //   .catch((err) => {
-    //     alert(err.message);
-    //   });
-    // };
     try {
       const savedFile = await saveFile(audio);
     } catch (e) {
@@ -76,7 +61,7 @@ export const runAudio = () => {
     if (quize.length > 0) {
       it.next();
     } else {
-      let rest = confirm(saySpeech("wants to reassesment ?"));
+      let rest = confirm(saySpeech("wants to Restart ?"));
       if (rest) {
         quize = [
           "Hello we are manodayam team, What is your name ?",

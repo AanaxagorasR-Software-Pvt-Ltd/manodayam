@@ -7,34 +7,21 @@ const path = require("path");
 const { env } = process;
 const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
 
-const imageStorage = multer.diskStorage({
-  // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
+const audioStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "../../../uploads/images"));
   },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
-    );
-  },
 });
-const imageUpload = multer({
-  storage: imageStorage,
+const audioUpload = multer({
+  storage: audioStorage,
   limits: {
     fieldSize: 1000000,
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-      return cb(new Error("Please upload a Image"));
-    }
-    cb(undefined, true);
   },
 });
 
 router.post(
   `/voice`,
-  imageUpload.single("image"),
+  audioUpload.single("audio_link"),
   async (req, res) => {
     try {
       const db = await getDatabase();
@@ -43,15 +30,6 @@ router.post(
         audio_link: body.audio_link,
       };
 
-      if (typeof req.file !== "undefined") {
-        const imagefile = req.file.filename;
-        const imageurl =
-          DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
-        data.image = imageurl;
-      } else {
-        data.image = body.image;
-      }
-
       console.log(data);
       if (!body?._id) {
         data.created = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
@@ -59,16 +37,8 @@ router.post(
         data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
       }
 
-      let insertedId = null;
-      let vedios = await db.collection("voicechat");
-      if (body._id) {
-        insertedId = await vedios.updateOne(
-          { _id: new ObjectId(body._id) },
-          { $set: data }
-        ).insertedId;
-      } else {
-        insertedId = await vedios.insertOne(data).insertedId;
-      }
+      let audios = await db.collection("voicechat");
+      const insertedId = await audios.insertOne(data);
 
       res.status(200).json({
         data: {
@@ -90,22 +60,21 @@ router.post(
   }
 );
 
-router.get("/", async (req, res) => {
-  const db = await getDatabase();
-  let filter = {};
-  if (req.query.id && req.query.id != "null") {
-    filter._id = ObjectId(req.query.id);
-  }
-  try {
-    // const { collectiontype } = req.body;
-    let dt = await db.collection("voicechat").find(filter).toArray();
-    res.json(dt);
-  } catch (err) {
-    console.log("err", err.message);
-  }
-
-  // res.send('hello')
-});
+// router.get("/", async (req, res) => {
+//   const db = await getDatabase();
+//   let filter = {};
+//   if (req.query.id && req.query.id != "null") {
+//     filter._id = ObjectId(req.query.id);
+//   }
+//   try {
+//     // const { collectiontype } = req.body;
+//     let dt = await db.collection("voicechat").find(filter).toArray();
+//     res.json(dt);
+//   } catch (err) {
+//     console.log("err", err.message);
+//   }
+//   // res.send('hello')
+// });
 router.delete("/delete/:_id", async (req, res) => {
   const _id = new ObjectId(req.params._id);
   console.log("delete", _id);

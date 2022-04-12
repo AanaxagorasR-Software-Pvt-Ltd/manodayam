@@ -61,12 +61,12 @@ const VoiceChat = (props) => {
       });
   };
 
-  // const deleteData = (_id) => {
-  //   voicechat.delete(_id).then((res) => {
-  //     alert(res?.message);
-  //     list();
-  //   });
-  // };
+  const deleteCat = (_id) => {
+    voicechat.delete(_id).then((res) => {
+      alert(res?.message);
+      list();
+    });
+  };
 
   const onsubmit = (e) => {
     e.preventDefault();
@@ -294,6 +294,16 @@ const VoiceChat = (props) => {
                                       .slice(0, 10)
                                       .replace(/-/g, "-")}{" "}
                                   </td>
+                                  <td>
+                               
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-danger add-btn"
+                                    onClick={() => deleteCat(v._id)}
+                                  >
+                                    <i class="ti-trash"></i>
+                                  </button>
+                                </td>
                                 </tr>
                               ))}
                           </tbody>

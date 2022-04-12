@@ -1,5 +1,4 @@
 import axios from "axios";
-
 export async function getWeather(city) {
   const weatherResponse = await fetch(
     `http://api.weatherapi.com/v1/current.json?key=647c054a280143f79b500313201411&q=${city}`
@@ -16,9 +15,6 @@ export async function saveFile(audioObje) {
   return axios.post("http://localhost:3020/api/voicechat/voice", {
     method: "POST",
     audio_link: audioObje.audioUrl,
-    // headers: new Headers({
-    //   enctype: "multipart/form-data", // the enctype is important to work with multer on the server
-    // }),
   });
   // const formData = new FormData();
   // blobToBase64(audioObje?.audioBlob).then((base64Data) => {
