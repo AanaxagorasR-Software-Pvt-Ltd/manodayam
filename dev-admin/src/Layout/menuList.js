@@ -67,6 +67,17 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
+    name: "Subscription plan",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/subscription-plan",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
+  {
     name: "Category",
     isActive: false,
     dataToggle: "",

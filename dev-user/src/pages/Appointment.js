@@ -8,6 +8,7 @@ import {
   API_ADMIN_URL,
   // PRODUCT_API,
   APPOINTMENT_API,
+  MASTERCATEGORY_API
 } from "../utill/api.endpoints";
 
 export default function Appointment() {
@@ -17,6 +18,7 @@ export default function Appointment() {
   const [appointmentSchedule, setappointmentSchedule] = useState("");
   const [appointDisorder, setappointDisorder] = useState("");
   const [appointMsg, setappointMsg] = useState("");
+  const[mastercategorys,setmastercategorys]=useState([]);
 
   //error
   const [appointNameError, setappointNameError] = useState("");
@@ -107,6 +109,21 @@ export default function Appointment() {
     }
     return false;
   }
+   const mastercategory = () => {
+    console.log(`${API_ADMIN_URL}${MASTERCATEGORY_API}`);
+    axios
+      .get(`${API_ADMIN_URL}${MASTERCATEGORY_API}`)
+      .then((res) => {
+        setmastercategorys(res.data);
+        console.log("====mentalHealthData====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect((props) => {
+    mastercategory();
+  }, []);
   const handleClose = () => setshow(false);
 
   return (
@@ -213,23 +230,9 @@ export default function Appointment() {
                             setappointDisorder(appointDisorder.target.value)
                           }
                         >
-                          <option value="Depression">Depression</option>
-                          <option value="Anxiety">Anxiety</option>
-                          <option value="Attention_Disorder">
-                            Attention Disorder
-                          </option>
-                          <option value="Psychosis">Psychosis</option>
-                          <option value="Obsessive_Compulsive_Disorder">
-                            Obsessive Compulsive Disorder
-                          </option>
-                          <option value="Drug_Abuse">Drug Abuse</option>
-                          <option value="Alcohol_Abuse">Alcohol Abuse</option>
-                          <option value="Sexual_Dysfunction">
-                            Sexual Dysfunction
-                          </option>
-                          <option value="Dementia">Dementia</option>
-                          <option value="Bipolar">Bipolar</option>
-                          <option value="schizophrenia">schizophrenia </option>
+                   { mastercategorys ?.map(element =>(
+                   < option value="disorder">{element.mastercategory}</option>))}
+                        
                         </select>
                         {appointDisorder == "" ? (
                           <p className="text-danger">{appointDisorderError}</p>

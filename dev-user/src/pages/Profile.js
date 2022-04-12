@@ -26,7 +26,7 @@ export default function Profile() {
     axios
       .post(`${API_ADMIN_URL}${PROFIL_API}`, profileData)
       .then((res) => {
-        
+
         setprofilData(res.data.data);
         console.log("====profileData====", res.data.data);
         console.log(res.data);
@@ -63,7 +63,7 @@ export default function Profile() {
       .get(`${API_ADMIN_URL}${PROFIL_API}?userId=${user._id}`)
       .then((res) => {
         console.log("res", res, typeof res);
-        formik.setValues({name:res.data.name,email:res.data.email})
+        formik.setValues({ name: res.data.name, email: res.data.email })
         setEditData(res.data)
       })
       .catch((err) => {
@@ -73,41 +73,41 @@ export default function Profile() {
   React.useEffect(() => {
     listBooked();
     Editprofile();
- 
+
   }, []);
   const convertToDateTime = (time) => {
     const d = new Date(time);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
-// const saveData =()=>{
-  
+  // const saveData =()=>{
 
-//   axios
-//   .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
-//   .then((res) => {
-    
-//     setprofilData(res.data.data);
-  
-//     console.log(res.data);
-//     setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
-//     setshow(true)
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
-// }
-// const handleChange = (v, k) => {
-//   setEditData({ ...editData, [k]: v });
-// };
+
+  //   axios
+  //   .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
+  //   .then((res) => {
+
+  //     setprofilData(res.data.data);
+
+  //     console.log(res.data);
+  //     setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
+  //     setshow(true)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
+  // const handleChange = (v, k) => {
+  //   setEditData({ ...editData, [k]: v });
+  // };
   const handleClose = () => setshow(false);
 
-  const formik=useFormik({
-    initialValues:{
-      name:"name",
-      email:"email"
-      
+  const formik = useFormik({
+    initialValues: {
+      name: "name",
+      email: "email"
+
     },
-    onSubmit:(values)=>{
+    onSubmit: (values) => {
       console.log(values)
     }
   })
@@ -115,7 +115,7 @@ export default function Profile() {
   return (
     <>
       <div className="contact-banner mb-50">
-        
+
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
@@ -180,7 +180,7 @@ export default function Profile() {
                             data-toggle="tab"
                             href="#menu1"
                           >
-                            My Orders
+                            My Subscriptions
                           </a>
                         </li>
                         {/* <li className="nav-item">
@@ -215,8 +215,8 @@ export default function Profile() {
                     <div class="row">
                       <div class="col-lg-12">
                         {/* <div class="profile-form checkout-form doctor-form"> */}
-                          {/* <h3>Edit Your Profile Here</h3> */}
-                          {/* <form action="" onSubmit={formik.handleSubmit} >
+                        {/* <h3>Edit Your Profile Here</h3> */}
+                        {/* <form action="" onSubmit={formik.handleSubmit} >
                             <div class="row"> 
                               <div class="col-lg-6">
                                 <div class="form-group">
@@ -245,7 +245,7 @@ export default function Profile() {
                                   />
                                 </div>
                               </div> */}
-                              {/* <div class="col-lg-6">
+                        {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Phone No.</label>
                                   <input
@@ -257,7 +257,7 @@ export default function Profile() {
                                   />
                                 </div>
                               </div> */}
-                              {/* <div class="col-lg-6">
+                        {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Email Address</label>
                                   <input
@@ -271,7 +271,7 @@ export default function Profile() {
                                   />
                                 </div>
                               </div> */}
-                              {/* <div class="col-lg-6">
+                        {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">Old Password</label>
                                   <input
@@ -283,7 +283,7 @@ export default function Profile() {
                                   />
                                 </div>
                               </div> */}
-                              {/* <div class="col-lg-6">
+                        {/* <div class="col-lg-6">
                                 <div class="form-group">
                                   <label for="">New Password</label>
                                   <input
@@ -294,7 +294,7 @@ export default function Profile() {
                                   />
                                 </div>
                               </div> */}
-                              {/* <div class="col-lg-12">
+                        {/* <div class="col-lg-12">
                                 <div class="form-group">
                                   <label for="">Confirm Password</label>
                                   <input
@@ -305,8 +305,8 @@ export default function Profile() {
                                   />
                                 </div>
                               </div> */}
-                              
-                                {/* <button class="btn hvr-float-shadow" type="submit" >
+
+                        {/* <button class="btn hvr-float-shadow" type="submit" >
                                   Save
                                 </button>
                               
@@ -323,59 +323,62 @@ export default function Profile() {
                           <table className="table table-bordered table-striped table-hover">
                             <thead>
                               <tr>
-                                <th>Product</th>
-                                <th>Product name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Shipping charges</th>
-                                <th>Status</th>
+                              <th>S.no</th>
+                                <th>Therapy</th>
+                                <th>Self Assessment</th>
+                                <th>Doctor Assessment</th>
+                                <th>Group Therapy</th>
+                              <th>Meditation Spirituality</th>
+                              <th>Price</th>
+                              
+
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <img src="image/pr.png" alt="" />
-                                </td>
-                                <td>Fidget Cube</td>
-                                <td>
-                                  <i className="fa fa-inr"></i> 399
-                                </td>
-                                <td>2</td>
-                                <td>
-                                  <i className="fa fa-inr"></i> 500
-                                </td>
-                                <td>Success</td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="image/pr.png" alt="" />
-                                </td>
-                                <td>Fidget Cube</td>
-                                <td>
-                                  <i className="fa fa-inr"></i> 399
-                                </td>
-                                <td>3</td>
-                                <td>
-                                  <i className="fa fa-inr"></i> 500
-                                </td>
-                                <td>Success</td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="image/pr.png" alt="" />
-                                </td>
-                                <td>Fidget Cube</td>
-                                <td>
-                                  <i className="fa fa-inr"></i> 399
-                                </td>
-                                <td>3</td>
-                                <td>
-                                  <i className="fa fa-inr"></i> 500
-                                </td>
-                                <td>Success</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                              {<tbody>
+                                <tr>
+                                  <td>
+                                    <img src="image/pr.png" alt="" />
+                                  </td>
+                                  <td>cbgfhfhh</td>
+                                  <td>
+                                    <i className="fa fa-inr"></i> 
+                                  </td>
+                                  <td></td>
+                                  <td>
+                                    <i className="fa fa-inr"></i> 500
+                                  </td>
+                                  <td>Success</td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <img src="image/pr.png" alt="" />
+                                  </td>
+                                  <td>Fidget Cube</td>
+                                  <td>
+                                    <i className="fa fa-inr"></i> 399
+                                  </td>
+                                  <td>3</td>
+                                  <td>
+                                    <i className="fa fa-inr"></i> 500
+                                  </td>
+                                  <td>Success</td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <img src="image/pr.png" alt="" />
+                                  </td>
+                                  <td>Fidget Cube</td>
+                                  <td>
+                                    <i className="fa fa-inr"></i> 399
+                                  </td>
+                                  <td>3</td>
+                                  <td>
+                                    <i className="fa fa-inr"></i> 500
+                                  </td>
+                                  <td>Success</td>
+                                </tr>
+                              </tbody>}
+                            </table>
                         </div>
                       </div>
                     </div>
