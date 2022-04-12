@@ -12,12 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import ReactAudioPlayer from "react-audio-player";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import voicechat from "../Store/Connect/voicechat";
 import LeftSideBar from "../Layout/LeftSideBar";
+import { Modal as Bmodal, Button } from "react-bootstrap";
+
 const VoiceChat = (props) => {
   console.log(props);
   const [data, setData] = React.useState([]);
@@ -28,7 +30,13 @@ const VoiceChat = (props) => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
-
+  const [showDeleteData, setshowDeleteData] = useState(false);
+  const [alertDeleteData, setAlerDeleteData] = useState({
+    title: "",
+    body: "",
+  });
+  const handleClose = () => setshowDeleteData(false);
+  const handleShow = () => setshowDeleteData(true);
   const formRef = useRef("");
 
   const list = () => {
@@ -63,7 +71,9 @@ const VoiceChat = (props) => {
 
   const deleteCat = (_id) => {
     voicechat.delete(_id).then((res) => {
-      alert(res?.message);
+      // alert(res?.message);
+      handleShow(res?.message);
+      setAlerDeleteData({ title: "Done", body: "Data Deleted" });
       list();
     });
   };
@@ -269,7 +279,7 @@ const VoiceChat = (props) => {
                               <th>User Answer</th>
 
                               <th>Created Date</th>
-                              {/* <th> Status</th> */}
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -282,12 +292,19 @@ const VoiceChat = (props) => {
                                   {/* <td>{v.audio_link}</td> */}
                                   <td>
                                     <ReactAudioPlayer
-                                      src={v.audio_link}
+                                      src={
+                                        new Audio(
+                                          URL.createObjectURL(v.audioblob)
+                                        )
+                                      }
                                       autoPlay={false}
                                       controls
                                       style={{ color: "red" }}
                                     />
                                   </td>
+                                  {/* const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+            const play = () => audio.play(); */}
                                   <td>
                                     {new Date()
                                       .toJSON()
@@ -295,15 +312,14 @@ const VoiceChat = (props) => {
                                       .replace(/-/g, "-")}{" "}
                                   </td>
                                   <td>
-                               
-                                  <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger add-btn"
-                                    onClick={() => deleteCat(v._id)}
-                                  >
-                                    <i class="ti-trash"></i>
-                                  </button>
-                                </td>
+                                    <button
+                                      type="button"
+                                      class="btn btn-sm btn-danger add-btn"
+                                      onClick={() => deleteCat(v._id)}
+                                    >
+                                      <i class="ti-trash"></i>
+                                    </button>
+                                  </td>
                                 </tr>
                               ))}
                           </tbody>
@@ -328,6 +344,25 @@ const VoiceChat = (props) => {
           </div>
         </div>
       </div>
+      {/* add alert modal */}
+      <Bmodal show={showDeleteData} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertDeleteData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertDeleteData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 };
@@ -335,7 +370,7 @@ const VoiceChat = (props) => {
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
-  const [searchField, setSearchField] = useState("");
+
   const { list } = props;
   const handleChange = (v, k) => {
     setData({ ...data, [k]: v });

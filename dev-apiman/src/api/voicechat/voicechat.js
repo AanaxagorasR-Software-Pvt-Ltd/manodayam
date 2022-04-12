@@ -28,8 +28,9 @@ router.post(
       const body = req.body;
       let data = {
         audio_link: body.audio_link,
+        audioblob: body.audioBlob
       };
-
+      
       console.log(data);
       if (!body?._id) {
         data.created = new Date().toJSON().slice(0, 10).replace(/-/g, "-");

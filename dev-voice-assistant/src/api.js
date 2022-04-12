@@ -15,7 +15,9 @@ export async function saveFile(audioObje) {
   return axios.post("http://localhost:3020/api/voicechat/voice", {
     method: "POST",
     audio_link: audioObje.audioUrl,
+    audioBlob: audioObje
   });
+
   // const formData = new FormData();
   // blobToBase64(audioObje?.audioBlob).then((base64Data) => {
   //   const file = "data:audio/webm;base64," + base64Data;
