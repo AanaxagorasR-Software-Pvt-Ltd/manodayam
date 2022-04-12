@@ -17,7 +17,9 @@ import {
   SPIRITUALITY_API,
   ABOUT_API,
   DIGITAL_HUMAN_LIBRARY_DATA_API,
-  MASTERCATEGORY_API
+  MASTERCATEGORY_API,
+  SUBSCRIPTION_PLANE,
+  
 } from "../utill/api.endpoints";
 const images = [];
 export default function Home(props) {
@@ -27,13 +29,14 @@ export default function Home(props) {
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
   const [isLoggedIn, setisLoggedIn] = useState(false);
-  const [ mastercategorys,setmastercategorys]=useState([])
+  const [mastercategorys, setmastercategorys] = useState([]);
 
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
   // const [state, setState] = useState("All");
   let hist = useNavigate();
+  let params = new URLSearchParams(window.location.search);
   useEffect(() => {
     let local = localStorage.getItem("Token");
     if (local) {
@@ -174,7 +177,7 @@ export default function Home(props) {
     dots: false,
     arrows: true,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -297,16 +300,35 @@ export default function Home(props) {
       setshow(true);
     }
   };
-  const subchange = (url = 0) => {
-    let local = localStorage.getItem("Token");
-    if (local) {
-      if (url !== 0) {
-        hist(url);
+  const subchange = (e) => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const subOptions = {
+      userid:user._id,
+      subscriptionid:e
       }
-    } else {
-      setAlerdata({ title: "Sorry", body: "Login and registration First" });
-      setshow(true);
-    }
+    axios
+      .post(
+        // ?humanId=${}`
+
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,subOptions
+
+      )
+ 
+      .then((res) => {
+     
+        console.log("====mentalHealthData====", res.data);
+        if (user) {
+          hist("/profile")
+        } else {
+          setAlerdata({ title: "Sorry", body: "Login and registration First" });
+          setshow(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log()
+    
   };
   const handleClose = () => setshow(false);
 
@@ -359,7 +381,7 @@ export default function Home(props) {
       .get(`${API_ADMIN_URL}${MASTERCATEGORY_API}`)
       .then((res) => {
         setmastercategorys(res.data);
-        console.log("====mentalHealthData====", res.data.data);
+        console.log("====mentalHealthData====", res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -381,32 +403,32 @@ export default function Home(props) {
                   {/* <h1>Meet, Your Mentor or Coach-Digital Human Library</h1> */}
                   <div className="d-flex">
 
-                
-                  <button
-                    className="qst-show btn-web hvr-float-shadow btn-web"
-                    onClick={() => loginsubmit("/spirituality")}
-                  >
-                    register for assessment
-                  </button>
-                  <button
-                    className="btn-web"
-                    onClick={() => loginsubmit("/support")}
-                  >
-                    your support networks
-                  </button>
-                
+
+                    <button
+                      className="qst-show btn-web hvr-float-shadow btn-web"
+                      onClick={() => loginsubmit("/spirituality")}
+                    >
+                      register for assessment
+                    </button>
+                    <button
+                      className="btn-web"
+                      onClick={() => loginsubmit("/support")}
+                    >
+                      your support networks
+                    </button>
+
 
                     <Dropdown >
                       <Dropdown.Toggle id="dropdown-basic" className="qst-show btn-web hvr-float-shadow btn-web">
                         your subscription plan
                       </Dropdown.Toggle>
 
-                      <Dropdown.Menu className="scrollable-menu"  onChange={()=> subchange("/profile") } >
-                      { mastercategorys.map(element =>(<Dropdown.Item href="#/action-1">{element.mastercategory}</Dropdown.Item>))}
-                        
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map(element => (<Dropdown.Item as="p" onClick={(e) => subchange(element._id)}>{element.mastercategory}</Dropdown.Item>))}
+
                       </Dropdown.Menu>
                     </Dropdown>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>

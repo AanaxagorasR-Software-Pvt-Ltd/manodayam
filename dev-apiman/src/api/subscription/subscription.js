@@ -25,6 +25,7 @@ const validate = (req, res, next) => {
 //   // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
 //   destination: (req, file, cb) => {
 //     cb(null, path.join(__dirname, "../../../uploads/images"))
+
 //   },
 //   filename: (req, file, cb) => {
 //     cb(
@@ -37,22 +38,22 @@ const validate = (req, res, next) => {
 
 router.post(
   `/sub`,
- 
+
   async (req, res) => {
     try {
-      const db = await getDatabase();     
+      const db = await getDatabase();
       const body = req.body;
       let data = {
         type: body.type,
         therapy: body.therapy,
         selfassessment: body.selfassessment,
-        doctorassessment:body.doctorassessment,
-        grouptherapy:body.grouptherapy,
-        meditation:body.meditation,
-        benefitsdescription:body.benefitsdescription,
-        price:body.price
-      
-     
+        doctorassessment: body.doctorassessment,
+        grouptherapy: body.grouptherapy,
+        meditation: body.meditation,
+        benefitsdescription: body.benefitsdescription,
+        price: body.price
+
+
         // type: body.type,
       };
 
@@ -82,7 +83,7 @@ router.post(
         status: true,
         message: "data inserted",
       });
-      
+
     } catch (e2) {
       res
         .status(400)
@@ -95,18 +96,38 @@ router.post(
   }
 );
 
+router.post("/usersubscription", async (req, res) => {
+  const db = await getDatabase();
+  const body = req.body;
+
+
+  try {
+    let insertedId = null;
+    let Addsublist = await db.collection("Subscription_Plan");
+
+    let data = await Addsublist.insertOne(body);
+    res.end()
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error",
+      error: e,
+    });
+  }
+});
+
 router.get("/", async (req, res) => {
   const db = await getDatabase();
   let filter = {
 
 
   };
-  if(req.query.id && req.query.id != "null" ){
-    filter._id =  ObjectId(req.query.id);
+  if (req.query.id && req.query.id != "null") {
+    filter._id = ObjectId(req.query.id);
 
   }
   try {
-  
+
     // const { collectiontype } = req.body;
     let dt = await db.collection("Subscription_Plan").find(filter).toArray();
     res.json(dt);
