@@ -42,7 +42,7 @@ const Audio = () => {
       .get("audios")
       .then((res) => {
         setData(res);
-        setfilerdata(res)
+        setfilerdata(res);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -76,20 +76,16 @@ const Audio = () => {
     e.preventDefault();
     const searchlist = data.filter((value) => {
       if (searchField == "") {
-        return true
-
-
+        return true;
       } else {
-        return value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) || value.type.toLowerCase().includes(searchField.toLocaleLowerCase()) 
-         
+        return (
+          value.title.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+          value.type.toLowerCase().includes(searchField.toLocaleLowerCase())
+        );
       }
-
-
-    })
+    });
     setfilerdata(searchlist);
-
-
-  }
+  };
   return (
     <>
       <Addform ref={formRef} list={list} />
@@ -132,9 +128,9 @@ const Audio = () => {
                       aria-label="search"
                       aria-describedby="search"
                       value={data.status}
-
-
-                      onChange={(event) => { setSearchField(event.target.value) }}
+                      onChange={(event) => {
+                        setSearchField(event.target.value);
+                      }}
                     />
                   </form>
                 </div>
@@ -206,8 +202,9 @@ const Audio = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
-                  }`}
+                class={`nav-item nav-profile dropdown ${
+                  profileShow ? "show" : ""
+                }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -220,8 +217,9 @@ const Audio = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
-                    }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
+                    profileShow ? "show" : ""
+                  }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -254,7 +252,6 @@ const Audio = () => {
             <ul class="nav">
               <LeftSideBar />
             </ul>
-            
           </nav>
           <div class="main-panel">
             <div class="content-wrapper">
@@ -438,11 +435,13 @@ const Addform = forwardRef((props, ref) => {
             <div class="form-group">
               <div class="col-md-3  offset-9">
                 <label for="exampleInputUsername1">Audio Type</label>
-                <select class="form-control"
+                <select
+                  class="form-control"
                   value={data.type || ""}
                   onChange={(e) => {
                     handleChange(e.target.value, "type");
-                  }}>
+                  }}
+                >
                   <option>Select</option>
                   <option>Latest updates</option>
                   <option>Sleep</option>
@@ -520,8 +519,8 @@ const Addform = forwardRef((props, ref) => {
           </Button>
         </Modal.Footer>
       </Modal>
-       {/* add alert modal */}
-       <Bmodal show={showdata} className="h-75">
+      {/* add alert modal */}
+      <Bmodal show={showdata} className="h-75">
         <Bmodal.Body className="modal-body">
           {" "}
           <form class="forms-sample">

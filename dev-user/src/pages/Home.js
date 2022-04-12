@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from "react-slick";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
@@ -865,6 +865,7 @@ export default function Home(props) {
                 Please see your support system such as genetics support, find
                 brain mapping centers
               </p>
+              {/* <Link to="/chat">jhkjxdch</Link> */}
             </div>
           </div>
 

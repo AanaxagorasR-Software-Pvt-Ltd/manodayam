@@ -81,7 +81,9 @@ export default function Musicplayer() {
               />
 
               <div className="player mt-5">
-              <h2 className="mb-3 text-center text-info display-5">{resData && resData.length > 0 && resData[0].type}</h2>
+                <h2 className="mb-3 text-center text-info display-5">
+                  {resData && resData.length > 0 && resData[0].type}
+                </h2>
 
                 {/* <div class="player-track">
                       <div class="artist-name"></div>
@@ -100,7 +102,9 @@ export default function Musicplayer() {
                       <i id="play" class="play-btn fas fa-play"></i>
                       <i id="next" class="next-btn fas fa-forward"></i>
                     </div> */}
-                <h4 className="text-center ">{resData && resData.length > 0 && resData[0].title}</h4>
+                <h4 className="text-center ">
+                  {resData && resData.length > 0 && resData[0].title}
+                </h4>
                 <ReactAudioPlayer
                   src={resData && resData.length > 0 && resData[0].audio_link}
                   autoPlay={false}

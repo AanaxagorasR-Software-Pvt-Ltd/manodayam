@@ -52,7 +52,7 @@ export default function Spirituality() {
                 <h3>Self Assessment</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Self Assessment</li>
                 </ol>
@@ -68,7 +68,6 @@ export default function Spirituality() {
               <div className="col-lg-12">
                 <div className="service-heading">
                   <h5>Self Assessment</h5>
-                  {/* <h3>{element.ques}</h3> */}
                   <p>{element.ques}</p>
                 </div>
               </div>

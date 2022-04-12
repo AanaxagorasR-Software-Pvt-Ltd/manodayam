@@ -43,7 +43,6 @@ export default function Login(props) {
     }
   };
   // const navigate = useNavigate();
-
   const [logineMail, setlogineMail] = useState("");
   const [loginPassword, setloginPassword] = useState("");
   const [registrationName, setregistrationName] = useState("");
@@ -60,7 +59,6 @@ export default function Login(props) {
   const [libraryMail, setlibraryMail] = useState("");
   const [libraryDate, setlibraryDate] = useState("");
   const [libraryMsg, setlibraryMsg] = useState("");
-
   const [libraryNamesgroup, setlibraryNamesgroup] = useState("");
   const [libraryNumsgroup, setlibraryNumsgroup] = useState("");
   const [libraryMailsgroup, setlibraryMailsgroup] = useState("");
@@ -72,19 +70,16 @@ export default function Login(props) {
   const [doctoremailError, setdoctoremailError] = useState("");
   const [doctorspecialityError, setdoctorspecialityError] = useState("");
   const [doctorpasswordError, setdoctorpasswordError] = useState("");
-
   const [libraryNameErrorgroup, setlibraryNameErrorgroup] = useState("");
   const [libraryNumErrorgroup, setlibraryNumErrorgroup] = useState("");
   const [libraryMailErrorgroup, setlibraryMailErrorgroup] = useState("");
   const [libraryDateErrorgroup, setlibraryDateErrorgroup] = useState("");
   const [libraryMsgErrorgroup, setlibraryMsgErrorgroup] = useState("");
-
   const [libraryNameError, setlibraryNameError] = useState("");
   const [libraryNumError, setlibraryNumError] = useState("");
   const [libraryMailError, setlibraryMailError] = useState("");
   const [libraryDateError, setlibraryDateError] = useState("");
   const [libraryMsgError, setlibraryMsgError] = useState("");
-
   const [LoginmailError, setLoginmailError] = useState("");
   const [loginPasswordError, setloginPasswordError] = useState("");
   const [registrationNameError, setregistrationNameError] = useState("");
@@ -92,7 +87,6 @@ export default function Login(props) {
   const [registrationPasswordError, setregistrationPasswordError] =
     useState("");
   const [showPasswordForm, setShowPasswordForm] = useState(false);
-
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
   const [show, setshow] = useState(false);
@@ -795,7 +789,6 @@ export default function Login(props) {
                     name=""
                     // id="mobile"
                     placeholder="Mail id"
-                    type="tel"
                     // minLength="10"
                     // maxLength="10"
                     onChange={(doctoremail) =>
