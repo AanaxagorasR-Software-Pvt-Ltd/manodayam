@@ -40,6 +40,8 @@ function App() {
           <Route path="/bookingAppoint" element={<BookingAppoint />} exact />
           <Route path="/appointment" element={<Appointment />} exact />
           <Route path="/all-mental-wellness" element={<AllmentalHealth />} exact />
+
+          
         </Routes>
 
         <Footer />

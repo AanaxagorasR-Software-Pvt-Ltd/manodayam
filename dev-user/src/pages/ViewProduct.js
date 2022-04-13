@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
+
+
 // import ReadMoreReact from "read-more-react";
 import { API_ADMIN_URL, VIEW_PRODUCT, AAD_TO_CARTLIST } from "../utill/api.endpoints";
 export default function ViewProduct(props) {
   // const {_id} = useParams();
   // console.log("*****###", useParams()._id);
   const [slug, setSlug] = useState(useParams().slug);
+  const [show, setshow] = useState(false);
+  const [alertData, setAlerdata] = useState({ title: "", body: "" });
+
   // const {slug} = useParams();
   useEffect(() => {
     // alert(slug);
@@ -28,6 +34,8 @@ export default function ViewProduct(props) {
       .then((res) => {
         setResponseData(res.data.data);
         console.log("----View----", res.data);
+       
+
       })
       .catch((error) => {
         console.log(error);
@@ -51,8 +59,13 @@ export default function ViewProduct(props) {
     axios
       .post(`${API_ADMIN_URL}${AAD_TO_CARTLIST}`,cart )
       .then((res) => {
-        setResponseData(res.data.data);
+        // setResponseData(res.data.data);
         console.log("----View----", res.data);
+        setAlerdata({
+          title: "Wishlist",
+          body: "product Add to cart",
+        });
+        setshow(true);
       })
       .catch((error) => {
         console.log(error);
@@ -60,7 +73,10 @@ export default function ViewProduct(props) {
   };
   useEffect((props) => {
     ViewProjuct(props);
+ 
   }, []);
+ 
+  const handleClose = () => setshow(false);
 
   return (
     <>
@@ -181,6 +197,17 @@ export default function ViewProduct(props) {
           </div>
         </div>
       </div>
+      <Modal show={show}>
+        <Modal.Header closeButton>
+          <Modal.Title>{alertData.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{alertData.body}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            ok
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

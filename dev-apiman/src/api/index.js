@@ -24,15 +24,18 @@ router.get(`/`,  validate,async (req,res) => {
     res.json({Js:data})
 })
 router.use(`/auth`, require("./user/newUser"));
-router.use(`/auth`, require("./user/doctor"));
+// router.use(`/auth`, require("./user/doctor"));
 router.use(`/auth`, require("./user/login"));
 router.use(`/auth`, require("./user/profile"));
 router.use(`/products`, require("./product/product.list"));
 router.use(`/products`, require("./product/addproduct"));
 router.use(`/products`, require("./product/productDetails"));
-router.use(`/addcarts`, require("./addToCart/aaToCarts"));
-router.use(`/products`,require("./product/productDetails"))
+router.use(`/addtocarts`, require("./addToCart/aaToCarts"));
+
+// router.use(`/products`,require("./product/productDetails"))
 router.use(`/banner`, require("./banner/banner"));
+router.use(`/mastercategory`, require("./mastercategory/MasterCategory"));
+router.use(`/subscription`, require("./subscription/subscription"));
 router.use(`/doctors`, require("./doctorlist/doctorlists"));
 router.use(`/appointments`, require("./appointment/appointments"));
 router.use(`/library`, require("./humanLibrary/library"));
@@ -50,11 +53,13 @@ router.use(`/appointed`, require("./appointment/appointments"));
 router.use(`/upload`, require("./media"));
 router.use('/otp',require("./user/forgot"));
 router.use(`/audios`,require("./media/Audio"))
+// router.use(`/chat`,require("./chatbot/chatbot"))
 
 // router.use(`/audios`,require("./media/Audio"))
 router.use(`/media-solutions`, require("./media-solutions"));
 router.use(`./profile`,require("./user/profile"))
 router.use(`/about`,require("./media/aboutus"))
+router.use(`/voicechat`,require("./voicechat/voicechat"))
 
 // shakthi
 router.use(`/shakthi-all`,require("./media/Audio"))

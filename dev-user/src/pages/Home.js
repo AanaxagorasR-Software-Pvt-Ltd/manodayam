@@ -2,12 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from "react-slick";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Login from "./Login";
 import globalDataGroupCall from "../utill/rdxGroupCall";
 import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
-import { Modal as Bmodal, Button } from "react-bootstrap";
+import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
 import SimpleImageSlider from "react-simple-image-slider";
 import {
   API_ADMIN_URL,
@@ -17,6 +17,9 @@ import {
   SPIRITUALITY_API,
   ABOUT_API,
   DIGITAL_HUMAN_LIBRARY_DATA_API,
+  MASTERCATEGORY_API,
+  SUBSCRIPTION_PLANE,
+  
 } from "../utill/api.endpoints";
 const images = [];
 export default function Home(props) {
@@ -26,12 +29,14 @@ export default function Home(props) {
   const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [mastercategorys, setmastercategorys] = useState([]);
 
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
   // const [state, setState] = useState("All");
   let hist = useNavigate();
+  let params = new URLSearchParams(window.location.search);
   useEffect(() => {
     let local = localStorage.getItem("Token");
     if (local) {
@@ -172,7 +177,7 @@ export default function Home(props) {
     dots: false,
     arrows: true,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -295,6 +300,36 @@ export default function Home(props) {
       setshow(true);
     }
   };
+  const subchange = (e) => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const subOptions = {
+      userid:user._id,
+      subscriptionid:e
+      }
+    axios
+      .post(
+        // ?humanId=${}`
+
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,subOptions
+
+      )
+ 
+      .then((res) => {
+     
+        console.log("====mentalHealthData====", res.data);
+        if (user) {
+          hist("/profile")
+        } else {
+          setAlerdata({ title: "Sorry", body: "Login and registration First" });
+          setshow(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log()
+    
+  };
   const handleClose = () => setshow(false);
 
   const loginsubmits = (url = 0) => {
@@ -340,6 +375,21 @@ export default function Home(props) {
       return false;
     }
   };
+  const mastercategory = () => {
+    console.log(`${API_ADMIN_URL}${MASTERCATEGORY_API}`);
+    axios
+      .get(`${API_ADMIN_URL}${MASTERCATEGORY_API}`)
+      .then((res) => {
+        setmastercategorys(res.data);
+        console.log("====mentalHealthData====", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect((props) => {
+    mastercategory();
+  }, []);
   return (
     <>
       <Login humanId={humanId} />
@@ -351,18 +401,34 @@ export default function Home(props) {
                 <div className="web-banner-content">
                   <h1>{element.banner_text}</h1>
                   {/* <h1>Meet, Your Mentor or Coach-Digital Human Library</h1> */}
-                  <button
-                    className="qst-show btn-web hvr-float-shadow btn-web"
-                    onClick={() => loginsubmit("/spirituality")}
-                  >
-                    register for assessment
-                  </button>
-                  <button
-                    className="btn-web"
-                    onClick={() => loginsubmit("/support")}
-                  >
-                    your support networks
-                  </button>
+                  <div className="d-flex">
+
+
+                    <button
+                      className="qst-show btn-web hvr-float-shadow btn-web"
+                      onClick={() => loginsubmit("/spirituality")}
+                    >
+                      Register For Assessment
+                    </button>
+                    <button
+                      className="btn-web"
+                      onClick={() => loginsubmit("/support")}
+                    >
+                      Your Support Networks
+                    </button>
+
+
+                    <Dropdown >
+                      <Dropdown.Toggle id="dropdown-basic" className="qst-show btn-web hvr-float-shadow btn-web">
+                        your subscription plan
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map(element => (<Dropdown.Item as="p" onClick={(e) => subchange(element._id)}>{element.mastercategory}</Dropdown.Item>))}
+
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
                 </div>
               </div>
             </div>
@@ -539,7 +605,7 @@ export default function Home(props) {
                       <select
                         name=""
                         id=""
-                        // onChange={(event) => setState(event.target.value)}
+                      // onChange={(event) => setState(event.target.value)}
                       >
                         <option value="All State">All State</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -865,6 +931,7 @@ export default function Home(props) {
                 Please see your support system such as genetics support, find
                 brain mapping centers
               </p>
+              {/* <Link to="/chat">jhkjxdch</Link> */}
             </div>
           </div>
 

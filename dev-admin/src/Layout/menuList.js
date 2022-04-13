@@ -56,6 +56,28 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
+    name: "Master Category",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/master-category",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
+  {
+    name: "Subscription plan",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/subscription-plan",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
+  {
     name: "Category",
     isActive: false,
     dataToggle: "",
@@ -181,7 +203,18 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Product",
+    name: "Product List",
+    isActive: false,
+    dataToggle: "", 
+    isExpand: false,
+    // link: "javascript:void(0)" ,
+    link: "",
+
+    iconClass: "icon-layout",
+    
+    submenu: [
+      {
+      name: "Product",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -190,6 +223,16 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    iconClass: "icon-layout",
+  },
+    {
+      name: "Order List",
+      isActive: true,
+      dataToggle: "",
+      link: "",
+      isExpand: false,
+    },
+    ]
   },
 
   {
@@ -251,6 +294,17 @@ const leftSideBarMenu = [
   //   submenu: [],
   //   isHover: false,
   // },
+  {
+    name: "Voice Chat",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/voice-chat",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+  },
   {
     name: "User List",
     isActive: false,

@@ -9,12 +9,6 @@ router.post("/:slug", async (req, res) => {
   const db = await getDatabase();
   try {
     const data = await db.collection("products").find({slug : slug}).toArray();
-
-    // const addToCart = await db.collection("addToCarts").insertOne({
-    //   product_id : data._id,
-    // }).toArray();
-
-  // console.log('*********', addToCart);
     console.log('|||||||||', data);
     if (Array.isArray(data)) {
       res.status(200).json({
@@ -31,7 +25,9 @@ router.post("/:slug", async (req, res) => {
       });
     }
   } catch (e) {
+    console.log(e);
     res.status(500).json({
+      
       status: false,
       message: "server error",
     });

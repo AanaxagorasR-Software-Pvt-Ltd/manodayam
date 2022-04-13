@@ -17,7 +17,8 @@ ul {
   list-style: none;
 }
 a {
-  color: #fff;
+  color:black;
+  
 }
 p {
   color: gray;
@@ -26,7 +27,7 @@ p {
   margin-bottom: 50px;
 }
 a:hover {
-  color: #fff;
+  color:black;
   text-decoration: none;
 }
 img {
@@ -380,6 +381,12 @@ header {
   margin-left: 8px !important;
   text-transform: capitalize;
 }
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+
 .btn-web a {
   text-transform: capitalize;
 }
@@ -719,6 +726,7 @@ header {
 }
 .contact-breadcrumb .breadcrumb li a {
   font-weight: 600;
+  color: #23adba;
 }
 .contact-breadcrumb .breadcrumb li {
   color: #fff;

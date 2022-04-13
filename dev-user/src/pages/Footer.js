@@ -10,6 +10,8 @@ export default function Footer() {
             <div class="col-lg-5">
               <div class="footer-logo pd-add">
                 <img src="assets/image/logo.png" alt="" />
+
+                
                 <ul>
                   <li class="hvr-float-shadow">
                     <a href="https://www.facebook.com" target="_blank">
