@@ -5,7 +5,8 @@ export const wait = (s) => new Promise((rs) => setTimeout(rs, s));
 export const runAudio = () => {
   // put here quize
   let quize = [
-    "Hello we are Manodayam Team, What is your name ?",
+    "Hello we are Manodayam Team, How are you ?",
+    "I am also fine, What is your name ? ",
     "What is problems are you facing?",
     "How old are you? ",
     "What is your gender?",
@@ -46,7 +47,7 @@ export const runAudio = () => {
     saySpeech(w);
     const recorder = await recordAudio();
     recorder.start();
-    await sleep(3000);
+    await sleep(5000);
     const audio = await recorder.stop();
     try {
       const savedFile = await saveFile(audio);
@@ -64,9 +65,10 @@ export const runAudio = () => {
       let rest = confirm(saySpeech("wants to Restart ?"));
       if (rest) {
         quize = [
-          "Hello we are manodayam team, What is your name ?",
+          "Hello we are Manodayam Team, How are you ?",
+          "I am also fine, What is your name ?",
           "What is problems are you facing?",
-          "How old are you? ",
+          "How old are you ?",
           "What is your gender?",
         ];
         it.next();

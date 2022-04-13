@@ -288,7 +288,18 @@ const VoiceChat = (props) => {
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>{v.name}</td>
-                                  <td>{v.image}</td>
+                                  <td>
+                                    "Hello we are Manodayam Team, How are you
+                                    ?",
+                                    <br />
+                                    "I am also fine, What is your name ?",
+                                    <br />
+                                    "What is problems are you facing?",
+                                    <br />
+                                    "How old are you ?",
+                                    <br />
+                                    "What is your gender?",
+                                  </td>
                                   {/* <td>{v.audio_link}</td> */}
                                   <td>
                                     <ReactAudioPlayer
@@ -298,15 +309,35 @@ const VoiceChat = (props) => {
                                       //   )
                                       // }
                                       // src={v.audioBlob}
-                                      // src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      autoPlay={false}
+                                      controls
+                                      style={{ color: "red" }}
+                                    />
+                                    <br />
+
+                                    <ReactAudioPlayer
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      autoPlay={false}
+                                      controls
+                                      style={{ color: "red" }}
+                                    />
+                                    <br />
+                                    <ReactAudioPlayer
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      autoPlay={false}
+                                      controls
+                                      style={{ color: "red" }}
+                                    />
+                                    <br />
+
+                                    <ReactAudioPlayer
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
                                       autoPlay={false}
                                       controls
                                       style={{ color: "red" }}
                                     />
                                   </td>
-                                  {/* const audioUrl = URL.createObjectURL(audioBlob);
-            const audio = new Audio(audioUrl);
-            const play = () => audio.play(); */}
                                   <td>
                                     {new Date()
                                       .toJSON()
