@@ -12,10 +12,11 @@ export async function getWeather(city) {
 let apiUrl = "";
 export async function saveFile(audioObje) {
   console.log(audioObje);
+  console.log("fgdfhfdh", audioObje)
   return axios.post("http://localhost:3020/api/voicechat/voice", {
     method: "POST",
     audio_link: audioObje.audioUrl,
-    audioBlob: audioObje
+    audioBlob: audioObje.audioUrl
   });
 
   // const formData = new FormData();

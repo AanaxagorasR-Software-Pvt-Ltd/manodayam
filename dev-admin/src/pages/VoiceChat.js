@@ -292,11 +292,13 @@ const VoiceChat = (props) => {
                                   {/* <td>{v.audio_link}</td> */}
                                   <td>
                                     <ReactAudioPlayer
-                                      src={
-                                        new Audio(
-                                          URL.createObjectURL(v.audioblob)
-                                        )
-                                      }
+                                      // src={
+                                      //   new Audio(
+                                      //     URL.createObjectURL(v.audioblob, {type: "audio/mp3"})
+                                      //   )
+                                      // }
+                                      // src={v.audioBlob}
+                                      // src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
                                       autoPlay={false}
                                       controls
                                       style={{ color: "red" }}
