@@ -4,6 +4,7 @@ import VoiceAssistant from "./voiceAssistant";
 import VoiceVisualizer from "./voiceVisualizer";
 
 const startButton = document.getElementById("start-btn");
+const restartBUtton = document.querySelector('#restart')
 
 let isStarted = false;
 let processingWord = null;
@@ -76,3 +77,9 @@ startButton.onclick = async () => {
     startButton.innerText = "Start Assistant";
   }
 };
+console.log(`${restartBUtton}`)
+document.querySelector('#restart').addEventListener('click',() => {
+console.log('clicked')
+  runAudio();
+  document.getElementById('id01').style.display='none'
+})

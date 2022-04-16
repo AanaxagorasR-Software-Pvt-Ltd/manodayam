@@ -97,7 +97,7 @@ const VoiceChat = (props) => {
 
   return (
     <>
-      {/* <Addform ref={formRef} list={list} /> */}
+      <Addform ref={formRef} list={list} />
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -275,7 +275,18 @@ const VoiceChat = (props) => {
                             <tr>
                               <th>S.No</th>
                               <th>Name</th>
-                              <th>Support Team</th>
+                              <th>
+                                Support Team
+                                <button
+                                  type="button"
+                                  class="btn btn-social-icon-text btn-info ml-2 "
+                                  onClick={() => {
+                                    formRef.current.openForm();
+                                  }}
+                                >
+                                  <i class="ti-plus"></i>Add
+                                </button>
+                              </th>
                               <th>User Answer</th>
 
                               <th>Created Date</th>
@@ -289,16 +300,29 @@ const VoiceChat = (props) => {
                                   <td>{i + 1}</td>
                                   <td>{v.name}</td>
                                   <td>
-                                    "Hello we are Manodayam Team, How are you
-                                    ?",
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-info border-radius-0 add-btn"
+                                    onClick={() => {
+                                      formRef.current.openForm(v);
+                                    }}
+                                  >
+                                    <i class="ti-pencil"></i>
+                                  </button>
+                                    {v.welcome}
                                     <br />
-                                    "I am also fine, What is your name ?",
+                                    {v.first_ques}
+
                                     <br />
-                                    "What is problems are you facing?",
+                                    {v.second_ques}
+
                                     <br />
-                                    "How old are you ?",
+                                    {v.third_ques}
+
                                     <br />
-                                    "What is your gender?",
+                                    {v.fourth_ques}
+                                    <br />
+                                    {v.fifth_ques}
                                   </td>
                                   {/* <td>{v.audio_link}</td> */}
                                   <td>
@@ -451,99 +475,76 @@ const Addform = forwardRef((props, ref) => {
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <label for="exampleInputUsername1"> Name</label>
+              <label for="exampleInputUsername1"> Welcome Text</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.fullname || ""}
+                value={data.welcome || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "fullname");
+                  handleChange(e.target.value, "welcome");
                 }}
-                placeholder="Enter Name"
+                placeholder="Enter welcome text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Email</label>
+              <label for="exampleInputUsername1"> first Question Text</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.email || ""}
+                value={data.first_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "email");
+                  handleChange(e.target.value, "first_ques");
                 }}
-                placeholder="Enter Email"
+                placeholder="Enter first question text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Phone</label>
-              <input
-                type="number"
-                class="form-control"
-                value={data.mobileNmb || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "mobileNmb");
-                }}
-                placeholder="Enter Phone"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Issue</label>
+              <label for="exampleInputUsername1"> Second Question Text</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.disorder || ""}
+                value={data.second_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "disorder");
+                  handleChange(e.target.value, "second_ques");
                 }}
-                placeholder="Enter Issue"
+                placeholder="Enter second question text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Schedule Date</label>
+              <label for="exampleInputUsername1"> Third Question Text</label>
               <input
-                type="datetime-local"
+                type="text"
                 class="form-control"
-                value={data.schedule || ""}
+                value={data.third_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "schedule");
+                  handleChange(e.target.value, "third_ques");
                 }}
-                placeholder="Enter Schedule Date"
+                placeholder="Enter third question text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Message</label>
-              <textarea
+              <label for="exampleInputUsername1"> Fourth Question Text</label>
+              <input
+                type="text"
                 class="form-control"
-                rows={4}
-                value={data.msg || ""}
+                value={data.fourth_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "msg");
+                  handleChange(e.target.value, "fourth_ques");
                 }}
-                placeholder=" Message"
+                placeholder="Enter fourth question text"
               />
             </div>
-
-            <div class="form-group ">
-              <label for="exampleInputUsername1">voicechat Status</label>
-              <select
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Fifth Question Text</label>
+              <input
+                type="text"
                 class="form-control"
-                value={data.status || ""}
+                value={data.fifth_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "status");
+                  handleChange(e.target.value, "fifth_ques");
                 }}
-              >
-                <option value="" disabled>
-                  Select voicechat Status
-                </option>
-                <option value="pending">Pending</option>
-                <option value="booked">Booked</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
+                placeholder="Enter fifth question text"
+              />
             </div>
           </form>
         </Modal.Body>

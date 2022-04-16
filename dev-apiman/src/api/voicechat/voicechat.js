@@ -6,7 +6,68 @@ const multer = require("multer");
 const path = require("path");
 const { env } = process;
 const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
+router.post("/new", async (req, res) => {
+  const db = await getDatabase();
+  const body = req.body;
+  console.log("data", req.body);
 
+  try {
+    let resp = await db
+      .collection("voicechat")
+      .findOne({ welcome: body.welcome });
+    if (resp) {
+      if (resp._id == body._id) {
+        resp = null;
+      }
+    }
+    if (!resp) {
+      let data = {
+        welcome: body.welcome,
+        first_ques: body.first_ques,
+        second_ques: body.second_ques,
+        third_ques: body.third_ques,
+        fourth_ques: body.fourth_ques,
+        fifth_ques: body.fifth_ques,
+      };
+      if (!body?._id) {
+        data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+      } else {
+        data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+      }
+
+      let insertedId = null;
+      let voicechat = await db.collection("voicechat");
+      if (body._id) {
+        insertedId = await voicechat.updateOne(
+          { _id: new ObjectID(body._id) },
+          { $set: data }
+        ).insertedId;
+      } else {
+        insertedId = await voicechat.insertOne(data).insertedId;
+      }
+
+      res.status(200).json({
+        data: {
+          _id: insertedId,
+          ...req.body,
+        },
+        status: true,
+        message: "data inserted",
+      });
+    } else {
+      res.status(200).json({
+        message: "data already exist.",
+        data: [],
+      });
+    }
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error 1",
+      error: e,
+    });
+  }
+});
 const audioStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "../../../uploads/images"));
@@ -28,9 +89,9 @@ router.post(
       const body = req.body;
       let data = {
         audio_link: body.audio_link,
-        audioblob: body.audioBlob
+        audioblob: body.audioBlob,
       };
-      
+
       console.log(data);
       if (!body?._id) {
         data.created = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
