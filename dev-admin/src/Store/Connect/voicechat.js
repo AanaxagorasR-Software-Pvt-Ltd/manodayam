@@ -11,7 +11,7 @@ class voicechat {
     return axios.get("/all/ignore-status");
   }
   save(data) {
-    return axios.post("/voicechat", data);
+    return axios.post("/voicechat/new", data);
   }
   delete(id) {
     return axios.delete(`/voicechat/delete/${id}`);

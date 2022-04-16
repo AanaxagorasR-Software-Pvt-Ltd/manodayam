@@ -5,11 +5,12 @@ export const wait = (s) => new Promise((rs) => setTimeout(rs, s));
 export const runAudio = () => {
   // put here quize
   let quize = [
-    "Hello we are Manodayam Team, How are you ?",
-    "I am also fine, What is your name ? ",
-    "What is problems are you facing?",
-    "How old are you? ",
-    "What is your gender?",
+    "We welcome you on our MANODAYAM’s holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
+    "Please share your Name ?",
+    "Please share your age ?",
+    "Please share  your gender ?",
+    "Would you like to share , How are you feeling today ?",
+    "Would you like to Share one good thing which happened in last one week ?",
   ];
   let it;
   const recordAudio = () =>
@@ -47,7 +48,7 @@ export const runAudio = () => {
     saySpeech(w);
     const recorder = await recordAudio();
     recorder.start();
-    await sleep(5000);
+    await sleep(3000);
     const audio = await recorder.stop();
     try {
       const savedFile = await saveFile(audio);
@@ -62,14 +63,27 @@ export const runAudio = () => {
     if (quize.length > 0) {
       it.next();
     } else {
-      let rest = confirm(saySpeech("wants to Restart ?"));
+      // let rest = confirm(
+      //   saySpeech(
+      //     "Did you answer questions to your satisfaction. Please press YES for us to proceed to Srlf assessment and please press NO if you want to re-run questions again ?"
+      //   )
+      // );
+      let rest = saySpeech(
+        "Did you answer questions to your satisfaction. Please press start Assessment button for us to proceed to Self assessment and please press restart if you want to re-run questions again?"
+      );
+
+      await sleep(3000);
+      let rest1 = document.querySelector("#Myques");
+      rest1.click();
+      console.log("button under hood");
       if (rest) {
         quize = [
-          "Hello we are Manodayam Team, How are you ?",
-          "I am also fine, What is your name ?",
-          "What is problems are you facing?",
-          "How old are you ?",
-          "What is your gender?",
+          "We welcome you on our MANODAYAM’s holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
+          "Please share your Name ?",
+          "Please share your age ?",
+          "Please share  your gender ?",
+          "Would you like to share , How are you feeling today ?",
+          "Would you like to Share one good thing which happened in last one week ?",
         ];
         it.next();
       }
