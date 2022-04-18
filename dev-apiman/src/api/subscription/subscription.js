@@ -103,7 +103,7 @@ router.post("/usersubscription", async (req, res) => {
 
   try {
     let insertedId = null;
-    let Addsublist = await db.collection("Subscription_Plan");
+    let Addsublist = await db.collection("Users_Subscription");
 
     let data = await Addsublist.insertOne(body);
     res.end()
@@ -117,20 +117,44 @@ router.post("/usersubscription", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const db = await getDatabase();
-  let filter = {
-
-
-  };
-  if (req.query.id && req.query.id != "null") {
-    filter._id = ObjectId(req.query.id);
-
-  }
   try {
+    const db = await getDatabase();
 
-    // const { collectiontype } = req.body;
-    let dt = await db.collection("Subscription_Plan").find(filter).toArray();
-    res.json(dt);
+    // let dt = await db
+    // 	.collection("appointments")
+    // 	.find({ status: { $nin: ["booked"] } })
+    // 	.sort({ _id: -1 })
+    // 	.toArray();
+    // res.send(dt);
+    let result = await db
+      .collection("Subscription_Plan")
+      .aggregate([
+       
+        {
+          $addFields: {
+            userid: {
+              $toObjectId: "$userid",
+            }
+           
+          },
+        },
+        {
+          $lookup: {
+            from: "Users_Subscription",
+            localField: "userid",
+            foreignField: "_id",
+            as: "subscription ",
+          },
+        },
+        {
+          $unwind: {
+            path: "$subscription",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+      ])
+      .toArray();
+    res.json(result);
   } catch (err) {
     console.log("err", err.message);
   }
