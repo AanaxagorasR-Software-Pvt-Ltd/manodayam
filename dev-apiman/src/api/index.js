@@ -60,6 +60,7 @@ router.use(`/media-solutions`, require("./media-solutions"));
 router.use(`./profile`,require("./user/profile"))
 router.use(`/about`,require("./media/aboutus"))
 router.use(`/voicechat`,require("./voicechat/voicechat"))
+router.use(`/voice-assessment-question`,require("./voicechat/voiceAssessmentQuestion"))
 
 // shakthi
 router.use(`/shakthi-all`,require("./media/Audio"))

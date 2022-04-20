@@ -8,15 +8,16 @@ export async function getWeather(city) {
 
   const jsonResponse = await weatherResponse.json();
   return jsonResponse.current.temp_c;
-}4
+}
+4;
 let apiUrl = "";
 export async function saveFile(audioObje) {
   console.log(audioObje);
-  console.log("fgdfhfdh", audioObje)
+  console.log("fgdfhfdh", audioObje);
   return axios.post("http://localhost:3020/api/voicechat/voice", {
     method: "POST",
     audio_link: audioObje.audioUrl,
-    audioBlob: audioObje.audioUrl
+    audioBlob: audioObje.audioUrl,
   });
 
   // const formData = new FormData();
@@ -38,4 +39,18 @@ export async function saveFile(audioObje) {
   //     'enctype': 'multipart/form-data' // the enctype is important to work with multer on the server
   //   })
   // });
+}
+
+// display questions
+export async function Question() {
+  console.log("fgdfhfdh");
+  let questionData = { collectiontypedata: "voice_assessment_question" };
+  return axios
+    .post("http://localhost:3020/api/voicechat/voice", questionData)
+    .then((res) => {
+      console.log("====questions====", res.data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
