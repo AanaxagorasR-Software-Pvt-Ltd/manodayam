@@ -33,13 +33,14 @@ const Subscription = () => {
         title: "",
         body: "",
     });
+
     const handleClose = () => setshowDeleteData(false);
     const handleShow = () => setshowDeleteData(true);
     const formRef = useRef();
 
     const list = () => {
         axios
-            .get("subscription")
+            .get("subscription/list")
             .then((res) => {
                 setData(res);
                 setfilerdata(res)
@@ -90,6 +91,7 @@ const Subscription = () => {
 
 
     }
+
     return (
         <>
             <Addform ref={formRef} list={list} />
@@ -299,9 +301,9 @@ const Subscription = () => {
                                                         {filterdata.map((a, i) => (
                                                             <tr key={i}>
                                                                 <td>{i + 1}</td>
-                                                              
-                                                                    <td>{a.type} </td>
-                                                              
+
+                                                                <td>{a.type} </td>
+
                                                                 <td>{a.selfassessment}</td>
                                                                 <td>{a.doctorassessment}</td>
                                                                 <td>{a.grouptherapy}</td>
@@ -380,6 +382,7 @@ const Addform = forwardRef((props, ref) => {
     const [data, setData] = useState({});
     const [showdata, setshowdata] = useState(false);
     const [alertData, setAlerdata] = useState({ title: "", body: "" });
+    const [mastercategorys, setmastercategorys] = useState([]);
 
     const handleClose = () => setshowdata(false);
     const handleShow = () => setshowdata(true);
@@ -388,6 +391,7 @@ const Addform = forwardRef((props, ref) => {
     const handleChange = (a, k) => {
         setData({ ...data, [k]: a });
     };
+
 
     const handleVisible = (state) => {
         setShow(state);
@@ -407,9 +411,9 @@ const Addform = forwardRef((props, ref) => {
         for (let prop in data) {
             fd.append(prop, data[prop]);
         }
-        subscription            
-        .save( data ,data.id)
-        
+        subscription
+            .save(data, data.id)
+
             .then((res) => {
                 // alert(res.message);
                 handleShow(res.message);
@@ -423,6 +427,22 @@ const Addform = forwardRef((props, ref) => {
                 setAlerdata({ title: "Sorry", body: "Server Error" });
             });
     };
+  
+    const mastercategory = () => {
+      
+        axios
+            .get("mastercategory")
+            .then((res) => {
+                setmastercategorys(res);
+                console.log("====mentalHealthData====", res.data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    useEffect((props) => {
+        mastercategory();
+    }, []);
 
     return (
         <>
@@ -446,20 +466,13 @@ const Addform = forwardRef((props, ref) => {
                                     onChange={(e) => {
                                         handleChange(e.target.value, "type");
                                     }}>
-                                    <option>Drug Addiction</option>
-                                    <option>Schizophrenia</option>
-                                    <option>Sexual Addiction</option>
-                                    <option>Depression</option>
-                                    <option>Anxiety</option>
-                                    <option>Hyperactivity</option>
-                                    <option>Psychosis</option>
-                                    <option>Alcohol Abuse</option>
-                                    <option>Dementia</option>
-                                    <option>Bipolar</option>
-                                    <option>Attention Disorder</option>
-                                    <option>Impulsivity</option>
-                                    <option>Inattention</option>
-                                </select>
+                                    {mastercategorys?.map(element => (
+                                        < option value={element.type}>{element.mastercategory}</option>))}
+                                  
+                                </select>  
+                               
+                          
+                                
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">

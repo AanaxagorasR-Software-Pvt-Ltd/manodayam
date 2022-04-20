@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, PROFIL_API, BOOKED_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, PROFIL_API, BOOKED_API ,SUBSCRIPTION_PLANE_LISTA} from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import { useFormik } from "formik";
@@ -16,6 +16,7 @@ export default function Profile() {
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [user, setUser] = useState({});
   const [editData, setEditData] = useState([]);
+  const [subScriptiondata, setSubscriptiondata] = useState([]);
 
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -70,9 +71,29 @@ export default function Profile() {
         console.log("err", err.message);
       });
   }
+  const subscription = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    
+    axios
+      .get(
+        // ?humanId=${}`
+
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?userId=${user._id}`
+
+      )
+      .then((res) => {
+        console.log("res", res, typeof res);
+
+        setSubscriptiondata(res.data)
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  }
   React.useEffect(() => {
     listBooked();
     Editprofile();
+    subscription();
 
   }, []);
   const convertToDateTime = (time) => {
@@ -214,105 +235,7 @@ export default function Profile() {
                   <div class="tab-pane active" id="home">
                     <div class="row">
                       <div class="col-lg-12">
-                        {/* <div class="profile-form checkout-form doctor-form"> */}
-                        {/* <h3>Edit Your Profile Here</h3> */}
-                        {/* <form action="" onSubmit={formik.handleSubmit} >
-                            <div class="row"> 
-                              <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Name</label>
-                                  <input
-                                    type="text"
-                                  
-                                   
-                                    name="name"
-                                    id="name"
-                                    placeholder="name"
-                                    {...formik.getFieldProps("name")}
-
-                                  />
-                                </div>
-                              </div>
-                              {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Last Name</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Last name"
-                                    disabled
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Phone No.</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Phone no."
-                                    disabled
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Email Address</label>
-                                  <input
-                                   
-                                    type="email"
-                                    name="email"
-                                    id=""
-                                    placeholder="Email address"
-                                    {...formik.getFieldProps("email")}
-
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Old Password</label>
-                                  <input
-                                   
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Old password"
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">New Password</label>
-                                  <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="New password"
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-12">
-                                <div class="form-group">
-                                  <label for="">Confirm Password</label>
-                                  <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Confirm password"
-                                  />
-                                </div>
-                              </div> */}
-
-                        {/* <button class="btn hvr-float-shadow" type="submit" >
-                                  Save
-                                </button>
-                              
-                            </div>
-                          // </form> */}
-                        {/* </div> */}
+                      
                       </div>
                     </div>
                   </div>
@@ -323,140 +246,49 @@ export default function Profile() {
                           <table className="table table-bordered table-striped table-hover">
                             <thead>
                               <tr>
-                              <th>S.no</th>
+                                <th>S.no</th>
+                                <th>Therapy Type</th>
                                 <th>Therapy</th>
                                 <th>Self Assessment</th>
                                 <th>Doctor Assessment</th>
                                 <th>Group Therapy</th>
-                              <th>Meditation Spirituality</th>
-                              <th>Price</th>
-                              
+                                <th>Meditation Spirituality</th>
+                                <th>benefitsdescription</th>
+                                <th>Price</th>
+                                <th>Action</th>
+        
+
 
                               </tr>
                             </thead>
-                              {<tbody>
-                                <tr>
-                                  <td>
-                                    <img src="image/pr.png" alt="" />
-                                  </td>
-                                  <td>cbgfhfhh</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 
-                                  </td>
-                                  <td></td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 500
-                                  </td>
-                                  <td>Success</td>
+                            {<tbody>
+                              {subScriptiondata.map((a, i) => (
+                                <tr  key={i}>
+
+
+                                  <td> {i + 1}</td>
+                                  <td>{a.type}</td>
+                                  <td>{a.therapy}</td>
+                                  <td> {a.selfassessment}</td>
+                                  <td> {a.doctorassessment} </td>
+                                  <td>{a.grouptherapy}  </td>
+                                  <td> {a.meditation} </td>
+                                  <td>  {a.benefitsdescription}</td>
+                                  <td>{a.price}</td>
+
+                                  <td><button    type="button" 
+                                          className="btn-web subbutton  hvr-float-shadow">Buy Plan
+                         
+                          </button></td>
+                                  
                                 </tr>
-                                <tr>
-                                  <td>
-                                    <img src="image/pr.png" alt="" />
-                                  </td>
-                                  <td>Fidget Cube</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 399
-                                  </td>
-                                  <td>3</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 500
-                                  </td>
-                                  <td>Success</td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <img src="image/pr.png" alt="" />
-                                  </td>
-                                  <td>Fidget Cube</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 399
-                                  </td>
-                                  <td>3</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 500
-                                  </td>
-                                  <td>Success</td>
-                                </tr>
-                              </tbody>}
-                            </table>
+                              ))}</tbody>}
+
+                          </table>
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  {/* <div className="tab-pane fade" id="menu2">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div className="profile-form checkout-form doctor-form">
-                          <h3>Change Your Address</h3>
-                          <form action="">
-                            <div className="row">
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">Street Line 1</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Street Line 1"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">Street Line 2</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Street Line 2"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">Country</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Country"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">State</label>
-                                  <input
-                                    type="email"
-                                    name=""
-                                    id=""
-                                    placeholder="State"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-12">
-                                <div className="form-group">
-                                  <label for="">Pin Code</label>
-                                  <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Pin code"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-12">
-                                <button className="btn hvr-float-shadow">
-                                  Save settings
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
                   <div className="tab-pane fade" id="menu3">
                     <div className="row">
                       <div className="col-lg-12">
@@ -511,7 +343,7 @@ export default function Profile() {
                                         target="_blank"
                                       >
                                         <button
-                                          type="button"
+                                         type="button" 
                                           class="btn btn-sm btn-success border-radius-0 add-btn"
                                         >
                                           <i class="ti-video-camera"></i>

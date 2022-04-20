@@ -57,6 +57,11 @@ img {
 .btn-web a {
   text-transform: capitalize;
   color: #fff;
+  
+}
+.subbutton{
+  height: 45px;
+  width: 100px;
 }
 .btn-web:hover {
   color: #fff;
