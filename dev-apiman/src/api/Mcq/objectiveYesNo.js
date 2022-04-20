@@ -95,7 +95,6 @@ router.delete("/delete/:_id", async (req, res) => {
 
   // res.send('hello')
 });
-
 // Display part
 const validate = (req, res, next) => {
   console.log("=cate===", req.body.collectiontypedata);

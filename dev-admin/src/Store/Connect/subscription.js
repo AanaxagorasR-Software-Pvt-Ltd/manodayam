@@ -3,7 +3,7 @@ import axios from "../../utill/axios";
 class subscription {
 
     list(data) {
-        return axios.get( '/', { params: data });
+        return axios.get( '/list', { params: data });
     }
     listAll() {
         return axios.get( "/all");

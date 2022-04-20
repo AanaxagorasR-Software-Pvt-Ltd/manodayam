@@ -41,6 +41,7 @@ router.post(
 
   async (req, res) => {
     try {
+
       const db = await getDatabase();
       const body = req.body;
       let data = {
@@ -52,6 +53,8 @@ router.post(
         meditation: body.meditation,
         benefitsdescription: body.benefitsdescription,
         price: body.price
+        
+
 
 
         // type: body.type,
@@ -105,7 +108,7 @@ router.post("/usersubscription", async (req, res) => {
     let insertedId = null;
     let Addsublist = await db.collection("Users_Subscription");
 
-    let data = await Addsublist.insertOne(body);
+    let data = await Addsublist.insertOne(body).insertedId;
     res.end()
   } catch (e) {
     console.log("error", e);
@@ -115,9 +118,32 @@ router.post("/usersubscription", async (req, res) => {
     });
   }
 });
+router.get("/list", async (req, res) => {
+  const db = await getDatabase();
+  let filter = {
+
+
+  };
+  if(req.query.id && req.query.id != "null" ){
+    filter._id =  ObjectId(req.query.id);
+
+  }
+  try {
+  
+    // const { collectiontype } = req.body;
+    let dt = await db.collection("Subscription_Plan").find(filter).toArray();
+    res.json(dt);
+  } catch (err) {
+    console.log("err", err.message);
+  }
+
+  // res.send('hello')
+});
 
 router.get("/", async (req, res) => {
   try {
+   
+    const _id = req.query._id
     const db = await getDatabase();
 
     // let dt = await db
@@ -129,6 +155,9 @@ router.get("/", async (req, res) => {
     let result = await db
       .collection("Subscription_Plan")
       .aggregate([
+        {
+          $match: { _id: { $eq: new ObjectId(_id) } },
+        },
        
         {
           $addFields: {

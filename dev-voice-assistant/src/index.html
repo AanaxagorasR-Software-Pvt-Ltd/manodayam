@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manodayam Voice Assistant</title>
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -20,7 +20,7 @@
         left: 0;
         top: 0;
         width: 100%; /* Full width */
-        height: 150%; /* Full height */
+        height: 100%; /* Full height */
         overflow: auto; /* Enable scroll if needed */
         background-color: rgb(0, 0, 0); /* Fallback color */
         background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
@@ -118,7 +118,7 @@
       .main_btn {
         display: inline;
       }
-      .next-btn {
+      .btn {
         background: linear-gradient(45deg, #23adba, #9d1892);
         width: 100px;
         border-radius: 25px;
@@ -138,7 +138,7 @@
       <h1 id="title">Manodayam Voice Assistant</h1>
       <div class="main_btn">
         <button id="start-btn" class="simple-btn">Start Assistant</button>
-        <button id="myBtn" class="simple-btn">Start Assessment</button>
+        <!-- <button id="myBtn" class="simple-btn">Start Assessment</button> -->
       </div>
     </div>
 
@@ -147,7 +147,7 @@
       <h2 id="word-preview"></h2>
       <h3 id="search-result"></h3>
     </div>
-    <!-- The Modal -->
+    <!-- The Modal questions-->
     <div id="myModal" class="modal">
       <!-- Modal content -->
       <div class="modal-content">
@@ -155,81 +155,290 @@
           <span class="close">&times;</span>
           <h2>Manodayam Assessment</h2>
         </div>
-        <div class="modal-body">
-          <p>Hello, How Much Sleep do you Take?</p>
-          <form>
-            <input type="radio" id="r_1" name="Sleep" value="5" />
-            <label for="r_1">5 Hours</label><br />
-            <input type="radio" id="r_2" name="Sleep" value="10" />
-            <label for="r_2">10 Hours</label><br />
-            <input type="radio" id="r_3" name="Sleep" value="8" />
-            <label for="r_3">8 Hours</label><br />
-            <input type="radio" id="r_4" name="Sleep" value="4" />
-            <label for="r_4">4 Hours</label><br />
-            <br />
-            <input id="nextbtn" class="next-btn" type="submit" value="Next" />
-            <br />
-            <br />
-            <!-- <p id="nextbtn" class="next-btn">Next</p> -->
-          </form>
-        </div>
-        <div class="modal-body">
-          <p>Hello, How Much Sleep do you Take?</p>
-          <form>
-            <input type="radio" id="r_1" name="Sleep" value="5" />
-            <label for="r_1">5 Hours</label><br />
-            <input type="radio" id="r_2" name="Sleep" value="10" />
-            <label for="r_2">10 Hours</label><br />
-            <input type="radio" id="r_3" name="Sleep" value="8" />
-            <label for="r_3">8 Hours</label><br />
-            <input type="radio" id="r_4" name="Sleep" value="4" />
-            <label for="r_4">4 Hours</label><br />
-            <br />
-            <input id="nextbtn" class="next-btn" type="submit" value="Next" />
-            <br />
-            <br />
-            <!-- <p id="nextbtn" class="next-btn">Next</p> -->
-          </form>
-        </div>
-        <div class="modal-body">
-          <p>Hello, How Much Sleep do you Take?</p>
-          <form>
-            <input type="radio" id="r_1" name="Sleep" value="5" />
-            <label for="r_1">5 Hours</label><br />
-            <input type="radio" id="r_2" name="Sleep" value="10" />
-            <label for="r_2">10 Hours</label><br />
-            <input type="radio" id="r_3" name="Sleep" value="8" />
-            <label for="r_3">8 Hours</label><br />
-            <input type="radio" id="r_4" name="Sleep" value="4" />
-            <label for="r_4">4 Hours</label><br />
-            <br />
-            <input id="nextbtn" class="next-btn" type="submit" value="Next" />
-            <br />
-            <br />
-            <!-- <p id="nextbtn" class="next-btn">Next</p> -->
-          </form>
-        </div>
-        <div class="modal-body">
-          <p>Hello, How Much Sleep do you Take?</p>
-          <form>
-            <input type="radio" id="r_1" name="Sleep" value="5" />
-            <label for="r_1">5 Hours</label><br />
-            <input type="radio" id="r_2" name="Sleep" value="10" />
-            <label for="r_2">10 Hours</label><br />
-            <input type="radio" id="r_3" name="Sleep" value="8" />
-            <label for="r_3">8 Hours</label><br />
-            <input type="radio" id="r_4" name="Sleep" value="4" />
-            <label for="r_4">4 Hours</label><br />
-            <br />
-            <input id="nextbtn" class="next-btn" type="submit" value="Next" />
-            <br />
-            <br />
-            <!-- <p id="nextbtn" class="next-btn">Next</p> -->
-          </form>
-        </div>
-        
+        <div class="modal-body"></div>
         <div class="modal-footer">
+          <form id="regForm" action="">
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab">
+              <h3 class="question">Hello, How Much Sleep do you Take?</h3>
+
+              <div class="radio_container">
+                <input
+                  type="radio"
+                  id="sleep_1"
+                  class="radio_btn"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_1">5 Hours</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  id="sleep_2"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_2">10 Hours</label>
+                <br />
+
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_3"
+                />
+                <label class="radio_text" for="sleep_3">8 Hours</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_4"
+                />
+                <label class="radio_text" for="sleep_4">4 Hours</label>
+              </div>
+            </div>
+
+            <div class="tab">
+              <h3 class="question">
+                Overall how would you rate your physical health?
+              </h3>
+
+              <div class="radio_container">
+                <input
+                  type="radio"
+                  id="sleep_1"
+                  class="radio_btn"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_1">Good</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  id="sleep_2"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_2">Excellent</label>
+                <br />
+
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_3"
+                />
+                <label class="radio_text" for="sleep_3">Average</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_4"
+                />
+                <label class="radio_text" for="sleep_4">Not sure</label>
+              </div>
+            </div>
+
+            <div class="tab">
+              <h3 class="question">
+                Overall how would you rate your mental health?
+              </h3>
+
+              <div class="radio_container">
+                <input
+                  type="radio"
+                  id="sleep_1"
+                  class="radio_btn"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_1">Good</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  id="sleep_2"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_2">Excellent</label>
+                <br />
+
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_3"
+                />
+                <label class="radio_text" for="sleep_3">Average</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_4"
+                />
+                <label class="radio_text" for="sleep_4">Not sure</label>
+              </div>
+            </div>
+
+            <div class="tab">
+              <h3 class="question">
+                Have you noticed any change in your diet habits?
+              </h3>
+
+              <div class="radio_container">
+                <input
+                  type="radio"
+                  id="sleep_1"
+                  class="radio_btn"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_1"
+                  >Yes, I eat too much</label
+                >
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  id="sleep_2"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_2"
+                  >Yes, I dont't feel hungry</label
+                >
+                <br />
+
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_3"
+                />
+                <label class="radio_text" for="sleep_3">Not much</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_4"
+                />
+                <label class="radio_text" for="sleep_4">Not change</label>
+              </div>
+            </div>
+
+            <div class="tab">
+              <h3 class="question">
+                During the past 4 weeks, how often has your mental health
+                affected your ability to get work done?
+              </h3>
+
+              <div class="radio_container">
+                <input
+                  type="radio"
+                  id="sleep_1"
+                  class="radio_btn"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_1">Very often</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  id="sleep_2"
+                  name="sleep"
+                />
+                <label class="radio_text" for="sleep_2">Somewhat often</label>
+                <br />
+
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_3"
+                />
+                <label class="radio_text" for="sleep_3">Not so often</label>
+                <br />
+                <input
+                  class="radio_btn"
+                  type="radio"
+                  name="sleep"
+                  id="sleep_4"
+                />
+                <label class="radio_text" for="sleep_4">Not at all</label>
+              </div>
+            </div>
+
+            <div style="overflow: auto">
+              <div style="float: right">
+                <button
+                  type="button"
+                  id="prevBtn"
+                  class="btn"
+                  onclick="nextPrev(-1)"
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  id="nextBtn"
+                  class="btn"
+                  onclick="nextPrev(1)"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align: center; margin-top: 40px">
+              <span class="step"></span>
+              <span class="step"></span>
+              <span class="step"></span>
+              <span class="step"></span>
+            </div>
+          </form>
+
           <h3>Thank You</h3>
+        </div>
+      </div>
+    </div>
+    <!-- restart modal-->
+    <div class="fresh_container">
+      <button
+        id="Myques"
+        onclick="document.getElementById('id01').style.display='block'"
+        class="w3-button w3-black"
+      >
+        Open Modal
+      </button>
+
+      <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span
+              onclick="document.getElementById('id01').style.display='none'"
+              class="w3-button w3-display-topright"
+              >&times;</span
+            >
+            <button id="myBtn" class="refresh">Start Assessment</button>
+            <button class="refresh" id="restart">Restart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- result modal -->
+    <div class="result_container">
+      <div id="result" class="w3-modal">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span
+              onclick="document.getElementById('result').style.display='none'"
+              class="w3-button w3-display-topright"
+              >&times;</span
+            >
+            <p class="emoji">&#128515;</p>
+          <h1>Congratulations</h1>
+
+          </div>
         </div>
       </div>
     </div>
@@ -259,6 +468,94 @@
           modal.style.display = "none";
         }
       };
+
+      var currentTab = 0; // Current tab is set to be the first tab (0)
+      showTab(currentTab); // Display the current tab
+
+      function showTab(n) {
+        // This function will display the specified tab of the form ...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        // ... and fix the Previous/Next buttons:
+        if (n == 0) {
+          document.getElementById("prevBtn").style.display = "none";
+        } else {
+          document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == x.length - 1) {
+          document.getElementById("nextBtn").innerHTML = "Submit";
+          document.getElementById("result").style.display = "block";
+        } else {
+          document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        // ... and run a function that displays the correct step indicator:
+        fixStepIndicator(n);
+      }
+      document.getElementById("result").style.display = "none";
+
+      function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form... :
+        if (currentTab >= x.length) {
+          //...the form gets submitted:
+          document.getElementById("regForm").submit();
+          return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+      }
+
+      function validateForm() {
+        // This function deals with validation of the form fields
+        var x,
+          y,
+          i,
+          valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+          // If a field is empty...
+          if (y[i].value == "") {
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false:
+            valid = false;
+          }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+          document.getElementsByClassName("step")[currentTab].className +=
+            " finish";
+        }
+        return valid; // return the valid status
+      }
+
+      function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i,
+          x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+          x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class to the current step:
+        x[n].className += " active";
+      }
+      document.querySelector("#myBtn").addEventListener("click", () => {
+        console.log(`handled`);
+        document.getElementById("id01").style.display = "none";
+      });
+      document.querySelector("#myBtn").addEventListener("click", () => {
+        console.log(`handled`);
+        document.getElementById("id01").style.display = "none";
+      });
     </script>
   </body>
 </html>

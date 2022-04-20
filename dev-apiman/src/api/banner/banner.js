@@ -7,7 +7,6 @@ router.post("/new", async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
   console.log("data", req.body);
-  
 
   try {
     let resp = await db
@@ -105,12 +104,12 @@ const validate = (req, res, next) => {
     });
   }
 };
-router.post("/bannertext",validate, async (req, res) => {
+router.post("/bannertext", validate, async (req, res) => {
   const db = await getDatabase();
 
   try {
     const { collectiontypedata } = req.body;
-    console.log('collectiontypedata', req.body);
+    console.log("collectiontypedata", req.body);
     const data = await db.collection(`${collectiontypedata}`).find().toArray();
     // console.log('=====jfgjh', data);
     if (Array.isArray(data)) {

@@ -24,7 +24,7 @@ const validate = (req, res, next) => {
 const imageStorage = multer.diskStorage({
   // destination: `${env.MEDIA_PATH}/${env.MEDIA_TYEP_1}`,
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../../../uploads/images"))
+    cb(null, path.join(__dirname, "../../../uploads/images"));
   },
   filename: (req, file, cb) => {
     cb(
@@ -96,7 +96,6 @@ router.post(
         status: true,
         message: "data inserted",
       });
-      
     } catch (e2) {
       res
         .status(400)
@@ -111,16 +110,11 @@ router.post(
 
 router.get("/", async (req, res) => {
   const db = await getDatabase();
-  let filter = {
-
-
-  };
-  if(req.query.id && req.query.id != "null" ){
-    filter._id =  ObjectId(req.query.id);
-
+  let filter = {};
+  if (req.query.id && req.query.id != "null") {
+    filter._id = ObjectId(req.query.id);
   }
   try {
-  
     // const { collectiontype } = req.body;
     let dt = await db.collection("audio").find(filter).toArray();
     res.json(dt);
@@ -148,6 +142,5 @@ router.delete("/delete/:_id", async (req, res) => {
 
   // res.send('hello')
 });
-
 
 module.exports = router;

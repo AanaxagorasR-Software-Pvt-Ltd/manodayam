@@ -12,12 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { isToggle } from "../Store/slices/toggle.slice";
 import useAuth from "../hooks/Auth";
 import { useNavigate } from "react-router";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import ReactAudioPlayer from "react-audio-player";
 import { Modal } from "react-bootstrap";
 import axios from "../utill/axios";
 import voicechat from "../Store/Connect/voicechat";
 import LeftSideBar from "../Layout/LeftSideBar";
+import { Modal as Bmodal, Button } from "react-bootstrap";
+
 const VoiceChat = (props) => {
   console.log(props);
   const [data, setData] = React.useState([]);
@@ -28,7 +30,13 @@ const VoiceChat = (props) => {
   const [profileShow, setProfileShow] = useToggle(false);
   const [searchField, setSearchField] = useState("");
   const [filterdata, setfilerdata] = React.useState([]);
-
+  const [showDeleteData, setshowDeleteData] = useState(false);
+  const [alertDeleteData, setAlerDeleteData] = useState({
+    title: "",
+    body: "",
+  });
+  const handleClose = () => setshowDeleteData(false);
+  const handleShow = () => setshowDeleteData(true);
   const formRef = useRef("");
 
   const list = () => {
@@ -61,12 +69,14 @@ const VoiceChat = (props) => {
       });
   };
 
-  // const deleteData = (_id) => {
-  //   voicechat.delete(_id).then((res) => {
-  //     alert(res?.message);
-  //     list();
-  //   });
-  // };
+  const deleteCat = (_id) => {
+    voicechat.delete(_id).then((res) => {
+      // alert(res?.message);
+      handleShow(res?.message);
+      setAlerDeleteData({ title: "Done", body: "Data Deleted" });
+      list();
+    });
+  };
 
   const onsubmit = (e) => {
     e.preventDefault();
@@ -87,7 +97,7 @@ const VoiceChat = (props) => {
 
   return (
     <>
-      {/* <Addform ref={formRef} list={list} /> */}
+      <Addform ref={formRef} list={list} />
       <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -265,11 +275,22 @@ const VoiceChat = (props) => {
                             <tr>
                               <th>S.No</th>
                               <th>Name</th>
-                              <th>Support Team</th>
+                              <th>
+                                Support Team
+                                <button
+                                  type="button"
+                                  class="btn btn-social-icon-text btn-info ml-2 "
+                                  onClick={() => {
+                                    formRef.current.openForm();
+                                  }}
+                                >
+                                  <i class="ti-plus"></i>Add
+                                </button>
+                              </th>
                               <th>User Answer</th>
 
                               <th>Created Date</th>
-                              {/* <th> Status</th> */}
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -278,11 +299,64 @@ const VoiceChat = (props) => {
                                 <tr key={i}>
                                   <td>{i + 1}</td>
                                   <td>{v.name}</td>
-                                  <td>{v.image}</td>
+                                  <td>
+                                  <button
+                                    type="button"
+                                    class="btn btn-sm btn-info border-radius-0 add-btn"
+                                    onClick={() => {
+                                      formRef.current.openForm(v);
+                                    }}
+                                  >
+                                    <i class="ti-pencil"></i>
+                                  </button>
+                                    {v.welcome}
+                                    <br />
+                                    {v.first_ques}
+
+                                    <br />
+                                    {v.second_ques}
+
+                                    <br />
+                                    {v.third_ques}
+
+                                    <br />
+                                    {v.fourth_ques}
+                                    <br />
+                                    {v.fifth_ques}
+                                  </td>
                                   {/* <td>{v.audio_link}</td> */}
                                   <td>
                                     <ReactAudioPlayer
-                                      src={v.audio_link}
+                                      // src={
+                                      //   new Audio(
+                                      //     URL.createObjectURL(v.audioblob, {type: "audio/mp3"})
+                                      //   )
+                                      // }
+                                      // src={v.audioBlob}
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      autoPlay={false}
+                                      controls
+                                      style={{ color: "red" }}
+                                    />
+                                    <br />
+
+                                    <ReactAudioPlayer
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      autoPlay={false}
+                                      controls
+                                      style={{ color: "red" }}
+                                    />
+                                    <br />
+                                    <ReactAudioPlayer
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      autoPlay={false}
+                                      controls
+                                      style={{ color: "red" }}
+                                    />
+                                    <br />
+
+                                    <ReactAudioPlayer
+                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
                                       autoPlay={false}
                                       controls
                                       style={{ color: "red" }}
@@ -293,6 +367,15 @@ const VoiceChat = (props) => {
                                       .toJSON()
                                       .slice(0, 10)
                                       .replace(/-/g, "-")}{" "}
+                                  </td>
+                                  <td>
+                                    <button
+                                      type="button"
+                                      class="btn btn-sm btn-danger add-btn"
+                                      onClick={() => deleteCat(v._id)}
+                                    >
+                                      <i class="ti-trash"></i>
+                                    </button>
                                   </td>
                                 </tr>
                               ))}
@@ -318,6 +401,25 @@ const VoiceChat = (props) => {
           </div>
         </div>
       </div>
+      {/* add alert modal */}
+      <Bmodal show={showDeleteData} className="h-75">
+        <Bmodal.Body className="modal-body">
+          {" "}
+          <form class="forms-sample">
+            <div class="form-group">
+              <h4 style={{ textAlign: "center" }}>{alertDeleteData.title} </h4>
+              <h3 style={{ textAlign: "center", color: "#4B49AC" }}>
+                {alertDeleteData.body}
+              </h3>
+            </div>
+          </form>
+        </Bmodal.Body>
+        <Bmodal.Footer>
+          <Button className="modal-btn-ok" onClick={handleClose}>
+            ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
     </>
   );
 };
@@ -325,7 +427,7 @@ const VoiceChat = (props) => {
 const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
-  const [searchField, setSearchField] = useState("");
+
   const { list } = props;
   const handleChange = (v, k) => {
     setData({ ...data, [k]: v });
@@ -373,99 +475,76 @@ const Addform = forwardRef((props, ref) => {
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <label for="exampleInputUsername1"> Name</label>
+              <label for="exampleInputUsername1"> Welcome Text</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.fullname || ""}
+                value={data.welcome || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "fullname");
+                  handleChange(e.target.value, "welcome");
                 }}
-                placeholder="Enter Name"
+                placeholder="Enter welcome text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Email</label>
+              <label for="exampleInputUsername1"> first Question Text</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.email || ""}
+                value={data.first_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "email");
+                  handleChange(e.target.value, "first_ques");
                 }}
-                placeholder="Enter Email"
+                placeholder="Enter first question text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Phone</label>
-              <input
-                type="number"
-                class="form-control"
-                value={data.mobileNmb || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "mobileNmb");
-                }}
-                placeholder="Enter Phone"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputUsername1"> Issue</label>
+              <label for="exampleInputUsername1"> Second Question Text</label>
               <input
                 type="text"
                 class="form-control"
-                value={data.disorder || ""}
+                value={data.second_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "disorder");
+                  handleChange(e.target.value, "second_ques");
                 }}
-                placeholder="Enter Issue"
+                placeholder="Enter second question text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Schedule Date</label>
+              <label for="exampleInputUsername1"> Third Question Text</label>
               <input
-                type="datetime-local"
+                type="text"
                 class="form-control"
-                value={data.schedule || ""}
+                value={data.third_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "schedule");
+                  handleChange(e.target.value, "third_ques");
                 }}
-                placeholder="Enter Schedule Date"
+                placeholder="Enter third question text"
               />
             </div>
-
             <div class="form-group">
-              <label for="exampleInputUsername1"> Message</label>
-              <textarea
+              <label for="exampleInputUsername1"> Fourth Question Text</label>
+              <input
+                type="text"
                 class="form-control"
-                rows={4}
-                value={data.msg || ""}
+                value={data.fourth_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "msg");
+                  handleChange(e.target.value, "fourth_ques");
                 }}
-                placeholder=" Message"
+                placeholder="Enter fourth question text"
               />
             </div>
-
-            <div class="form-group ">
-              <label for="exampleInputUsername1">voicechat Status</label>
-              <select
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Fifth Question Text</label>
+              <input
+                type="text"
                 class="form-control"
-                value={data.status || ""}
+                value={data.fifth_ques || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "status");
+                  handleChange(e.target.value, "fifth_ques");
                 }}
-              >
-                <option value="" disabled>
-                  Select voicechat Status
-                </option>
-                <option value="pending">Pending</option>
-                <option value="booked">Booked</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
+                placeholder="Enter fifth question text"
+              />
             </div>
           </form>
         </Modal.Body>

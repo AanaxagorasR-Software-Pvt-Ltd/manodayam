@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, PROFIL_API, BOOKED_API, SUBSCRIPTION_PLANE_LIST } from "../utill/api.endpoints";
+import { API_ADMIN_URL, PROFIL_API, BOOKED_API ,SUBSCRIPTION_PLANE_LISTA} from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import { useFormik } from "formik";
@@ -78,7 +78,7 @@ export default function Profile() {
       .get(
         // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LIST}`
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?userId=${user._id}`
 
       )
       .then((res) => {
@@ -276,8 +276,8 @@ export default function Profile() {
                                   <td>  {a.benefitsdescription}</td>
                                   <td>{a.price}</td>
 
-                                  <td><button className="btn"   type="button" 
-                                          class="btn btn-sm btn-success border-radius-0 add-btn">BUY PLAN
+                                  <td><button    type="button" 
+                                          className="btn-web subbutton  hvr-float-shadow">Buy Plan
                          
                           </button></td>
                                   

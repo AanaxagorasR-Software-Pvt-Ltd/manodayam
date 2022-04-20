@@ -22,6 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 
 .simple-btn {
@@ -40,6 +41,24 @@ body {
 .simple-btn:hover {
   background: linear-gradient(45deg, #23adba, #9d1892);
 }
+.refresh {
+  outline: 0;
+  border: 0;
+  background: linear-gradient(45deg, #23adba, #9d1892);
+  padding: 7px 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+  width: 850px;
+  margin: 2px;
+}
+
+.refresh:hover {
+  background: linear-gradient(45deg, #23adba, #9d1892);
+}
 
 #visualizer-container {
   width: 100%;
@@ -53,4 +72,101 @@ body {
 
 #search-result {
   margin-top: 2em;
+}
+/* Style the form */
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+/* Style the input fields */
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #04aa6d;
+}
+.w3-black {
+  opacity: 0;
+}
+.modal-footer {
+  height: 500px;
+}
+.question {
+  color: black;
+  text-align: center;
+}
+.radio_text {
+  color: black;
+  font-size: 16px;
+  text-align: center;
+  /* margin-left: 260px; */
+}
+.radio_btn {
+  width: 3%;
+  /* margin-left: 250px; */
+}
+.radio_container {
+  margin-left: 230px;
+}
+.step.finish {
+  background-color: #9d1892;
+}
+.w3-container {
+  height: 150px;
+  background-color: white;
+  width: 400px;
+  justify-content: center;
+  text-align: center;
+  /* margin-top: 10px; */
+  padding-top: 50px;
+}
+.w3-display-topright {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 23px;
+}
+.emoji{
+  /* font-size: 30px; */
+  text-align: center;
+}
+.result_container{
+  height: 200px;
 }

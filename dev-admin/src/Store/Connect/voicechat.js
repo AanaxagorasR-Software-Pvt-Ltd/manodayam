@@ -11,10 +11,10 @@ class voicechat {
     return axios.get("/all/ignore-status");
   }
   save(data) {
-    return axios.post("/library/media", data);
+    return axios.post("/voicechat/new", data);
   }
   delete(id) {
-    return axios.delete(`/library/delete/${id}`);
+    return axios.delete(`/voicechat/delete/${id}`);
   }
   // update(data){
   //     return  axios.put('/library/media',data)
