@@ -127,7 +127,7 @@ router.get("/booked", async (req, res) => {
 	  };
 	  if (req.query.userId)  {
 		filter.userId = req.query.userId
-	  }
+	  } 
 	// ('id: ' + req.query.id);
     const db = await getDatabase();
     let dt = await db

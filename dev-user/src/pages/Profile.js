@@ -17,7 +17,7 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [editData, setEditData] = useState([]);
   const [subScriptiondata, setSubscriptiondata] = useState([]);
-
+  let params = new URLSearchParams(window.location.search);
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
     const profileData = {
@@ -57,6 +57,7 @@ export default function Profile() {
         console.log("err", err.message);
       });
   };
+ 
   const Editprofile = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     axios
@@ -78,9 +79,9 @@ export default function Profile() {
       .get(
         // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?userId=${user._id}`
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get( "usertype")}`
 
-      )
+)
       .then((res) => {
         console.log("res", res, typeof res);
 
@@ -89,37 +90,17 @@ export default function Profile() {
       .catch((err) => {
         console.log("err", err.message);
       });
-  }
+  }  
   React.useEffect(() => {
     listBooked();
     Editprofile();
     subscription();
 
   }, []);
-  const convertToDateTime = (time) => {
-    const d = new Date(time);
-    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
-  };
-  // const saveData =()=>{
 
+ 
+ 
 
-  //   axios
-  //   .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
-  //   .then((res) => {
-
-  //     setprofilData(res.data.data);
-
-  //     console.log(res.data);
-  //     setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
-  //     setshow(true)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
-  // const handleChange = (v, k) => {
-  //   setEditData({ ...editData, [k]: v });
-  // };
   const handleClose = () => setshow(false);
 
   const formik = useFormik({
@@ -132,7 +113,10 @@ export default function Profile() {
       console.log(values)
     }
   })
-
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+  };
   return (
     <>
       <div className="contact-banner mb-50">
@@ -253,7 +237,8 @@ export default function Profile() {
                                 <th>Doctor Assessment</th>
                                 <th>Group Therapy</th>
                                 <th>Meditation Spirituality</th>
-                                <th>benefitsdescription</th>
+                                <th>Benefitsdescription</th>
+                                <th>Create Date</th>
                                 <th>Price</th>
                                 <th>Action</th>
         
@@ -274,7 +259,8 @@ export default function Profile() {
                                   <td>{a.grouptherapy}  </td>
                                   <td> {a.meditation} </td>
                                   <td>  {a.benefitsdescription}</td>
-                                  <td>{a.price}</td>
+                                  <th>{convertToDateTime(a.created)}</th>
+                                  <td> <i className="fa fa-inr"></i>{a.price}</td>
 
                                   <td><button    type="button" 
                                           className="btn-web subbutton  hvr-float-shadow">Buy Plan
@@ -302,7 +288,7 @@ export default function Profile() {
                                 <th>Condition</th>
                                 <th>Connect Here!</th>
                                 <th>Status</th>
-                              </tr>
+                              </tr> 
                             </thead>
                             <tbody>
                               {bookData.map((a, i) => (

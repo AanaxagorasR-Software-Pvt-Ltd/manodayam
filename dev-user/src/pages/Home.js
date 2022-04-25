@@ -302,31 +302,28 @@ export default function Home(props) {
   };
   const subchange = (e) => {
     let user = JSON.parse(localStorage.getItem("user"));
-    const subOptions = {
-      userid:user._id,
-      subscriptionid:e
-      }
-    axios
-      .post(
-        // ?humanId=${}`
+    hist(`/profile?usertype=${e}`)
+    // axios
+    //   .post(
+    //     // ?humanId=${}`
+  
+    //     `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,subOptions
-
-      )
+    //   )
  
-      .then((res) => {
+    //   .then((res) => {
      
-        console.log("====mentalHealthData====", res.data);
-        if (user) {
-          hist("/profile")
-        } else {
-          setAlerdata({ title: "Sorry", body: "Login and registration First" });
-          setshow(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //     console.log("====mentalHealthData====", res.data);
+    //     if (user) {
+    //       hist(`/profile?catid=${e}`)
+    //     } else {
+    //       setAlerdata({ title: "Sorry", body: "Login and registration First" });
+    //       setshow(true);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     console.log()
     
   };
@@ -420,11 +417,11 @@ export default function Home(props) {
 
                     <Dropdown >
                       <Dropdown.Toggle id="dropdown-basic" className="qst-show btn-web hvr-float-shadow btn-web">
-                        your subscription plan
+                        Choose Subscription plane
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu className="scrollable-menu">
-                        {mastercategorys.map(element => (<Dropdown.Item as="p" onClick={(e) => subchange(element._id)}>{element.mastercategory}</Dropdown.Item>))}
+                        {mastercategorys.map(element => (<Dropdown.Item as="p" onClick={(e) => subchange(element.mastercategory)}>{element.mastercategory}</Dropdown.Item>))}
 
                       </Dropdown.Menu>
                     </Dropdown>
