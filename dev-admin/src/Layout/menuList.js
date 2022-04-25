@@ -1,4 +1,3 @@
-
 const leftSideBarMenu = [
   {
     name: "Dashboard",
@@ -33,7 +32,7 @@ const leftSideBarMenu = [
     submenu: [],
     isHover: false,
   },
-   {
+  {
     name: "About us manodayam",
     isActive: false,
     dataToggle: "",
@@ -198,41 +197,40 @@ const leftSideBarMenu = [
         link: "/admin/audio",
         isExpand: false,
       },
-    
     ],
     isHover: false,
   },
   {
     name: "Product List",
     isActive: false,
-    dataToggle: "", 
+    dataToggle: "",
     isExpand: false,
     // link: "javascript:void(0)" ,
     link: "",
 
     iconClass: "icon-layout",
-    
+
     submenu: [
       {
-      name: "Product",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "/admin/product" ,
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
-    iconClass: "icon-layout",
-  },
-    {
-      name: "Order List",
-      isActive: true,
-      dataToggle: "",
-      link: "",
-      isExpand: false,
-    },
-    ]
+        name: "Product",
+        isActive: false,
+        dataToggle: "",
+        isExpand: false,
+        link: "/admin/product",
+        iconClass: "icon-grid",
+        subMenuid: "ui-basic",
+        submenu: [],
+        isHover: false,
+        iconClass: "icon-layout",
+      },
+      {
+        name: "Order List",
+        isActive: true,
+        dataToggle: "",
+        link: "",
+        isExpand: false,
+      },
+    ],
   },
 
   {
@@ -265,7 +263,7 @@ const leftSideBarMenu = [
         link: "/admin/library-appointment-booked",
         isExpand: false,
       },
-      
+
       {
         name: "Group connectors",
         isActive: true,
@@ -295,14 +293,29 @@ const leftSideBarMenu = [
   //   isHover: false,
   // },
   {
-    name: "Voice Chat",
+    name: "Voice Assistant",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/admin/voice-chat",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
+    iconClass: "icon-layout",
+    link: "",
+
+    submenu: [
+      {
+        name: "Voice Chat",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/voice-chat",
+        isExpand: false,
+      },
+      {
+        name: "Assessment",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/voice-assessment-question",
+        isExpand: false,
+      },
+    ],
     isHover: false,
   },
   {

@@ -30,7 +30,7 @@ import ShakthiQuestion from "./pages/ShakthiQuestion";
 import LibraryGroupAppoint from "./pages/LibraryGroupAppoint";
 import LibraryGroupBooked from "./pages/LibraryGroupBooked";
 import VoiceChat from "./pages/VoiceChat";
-
+import VoiceAssessment from "./pages/VoiceAssessment"
 const Login = React.lazy(() => import("./pages/Login"));
 const ProtectedRoute = React.lazy(() => import("./Auth/Protected"));
 const Register = React.lazy(() => import("./pages/Register"));
@@ -58,7 +58,9 @@ const InternalRoute = (props) => {
           <Route path="/admin/library" element={<Library />} exact />
           <Route path="/admin/users-list" element={<Userslist />} exact />
           <Route path="/admin/voice-chat" element={<VoiceChat />} exact />
+          <Route path="/admin/voice-assessment-question" element={<VoiceAssessment />} exact />
 
+          
           <Route
             path="/admin/library-appointment"
             element={<LibraryAppoint />}
