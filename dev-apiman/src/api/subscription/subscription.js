@@ -121,6 +121,48 @@ router.post("/usersubscription", async (req, res) => {
     });
   }
 });
+router.post('/bookplane', async (req, res) => {
+ 
+const data={
+  subid:req.query.subid,
+  email:req.query.useremail
+}
+
+const db = await getDatabase();
+  try {
+
+    
+    console.log(data);
+    if (!body?._id) {
+      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    } else {
+      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    }
+
+   
+    let subscriptionbook = await db.collection("Subscription_Book")
+    let subscriptiondata = await db
+      .collection("Subscription_Book").insertOne(data)
+      let subscriptionplane = await db
+      .collection("Subscription_Plan").findOne({_id: new ObjectID(userid)})
+      var date = new Date(body.schedule)
+      var dates=date.toLocaleString('en-IN');
+     
+ 
+    EmailService.sendEmailToPlanebooked(subscriptiondata.email, {therapy:subscriptionplane.therapy ,selfassessment:subscriptionplane.selfassessment,doctorassessment:subscriptionplane.
+      doctorassessment ,grouptherapy:subscriptionplane.grouptherapy,meditation:subscriptionplane.meditation,benefitsdescription:
+      subscriptionplane.benefitsdescription,schedule:subscriptionplane.schedule,price:subscriptionplane.price });
+    
+  }
+
+  catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error",
+      error: e,
+    });
+  }
+}),
 // router.get("/list", async (req, res) => {
 //   const db = await getDatabase();
 
