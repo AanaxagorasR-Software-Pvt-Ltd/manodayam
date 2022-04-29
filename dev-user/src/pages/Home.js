@@ -277,9 +277,6 @@ export default function Home(props) {
           slidesToScroll: 1,
         },
       },
-      // You can unslick at a given breakpoint now by adding:
-      // settings: "unslick"
-      // instead of a settings object
     ],
   };
   const [humanId, setHumanId] = useState("");
@@ -305,13 +302,9 @@ export default function Home(props) {
     // axios
     //   .post(
     //     // ?humanId=${}`
-
     //     `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,
-
     //   )
-
     //   .then((res) => {
-
     //     console.log("====mentalHealthData====", res.data);
     //     if (user) {
     //       hist(`/profile?catid=${e}`)
@@ -323,7 +316,7 @@ export default function Home(props) {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    console.log();
+    // console.log();
   };
   const handleClose = () => setshow(false);
 
@@ -395,7 +388,6 @@ export default function Home(props) {
               <div className="container">
                 <div className="web-banner-content">
                   <h1>{element.banner_text}</h1>
-                  {/* <h1>Meet, Your Mentor or Coach-Digital Human Library</h1> */}
                   <div className="d-flex">
                     <button
                       className="qst-show btn-web hvr-float-shadow btn-web"
@@ -409,43 +401,35 @@ export default function Home(props) {
                     >
                       Your Support Networks
                     </button>
-
                     <Dropdown>
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map((element) => (
+                          <Dropdown.Item
+                            as="p"
+                            onClick={(e) => subchange(element._id)}
+                          >
+                            {element.mastercategory}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
                       <Dropdown.Toggle
                         id="dropdown-basic"
                         className="qst-show btn-web hvr-float-shadow btn-web"
                       >
-                        your subscription plan
+                        Choose Subscription plane
                       </Dropdown.Toggle>
+
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map((element) => (
+                          <Dropdown.Item
+                            as="p"
+                            onClick={(e) => subchange(element.mastercategory)}
+                          >
+                            {element.mastercategory}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
                     </Dropdown>
-
-                    <Dropdown.Menu className="scrollable-menu">
-                      {mastercategorys.map((element) => (
-                        <Dropdown.Item
-                          as="p"
-                          onClick={(e) => subchange(element._id)}
-                        >
-                          {element.mastercategory}
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
-                    <Dropdown.Toggle
-                      id="dropdown-basic"
-                      className="qst-show btn-web hvr-float-shadow btn-web"
-                    >
-                      Choose Subscription plane
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu className="scrollable-menu">
-                      {mastercategorys.map((element) => (
-                        <Dropdown.Item
-                          as="p"
-                          onClick={(e) => subchange(element.mastercategory)}
-                        >
-                          {element.mastercategory}
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
                   </div>
                 </div>
               </div>
