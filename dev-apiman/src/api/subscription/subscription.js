@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ObjectID = require("mongodb").ObjectID;
 // var ObjectId = require('mongodb').ObjectID;
+const EmailService = require("../Service/EmailService");
 const { getDatabase } = require("../../db/mongo");
 
 const path = require("path");
@@ -124,16 +125,16 @@ router.post("/usersubscription", async (req, res) => {
 router.post('/bookplane', async (req, res) => {
  
 const data={
-  subid:req.query.subid,
-  email:req.query.useremail
+  id:req.query.subid,
+  email:req.query.subemail
 }
-
+console.log(data);
 const db = await getDatabase();
   try {
 
     
     console.log(data);
-    if (!body?._id) {
+    if (!data?._id) {
       data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     } else {
       data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
@@ -144,14 +145,12 @@ const db = await getDatabase();
     let subscriptiondata = await db
       .collection("Subscription_Book").insertOne(data)
       let subscriptionplane = await db
-      .collection("Subscription_Plan").findOne({_id: new ObjectID(userid)})
-      var date = new Date(body.schedule)
+      .collection("Subscription_Plan").findOne({_id: new ObjectID(data.id)})
+      var date = new Date(subscriptionplane.created)
       var dates=date.toLocaleString('en-IN');
      
  
-    EmailService.sendEmailToPlanebooked(subscriptiondata.email, {therapy:subscriptionplane.therapy ,selfassessment:subscriptionplane.selfassessment,doctorassessment:subscriptionplane.
-      doctorassessment ,grouptherapy:subscriptionplane.grouptherapy,meditation:subscriptionplane.meditation,benefitsdescription:
-      subscriptionplane.benefitsdescription,schedule:subscriptionplane.schedule,price:subscriptionplane.price });
+    EmailService.sendEmailToPlanebooked(data.email,subscriptionplane  );
     
   }
 

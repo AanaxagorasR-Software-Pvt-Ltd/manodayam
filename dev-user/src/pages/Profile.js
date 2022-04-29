@@ -118,13 +118,13 @@ export default function Profile() {
     const d = new Date(time);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
- const  subscriptionbook =()=>{
+ const  subscriptionbook =(subId)=>{
   let sub = JSON.parse(localStorage.getItem("user")); 
     axios
       .post(
         // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?useremail=${sub.email}?userid=${sub._id}`)
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?subemail=${sub.email}&subid=${subId}`)
       }
       // setAlerdata({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
       // setshow(true);
@@ -274,7 +274,7 @@ export default function Profile() {
                                   <td> <i className="fa fa-inr"></i>{a.price}</td>
 
                                   <td><button type="button"
-                                    className="btn-web subbutton  hvr-float-shadow" data-toggle="modal" data-target="#exampleModal" onClick={subscriptionbook}>Buy</button></td>
+                                    className="btn-web subbutton  hvr-float-shadow" data-toggle="modal" data-target="#exampleModal" onClick={() => subscriptionbook(a._id)}>Buy</button></td>
 
                                 </tr>
                               ))}</tbody>}
