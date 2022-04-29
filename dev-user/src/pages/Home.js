@@ -19,7 +19,6 @@ import {
   DIGITAL_HUMAN_LIBRARY_DATA_API,
   MASTERCATEGORY_API,
   SUBSCRIPTION_PLANE,
-  
 } from "../utill/api.endpoints";
 const images = [];
 export default function Home(props) {
@@ -303,22 +302,21 @@ export default function Home(props) {
   const subchange = (e) => {
     let user = JSON.parse(localStorage.getItem("user"));
     const subOptions = {
-      userid:user._id,
-      subscriptionid:e
-      }
+      userid: user._id,
+      subscriptionid: e,
+    };
     axios
       .post(
         // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,subOptions
-
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,
+        subOptions
       )
- 
+
       .then((res) => {
-     
         console.log("====mentalHealthData====", res.data);
         if (user) {
-          hist("/profile")
+          hist("/profile");
         } else {
           setAlerdata({ title: "Sorry", body: "Login and registration First" });
           setshow(true);
@@ -327,8 +325,7 @@ export default function Home(props) {
       .catch((error) => {
         console.log(error);
       });
-    console.log()
-    
+    console.log();
   };
   const handleClose = () => setshow(false);
 
@@ -402,8 +399,6 @@ export default function Home(props) {
                   <h1>{element.banner_text}</h1>
                   {/* <h1>Meet, Your Mentor or Coach-Digital Human Library</h1> */}
                   <div className="d-flex">
-
-
                     <button
                       className="qst-show btn-web hvr-float-shadow btn-web"
                       onClick={() => loginsubmit("/spirituality")}
@@ -417,15 +412,23 @@ export default function Home(props) {
                       Your Support Networks
                     </button>
 
-
-                    <Dropdown >
-                      <Dropdown.Toggle id="dropdown-basic" className="qst-show btn-web hvr-float-shadow btn-web">
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        id="dropdown-basic"
+                        className="qst-show btn-web hvr-float-shadow btn-web"
+                      >
                         your subscription plan
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu className="scrollable-menu">
-                        {mastercategorys.map(element => (<Dropdown.Item as="p" onClick={(e) => subchange(element._id)}>{element.mastercategory}</Dropdown.Item>))}
-
+                        {mastercategorys.map((element) => (
+                          <Dropdown.Item
+                            as="p"
+                            onClick={(e) => subchange(element._id)}
+                          >
+                            {element.mastercategory}
+                          </Dropdown.Item>
+                        ))}
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
@@ -443,67 +446,71 @@ export default function Home(props) {
               <div className="about-content">
                 <h5>ABOUT US</h5>
                 <p>
-                  Manodayam is a Mental Health and Wellnessorganization
-                  providing Holistic solutions. It has Unique Value proposition
-                  integrating continual mental health assessment and support
-                  networks including Neuromodulation with Vedic methodology and
-                  latest scientific techniques through mobile app.
+                  We provide an Online holistic solution for Mental Health and
+                  Wellness seekers through Web portal & Mobil App. This has been
+                  initiated in collaboration with Mental Health Foundation of
+                  India(MHFI) for technical, functional and strategic depth &
+                  are backed & invested by STPI (Ministry of Electronics and
+                  Information Technology , MieTY) Govt Of India, under DIGITAL
+                  Health initiative called “ MediTech”.
                 </p>
                 <p>
-                  These Solutions are driven by Artificial Intelligence (AI)
-                  centric algorithms. and group of leading medical fraternity in
-                  mental health space
+                  We provide Unique Value proposition of integrating continual
+                  mental health assessment and support networks including
+                  Neuromodulation with Vedic methodology and latest scientific
+                  techniques.
                 </p>
                 <p>
-                  Solutions to 17 Mental Health Conditions such as Depression,
-                  Panic, Stress, PSTD, Alcoholism, Substance Abuse,
-                  Schizophrenia, Bipolar, ADHD, Dementia, Alzheimer’s,
-                  Parkinson’s, Juvenile Delinquency, Autism, Sexual Disorders,
-                  Sleeplessness
+                  This platform is scaled to provide Solutions to 17 different
+                  Mental Health scenarios such as Depression, Panic, Stress,
+                  Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
+                  ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
+                  Delinquency, Autism & Sexual Disorders!! Though as per data
+                  from Health experts and WHO , we have First seven scenarios as
+                  majority of ongoing and potential scenarios.
                 </p>
                 <p>
-                  Manodayam has Comprehensive team of Clinical Psychologist,
-                  Psychiatrists, Care-givers Also we have Expertise in
-                  Mathematical Modeling, Business Management, Big Data
-                  Management, Statistical Analytics
+                  These Solutions are driven by Artificial Intelligence
+                  (AI)based on Patient-centric data including Genetic Markers,
+                  Brain Scans and Complete Mental Health Mgmt.
                 </p>
                 <p>
-                  Manodayam is in the process of Compliances to Clinical Trials,
-                  Validationsand Data Protection
+                  We have a Comprehensive team of Experts like senior Clinical
+                  Psychologist, Psychiatrists & Care-givers.
                 </p>
+                <p>
+                  Expertise in Mathematical Modelling, Business Management, Big
+                  Data Management, Statistical Analytics.
+                </p>
+                <p>
+                  We have a special focus on Compliances to Clinical Trials,
+                  Validations, Data Protection & Statute as a constant process.
+                </p>
+                {/* <Link to="/about-us">
+                  <p className="text-primary font-italic">Read More</p>
+                </Link> */}
                 <img src="assets/image/rose.png" alt="" />
               </div>
             </div>
-
-            <div className="col-lg-6">
-              <div className="about-img">
-                <Slider {...settingsnext}>
-                  <img src="assets/image/white9.jpeg" alt="" />
-                  <img src="assets/image/seen1.jpeg" alt="" />
-                  <img src="assets/image/seen3.jpeg" alt="" />
-                  <img src="assets/image/seen4.jpg" alt="" />
-                  <img src="assets/image/seen5.webp" alt="" />
-                  <img src="assets/image/seen7.webp" alt="" />
-                </Slider>
-              </div>
-            </div>
-            {data.map((element) => (
-              <div className="col-lg-4">
-                <div>
-                  <video
-                    id="about-us-video"
-                    controls
-                    preload="auto"
-                    poster={element.thumbnail_image}
-                    data-setup=""
-                    loop="auto"
-                  >
-                    <source src={element.video} type="video/mp4" />
-                  </video>
-                  <h6 className="about_title">{element.title}</h6>
+            <div>
+              {data.map((element) => (
+                <div className="col-lg-4">
+                  <div>
+                    <video
+                      id="about-us-video-2"
+                      controls
+                      preload="auto"
+                      poster={element.thumbnail_image}
+                      data-setup=""
+                      loop="auto"
+                    >
+                      <source src={element.video} type="video/mp4" />
+                    </video>
+                    <h6 className="about_title">{element.title}</h6>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -605,7 +612,7 @@ export default function Home(props) {
                       <select
                         name=""
                         id=""
-                      // onChange={(event) => setState(event.target.value)}
+                        // onChange={(event) => setState(event.target.value)}
                       >
                         <option value="All State">All State</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>

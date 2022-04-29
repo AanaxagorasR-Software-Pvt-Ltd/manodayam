@@ -285,7 +285,7 @@ const VoiceAssessment = () => {
                             <tr>
                               <th style={{ width: "10px" }}>S.No</th>
                               <th>Questions</th>
-                              <th>Right-Answer</th>
+                              {/* <th>Right-Answer</th> */}
                               <th>Category</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -304,7 +304,7 @@ const VoiceAssessment = () => {
                                   <strong>Ans3:</strong> {v.ans3} <br />
                                   <strong>Ans4:</strong> {v.ans4} <br />
                                 </td>
-                                <td>{v.rytAns}</td>
+                                {/* <td>{v.rytAns}</td> */}
                                 <td>{v.category}</td>
                                 <td>{v.createdAt}</td>
 
@@ -494,7 +494,7 @@ const Addform = forwardRef((props, ref) => {
                 placeholder="Answer here"
               />
             </div>
-            <div class="form-group">
+            {/* <div class="form-group">
               <label for="exampleInputUsername1">Right Answer</label>
               <select
                 class="form-control"
@@ -511,7 +511,7 @@ const Addform = forwardRef((props, ref) => {
                 <option value="Answer-3">Answer-3</option>
                 <option value="Answer-4">Answer-4</option>
               </select>
-            </div>
+            </div> */}
             <div class="form-group">
               <label for="exampleInputUsername1"> Select Category</label>
               <select

@@ -72,22 +72,21 @@ export default function Header() {
                     <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                     {/* </Link> */}
                     <h6 className="profile-head-text">Profile</h6>
-
                   </button>
-                  <button
+                  {/* <button
                     className="btn-web hvr-float-shadow"
                     data-toggle="tooltip"
                     title="Cart!"
                     onClick={() => loginsubmit("/Cart")}
                   >
-                    {/* <Link to="/cart"> */}
+                    <Link to="/cart">
                     <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                     <h6 className="cart-head-text">Cart</h6>
-                    {/* </Link> */}
-                  </button>
-                  <i className="fa fa-mobile" aria-hidden="true"></i>
+                    </Link>
+                  </button> */}
+                  {/* <i className="fa fa-mobile" aria-hidden="true"></i>
                   <a href="telto:+91 7428409721">+91 7428409721</a>
-                  <p>contact us for help</p>
+                  <p>contact us for help</p> */}
                 </div>
               </div>
             </div>
@@ -119,30 +118,31 @@ export default function Header() {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="#about" className="nav-link">
+                    <Link to="/about-us" className="nav-link">
                       About Us
-                    </a>
+                    </Link>
+                    {/* <a href="#about" className="nav-link">
+                      About Us
+                    </a> */}
                   </li>
                   <li className="nav-item">
-                    {/* <Link to="/support" className="nav-link">
-                    Support
-                    </Link> */}
-                    <a href="#support" className="nav-link">
-                      Support
-                    </a>
+                    <Link to="/" className="nav-link">
+                      How we do
+                    </Link>
                   </li>
-
                   <li className="nav-item">
-                    <a href="#humanlibrary" className="nav-link">
-                      Digital Human Library
-                    </a>
-                    {/* <Link to="/library" className="nav-link">
-                      Digital Human Library
-                    </Link> */}
+                    <Link to="/bookingAppoint" className="nav-link">
+                      Therapies
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/research" className="nav-link">
-                      Research
+                    Research
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/support" className="nav-link">
+                      Support Network
                     </Link>
                   </li>
                   <li className="nav-item">

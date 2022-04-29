@@ -41,16 +41,24 @@ export async function saveFile(audioObje) {
   // });
 }
 
-// display questions
-export async function Question() {
-  console.log("fgdfhfdh");
-  let questionData = { collectiontypedata: "voice_assessment_question" };
-  return axios
-    .post("http://localhost:3020/api/voicechat/voice", questionData)
-    .then((res) => {
-      console.log("====questions====", res.data.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
+// export async function Question() {
+console.log("fgdfhfdh");
+
+axios
+  .get("http://localhost:3020/api/voice-assessment-question")
+  .then((response) => {
+    console.log(9999999, response.data);
+    // document.getElementById("questionss").innerHTML = "hjghjjjjgnvngjgj";
+    // document.getElementById("question").innerHTML = `<h3>${response.data[1].ques}</h3>`
+    document.getElementById("question").innerHTML =
+      response.data.map(getFullName);
+    function getFullName(item) {
+      console.log(5555, item);
+      return [item.ans1].join("");
+    }
+    res.render("index", { data: response.data });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+// }

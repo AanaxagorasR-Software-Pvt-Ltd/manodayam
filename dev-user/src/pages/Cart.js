@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, ADD_CART_API, ADD_ALL_CART, DELETE_DATA, UPDATE_QUANTITY } from "../utill/api.endpoints";
-
+import {
+  API_ADMIN_URL,
+  ADD_CART_API,
+  ADD_ALL_CART,
+  DELETE_DATA,
+  UPDATE_QUANTITY,
+} from "../utill/api.endpoints";
 
 // var quen = 2;
 // {
@@ -39,7 +44,6 @@ export default function Cart(props) {
     allproduct();
   }, []);
 
-
   // const plus = () => {
   //   setquantity(quantity + 1);
   //   // const quen = quantity * 3
@@ -58,31 +62,25 @@ export default function Cart(props) {
       .then((res) => {
         setResponseData(res.data.data);
         console.log("new", res.data);
-
-
-
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const updateQuantity = (quantity, _id ,index) => {
+  const updateQuantity = (quantity, _id, index) => {
     let copy = [...responseData];
     copy[index].quantity = quantity;
     setResponseData(copy);
     const addlist = {
-
       quantity: quantity,
 
       _id: _id,
-
-    }
+    };
     axios
       .post(`${API_ADMIN_URL}${UPDATE_QUANTITY}`, addlist)
       .then((res) => {
         setResponseData(res.data.data);
         console.log("new", res.data);
-
 
         allproduct();
       })
@@ -91,13 +89,16 @@ export default function Cart(props) {
       });
   };
   const deleteData = (_id) => {
-    axios.delete(`${API_ADMIN_URL}${DELETE_DATA}/${_id}`).then((res) => {
-      // alert(res?.message);
+    axios
+      .delete(`${API_ADMIN_URL}${DELETE_DATA}/${_id}`)
+      .then((res) => {
+        // alert(res?.message);
 
-      allproduct();
-    }).catch((error) => {
-      console.log(error);
-    });
+        allproduct();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -145,71 +146,85 @@ export default function Cart(props) {
                     </tr>
                   </thead>
                   <tbody>
-                    {responseData && responseData.map((element,index) => (
-                      <tr key={element._id}>
-                        <td>
-                          <img src={element.products.img_url} alt="" />
-                        </td>
-                        {/* <td>{element.products.product_name}</td> */}
-                      
-                                 
-                                    <td>
-                                    <Link to={"/ViewProduct/" + element.products.slug}>
-                                      {element.products.product_name}
-                                      </Link>
-                                      </td>
-                                  
-                               
-                        <td>
-                          <i className="fa fa-inr"></i> {element.products.mrp}
-                          {/* {element.mrp * localStorage.getItem("Password")} */}
-                        </td>
-                        <td>
-                          <div className="d-inline-flex">
-                            <div
-                              className="bg-light rounded-bottom rounded-top border h-25 p-1"
-                              onClick={() => updateQuantity(element.quantity - 1, element._id,index)}
+                    {responseData &&
+                      responseData.map((element, index) => (
+                        <tr key={element._id}>
+                          <td>
+                            <img src={element.products.img_url} alt="" />
+                          </td>
+                          {/* <td>{element.products.product_name}</td> */}
 
-                            >
-                             
+                          <td>
+                            <Link to={"/ViewProduct/" + element.products.slug}>
+                              {element.products.product_name}
+                            </Link>
+                          </td>
+
+                          <td>
+                            <i className="fa fa-inr"></i> {element.products.mrp}
+                            {/* {element.mrp * localStorage.getItem("Password")} */}
+                          </td>
+                          <td>
+                            <div className="d-inline-flex">
+                              <div
+                                className="bg-light rounded-bottom rounded-top border h-25 p-1"
+                                onClick={() =>
+                                  updateQuantity(
+                                    element.quantity - 1,
+                                    element._id,
+                                    index
+                                  )
+                                }
+                              >
                                 <div>
                                   <i className="fa fa-minus"></i>
                                 </div>
-                            
+
                                 {/* <div>
                                   <Link to="/">
                                     <i className="fa fa-minus text-dark"></i>
                                   </Link>
                                 </div> */}
-                             
-                            </div>
-                            <h5 className="ml-3 mt-2 text-dark font-weight-bold">
-                              {element.quantity}
-                            </h5>
+                              </div>
+                              <h5 className="ml-3 mt-2 text-dark font-weight-bold">
+                                {element.quantity}
+                              </h5>
 
-                            <div
-                              className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
-                              onClick={() => updateQuantity(element.quantity + 1, element._id,index)}
+                              <div
+                                className="ml-3 bg-light rounded-bottom rounded-top border h-25 p-1"
+                                onClick={() =>
+                                  updateQuantity(
+                                    element.quantity + 1,
+                                    element._id,
+                                    index
+                                  )
+                                }
+                              >
+                                <i className="fa fa-plus"></i>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <i className="fa fa-inr"></i>{" "}
+                            {element.products.shipping}
+                          </td>
+                          <td>
+                            <i className="fa fa-inr"></i>{" "}
+                            {element.quantity * element.products.mrp +
+                              parseFloat(element.products.shipping)}
+                            {/* {element.mrp * localStorage.getItem("Password")} */}
+                          </td>
+                          <td>
+                            <button
+                              className="btn"
+                              onClick={() => deleteData(element._id)}
                             >
-                              <i className="fa fa-plus"></i>
-                            </div>
-                          </div>
-                        </td>
-
-                        <td>
-                          <i className="fa fa-inr"></i> {element.products.shipping}
-                        </td>
-                        <td>
-                          <i className="fa fa-inr"></i> {(element.quantity * element.products.mrp) + parseFloat(element.products.shipping) }
-                          {/* {element.mrp * localStorage.getItem("Password")} */}
-                        </td>
-                        <td> 
-                          <button className="btn" onClick={() => deleteData(element._id)}>
-                            <i className="fas fa-trash-alt"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                              <i className="fas fa-trash-alt"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                     <tr>
                       <td></td>
                       <td></td>
