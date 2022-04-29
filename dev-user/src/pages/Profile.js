@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, PROFIL_API, BOOKED_API ,SUBSCRIPTION_PLANE_LISTA} from "../utill/api.endpoints";
+import { API_ADMIN_URL, PROFIL_API, BOOKED_API, SUBSCRIPTION_PLANE_LISTA ,SUBSCRIPTION_PLANE_BOOK} from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import { useFormik } from "formik";
@@ -17,7 +17,8 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [editData, setEditData] = useState([]);
   const [subScriptiondata, setSubscriptiondata] = useState([]);
-
+  const [subbuy,setsubBuy]=useState("")
+  let params = new URLSearchParams(window.location.search);
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
     const profileData = {
@@ -57,6 +58,7 @@ export default function Profile() {
         console.log("err", err.message);
       });
   };
+
   const Editprofile = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     axios
@@ -73,12 +75,12 @@ export default function Profile() {
   }
   const subscription = () => {
     let user = JSON.parse(localStorage.getItem("user"));
-    
+
     axios
       .get(
         // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?userId=${user._id}`
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get("usertype")}`
 
       )
       .then((res) => {
@@ -96,30 +98,10 @@ export default function Profile() {
     subscription();
 
   }, []);
-  const convertToDateTime = (time) => {
-    const d = new Date(time);
-    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
-  };
-  // const saveData =()=>{
 
 
-  //   axios
-  //   .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
-  //   .then((res) => {
 
-  //     setprofilData(res.data.data);
 
-  //     console.log(res.data);
-  //     setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
-  //     setshow(true)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
-  // const handleChange = (v, k) => {
-  //   setEditData({ ...editData, [k]: v });
-  // };
   const handleClose = () => setshow(false);
 
   const formik = useFormik({
@@ -132,8 +114,21 @@ export default function Profile() {
       console.log(values)
     }
   })
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+  };
+ const  subscriptionbook =()=>{
+  let sub = JSON.parse(localStorage.getItem("user")); 
+    axios
+      .post(
+        // ?humanId=${}`
 
-  return (
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?useremail=${sub.email}?userid=${sub._id}`)
+      }
+      // setAlerdata({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
+      // setshow(true);
+  return ( 
     <>
       <div className="contact-banner mb-50">
 
@@ -170,7 +165,7 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h4 className="profile-name">
-                        <span className="profile-hello">Hello</span> {user && user.name}
+                        <span className="profile-hello">Hello</span>{user && user.name}
                       </h4>
                       {/* {
                         <p>
@@ -235,7 +230,7 @@ export default function Profile() {
                   <div class="tab-pane active" id="home">
                     <div class="row">
                       <div class="col-lg-12">
-                      
+
                       </div>
                     </div>
                   </div>
@@ -253,17 +248,18 @@ export default function Profile() {
                                 <th>Doctor Assessment</th>
                                 <th>Group Therapy</th>
                                 <th>Meditation Spirituality</th>
-                                <th>benefitsdescription</th>
+                                <th>Benefitsdescription</th>
+                                <th>Create Date</th>
                                 <th>Price</th>
                                 <th>Action</th>
-        
+
 
 
                               </tr>
                             </thead>
                             {<tbody>
                               {subScriptiondata.map((a, i) => (
-                                <tr  key={i}>
+                                <tr key={i}>
 
 
                                   <td> {i + 1}</td>
@@ -274,13 +270,12 @@ export default function Profile() {
                                   <td>{a.grouptherapy}  </td>
                                   <td> {a.meditation} </td>
                                   <td>  {a.benefitsdescription}</td>
-                                  <td>{a.price}</td>
+                                  <th>{convertToDateTime(a.created)}</th>
+                                  <td> <i className="fa fa-inr"></i>{a.price}</td>
 
-                                  <td><button    type="button" 
-                                          className="btn-web subbutton  hvr-float-shadow">Buy Plan
-                         
-                          </button></td>
-                                  
+                                  <td><button type="button"
+                                    className="btn-web subbutton  hvr-float-shadow" data-toggle="modal" data-target="#exampleModal" onClick={subscriptionbook}>Buy</button></td>
+
                                 </tr>
                               ))}</tbody>}
 
@@ -343,7 +338,7 @@ export default function Profile() {
                                         target="_blank"
                                       >
                                         <button
-                                         type="button" 
+                                          type="button"
                                           class="btn btn-sm btn-success border-radius-0 add-btn"
                                         >
                                           <i class="ti-video-camera"></i>
@@ -366,6 +361,27 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      {/* <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"> Your subscription plane</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            confirm your subcription plane
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button"  data-dismiss="modal" class="btn btn-primary"onClick={subscriptionbook} >confirm</button>
+            </div>
+          </div>
+        </div>
+      </div> */}
       <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title>{alertData.title}</Bmodal.Title>

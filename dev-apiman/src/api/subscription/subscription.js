@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const ObjectId = require("mongodb").ObjectId;
+const ObjectID = require("mongodb").ObjectID;
+// var ObjectId = require('mongodb').ObjectID;
 const { getDatabase } = require("../../db/mongo");
 
 const path = require("path");
@@ -52,8 +53,10 @@ router.post(
         grouptherapy: body.grouptherapy,
         meditation: body.meditation,
         benefitsdescription: body.benefitsdescription,
+        schedule: body.schedule,
         price: body.price
-        
+
+
 
 
 
@@ -71,7 +74,7 @@ router.post(
       let vedios = await db.collection("Subscription_Plan");
       if (body._id) {
         insertedId = await vedios.updateOne(
-          { _id: new ObjectId(body._id) },
+          { _id: new ObjectID(body._id) },
           { $set: data }
         ).insertedId;
       } else {
@@ -113,36 +116,87 @@ router.post("/usersubscription", async (req, res) => {
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
-      message: "server error",
+      message: "server error 2",
       error: e,
     });
   }
 });
+router.post('/bookplane', async (req, res) => {
+ 
+const data={
+  subid:req.query.subid,
+  email:req.query.useremail
+}
+
+const db = await getDatabase();
+  try {
+
+    
+    console.log(data);
+    if (!body?._id) {
+      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    } else {
+      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    }
+
+   
+    let subscriptionbook = await db.collection("Subscription_Book")
+    let subscriptiondata = await db
+      .collection("Subscription_Book").insertOne(data)
+      let subscriptionplane = await db
+      .collection("Subscription_Plan").findOne({_id: new ObjectID(userid)})
+      var date = new Date(body.schedule)
+      var dates=date.toLocaleString('en-IN');
+     
+ 
+    EmailService.sendEmailToPlanebooked(subscriptiondata.email, {therapy:subscriptionplane.therapy ,selfassessment:subscriptionplane.selfassessment,doctorassessment:subscriptionplane.
+      doctorassessment ,grouptherapy:subscriptionplane.grouptherapy,meditation:subscriptionplane.meditation,benefitsdescription:
+      subscriptionplane.benefitsdescription,schedule:subscriptionplane.schedule,price:subscriptionplane.price });
+    
+  }
+
+  catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error",
+      error: e,
+    });
+  }
+}),
+// router.get("/list", async (req, res) => {
+//   const db = await getDatabase();
+
+
+//   // res.send('hello')
+// });
+
 router.get("/list", async (req, res) => {
-  const db = await getDatabase();
+
   let filter = {
 
 
   };
-  if(req.query.id && req.query.id != "null" ){
-    filter._id =  ObjectId(req.query.id);
+  if (req.query.usertype) {
+    filter.type= req.query.usertype
 
   }
+
   try {
-  
-    // const { collectiontype } = req.body;
-    let dt = await db.collection("Subscription_Plan").find(filter).toArray();
-    res.json(dt);
+
+    const db = await getDatabase();
+    const data = await db.collection("Subscription_Plan").find(filter).sort({ type: -1 })
+      .toArray();
+    res.send(data);
   } catch (err) {
     console.log("err", err.message);
   }
-
-  // res.send('hello')
 });
+
+
 
 router.get("/", async (req, res) => {
   try {
-   
+
     const _id = req.query._id
     const db = await getDatabase();
 
@@ -156,15 +210,15 @@ router.get("/", async (req, res) => {
       .collection("Subscription_Plan")
       .aggregate([
         {
-          $match: { _id: { $eq: new ObjectId(_id) } },
+          $match: { _id: { $eq: new ObjectID(_id) } },
         },
-       
+
         {
           $addFields: {
             userid: {
               $toObjectId: "$userid",
             }
-           
+
           },
         },
         {
@@ -191,7 +245,7 @@ router.get("/", async (req, res) => {
   // res.send('hello')
 });
 router.delete("/delete/:_id", async (req, res) => {
-  const _id = new ObjectId(req.params._id);
+  const _id = new ObjectID(req.params._id);
   console.log("delete", _id);
 
   try {

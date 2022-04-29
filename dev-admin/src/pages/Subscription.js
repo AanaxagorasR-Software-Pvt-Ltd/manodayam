@@ -73,6 +73,10 @@ const Subscription = () => {
             list();
         });
     };
+    const convertToDateTime = (time) => {
+        const d = new Date(time);
+        return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+      };
     const onsubmit = (e) => {
         e.preventDefault();
         const searchlist = data.filter((value) => {
@@ -293,6 +297,7 @@ const Subscription = () => {
                                                             <th> Group Therapy</th>
                                                             <th>Meditation Spirituality</th>
                                                             <th>Benefits/Description</th>
+                                                            <th>Create date</th>
                                                             <th>Price per users</th>
                                                             <th style={{ width: "80px" }}>Action</th>
                                                         </tr>
@@ -310,6 +315,7 @@ const Subscription = () => {
 
                                                                 <td>{a.meditation}</td>
                                                                 <th>{a.benefitsdescription}</th>
+                                                                <th>{convertToDateTime(a.created)}</th>
 
                                                                 <td>{a.price}</td>
 
