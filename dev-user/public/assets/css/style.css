@@ -17,8 +17,7 @@ ul {
   list-style: none;
 }
 a {
-  color:black;
-  
+  color: black;
 }
 p {
   color: gray;
@@ -27,7 +26,7 @@ p {
   margin-bottom: 50px;
 }
 a:hover {
-  color:black;
+  color: black;
   text-decoration: none;
 }
 img {
@@ -57,9 +56,8 @@ img {
 .btn-web a {
   text-transform: capitalize;
   color: #fff;
-  
 }
-.subbutton{
+.subbutton {
   height: 45px;
   width: 100px;
 }
@@ -80,7 +78,10 @@ header {
   padding-left: 0.5rem;
 }
 .web-header {
-  position: unset;
+  position: fixed;
+  top: 72px;
+  background: white;
+  border-bottom: 1px solid rgb(218, 218, 218);
 }
 .banner-content h1 {
   color: #fff;
@@ -399,7 +400,7 @@ header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(../image/banner/slide-banner3.png);
   background-size: cover;
-  height: 70vh;
+  height: 78vh;
   /* margin-top: 130px;*/
   background-position-y: 20%;
 }
@@ -710,7 +711,14 @@ header {
   /*margin-top: 127px;*/
   background-position-y: 29%;
 }
-
+.aboutus-banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=);
+  background-size: cover;
+  padding: 110px 0;
+  /* margin-top: 50px; */
+  background-position-y: 29%;
+}
 .breadcrumb {
   display: -ms-flexbox;
   display: flex;
@@ -728,6 +736,7 @@ header {
   font-size: 33px;
   color: #fff;
   font-weight: 700;
+  margin-top: 90px;
 }
 .contact-breadcrumb .breadcrumb li a {
   font-weight: 600;
@@ -916,8 +925,9 @@ footer {
   text-transform: uppercase;
   font-size: 41px;
   font-weight: 700;
-  margin-bottom: 41px;
+  /* margin-bottom: 31px; */
   width: 70%;
+  margin-top: 105px;
 }
 .web-banner-content {
   padding: 70px 0px;
@@ -1139,7 +1149,7 @@ footer {
 }
 .fixed {
   background: #fff;
-  /*position: fixed;*/
+  position: fixed;
   width: 100%;
   z-index: 99;
   top: 0;
@@ -1200,9 +1210,14 @@ footer {
   width: 280px;
   margin-left: 25px;
 }
+#about-us-video-2 {
+  height: 200px;
+  width: 420px;
+  margin-left: 25px;
+}
 .about_title {
   margin-left: 28px;
-width: 200px;
+  width: 200px;
   font-weight: 300;
   font-size: 22px;
   color: #23adba;
@@ -1211,15 +1226,15 @@ width: 200px;
   width: 372px;
   height: 210px;
 }
-.product-img{
+.product-img {
   margin-left: 10px;
 }
-.profile-head-text{
+.profile-head-text {
   color: #23adba;
   margin-top: 13px;
   margin-left: -15px;
 }
-.cart-head-text{
+.cart-head-text {
   color: #23adba;
   margin-top: 13px;
   margin-left: -8px;

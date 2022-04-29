@@ -22,7 +22,7 @@ router.post("/new", async (req, res) => {
         ans2: body.ans2,
         ans3: body.ans3,
         ans4: body.ans4,
-        rytAns: body.rytAns,
+        // rytAns: body.rytAns,
         category: body.category,
         // type: body.type
       };
@@ -108,14 +108,14 @@ const validate = (req, res, next) => {
     });
   }
 };
-router.post("/voice-assessmentques", validate, async (req, res) => {
+router.post("/ques-assessment", validate, async (req, res) => {
   const db = await getDatabase();
 
   try {
     const { collectiontypedata } = req.body;
     console.log("collectiontypedata", req.body);
     const data = await db.collection(`${collectiontypedata}`).find().toArray();
-    console.log("===question-mcq===", data);
+    console.log("===question-assessment===", data);
     if (Array.isArray(data)) {
       res.status(200).json({
         data: data,
