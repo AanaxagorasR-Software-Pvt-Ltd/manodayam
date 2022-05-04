@@ -17,6 +17,8 @@ import BookingAppoint from "./pages/BookAppoint";
 import Appointment from "./pages/Appointment";
 import AllmentalHealth from "./pages/AllmentalHealth";
 import Aboutus from './pages/Aboutus'
+import PrimarySprituality from './pages/PrimarySprituality'
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -42,6 +44,9 @@ function App() {
           <Route path="/appointment" element={<Appointment />} exact />
           <Route path="/all-mental-wellness" element={<AllmentalHealth />} exact />
           <Route path="/about-us" element={<Aboutus />} exact />
+          <Route path="/primary-sprituality" element={<PrimarySprituality />} exact />
+
+          
         </Routes>
 
         <Footer />

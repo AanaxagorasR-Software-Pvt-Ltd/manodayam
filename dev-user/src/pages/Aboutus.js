@@ -46,7 +46,7 @@ export default function Aboutus() {
                   <li>
                     <Link to="/home">Home / &nbsp;</Link>
                   </li>
-                  <li>About Us</li>
+                  <li>About us</li>
                 </ol>
               </div>
             </div>

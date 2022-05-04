@@ -9,6 +9,12 @@ import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
 import SimpleImageSlider from "react-simple-image-slider";
+import logo from "./favicon.png";
+import Ai from "./ai.jpeg";
+import library from "./library.jpeg";
+import sprituality from "./sprituality.jpeg";
+import teledoctor from "./teledr.png";
+
 import {
   API_ADMIN_URL,
   PRODUCT_API,
@@ -437,7 +443,6 @@ export default function Home(props) {
           ))}
         </Slider>
       </div>
-
       <div id="about" className="about-section mb-50">
         <div className="container">
           <div className="row">
@@ -460,7 +465,7 @@ export default function Home(props) {
                   techniques.
                 </p>
                 <p>
-                  This platform is scaled to provide Solutions to 17 different
+                  This platform is scaled to provide Solutions to Five different
                   Mental Health scenarios such as Depression, Panic, Stress,
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
                   ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
@@ -513,32 +518,133 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-
       <div className="service-section mb-50">
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>Swayam- Do It Yourself</h5>
-              <p>Swayam gives you power to heal and get you to wellness</p>
+              <h5>Menu (How We Do) </h5>
+              <p>
+                Our Technology Architecture helps you to find the solutions to
+                various possible mental/emotional scenarios which are or may be
+                faced by you. Our Health experts have made sure that your
+                THERAPIES are tailor made & driven basis FOUR building blocks of
+                our Online platform to help you find an apt solution for
+                yourself
+              </p>
             </div>
           </div>
-
           <div className="service-slide">
+            <div className="col-lg-12">
+              {/* <div className="service-card hvr-float-shadow col-lg-12">
+                <img src={logo} alt="" />
+                <img src={logo} className="img-bfr" alt="" />
+                <buttton
+                  className="btn-web hvr-float-shadow"
+                  onClick={() => loginsubmit("/mentalHealth/")}
+                >
+                  AI DRIVEN SELF-ASSESSMENT
+                </buttton>
+                <buttton
+                  className="btn-web hvr-float-shadow"
+                  onClick={() => loginsubmit("/all-mental-wellness")}
+                >
+                  TELE-PSYCHIATRY CONNECT WITH DOCTORS
+                </buttton>
+                <buttton
+                  className="btn-web hvr-float-shadow"
+                  onClick={() => loginsubmit("/all-mental-wellness")}
+                >
+                  SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
+                </buttton>
+                <buttton
+                  className="btn-web hvr-float-shadow"
+                  onClick={() => loginsubmit("/all-mental-wellness")}
+                >
+                  DIGITAL HUMAN LIBRARY
+                </buttton>
+              </div> */}
+              <div className="d-flex justify-content-center mt-4">
+                <a href="http://localhost:3000/">
+                  <div className="flip-box">
+                    <div className="flip-box-inner ">
+                      <div className="flip-box-front">
+                        <p className="flip-para"> AI DRIVEN SELF-ASSESSMENT</p>
+                      </div>
+                      <div class="flip-box-back">
+                        <img src={Ai} className="flip-img" alt="loading..." />
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <div className="flip-box ml-2">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/bookingAppoint/")}
+                  >
+                    <div className="flip-box-front">
+                      <p className="flip-para">
+                        TELE-PSYCHIATRY CONNECT WITH DOCTORS
+                      </p>
+                    </div>
+                    <div className="flip-box-back">
+                      <img
+                        src={teledoctor}
+                        className="flip-img"
+                        alt="loading..."
+                      />
+                    </div>
+                  </div>
+                </div>{" "}
+                <div className="flip-box ml-2">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/primary-sprituality")}
+                  >
+                    <div className="flip-box-front">
+                      <p className="flip-para">
+                        {" "}
+                        SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
+                      </p>
+                    </div>
+                    <div className="flip-box-back">
+                      <img
+                        src={sprituality}
+                        className="flip-img"
+                        alt="loading..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex justify-content-center mt-2">
+                <div className="flip-box">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/mentalHealth/")}
+                  >
+                    <div className="flip-box-front">
+                      <p className="flip-para"> DIGITAL HUMAN LIBRARY</p>
+                    </div>
+                    <div className="flip-box-back">
+                      <img
+                        src={library}
+                        className="flip-img"
+                        alt="loading..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="service-slide">
             <Slider {...settingstwo}>
               {categoryData.map((element) => (
                 <div className="col-lg-12">
                   <div className="service-card hvr-float-shadow">
-                    {/* <img src={element.img} alt="" /> */}
                     <img src={element.img_url} alt="" />
-
                     <img src={element.img_url} className="img-bfr" alt="" />
-
                     <h3>{element.name}</h3>
-                    {/* <Link
-                      to={{
-                        pathname: "/mentalHealth/" + element.slug,
-                      }}
-                    > */}
                     <buttton
                       className="btn-web hvr-float-shadow"
                       onClick={() =>
@@ -553,26 +659,62 @@ export default function Home(props) {
                     >
                       View More
                     </buttton>
-                    {/* </Link> */}
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div> */}
+        </div>
+      </div>
+      {/* <div className="service-section mb-50">
+        <div className="container">
+          <div className="col-lg-12">
+            <div className="service-heading">
+              <h5>Swayam- Do It Yourself</h5>
+              <p>Swayam gives you power to heal and get you to wellness</p>
+            </div>
+          </div>
+
+          <div className="service-slide">
+            <Slider {...settingstwo}>
+              {categoryData.map((element) => (
+                <div className="col-lg-12">
+                  <div className="service-card hvr-float-shadow">
+                    <img src={element.img_url} alt="" />
+
+                    <img src={element.img_url} className="img-bfr" alt="" />
+
+                    <h3>{element.name}</h3>
+                 
+                    <buttton
+                      className="btn-web hvr-float-shadow"
+                      onClick={() =>
+                        loginsubmit("/mentalHealth/" + element.slug)
+                      }
+                    >
+                      Find Solution
+                    </buttton>
+                    <buttton
+                      className="btn-web hvr-float-shadow"
+                      onClick={() => loginsubmit("/all-mental-wellness")}
+                    >
+                      View More
+                    </buttton>
                   </div>
                 </div>
               ))}
             </Slider>
           </div>
         </div>
-      </div>
-
-      <div className="doctor-section mb-50">
+      </div> */}
+      {/* <div className="doctor-section mb-50">
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
               <div className="doctor-heading">
                 <br />
                 <h2>Swayam- Consult with Experts </h2>
-                {/* <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                  ad repellendus laboriosam ea, dolorem odio culpa.
-                </p> */}
+            
                 <br />
                 <div className="expert-details">
                   <span>01</span>
@@ -602,16 +744,13 @@ export default function Home(props) {
                 <h3>Search Doctors For Appointment</h3>
                 <form action="">
                   <div className="col-lg-12">
-                    {/* <div className="form-group">
-                      <input type="text" name="" id="" placeholder="Country" />
-                    </div> */}
+                 
                   </div>
                   <div className="col-lg-12">
                     <div className="form-group">
                       <select
                         name=""
                         id=""
-                        // onChange={(event) => setState(event.target.value)}
                       >
                         <option value="All State">All State</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -663,23 +802,7 @@ export default function Home(props) {
                       </select>
                     </div>
                   </div>
-                  {/* <div className="col-lg-12">
-                    <div className="form-group ">
-                      <select name="" id="">
-                        <option value=""> Depression</option>
-                        <option value="">Anxiety</option>
-                        <option value="">Attention Disorder</option>
-                        <option value="">Psychosis</option>
-                        <option value="">Alcohol Abuse</option>
-                        <option value="">Sexual Dysfunction</option>
-                        <option value="">Dementia</option>
-                        <option value="">Bipolar</option>
-                        <option value="">Obsessive Compulsive Disorder</option>
-                        <option value="">Drug Abuse</option>
-                        <option value="">schizophrenia</option>
-                      </select>
-                    </div>
-                  </div> */}
+          
 
                   <div className="col-lg-12">
                     <buttton
@@ -694,8 +817,7 @@ export default function Home(props) {
             </div>
           </div>
         </div>
-      </div>
-      <hr />
+      </div> */}
       {/* Digital Human Library */}
       <div id="humanlibrary" className="library-section mb-50">
         <div className="container">
@@ -927,7 +1049,6 @@ export default function Home(props) {
         </div>
       </div>
       {/* {ecosystem product} */}
-
       <div className="service-section mb-50">
         <div className="container">
           <div className="col-lg-12">

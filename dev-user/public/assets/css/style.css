@@ -1239,3 +1239,60 @@ footer {
   margin-top: 13px;
   margin-left: -8px;
 }
+/* flip-box */
+.flip-box {
+  background-color: transparent;
+  width: 190px;
+  height: 190px;
+  perspective: 1000px;
+  /* border-radius: 100px; */
+}
+
+.flip-box-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-box-front,
+.flip-box-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 50%;
+}
+
+.flip-box-front {
+  background: linear-gradient(45deg, #23adba, #9d1892);
+  color: black;
+}
+
+.flip-box-back {
+  /* background-color: dodgerblue; */
+  color: white;
+  transform: rotateY(180deg);
+}
+.flip-para{
+  font-size: 16px;
+  color: #fff;
+  padding: 15px;
+  padding-top: 58px;
+}
+.flip-img {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+
+}
