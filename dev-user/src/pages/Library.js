@@ -138,7 +138,7 @@ export default function Library(props) {
                       </div>
                       <div className="ml-3 mt-3">
                         <div>
-                        <Link to="/">
+                        <Link to="/primary-library">
                           <button
                             // onClick={() =>loginsubmit()}
                             // onClick={() => Home}

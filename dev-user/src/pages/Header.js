@@ -4,6 +4,12 @@ import Login from "./Login";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button } from "react-bootstrap";
+import SearchBar from "react-js-search";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import * as IoIcons from "react-icons/io";
+import { IconName } from "react-icons/fa";
+import { IconContext } from "react-icons";
 export default function Header() {
   let hist = useNavigate();
   {
@@ -13,7 +19,9 @@ export default function Header() {
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [loginhide, setloginhide] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
 
+  const showSidebar = () => setSidebar(!sidebar);
   useEffect(() => {
     let token = localStorage.getItem("Token");
     if (token) setloginhide(true);
@@ -45,6 +53,65 @@ export default function Header() {
     }
   };
   const handleClose = () => setshow(false);
+  var dataObjects = [
+    { number: 12, name: "ABOUT", position: "ST", success: true },
+    { number: 21, name: "Pirlo", position: "MC", success: false },
+    { number: 10, name: "Ruiz", position: "MDI" },
+    { number: 7, name: "Nesta", position: "RB", success: true },
+    { number: 4, name: "Cannavaro", position: "CB" },
+    { number: 2, name: "Puyol", position: "CB", success: false },
+    { number: 15, name: "Abate", position: "LB" },
+    { number: 16, name: "Locatelli", position: "MDI" },
+    { number: 1, name: "Buffon", position: "GK" },
+    { number: 21, name: "Pirlo", position: "MC" },
+    { number: 10, name: "Ruiz", position: "MDI" },
+    { number: 7, name: "Nesta", position: "RB" },
+  ];
+  const SidebarData = [
+    {
+      title: "Home",
+      path: "/",
+      icon: <AiIcons.AiFillHome />,
+      cName: "nav-text",
+    },
+    {
+      title: "About Us",
+      path: "/about-us",
+      icon: <IoIcons.IoIosPaper />,
+      cName: "nav-text",
+    },
+    {
+      title: "How we do",
+      path: "/how-we-do",
+      icon: <FaIcons.FaQuestion />,
+      cName: "nav-text",
+    },
+    {
+      title: "Therapies",
+      path: "/bookingAppoint",
+      icon: <IoIcons.IoMdPeople />,
+      cName: "nav-text",
+    },
+
+    {
+      title: "Research",
+      path: "/research",
+      icon: <FaIcons.FaSistrix />,
+      cName: "nav-text",
+    },
+    {
+      title: "Support Network",
+      path: "/support",
+      icon: <FaIcons.FaNetworkWired />,
+      cName: "nav-text",
+    },
+    {
+      title: "Contact",
+      path: "/contact",
+      icon: <FaIcons.FaPhoneAlt />,
+      cName: "nav-text",
+    },
+  ];
 
   return (
     <>
@@ -60,35 +127,52 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-              <div className="col-lg-6 col-sm-8">
-                <div className="header-contact">
+              <div className="search-part">
+                <SearchBar
+                  // onSearchTextChange={(term, hits) => onSearchChange(term, hits)}
+                  // onSearchButtonClick={this.onSearchClick}
+                  placeHolderText={"Search here..."}
+                  data={dataObjects}
+                  className="search"
+                />
+              </div>
+              <div className="col-lg-4 col-sm-8">
+                <div className="header-contact justify-content-end">
                   <button
-                    className="btn-web hvr-float-shadow mr-3"
-                    data-toggle="tooltip"
-                    title="Profile!"
-                    onClick={() => loginsubmit("/profile")}
-                  >
-                    {/* <Link to="/profile"> */}
-                    <i className="fa fa-user-circle-o" aria-hidden="true"></i>
-                    {/* </Link> */}
-                    <h6 className="profile-head-text">Profile</h6>
-                  </button>
-                  {/* <button
                     className="btn-web hvr-float-shadow"
                     data-toggle="tooltip"
-                    title="Cart!"
-                    onClick={() => loginsubmit("/Cart")}
+                    onClick={showSidebar}
                   >
-                    <Link to="/cart">
-                    <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                    <h6 className="cart-head-text">Cart</h6>
-                    </Link>
-                  </button> */}
-                  {/* <i className="fa fa-mobile" aria-hidden="true"></i>
-                  <a href="telto:+91 7428409721">+91 7428409721</a>
-                  <p>contact us for help</p> */}
+                    <i class="fa fa-bars"></i>
+                  </button>
                 </div>
               </div>
+              <IconContext.Provider value={{ color: "#fff" }}>
+                {/* <div className="navbara">
+                  <Link to="#" className="menu-bars">
+                    <FaIcons.FaBars onClick={showSidebar} />
+                  </Link>
+                </div> */}
+                <nav className={sidebar ? "nava-menu active" : "nava-menu"}>
+                  <ul className="nava-menu-items " onClick={showSidebar}>
+                    <li className="navbara-toggle">
+                      <Link to="#" className="menu-bars">
+                        <AiIcons.AiOutlineClose />
+                      </Link>
+                    </li>
+                    {SidebarData.map((item, index) => {
+                      return (
+                        <li key={index} className={item.cName}>
+                          <Link to={item.path} className="menu-icon">
+                            {item.icon}
+                            <span>{item.title}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
+              </IconContext.Provider>
             </div>
           </div>
         </div>
@@ -111,7 +195,7 @@ export default function Header() {
               </button>
 
               <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul className="navbar-nav nav-custom">
+                {/* <ul className="navbar-nav nav-custom">
                   <li className="nav-item">
                     <Link to="/" className="nav-link">
                       Home
@@ -121,14 +205,13 @@ export default function Header() {
                     <Link to="/about-us" className="nav-link">
                       About Us
                     </Link>
-                    {/* <a href="#about" className="nav-link">
-                      About Us
-                    </a> */}
+                  
                   </li>
                   <li className="nav-item">
-                    <Link to="/" className="nav-link">
+                
+                    <a href="#how-we-do" className="nav-link">
                       How we do
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item">
                     <Link to="/bookingAppoint" className="nav-link">
@@ -137,7 +220,7 @@ export default function Header() {
                   </li>
                   <li className="nav-item">
                     <Link to="/research" className="nav-link">
-                    Research
+                      Research
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -150,8 +233,35 @@ export default function Header() {
                       Contact
                     </Link>
                   </li>
-                </ul>
+                </ul> */}
                 <ul className="navbar-nav nav-custom ml-auto btn-nav">
+                  {loginhide && (
+                    <li className="nav-item">
+                      <button
+                        className="btn-web hvr-float-shadow"
+                        data-toggle="tooltip"
+                        title="Profile!"
+                        onClick={() => loginsubmit("/profile")}
+                      >
+                        Profile
+                      </button>
+                    </li>
+                  )}
+                  {loginhide && (
+                    <li className="nav-item">
+                      <Link to="/Cart/xyz">
+                        <button
+                          className="btn-web hvr-float-shadow"
+                          data-toggle="tooltip"
+                          title="Cart!"
+                          // onClick={() => loginsubmit("/Cart")}
+                        >
+                          Cart
+                        </button>
+                      </Link>
+                    </li>
+                  )}
+
                   {!loginhide && (
                     <li className="nav-item">
                       <button
@@ -164,15 +274,6 @@ export default function Header() {
                     </li>
                   )}
 
-                  {/* <li className="nav-item">
-                    <button
-                      className="btn-web hvr-float-shadow ipad-btn"
-                      data-toggle="modal"
-                      data-target="#myModal"
-                    >
-                      Login
-                    </button>
-                  </li> */}
                   {!loginhide && (
                     <li className="nav-item">
                       <button
@@ -195,15 +296,6 @@ export default function Header() {
                       </button>
                     </li>
                   )}
-                  {/* <li className="nav-item">
-                    <button
-                      className="btn-web hvr-float-shadow"
-                      data-toggle="modal"
-                      data-target="#doctor-modal"
-                    >
-                      Doctor
-                    </button>
-                  </li> */}
                 </ul>
               </div>
             </nav>

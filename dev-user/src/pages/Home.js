@@ -4,37 +4,31 @@ import axios from "axios";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import globalDataGroupCall from "../utill/rdxGroupCall";
-import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
-import SimpleImageSlider from "react-simple-image-slider";
 import logo from "./favicon.png";
 import Ai from "./ai.jpeg";
 import library from "./library.jpeg";
 import sprituality from "./sprituality.jpeg";
 import teledoctor from "./teledr.png";
+import { FloatingLettersTextBuilder } from "react-animated-text-builders";
+import voiceAssisstant from "../utill/rdxassisstant";
 
 import {
   API_ADMIN_URL,
-  PRODUCT_API,
+  // PRODUCT_API,
   BANNER_API,
-  CATEGORY_API,
-  SPIRITUALITY_API,
   ABOUT_API,
-  DIGITAL_HUMAN_LIBRARY_DATA_API,
   MASTERCATEGORY_API,
   SUBSCRIPTION_PLANE,
 } from "../utill/api.endpoints";
 const images = [];
 export default function Home(props) {
-  const [responseData, setResponseData] = useState([]);
+  // const [responseData, setResponseData] = useState([]);
   const [bannerData, setbannerData] = useState([]);
-  const [categoryData, setcategoryData] = useState([]);
-  const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
-  const [isLoggedIn, setisLoggedIn] = useState(false);
   const [mastercategorys, setmastercategorys] = useState([]);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
 
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
@@ -72,26 +66,26 @@ export default function Home(props) {
       });
   };
   // productlist
-  const Productlist = () => {
-    console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
-    const productlisting = {
-      collectiontype: "products",
-    };
-    axios
-      .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
-      .then((res) => {
-        setResponseData(res.data.data);
+  // const Productlist = () => {
+  //   console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
+  //   const productlisting = {
+  //     collectiontype: "products",
+  //   };
+  //   axios
+  //     .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
+  //     .then((res) => {
+  //       setResponseData(res.data.data);
 
-        console.log("====pppppp====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
-        // localStorage.setItem('Name', name);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //       console.log("====pppppp====", res.data.data);
+  //       {
+  //         window.localStorage.getItem("Token");
+  //       }
+  //       // localStorage.setItem('Name', name);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   // Banner
   const BannerData = () => {
     console.log(`${API_ADMIN_URL}${BANNER_API}`);
@@ -111,71 +105,10 @@ export default function Home(props) {
         console.log(error);
       });
   };
-  // category
-  const Categorylist = () => {
-    console.log(`${API_ADMIN_URL}${CATEGORY_API}`);
-    const categorylisting = {
-      collectiontypedata: "categories",
-    };
-    axios
-      .post(`${API_ADMIN_URL}${CATEGORY_API}`, categorylisting)
-      .then((res) => {
-        setcategoryData(res.data.data);
-        console.log("====category====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  //Sprituality
-  const Spritualitylist = () => {
-    console.log(`${API_ADMIN_URL}${SPIRITUALITY_API}`);
-    const spiritualitylisting = {
-      collectiontypedata: "spirituality",
-    };
-    axios
-      .post(`${API_ADMIN_URL}${SPIRITUALITY_API}`, spiritualitylisting)
-      .then((res) => {
-        setSpritualityData(res.data.data);
-        console.log("====Sprituality====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const libraryDatalist = () => {
-    console.log(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`);
-    const libraryDatalisting = {
-      collectiondata: "library_content",
-    };
-    axios
-      .post(
-        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`,
-        libraryDatalisting
-      )
-      .then((res) => {
-        setlibraryData(res.data.data);
-        console.log("====libraryContent====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
   useEffect((props) => {
-    Productlist(props);
+    // Productlist(props);
     BannerData();
-    Categorylist();
-    Spritualitylist();
-    libraryDatalist();
     aboutlist();
   }, []);
   var settings = {
@@ -393,7 +326,25 @@ export default function Home(props) {
             <div className="web-banner mb-50">
               <div className="container">
                 <div className="web-banner-content">
-                  <h1>{element.banner_text}</h1>
+                  <marquee behavior="slide" direction="up">
+                    <h1>{element.banner_text}</h1>
+                  </marquee>
+                  {/* <FloatingLettersTextBuilder
+                    floatingSpeed={500}
+                    lettersAppearanceDelay={250}
+                    letterSpacing="20px"
+                    animationMaxMargin="100px"
+                    letterStyle={{
+                      color: "#fff",
+                      fontSize: "41px",
+                      textTransform: "uppercase",
+                      fontWeight: "700",
+                      marginTop: "105px",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    {element.banner_text}
+                  </FloatingLettersTextBuilder> */}
                   <div className="d-flex">
                     <button
                       className="qst-show btn-web hvr-float-shadow btn-web"
@@ -401,12 +352,12 @@ export default function Home(props) {
                     >
                       Register For Assessment
                     </button>
-                    <button
-                      className="btn-web"
+                    {/* <button
+                      className="btn-web hvr-float-shadow btn-web"
                       onClick={() => loginsubmit("/support")}
                     >
                       Your Support Networks
-                    </button>
+                    </button> */}
                     <Dropdown>
                       <Dropdown.Menu className="scrollable-menu">
                         {mastercategorys.map((element) => (
@@ -458,6 +409,7 @@ export default function Home(props) {
                   Information Technology , MieTY) Govt Of India, under DIGITAL
                   Health initiative called “ MediTech”.
                 </p>
+
                 <p>
                   We provide Unique Value proposition of integrating continual
                   mental health assessment and support networks including
@@ -507,6 +459,7 @@ export default function Home(props) {
                       poster={element.thumbnail_image}
                       data-setup=""
                       loop="auto"
+                      className=""
                     >
                       <source src={element.video} type="video/mp4" />
                     </video>
@@ -518,16 +471,18 @@ export default function Home(props) {
           </div>
         </div>
       </div>
+      {/* how we do */}
       <div className="service-section mb-50">
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>Menu (How We Do) </h5>
+              <h5>How We Do</h5>
+              <div className="exam"></div>
               <p>
                 Our Technology Architecture helps you to find the solutions to
                 various possible mental/emotional scenarios which are or may be
                 faced by you. Our Health experts have made sure that your
-                THERAPIES are tailor made & driven basis FOUR building blocks of
+                THERAPIES are tailor made & driven basis SIX building blocks of
                 our Online platform to help you find an apt solution for
                 yourself
               </p>
@@ -535,51 +490,24 @@ export default function Home(props) {
           </div>
           <div className="service-slide">
             <div className="col-lg-12">
-              {/* <div className="service-card hvr-float-shadow col-lg-12">
-                <img src={logo} alt="" />
-                <img src={logo} className="img-bfr" alt="" />
-                <buttton
-                  className="btn-web hvr-float-shadow"
-                  onClick={() => loginsubmit("/mentalHealth/")}
+              <div className="d-flex justify-content-center mt-2">
+                <div
+                  className="flip-box mt-4 mr-4"
+                  onClick={() => loginsubmits(voiceAssisstant.liveLink)}
                 >
-                  AI DRIVEN SELF-ASSESSMENT
-                </buttton>
-                <buttton
-                  className="btn-web hvr-float-shadow"
-                  onClick={() => loginsubmit("/all-mental-wellness")}
-                >
-                  TELE-PSYCHIATRY CONNECT WITH DOCTORS
-                </buttton>
-                <buttton
-                  className="btn-web hvr-float-shadow"
-                  onClick={() => loginsubmit("/all-mental-wellness")}
-                >
-                  SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
-                </buttton>
-                <buttton
-                  className="btn-web hvr-float-shadow"
-                  onClick={() => loginsubmit("/all-mental-wellness")}
-                >
-                  DIGITAL HUMAN LIBRARY
-                </buttton>
-              </div> */}
-              <div className="d-flex justify-content-center mt-4">
-                <a href="http://localhost:3000/">
-                  <div className="flip-box">
-                    <div className="flip-box-inner ">
-                      <div className="flip-box-front">
-                        <p className="flip-para"> AI DRIVEN SELF-ASSESSMENT</p>
-                      </div>
-                      <div class="flip-box-back">
-                        <img src={Ai} className="flip-img" alt="loading..." />
-                      </div>
+                  <div className="flip-box-inner ">
+                    <div className="flip-box-front">
+                      <p className="flip-para"> AI DRIVEN SELF-ASSESSMENT</p>
+                    </div>
+                    <div class="flip-box-back">
+                      <img src={Ai} className="flip-img" alt="loading..." />
                     </div>
                   </div>
-                </a>
-                <div className="flip-box ml-2">
+                </div>
+                <div className="flip-box mr-2 ml-2">
                   <div
                     className="flip-box-inner"
-                    onClick={() => loginsubmit("/bookingAppoint/")}
+                    onClick={() => loginsubmit("/bookingAppoint")}
                   >
                     <div className="flip-box-front">
                       <p className="flip-para">
@@ -594,33 +522,11 @@ export default function Home(props) {
                       />
                     </div>
                   </div>
-                </div>{" "}
-                <div className="flip-box ml-2">
-                  <div
-                    className="flip-box-inner"
-                    onClick={() => loginsubmit("/primary-sprituality")}
-                  >
-                    <div className="flip-box-front">
-                      <p className="flip-para">
-                        {" "}
-                        SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
-                      </p>
-                    </div>
-                    <div className="flip-box-back">
-                      <img
-                        src={sprituality}
-                        className="flip-img"
-                        alt="loading..."
-                      />
-                    </div>
-                  </div>
                 </div>
-              </div>
-              <div className="d-flex justify-content-center mt-2">
-                <div className="flip-box">
+                <div className="flip-box ml-4 mt-4">
                   <div
                     className="flip-box-inner"
-                    onClick={() => loginsubmit("/mentalHealth/")}
+                    onClick={() => loginsubmit("/primary-library")}
                   >
                     <div className="flip-box-front">
                       <p className="flip-para"> DIGITAL HUMAN LIBRARY</p>
@@ -635,78 +541,84 @@ export default function Home(props) {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          {/* <div className="service-slide">
-            <Slider {...settingstwo}>
-              {categoryData.map((element) => (
-                <div className="col-lg-12">
-                  <div className="service-card hvr-float-shadow">
-                    <img src={element.img_url} alt="" />
-                    <img src={element.img_url} className="img-bfr" alt="" />
-                    <h3>{element.name}</h3>
-                    <buttton
-                      className="btn-web hvr-float-shadow"
-                      onClick={() =>
-                        loginsubmit("/mentalHealth/" + element.slug)
-                      }
-                    >
-                      Find Solution
-                    </buttton>
-                    <buttton
-                      className="btn-web hvr-float-shadow"
-                      onClick={() => loginsubmit("/all-mental-wellness")}
-                    >
-                      View More
-                    </buttton>
+              <div className="d-flex justify-content-center">
+                <div className="flip-box-center">
+                  <div
+                    className="flip-box-inner"
+                    // onClick={() => loginsubmit("/primary-sprituality")}
+                  >
+                    <div className="flip-box-front">
+                      <p className="flip-para-center">MANODAYAM</p>
+                    </div>
+                    <div className="flip-box-back">
+                      <img
+                        src={sprituality}
+                        className="flip-img"
+                        alt="loading..."
+                      />
+                    </div>
                   </div>
                 </div>
-              ))}
-            </Slider>
-          </div> */}
+              </div>
+              <div className="d-flex justify-content-center mt-2">
+                <div className="flip-box mr-4">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/primary-sprituality")}
+                  >
+                    <div className="flip-box-front">
+                      <p className="flip-para">
+                        SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
+                      </p>
+                    </div>
+                    <div className="flip-box-back">
+                      <img
+                        src={sprituality}
+                        className="flip-img"
+                        alt="loading..."
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flip-box ml-2 mr-2 mt-3">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/self-awareness")}
+                  >
+                    <div className="flip-box-front">
+                      <p className="flip-para pt-5">SELF AWARENESS</p>
+                    </div>
+                    <div className="flip-box-back">
+                      <img
+                        src={library}
+                        className="flip-img"
+                        alt="loading..."
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flip-box ml-4">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/eco-system")}
+                  >
+                    <div className="flip-box-front">
+                      <p className="flip-para"> MANODAYAM ECOSYSTEM</p>
+                    </div>
+                    <div className="flip-box-back">
+                      <img
+                        src={library}
+                        className="flip-img"
+                        alt="loading..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      {/* <div className="service-section mb-50">
-        <div className="container">
-          <div className="col-lg-12">
-            <div className="service-heading">
-              <h5>Swayam- Do It Yourself</h5>
-              <p>Swayam gives you power to heal and get you to wellness</p>
-            </div>
-          </div>
-
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {categoryData.map((element) => (
-                <div className="col-lg-12">
-                  <div className="service-card hvr-float-shadow">
-                    <img src={element.img_url} alt="" />
-
-                    <img src={element.img_url} className="img-bfr" alt="" />
-
-                    <h3>{element.name}</h3>
-                 
-                    <buttton
-                      className="btn-web hvr-float-shadow"
-                      onClick={() =>
-                        loginsubmit("/mentalHealth/" + element.slug)
-                      }
-                    >
-                      Find Solution
-                    </buttton>
-                    <buttton
-                      className="btn-web hvr-float-shadow"
-                      onClick={() => loginsubmit("/all-mental-wellness")}
-                    >
-                      View More
-                    </buttton>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-      </div> */}
       {/* <div className="doctor-section mb-50">
         <div className="container">
           <div className="row">
@@ -818,203 +730,6 @@ export default function Home(props) {
           </div>
         </div>
       </div> */}
-      {/* Digital Human Library */}
-      <div id="humanlibrary" className="library-section mb-50">
-        <div className="container">
-          {/* <div className="row"> */}
-          <div className="col-lg-12">
-            <div className="service-heading">
-              {/* <h5>Digital Human Library</h5> */}
-              <h3>Digital Human Library</h3>
-              <h5>Life Coaches</h5>
-
-              <p>
-                Find yourself coach, He/She can help you to overcome your
-                inhibitions, learn from their experiences
-              </p>
-            </div>
-          </div>
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {filtercoach.map((element) => (
-                <div className="col-lg-13">
-                  <div className="library-card">
-                    {/* <div className="row"> */}
-                    <div className="col-lg-16 offset-1">
-                      <div className="library-person">
-                        <div className="d-flex">
-                          <div className="">
-                            <div className="col-9">
-                              <img src={element.image} alt="" />
-                            </div>
-                            <div className="mr-8">
-                              <h3>{element.title}</h3>
-                              <h5>{element.motivator_status}</h5>
-                            </div>
-                          </div>
-                          <div className="col-lg-7 mr-4">
-                            <video
-                              id="my-library-video"
-                              class="video-js"
-                              controls
-                              preload="auto"
-                              poster={element.thumbnail_image}
-                              data-setup=""
-                              loop="auto"
-                            >
-                              <source src={element.video} type="video/mp4" />
-                            </video>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ml-3">
-                      <button
-                        className="btn-web col-11"
-                        onClick={() =>
-                          loginsubmit(`/library?humanId=${element._id}`)
-                        }
-                      >
-                        View More
-                      </button>
-                      <button
-                        // onClick={() =>loginsubmit()}
-                        onClick={() => pleasetalk(element._id)}
-                        data-toggle="modal"
-                        data-target={isLoggedIn ? "#library-modal" : ""}
-                        className="btn-web col-11 mt-2"
-                      >
-                        Personal therapy
-                      </button>
-
-                      <button
-                        className="btn-web col-11 mt-2"
-                        data-toggle="modal"
-                        data-target={isLoggedIn ? "#library-modalgroup" : ""}
-                        onClick={() => joingroup(element._id)}
-                      >
-                        Group therapy
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-          {/* </div> */}
-        </div>
-      </div>
-      <hr />
-      <div className="library-section mb-50">
-        <div className="container">
-          {/* <div className="row"> */}
-          <div className="col-lg-12">
-            <div className="service-heading">
-              <h5>Mentors</h5>
-              <p>
-                Find yourself mentor, He/She can help you to overcome your
-                inhibitions, learn from their experiences
-              </p>
-            </div>
-          </div>
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {filtermentor.map((element) => (
-                <div className="col-lg-13">
-                  <div className="library-card">
-                    {/* <div className="row"> */}
-                    <div className="col-lg-16 offset-1">
-                      <div className="library-person">
-                        <div className="d-flex">
-                          <div className="">
-                            <div className="col-9">
-                              <img src={element.image} alt="" />
-                            </div>
-                            <div className="mr-8">
-                              <h3>{element.title}</h3>
-                              <h5>{element.video_type}</h5>
-                            </div>
-                          </div>
-                          <div className="col-lg-7 mr-4">
-                            {/* <div className="library-video"> */}
-                            <video
-                              id="my-library-video"
-                              class="video-js"
-                              controls
-                              preload="auto"
-                              poster={element.thumbnail_image}
-                              data-setup=""
-                              loop="auto"
-                            >
-                              <source src={element.video} type="video/mp4" />
-                            </video>
-                            {/* </div> */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ml-3">
-                      <button
-                        className="btn-web col-11"
-                        onClick={() =>
-                          loginsubmit(`/library?humanId=${element._id}`)
-                        }
-                      >
-                        View More
-                      </button>
-                      {/* <a href={globalDataLive.liveLink} target="_blank"> */}
-                      <button
-                        className="btn-web col-11 mt-2"
-                        onClick={() => loginsubmits(globalDataLive.liveLink)}
-                      >
-                        Join Live Session
-                      </button>
-                      {/* </a> */}
-                    </div>
-                    {/* </div> */}
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-          {/* </div> */}
-        </div>
-      </div>
-      <br />
-      {/* Sprituality */}
-      <div className="service-section mb-50">
-        <div className="container">
-          <div className="col-lg-12">
-            <div className="service-heading">
-              <h5>Spirituality</h5>
-              {/* <h2> You can heal and create  balance life style .Do it yourself</h2> */}
-              <p>You can heal and create balance life style .Do it yourself</p>
-            </div>
-          </div>
-
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {SpritualityData.map((element) => (
-                <div className="col-lg-12">
-                  <div className="service-card spritual-card h-100">
-                    <img src={element.img_url} alt="" />
-                    <img src={element.img_url} className="img-bfr" alt="" />
-                    {/* <img src={element.img} className="img-bfr" alt="" /> */}
-                    <h3>{element.name}</h3>
-                    <p>{element.description}</p>
-                    <button
-                      className="qst-show btn-web hvr-float-shadow"
-                      onClick={() => loginsubmit("/spirituality")}
-                    >
-                      Get your solution
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-      </div>
       {/* support */}
       <div id="support" className="about-section mb-50">
         <div className="container">
@@ -1048,8 +763,66 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      {/* {ecosystem product} */}
+      {/* Therapy */}
       <div className="service-section mb-50">
+        <div className="container">
+          <div className="col-lg-12">
+            <div className="service-heading">
+              <h5>Menu (Therapy)</h5>
+              <div className="exam"></div>
+              <p>We present you therapies for your specific problems.</p>
+              <p>
+                Please click below (… these are various possible therapies …
+                which will be guided by platform & Health experts)
+              </p>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <div className="col-lg-6">
+              <div className="doctor-form">
+                <h3>Select Your Therapy</h3>
+                <form action="">
+                  <div className="col-lg-12"></div>
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <select name="" id="">
+                        <option value="All therapies">All therapies</option>
+                        <option value="Anxiety P-1">Anxiety</option>
+                        <option value="Anxiety P-2">Anxiety P-2</option>
+                        <option value="Bipolar P-1">Bipolar P-1</option>
+                        <option value="Bipolar P-2">Bipolar P-2</option>
+                        <option value="Dementia P-1">Dementia P-1</option>
+                        <option value="Dementia P-2">Dementia p-2</option>
+                        <option value="Depression P-1">Depression P-1</option>
+                        <option value="Depression P-2">Depression P-2</option>
+                        <option value="Alcoholism P-1">Alcoholism P-1</option>
+                        <option value="Alcoholism P-2">Alcoholism P-2</option>
+                        <option value="Sexual Disorders P-1">
+                          Sexual Disorders P-1
+                        </option>
+                        <option value="Sexual Disorders P-2">
+                          Sexual Disorders P-2
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <buttton
+                      className="btn hvr-float-shadow"
+                      onClick={() => loginsubmit("/bookingAppoint")}
+                    >
+                      <span style={{ color: "#23adba" }}>Submit</span>
+                    </buttton>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* {ecosystem product} */}
+      {/* <div className="service-section mb-50">
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
@@ -1058,7 +831,6 @@ export default function Home(props) {
                 Please see your support system such as genetics support, find
                 brain mapping centers
               </p>
-              {/* <Link to="/chat">jhkjxdch</Link> */}
             </div>
           </div>
 
@@ -1088,7 +860,7 @@ export default function Home(props) {
             </Slider>
           </div>
         </div>
-      </div>
+      </div> */}
       <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>

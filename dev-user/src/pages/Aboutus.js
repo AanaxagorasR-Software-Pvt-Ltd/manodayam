@@ -81,9 +81,9 @@ export default function Aboutus() {
             </div>
 
             <div className="col-lg-7">
-              <div className="about-content support-content">
+              <div className="about-content aboutus-content">
                 <h2>About Us</h2>
-                <p>
+                <p className="about-text">
                   We provide an Online holistic solution for Mental Health and
                   Wellness seekers through Web portal & Mobil App. This has been
                   initiated in collaboration with Mental Health Foundation of
@@ -99,7 +99,7 @@ export default function Aboutus() {
                   techniques.
                 </p>
                 <p>
-                  This platform is scaled to provide Solutions to 17 different
+                  This platform is scaled to provide Solutions to Five different
                   Mental Health scenarios such as Depression, Panic, Stress,
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
                   ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
