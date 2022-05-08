@@ -13,8 +13,8 @@ class EmailService {
       service: "gmail",
       secure: false,
       auth: {
-        user: `infomanodayamshakthi6`,
-        pass: `Mano@321`,
+        user: `manodayam.swayamshakthi@gmail.com`,
+        pass: `Manodayam@321`,
       },
       tls: { rejectUnauthorized: false },
     });
@@ -24,7 +24,7 @@ class EmailService {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "infomanodayamshakthi6@gmail.com",
+        from: "manodayam.swayamshakthi@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -70,7 +70,7 @@ class EmailService {
   async sendEmailToPatient(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
+      from: `manodayam.swayamshakthi@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -118,7 +118,7 @@ class EmailService {
     try {
       let info = await this.transporter.sendMail({
         to: email,
-        from: "infomanodayamshakthi6@gmail.com",
+        from: "manodayam.swayamshakthi@gmail.com",
         subject: "Your appointment has been booked.",
         html: `
                     
@@ -145,17 +145,13 @@ class EmailService {
             <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
               <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
               <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;"> Hello Doctor ! We Would  like to inform you that we have booked  your schedule  on 
-              <strong style="box-sizing: border-box;font-weight: bolder;">${
-                details.created
-              } </strong>. please acknowledge this appointment !! your patient name  is  <strong style="box-sizing: border-box;font-weight: bolder;">${
-          details.name
-        } </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${
-          details.disorder
-        }</strong>
+              <strong style="box-sizing: border-box;font-weight: bolder;">${details.created
+          } </strong>. please acknowledge this appointment !! your patient name  is  <strong style="box-sizing: border-box;font-weight: bolder;">${details.name
+          } </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${details.disorder
+          }</strong>
                 ${details.email}</p>
-              <a href="${
-                "https://confrecall.herokuapp.com/" + details.room_no
-              }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a>
+              <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+          }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a>
             </div>
           </div>
         </body>
@@ -169,7 +165,7 @@ class EmailService {
   async sendEmailToPatientbooked(email, details) {
     let info = await this.transporter.sendMail({
       to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
+      from: `manodayam.swayamshakthi@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -215,11 +211,12 @@ class EmailService {
   }
   // ---------------------------------------------------------------------Expert and user email --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
   async sendEmailToUser(email, details) {
-    console.log("sendEmailtoUser");
+    console.log("sendEmailtoUser")
     let info = await this.transporter.sendMail({
       to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
+      from: `manodayam.swayamshakthi@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -266,10 +263,10 @@ class EmailService {
     console.log(info);
   }
   async sendEmailToExpert(email, details) {
-    console.log("sendEmailToExpert");
+    console.log("sendEmailToExpert")
     let info = await this.transporter.sendMail({
       to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
+      from: `manodayam.swayamshakthi@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -315,10 +312,10 @@ class EmailService {
   }
   // -------------------------------------------------------------------expert and user room created email---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   async sendEmailToexpertbooked(email, details) {
-    console.log("sendEmailToExpert");
+    console.log("sendEmailToExpert")
     let info = await this.transporter.sendMail({
       to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
+      from: `manodayam.swayamshakthi@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -346,20 +343,13 @@ class EmailService {
         <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
           <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
           <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">We are pleased to invite  on Online Video Conference schedule  from
-          <strong style="box-sizing: border-box;font-weight: bolder;"> ${
-            details.created
-          }</strong> .Please confirm your acceptance via on-line registration available 
+          <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> .Please confirm your acceptance via on-line registration available 
  
   
-          .please acknowledge this appointment !! your patient name  is   <strong style="box-sizing: border-box;font-weight: bolder;">${
-            details.name
-          }</strong> email
-           <strong style="box-sizing: border-box;font-weight: bolder;"> ${
-             details.email
-           }</strong>please  join  meeting      
-                    <a href="${
-                      "https://confrecall.herokuapp.com/" + details.room_no
-                    }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
+          .please acknowledge this appointment !! your patient name  is   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> email
+           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please  join  meeting      
+                    <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+        }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
          
         </div>
       </div> 
@@ -373,10 +363,10 @@ class EmailService {
   }
 
   async sendEmailToUserbooked(email, details) {
-    console.log("sendEmailToExpert");
+    console.log("sendEmailToExpert")
     let info = await this.transporter.sendMail({
       to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
+      from: `manodayam.swayamshakthi@gmail.com`,
       subject: "Your appointment has been booked.",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -404,19 +394,12 @@ class EmailService {
         <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
           <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
           <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with
-          <strong style="box-sizing: border-box;font-weight: bolder;"> ${
-            details.created
-          }</strong> .Please confirm your acceptance via on-line registration available 
+          <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> .Please confirm your acceptance via on-line registration available 
  
             <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
-            If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${
-              details.name
-            }</strong>
-           <strong style="box-sizing: border-box;font-weight: bolder;"> ${
-             details.email
-           }</strong>please join meeting   <a href="${
-        "https://confrecall.herokuapp.com/" + details.room_no
-      }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
+            If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
+           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please join meeting   <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+        }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
          
         </div>
       </div> 
@@ -431,9 +414,10 @@ class EmailService {
   // -----------------------------------------------------------------------email send otp-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   async sendEmailForotp(email, seq_otp) {
+  
     let info = await this.transporter.sendMail({
       to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
+      from: `manodayam.swayamshakthi@gmail.com`,
       subject: "infoManodayam otp verification ",
       // alternatives: [{ contentType: "text/html" }],
       html: `
@@ -474,17 +458,19 @@ class EmailService {
     });
     console.log(info);
   }
+  
 
-  // ---------------------------------------------------------------------Expert and user email  join group--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------Expert and user email  join group--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  async sendEmailToUserJoingroup(email, details) {
-    console.log("sendEmailtoUser");
-    let info = await this.transporter.sendMail({
-      to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
-      subject: "Your appointment has been booked.",
-      // alternatives: [{ contentType: "text/html" }],
-      html: `
+
+async sendEmailToUserJoingroup(email, details) {
+  console.log("sendEmailtoUser")
+  let info = await this.transporter.sendMail({
+    to: email,
+    from: `manodayam.swayamshakthi@gmail.com`,
+    subject: "Your appointment has been booked.",
+    // alternatives: [{ contentType: "text/html" }],
+    html: `
          
     <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
 
@@ -524,17 +510,17 @@ class EmailService {
   </html>
                  
               `,
-    });
-    console.log(info);
-  }
-  async sendEmailToExpertjoingroup(email, details) {
-    console.log("sendEmailToExpert");
-    let info = await this.transporter.sendMail({
-      to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
-      subject: "Your appointment has been booked.",
-      // alternatives: [{ contentType: "text/html" }],
-      html: `
+  });
+  console.log(info);
+}
+async sendEmailToExpertjoingroup(email, details) {
+  console.log("sendEmailToExpert")
+  let info = await this.transporter.sendMail({
+    to: email,
+    from: `manodayam.swayamshakthi@gmail.com`,
+    subject: "Your appointment has been booked.",
+    // alternatives: [{ contentType: "text/html" }],
+    html: `
          
     <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
 
@@ -572,18 +558,18 @@ class EmailService {
   </html>
                  
               `,
-    });
-    console.log(info);
-  }
-  // -------------------------------------------------------------------expert and user join group room created email---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  async sendEmailToExpertjoingroupbooked(email, details) {
-    console.log("sendEmailToExpert");
-    let info = await this.transporter.sendMail({
-      to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
-      subject: "Your appointment has been booked.",
-      // alternatives: [{ contentType: "text/html" }],
-      html: `
+  });
+  console.log(info);
+}
+// -------------------------------------------------------------------expert and user join group room created email---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+async sendEmailToExpertjoingroupbooked(email, details) {
+  console.log("sendEmailToExpert")
+  let info = await this.transporter.sendMail({
+    to: email,
+    from: `manodayam.swayamshakthi@gmail.com`,
+    subject: "Your appointment has been booked.",
+    // alternatives: [{ contentType: "text/html" }],
+    html: `
          
     <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
 
@@ -611,15 +597,10 @@ class EmailService {
        Please confirm your acceptance via on-line registration available 
 
 
-        .please acknowledge this appointment !! your patient name  is   <strong style="box-sizing: border-box;font-weight: bolder;">${
-          details.name
-        }</strong> email
-         <strong style="box-sizing: border-box;font-weight: bolder;"> ${
-           details.email
-         }</strong>please  join  meeting      
-                  <a href="${
-                    "https://confrecall.herokuapp.com/" + details.room_no
-                  }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
+        .please acknowledge this appointment !! your patient name  is   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> email
+         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please  join  meeting      
+                  <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+      }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
        
       </div>
     </div> 
@@ -628,18 +609,18 @@ class EmailService {
   </html>
                  
               `,
-    });
-    console.log(info);
-  }
+  });
+  console.log(info);
+}
 
-  async sendEmailToUserJoingroupbooked(email, details) {
-    console.log("sendEmailToExpert");
-    let info = await this.transporter.sendMail({
-      to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
-      subject: "Your appointment has been booked.",
-      // alternatives: [{ contentType: "text/html" }],
-      html: `
+async sendEmailToUserJoingroupbooked(email, details) {
+  console.log("sendEmailToExpert")
+  let info = await this.transporter.sendMail({
+    to: email,
+    from: `manodayam.swayamshakthi@gmail.com`,
+    subject: "Your appointment has been booked.",
+    // alternatives: [{ contentType: "text/html" }],
+    html: `
          
     <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
 
@@ -667,13 +648,8 @@ class EmailService {
        Please confirm your acceptance via on-line registration available 
 
           <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
-          If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${
-            details.name
-          }</strong>
-         <strong style="box-sizing: border-box;font-weight: bolder;"> ${
-           details.email
-         }</strong>please join meeting   <a href="${
-        "https://confrecall.herokuapp.com/" + details.room_no
+          If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
+         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please join meeting   <a href="${"https://confrecall.herokuapp.com/" + details.room_no
       }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
        
       </div>
@@ -683,20 +659,22 @@ class EmailService {
   </html>
                  
               `,
-    });
-    console.log(info);
-  }
+  });
+  console.log(info);
+  
+}
 
-  // -------------------------------------------------------------email for subscription plane book------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  async sendEmailToUser(email, details) {
-    console.log("sendEmailtoUser");
-    let info = await this.transporter.sendMail({
-      to: email,
-      from: `infomanodayamshakthi6@gmail.com`,
-      subject: "Your Subscription  has been booked.",
-      // alternatives: [{ contentType: "text/html" }],
-      html: `
+// -------------------------------------------------------------email for subscription plane book------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+async sendEmailToPlanebooked(email, details) {
+  console.log("sendEmailtoUser")
+  let info = await this.transporter.sendMail({
+    to: email,
+    from: `manodayam.swayamshakthi@gmail.com`,
+    subject: "Your Subscription  has been booked.",
+    // alternatives: [{ contentType: "text/html" }],
+    html: `
          
     <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
 
@@ -719,15 +697,14 @@ class EmailService {
     <div class="card" style="width: 24rem;box-sizing: border-box;position: relative;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;">
       <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
-        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
-        <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with
-        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.date}</strong> .Please confirm your acceptance via on-line registration available 
-
+        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
+        <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Your Subscription plane is successfully book on
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.schedule}</strong> kindly Check  your subscription plane details
           <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
-          If you have any questions or queries before or after the session ,pls feel free   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>   email 
+       
 
 
-         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>
+        ~~
        
       </div>
     </div>
@@ -736,9 +713,9 @@ class EmailService {
   </html>
                  
               `,
-    });
-    console.log(info);
-  }
+  });
+  console.log(info);
+}
 }
 
 module.exports = new EmailService();
@@ -767,15 +744,13 @@ module.exports = new EmailService();
 
 // <body>
 
-//
-//
+//  
+//  
 //       <h5 class="card-title">infomanodayam otp</h5>
 //       <p class="card-text font-italic text-info">  <strong>${seq_otp}</strong>. is your otp  and is valid for 20 minutes. Do not share the otp with anyone.
-{
-  /* <strong>{https://swarnratnaindia.com/}</strong>. */
-}
-//
-//
+{/* <strong>{https://swarnratnaindia.com/}</strong>. */}
+//      
+//   
 // </body>
 //
 // </html>
