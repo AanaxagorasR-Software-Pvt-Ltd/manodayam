@@ -16,11 +16,11 @@ import voiceAssisstant from "../utill/rdxassisstant";
 
 import {
   API_ADMIN_URL,
-  // PRODUCT_API,
   BANNER_API,
   ABOUT_API,
   MASTERCATEGORY_API,
   SUBSCRIPTION_PLANE,
+  SUBSCRIPTION_PLANE_LISTA,
 } from "../utill/api.endpoints";
 const images = [];
 export default function Home(props) {
@@ -33,6 +33,8 @@ export default function Home(props) {
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
+  const [subScriptiondata, setSubscriptiondata] = useState([]);
+
   // const [state, setState] = useState("All");
   let hist = useNavigate();
   let params = new URLSearchParams(window.location.search);
@@ -65,28 +67,6 @@ export default function Home(props) {
         console.log(error);
       });
   };
-  // productlist
-  // const Productlist = () => {
-  //   console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
-  //   const productlisting = {
-  //     collectiontype: "products",
-  //   };
-  //   axios
-  //     .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
-  //     .then((res) => {
-  //       setResponseData(res.data.data);
-
-  //       console.log("====pppppp====", res.data.data);
-  //       {
-  //         window.localStorage.getItem("Token");
-  //       }
-  //       // localStorage.setItem('Name', name);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-  // Banner
   const BannerData = () => {
     console.log(`${API_ADMIN_URL}${BANNER_API}`);
     const bannerdata = {
@@ -105,9 +85,27 @@ export default function Home(props) {
         console.log(error);
       });
   };
+  const subscription = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
 
+    axios
+      .get(
+        // ?humanId=${}`
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get(
+          "usertype"
+        )}`
+      )
+      .then((res) => {
+        console.log("res", res, typeof res);
+
+        setSubscriptiondata(res.data);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
   useEffect((props) => {
-    // Productlist(props);
+    subscription();
     BannerData();
     aboutlist();
   }, []);
@@ -257,6 +255,28 @@ export default function Home(props) {
     //   });
     // console.log();
   };
+  const subchange2 = (e) => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    // hist(`{e}`);
+    // axios
+    //   .post(
+    //     // ?humanId=${}`
+    //     `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,
+    //   )
+    //   .then((res) => {
+    //     console.log("====mentalHealthData====", res.data);
+    //     if (user) {
+    //       hist(`/profile?catid=${e}`)
+    //     } else {
+    //       setAlerdata({ title: "Sorry", body: "Login and registration First" });
+    //       setshow(true);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // console.log();
+  };
   const handleClose = () => setshow(false);
 
   const loginsubmits = (url = 0) => {
@@ -283,12 +303,7 @@ export default function Home(props) {
       return false;
     }
   };
-  const filtermentor = libraryData.filter((element) =>
-    element?.type?.includes((element = "Mentor"))
-  );
-  const filtercoach = libraryData.filter((element) =>
-    element?.type?.includes((element = "Life Coach"))
-  );
+
   const joingroup = (_id) => {
     let local = localStorage.getItem("Token");
     if (local) {
@@ -326,10 +341,10 @@ export default function Home(props) {
             <div className="web-banner mb-50">
               <div className="container">
                 <div className="web-banner-content">
-                  <marquee behavior="slide" direction="up">
+                  {/* <marquee behavior="slide" direction="up">
                     <h1>{element.banner_text}</h1>
-                  </marquee>
-                  {/* <FloatingLettersTextBuilder
+                  </marquee> */}
+                  <FloatingLettersTextBuilder
                     floatingSpeed={500}
                     lettersAppearanceDelay={250}
                     letterSpacing="20px"
@@ -344,7 +359,7 @@ export default function Home(props) {
                     }}
                   >
                     {element.banner_text}
-                  </FloatingLettersTextBuilder> */}
+                  </FloatingLettersTextBuilder>
                   <div className="d-flex">
                     <button
                       className="qst-show btn-web hvr-float-shadow btn-web"
@@ -359,7 +374,7 @@ export default function Home(props) {
                       Your Support Networks
                     </button> */}
                     <Dropdown>
-                      <Dropdown.Menu className="scrollable-menu">
+                      {/* <Dropdown.Menu className="scrollable-menu">
                         {mastercategorys.map((element) => (
                           <Dropdown.Item
                             as="p"
@@ -368,7 +383,7 @@ export default function Home(props) {
                             {element.mastercategory}
                           </Dropdown.Item>
                         ))}
-                      </Dropdown.Menu>
+                      </Dropdown.Menu> */}
                       <Dropdown.Toggle
                         id="dropdown-basic"
                         className="qst-show btn-web hvr-float-shadow btn-web"
@@ -619,117 +634,6 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      {/* <div className="doctor-section mb-50">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="doctor-heading">
-                <br />
-                <h2>Swayam- Consult with Experts </h2>
-            
-                <br />
-                <div className="expert-details">
-                  <span>01</span>
-                  <p>
-                    Meet the specialists who can take care of your requirement
-                    in discreet mode
-                  </p>
-                </div>
-                <div className="expert-details">
-                  <span>02</span>
-                  <p>
-                    Do It Your Self-Please record your voice for 60 seconds and
-                    you can assess yourself
-                  </p>
-                </div>
-                <div className="expert-details">
-                  <span>03</span>
-                  <p>
-                    Your reports will be available for your continual progress
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-lg-6">
-              <div className="doctor-form">
-                <h3>Search Doctors For Appointment</h3>
-                <form action="">
-                  <div className="col-lg-12">
-                 
-                  </div>
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <select
-                        name=""
-                        id=""
-                      >
-                        <option value="All State">All State</option>
-                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                        <option value="Andaman and Nicobar Islands">
-                          Andaman and Nicobar Islands
-                        </option>
-                        <option value="Arunachal Pradesh">
-                          Arunachal Pradesh
-                        </option>
-                        <option value="Assam">Assam</option>
-                        <option value="Bihar">Bihar</option>
-                        <option value="Chandigarh">Chandigarh</option>
-                        <option value="Chhattisgarh">Chhattisgarh</option>
-                        <option value="Dadar and Nagar Haveli">
-                          Dadar and Nagar Haveli
-                        </option>
-                        <option value="Daman and Diu">Daman and Diu</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Lakshadweep">Lakshadweep</option>
-                        <option value="Puducherry">Puducherry</option>
-                        <option value="Goa">Goa</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Himachal Pradesh">
-                          Himachal Pradesh
-                        </option>
-                        <option value="Jammu and Kashmir">
-                          Jammu and Kashmir
-                        </option>
-                        <option value="Jharkhand">Jharkhand</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Kerala">Kerala</option>
-                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Manipur">Manipur</option>
-                        <option value="Meghalaya">Meghalaya</option>
-                        <option value="Mizoram">Mizoram</option>
-                        <option value="Nagaland">Nagaland</option>
-                        <option value="Odisha">Odisha</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Rajasthan">Rajasthan</option>
-                        <option value="Sikkim">Sikkim</option>
-                        <option value="Tamil Nadu">Tamil Nadu</option>
-                        <option value="Telangana">Telangana</option>
-                        <option value="Tripura">Tripura</option>
-                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                        <option value="Uttarakhand">Uttarakhand</option>
-                        <option value="West Bengal">West Bengal</option>
-                      </select>
-                    </div>
-                  </div>
-          
-
-                  <div className="col-lg-12">
-                    <buttton
-                      className="btn hvr-float-shadow"
-                      onClick={() => loginsubmit("/bookingAppoint")}
-                    >
-                      <span style={{ color: "#23adba" }}>Submit</span>
-                    </buttton>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
       {/* support */}
       <div id="support" className="about-section mb-50">
         <div className="container">
@@ -780,40 +684,29 @@ export default function Home(props) {
           <div className="d-flex justify-content-center">
             <div className="col-lg-6">
               <div className="doctor-form">
-                <h3>Select Your Therapy</h3>
+                <h3>Select Your Therapy Type / Subscription Plane</h3>
                 <form action="">
                   <div className="col-lg-12"></div>
                   <div className="col-lg-12">
-                    <div className="form-group">
-                      <select name="" id="">
-                        <option value="All therapies">All therapies</option>
-                        <option value="Anxiety P-1">Anxiety</option>
-                        <option value="Anxiety P-2">Anxiety P-2</option>
-                        <option value="Bipolar P-1">Bipolar P-1</option>
-                        <option value="Bipolar P-2">Bipolar P-2</option>
-                        <option value="Dementia P-1">Dementia P-1</option>
-                        <option value="Dementia P-2">Dementia p-2</option>
-                        <option value="Depression P-1">Depression P-1</option>
-                        <option value="Depression P-2">Depression P-2</option>
-                        <option value="Alcoholism P-1">Alcoholism P-1</option>
-                        <option value="Alcoholism P-2">Alcoholism P-2</option>
-                        <option value="Sexual Disorders P-1">
-                          Sexual Disorders P-1
-                        </option>
-                        <option value="Sexual Disorders P-2">
-                          Sexual Disorders P-2
-                        </option>
-                      </select>
-                    </div>
-                  </div>
+                    <Dropdown className="form-group">
+                      <Dropdown.Toggle
+                        id="dropdown-basic"
+                        className="hvr-float-shadow"
+                      >
+                        Choose Therapy
+                      </Dropdown.Toggle>
 
-                  <div className="col-lg-12">
-                    <buttton
-                      className="btn hvr-float-shadow"
-                      onClick={() => loginsubmit("/bookingAppoint")}
-                    >
-                      <span style={{ color: "#23adba" }}>Submit</span>
-                    </buttton>
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map((element) => (
+                          <Dropdown.Item
+                            as="p"
+                            onClick={(e) => subchange(element.mastercategory)}
+                          >
+                            {element.mastercategory}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </div>
                 </form>
               </div>
@@ -821,46 +714,6 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      {/* {ecosystem product} */}
-      {/* <div className="service-section mb-50">
-        <div className="container">
-          <div className="col-lg-12">
-            <div className="service-heading">
-              <h5>Manodayam Ecosystem</h5>
-              <p>
-                Please see your support system such as genetics support, find
-                brain mapping centers
-              </p>
-            </div>
-          </div>
-
-          <div className="service-slide mb-50">
-            <Slider {...settingstwo}>
-              {responseData.map((element) => (
-                <div className="col-lg-11">
-                  <div className="product-card">
-                    <img className="product-img" src={element.img_url} alt="" />
-                    <h3>{element.product_name}</h3>
-                    <p>{element.description}</p>
-                    <span>
-                      <i className="fa fa-inr"></i>
-                      {element.mrp}
-                    </span>
-                    <buttton
-                      className="btn-web cart-btn"
-                      onClick={() =>
-                        loginsubmit("/ViewProduct/" + element.slug)
-                      }
-                    >
-                      View More
-                    </buttton>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-      </div> */}
       <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>

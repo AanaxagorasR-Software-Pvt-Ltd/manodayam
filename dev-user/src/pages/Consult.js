@@ -11,7 +11,7 @@ export default function Consult() {
                 <h3>Consult with your doctor</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Consult with your doctor</li>
                 </ol>

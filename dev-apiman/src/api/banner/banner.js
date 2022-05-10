@@ -20,7 +20,6 @@ router.post("/new", async (req, res) => {
     if (!resp) {
       let data = {
         banner_text: body.banner_text,
-        // slug: body.slug,
         status: body.status,
       };
       if (!body?._id) {

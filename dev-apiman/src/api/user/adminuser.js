@@ -4,31 +4,30 @@ const bcrypt = require("bcrypt");
 
 const { getDatabase } = require("../../db/mongo");
 
-const validate = (req, res, next ) => {
-  const { email, password, name } = req.body;
-console.log('888888', );
-  if (email && password && name) {
+const validate = (req, res, next) => {
+  const { email, password, name, roll } = req.body;
+  console.log("888888");
+  if ((email && password && name, roll)) {
     next();
   } else {
     res.status(400).json({ status: false, message: "Bad request1" });
   }
 };
-router.post("/user/new", validate, async (req, res) => {
+router.post("/subadmin/new",validate , async (req, res) => {
   try {
     const db = await getDatabase();
-    const { email, password, name  } = req.body;
+    const { email, password, name, roll } = req.body;
     const encryptedPassword = await bcrypt.hash(password, 10);
-    const user = await db.collection("user").findOne({ email: email });
-	  console.log("user ragister", user);
+    const user = await db.collection("subadmin_user").findOne({ email: email });
+    console.log("user ragister", user);
 
     if (!user) {
-   
-      db.collection("user")
+      db.collection("subadmin_user")
         .insertOne({
           name: name,
           email: email,
           password: encryptedPassword,
-          // type: type,
+          roll: roll,
         })
         .then((resp) => {
           res.status(200).json({
@@ -36,8 +35,6 @@ router.post("/user/new", validate, async (req, res) => {
             status: true,
             data: resp,
           });
-          
-        
         })
         .catch((e) => {
           console.error(e);
@@ -51,8 +48,7 @@ router.post("/user/new", validate, async (req, res) => {
       return res
         .status(200)
         .json({ message: "user already exist", status: false });
-        
-      }
+    }
   } catch (e) {
     res
       .status(500)
@@ -62,12 +58,8 @@ router.post("/user/new", validate, async (req, res) => {
 router.get("/user/list", async (req, res) => {
   try {
     const db = await getDatabase();
-    let dt = await db
-      .collection("user")
-      .find().toArray()
+    let dt = await db.collection("subadmin_user").find().toArray();
     res.json(dt);
-    
-   
   } catch (err) {
     console.log("err", err.message);
   }

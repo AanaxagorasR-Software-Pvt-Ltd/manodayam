@@ -25,6 +25,9 @@ router.get(`/`,  validate,async (req,res) => {
 })
 router.use(`/auth`, require("./user/newUser"));
 // router.use(`/auth`, require("./user/doctor"));
+router.use(`/auth`, require("./user/adminuser"));
+router.use(`/auth`, require("./user/adminlogin"));
+
 router.use(`/auth`, require("./user/login"));
 router.use(`/auth`, require("./user/profile"));
 router.use(`/products`, require("./product/product.list"));
@@ -67,6 +70,9 @@ router.use(`/shakthi-all`,require("./media/Audio"))
 router.use('/videos', require("./media/video"));
 router.use(`/shakthi-body`, require("./shakthi/body"));
 router.use(`/shakthi-ott-music`, require("./shakthi/musicData"));
+
+//admin-subadmin
+router.use('/subadmin', require("./adminSubadmin/subadmin"));
 
 
 module.exports = router;

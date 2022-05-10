@@ -37,13 +37,11 @@ const validate = (req, res, next) => {
 //   },
 // });
 
-
 router.post(
   `/sub`,
 
   async (req, res) => {
     try {
-
       const db = await getDatabase();
       const body = req.body;
       let data = {
@@ -55,11 +53,7 @@ router.post(
         meditation: body.meditation,
         benefitsdescription: body.benefitsdescription,
         schedule: body.schedule,
-        price: body.price
-
-
-
-
+        price: body.price,
 
         // type: body.type,
       };
@@ -90,7 +84,6 @@ router.post(
         status: true,
         message: "data inserted",
       });
-
     } catch (e2) {
       res
         .status(400)
@@ -107,13 +100,12 @@ router.post("/usersubscription", async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
 
-
   try {
     let insertedId = null;
     let Addsublist = await db.collection("Users_Subscription");
 
     let data = await Addsublist.insertOne(body).insertedId;
-    res.end()
+    res.end();
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
@@ -122,39 +114,33 @@ router.post("/usersubscription", async (req, res) => {
     });
   }
 });
-router.post('/bookplane', async (req, res) => {
- 
-const data={
-  id:req.query.subid,
-  email:req.query.subemail
-}
-console.log(data);
-const db = await getDatabase();
+router.post("/bookplane", async (req, res) => {
+  const data = {
+    id: req.query.subid,
+    email: req.query.subemail,
+  };
+  console.log(data);
+  const db = await getDatabase();
   try {
-
-    
     console.log(data);
     if (!data?._id) {
-      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
     } else {
-      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
     }
 
-   
-    let subscriptionbook = await db.collection("Subscription_Book")
+    let subscriptionbook = await db.collection("Subscription_Book");
     let subscriptiondata = await db
-      .collection("Subscription_Book").insertOne(data)
-      let subscriptionplane = await db
-      .collection("Subscription_Plan").findOne({_id: new ObjectID(data.id)})
-      var date = new Date(subscriptionplane.created)
-      var dates=date.toLocaleString('en-IN');
-     
- 
-    EmailService.sendEmailToPlanebooked(data.email,subscriptionplane  );
-    
-  }
+      .collection("Subscription_Book")
+      .insertOne(data);
+    let subscriptionplane = await db
+      .collection("Subscription_Plan")
+      .findOne({ _id: new ObjectID(data.id) });
+    var date = new Date(subscriptionplane.created);
+    var dates = date.toLocaleString("en-IN");
 
-  catch (e) {
+    EmailService.sendEmailToPlanebooked(data.email, subscriptionplane);
+  } catch (e) {
     console.log("error", e);
     res.status(500).json({
       message: "server error",
@@ -162,41 +148,34 @@ const db = await getDatabase();
     });
   }
 }),
-// router.get("/list", async (req, res) => {
-//   const db = await getDatabase();
+  // router.get("/list", async (req, res) => {
+  //   const db = await getDatabase();
 
+  //   // res.send('hello')
+  // });
 
-//   // res.send('hello')
-// });
+  router.get("/list", async (req, res) => {
+    let filter = {};
+    if (req.query.usertype) {
+      filter.type = req.query.usertype;
+    }
 
-router.get("/list", async (req, res) => {
-
-  let filter = {
-
-
-  };
-  if (req.query.usertype) {
-    filter.type= req.query.usertype
-
-  }
-
-  try {
-
-    const db = await getDatabase();
-    const data = await db.collection("Subscription_Plan").find(filter).sort({ type: -1 })
-      .toArray();
-    res.send(data);
-  } catch (err) {
-    console.log("err", err.message);
-  }
-});
-
-
+    try {
+      const db = await getDatabase();
+      const data = await db
+        .collection("Subscription_Plan")
+        .find(filter)
+        .sort({ type: -1 })
+        .toArray();
+      res.send(data);
+    } catch (err) {
+      console.log("err", err.message);
+    }
+  });
 
 router.get("/", async (req, res) => {
   try {
-
-    const _id = req.query._id
+    const _id = req.query._id;
     const db = await getDatabase();
 
     // let dt = await db
@@ -216,8 +195,7 @@ router.get("/", async (req, res) => {
           $addFields: {
             userid: {
               $toObjectId: "$userid",
-            }
-
+            },
           },
         },
         {
@@ -261,6 +239,5 @@ router.delete("/delete/:_id", async (req, res) => {
 
   // res.send('hello')
 });
-
 
 module.exports = router;

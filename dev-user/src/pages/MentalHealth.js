@@ -39,7 +39,7 @@ export default function MentalHealth() {
                     <h3>{element.heading}</h3>
                     <ol className="breadcrumb">
                       <li>
-                        <Link to="/home">Home / &nbsp;</Link>
+                        <Link to="/">Home / &nbsp;</Link>
                       </li>
                       <li>{element.heading}</li>
                     </ol>

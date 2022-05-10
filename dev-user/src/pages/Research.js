@@ -11,7 +11,7 @@ export default function Research() {
                 <h3>research</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Research</li>
                 </ol>

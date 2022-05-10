@@ -44,7 +44,7 @@ export default function Aboutus() {
                 <h3>About Us</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>About us</li>
                 </ol>

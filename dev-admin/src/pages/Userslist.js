@@ -267,6 +267,8 @@ const Userslist = (props) => {
                               <th>S.No</th>
                               <th>Name</th>
                               <th>Email</th>
+                              <th>Type</th>
+
                               <th>Created Date</th>
                               {/* <th> Status</th> */}
                             </tr>
@@ -278,6 +280,7 @@ const Userslist = (props) => {
                                   <td>{i + 1}</td>
                                   <td>{v.name}</td>
                                   <td>{v.email}</td>
+                                  <td>{v.type}</td>
 
                                   <td>{new Date().toJSON().slice(0, 10).replace(/-/g, "-")}  </td>
                                 </tr>

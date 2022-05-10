@@ -82,7 +82,7 @@ export default function PrimarySprituality() {
                 <h3>Sprituality</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Sprituality</li>
                 </ol>

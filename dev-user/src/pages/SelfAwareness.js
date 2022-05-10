@@ -100,7 +100,7 @@ export default function SelfAwareness() {
                 <h3>Self SelfAwareness</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Self SelfAwareness (Swayam)</li>
                 </ol>

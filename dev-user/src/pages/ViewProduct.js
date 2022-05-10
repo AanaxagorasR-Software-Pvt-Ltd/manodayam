@@ -87,7 +87,7 @@ export default function ViewProduct(props) {
               <div className="contact-breadcrumb">
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Product Details</li>
                 </ol>

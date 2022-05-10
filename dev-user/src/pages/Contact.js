@@ -11,7 +11,7 @@ export default function Contact() {
                 <h3>contact Us</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Contact Us</li>
                 </ol>

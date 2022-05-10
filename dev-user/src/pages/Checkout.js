@@ -165,7 +165,7 @@ export default function Checkout() {
                 <h3>Checkout</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Checkout</li>
                 </ol>

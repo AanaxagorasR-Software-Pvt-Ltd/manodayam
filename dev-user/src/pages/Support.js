@@ -19,7 +19,7 @@ const handleShow = () => setshow(true);
                 <h3>your support network</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Your support Network</li>
                 </ol>

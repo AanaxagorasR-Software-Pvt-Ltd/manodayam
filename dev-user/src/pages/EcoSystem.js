@@ -98,19 +98,19 @@ export default function EcoSystem() {
           <div className="row">
             <div className="col-lg-6">
               <div className="contact-breadcrumb">
-                <h3>Sprituality</h3>
+                <h3>Manodayam Ecosystem</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
-                  <li>Sprituality</li>
+                  <li>Manodayam Ecosystem</li>
                 </ol>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="service-section mb-50">
+      <div className="about-section mb-50">
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">

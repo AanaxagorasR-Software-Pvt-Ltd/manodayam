@@ -11,7 +11,7 @@ export default function Consultvideo() {
                 <h3>Talk With Your Doctor</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Talk With Your Doctor</li>
                 </ol>

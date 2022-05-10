@@ -111,7 +111,7 @@ export default function Cart(props) {
                 <h3>Add To Cart</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Add To Cart</li>
                 </ol>

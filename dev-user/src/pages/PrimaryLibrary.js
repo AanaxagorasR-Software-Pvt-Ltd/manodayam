@@ -151,7 +151,7 @@ export default function PrimaryLibrary() {
                 <h3>Human Digital Library</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Human Digital Library</li>
                 </ol>

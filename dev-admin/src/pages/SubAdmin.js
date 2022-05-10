@@ -16,11 +16,11 @@ import { useNavigate } from "react-router";
 import { Modal } from "react-bootstrap";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import axios from "../utill/axios";
-import subscription from "../Store/Connect/subscription";
+import subadmin from "../Store/Connect/subadmin";
 import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
-const Subscription = () => {
+const SubAdmin = () => {
   const [data, setData] = React.useState([]);
   const dispatch = useDispatch();
   const { logout } = useAuth();
@@ -33,14 +33,13 @@ const Subscription = () => {
     title: "",
     body: "",
   });
-
   const handleClose = () => setshowDeleteData(false);
   const handleShow = () => setshowDeleteData(true);
   const formRef = useRef();
 
   const list = () => {
     axios
-      .get("subscription/list")
+      .get("subadmin")
       .then((res) => {
         setData(res);
         setfilerdata(res);
@@ -66,16 +65,12 @@ const Subscription = () => {
       });
   };
   const deleteData = (_id) => {
-    subscription.delete(_id).then((res) => {
+    subadmin.delete(_id).then((res) => {
       // alert(res?.message);
       handleShow(res?.message);
       setAlerDeleteData({ title: "Done", body: "Data Deleted" });
       list();
     });
-  };
-  const convertToDateTime = (time) => {
-    const d = new Date(time);
-    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
   const onsubmit = (e) => {
     e.preventDefault();
@@ -91,7 +86,6 @@ const Subscription = () => {
     });
     setfilerdata(searchlist);
   };
-
   return (
     <>
       <Addform ref={formRef} list={list} />
@@ -281,22 +275,19 @@ const Subscription = () => {
                 <div class="col-lg-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Subscription Plans</h4>
+                      <h4 class="card-title">Sub-Admin (Roll Divid)</h4>
                       <div class="table-responsive pt-3">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
                               <th>S.N</th>
-                              <th>Type</th>
 
-                              <th>Therapy Title</th>
-                              <th>Self Assessment</th>
-                              <th> Doctor Assessment</th>
-                              <th> Group Therapy</th>
-                              <th>Meditation Spirituality</th>
-                              <th>Benefits/Description</th>
-                              <th>Create date</th>
-                              <th>Price per users</th>
+                              <th>Photo</th>
+                              <th>Name</th>
+                              <th>Work Roll</th>
+                              <th>Sab-admin Id</th>
+                              {/* <th>Audio Link</th> */}
+                              <th>Date</th>
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
                           </thead>
@@ -304,19 +295,13 @@ const Subscription = () => {
                             {filterdata.map((a, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
-
-                                <td>{a.type} </td>
-                                <td>{a.therapy} </td>
-
-                                <td>{a.selfassessment}</td>
-                                <td>{a.doctorassessment}</td>
-                                <td>{a.grouptherapy}</td>
-
-                                <td>{a.meditation}</td>
-                                <th>{a.benefitsdescription}</th>
-                                <th>{convertToDateTime(a.created)}</th>
-
-                                <td>{a.price}</td>
+                                <td>
+                                  <img src={a.image} />
+                                </td>
+                                <td>{a.name}</td>
+                                <td>{a.roll}</td>
+                                <td>{a.type}</td>
+                                <td>{a.created}</td>
 
                                 <td>
                                   <button
@@ -387,7 +372,6 @@ const Addform = forwardRef((props, ref) => {
   const [data, setData] = useState({});
   const [showdata, setshowdata] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
-  const [mastercategorys, setmastercategorys] = useState([]);
 
   const handleClose = () => setshowdata(false);
   const handleShow = () => setshowdata(true);
@@ -415,9 +399,8 @@ const Addform = forwardRef((props, ref) => {
     for (let prop in data) {
       fd.append(prop, data[prop]);
     }
-    subscription
-      .save(data, data.id)
-
+    subadmin
+      .save(fd)
       .then((res) => {
         // alert(res.message);
         handleShow(res.message);
@@ -432,21 +415,6 @@ const Addform = forwardRef((props, ref) => {
       });
   };
 
-  const mastercategory = () => {
-    axios
-      .get("mastercategory")
-      .then((res) => {
-        setmastercategorys(res);
-        console.log("====mentalHealthData====", res.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  useEffect((props) => {
-    mastercategory();
-  }, []);
-
   return (
     <>
       <Modal
@@ -457,113 +425,79 @@ const Addform = forwardRef((props, ref) => {
         }}
       >
         <Modal.Header>
-          <Modal.Title>Subscription Plans</Modal.Title>
+          <Modal.Title>Audio Uplode</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <div class="col-md-3  offset-9">
-                <label for="exampleInputUsername1">Therapy Type</label>
-                <select
+              <div class="d-flex">
+                <div class="col-md-4">
+                  <label for="exampleInputUsername1">Subadmin Roll</label>
+                  <select
+                    class="form-control"
+                    value={data.roll || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "roll");
+                    }}
+                  >
+                    <option>Select</option>
+                    <option>Content module</option>
+                    <option>Human Digital Library</option>
+                    <option>Product module</option>
+                    <option>Subscription</option>
+                    <option>Doctor module</option>
+                    <option>Voice Assistant</option>
+                    <option>Shakthi OTT</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="exampleInputUsername1">Subadmin Id</label>
+                  <select
+                    class="form-control"
+                    value={data.type || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "type");
+                    }}
+                  >
+                    <option>Select</option>
+                    <option>manodayam001</option>
+                    <option>manodayam002</option>
+                    <option>manodayam003</option>
+                    <option>manodayam004</option>
+                    <option>manodayam005</option>
+                    <option>manodayam006</option>
+                    <option>manodayam007</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputUsername1">Subadmin Name</label>
+                <input
+                  type="text"
                   class="form-control"
-                  value={data.type || ""}
+                  value={data.name || ""}
                   onChange={(e) => {
-                    handleChange(e.target.value, "type");
+                    handleChange(e.target.value, "name");
                   }}
-                >
-                  {mastercategorys?.map((element) => (
-                    <option value={element.type}>
-                      {element.mastercategory}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">Therapy Title</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    value={data.therapy || ""}
-                    onChange={(e) => {
-                      handleChange(e.target.value, "therapy");
-                    }}
-                    placeholder="Therapy Title"
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">Self Assessment </label>
-                  <input
-                    class="form-control"
-                    value={data.selfassessment || ""}
-                    onChange={(e) => {
-                      handleChange(e.target.value, "selfassessment");
-                    }}
-                    placeholder="Self Assessment"
-                  />
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">doctor Assessment </label>
-                  <input
-                    class="form-control"
-                    value={data.doctorassessment || ""}
-                    onChange={(e) => {
-                      handleChange(e.target.value, "doctorassessment");
-                    }}
-                    placeholder=" Doctor Assessment "
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">Group Therapy</label>
-                  <input
-                    class="form-control"
-                    value={data.grouptherapy || ""}
-                    onChange={(e) => {
-                      handleChange(e.target.value, "grouptherapy");
-                    }}
-                    placeholder=" Group Therapy"
-                  />
-                </div>
+                  placeholder="Subadmin name"
+                />
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="exampleInputUsername1">
-                    Meditation Spirituality
+                    Subadmin Photo Upload
                   </label>
                   <input
-                    class="form-control"
-                    value={data.meditation || ""}
+                    type="file"
+                    class="form-control file-upload-info"
                     onChange={(e) => {
-                      handleChange(e.target.value, "meditation");
+                      handleChange(e.target.files[0], "image");
                     }}
-                    placeholder=" Meditation Spirituality "
+                    placeholder="Upload Photo"
                   />
+                  <small></small>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">Price per users</label>
-                  <input
-                    class="form-control"
-                    value={data.price || ""}
-                    onChange={(e) => {
-                      handleChange(e.target.value, "price");
-                    }}
-                    placeholder=" price per users"
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputUsername1">Benefits/Description</label>
-                <textarea
-                  class="form-control"
-                  row={4}
-                  value={data.benefitsdescription || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "benefitsdescription");
-                  }}
-                  placeholder=" Benefits/Description "
-                />
               </div>
             </div>
           </form>
@@ -604,4 +538,4 @@ const Addform = forwardRef((props, ref) => {
     </>
   );
 });
-export default Subscription;
+export default SubAdmin;

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { UserLogin } from "../Store/Services/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { logoutClean } from "../Store/slices/login.slice";
 import LoadingContainer from "../Components/Loading";
 
@@ -33,7 +33,7 @@ const Login = (props) => {
   useEffect(() => {
     if (user && user?.status && user.loginStatus === "undone") {
       dispatch(logoutClean(user));
-      navigate("/");
+      navigate("/admin/dashboard");
     }
   }, [user]);
 
@@ -48,14 +48,16 @@ const Login = (props) => {
         <div className="row w-100 mx-0">
           <div className="col-lg-4 mx-auto">
             <div className="auth-form-light text-left py-5 px-4 px-sm-5">
+              {/* <div className="text-danger">
+              
+                Back
+              </div> */}
               <div className="brand-logo">
                 <img src="images/logo.png" alt="logo" />
               </div>
               <h4>Hello! let's get started</h4>
               <h6 className="font-weight-light">Sign in to continue.</h6>
-              <form className="pt-3"
-              onSubmit={handleSubmit(onSubmitHandler)}
-              >
+              <form className="pt-3" onSubmit={handleSubmit(onSubmitHandler)}>
                 <div className="form-group">
                   <input
                     type="email"
@@ -81,16 +83,20 @@ const Login = (props) => {
                     placeholder="Password"
                   />
                 </div>
-                <div className="mt-3">
-
-                  <Link to="/admin/dashboard" >
-                    <button
-                      className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" 
-                    >
-
+                {/* <div className="mt-3">
+                  <Link to="/admin/dashboard">
+                    <button className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                       Sign In
                     </button>
                   </Link>
+                </div> */}
+                <div className="mt-3">
+                  <input
+                    type="submit"
+                    className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                    href="javascript:void(0)"
+                    value="LOGIN"
+                  />
                 </div>
                 <div className="my-2 d-flex justify-content-between align-items-center">
                   <div className="form-check">
@@ -99,7 +105,10 @@ const Login = (props) => {
                       Keep me signed in
                     </label>
                   </div>
-                  <Link to ="/admin/forgotpassword" className="auth-link text-black">
+                  <Link
+                    to="/admin/forgotpassword"
+                    className="auth-link text-black"
+                  >
                     Forgot password?
                   </Link>
                 </div>

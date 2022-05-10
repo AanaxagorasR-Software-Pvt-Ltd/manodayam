@@ -2,11 +2,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, PROFIL_API, BOOKED_API, SUBSCRIPTION_PLANE_LISTA ,SUBSCRIPTION_PLANE_BOOK} from "../utill/api.endpoints";
+import {
+  API_ADMIN_URL,
+  PROFIL_API,
+  BOOKED_API,
+  SUBSCRIPTION_PLANE_LISTA,
+  SUBSCRIPTION_PLANE_BOOK,
+} from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import { useFormik } from "formik";
-
 
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
@@ -17,7 +22,7 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [editData, setEditData] = useState([]);
   const [subScriptiondata, setSubscriptiondata] = useState([]);
-  const [subbuy,setsubBuy]=useState("")
+  const [subbuy, setsubBuy] = useState("");
   let params = new URLSearchParams(window.location.search);
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -28,12 +33,11 @@ export default function Profile() {
     axios
       .post(`${API_ADMIN_URL}${PROFIL_API}`, profileData)
       .then((res) => {
-
         setprofilData(res.data.data);
         console.log("====profileData====", res.data.data);
         console.log(res.data);
-        setAlerdata({ title: "Login", body: "User Login Successfully" })
-        setshow(true)
+        setAlerdata({ title: "Login", body: "User Login Successfully" });
+        setshow(true);
       })
       .catch((error) => {
         console.log(error);
@@ -66,13 +70,13 @@ export default function Profile() {
       .get(`${API_ADMIN_URL}${PROFIL_API}?userId=${user._id}`)
       .then((res) => {
         console.log("res", res, typeof res);
-        formik.setValues({ name: res.data.name, email: res.data.email })
-        setEditData(res.data)
+        formik.setValues({ name: res.data.name, email: res.data.email });
+        setEditData(res.data);
       })
       .catch((err) => {
         console.log("err", err.message);
       });
-  }
+  };
   const subscription = () => {
     let user = JSON.parse(localStorage.getItem("user"));
 
@@ -80,58 +84,53 @@ export default function Profile() {
       .get(
         // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get("usertype")}`
-
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get(
+          "usertype"
+        )}`
       )
       .then((res) => {
         console.log("res", res, typeof res);
 
-        setSubscriptiondata(res.data)
+        setSubscriptiondata(res.data);
       })
       .catch((err) => {
         console.log("err", err.message);
       });
-  }
+  };
   React.useEffect(() => {
     listBooked();
     Editprofile();
     subscription();
-
   }, []);
-
-
-
 
   const handleClose = () => setshow(false);
 
   const formik = useFormik({
     initialValues: {
       name: "name",
-      email: "email"
-
+      email: "email",
     },
     onSubmit: (values) => {
-      console.log(values)
-    }
-  })
+      console.log(values);
+    },
+  });
   const convertToDateTime = (time) => {
     const d = new Date(time);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
- const  subscriptionbook =(subId)=>{
-  let sub = JSON.parse(localStorage.getItem("user")); 
-    axios
-      .post(
-        // ?humanId=${}`
+  const subscriptionbook = (subId) => {
+    let sub = JSON.parse(localStorage.getItem("user"));
+    axios.post(
+      // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?subemail=${sub.email}&subid=${subId}`)
-      }
-      // setAlerdata({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
-      // setshow(true);
-  return ( 
+      `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?subemail=${sub.email}&subid=${subId}`
+    );
+  };
+  // setAlerdata({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
+  // setshow(true);
+  return (
     <>
       <div className="contact-banner mb-50">
-
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
@@ -139,7 +138,7 @@ export default function Profile() {
                 <h3>Profile</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Profile</li>
                   {profilData?.[0]?.bannerText}
@@ -165,7 +164,8 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h4 className="profile-name">
-                        <span className="profile-hello">Hello</span>{user && user.name}
+                        <span className="profile-hello">Hello</span>
+                        {user && user.name}
                       </h4>
                       {/* {
                         <p>
@@ -229,9 +229,7 @@ export default function Profile() {
                 <div className="tab-content">
                   <div class="tab-pane active" id="home">
                     <div class="row">
-                      <div class="col-lg-12">
-
-                      </div>
+                      <div class="col-lg-12"></div>
                     </div>
                   </div>
                   <div className="tab-pane fade" id="menu1">
@@ -252,33 +250,42 @@ export default function Profile() {
                                 <th>Create Date</th>
                                 <th>Price</th>
                                 <th>Action</th>
-
-
-
                               </tr>
                             </thead>
-                            {<tbody>
-                              {subScriptiondata.map((a, i) => (
-                                <tr key={i}>
+                            {
+                              <tbody>
+                                {subScriptiondata.map((a, i) => (
+                                  <tr key={i}>
+                                    <td> {i + 1}</td>
+                                    <td>{a.type}</td>
+                                    <td>{a.therapy}</td>
+                                    <td> {a.selfassessment}</td>
+                                    <td> {a.doctorassessment} </td>
+                                    <td>{a.grouptherapy} </td>
+                                    <td> {a.meditation} </td>
+                                    <td> {a.benefitsdescription}</td>
+                                    <th>{convertToDateTime(a.created)}</th>
+                                    <td>
+                                      {" "}
+                                      <i className="fa fa-inr"></i>
+                                      {a.price}
+                                    </td>
 
-
-                                  <td> {i + 1}</td>
-                                  <td>{a.type}</td>
-                                  <td>{a.therapy}</td>
-                                  <td> {a.selfassessment}</td>
-                                  <td> {a.doctorassessment} </td>
-                                  <td>{a.grouptherapy}  </td>
-                                  <td> {a.meditation} </td>
-                                  <td>  {a.benefitsdescription}</td>
-                                  <th>{convertToDateTime(a.created)}</th>
-                                  <td> <i className="fa fa-inr"></i>{a.price}</td>
-
-                                  <td><button type="button"
-                                    className="btn-web subbutton  hvr-float-shadow" data-toggle="modal" data-target="#exampleModal" onClick={() => subscriptionbook(a._id)}>Buy</button></td>
-
-                                </tr>
-                              ))}</tbody>}
-
+                                    <td>
+                                      <button
+                                        type="button"
+                                        className="btn-web subbutton  hvr-float-shadow"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        onClick={() => subscriptionbook(a._id)}
+                                      >
+                                        Buy
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            }
                           </table>
                         </div>
                       </div>

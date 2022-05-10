@@ -1,4 +1,5 @@
 const leftSideBarMenu = [
+
   {
     name: "Dashboard",
     isActive: true,
@@ -9,6 +10,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    // id: "manodayam001"
   },
   {
     name: "Spirituality",
@@ -20,6 +22,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    id: "manodayam001",
   },
   {
     name: "Banner",
@@ -38,17 +41,6 @@ const leftSideBarMenu = [
     dataToggle: "",
     isExpand: false,
     link: "/admin/about-us",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
-  },
-  {
-    name: "Shakthi Asking",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "/admin/shakthi-ques",
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
     submenu: [],
@@ -77,7 +69,7 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Category",
+    name: "Self-Awareness Category",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -102,13 +94,20 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Appointments",
+    name: "Doctor module",
     isActive: false,
     dataToggle: "",
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
     submenu: [
+      {
+        name: "Doctor List",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/doctor-list",
+        isExpand: false,
+      },
       {
         name: "All Appointments",
         isActive: true,
@@ -123,40 +122,15 @@ const leftSideBarMenu = [
         link: "/admin/booked-appointment-list",
         isExpand: false,
       },
-    ],
-    isHover: false,
-  },
-
-  {
-    name: "Doctor List",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "/admin/doctor-list",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
-  },
-
-  {
-    name: "Questions Part",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    iconClass: "icon-layout",
-    link: "",
-
-    submenu: [
       {
-        name: "MSQ",
+        name: "MSQ Question",
         isActive: true,
         dataToggle: "",
         link: "/admin/questions",
         isExpand: false,
       },
       {
-        name: "Yes No",
+        name: "Yes-No Question",
         isActive: true,
         dataToggle: "",
         link: "/admin/yes-no-questions",
@@ -165,15 +139,11 @@ const leftSideBarMenu = [
     ],
     isHover: false,
   },
-
   {
-    name: "Shakti",
+    name: "Shakti OTT module",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    // link: "javascript:void(0)" ,
-    link: "",
-
     iconClass: "icon-layout",
     submenu: [
       // {
@@ -183,6 +153,13 @@ const leftSideBarMenu = [
       //   link: "/admin/media-solutions",
       //   isExpand: false,
       // },
+      {
+        name: "Shakthi Asking",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/shakthi-ques",
+        isExpand: false,
+      },
       {
         name: "Video",
         isActive: true,
@@ -201,18 +178,15 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Product List",
+    name: "Product module",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    // link: "javascript:void(0)" ,
     link: "",
-
     iconClass: "icon-layout",
-
     submenu: [
       {
-        name: "Product",
+        name: "Product List",
         isActive: false,
         dataToggle: "",
         isExpand: false,
@@ -232,7 +206,6 @@ const leftSideBarMenu = [
       },
     ],
   },
-
   {
     name: "Digital Human Library",
     isActive: false,
@@ -243,7 +216,7 @@ const leftSideBarMenu = [
 
     submenu: [
       {
-        name: "Create Library",
+        name: "Coach/mentor list",
         isActive: true,
         dataToggle: "",
         link: "/admin/library",
@@ -281,23 +254,12 @@ const leftSideBarMenu = [
     ],
     isHover: false,
   },
-
-  // {
-  //   name: "Settings",
-  //   isActive: false,
-  //   dataToggle: "",
-  //   isExpand: false,
-  //   // link: "javascript:void(0)" ,
-  //   iconClass: "icon-contract",
-  //   submenu: [],
-  //   isHover: false,
-  // },
   {
     name: "Voice Assistant",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    iconClass: "icon-layout",
+    iconClass: "icon-contract",
     link: "",
 
     submenu: [
@@ -309,7 +271,7 @@ const leftSideBarMenu = [
         isExpand: false,
       },
       {
-        name: "Assessment",
+        name: "Self Assessment",
         isActive: true,
         dataToggle: "",
         link: "/admin/voice-assessment-question",
@@ -326,6 +288,32 @@ const leftSideBarMenu = [
     link: "/admin/users-list",
     iconClass: "icon-contract",
     submenu: [],
+    isHover: false,
+  },
+  {
+    name: "Admin Setting",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    iconClass: "icon-contract",
+    link: "",
+
+    submenu: [
+      {
+        name: "Sub-admin",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/sub-admin",
+        isExpand: false,
+      },
+      {
+        name: "Sub-admin Register",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/subadmin-register",
+        isExpand: false,
+      },
+    ],
     isHover: false,
   },
 ];

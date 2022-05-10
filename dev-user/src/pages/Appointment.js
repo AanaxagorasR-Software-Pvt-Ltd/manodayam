@@ -136,7 +136,7 @@ export default function Appointment() {
                 <h3>Appointment</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Appointment</li>
                 </ol>
