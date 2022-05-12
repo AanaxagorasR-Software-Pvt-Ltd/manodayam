@@ -13,7 +13,6 @@ import sprituality from "./sprituality.jpeg";
 import teledoctor from "./teledr.png";
 import { FloatingLettersTextBuilder } from "react-animated-text-builders";
 import voiceAssisstant from "../utill/rdxassisstant";
-import video from "./sun.mov";
 import {
   API_ADMIN_URL,
   BANNER_API,

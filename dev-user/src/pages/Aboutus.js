@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
-import sample from "./sample.mp4";
 import { API_ADMIN_URL, ABOUT_API } from "../utill/api.endpoints";
 export default function Aboutus() {
   const [data, setData] = useState([]);
