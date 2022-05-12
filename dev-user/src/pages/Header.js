@@ -10,6 +10,7 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import { IconName } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 export default function Header() {
   let hist = useNavigate();
   {
@@ -112,7 +113,69 @@ export default function Header() {
       cName: "nav-text",
     },
   ];
+ 
+    const items = [
+      {
+        id: 0,
+        name: 'Contact',
+        path: "/contact"
+      },
+      {
+        id: 9,
+        name: 'Home',
+        path: "/"
+      },
+      {
+        id: 1,
+        name: 'Support Network',
+        path: "/support",
 
+      },
+      {
+        id: 2,
+        name: 'Therapies',
+        path: "/bookingAppoint",
+      },
+      {
+        id: 3,
+        name: 'About Us',
+        path: "/about-us",
+      },
+      {
+        id: 4,
+        name: 'How we do',
+        path: "/how-we-do",
+      }
+    ]
+  
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    hist(item.path);
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+  const formatResult = (item) => {
+    return (
+      <>
+       
+        <span style={{ display: 'block', textAlign: 'left' ,color:'black'}}>{item.name}</span>
+      </>
+    )
+  }
   return (
     <>
       {/* <Login /> */}
@@ -127,7 +190,7 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-              <div className="search-part">
+              {/* <div className="search-part">
                 <SearchBar
                   // onSearchTextChange={(term, hits) => onSearchChange(term, hits)}
                   // onSearchButtonClick={this.onSearchClick}
@@ -135,7 +198,25 @@ export default function Header() {
                   data={dataObjects}
                   className="search"
                 />
+              </div> */}
+
+              <div className="App">
+                <header className="App-header">
+                  <div style={{ width: 300 }}>
+                    <ReactSearchAutocomplete
+                      items={items}
+                      onSearch={handleOnSearch}
+                      onHover={handleOnHover}
+                      onSelect={handleOnSelect}
+                      onFocus={handleOnFocus}
+                      autoFocus
+                      formatResult={formatResult}
+                    />
+                  </div>
+                </header>
               </div>
+
+
               <div className="col-lg-4 col-sm-8">
                 <div className="header-contact justify-content-end">
                   <button
@@ -255,7 +336,7 @@ export default function Header() {
                           className="btn-web hvr-float-shadow"
                           data-toggle="tooltip"
                           title="Cart!"
-                          // onClick={() => loginsubmit("/Cart")}
+                        // onClick={() => loginsubmit("/Cart")}
                         >
                           <li className="fa fa-shopping-cart navicon"></li>
 

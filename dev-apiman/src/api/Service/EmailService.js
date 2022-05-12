@@ -674,7 +674,7 @@ async sendEmailToPlanebooked(email, details) {
     from: `manodayam.swayamshakthi@gmail.com`,
     subject: "Your Subscription  has been booked.",
     // alternatives: [{ contentType: "text/html" }],
-    html: `
+    html: ` 
          
     <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
 
