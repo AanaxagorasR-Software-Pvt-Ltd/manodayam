@@ -88,7 +88,7 @@ export default function Header() {
     },
     {
       title: "Therapies",
-      path: "/bookingAppoint",
+      path: "/therapy",
       icon: <IoIcons.IoMdPeople />,
       cName: "nav-text",
     },
@@ -236,14 +236,15 @@ export default function Header() {
                 </ul> */}
                 <ul className="navbar-nav nav-custom ml-auto btn-nav">
                   {loginhide && (
-                    <li className="nav-item">
+                    <li className="nav-item ">
                       <button
                         className="btn-web hvr-float-shadow"
                         data-toggle="tooltip"
                         title="Profile!"
                         onClick={() => loginsubmit("/profile")}
                       >
-                        Profile
+                        <li className="fa fa-user navicon"></li>
+                        {/* Profile */}
                       </button>
                     </li>
                   )}
@@ -256,7 +257,9 @@ export default function Header() {
                           title="Cart!"
                           // onClick={() => loginsubmit("/Cart")}
                         >
-                          Cart
+                          <li className="fa fa-shopping-cart navicon"></li>
+
+                          {/* Cart */}
                         </button>
                       </Link>
                     </li>

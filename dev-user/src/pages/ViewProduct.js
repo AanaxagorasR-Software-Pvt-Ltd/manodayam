@@ -3,9 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 
-
 // import ReadMoreReact from "read-more-react";
-import { API_ADMIN_URL, VIEW_PRODUCT, AAD_TO_CARTLIST } from "../utill/api.endpoints";
+import {
+  API_ADMIN_URL,
+  VIEW_PRODUCT,
+  AAD_TO_CARTLIST,
+} from "../utill/api.endpoints";
 export default function ViewProduct(props) {
   // const {_id} = useParams();
   // console.log("*****###", useParams()._id);
@@ -20,7 +23,6 @@ export default function ViewProduct(props) {
     console.log("slug", slug);
   }, []);
 
-
   // productlist
   const [responseData, setResponseData] = useState([]);
   const ViewProjuct = () => {
@@ -34,30 +36,26 @@ export default function ViewProduct(props) {
       .then((res) => {
         setResponseData(res.data.data);
         console.log("----View----", res.data);
-       
-
       })
       .catch((error) => {
         console.log(error);
       });
   };
   const addtocart = (productId) => {
-
     console.log(`${API_ADMIN_URL}${AAD_TO_CARTLIST}`);
-   
+
     let user = JSON.parse(localStorage.getItem("user"));
     const cart = {
-   
-      productId:productId,
-      userId:user._id,
-      quantity:1
-    }
+      productId: productId,
+      userId: user._id,
+      quantity: 1,
+    };
     // const productlisting = {
     //   collectiontype: "products",
     //   // slug: slug,
     // };
     axios
-      .post(`${API_ADMIN_URL}${AAD_TO_CARTLIST}`,cart )
+      .post(`${API_ADMIN_URL}${AAD_TO_CARTLIST}`, cart)
       .then((res) => {
         // setResponseData(res.data.data);
         console.log("----View----", res.data);
@@ -73,9 +71,8 @@ export default function ViewProduct(props) {
   };
   useEffect((props) => {
     ViewProjuct(props);
- 
   }, []);
- 
+
   const handleClose = () => setshow(false);
 
   return (
@@ -122,7 +119,10 @@ export default function ViewProduct(props) {
                             {/* to={{ pathname: "/Cart/" + slug }}
                               className="ml-4 mt-4"
                             > */}
-                            <button className=" mt-4 ml-4 btn-web hvr-float-shadow" onClick={()=>addtocart(element._id)}>
+                            <button
+                              className=" mt-4 ml-4 btn-web hvr-float-shadow"
+                              onClick={() => addtocart(element._id)}
+                            >
                               Add to Cart
                             </button>
                             {/* </Link> */}
@@ -131,7 +131,7 @@ export default function ViewProduct(props) {
                               className="ml-4 mt-4"
                             >
                               <button className=" mt-4 ml-4 btn-web hvr-float-shadow">
-                                Go  to Cart
+                                Go to Cart
                               </button>
                             </Link>
                           </div>
@@ -153,7 +153,9 @@ export default function ViewProduct(props) {
                                   </div>
                                   <div className="mb-3">
                                     <i className="fa fa-inr"></i>&nbsp;
-                                    <span style={{ fontSize: "20px" }}>{element.mrp}</span>
+                                    <span style={{ fontSize: "20px" }}>
+                                      {element.mrp}
+                                    </span>
                                   </div>
                                   {/* <h3 className="text-dark">Quantity:</h3>
                                   <div className="d-inline-flex">
@@ -208,6 +210,17 @@ export default function ViewProduct(props) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

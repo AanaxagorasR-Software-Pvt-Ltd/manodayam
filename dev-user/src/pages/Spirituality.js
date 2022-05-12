@@ -103,6 +103,17 @@ export default function Spirituality() {
           }
         </div>
       </div>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

@@ -8,7 +8,7 @@ import {
   API_ADMIN_URL,
   // PRODUCT_API,
   APPOINTMENT_API,
-  MASTERCATEGORY_API
+  MASTERCATEGORY_API,
 } from "../utill/api.endpoints";
 
 export default function Appointment() {
@@ -18,7 +18,7 @@ export default function Appointment() {
   const [appointmentSchedule, setappointmentSchedule] = useState("");
   const [appointDisorder, setappointDisorder] = useState("");
   const [appointMsg, setappointMsg] = useState("");
-  const[mastercategorys,setmastercategorys]=useState([]);
+  const [mastercategorys, setmastercategorys] = useState([]);
 
   //error
   const [appointNameError, setappointNameError] = useState("");
@@ -31,8 +31,8 @@ export default function Appointment() {
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
   let params = new URLSearchParams(window.location.search);
-  
-  console.log(params.get('docid'));
+
+  console.log(params.get("docid"));
   // Appointments
   const Appointment = () => {
     if (appointName == "") {
@@ -109,7 +109,7 @@ export default function Appointment() {
     }
     return false;
   }
-   const mastercategory = () => {
+  const mastercategory = () => {
     console.log(`${API_ADMIN_URL}${MASTERCATEGORY_API}`);
     axios
       .get(`${API_ADMIN_URL}${MASTERCATEGORY_API}`)
@@ -147,8 +147,8 @@ export default function Appointment() {
       </div>
       <div className="zoom-consult mb-50">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-7">
+          <div className="row  d-flex justify-content-center">
+            <div className="col-lg-8">
               <div className="doctor-form">
                 <h3>Consult With Us</h3>
                 <form action="" id="appointform">
@@ -230,9 +230,11 @@ export default function Appointment() {
                             setappointDisorder(appointDisorder.target.value)
                           }
                         >
-                   { mastercategorys ?.map(element =>(
-                   < option value="disorder">{element.mastercategory}</option>))}
-                        
+                          {mastercategorys?.map((element) => (
+                            <option value="disorder">
+                              {element.mastercategory}
+                            </option>
+                          ))}
                         </select>
                         {appointDisorder == "" ? (
                           <p className="text-danger">{appointDisorderError}</p>
@@ -255,6 +257,7 @@ export default function Appointment() {
                           <p className="text-danger">{appointMsgError}</p>
                         ) : null}
                       </div>
+                      
                     </div>
 
                     <div className="col-lg-12" onClick={Appointment}>
@@ -269,7 +272,7 @@ export default function Appointment() {
               </div>
             </div>
 
-            <div className="col-lg-5">
+            {/* <div className="col-lg-5">
               <div className="doctor-heading mt-25 mt-30">
                 <h2>Schedule your appointment</h2>
                 <p>
@@ -294,7 +297,7 @@ export default function Appointment() {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -309,6 +312,17 @@ export default function Appointment() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

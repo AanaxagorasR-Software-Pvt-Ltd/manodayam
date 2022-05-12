@@ -22,7 +22,7 @@ import PrimaryLibrary from "./pages/PrimaryLibrary";
 import HowWeDo from "./pages/HowWeDo";
 import SelfAwareness from "./pages/SelfAwareness";
 import EcoSystem from "./pages/EcoSystem";
-
+import Therapy from "./pages/Therapy"
 
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -63,8 +63,10 @@ function App() {
           <Route path="/how-we-do" element={<HowWeDo />} exact />
           <Route path="/self-awareness" element={<SelfAwareness />} exact />
           <Route path="/eco-system" element={<EcoSystem />} exact />
+          <Route path="/therapy" element={<Therapy />} exact />
 
-                    
+
+                   
         </Routes>
 
         <Footer />

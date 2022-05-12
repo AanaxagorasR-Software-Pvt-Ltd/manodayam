@@ -13,7 +13,7 @@ import sprituality from "./sprituality.jpeg";
 import teledoctor from "./teledr.png";
 import { FloatingLettersTextBuilder } from "react-animated-text-builders";
 import voiceAssisstant from "../utill/rdxassisstant";
-
+import video from "./sun.mov";
 import {
   API_ADMIN_URL,
   BANNER_API,
@@ -113,8 +113,8 @@ export default function Home(props) {
     dots: false,
     arrows: true,
     infinite: true,
-    autoplay: false,
-    speed: 300,
+    autoplay: true,
+    speed: 200,
     slidesToShow: 1,
     slidesToScroll: 1,
     responsive: [
@@ -145,77 +145,7 @@ export default function Home(props) {
       },
     ],
   };
-  var settingsnext = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    autoplay: true,
-    speed: 300,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          infinite: true,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          infinite: true,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  //service slider
-  const settingstwo = {
-    dots: true,
-    arrows: false,
-    infinite: true,
-    autoplay: true,
-    speed: 300,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+
   const [humanId, setHumanId] = useState("");
   const submitformdata = (_id) => {
     setHumanId(_id);
@@ -344,7 +274,7 @@ export default function Home(props) {
                   {/* <marquee behavior="slide" direction="up">
                     <h1>{element.banner_text}</h1>
                   </marquee> */}
-                  <FloatingLettersTextBuilder
+                  {/* <FloatingLettersTextBuilder
                     floatingSpeed={500}
                     lettersAppearanceDelay={250}
                     letterSpacing="20px"
@@ -359,50 +289,9 @@ export default function Home(props) {
                     }}
                   >
                     {element.banner_text}
-                  </FloatingLettersTextBuilder>
-                  <div className="d-flex">
-                    <button
-                      className="qst-show btn-web hvr-float-shadow btn-web"
-                      onClick={() => loginsubmit("/spirituality")}
-                    >
-                      Register For Assessment
-                    </button>
-                    {/* <button
-                      className="btn-web hvr-float-shadow btn-web"
-                      onClick={() => loginsubmit("/support")}
-                    >
-                      Your Support Networks
-                    </button> */}
-                    <Dropdown>
-                      {/* <Dropdown.Menu className="scrollable-menu">
-                        {mastercategorys.map((element) => (
-                          <Dropdown.Item
-                            as="p"
-                            onClick={(e) => subchange(element._id)}
-                          >
-                            {element.mastercategory}
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu> */}
-                      <Dropdown.Toggle
-                        id="dropdown-basic"
-                        className="qst-show btn-web hvr-float-shadow btn-web"
-                      >
-                        Choose Subscription plane
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu className="scrollable-menu">
-                        {mastercategorys.map((element) => (
-                          <Dropdown.Item
-                            as="p"
-                            onClick={(e) => subchange(element.mastercategory)}
-                          >
-                            {element.mastercategory}
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </div>
+                  </FloatingLettersTextBuilder> */}
+              
+                  <h1 className="banner-text">{element.banner_text}</h1>
                 </div>
               </div>
             </div>
@@ -432,7 +321,7 @@ export default function Home(props) {
                   techniques.
                 </p>
                 <p>
-                  This platform is scaled to provide Solutions to Five different
+                  This platform is scaled to provide Solutions to different
                   Mental Health scenarios such as Depression, Panic, Stress,
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
                   ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
@@ -487,7 +376,7 @@ export default function Home(props) {
         </div>
       </div>
       {/* how we do */}
-      <div className="service-section mb-50">
+      <div className="service-section mb-50" id="howwedo">
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
@@ -506,53 +395,36 @@ export default function Home(props) {
           <div className="service-slide">
             <div className="col-lg-12">
               <div className="d-flex justify-content-center mt-2">
+                <div className="flip-box mt-4 mr-4">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/self-awareness")}
+                  >
+                    <p className="flip-para">SELF AWARENESS</p>
+                  </div>
+                </div>
                 <div
-                  className="flip-box mt-4 mr-4"
+                  className="flip-box mr-2 ml-2"
                   onClick={() => loginsubmits(voiceAssisstant.liveLink)}
                 >
                   <div className="flip-box-inner ">
-                    <div className="flip-box-front">
-                      <p className="flip-para"> AI DRIVEN SELF-ASSESSMENT</p>
-                    </div>
-                    <div class="flip-box-back">
+                    {/* <div className="flip-box-front"> */}
+                    <p className="flip-para"> AI DRIVEN SELF-ASSESSMENT</p>
+                    {/* </div> */}
+                    {/* <div class="flip-box-back">
                       <img src={Ai} className="flip-img" alt="loading..." />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
-                <div className="flip-box mr-2 ml-2">
-                  <div
-                    className="flip-box-inner"
-                    onClick={() => loginsubmit("/bookingAppoint")}
-                  >
-                    <div className="flip-box-front">
-                      <p className="flip-para">
-                        TELE-PSYCHIATRY CONNECT WITH DOCTORS
-                      </p>
-                    </div>
-                    <div className="flip-box-back">
-                      <img
-                        src={teledoctor}
-                        className="flip-img"
-                        alt="loading..."
-                      />
-                    </div>
-                  </div>
-                </div>
+
                 <div className="flip-box ml-4 mt-4">
                   <div
                     className="flip-box-inner"
-                    onClick={() => loginsubmit("/primary-library")}
+                    onClick={() => loginsubmit("/primary-sprituality")}
                   >
-                    <div className="flip-box-front">
-                      <p className="flip-para"> DIGITAL HUMAN LIBRARY</p>
-                    </div>
-                    <div className="flip-box-back">
-                      <img
-                        src={library}
-                        className="flip-img"
-                        alt="loading..."
-                      />
-                    </div>
+                    <p className="flip-para">
+                      SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
+                    </p>
                   </div>
                 </div>
               </div>
@@ -562,16 +434,15 @@ export default function Home(props) {
                     className="flip-box-inner"
                     // onClick={() => loginsubmit("/primary-sprituality")}
                   >
-                    <div className="flip-box-front">
-                      <p className="flip-para-center">MANODAYAM</p>
-                    </div>
-                    <div className="flip-box-back">
-                      <img
-                        src={sprituality}
-                        className="flip-img"
-                        alt="loading..."
-                      />
-                    </div>
+                    {/* <div className="flip-box-front"> */}
+                    <img
+                      src={logo}
+                      className="flip-img ml-4"
+                      alt="loading..."
+                    />
+                    {/* <p className="flip-para-center">MANODAYAM</p> */}
+                    {/* </div> */}
+                    <div className="flip-box-back"></div>
                   </div>
                 </div>
               </div>
@@ -579,54 +450,28 @@ export default function Home(props) {
                 <div className="flip-box mr-4">
                   <div
                     className="flip-box-inner"
-                    onClick={() => loginsubmit("/primary-sprituality")}
+                    onClick={() => loginsubmit("/primary-library")}
                   >
-                    <div className="flip-box-front">
-                      <p className="flip-para">
-                        SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
-                      </p>
-                    </div>
-                    <div className="flip-box-back">
-                      <img
-                        src={sprituality}
-                        className="flip-img"
-                        alt="loading..."
-                      />
-                    </div>
+                    <p className="flip-para"> DIGITAL HUMAN LIBRARY</p>
                   </div>
                 </div>
                 <div className="flip-box ml-2 mr-2 mt-3">
                   <div
                     className="flip-box-inner"
-                    onClick={() => loginsubmit("/self-awareness")}
+                    onClick={() => loginsubmit("/bookingAppoint")}
                   >
-                    <div className="flip-box-front">
-                      <p className="flip-para pt-5">SELF AWARENESS</p>
-                    </div>
-                    <div className="flip-box-back">
-                      <img
-                        src={library}
-                        className="flip-img"
-                        alt="loading..."
-                      />
-                    </div>
+                    <p className="flip-para">
+                      TELE-PSYCHIATRY CONNECT WITH DOCTORS
+                    </p>
                   </div>
                 </div>
+
                 <div className="flip-box ml-4">
                   <div
                     className="flip-box-inner"
                     onClick={() => loginsubmit("/eco-system")}
                   >
-                    <div className="flip-box-front">
-                      <p className="flip-para"> MANODAYAM ECOSYSTEM</p>
-                    </div>
-                    <div className="flip-box-back">
-                      <img
-                        src={library}
-                        className="flip-img"
-                        alt="loading..."
-                      />
-                    </div>
+                    <p className="flip-para"> MANODAYAM ECOSYSTEM</p>
                   </div>
                 </div>
               </div>
@@ -709,6 +554,40 @@ export default function Home(props) {
                     </Dropdown>
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* contact */}
+      <div className="contact-form-section mb-50">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              {/* <h4 className="text-center text-info">Change Your Life</h4> */}
+              <div className="contact-details d-flex justify-content-around">
+                <div className="pd-add">
+                  <h2>Contact Me Now</h2>
+                  <p>
+                    Molestie ac feugiat sed lectus vestibulum mattis ullamcorper
+                    velit sed. Arcu vitae elementum vitae nunc.
+                  </p>
+                </div>
+
+                <div className="pd-add">
+                  <h4>Address</h4>
+                  <p>
+                    MEDTECH Incubation Center 3rd Floor, New library building ,
+                    Sanjay Gandhi Postgraduate Institute of Medical Sciences
+                    (SGPGI) New PMSSY Rd, Raibareli Rd,Lucknow,Uttar Pradesh
+                  </p>
+                </div>
+                <div className="pd-add">
+                  <h4>Phone Number & Email</h4>
+                  <a href="">+91 8882832500</a>
+                  <br />
+                  <a href="">info@manodsyam.com</a>
+                </div>
               </div>
             </div>
           </div>
