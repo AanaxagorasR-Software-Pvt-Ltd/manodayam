@@ -17,7 +17,7 @@ import banner from "../Store/Services/banner";
 import axios from "../utill/axios";
 import { Modal } from "react-bootstrap";
 import { Modal as Bmodal, Button } from "react-bootstrap";
-import { API_ADMIN_URL, SUBADMIN_REGISTER_API } from "../utill/api.endpoints";
+import { API_ADMIN_URL, SUBADMIN_LOGIN_API } from "../utill/api.endpoints";
 
 import LeftSideBar from "../Layout/LeftSideBar";
 
@@ -41,7 +41,7 @@ const SubadminLogin = () => {
   const formRef = useRef();
 
   const LoginApi = () => {
-    console.log("jyotippp", `${API_ADMIN_URL}${SUBADMIN_REGISTER_API}`);
+    console.log("jyotippp", `${API_ADMIN_URL}${SUBADMIN_LOGIN_API}`);
     const RegisterationOptions = {
       email: subadminemail,
       password: subadminpassword,
@@ -49,9 +49,10 @@ const SubadminLogin = () => {
     };
 
     axios
-      .post(`${API_ADMIN_URL}${SUBADMIN_REGISTER_API}`, RegisterationOptions)
+      .post(`${API_ADMIN_URL}${SUBADMIN_LOGIN_API}`, RegisterationOptions)
       .then((res) => {
-        console.log(res.data);
+        console.log("new", res.user);
+        window.__USER = res.user;
         navigate("/admin/dashboard");
         // alert("okokokokokokokok");
       })
@@ -101,17 +102,25 @@ const SubadminLogin = () => {
                       }
                     />
                   </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      name="Manodayam Id"
-                      className="form-control form-control-lg"
-                      //   {...register("email")}
-                      id="exampleInputEmail1"
-                      placeholder="Manodayam id"
+
+                  <div class="form-group">
+                    <label for="exampleInputUsername1">Subadmin Roll</label>
+                    <select
+                      class="form-control"
                       value={roll}
-                      onChange={(roll) => setroll(roll.target.value)}
-                    />
+                      onChange={(roll) => {
+                        setroll(roll.target.value);
+                      }}
+                    >
+                      <option>Select</option>
+                      <option>Content module</option>
+                      <option>Digital Human Library</option>
+                      <option>Product module</option>
+                      <option>Subscription</option>
+                      <option>Doctor module</option>
+                      <option>Voice Assistant</option>
+                      <option>Shakthi OTT</option>
+                    </select>
                   </div>
                   <div className="mt-3">
                     <input

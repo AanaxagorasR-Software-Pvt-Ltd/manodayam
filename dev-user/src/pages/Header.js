@@ -134,7 +134,7 @@ export default function Header() {
       {
         id: 2,
         name: 'Therapies',
-        path: "/bookingAppoint",
+        path: "/therapy",
       },
       {
         id: 3,
@@ -145,7 +145,37 @@ export default function Header() {
         id: 4,
         name: 'How we do',
         path: "/how-we-do",
-      }
+      },
+      {
+        id: 5,
+        name: 'Digital Human Library',
+        path: "/primary-library",
+      },
+      {
+        id: 6,
+        name: 'Profil',
+        path: "/profile",
+      },
+      {
+        id: 7,
+        name: 'Cart',
+        path: "/Cart/xyz",
+      },
+      {
+        id: 8,
+        name: 'Eco-Systam',
+        path: "/eco-system",
+      },
+      {
+        id: 10,
+        name: 'Doctors',
+        path: "/bookingAppoint",
+      },
+      {
+        id: 8,
+        name: 'Tele-phychiatry',
+        path: "/bookingAppoint",
+      },
     ]
   
   const handleOnSearch = (string, results) => {
@@ -237,9 +267,9 @@ export default function Header() {
                 <nav className={sidebar ? "nava-menu active" : "nava-menu"}>
                   <ul className="nava-menu-items " onClick={showSidebar}>
                     <li className="navbara-toggle">
-                      <Link to="#" className="menu-bars">
+                      {/* <Link to="#" className="menu-bars">
                         <AiIcons.AiOutlineClose />
-                      </Link>
+                      </Link> */}
                     </li>
                     {SidebarData.map((item, index) => {
                       return (
@@ -276,7 +306,7 @@ export default function Header() {
               </button>
 
               <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                {/* <ul className="navbar-nav nav-custom">
+                <ul className="navbar-nav nav-custom">
                   <li className="nav-item">
                     <Link to="/" className="nav-link">
                       Home
@@ -290,12 +320,12 @@ export default function Header() {
                   </li>
                   <li className="nav-item">
                 
-                    <a href="#how-we-do" className="nav-link">
+                    <a href="/how-we-do" className="nav-link">
                       How we do
                     </a>
                   </li>
                   <li className="nav-item">
-                    <Link to="/bookingAppoint" className="nav-link">
+                    <Link to="/therapy" className="nav-link">
                       Therapies
                     </Link>
                   </li>
@@ -314,7 +344,7 @@ export default function Header() {
                       Contact
                     </Link>
                   </li>
-                </ul> */}
+                </ul>
                 <ul className="navbar-nav nav-custom ml-auto btn-nav">
                   {loginhide && (
                     <li className="nav-item ">

@@ -109,22 +109,23 @@ const SubadminRegister = () => {
                       }
                     />
                   </div>
-                  <div className="form-group">
+                  <div class="form-group">
+                    <label for="exampleInputUsername1">Subadmin Roll</label>
                     <select
-                      class="form-control form-control-lg"
+                      class="form-control"
                       value={roll}
                       onChange={(roll) => {
                         setroll(roll.target.value);
                       }}
                     >
                       <option>Select</option>
-                      <option>manodayam001</option>
-                      <option>manodayam002</option>
-                      <option>manodayam003</option>
-                      <option>manodayam004</option>
-                      <option>manodayam005</option>
-                      <option>manodayam006</option>
-                      <option>manodayam007</option>
+                      <option>Content module</option>
+                      <option>Digital Human Library</option>
+                      <option>Product module</option>
+                      <option>Subscription</option>
+                      <option>Doctor module</option>
+                      <option>Voice Assistant</option>
+                      <option>Shakthi OTT</option>
                     </select>
                   </div>
                   <button

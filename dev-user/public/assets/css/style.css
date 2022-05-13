@@ -421,7 +421,7 @@ header {
     ),
     url(../image/banner/first.jpeg);
   background-size: cover;
-  height: 80vh;
+  height: 72vh;
   /* margin-top: 130px;*/
   background-position-y: 20%;
 }
