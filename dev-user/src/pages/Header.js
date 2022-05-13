@@ -137,6 +137,16 @@ export default function Header() {
         path: "/bookingAppoint",
       },
       {
+        id: 22,
+        name: 'Docter booking',
+        path: "/bookingAppoint",
+      },
+      {
+        id: 34,
+        name: 'Manodayam ecosystem',
+        path: "/eco-system",
+      },
+      {
         id: 3,
         name: 'About Us',
         path: "/about-us",
@@ -145,7 +155,17 @@ export default function Header() {
         id: 4,
         name: 'How we do',
         path: "/how-we-do",
-      }
+      },
+      {
+        id: 5,
+        name: 'Profile',
+        path: "/profile",
+      },
+      {
+        id: 6,
+        name: 'Cart',
+        path: "/Cart/xyz",
+      },
     ]
   
   const handleOnSearch = (string, results) => {
@@ -232,7 +252,7 @@ export default function Header() {
                 {/* <div className="navbara">
                   <Link to="#" className="menu-bars">
                     <FaIcons.FaBars onClick={showSidebar} />
-                  </Link>
+                  </Link>}edd
                 </div> */}
                 <nav className={sidebar ? "nava-menu active" : "nava-menu"}>
                   <ul className="nava-menu-items " onClick={showSidebar}>
