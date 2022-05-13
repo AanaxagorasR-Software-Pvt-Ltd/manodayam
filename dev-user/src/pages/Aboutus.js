@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
-import sample from "./sample.mp4";
 import { API_ADMIN_URL, ABOUT_API } from "../utill/api.endpoints";
 export default function Aboutus() {
   const [data, setData] = useState([]);
@@ -99,7 +98,7 @@ export default function Aboutus() {
                   techniques.
                 </p>
                 <p>
-                  This platform is scaled to provide Solutions to Five different
+                  This platform is scaled to provide Solutions to different
                   Mental Health scenarios such as Depression, Panic, Stress,
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
                   ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
@@ -132,6 +131,17 @@ export default function Aboutus() {
           </div>
         </div>
       </div>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

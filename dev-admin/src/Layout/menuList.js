@@ -1,5 +1,4 @@
 const leftSideBarMenu = [
-
   {
     name: "Dashboard",
     isActive: true,
@@ -10,6 +9,8 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    // userAccess: "manodayam001",
+
     // id: "manodayam001"
   },
   {
@@ -22,7 +23,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
-    id: "manodayam001",
+    userAccess: "Content module",
   },
   {
     name: "Banner",
@@ -34,6 +35,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "Content module",
   },
   {
     name: "About us manodayam",
@@ -45,6 +47,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "Content module",
   },
   {
     name: "Master Category",
@@ -56,6 +59,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "Content module",
   },
   {
     name: "Subscription plan",
@@ -67,6 +71,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "Subscription",
   },
   {
     name: "Self-Awareness Category",
@@ -75,6 +80,8 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
+    userAccess: "Content module",
+
     submenu: [
       {
         name: "Category List",
@@ -100,6 +107,8 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
+    userAccess: "Doctor module",
+
     submenu: [
       {
         name: "Doctor List",
@@ -144,6 +153,7 @@ const leftSideBarMenu = [
     isActive: false,
     dataToggle: "",
     isExpand: false,
+    userAccess: "Shakthi OTT",
     iconClass: "icon-layout",
     submenu: [
       // {
@@ -183,6 +193,7 @@ const leftSideBarMenu = [
     dataToggle: "",
     isExpand: false,
     link: "",
+    userAccess: "Product module",
     iconClass: "icon-layout",
     submenu: [
       {
@@ -213,6 +224,7 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
+    userAccess: "Digital Human Library",
 
     submenu: [
       {
@@ -261,6 +273,7 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-contract",
     link: "",
+    userAccess: "Voice Assistant",
 
     submenu: [
       {
@@ -287,6 +300,7 @@ const leftSideBarMenu = [
     isExpand: false,
     link: "/admin/users-list",
     iconClass: "icon-contract",
+    // userAccess: "manodayam001",
     submenu: [],
     isHover: false,
   },
@@ -295,6 +309,7 @@ const leftSideBarMenu = [
     isActive: false,
     dataToggle: "",
     isExpand: false,
+    // userAccess: "manodayam001",
     iconClass: "icon-contract",
     link: "",
 

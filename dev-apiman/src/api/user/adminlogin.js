@@ -19,8 +19,8 @@ router.post("/subadmin/login", validate, async (req, res) => {
 
     const { email, password } = req.body;
     const db = await getDatabase();
-    const user = await db.collection("user").findOne({ email: email });
-    console.log("user login", user);
+    const user = await db.collection("subadmin_user").findOne({ email: email });
+    console.log("subadmin login", user);
     if (user && (await bcrypt.compare(password, user.password))) {
       const { roll, name, age, _id, email, password } = user;
 
@@ -32,8 +32,8 @@ router.post("/subadmin/login", validate, async (req, res) => {
         "STERETE8998858JUJFHKJ*8",
         { expiresIn: 9860 }
       );
-
-      res.send({ message: "login sucessfully", status: true, token: token ,user});
+      console.log("9999999", user)
+      res.send({ message: "login sucessfully", status: true, token: token ,user: user});
       // res.write("=======this is your");
       // console.log("[[[[[[[[");
     } else {

@@ -7,12 +7,11 @@ export default function Footer() {
       <footer>
         <div class="container">
           <div class="row">
-            <div class="col-lg-5">
-              <div class="footer-logo pd-add">
+            <div class="col-lg-12">
+              <div class="footer-logo pd-add d-flex justify-content-between">
                 <img src="assets/image/logo.png" alt="" />
 
-                
-                <ul>
+                <ul className="">
                   <li class="hvr-float-shadow">
                     <a href="https://www.facebook.com" target="_blank">
                       <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -36,14 +35,12 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            <div class="col-lg-7">
+            {/* <div class="col-lg-7">
               <div class="footer-navs">
                 <ul>
-                  {/* <li>
-                    <Link to="/Home">Home</Link>
-                  </li> */}
+              
                   <li>
-                    <a href="#about">About Us</a>
+                    <Link to="/about-us">About Us</Link>
                   </li>
                   <li>
                     <Link to="/support">Support Network</Link>
@@ -56,7 +53,7 @@ export default function Footer() {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
 
             <div class="col-lg-12">
               <div class="copyright-section">

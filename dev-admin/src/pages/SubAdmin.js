@@ -442,7 +442,7 @@ const Addform = forwardRef((props, ref) => {
                   >
                     <option>Select</option>
                     <option>Content module</option>
-                    <option>Human Digital Library</option>
+                    <option>Digital Human Library</option>
                     <option>Product module</option>
                     <option>Subscription</option>
                     <option>Doctor module</option>
