@@ -16,8 +16,7 @@ export default function BookingAppoint() {
     axios
       .post(`${API_ADMIN_URL}${DOCTOR_LIST_API}`, doctorlisting)
 
-      
-      //  
+      //
       .then((res) => {
         setdoctorData(res.data.data);
         console.log("====pppppp====", res.data.data);
@@ -66,11 +65,11 @@ export default function BookingAppoint() {
                   <p>{element.experience} Experience</p>
                   {/* <p>{element.location}</p> */}
                   <p>{element.email}</p>
-                 
-                  
 
                   <button className="btn-web hvr-float-shadow mr-4">
-                  <Link to={`/appointment?docid=${element._id}`}>Book Your Appointment</Link>
+                    <Link to={`/appointment?docid=${element._id}`}>
+                      Book Your Appointment
+                    </Link>
                   </button>
                 </div>
               </div>
@@ -79,6 +78,17 @@ export default function BookingAppoint() {
           <hr />
         </div>
       ))}
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

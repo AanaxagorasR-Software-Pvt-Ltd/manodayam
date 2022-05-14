@@ -1,18 +1,21 @@
-
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 import { Modal, Button } from "react-bootstrap";
-import { UPDATE_QUANTITY,API_ADMIN_URL ,ADD_ALL_CART,ORDER_LIST} from "../utill/api.endpoints";
+import {
+  UPDATE_QUANTITY,
+  API_ADMIN_URL,
+  ADD_ALL_CART,
+  ORDER_LIST,
+} from "../utill/api.endpoints";
 
 export default function Checkout() {
-
   const [show, setshow] = useState(false);
   const [totalamount, settotalamount] = useState(0);
   const [totalshipping, settotalshipping] = useState(0);
-  const [total,settotal]=useState(0);
+  const [total, settotal] = useState(0);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [responseData, setResponseData] = useState([]);
   const formik = useFormik({
@@ -26,16 +29,15 @@ export default function Checkout() {
       Country: "",
       TownCity: "",
       State: "",
-      PostalCode: ""
-      
+      PostalCode: "",
     },
     onSubmit: async (values) => {
       console.log(values);
       try {
         let user = JSON.parse(localStorage.getItem("user"));
         values.userId = user._id;
-        const resp=axios.post(`${API_ADMIN_URL}${ORDER_LIST} `, values)
-        
+        const resp = axios.post(`${API_ADMIN_URL}${ORDER_LIST} `, values);
+
         if (resp.data.status) {
           formik.resetForm();
           setAlerdata({
@@ -45,7 +47,6 @@ export default function Checkout() {
           setshow(true);
           window.location.reload();
         } else {
-
           setshow(true);
         }
       } catch (error) {
@@ -55,20 +56,18 @@ export default function Checkout() {
   });
   const allproduct = () => {
     let user = JSON.parse(localStorage.getItem("user"));
-    axios.post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
+    axios
+      .post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
       .then((res) => {
-       
-        let items = res.data.data
-        let sum= 0;
+        let items = res.data.data;
+        let sum = 0;
         for (let i = 0; i < items.length; i++) {
-      
-       
-        sum = sum + ((items[i].products.mrp * items[i].quantity) + parseFloat (items[i].products.shipping));
+          sum =
+            sum +
+            (items[i].products.mrp * items[i].quantity +
+              parseFloat(items[i].products.shipping));
         }
         settotalamount(sum);
-
-
-
       })
       .catch((error) => {
         console.log(error);
@@ -76,20 +75,15 @@ export default function Checkout() {
   };
   const shipping = () => {
     let user = JSON.parse(localStorage.getItem("user"));
-    axios.post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
+    axios
+      .post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
       .then((res) => {
-       
-        let items = res.data.data
-        let sum= 0;
+        let items = res.data.data;
+        let sum = 0;
         for (let i = 0; i < items.length; i++) {
-      
-       
-        sum = sum + (items[i].products.mrp * items[i].quantity);
+          sum = sum + items[i].products.mrp * items[i].quantity;
         }
         settotal(sum);
-
-
-
       })
       .catch((error) => {
         console.log(error);
@@ -97,20 +91,15 @@ export default function Checkout() {
   };
   const allshipping = () => {
     let user = JSON.parse(localStorage.getItem("user"));
-    axios.post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
+    axios
+      .post(`${API_ADMIN_URL}${ADD_ALL_CART}?userId=${user._id}`)
       .then((res) => {
-       
-        let items = res.data.data
-        let sum= 0;
+        let items = res.data.data;
+        let sum = 0;
         for (let i = 0; i < items.length; i++) {
-      
-       
-        sum = sum + (  parseFloat (items[i].products.shipping));
+          sum = sum + parseFloat(items[i].products.shipping);
         }
         settotalshipping(sum);
-
-
-
       })
       .catch((error) => {
         console.log(error);
@@ -126,7 +115,7 @@ export default function Checkout() {
 
   //   }
   //   axios
-   
+
   //     .then((res) => {
   //       setResponseData(res.data.data);
   //       const sum=0;
@@ -134,13 +123,12 @@ export default function Checkout() {
   //           sum=sum+(quantity * productsmrp)
   //         }
 
-
   //         settotalamount()
   //     })
   //     .catch((error) => {
   //       console.log(error);
   //     });
-    
+
   // };
   const handleClose = () => setshow(false);
   // const totalproduct=()=>{
@@ -150,7 +138,6 @@ export default function Checkout() {
   //   }
   // }
   useEffect((props) => {
- 
     allproduct();
     allshipping();
     shipping();
@@ -165,7 +152,7 @@ export default function Checkout() {
                 <h3>Checkout</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Checkout</li>
                 </ol>
@@ -182,17 +169,17 @@ export default function Checkout() {
               <div className="checkout-form doctor-form">
                 <h2>Billing Address</h2>
 
-                <form action="" >
+                <form action="">
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group">
                         <label for="">Full Name</label>
                         <input
-                           type="email"
-                           fullname=""
-                           id=""
-                           placeholder="Enter your fullname here"
-                           {...formik.getFieldProps("fullname")}
+                          type="email"
+                          fullname=""
+                          id=""
+                          placeholder="Enter your fullname here"
+                          {...formik.getFieldProps("fullname")}
                         />
                       </div>
                     </div>
@@ -220,10 +207,12 @@ export default function Checkout() {
                         />
                       </div>
                     </div>
-                   
+
                     <div className="col-lg-12">
                       <div className="form-group">
-                        <label for="">Flat, House no., Building, Company, Apartment</label>
+                        <label for="">
+                          Flat, House no., Building, Company, Apartment
+                        </label>
                         <input
                           type="text"
                           Address1=""
@@ -235,7 +224,9 @@ export default function Checkout() {
                     </div>
                     <div className="col-lg-12">
                       <div className="form-group">
-                        <label for="">Area, Colony, Street, Sector, Village</label>
+                        <label for="">
+                          Area, Colony, Street, Sector, Village
+                        </label>
                         <input
                           type="text"
                           Address2=""
@@ -272,11 +263,13 @@ export default function Checkout() {
                     <div className="col-lg-6">
                       <div className="form-group">
                         <label for="">State </label>
-                        <input type="text"
-                         State=""
-                          id="" 
-                         placeholder="Enter your State here"
-                          {...formik.getFieldProps("State")} />
+                        <input
+                          type="text"
+                          State=""
+                          id=""
+                          placeholder="Enter your State here"
+                          {...formik.getFieldProps("State")}
+                        />
                       </div>
                     </div>
                     <div className="col-lg-6">
@@ -314,24 +307,22 @@ export default function Checkout() {
                       <label for="">
                         <h3>Product</h3>
                       </label>
-                      <span>
+                      <span className="text-dark">
                         <h3>Total</h3>
                       </span>
                     </div>
                     <div className="form-inline">
                       <label for="">Total Product Price</label>
-                      <span>
+                      <span className="text-dark">
                         <i className="fa fa-inr"></i> {total}
-                        
                       </span>
                     </div>
-                   
-                    
+
                     <hr />
-                   
+
                     <div className="form-inline">
                       <label for="">Shipping Fee</label>
-                      <span>
+                      <span className="text-dark">
                         <i className="fa fa-inr"></i> {totalshipping}
                       </span>
                     </div>
@@ -340,7 +331,7 @@ export default function Checkout() {
                         <h3>Payable Amount</h3>
                       </label>
                       <span>
-                        <h3>
+                        <h3 className="text-dark">
                           <i className="fa fa-inr"></i> {totalamount}
                         </h3>
                       </span>
@@ -351,8 +342,7 @@ export default function Checkout() {
                 <div className="col-lg-12">
                   <div className="checkout-detail">
                     <h2>Payment Method</h2>
-                   
-                    
+
                     <div className="form-inline">
                       <label for="option_3">UPI</label>
                       <span>
@@ -362,7 +352,7 @@ export default function Checkout() {
                     <hr />
                     <div className="form-inline">
                       <label for="">Sub Total</label>
-                      <span>
+                      <span className="text-dark">
                         <i className="fa fa-inr"></i> {totalamount}
                       </span>
                     </div>
@@ -390,6 +380,17 @@ export default function Checkout() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

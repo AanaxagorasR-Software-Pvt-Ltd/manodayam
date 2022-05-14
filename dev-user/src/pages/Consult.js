@@ -11,7 +11,7 @@ export default function Consult() {
                 <h3>Consult with your doctor</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Consult with your doctor</li>
                 </ol>
@@ -236,6 +236,17 @@ export default function Consult() {
           </div>
         </div>
       </div>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

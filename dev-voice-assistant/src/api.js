@@ -8,15 +8,16 @@ export async function getWeather(city) {
 
   const jsonResponse = await weatherResponse.json();
   return jsonResponse.current.temp_c;
-}4
+}
+4;
 let apiUrl = "";
 export async function saveFile(audioObje) {
   console.log(audioObje);
-  console.log("fgdfhfdh", audioObje)
+  console.log("fgdfhfdh", audioObje);
   return axios.post("http://localhost:3020/api/voicechat/voice", {
     method: "POST",
     audio_link: audioObje.audioUrl,
-    audioBlob: audioObje.audioUrl
+    audioBlob: audioObje.audioUrl,
   });
 
   // const formData = new FormData();
@@ -39,3 +40,25 @@ export async function saveFile(audioObje) {
   //   })
   // });
 }
+
+// export async function Question() {
+console.log("fgdfhfdh");
+
+axios
+  .get("http://localhost:3020/api/voice-assessment-question")
+  .then((response) => {
+    console.log(9999999, response.data);
+    // document.getElementById("questionss").innerHTML = "hjghjjjjgnvngjgj";
+    // document.getElementById("question").innerHTML = `<h3>${response.data[1].ques}</h3>`
+    document.getElementById("question").innerHTML =
+      response.data.map(getFullName);
+    function getFullName(item) {
+      console.log(5555, item);
+      return [item.ans1].join("");
+    }
+    res.render("index", { data: response.data });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+// }

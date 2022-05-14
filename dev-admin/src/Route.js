@@ -30,6 +30,11 @@ import ShakthiQuestion from "./pages/ShakthiQuestion";
 import LibraryGroupAppoint from "./pages/LibraryGroupAppoint";
 import LibraryGroupBooked from "./pages/LibraryGroupBooked";
 import VoiceChat from "./pages/VoiceChat";
+import VoiceAssessment from "./pages/VoiceAssessment";
+import SubAdmin from "./pages/SubAdmin";
+import Welcome from "./pages/Welcome";
+import SubadminLogin from "./pages/SubadminLogin";
+import SubadminRegister from "./pages/SubadminRegister"
 
 const Login = React.lazy(() => import("./pages/Login"));
 const ProtectedRoute = React.lazy(() => import("./Auth/Protected"));
@@ -58,6 +63,18 @@ const InternalRoute = (props) => {
           <Route path="/admin/library" element={<Library />} exact />
           <Route path="/admin/users-list" element={<Userslist />} exact />
           <Route path="/admin/voice-chat" element={<VoiceChat />} exact />
+          <Route path="/admin/welcome" element={<Welcome />} exact />
+          <Route path="/admin/subadmin-login" element={<SubadminLogin />} exact />
+          <Route path="/admin/subadmin-register" element={<SubadminRegister />} exact />
+
+          
+          
+          
+          <Route
+            path="/admin/voice-assessment-question"
+            element={<VoiceAssessment />}
+            exact
+          />
 
           <Route
             path="/admin/library-appointment"
@@ -75,8 +92,16 @@ const InternalRoute = (props) => {
             element={<BookedAppointmentList />}
             exact
           />
-           <Route path="/admin/master-category" element={<MasterCategory />} exact />
-           <Route path="/admin/subscription-plan" element={<Subscription />} exact />
+          <Route
+            path="/admin/master-category"
+            element={<MasterCategory />}
+            exact
+          />
+          <Route
+            path="/admin/subscription-plan"
+            element={<Subscription />}
+            exact
+          />
           <Route path="/admin/category" element={<Category />} exact />
           <Route
             path="/admin/about-category"
@@ -113,7 +138,7 @@ const InternalRoute = (props) => {
             element={<LibraryGroupBooked />}
             exact
           />
-
+          <Route path="/admin/sub-admin" element={<SubAdmin />} exact />
           <Route path="/" element={<ProtectedRoute />}>
             <Route exact path="/admin/dashboard" element={<Main />} />
           </Route>

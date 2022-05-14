@@ -5,7 +5,7 @@ import useAuth from "../hooks/Auth"
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
-    const ele = isAuthenticated ? <Outlet /> : <Navigate to="/admin/login" replace="/" />
+    const ele = isAuthenticated ? <Outlet /> : <Navigate to="/admin/welcome" replace="/" />
     return ele;
 }
 export default ProtectedRoute;

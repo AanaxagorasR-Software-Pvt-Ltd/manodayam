@@ -8,7 +8,7 @@ import {
   FORGOTPASSWORD_URL,
   RESETPASSWORD_URL,
   LIBRARY_GROUP_CALL_API,
-  MASTERCATEGORY_API
+  MASTERCATEGORY_API,
 } from "../utill/api.endpoints";
 import { useState } from "react";
 import axios from "axios";
@@ -438,7 +438,7 @@ export default function Login(props) {
       }
     },
   });
-  
+
   const handleClose = () => setshow(false);
   return (
     <>
@@ -801,11 +801,6 @@ export default function Login(props) {
                       <small> {doctoremailError}</small>
                     </p>
                   ) : null}
-                  {/* {doctorphone == doctorphone ? null : (
-                    <p className="text-danger">
-                      <small>{phoneTenDigits}</small>
-                    </p>
-                  )} */}
                 </div>
                 <div className="form-group">
                   <label for="">Your Speciality</label>
@@ -1182,7 +1177,7 @@ export default function Login(props) {
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
-                      // style={{ width: 300, borderRadius: 50, height: 46 }}
+                        // style={{ width: 300, borderRadius: 50, height: 46 }}
                       >
                         <i
                           className="fa fa-google-plus"
@@ -1260,7 +1255,7 @@ export default function Login(props) {
                     onSuccess={responseInstagram}
                     onFailure={responseInstagram}
                     cssClass="btninsta"
-                  // style={{marginLeft}}
+                    // style={{marginLeft}}
                   />
 
                   <AppleSignin

@@ -2,11 +2,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_ADMIN_URL, PROFIL_API, BOOKED_API } from "../utill/api.endpoints";
+import {
+  API_ADMIN_URL,
+  PROFIL_API,
+  BOOKED_API,
+  SUBSCRIPTION_PLANE_LISTA,
+  SUBSCRIPTION_PLANE_BOOK,
+} from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import { useFormik } from "formik";
-
 
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
@@ -16,7 +21,9 @@ export default function Profile() {
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [user, setUser] = useState({});
   const [editData, setEditData] = useState([]);
-
+  const [subScriptiondata, setSubscriptiondata] = useState([]);
+  const [subbuy, setsubBuy] = useState("");
+  let params = new URLSearchParams(window.location.search);
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
     const profileData = {
@@ -26,12 +33,11 @@ export default function Profile() {
     axios
       .post(`${API_ADMIN_URL}${PROFIL_API}`, profileData)
       .then((res) => {
-
         setprofilData(res.data.data);
         console.log("====profileData====", res.data.data);
         console.log(res.data);
-        setAlerdata({ title: "Login", body: "User Login Successfully" })
-        setshow(true)
+        setAlerdata({ title: "Login", body: "User Login Successfully" });
+        setshow(true);
       })
       .catch((error) => {
         console.log(error);
@@ -56,6 +62,7 @@ export default function Profile() {
         console.log("err", err.message);
       });
   };
+
   const Editprofile = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     axios
@@ -63,59 +70,67 @@ export default function Profile() {
       .get(`${API_ADMIN_URL}${PROFIL_API}?userId=${user._id}`)
       .then((res) => {
         console.log("res", res, typeof res);
-        formik.setValues({ name: res.data.name, email: res.data.email })
-        setEditData(res.data)
+        formik.setValues({ name: res.data.name, email: res.data.email });
+        setEditData(res.data);
       })
       .catch((err) => {
         console.log("err", err.message);
       });
-  }
+  };
+  const subscription = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    axios
+      .get(
+        // ?humanId=${}`
+
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get(
+          "usertype"
+        )}`
+      )
+      .then((res) => {
+        console.log("res", res, typeof res);
+
+        setSubscriptiondata(res.data);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
   React.useEffect(() => {
     listBooked();
     Editprofile();
-
+    subscription();
   }, []);
-  const convertToDateTime = (time) => {
-    const d = new Date(time);
-    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
-  };
-  // const saveData =()=>{
 
-
-  //   axios
-  //   .post(`${API_ADMIN_URL}${PROFIL_API}`, editData)
-  //   .then((res) => {
-
-  //     setprofilData(res.data.data);
-
-  //     console.log(res.data);
-  //     setAlerdata({ title: "Profile", body: "Profile  Successfully Edit" })
-  //     setshow(true)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
-  // const handleChange = (v, k) => {
-  //   setEditData({ ...editData, [k]: v });
-  // };
   const handleClose = () => setshow(false);
 
   const formik = useFormik({
     initialValues: {
       name: "name",
-      email: "email"
-
+      email: "email",
     },
     onSubmit: (values) => {
-      console.log(values)
-    }
-  })
+      console.log(values);
+    },
+  });
+  const convertToDateTime = (time) => {
+    const d = new Date(time);
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+  };
+  const subscriptionbook = (subId) => {
+    let sub = JSON.parse(localStorage.getItem("user"));
+    axios.post(
+      // ?humanId=${}`
 
+      `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?subemail=${sub.email}&subid=${subId}`
+    );
+  };
+  // setAlerdata({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
+  // setshow(true);
   return (
     <>
       <div className="contact-banner mb-50">
-
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
@@ -123,7 +138,7 @@ export default function Profile() {
                 <h3>Profile</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Profile</li>
                   {profilData?.[0]?.bannerText}
@@ -149,7 +164,8 @@ export default function Profile() {
                   <div className="col-lg-7 col-sm-9">
                     <div className="profile-content">
                       <h4 className="profile-name">
-                        <span className="profile-hello">Hello</span> {user && user.name}
+                        <span className="profile-hello">Hello</span>
+                        {user && user.name}
                       </h4>
                       {/* {
                         <p>
@@ -213,107 +229,7 @@ export default function Profile() {
                 <div className="tab-content">
                   <div class="tab-pane active" id="home">
                     <div class="row">
-                      <div class="col-lg-12">
-                        {/* <div class="profile-form checkout-form doctor-form"> */}
-                        {/* <h3>Edit Your Profile Here</h3> */}
-                        {/* <form action="" onSubmit={formik.handleSubmit} >
-                            <div class="row"> 
-                              <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Name</label>
-                                  <input
-                                    type="text"
-                                  
-                                   
-                                    name="name"
-                                    id="name"
-                                    placeholder="name"
-                                    {...formik.getFieldProps("name")}
-
-                                  />
-                                </div>
-                              </div>
-                              {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Last Name</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Last name"
-                                    disabled
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Phone No.</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Phone no."
-                                    disabled
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Email Address</label>
-                                  <input
-                                   
-                                    type="email"
-                                    name="email"
-                                    id=""
-                                    placeholder="Email address"
-                                    {...formik.getFieldProps("email")}
-
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">Old Password</label>
-                                  <input
-                                   
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Old password"
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-6">
-                                <div class="form-group">
-                                  <label for="">New Password</label>
-                                  <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="New password"
-                                  />
-                                </div>
-                              </div> */}
-                        {/* <div class="col-lg-12">
-                                <div class="form-group">
-                                  <label for="">Confirm Password</label>
-                                  <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Confirm password"
-                                  />
-                                </div>
-                              </div> */}
-
-                        {/* <button class="btn hvr-float-shadow" type="submit" >
-                                  Save
-                                </button>
-                              
-                            </div>
-                          // </form> */}
-                        {/* </div> */}
-                      </div>
+                      <div class="col-lg-12"></div>
                     </div>
                   </div>
                   <div className="tab-pane fade" id="menu1">
@@ -323,140 +239,58 @@ export default function Profile() {
                           <table className="table table-bordered table-striped table-hover">
                             <thead>
                               <tr>
-                              <th>S.no</th>
+                                <th>S.no</th>
+                                <th>Therapy Type</th>
                                 <th>Therapy</th>
                                 <th>Self Assessment</th>
                                 <th>Doctor Assessment</th>
                                 <th>Group Therapy</th>
-                              <th>Meditation Spirituality</th>
-                              <th>Price</th>
-                              
-
+                                <th>Meditation Spirituality</th>
+                                <th>Benefitsdescription</th>
+                                <th>Create Date</th>
+                                <th>Price</th>
+                                <th>Action</th>
                               </tr>
                             </thead>
-                              {<tbody>
-                                <tr>
-                                  <td>
-                                    <img src="image/pr.png" alt="" />
-                                  </td>
-                                  <td>cbgfhfhh</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 
-                                  </td>
-                                  <td></td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 500
-                                  </td>
-                                  <td>Success</td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <img src="image/pr.png" alt="" />
-                                  </td>
-                                  <td>Fidget Cube</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 399
-                                  </td>
-                                  <td>3</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 500
-                                  </td>
-                                  <td>Success</td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <img src="image/pr.png" alt="" />
-                                  </td>
-                                  <td>Fidget Cube</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 399
-                                  </td>
-                                  <td>3</td>
-                                  <td>
-                                    <i className="fa fa-inr"></i> 500
-                                  </td>
-                                  <td>Success</td>
-                                </tr>
-                              </tbody>}
-                            </table>
+                            {
+                              <tbody>
+                                {subScriptiondata.map((a, i) => (
+                                  <tr key={i}>
+                                    <td> {i + 1}</td>
+                                    <td>{a.type}</td>
+                                    <td>{a.therapy}</td>
+                                    <td> {a.selfassessment}</td>
+                                    <td> {a.doctorassessment} </td>
+                                    <td>{a.grouptherapy} </td>
+                                    <td> {a.meditation} </td>
+                                    <td> {a.benefitsdescription}</td>
+                                    <th>{convertToDateTime(a.created)}</th>
+                                    <td>
+                                      {" "}
+                                      <i className="fa fa-inr"></i>
+                                      {a.price}
+                                    </td>
+
+                                    <td>
+                                      <button
+                                        type="button"
+                                        className="btn-web subbutton  hvr-float-shadow"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        onClick={() => subscriptionbook(a._id)}
+                                      >
+                                        Buy
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            }
+                          </table>
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  {/* <div className="tab-pane fade" id="menu2">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div className="profile-form checkout-form doctor-form">
-                          <h3>Change Your Address</h3>
-                          <form action="">
-                            <div className="row">
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">Street Line 1</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Street Line 1"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">Street Line 2</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Street Line 2"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">Country</label>
-                                  <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="Country"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group">
-                                  <label for="">State</label>
-                                  <input
-                                    type="email"
-                                    name=""
-                                    id=""
-                                    placeholder="State"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-12">
-                                <div className="form-group">
-                                  <label for="">Pin Code</label>
-                                  <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Pin code"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-12">
-                                <button className="btn hvr-float-shadow">
-                                  Save settings
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
                   <div className="tab-pane fade" id="menu3">
                     <div className="row">
                       <div className="col-lg-12">
@@ -534,6 +368,27 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      {/* <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"> Your subscription plane</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            confirm your subcription plane
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button"  data-dismiss="modal" class="btn btn-primary"onClick={subscriptionbook} >confirm</button>
+            </div>
+          </div>
+        </div>
+      </div> */}
       <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title>{alertData.title}</Bmodal.Title>
@@ -545,6 +400,17 @@ export default function Profile() {
           </Button>
         </Bmodal.Footer>
       </Bmodal>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

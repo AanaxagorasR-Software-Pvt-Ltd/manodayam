@@ -138,7 +138,7 @@ export default function Library(props) {
                       </div>
                       <div className="ml-3 mt-3">
                         <div>
-                        <Link to="/">
+                        <Link to="/primary-library">
                           <button
                             // onClick={() =>loginsubmit()}
                             // onClick={() => Home}
@@ -216,6 +216,17 @@ export default function Library(props) {
           </div>
         </div>
       ))}
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

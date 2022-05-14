@@ -1,40 +1,43 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const axios = require('axios');
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const axios = require("axios");
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 const port = process.env.PORT || 5000;
-const { v4: uuidv4 } = require('uuid');
-const { ExpressPeerServer } = require('peer')
+const { v4: uuidv4 } = require("uuid");
+const { ExpressPeerServer } = require("peer");
 const peer = ExpressPeerServer(server, {
-	debug: true
+  debug: true,
 });
-app.use('/peerjs', peer);
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
-app.get('/', (req, res) => {
-	res.redirect(`/${uuidv4()}`)
+app.use("/peerjs", peer);
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.get("/", (req, res) => {
+  res.redirect(`/${uuidv4()}`);
 });
-app.get('/:room', (req, res) => {
-	console.log(8798798798797979);
-	// res.render('index', { RoomId: req.params.room, });
+app.get("/:room", (req, res) => {
+  console.log(8798798798797979);
+  // res.render('index', { RoomId: req.params.room, });
 
-	axios.get('https://swarnratnaindia.com/dev-apiman/api/question').then(response => {
-		console.log(9999999, response.data)
-		res.render('index', { RoomId: req.params.room, data: response.data });
-	}).catch(err => {
-		console.log(err)});
-	
+  axios
+    .get("https://swarnratnaindia.com/dev-apiman/api/question")
+    .then((response) => {
+      console.log(9999999, response.data);
+      res.render("index", { RoomId: req.params.room, data: response.data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 io.on("connection", (socket) => {
-	socket.on('newUser', (id, RoomId) => {
-		socket.join(RoomId);
-		socket.to(RoomId).broadcast.emit('userJoined', id);
-		socket.on('disconnect', () => {
-			socket.to(RoomId).broadcast.emit('userDisconnect', id);
-		})
-	})
-})
+  socket.on("newUser", (id, RoomId) => {
+    socket.join(RoomId);
+    socket.to(RoomId).broadcast.emit("userJoined", id);
+    socket.on("disconnect", () => {
+      socket.to(RoomId).broadcast.emit("userDisconnect", id);
+    });
+  });
+});
 server.listen(port, () => {
-	console.log("Server running on port : " + port);
-})
+  console.log("Server running on port : " + port);
+});

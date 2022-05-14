@@ -4,36 +4,36 @@ import axios from "axios";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import globalDataGroupCall from "../utill/rdxGroupCall";
-import globalDataLive from "../utill/rdxLive";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
-import SimpleImageSlider from "react-simple-image-slider";
+import logo from "./favicon.png";
+import Ai from "./ai.jpeg";
+import library from "./library.jpeg";
+import sprituality from "./sprituality.jpeg";
+import teledoctor from "./teledr.png";
+import { FloatingLettersTextBuilder } from "react-animated-text-builders";
+import voiceAssisstant from "../utill/rdxassisstant";
 import {
   API_ADMIN_URL,
-  PRODUCT_API,
   BANNER_API,
-  CATEGORY_API,
-  SPIRITUALITY_API,
   ABOUT_API,
-  DIGITAL_HUMAN_LIBRARY_DATA_API,
   MASTERCATEGORY_API,
   SUBSCRIPTION_PLANE,
-  
+  SUBSCRIPTION_PLANE_LISTA,
 } from "../utill/api.endpoints";
 const images = [];
 export default function Home(props) {
-  const [responseData, setResponseData] = useState([]);
+  // const [responseData, setResponseData] = useState([]);
   const [bannerData, setbannerData] = useState([]);
-  const [categoryData, setcategoryData] = useState([]);
-  const [SpritualityData, setSpritualityData] = useState([]);
   const [libraryData, setlibraryData] = useState([]);
-  const [isLoggedIn, setisLoggedIn] = useState(false);
   const [mastercategorys, setmastercategorys] = useState([]);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
 
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [data, setData] = useState([]);
+  const [subScriptiondata, setSubscriptiondata] = useState([]);
+
   // const [state, setState] = useState("All");
   let hist = useNavigate();
   let params = new URLSearchParams(window.location.search);
@@ -66,28 +66,6 @@ export default function Home(props) {
         console.log(error);
       });
   };
-  // productlist
-  const Productlist = () => {
-    console.log(`${API_ADMIN_URL}${PRODUCT_API}`);
-    const productlisting = {
-      collectiontype: "products",
-    };
-    axios
-      .post(`${API_ADMIN_URL}${PRODUCT_API}`, productlisting)
-      .then((res) => {
-        setResponseData(res.data.data);
-
-        console.log("====pppppp====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
-        // localStorage.setItem('Name', name);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  // Banner
   const BannerData = () => {
     console.log(`${API_ADMIN_URL}${BANNER_API}`);
     const bannerdata = {
@@ -106,79 +84,36 @@ export default function Home(props) {
         console.log(error);
       });
   };
-  // category
-  const Categorylist = () => {
-    console.log(`${API_ADMIN_URL}${CATEGORY_API}`);
-    const categorylisting = {
-      collectiontypedata: "categories",
-    };
+  const subscription = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+
     axios
-      .post(`${API_ADMIN_URL}${CATEGORY_API}`, categorylisting)
-      .then((res) => {
-        setcategoryData(res.data.data);
-        console.log("====category====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  //Sprituality
-  const Spritualitylist = () => {
-    console.log(`${API_ADMIN_URL}${SPIRITUALITY_API}`);
-    const spiritualitylisting = {
-      collectiontypedata: "spirituality",
-    };
-    axios
-      .post(`${API_ADMIN_URL}${SPIRITUALITY_API}`, spiritualitylisting)
-      .then((res) => {
-        setSpritualityData(res.data.data);
-        console.log("====Sprituality====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const libraryDatalist = () => {
-    console.log(`${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`);
-    const libraryDatalisting = {
-      collectiondata: "library_content",
-    };
-    axios
-      .post(
-        `${API_ADMIN_URL}${DIGITAL_HUMAN_LIBRARY_DATA_API}`,
-        libraryDatalisting
+      .get(
+        // ?humanId=${}`
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get(
+          "usertype"
+        )}`
       )
       .then((res) => {
-        setlibraryData(res.data.data);
-        console.log("====libraryContent====", res.data.data);
-        {
-          window.localStorage.getItem("Token");
-        }
+        console.log("res", res, typeof res);
+
+        setSubscriptiondata(res.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log("err", err.message);
       });
   };
   useEffect((props) => {
-    Productlist(props);
+    subscription();
     BannerData();
-    Categorylist();
-    Spritualitylist();
-    libraryDatalist();
     aboutlist();
   }, []);
   var settings = {
     dots: false,
     arrows: true,
     infinite: true,
-    autoplay: false,
-    speed: 300,
+    autoplay: true,
+    speed: 200,
     slidesToShow: 1,
     slidesToScroll: 1,
     responsive: [
@@ -209,80 +144,7 @@ export default function Home(props) {
       },
     ],
   };
-  var settingsnext = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    autoplay: true,
-    speed: 300,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          infinite: true,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          infinite: true,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  //service slider
-  const settingstwo = {
-    dots: true,
-    arrows: false,
-    infinite: true,
-    autoplay: true,
-    speed: 300,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      // You can unslick at a given breakpoint now by adding:
-      // settings: "unslick"
-      // instead of a settings object
-    ],
-  };
+
   const [humanId, setHumanId] = useState("");
   const submitformdata = (_id) => {
     setHumanId(_id);
@@ -302,33 +164,47 @@ export default function Home(props) {
   };
   const subchange = (e) => {
     let user = JSON.parse(localStorage.getItem("user"));
-    const subOptions = {
-      userid:user._id,
-      subscriptionid:e
-      }
-    axios
-      .post(
-        // ?humanId=${}`
-
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,subOptions
-
-      )
- 
-      .then((res) => {
-     
-        console.log("====mentalHealthData====", res.data);
-        if (user) {
-          hist("/profile")
-        } else {
-          setAlerdata({ title: "Sorry", body: "Login and registration First" });
-          setshow(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log()
-    
+    hist(`/profile?usertype=${e}`);
+    // axios
+    //   .post(
+    //     // ?humanId=${}`
+    //     `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,
+    //   )
+    //   .then((res) => {
+    //     console.log("====mentalHealthData====", res.data);
+    //     if (user) {
+    //       hist(`/profile?catid=${e}`)
+    //     } else {
+    //       setAlerdata({ title: "Sorry", body: "Login and registration First" });
+    //       setshow(true);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // console.log();
+  };
+  const subchange2 = (e) => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    // hist(`{e}`);
+    // axios
+    //   .post(
+    //     // ?humanId=${}`
+    //     `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,
+    //   )
+    //   .then((res) => {
+    //     console.log("====mentalHealthData====", res.data);
+    //     if (user) {
+    //       hist(`/profile?catid=${e}`)
+    //     } else {
+    //       setAlerdata({ title: "Sorry", body: "Login and registration First" });
+    //       setshow(true);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // console.log();
   };
   const handleClose = () => setshow(false);
 
@@ -356,12 +232,7 @@ export default function Home(props) {
       return false;
     }
   };
-  const filtermentor = libraryData.filter((element) =>
-    element?.type?.includes((element = "Mentor"))
-  );
-  const filtercoach = libraryData.filter((element) =>
-    element?.type?.includes((element = "Life Coach"))
-  );
+
   const joingroup = (_id) => {
     let local = localStorage.getItem("Token");
     if (local) {
@@ -390,6 +261,15 @@ export default function Home(props) {
   useEffect((props) => {
     mastercategory();
   }, []);
+  const handlePlay = (evt) => {
+    let allVideosElements = document.getElementsByTagName('video');
+    let currentVideoElement = evt.target;
+    for (let v of allVideosElements) {
+      if (v !== currentVideoElement) {
+        v.pause()
+      }
+    }
+  }
   return (
     <>
       <Login humanId={humanId} />
@@ -399,43 +279,33 @@ export default function Home(props) {
             <div className="web-banner mb-50">
               <div className="container">
                 <div className="web-banner-content">
-                  <h1>{element.banner_text}</h1>
-                  {/* <h1>Meet, Your Mentor or Coach-Digital Human Library</h1> */}
-                  <div className="d-flex">
-
-
-                    <button
-                      className="qst-show btn-web hvr-float-shadow btn-web"
-                      onClick={() => loginsubmit("/spirituality")}
-                    >
-                      Register For Assessment
-                    </button>
-                    <button
-                      className="btn-web"
-                      onClick={() => loginsubmit("/support")}
-                    >
-                      Your Support Networks
-                    </button>
-
-
-                    <Dropdown >
-                      <Dropdown.Toggle id="dropdown-basic" className="qst-show btn-web hvr-float-shadow btn-web">
-                        your subscription plan
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu className="scrollable-menu">
-                        {mastercategorys.map(element => (<Dropdown.Item as="p" onClick={(e) => subchange(element._id)}>{element.mastercategory}</Dropdown.Item>))}
-
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </div>
+                  {/* <marquee behavior="slide" direction="up">
+                    <h1>{element.banner_text}</h1>
+                  </marquee> */}
+                  {/* <FloatingLettersTextBuilder
+                    floatingSpeed={500}
+                    lettersAppearanceDelay={250}
+                    letterSpacing="20px"
+                    animationMaxMargin="100px"
+                    letterStyle={{
+                      color: "#fff",
+                      fontSize: "41px",
+                      textTransform: "uppercase",
+                      fontWeight: "700",
+                      marginTop: "105px",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    {element.banner_text}
+                  </FloatingLettersTextBuilder> */}
+              
+                  <h1 className="banner-text">{element.banner_text}</h1>
                 </div>
               </div>
             </div>
           ))}
         </Slider>
       </div>
-
       <div id="about" className="about-section mb-50">
         <div className="container">
           <div className="row">
@@ -443,447 +313,178 @@ export default function Home(props) {
               <div className="about-content">
                 <h5>ABOUT US</h5>
                 <p>
-                  Manodayam is a Mental Health and Wellnessorganization
-                  providing Holistic solutions. It has Unique Value proposition
-                  integrating continual mental health assessment and support
-                  networks including Neuromodulation with Vedic methodology and
-                  latest scientific techniques through mobile app.
+                  We provide an Online holistic solution for Mental Health and
+                  Wellness seekers through Web portal & Mobil App. This has been
+                  initiated in collaboration with Mental Health Foundation of
+                  India(MHFI) for technical, functional and strategic depth &
+                  are backed & invested by STPI (Ministry of Electronics and
+                  Information Technology , MieTY) Govt Of India, under DIGITAL
+                  Health initiative called “ MediTech”.
+                </p>
+
+                <p>
+                  We provide Unique Value proposition of integrating continual
+                  mental health assessment and support networks including
+                  Neuromodulation with Vedic methodology and latest scientific
+                  techniques.
                 </p>
                 <p>
-                  These Solutions are driven by Artificial Intelligence (AI)
-                  centric algorithms. and group of leading medical fraternity in
-                  mental health space
+                  This platform is scaled to provide Solutions to different
+                  Mental Health scenarios such as Depression, Panic, Stress,
+                  Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
+                  ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
+                  Delinquency, Autism & Sexual Disorders!! Though as per data
+                  from Health experts and WHO , we have First seven scenarios as
+                  majority of ongoing and potential scenarios.
                 </p>
                 <p>
-                  Solutions to 17 Mental Health Conditions such as Depression,
-                  Panic, Stress, PSTD, Alcoholism, Substance Abuse,
-                  Schizophrenia, Bipolar, ADHD, Dementia, Alzheimer’s,
-                  Parkinson’s, Juvenile Delinquency, Autism, Sexual Disorders,
-                  Sleeplessness
+                  These Solutions are driven by Artificial Intelligence
+                  (AI)based on Patient-centric data including Genetic Markers,
+                  Brain Scans and Complete Mental Health Mgmt.
                 </p>
                 <p>
-                  Manodayam has Comprehensive team of Clinical Psychologist,
-                  Psychiatrists, Care-givers Also we have Expertise in
-                  Mathematical Modeling, Business Management, Big Data
-                  Management, Statistical Analytics
+                  We have a Comprehensive team of Experts like senior Clinical
+                  Psychologist, Psychiatrists & Care-givers.
                 </p>
                 <p>
-                  Manodayam is in the process of Compliances to Clinical Trials,
-                  Validationsand Data Protection
+                  Expertise in Mathematical Modelling, Business Management, Big
+                  Data Management, Statistical Analytics.
                 </p>
+                <p>
+                  We have a special focus on Compliances to Clinical Trials,
+                  Validations, Data Protection & Statute as a constant process.
+                </p>
+                {/* <Link to="/about-us">
+                  <p className="text-primary font-italic">Read More</p>
+                </Link> */}
                 <img src="assets/image/rose.png" alt="" />
               </div>
             </div>
-
-            <div className="col-lg-6">
-              <div className="about-img">
-                <Slider {...settingsnext}>
-                  <img src="assets/image/white9.jpeg" alt="" />
-                  <img src="assets/image/seen1.jpeg" alt="" />
-                  <img src="assets/image/seen3.jpeg" alt="" />
-                  <img src="assets/image/seen4.jpg" alt="" />
-                  <img src="assets/image/seen5.webp" alt="" />
-                  <img src="assets/image/seen7.webp" alt="" />
-                </Slider>
-              </div>
-            </div>
-            {data.map((element) => (
-              <div className="col-lg-4">
-                <div>
-                  <video
-                    id="about-us-video"
-                    controls
-                    preload="auto"
-                    poster={element.thumbnail_image}
-                    data-setup=""
-                    loop="auto"
-                  >
-                    <source src={element.video} type="video/mp4" />
-                  </video>
-                  <h6 className="about_title">{element.title}</h6>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="service-section mb-50">
-        <div className="container">
-          <div className="col-lg-12">
-            <div className="service-heading">
-              <h5>Swayam- Do It Yourself</h5>
-              <p>Swayam gives you power to heal and get you to wellness</p>
-            </div>
-          </div>
-
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {categoryData.map((element) => (
-                <div className="col-lg-12">
-                  <div className="service-card hvr-float-shadow">
-                    {/* <img src={element.img} alt="" /> */}
-                    <img src={element.img_url} alt="" />
-
-                    <img src={element.img_url} className="img-bfr" alt="" />
-
-                    <h3>{element.name}</h3>
-                    {/* <Link
-                      to={{
-                        pathname: "/mentalHealth/" + element.slug,
-                      }}
-                    > */}
-                    <buttton
-                      className="btn-web hvr-float-shadow"
-                      onClick={() =>
-                        loginsubmit("/mentalHealth/" + element.slug)
-                      }
+            <div>
+              {data.map((element) => (
+                <div className="col-lg-4">
+                  <div>
+                    <video
+                      id="about-us-video-2"
+                      controls
+                      preload="auto"
+                      poster={element.thumbnail_image}
+                      data-setup=""
+                      loop="auto"
+                      onPlay={handlePlay}
+                      className=""
                     >
-                      Find Solution
-                    </buttton>
-                    <buttton
-                      className="btn-web hvr-float-shadow"
-                      onClick={() => loginsubmit("/all-mental-wellness")}
-                    >
-                      View More
-                    </buttton>
-                    {/* </Link> */}
+                      <source src={element.video} type="video/mp4" />
+                    </video>
+                    <h6 className="about_title">{element.title}</h6>
                   </div>
                 </div>
               ))}
-            </Slider>
+            </div>
           </div>
         </div>
       </div>
-
-      <div className="doctor-section mb-50">
+      {/* how we do */}
+      <div className="service-section mb-50" id="howwedo">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="doctor-heading">
-                <br />
-                <h2>Swayam- Consult with Experts </h2>
-                {/* <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                  ad repellendus laboriosam ea, dolorem odio culpa.
-                </p> */}
-                <br />
-                <div className="expert-details">
-                  <span>01</span>
-                  <p>
-                    Meet the specialists who can take care of your requirement
-                    in discreet mode
-                  </p>
-                </div>
-                <div className="expert-details">
-                  <span>02</span>
-                  <p>
-                    Do It Your Self-Please record your voice for 60 seconds and
-                    you can assess yourself
-                  </p>
-                </div>
-                <div className="expert-details">
-                  <span>03</span>
-                  <p>
-                    Your reports will be available for your continual progress
-                  </p>
-                </div>
-              </div>
+          <div className="col-lg-12">
+            <div className="service-heading">
+              <h5>How We Do</h5>
+              <div className="exam"></div>
+              <p>
+                Our Technology Architecture helps you to find the solutions to
+                various possible mental/emotional scenarios which are or may be
+                faced by you. Our Health experts have made sure that your
+                THERAPIES are tailor made & driven basis SIX building blocks of
+                our Online platform to help you find an apt solution for
+                yourself
+              </p>
             </div>
-
-            <div className="col-lg-6">
-              <div className="doctor-form">
-                <h3>Search Doctors For Appointment</h3>
-                <form action="">
-                  <div className="col-lg-12">
-                    {/* <div className="form-group">
-                      <input type="text" name="" id="" placeholder="Country" />
+          </div>
+          <div className="service-slide">
+            <div className="col-lg-12">
+              <div className="d-flex justify-content-center mt-2">
+                <div className="flip-box mt-4 mr-4">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/self-awareness")}
+                  >
+                    <p className="flip-para">SELF AWARENESS</p>
+                  </div>
+                </div>
+                <div
+                  className="flip-box mr-2 ml-2"
+                  onClick={() => loginsubmits(voiceAssisstant.liveLink)}
+                >
+                  <div className="flip-box-inner ">
+                    {/* <div className="flip-box-front"> */}
+                    <p className="flip-para"> AI DRIVEN SELF-ASSESSMENT</p>
+                    {/* </div> */}
+                    {/* <div class="flip-box-back">
+                      <img src={Ai} className="flip-img" alt="loading..." />
                     </div> */}
                   </div>
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <select
-                        name=""
-                        id=""
-                      // onChange={(event) => setState(event.target.value)}
-                      >
-                        <option value="All State">All State</option>
-                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                        <option value="Andaman and Nicobar Islands">
-                          Andaman and Nicobar Islands
-                        </option>
-                        <option value="Arunachal Pradesh">
-                          Arunachal Pradesh
-                        </option>
-                        <option value="Assam">Assam</option>
-                        <option value="Bihar">Bihar</option>
-                        <option value="Chandigarh">Chandigarh</option>
-                        <option value="Chhattisgarh">Chhattisgarh</option>
-                        <option value="Dadar and Nagar Haveli">
-                          Dadar and Nagar Haveli
-                        </option>
-                        <option value="Daman and Diu">Daman and Diu</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Lakshadweep">Lakshadweep</option>
-                        <option value="Puducherry">Puducherry</option>
-                        <option value="Goa">Goa</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Himachal Pradesh">
-                          Himachal Pradesh
-                        </option>
-                        <option value="Jammu and Kashmir">
-                          Jammu and Kashmir
-                        </option>
-                        <option value="Jharkhand">Jharkhand</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Kerala">Kerala</option>
-                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Manipur">Manipur</option>
-                        <option value="Meghalaya">Meghalaya</option>
-                        <option value="Mizoram">Mizoram</option>
-                        <option value="Nagaland">Nagaland</option>
-                        <option value="Odisha">Odisha</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Rajasthan">Rajasthan</option>
-                        <option value="Sikkim">Sikkim</option>
-                        <option value="Tamil Nadu">Tamil Nadu</option>
-                        <option value="Telangana">Telangana</option>
-                        <option value="Tripura">Tripura</option>
-                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                        <option value="Uttarakhand">Uttarakhand</option>
-                        <option value="West Bengal">West Bengal</option>
-                      </select>
-                    </div>
-                  </div>
-                  {/* <div className="col-lg-12">
-                    <div className="form-group ">
-                      <select name="" id="">
-                        <option value=""> Depression</option>
-                        <option value="">Anxiety</option>
-                        <option value="">Attention Disorder</option>
-                        <option value="">Psychosis</option>
-                        <option value="">Alcohol Abuse</option>
-                        <option value="">Sexual Dysfunction</option>
-                        <option value="">Dementia</option>
-                        <option value="">Bipolar</option>
-                        <option value="">Obsessive Compulsive Disorder</option>
-                        <option value="">Drug Abuse</option>
-                        <option value="">schizophrenia</option>
-                      </select>
-                    </div>
-                  </div> */}
+                </div>
 
-                  <div className="col-lg-12">
-                    <buttton
-                      className="btn hvr-float-shadow"
-                      onClick={() => loginsubmit("/bookingAppoint")}
-                    >
-                      <span style={{ color: "#23adba" }}>Submit</span>
-                    </buttton>
+                <div className="flip-box ml-4 mt-4">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/primary-sprituality")}
+                  >
+                    <p className="flip-para">
+                      SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
+                    </p>
                   </div>
-                </form>
+                </div>
+              </div>
+              <div className="d-flex justify-content-center">
+                <div className="flip-box-center">
+                  <div
+                    className="flip-box-inner"
+                    // onClick={() => loginsubmit("/primary-sprituality")}
+                  >
+                    {/* <div className="flip-box-front"> */}
+                    <img
+                      src={logo}
+                      className="flip-img ml-4"
+                      alt="loading..."
+                    />
+                    {/* <p className="flip-para-center">MANODAYAM</p> */}
+                    {/* </div> */}
+                    <div className="flip-box-back"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex justify-content-center mt-2">
+                <div className="flip-box mr-4">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/primary-library")}
+                  >
+                    <p className="flip-para"> DIGITAL HUMAN LIBRARY</p>
+                  </div>
+                </div>
+                <div className="flip-box ml-2 mr-2 mt-3">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/bookingAppoint")}
+                  >
+                    <p className="flip-para">
+                      TELE-PSYCHIATRY CONNECT WITH DOCTORS
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flip-box ml-4">
+                  <div
+                    className="flip-box-inner"
+                    onClick={() => loginsubmit("/eco-system")}
+                  >
+                    <p className="flip-para"> MANODAYAM ECOSYSTEM</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <hr />
-      {/* Digital Human Library */}
-      <div id="humanlibrary" className="library-section mb-50">
-        <div className="container">
-          {/* <div className="row"> */}
-          <div className="col-lg-12">
-            <div className="service-heading">
-              {/* <h5>Digital Human Library</h5> */}
-              <h3>Digital Human Library</h3>
-              <h5>Life Coaches</h5>
-
-              <p>
-                Find yourself coach, He/She can help you to overcome your
-                inhibitions, learn from their experiences
-              </p>
-            </div>
-          </div>
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {filtercoach.map((element) => (
-                <div className="col-lg-13">
-                  <div className="library-card">
-                    {/* <div className="row"> */}
-                    <div className="col-lg-16 offset-1">
-                      <div className="library-person">
-                        <div className="d-flex">
-                          <div className="">
-                            <div className="col-9">
-                              <img src={element.image} alt="" />
-                            </div>
-                            <div className="mr-8">
-                              <h3>{element.title}</h3>
-                              <h5>{element.motivator_status}</h5>
-                            </div>
-                          </div>
-                          <div className="col-lg-7 mr-4">
-                            <video
-                              id="my-library-video"
-                              class="video-js"
-                              controls
-                              preload="auto"
-                              poster={element.thumbnail_image}
-                              data-setup=""
-                              loop="auto"
-                            >
-                              <source src={element.video} type="video/mp4" />
-                            </video>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ml-3">
-                      <button
-                        className="btn-web col-11"
-                        onClick={() =>
-                          loginsubmit(`/library?humanId=${element._id}`)
-                        }
-                      >
-                        View More
-                      </button>
-                      <button
-                        // onClick={() =>loginsubmit()}
-                        onClick={() => pleasetalk(element._id)}
-                        data-toggle="modal"
-                        data-target={isLoggedIn ? "#library-modal" : ""}
-                        className="btn-web col-11 mt-2"
-                      >
-                        Personal therapy
-                      </button>
-
-                      <button
-                        className="btn-web col-11 mt-2"
-                        data-toggle="modal"
-                        data-target={isLoggedIn ? "#library-modalgroup" : ""}
-                        onClick={() => joingroup(element._id)}
-                      >
-                        Group therapy
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-          {/* </div> */}
-        </div>
-      </div>
-      <hr />
-      <div className="library-section mb-50">
-        <div className="container">
-          {/* <div className="row"> */}
-          <div className="col-lg-12">
-            <div className="service-heading">
-              <h5>Mentors</h5>
-              <p>
-                Find yourself mentor, He/She can help you to overcome your
-                inhibitions, learn from their experiences
-              </p>
-            </div>
-          </div>
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {filtermentor.map((element) => (
-                <div className="col-lg-13">
-                  <div className="library-card">
-                    {/* <div className="row"> */}
-                    <div className="col-lg-16 offset-1">
-                      <div className="library-person">
-                        <div className="d-flex">
-                          <div className="">
-                            <div className="col-9">
-                              <img src={element.image} alt="" />
-                            </div>
-                            <div className="mr-8">
-                              <h3>{element.title}</h3>
-                              <h5>{element.video_type}</h5>
-                            </div>
-                          </div>
-                          <div className="col-lg-7 mr-4">
-                            {/* <div className="library-video"> */}
-                            <video
-                              id="my-library-video"
-                              class="video-js"
-                              controls
-                              preload="auto"
-                              poster={element.thumbnail_image}
-                              data-setup=""
-                              loop="auto"
-                            >
-                              <source src={element.video} type="video/mp4" />
-                            </video>
-                            {/* </div> */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ml-3">
-                      <button
-                        className="btn-web col-11"
-                        onClick={() =>
-                          loginsubmit(`/library?humanId=${element._id}`)
-                        }
-                      >
-                        View More
-                      </button>
-                      {/* <a href={globalDataLive.liveLink} target="_blank"> */}
-                      <button
-                        className="btn-web col-11 mt-2"
-                        onClick={() => loginsubmits(globalDataLive.liveLink)}
-                      >
-                        Join Live Session
-                      </button>
-                      {/* </a> */}
-                    </div>
-                    {/* </div> */}
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-          {/* </div> */}
-        </div>
-      </div>
-      <br />
-      {/* Sprituality */}
-      <div className="service-section mb-50">
-        <div className="container">
-          <div className="col-lg-12">
-            <div className="service-heading">
-              <h5>Spirituality</h5>
-              {/* <h2> You can heal and create  balance life style .Do it yourself</h2> */}
-              <p>You can heal and create balance life style .Do it yourself</p>
-            </div>
-          </div>
-
-          <div className="service-slide">
-            <Slider {...settingstwo}>
-              {SpritualityData.map((element) => (
-                <div className="col-lg-12">
-                  <div className="service-card spritual-card h-100">
-                    <img src={element.img_url} alt="" />
-                    <img src={element.img_url} className="img-bfr" alt="" />
-                    {/* <img src={element.img} className="img-bfr" alt="" /> */}
-                    <h3>{element.name}</h3>
-                    <p>{element.description}</p>
-                    <button
-                      className="qst-show btn-web hvr-float-shadow"
-                      onClick={() => loginsubmit("/spirituality")}
-                    >
-                      Get your solution
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </Slider>
           </div>
         </div>
       </div>
@@ -920,45 +521,84 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      {/* {ecosystem product} */}
-
+      {/* Therapy */}
       <div className="service-section mb-50">
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>Manodayam Ecosystem</h5>
+              <h5>Menu (Therapy)</h5>
+              <div className="exam"></div>
+              <p>We present you therapies for your specific problems.</p>
               <p>
-                Please see your support system such as genetics support, find
-                brain mapping centers
+                Please click below (… these are various possible therapies …
+                which will be guided by platform & Health experts)
               </p>
-              {/* <Link to="/chat">jhkjxdch</Link> */}
             </div>
           </div>
+          <div className="d-flex justify-content-center">
+            <div className="col-lg-6">
+              <div className="doctor-form">
+                <h3>Select Your Therapy Type / Subscription Plane</h3>
+                <form action="">
+                  <div className="col-lg-12"></div>
+                  <div className="col-lg-12">
+                    <Dropdown className="form-group">
+                      <Dropdown.Toggle
+                        id="dropdown-basic"
+                        className="hvr-float-shadow"
+                      >
+                        Choose Therapy
+                      </Dropdown.Toggle>
 
-          <div className="service-slide mb-50">
-            <Slider {...settingstwo}>
-              {responseData.map((element) => (
-                <div className="col-lg-11">
-                  <div className="product-card">
-                    <img className="product-img" src={element.img_url} alt="" />
-                    <h3>{element.product_name}</h3>
-                    <p>{element.description}</p>
-                    <span>
-                      <i className="fa fa-inr"></i>
-                      {element.mrp}
-                    </span>
-                    <buttton
-                      className="btn-web cart-btn"
-                      onClick={() =>
-                        loginsubmit("/ViewProduct/" + element.slug)
-                      }
-                    >
-                      View More
-                    </buttton>
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map((element) => (
+                          <Dropdown.Item
+                            as="p"
+                            onClick={(e) => subchange(element.mastercategory)}
+                          >
+                            {element.mastercategory}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* contact */}
+      <div className="contact-form-section mb-50">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              {/* <h4 className="text-center text-info">Change Your Life</h4> */}
+              <div className="contact-details d-flex justify-content-around">
+                <div className="pd-add">
+                  <h2>Contact Me Now</h2>
+                  <p>
+                    Molestie ac feugiat sed lectus vestibulum mattis ullamcorper
+                    velit sed. Arcu vitae elementum vitae nunc.
+                  </p>
                 </div>
-              ))}
-            </Slider>
+
+                <div className="pd-add">
+                  <h4>Address</h4>
+                  <p>
+                    MEDTECH Incubation Center 3rd Floor, New library building ,
+                    Sanjay Gandhi Postgraduate Institute of Medical Sciences
+                    (SGPGI) New PMSSY Rd, Raibareli Rd,Lucknow,Uttar Pradesh
+                  </p>
+                </div>
+                <div className="pd-add">
+                  <h4>Phone Number & Email</h4>
+                  <a href="">+91 8882832500</a>
+                  <br />
+                  <a href="">info@manodsyam.com</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

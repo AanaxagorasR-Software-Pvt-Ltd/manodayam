@@ -19,6 +19,10 @@ export const LIBRARY_GROUP_CALL_API = "/library-group/group_appoint";
 export const BANNER_API = "/banner/bannertext";
 export const MASTERCATEGORY_API = "/mastercategory";
 export const SUBSCRIPTION_PLANE="/subscription/usersubscription";
+export const SUBSCRIPTION_PLANE_LIST="/subscription"
+export const SUBSCRIPTION_PLANE_LISTA="/subscription/list"
+export const SUBSCRIPTION_PLANE_BOOK="/subscription/bookplane"
+
 // export const SUBSCRIPTION_PLANELIST="/subscription/usersubscription";
 export const DOCTOR_LIST_API = "/doctors/doctorlists";
 export const PROFIL_API = "/auth/user/profil"

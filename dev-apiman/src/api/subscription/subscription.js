@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const ObjectId = require("mongodb").ObjectId;
+const ObjectID = require("mongodb").ObjectID;
+// var ObjectId = require('mongodb').ObjectID;
+const EmailService = require("../Service/EmailService");
 const { getDatabase } = require("../../db/mongo");
 
 const path = require("path");
@@ -35,7 +37,6 @@ const validate = (req, res, next) => {
 //   },
 // });
 
-
 router.post(
   `/sub`,
 
@@ -51,8 +52,8 @@ router.post(
         grouptherapy: body.grouptherapy,
         meditation: body.meditation,
         benefitsdescription: body.benefitsdescription,
-        price: body.price
-
+        schedule: body.schedule,
+        price: body.price,
 
         // type: body.type,
       };
@@ -68,7 +69,7 @@ router.post(
       let vedios = await db.collection("Subscription_Plan");
       if (body._id) {
         insertedId = await vedios.updateOne(
-          { _id: new ObjectId(body._id) },
+          { _id: new ObjectID(body._id) },
           { $set: data }
         ).insertedId;
       } else {
@@ -83,7 +84,6 @@ router.post(
         status: true,
         message: "data inserted",
       });
-
     } catch (e2) {
       res
         .status(400)
@@ -100,13 +100,46 @@ router.post("/usersubscription", async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
 
-
   try {
     let insertedId = null;
-    let Addsublist = await db.collection("Subscription_Plan");
+    let Addsublist = await db.collection("Users_Subscription");
 
-    let data = await Addsublist.insertOne(body);
-    res.end()
+    let data = await Addsublist.insertOne(body).insertedId;
+    res.end();
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error 2",
+      error: e,
+    });
+  }
+});
+router.post("/bookplane", async (req, res) => {
+  const data = {
+    id: req.query.subid,
+    email: req.query.subemail,
+  };
+  console.log(data);
+  const db = await getDatabase();
+  try {
+    console.log(data);
+    if (!data?._id) {
+      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+    } else {
+      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+    }
+
+    let subscriptionbook = await db.collection("Subscription_Book");
+    let subscriptiondata = await db
+      .collection("Subscription_Book")
+      .insertOne(data);
+    let subscriptionplane = await db
+      .collection("Subscription_Plan")
+      .findOne({ _id: new ObjectID(data.id) });
+    var date = new Date(subscriptionplane.created);
+    var dates = date.toLocaleString("en-IN");
+
+    EmailService.sendEmailToPlanebooked(data.email, subscriptionplane);
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
@@ -114,23 +147,74 @@ router.post("/usersubscription", async (req, res) => {
       error: e,
     });
   }
-});
+}),
+  // router.get("/list", async (req, res) => {
+  //   const db = await getDatabase();
+
+  //   // res.send('hello')
+  // });
+
+  router.get("/list", async (req, res) => {
+    let filter = {};
+    if (req.query.usertype) {
+      filter.type = req.query.usertype;
+    }
+
+    try {
+      const db = await getDatabase();
+      const data = await db
+        .collection("Subscription_Plan")
+        .find(filter)
+        .sort({ type: -1 })
+        .toArray();
+      res.send(data);
+    } catch (err) {
+      console.log("err", err.message);
+    }
+  });
 
 router.get("/", async (req, res) => {
-  const db = await getDatabase();
-  let filter = {
-
-
-  };
-  if (req.query.id && req.query.id != "null") {
-    filter._id = ObjectId(req.query.id);
-
-  }
   try {
+    const _id = req.query._id;
+    const db = await getDatabase();
 
-    // const { collectiontype } = req.body;
-    let dt = await db.collection("Subscription_Plan").find(filter).toArray();
-    res.json(dt);
+    // let dt = await db
+    // 	.collection("appointments")
+    // 	.find({ status: { $nin: ["booked"] } })
+    // 	.sort({ _id: -1 })
+    // 	.toArray();
+    // res.send(dt);
+    let result = await db
+      .collection("Subscription_Plan")
+      .aggregate([
+        {
+          $match: { _id: { $eq: new ObjectID(_id) } },
+        },
+
+        {
+          $addFields: {
+            userid: {
+              $toObjectId: "$userid",
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "Users_Subscription",
+            localField: "userid",
+            foreignField: "_id",
+            as: "subscription ",
+          },
+        },
+        {
+          $unwind: {
+            path: "$subscription",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+      ])
+      .toArray();
+    res.json(result);
   } catch (err) {
     console.log("err", err.message);
   }
@@ -138,7 +222,7 @@ router.get("/", async (req, res) => {
   // res.send('hello')
 });
 router.delete("/delete/:_id", async (req, res) => {
-  const _id = new ObjectId(req.params._id);
+  const _id = new ObjectID(req.params._id);
   console.log("delete", _id);
 
   try {
@@ -155,6 +239,5 @@ router.delete("/delete/:_id", async (req, res) => {
 
   // res.send('hello')
 });
-
 
 module.exports = router;

@@ -25,6 +25,9 @@ router.get(`/`,  validate,async (req,res) => {
 })
 router.use(`/auth`, require("./user/newUser"));
 // router.use(`/auth`, require("./user/doctor"));
+router.use(`/auth`, require("./user/subadminuser"));
+router.use(`/auth`, require("./user/subadminlogin"));
+
 router.use(`/auth`, require("./user/login"));
 router.use(`/auth`, require("./user/profile"));
 router.use(`/products`, require("./product/product.list"));
@@ -60,12 +63,16 @@ router.use(`/media-solutions`, require("./media-solutions"));
 router.use(`./profile`,require("./user/profile"))
 router.use(`/about`,require("./media/aboutus"))
 router.use(`/voicechat`,require("./voicechat/voicechat"))
+router.use(`/voice-assessment-question`,require("./voicechat/voiceAssessmentQuestion"))
 
 // shakthi
 router.use(`/shakthi-all`,require("./media/Audio"))
 router.use('/videos', require("./media/video"));
 router.use(`/shakthi-body`, require("./shakthi/body"));
 router.use(`/shakthi-ott-music`, require("./shakthi/musicData"));
+
+//admin-subadmin
+router.use('/subadmin', require("./adminSubadmin/subadmin"));
 
 
 module.exports = router;

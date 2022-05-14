@@ -16,6 +16,15 @@ import ViewProduct from "./pages/ViewProduct";
 import BookingAppoint from "./pages/BookAppoint";
 import Appointment from "./pages/Appointment";
 import AllmentalHealth from "./pages/AllmentalHealth";
+import Aboutus from "./pages/Aboutus";
+import PrimarySprituality from "./pages/PrimarySprituality";
+import PrimaryLibrary from "./pages/PrimaryLibrary";
+import HowWeDo from "./pages/HowWeDo";
+import SelfAwareness from "./pages/SelfAwareness";
+import EcoSystem from "./pages/EcoSystem";
+import Therapy from "./pages/Therapy"
+
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -39,9 +48,25 @@ function App() {
           <Route path="/ViewProduct/:slug" element={<ViewProduct />} exact />
           <Route path="/bookingAppoint" element={<BookingAppoint />} exact />
           <Route path="/appointment" element={<Appointment />} exact />
-          <Route path="/all-mental-wellness" element={<AllmentalHealth />} exact />
+          <Route
+            path="/all-mental-wellness"
+            element={<AllmentalHealth />}
+            exact
+          />
+          <Route path="/about-us" element={<Aboutus />} exact />
+          <Route
+            path="/primary-sprituality"
+            element={<PrimarySprituality />}
+            exact
+          />
+          <Route path="/primary-library" element={<PrimaryLibrary />} exact />
+          <Route path="/how-we-do" element={<HowWeDo />} exact />
+          <Route path="/self-awareness" element={<SelfAwareness />} exact />
+          <Route path="/eco-system" element={<EcoSystem />} exact />
+          <Route path="/therapy" element={<Therapy />} exact />
 
-          
+
+                   
         </Routes>
 
         <Footer />

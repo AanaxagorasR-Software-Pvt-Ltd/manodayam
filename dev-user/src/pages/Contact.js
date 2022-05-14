@@ -11,7 +11,7 @@ export default function Contact() {
                 <h3>contact Us</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>Contact Us</li>
                 </ol>
@@ -35,7 +35,11 @@ export default function Contact() {
 
                 <div className="pd-add">
                   <h4>Address</h4>
-                  <p>MEDTECH Incubation Center 3rd Floor, New library building , Sanjay Gandhi Postgraduate Institute of Medical Sciences (SGPGI) New PMSSY Rd, Raibareli Rd,Lucknow,Uttar Pradesh</p>
+                  <p>
+                    MEDTECH Incubation Center 3rd Floor, New library building ,
+                    Sanjay Gandhi Postgraduate Institute of Medical Sciences
+                    (SGPGI) New PMSSY Rd, Raibareli Rd,Lucknow,Uttar Pradesh
+                  </p>
                 </div>
                 <div className="pd-add">
                   <h4>Phone Number & Email</h4>
@@ -117,6 +121,17 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <a href="#howwedo">
+        <div
+          data-placement="top"
+          tabindex="0"
+          data-toggle="tooltip"
+          title="Previous page"
+          className="bd-dark"
+        >
+          <li className="scrollToTop fa fa-chevron-left backbtn"></li>
+        </div>
+      </a>
     </>
   );
 }

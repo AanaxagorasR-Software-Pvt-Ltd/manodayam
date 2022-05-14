@@ -16,7 +16,7 @@ console.log('888888', );
 router.post("/user/new", validate, async (req, res) => {
   try {
     const db = await getDatabase();
-    const { email, password, name } = req.body;
+    const { email, password, name  } = req.body;
     const encryptedPassword = await bcrypt.hash(password, 10);
     const user = await db.collection("user").findOne({ email: email });
 	  console.log("user ragister", user);

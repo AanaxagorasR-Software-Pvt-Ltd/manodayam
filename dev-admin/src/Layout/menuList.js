@@ -1,5 +1,287 @@
-
 const leftSideBarMenu = [
+
+  {
+    name: "Spirituality",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/spirituality",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+    userAccess: "Content module",
+  },
+  {
+    name: "Banner",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/banner",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+    userAccess: "Content module",
+  },
+  {
+    name: "About us manodayam",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/about-us",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+    userAccess: "Content module",
+  },
+  {
+    name: "Master Category",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/master-category",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+    userAccess: "Content module",
+  },
+  {
+    name: "Subscription plan",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "/admin/subscription-plan",
+    iconClass: "icon-grid",
+    subMenuid: "ui-basic",
+    submenu: [],
+    isHover: false,
+    userAccess: "Subscription",
+  },
+  {
+    name: "Self-Awareness Category",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    iconClass: "icon-layout",
+    link: "",
+    userAccess: "Content module",
+
+    submenu: [
+      {
+        name: "Category List",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/category",
+        isExpand: false,
+      },
+      {
+        name: "About Category",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/about-category",
+        isExpand: false,
+      },
+    ],
+    isHover: false,
+  },
+  {
+    name: "Doctor module",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    iconClass: "icon-layout",
+    link: "",
+    userAccess: "Doctor module",
+
+    submenu: [
+      {
+        name: "Doctor List",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/doctor-list",
+        isExpand: false,
+      },
+      {
+        name: "All Appointments",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/appointment-list",
+        isExpand: false,
+      },
+      {
+        name: "Booked List",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/booked-appointment-list",
+        isExpand: false,
+      },
+      {
+        name: "MSQ Question",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/questions",
+        isExpand: false,
+      },
+      {
+        name: "Yes-No Question",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/yes-no-questions",
+        isExpand: false,
+      },
+    ],
+    isHover: false,
+  },
+  {
+    name: "Shakti OTT module",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    userAccess: "Shakthi OTT",
+    iconClass: "icon-layout",
+    submenu: [
+      // {
+      //   name: "Media Solutions",
+      //   isActive: true,
+      //   dataToggle: "",
+      //   link: "/admin/media-solutions",
+      //   isExpand: false,
+      // },
+      {
+        name: "Shakthi Asking",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/shakthi-ques",
+        isExpand: false,
+      },
+      {
+        name: "Video",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/video",
+        isExpand: false,
+      },
+      {
+        name: "Audio",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/audio",
+        isExpand: false,
+      },
+    ],
+    isHover: false,
+  },
+  {
+    name: "Product module",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    link: "",
+    userAccess: "Product module",
+    iconClass: "icon-layout",
+    submenu: [
+      {
+        name: "Product List",
+        isActive: false,
+        dataToggle: "",
+        isExpand: false,
+        link: "/admin/product",
+        iconClass: "icon-grid",
+        subMenuid: "ui-basic",
+        submenu: [],
+        isHover: false,
+        iconClass: "icon-layout",
+      },
+      {
+        name: "Order List",
+        isActive: true,
+        dataToggle: "",
+        link: "",
+        isExpand: false,
+      },
+    ],
+  },
+  {
+    name: "Digital Human Library",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    iconClass: "icon-layout",
+    link: "",
+    userAccess: "Digital Human Library",
+
+    submenu: [
+      {
+        name: "Coach/mentor list",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/library",
+        isExpand: false,
+      },
+      {
+        name: "Single connectors",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/library-appointment",
+        isExpand: false,
+      },
+      {
+        name: "Single call Booked",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/library-appointment-booked",
+        isExpand: false,
+      },
+
+      {
+        name: "Group connectors",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/group-appoint",
+        isExpand: false,
+      },
+      {
+        name: "Group Booked",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/group-appoint-book",
+        isExpand: false,
+      },
+    ],
+    isHover: false,
+  },
+  {
+    name: "Voice Assistant",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    iconClass: "icon-contract",
+    link: "",
+    userAccess: "Voice Assistant",
+
+    submenu: [
+      {
+        name: "Voice Chat",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/voice-chat",
+        isExpand: false,
+      },
+      {
+        name: "Self Assessment",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/voice-assessment-question",
+        isExpand: false,
+      },
+    ],
+    isHover: false,
+  },
+ 
+  // admin roll
   {
     name: "Dashboard",
     isActive: true,
@@ -33,23 +315,12 @@ const leftSideBarMenu = [
     submenu: [],
     isHover: false,
   },
-   {
+  {
     name: "About us manodayam",
     isActive: false,
     dataToggle: "",
     isExpand: false,
     link: "/admin/about-us",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
-  },
-  {
-    name: "Shakthi Asking",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "/admin/shakthi-ques",
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
     submenu: [],
@@ -78,7 +349,7 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Category",
+    name: "Self-Awareness Category",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -103,13 +374,20 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "Appointments",
+    name: "Doctor module",
     isActive: false,
     dataToggle: "",
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
     submenu: [
+      {
+        name: "Doctor List",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/doctor-list",
+        isExpand: false,
+      },
       {
         name: "All Appointments",
         isActive: true,
@@ -124,40 +402,15 @@ const leftSideBarMenu = [
         link: "/admin/booked-appointment-list",
         isExpand: false,
       },
-    ],
-    isHover: false,
-  },
-
-  {
-    name: "Doctor List",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    link: "/admin/doctor-list",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
-  },
-
-  {
-    name: "Questions Part",
-    isActive: false,
-    dataToggle: "",
-    isExpand: false,
-    iconClass: "icon-layout",
-    link: "",
-
-    submenu: [
       {
-        name: "MSQ",
+        name: "MSQ Question",
         isActive: true,
         dataToggle: "",
         link: "/admin/questions",
         isExpand: false,
       },
       {
-        name: "Yes No",
+        name: "Yes-No Question",
         isActive: true,
         dataToggle: "",
         link: "/admin/yes-no-questions",
@@ -166,15 +419,11 @@ const leftSideBarMenu = [
     ],
     isHover: false,
   },
-
   {
-    name: "Shakti",
+    name: "Shakti OTT module",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    // link: "javascript:void(0)" ,
-    link: "",
-
     iconClass: "icon-layout",
     submenu: [
       // {
@@ -184,6 +433,13 @@ const leftSideBarMenu = [
       //   link: "/admin/media-solutions",
       //   isExpand: false,
       // },
+      {
+        name: "Shakthi Asking",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/shakthi-ques",
+        isExpand: false,
+      },
       {
         name: "Video",
         isActive: true,
@@ -198,43 +454,38 @@ const leftSideBarMenu = [
         link: "/admin/audio",
         isExpand: false,
       },
-    
     ],
     isHover: false,
   },
   {
-    name: "Product List",
-    isActive: false,
-    dataToggle: "", 
-    isExpand: false,
-    // link: "javascript:void(0)" ,
-    link: "",
-
-    iconClass: "icon-layout",
-    
-    submenu: [
-      {
-      name: "Product",
+    name: "Product module",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/admin/product" ,
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
+    link: "",
     iconClass: "icon-layout",
+    submenu: [
+      {
+        name: "Product List",
+        isActive: false,
+        dataToggle: "",
+        isExpand: false,
+        link: "/admin/product",
+        iconClass: "icon-grid",
+        subMenuid: "ui-basic",
+        submenu: [],
+        isHover: false,
+        iconClass: "icon-layout",
+      },
+      {
+        name: "Order List",
+        isActive: true,
+        dataToggle: "",
+        link: "",
+        isExpand: false,
+      },
+    ],
   },
-    {
-      name: "Order List",
-      isActive: true,
-      dataToggle: "",
-      link: "",
-      isExpand: false,
-    },
-    ]
-  },
-
   {
     name: "Digital Human Library",
     isActive: false,
@@ -245,7 +496,7 @@ const leftSideBarMenu = [
 
     submenu: [
       {
-        name: "Create Library",
+        name: "Coach/mentor list",
         isActive: true,
         dataToggle: "",
         link: "/admin/library",
@@ -265,7 +516,7 @@ const leftSideBarMenu = [
         link: "/admin/library-appointment-booked",
         isExpand: false,
       },
-      
+
       {
         name: "Group connectors",
         isActive: true,
@@ -283,26 +534,30 @@ const leftSideBarMenu = [
     ],
     isHover: false,
   },
-
-  // {
-  //   name: "Settings",
-  //   isActive: false,
-  //   dataToggle: "",
-  //   isExpand: false,
-  //   // link: "javascript:void(0)" ,
-  //   iconClass: "icon-contract",
-  //   submenu: [],
-  //   isHover: false,
-  // },
   {
-    name: "Voice Chat",
+    name: "Voice Assistant",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/admin/voice-chat",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
+    iconClass: "icon-contract",
+    link: "",
+
+    submenu: [
+      {
+        name: "Voice Chat",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/voice-chat",
+        isExpand: false,
+      },
+      {
+        name: "Self Assessment",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/voice-assessment-question",
+        isExpand: false,
+      },
+    ],
     isHover: false,
   },
   {
@@ -313,6 +568,32 @@ const leftSideBarMenu = [
     link: "/admin/users-list",
     iconClass: "icon-contract",
     submenu: [],
+    isHover: false,
+  },
+  {
+    name: "Admin Setting",
+    isActive: false,
+    dataToggle: "",
+    isExpand: false,
+    iconClass: "icon-contract",
+    link: "",
+
+    submenu: [
+      {
+        name: "Sub-admin",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/sub-admin",
+        isExpand: false,
+      },
+      {
+        name: "Sub-admin Register",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/subadmin-register",
+        isExpand: false,
+      },
+    ],
     isHover: false,
   },
 ];

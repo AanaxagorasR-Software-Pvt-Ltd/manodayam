@@ -1,10 +1,10 @@
 import { leftSideBarMenu } from "./menuList";
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function LeftSideBar() {
   const [menuList, setMenuList] = useState(leftSideBarMenu);
-  const location  = useLocation();
+  const location = useLocation();
   const handleClickMenu = (name) => {
     setMenuList(
       menuList.map((li) =>
@@ -25,56 +25,66 @@ export default function LeftSideBar() {
     setMenuList(menuList.map((li) => ({ ...li, isHover: false })));
   };
 
+  // const userType = ["root", "admin", "editor", "video-editor"];
+  // console.log("3333333", window.__USER);
+  // let adminType = window?.__USER?.roll;
+  let adminType = localStorage.getItem("Roll");
+  console.log("99999999999", adminType);
   return (
     <>
       <ul class="nav overflow-y">
-        {menuList.map((sMenu, i) => (
-          <li
-            className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
-              sMenu?.isHover ? "hover-open" : ""
-            }`}
-            key={i}
-            onClick={(e) => handleClickMenu(sMenu?.name)}
-            onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
-            onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
-          >
-            <Link
-              className={`nav-link ${
-                sMenu.submenu.length > 0 ? "collapsed" : ""
+        {/* {menuList.map((sMenu, i) => ( */}
+        {menuList
+          .filter((menu) =>
+            adminType === "root" ? true : adminType === menu.userAccess
+          )
+          .map((sMenu, i) => (
+            <li
+              className={`nav-item ${sMenu?.isActive ? "active" : ""} ${
+                sMenu?.isHover ? "hover-open" : ""
               }`}
-              to={ sMenu.link ? sMenu.link : location.pathname }
-              data-toggle="collapse"
-              aria-expanded={sMenu?.isActive ? true : false}
+              key={i}
+              onClick={(e) => handleClickMenu(sMenu?.name)}
+              onMouseEnter={(e) => handleMouseOverkMenu(sMenu?.name)}
+              onMouseLeave={(e) => handleMouseOutkMenu(sMenu?.name)}
             >
-              <i className={`${sMenu?.iconClass} menu-icon`}></i>
-              <span className="menu-title">{sMenu?.name}</span>
-              {sMenu.submenu && sMenu.submenu.length > 0 ? (
-                <i class="menu-arrow"></i>
-              ) : null}
-            </Link>
-            {sMenu.submenu && sMenu.submenu.length > 0 ? (
-              <div
-                className={`collapse ${sMenu?.isActive ? " show" : ""}`}
-                id="ui-basic"
+              <Link
+                className={`nav-link ${
+                  sMenu.submenu.length > 0 ? "collapsed" : ""
+                }`}
+                to={sMenu.link ? sMenu.link : location.pathname}
+                data-toggle="collapse"
+                aria-expanded={sMenu?.isActive ? true : false}
               >
-                <ul className="nav flex-column sub-menu">
-                  {sMenu.submenu.map((sub, i) => (
-                    <li class="nav-item" key={i}>
-                      {" "}
-                      <Link
-                        to={sub.link ? sub.link :location.pathname  }
-                        class="nav-link"
-                        aria-expanded={sMenu?.isActive ? true : false}
-                      >
-                        {sub.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </li>
-        ))}
+                <i className={`${sMenu?.iconClass} menu-icon`}></i>
+                <span className="menu-title">{sMenu?.name}</span>
+                {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                  <i class="menu-arrow"></i>
+                ) : null}
+              </Link>
+              {sMenu.submenu && sMenu.submenu.length > 0 ? (
+                <div
+                  className={`collapse ${sMenu?.isActive ? " show" : ""}`}
+                  id="ui-basic"
+                >
+                  <ul className="nav flex-column sub-menu">
+                    {sMenu.submenu.map((sub, i) => (
+                      <li class="nav-item" key={i}>
+                        {" "}
+                        <Link
+                          to={sub.link ? sub.link : location.pathname}
+                          class="nav-link"
+                          aria-expanded={sMenu?.isActive ? true : false}
+                        >
+                          {sub.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </li>
+          ))}
       </ul>
     </>
   );
