@@ -261,15 +261,6 @@ export default function Home(props) {
   useEffect((props) => {
     mastercategory();
   }, []);
-  const handlePlay = (evt) => {
-    let allVideosElements = document.getElementsByTagName('video');
-    let currentVideoElement = evt.target;
-    for (let v of allVideosElements) {
-      if (v !== currentVideoElement) {
-        v.pause();
-      }
-    }
-  }
   return (
     <>
       <Login humanId={humanId} />
@@ -298,7 +289,7 @@ export default function Home(props) {
                   >
                     {element.banner_text}
                   </FloatingLettersTextBuilder> */}
-              
+
                   <h1 className="banner-text">{element.banner_text}</h1>
                 </div>
               </div>
@@ -371,7 +362,6 @@ export default function Home(props) {
                       poster={element.thumbnail_image}
                       data-setup=""
                       loop="auto"
-                      onPlay={handlePlay}
                       className=""
                     >
                       <source src={element.video} type="video/mp4" />
@@ -405,10 +395,7 @@ export default function Home(props) {
             <div className="col-lg-12">
               <div className="d-flex justify-content-center mt-2">
                 <div className="flip-box mt-4 mr-4">
-                  <div
-                    className="flip-box-inner"
-                    onClick={() => loginsubmit("/self-awareness")}
-                  >
+                  <div onClick={() => loginsubmit("/self-awareness")}>
                     <p className="flip-para">SELF AWARENESS</p>
                   </div>
                 </div>
@@ -416,13 +403,8 @@ export default function Home(props) {
                   className="flip-box mr-2 ml-2"
                   onClick={() => loginsubmits(voiceAssisstant.link)}
                 >
-                  <div className="flip-box-inner ">
-                    {/* <div className="flip-box-front"> */}
+                  <div>
                     <p className="flip-para"> AI DRIVEN SELF-ASSESSMENT</p>
-                    {/* </div> */}
-                    {/* <div class="flip-box-back">
-                      <img src={Ai} className="flip-img" alt="loading..." />
-                    </div> */}
                   </div>
                 </div>
 
@@ -438,37 +420,16 @@ export default function Home(props) {
                 </div>
               </div>
               <div className="d-flex justify-content-center">
-                <div className="flip-box-center">
-                  <div
-                    className="flip-box-inner"
-                    // onClick={() => loginsubmit("/primary-sprituality")}
-                  >
-                    {/* <div className="flip-box-front"> */}
-                    <img
-                      src={logo}
-                      className="flip-img ml-4"
-                      alt="loading..."
-                    />
-                    {/* <p className="flip-para-center">MANODAYAM</p> */}
-                    {/* </div> */}
-                    <div className="flip-box-back"></div>
-                  </div>
-                </div>
+                <img src={logo} alt="loading..." className="flip-box-center" />
               </div>
               <div className="d-flex justify-content-center mt-2">
                 <div className="flip-box mr-4">
-                  <div
-                    className="flip-box-inner"
-                    onClick={() => loginsubmit("/primary-library")}
-                  >
+                  <div onClick={() => loginsubmit("/primary-library")}>
                     <p className="flip-para"> DIGITAL HUMAN LIBRARY</p>
                   </div>
                 </div>
                 <div className="flip-box ml-2 mr-2 mt-3">
-                  <div
-                    className="flip-box-inner"
-                    onClick={() => loginsubmit("/bookingAppoint")}
-                  >
+                  <div onClick={() => loginsubmit("/bookingAppoint")}>
                     <p className="flip-para">
                       TELE-PSYCHIATRY CONNECT WITH DOCTORS
                     </p>
@@ -476,10 +437,7 @@ export default function Home(props) {
                 </div>
 
                 <div className="flip-box ml-4">
-                  <div
-                    className="flip-box-inner"
-                    onClick={() => loginsubmit("/eco-system")}
-                  >
+                  <div onClick={() => loginsubmit("/eco-system")}>
                     <p className="flip-para"> MANODAYAM ECOSYSTEM</p>
                   </div>
                 </div>
@@ -574,7 +532,7 @@ export default function Home(props) {
           <div className="row">
             <div className="col-lg-12">
               {/* <h4 className="text-center text-info">Change Your Life</h4> */}
-              <div className="contact-details d-flex justify-content-around">
+              <div className="contact-details ">
                 <div className="pd-add">
                   <h2>Contact Me Now</h2>
                   <p>

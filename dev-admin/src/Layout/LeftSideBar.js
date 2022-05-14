@@ -30,7 +30,9 @@ export default function LeftSideBar() {
 
   // const userType = ["root", "admin", "editor", "video-editor"];
   console.log("3333333", window.__USER);
-  let userType = window?.__USER?.roll;
+  // let userType = window?.__USER?.roll;
+  let userType = localStorage.getItem("Roll");
+  console.log("99999999999", localStorage.getItem("Roll"));
   return (
     <>
       <ul class="nav overflow-y">

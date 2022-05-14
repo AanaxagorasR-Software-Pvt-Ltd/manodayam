@@ -52,7 +52,8 @@ const SubadminLogin = () => {
       .post(`${API_ADMIN_URL}${SUBADMIN_LOGIN_API}`, RegisterationOptions)
       .then((res) => {
         console.log("new", res.user);
-        window.__USER = res.user;
+        // window.__USER = res.user;
+        localStorage.setItem('Roll', res.user);
         navigate("/admin/dashboard");
         // alert("okokokokokokokok");
       })

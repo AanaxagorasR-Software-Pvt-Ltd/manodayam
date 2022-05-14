@@ -285,8 +285,8 @@ export default function Header() {
                     <i class="fa fa-bars"></i>
                   </button>
                 </div>
-              <IconContext.Provider value={{ color: "#fff" }}>
-                {/* <div className="navbara">
+                <IconContext.Provider value={{ color: "#fff" }}>
+                  <div className="navbara">
                     {SidebarData.map((item, index) => {
                       return (
                         <li key={index} className={item.cName}>
@@ -297,133 +297,133 @@ export default function Header() {
                         </li>
                       );
                     })}
-                  </ul>
-                </nav>
-              </IconContext.Provider> */}
+                  </div>
+                </IconContext.Provider>
+              </div> */}
             </div>
           </div>
-        </div>
 
-        <header className="web-header">
-          <div className="container">
-            <nav className="navbar navbar-expand-md">
-              <a className="navbar-brand d-logo" href="#">
-                <img src="assets/image/logo.png" alt="" />
-              </a>
+          <header className="web-header">
+            <div className="container">
+              <nav className="navbar navbar-expand-md">
+                <a className="navbar-brand d-logo" href="#">
+                  <img src="assets/image/logo.png" alt="" />
+                </a>
 
-              <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul className="navbar-nav nav-custom">
-                  <li className="nav-item">
-                    <Link to="/" className="nav-link">
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/about-us" className="nav-link">
-                      About Us
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <a href="/how-we-do" className="nav-link">
-                      How we do
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/therapy" className="nav-link">
-                      Therapies
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/research" className="nav-link">
-                      Research
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/support" className="nav-link">
-                      Support Network
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/contact" className="nav-link">
-                      Contact
-                    </Link>
-                  </li>
-                </ul>
-                <ul className="navbar-nav nav-custom ml-auto btn-nav">
-                  {loginhide && (
-                    <li className="nav-item ">
-                      <button
-                        className="btn-web hvr-float-shadow"
-                        data-toggle="tooltip"
-                        title="Profile!"
-                        onClick={() => loginsubmit("/profile")}
-                      >
-                        <li className="fa fa-user navicon"></li>
-                        {/* Profile */}
-                      </button>
-                    </li>
-                  )}
-                  {loginhide && (
+                <div
+                  className="collapse navbar-collapse"
+                  id="collapsibleNavbar"
+                >
+                  <ul className="navbar-nav nav-custom">
                     <li className="nav-item">
-                      <Link to="/Cart/xyz">
+                      <Link to="/" className="nav-link">
+                        Home
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/about-us" className="nav-link">
+                        About Us
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <a href="/how-we-do" className="nav-link">
+                        How we do
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/therapy" className="nav-link">
+                        Therapies
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/research" className="nav-link">
+                        Research
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/support" className="nav-link">
+                        Support Network
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/contact" className="nav-link">
+                        Contact
+                      </Link>
+                    </li>
+                  </ul>
+                  <ul className="navbar-nav nav-custom ml-auto btn-nav">
+                    {loginhide && (
+                      <li className="nav-item ">
                         <button
                           className="btn-web hvr-float-shadow"
                           data-toggle="tooltip"
-                          title="Cart!"
-                          // onClick={() => loginsubmit("/Cart")}
+                          title="Profile!"
+                          onClick={() => loginsubmit("/profile")}
                         >
-                          <li className="fa fa-shopping-cart navicon"></li>
-
-                          {/* Cart */}
+                          <li className="fa fa-user navicon"></li>
+                          {/* Profile */}
                         </button>
-                      </Link>
-                    </li>
-                  )}
+                      </li>
+                    )}
+                    {loginhide && (
+                      <li className="nav-item">
+                        <Link to="/Cart/xyz">
+                          <button
+                            className="btn-web hvr-float-shadow"
+                            data-toggle="tooltip"
+                            title="Cart!"
+                            // onClick={() => loginsubmit("/Cart")}
+                          >
+                            <li className="fa fa-shopping-cart navicon"></li>
 
-                  {!loginhide && (
-                    <li className="nav-item">
-                      <button
-                        className="btn-web hvr-float-shadow "
-                        data-toggle="modal"
-                        data-target="#myModal"
-                      >
-                        Login
-                      </button>
-                    </li>
-                  )}
+                            {/* Cart */}
+                          </button>
+                        </Link>
+                      </li>
+                    )}
 
-                  {!loginhide && (
-                    <li className="nav-item">
-                      <button
-                        className="btn-web hvr-float-shadow"
-                        data-toggle="modal"
-                        data-target="#registermodal"
-                      >
-                        Register
-                      </button>
-                    </li>
-                  )}
+                    {!loginhide && (
+                      <li className="nav-item">
+                        <button
+                          className="btn-web hvr-float-shadow "
+                          data-toggle="modal"
+                          data-target="#myModal"
+                        >
+                          Login
+                        </button>
+                      </li>
+                    )}
 
-                  {loginhide && (
-                    <li className="nav-item">
-                      <button
-                        className="btn-web hvr-float-shadow"
-                        onClick={logoutfunction}
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </nav>
-          </div>
-        </header>
+                    {!loginhide && (
+                      <li className="nav-item">
+                        <button
+                          className="btn-web hvr-float-shadow"
+                          data-toggle="modal"
+                          data-target="#registermodal"
+                        >
+                          Register
+                        </button>
+                      </li>
+                    )}
+
+                    {loginhide && (
+                      <li className="nav-item">
+                        <button
+                          className="btn-web hvr-float-shadow"
+                          onClick={logoutfunction}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </header>
+        </div>
       </div>
 
-      <a href="#" className="scrollToTop">
-        <i className="fa fa-hand-pointer-o" aria-hidden="true"></i>
-      </a>
       <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>

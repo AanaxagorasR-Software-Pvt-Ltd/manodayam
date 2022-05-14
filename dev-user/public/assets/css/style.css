@@ -787,7 +787,7 @@ header {
   margin-bottom: 60px;
 }
 .pd-add p {
-  width: 300px;
+  /* width: 300px; */
   margin-bottom: 0;
 }
 .pd-add a {
@@ -1233,8 +1233,8 @@ footer {
 }
 #about-us-video-2 {
   height: 200px;
-  width: 420px;
-  margin-left: 25px;
+  width: 310px;
+  margin-left: 10px;
 }
 .about_title {
   margin-left: 28px;
@@ -1263,7 +1263,7 @@ footer {
 /* flip-box */
 .flip-box {
   background: linear-gradient(45deg, #23adba, #9d1892);
-  height: 116px;
+  height: 100px;
   text-align: center;
   display: flex;
   border-radius: 10px;
@@ -1323,7 +1323,7 @@ footer {
   color: #fff;
   padding-top: 16px;
   text-align: center;
-  font-weight: 700;
+  font-weight: 400;
   font-style: unset;
 }
 .flip-para-center {
@@ -1333,13 +1333,7 @@ footer {
   font-weight: 700;
   text-align: center;
 }
-.flip-img {
-  position: absolute;
-  width: 150px;
-  height: 130px;
 
-  border-radius: 50%;
-}
 .aboutus-content p {
   font-size: 17px;
 }
