@@ -140,11 +140,7 @@ export default function Header() {
       name: "About Us",
       path: "/about-us",
     },
-    {
-      id: 4,
-      name: "How we do",
-      path: "/how-we-do",
-    },
+
     {
       id: 5,
       name: "Digital Human Library",
@@ -160,6 +156,18 @@ export default function Header() {
       name: "Cart",
       path: "/Cart/xyz",
     },
+
+    {
+      id: 22,
+      name: "Docter booking",
+      path: "/bookingAppoint",
+    },
+    {
+      id: 34,
+      name: "Manodayam ecosystem",
+      path: "/eco-system",
+    },
+
     {
       id: 8,
       name: "Eco-Systam",
@@ -174,6 +182,21 @@ export default function Header() {
       id: 8,
       name: "Tele-phychiatry",
       path: "/bookingAppoint",
+    },
+    {
+      id: 78,
+      name: "Research",
+      path: "/research",
+    },
+    {
+      id: 99,
+      name: "Sprituality",
+      path: "primary-sprituality",
+    },
+    {
+      id: 77,
+      name: "Self-Awareness",
+      path: "self-awareness",
     },
   ];
 
@@ -198,13 +221,19 @@ export default function Header() {
     console.log("Focused");
   };
   const formatResult = (item) => {
-    return (
-      <>
-        <span style={{ display: "block", textAlign: "left", color: "black" }}>
-          {item.name}
-        </span>
-      </>
-    );
+    let local = localStorage.getItem("Token");
+    if (local) {
+      return (
+        <>
+          <span style={{ display: "block", textAlign: "left", color: "black" }}>
+            {item.name}
+          </span>
+        </>
+      );
+    } else {
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true);
+    }
   };
   return (
     <>
@@ -256,13 +285,8 @@ export default function Header() {
                     <i class="fa fa-bars"></i>
                   </button>
                 </div>
-              </div> */}
-              {/* <IconContext.Provider value={{ color: "#fff" }}>
-                <nav className={sidebar ? "nava-menu active" : "nava-menu"}>
-                  <ul className="nava-menu-items " onClick={showSidebar}>
-                    <li className="navbara-toggle">
-                  
-                    </li>
+              <IconContext.Provider value={{ color: "#fff" }}>
+                {/* <div className="navbara">
                     {SidebarData.map((item, index) => {
                       return (
                         <li key={index} className={item.cName}>
