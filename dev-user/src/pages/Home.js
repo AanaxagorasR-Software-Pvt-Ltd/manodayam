@@ -446,7 +446,7 @@ export default function Home(props) {
                     {/* <div className="flip-box-front"> */}
                     <img
                       src={logo}
-                      className="flip-img ml-4"
+                      className="flip-img"
                       alt="loading..."
                     />
                     {/* <p className="flip-para-center">MANODAYAM</p> */}
