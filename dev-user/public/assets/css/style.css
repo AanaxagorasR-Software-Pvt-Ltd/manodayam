@@ -1319,10 +1319,12 @@ footer {
   transform: rotateY(180deg);
 }
 .flip-para {
-  font-size: 14px;
+  font-size: 16px;
   color: #fff;
   padding-top: 16px;
   text-align: center;
+  font-weight: 700;
+  font-style: unset;
 }
 .flip-para-center {
   font-size: 17px;

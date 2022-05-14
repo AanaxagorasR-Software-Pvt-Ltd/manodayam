@@ -186,6 +186,21 @@ export default function Header() {
         name: 'Tele-phychiatry',
         path: "/bookingAppoint",
       },
+      {
+        id:78,
+        name: "Research",
+        path: "/research",
+      },
+      {
+        id:99,
+        name:"Sprituality",
+        path:"primary-sprituality",
+      },
+      {
+        id:77,
+        name:"Self-Awareness",
+        path:"self-awareness",
+      }
     ]
   
   const handleOnSearch = (string, results) => {
@@ -209,12 +224,20 @@ export default function Header() {
     console.log('Focused')
   }
   const formatResult = (item) => {
+    let local = localStorage.getItem("Token");
+    if(local){
+
+    
     return (
       <>
        
         <span style={{ display: 'block', textAlign: 'left' ,color:'black'}}>{item.name}</span>
       </>
     )
+    }else{
+      setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      setshow(true); 
+    }
   }
   return (
     <>
