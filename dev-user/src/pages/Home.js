@@ -404,7 +404,7 @@ export default function Home(props) {
                 </div>
                 <div
                   className="flip-box mr-2 ml-2"
-                  onClick={() => loginsubmits(voiceAssisstant.liveLink)}
+                  onClick={() => loginsubmits(voiceAssisstant.link)}
                 >
                   <div className="flip-box-inner ">
                     {/* <div className="flip-box-front"> */}
