@@ -1445,3 +1445,7 @@ span {
 .backbtn:hover {
   color: rgb(25, 25, 25);
 }
+.flip-img{
+  height: 150px;
+  width: 190px;
+}
