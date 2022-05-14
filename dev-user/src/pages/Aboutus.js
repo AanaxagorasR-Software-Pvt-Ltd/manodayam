@@ -32,7 +32,7 @@ export default function Aboutus() {
   }, []);
   return (
     <>
-      <div className="aboutus-banner mb-50">
+      <div className="contact-banner mb-50">
         {/* <video className="aboutus-banner mb-50" autoPlay loop muted>
           <source src={sample} type="video/mp4" />
         </video> */}
@@ -57,9 +57,7 @@ export default function Aboutus() {
         <div className="container">
           <div className="row">
             <div className="col-lg-5">
-              {/* <div className="about-img">
-                <img src="assets/image/MentalHealth.jpg" alt="" />
-              </div> */}
+          
               {data.map((element) => (
                 <div className="col-lg-4">
                   <div>

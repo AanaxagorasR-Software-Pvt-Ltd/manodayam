@@ -10,7 +10,7 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import { IconName } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 export default function Header() {
   let hist = useNavigate();
   {
@@ -113,99 +113,99 @@ export default function Header() {
       cName: "nav-text",
     },
   ];
- 
-    const items = [
-      {
-        id: 0,
-        name: 'Contact',
-        path: "/contact"
-      },
-      {
-        id: 9,
-        name: 'Home',
-        path: "/"
-      },
-      {
-        id: 1,
-        name: 'Support Network',
-        path: "/support",
 
-      },
-      {
-        id: 2,
-        name: 'Therapies',
-        path: "/therapy",
-      },
-      {
-        id: 3,
-        name: 'About Us',
-        path: "/about-us",
-      },
-      {
-        id: 4,
-        name: 'How we do',
-        path: "/how-we-do",
-      },
-      {
-        id: 5,
-        name: 'Digital Human Library',
-        path: "/primary-library",
-      },
-      {
-        id: 6,
-        name: 'Profil',
-        path: "/profile",
-      },
-      {
-        id: 7,
-        name: 'Cart',
-        path: "/Cart/xyz",
-      },
-      {
-        id: 8,
-        name: 'Eco-Systam',
-        path: "/eco-system",
-      },
-      {
-        id: 10,
-        name: 'Doctors',
-        path: "/bookingAppoint",
-      },
-      {
-        id: 8,
-        name: 'Tele-phychiatry',
-        path: "/bookingAppoint",
-      },
-    ]
-  
+  const items = [
+    {
+      id: 0,
+      name: "Contact",
+      path: "/contact",
+    },
+    {
+      id: 9,
+      name: "Home",
+      path: "/",
+    },
+    {
+      id: 1,
+      name: "Support Network",
+      path: "/support",
+    },
+    {
+      id: 2,
+      name: "Therapies",
+      path: "/therapy",
+    },
+    {
+      id: 3,
+      name: "About Us",
+      path: "/about-us",
+    },
+    {
+      id: 4,
+      name: "How we do",
+      path: "/how-we-do",
+    },
+    {
+      id: 5,
+      name: "Digital Human Library",
+      path: "/primary-library",
+    },
+    {
+      id: 6,
+      name: "Profil",
+      path: "/profile",
+    },
+    {
+      id: 7,
+      name: "Cart",
+      path: "/Cart/xyz",
+    },
+    {
+      id: 8,
+      name: "Eco-Systam",
+      path: "/eco-system",
+    },
+    {
+      id: 10,
+      name: "Doctors",
+      path: "/bookingAppoint",
+    },
+    {
+      id: 8,
+      name: "Tele-phychiatry",
+      path: "/bookingAppoint",
+    },
+  ];
+
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
-    console.log(string, results)
-  }
+    console.log(string, results);
+  };
 
   const handleOnHover = (result) => {
     // the item hovered
-    console.log(result)
-  }
+    console.log(result);
+  };
 
   const handleOnSelect = (item) => {
     // the item selected
     hist(item.path);
-    console.log(item)
-  }
+    console.log(item);
+  };
 
   const handleOnFocus = () => {
-    console.log('Focused')
-  }
+    console.log("Focused");
+  };
   const formatResult = (item) => {
     return (
       <>
-       
-        <span style={{ display: 'block', textAlign: 'left' ,color:'black'}}>{item.name}</span>
+        <span style={{ display: "block", textAlign: "left", color: "black" }}>
+          {item.name}
+        </span>
       </>
-    )
-  }
+    );
+  };
   return (
     <>
       {/* <Login /> */}
@@ -213,7 +213,7 @@ export default function Header() {
         <div className="header-top">
           <div className="container">
             <div className="row">
-              <div className="col-lg-6 col-sm-4">
+              <div className="col-lg-6">
                 <div className="top-logo">
                   <Link to="/">
                     <img src="assets/image/logo.png" alt="" />
@@ -232,7 +232,7 @@ export default function Header() {
 
               <div className="App">
                 <header className="App-header">
-                  <div style={{ width: 300 }}>
+                  <div style={{ width: 555 }}>
                     <ReactSearchAutocomplete
                       items={items}
                       onSearch={handleOnSearch}
@@ -246,8 +246,7 @@ export default function Header() {
                 </header>
               </div>
 
-
-              <div className="col-lg-4 col-sm-8">
+              {/* <div className="col-lg-4 col-sm-8">
                 <div className="header-contact justify-content-end">
                   <button
                     className="btn-web hvr-float-shadow"
@@ -257,19 +256,12 @@ export default function Header() {
                     <i class="fa fa-bars"></i>
                   </button>
                 </div>
-              </div>
-              <IconContext.Provider value={{ color: "#fff" }}>
-                {/* <div className="navbara">
-                  <Link to="#" className="menu-bars">
-                    <FaIcons.FaBars onClick={showSidebar} />
-                  </Link>
-                </div> */}
+              </div> */}
+              {/* <IconContext.Provider value={{ color: "#fff" }}>
                 <nav className={sidebar ? "nava-menu active" : "nava-menu"}>
                   <ul className="nava-menu-items " onClick={showSidebar}>
                     <li className="navbara-toggle">
-                      {/* <Link to="#" className="menu-bars">
-                        <AiIcons.AiOutlineClose />
-                      </Link> */}
+                  
                     </li>
                     {SidebarData.map((item, index) => {
                       return (
@@ -283,7 +275,7 @@ export default function Header() {
                     })}
                   </ul>
                 </nav>
-              </IconContext.Provider>
+              </IconContext.Provider> */}
             </div>
           </div>
         </div>
@@ -294,16 +286,6 @@ export default function Header() {
               <a className="navbar-brand d-logo" href="#">
                 <img src="assets/image/logo.png" alt="" />
               </a>
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapsibleNavbar"
-              >
-                <span className="navbar-toggler-icon">
-                  <i className="fa fa-bars"></i>
-                </span>
-              </button>
 
               <div className="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul className="navbar-nav nav-custom">
@@ -316,10 +298,8 @@ export default function Header() {
                     <Link to="/about-us" className="nav-link">
                       About Us
                     </Link>
-                  
                   </li>
                   <li className="nav-item">
-                
                     <a href="/how-we-do" className="nav-link">
                       How we do
                     </a>
@@ -366,7 +346,7 @@ export default function Header() {
                           className="btn-web hvr-float-shadow"
                           data-toggle="tooltip"
                           title="Cart!"
-                        // onClick={() => loginsubmit("/Cart")}
+                          // onClick={() => loginsubmit("/Cart")}
                         >
                           <li className="fa fa-shopping-cart navicon"></li>
 

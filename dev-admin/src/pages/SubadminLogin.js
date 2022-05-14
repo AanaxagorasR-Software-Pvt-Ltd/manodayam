@@ -102,7 +102,7 @@ const SubadminLogin = () => {
                       }
                     />
                   </div>
-
+{/* 
                   <div class="form-group">
                     <label for="exampleInputUsername1">Subadmin Roll</label>
                     <select
@@ -121,7 +121,7 @@ const SubadminLogin = () => {
                       <option>Voice Assistant</option>
                       <option>Shakthi OTT</option>
                     </select>
-                  </div>
+                  </div> */}
                   <div className="mt-3">
                     <input
                       type="button"
