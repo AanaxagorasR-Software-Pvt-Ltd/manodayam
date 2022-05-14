@@ -261,6 +261,15 @@ export default function Home(props) {
   useEffect((props) => {
     mastercategory();
   }, []);
+  const handlePlay = (evt) => {
+    let allVideosElements = document.getElementsByTagName('video');
+    let currentVideoElement = evt.target;
+    for (let v of allVideosElements) {
+      if (v !== currentVideoElement) {
+        v.pause();
+      }
+    }
+  }
   return (
     <>
       <Login humanId={humanId} />
@@ -362,6 +371,7 @@ export default function Home(props) {
                       poster={element.thumbnail_image}
                       data-setup=""
                       loop="auto"
+                      onPlay={handlePlay}
                       className=""
                     >
                       <source src={element.video} type="video/mp4" />
