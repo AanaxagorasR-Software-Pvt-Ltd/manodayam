@@ -24,22 +24,19 @@ export default function LeftSideBar() {
   const handleMouseOutkMenu = () => {
     setMenuList(menuList.map((li) => ({ ...li, isHover: false })));
   };
-  //  const manodayam001 = id;
-  const name1 = "Dashboard";
-  const id1 = "manodayam001";
 
   // const userType = ["root", "admin", "editor", "video-editor"];
-  console.log("3333333", window.__USER);
-  // let userType = window?.__USER?.roll;
-  let userType = localStorage.getItem("Roll");
-  console.log("99999999999", localStorage.getItem("Roll"));
+  // console.log("3333333", window.__USER);
+  // let adminType = window?.__USER?.roll;
+  let adminType = localStorage.getItem("Roll");
+  console.log("99999999999", adminType);
   return (
     <>
       <ul class="nav overflow-y">
         {/* {menuList.map((sMenu, i) => ( */}
         {menuList
           .filter((menu) =>
-            userType === "root" ? true : userType === menu.userAccess
+            adminType === "root" ? true : adminType === menu.userAccess
           )
           .map((sMenu, i) => (
             <li

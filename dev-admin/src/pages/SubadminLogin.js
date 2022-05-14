@@ -42,20 +42,23 @@ const SubadminLogin = () => {
 
   const LoginApi = () => {
     console.log("jyotippp", `${API_ADMIN_URL}${SUBADMIN_LOGIN_API}`);
-    const RegisterationOptions = {
+    const subadminlogin = {
       email: subadminemail,
       password: subadminpassword,
       roll: roll,
     };
 
     axios
-      .post(`${API_ADMIN_URL}${SUBADMIN_LOGIN_API}`, RegisterationOptions)
+      .post(`${API_ADMIN_URL}${SUBADMIN_LOGIN_API}`, subadminlogin)
       .then((res) => {
-        console.log("new", res.user);
-        // window.__USER = res.user;
-        localStorage.setItem('Roll', res.user);
-        navigate("/admin/dashboard");
-        // alert("okokokokokokokok");
+        console.log("newhello", res);
+        if (res.status !== false) {
+          localStorage.setItem("Roll", res.user.roll);
+          navigate("/admin/dashboard");
+        } else {
+          localStorage.removeItem("Roll");
+          alert("You have no account, please register first");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -103,7 +106,7 @@ const SubadminLogin = () => {
                       }
                     />
                   </div>
-{/* 
+
                   <div class="form-group">
                     <label for="exampleInputUsername1">Subadmin Roll</label>
                     <select
@@ -122,7 +125,7 @@ const SubadminLogin = () => {
                       <option>Voice Assistant</option>
                       <option>Shakthi OTT</option>
                     </select>
-                  </div> */}
+                  </div>
                   <div className="mt-3">
                     <input
                       type="button"

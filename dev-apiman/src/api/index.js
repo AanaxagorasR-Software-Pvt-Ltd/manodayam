@@ -25,8 +25,8 @@ router.get(`/`,  validate,async (req,res) => {
 })
 router.use(`/auth`, require("./user/newUser"));
 // router.use(`/auth`, require("./user/doctor"));
-router.use(`/auth`, require("./user/adminuser"));
-router.use(`/auth`, require("./user/adminlogin"));
+router.use(`/auth`, require("./user/subadminuser"));
+router.use(`/auth`, require("./user/subadminlogin"));
 
 router.use(`/auth`, require("./user/login"));
 router.use(`/auth`, require("./user/profile"));
