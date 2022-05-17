@@ -436,6 +436,9 @@ export default function Home(props) {
                     <p className="flip-para">
                       SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
                     </p>
+                    
+                  
+
                   </div>
                 </div>
               </div>
@@ -509,6 +512,7 @@ export default function Home(props) {
                 >
                   know more
                 </button>
+               
               </div>
             </div>
             <div className="col-lg-5 mt-25">
