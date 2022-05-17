@@ -10,6 +10,7 @@ import sprituality from "./sprituality.jpeg";
 import teledoctor from "./teledr.png";
 import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
 import voiceAssisstant from "../utill/rdxassisstant";
+import Login from "./Login";
 
 export default function HowWeDo() {
   const [SpritualityData, setSpritualityData] = useState([]);
@@ -51,6 +52,7 @@ export default function HowWeDo() {
   };
   return (
     <>
+    <Login/>
       <div className="contact-banner mb-50">
         <div className="container">
           <div className="row">
@@ -59,7 +61,7 @@ export default function HowWeDo() {
                 <h3>How We Do</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>How We Do</li>
                 </ol>

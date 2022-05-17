@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { Modal as Bmodal, Button } from "react-bootstrap";
-
+import Login from "./Login";
 export default function Support() {
 const [show, setshow] = useState(false);
 const handleClose = () => setshow(false);
@@ -11,6 +11,7 @@ const handleShow = () => setshow(true);
 
   return (
     <>
+    <Login/>
       <div className="contact-banner mb-50">
         <div className="container">
           <div className="row">

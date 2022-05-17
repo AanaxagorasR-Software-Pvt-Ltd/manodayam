@@ -272,7 +272,7 @@ export default function Login(props) {
     axios
       .post(`${API_ADMIN_URL}${LIBRARY_SINGLE_CALL_API}`, humanLibraryOptions)
       .then((res) => {
-        // console.log("====llll=====", res.data.data);
+        // cuonsole.log("====llll=====", res.data.data);
         setAlerdata({ title: "Connect", body: "We are Connect you soon" });
         setshow(true);
         document.getElementById("humandigital").reset();

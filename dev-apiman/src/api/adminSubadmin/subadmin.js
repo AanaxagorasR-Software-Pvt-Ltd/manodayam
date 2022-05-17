@@ -43,7 +43,7 @@ router.post(
         type: body.type,
         name: body.name,
         roll: body.roll,
-        // type: body.type,
+        email: body.email,
       };
 
       if (typeof req.file !== "undefined") {

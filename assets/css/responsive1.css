@@ -374,7 +374,7 @@
         padding: 18px 15px;
     }
     .scrollToTop {
-        bottom: 183px;
+        /* bottom: 183px; */
         display: none !important;
     }
     .header-contact button {

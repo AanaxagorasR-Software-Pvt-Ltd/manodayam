@@ -309,21 +309,30 @@ export default function Header() {
                 <a className="navbar-brand d-logo" href="#">
                   <img src="assets/image/logo.png" alt="" />
                 </a>
-
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapsibleNavbar"
+                >
+                  <span className="navbar-toggler-icon">
+                    <i className="fa fa-bars"></i>
+                  </span>
+                </button>
                 <div
                   className="collapse navbar-collapse"
                   id="collapsibleNavbar"
                 >
                   <ul className="navbar-nav nav-custom">
                     <li className="nav-item">
-                      <Link to="/" className="nav-link">
+                      <a href="/" className="nav-link">
                         Home
-                      </Link>
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <Link to="/about-us" className="nav-link">
+                      <a href="/about-us" className="nav-link">
                         About Us
-                      </Link>
+                      </a>
                     </li>
                     <li className="nav-item">
                       <a href="/how-we-do" className="nav-link">
@@ -331,24 +340,24 @@ export default function Header() {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <Link to="/therapy" className="nav-link">
+                      <a href="/therapy" className="nav-link">
                         Therapies
-                      </Link>
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <Link to="/research" className="nav-link">
+                      <a href="/research" className="nav-link">
                         Research
-                      </Link>
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <Link to="/support" className="nav-link">
+                      <a href="/support" className="nav-link">
                         Support Network
-                      </Link>
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <Link to="/contact" className="nav-link">
+                      <a href="/contact" className="nav-link">
                         Contact
-                      </Link>
+                      </a>
                     </li>
                   </ul>
                   <ul className="navbar-nav nav-custom ml-auto btn-nav">
@@ -423,7 +432,9 @@ export default function Header() {
           </header>
         </div>
       </div>
-
+      <a href="#" className="scrollToTop">
+        <i className="fa fa-hand-pointer-o" aria-hidden="true"></i>
+      </a>
       <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>

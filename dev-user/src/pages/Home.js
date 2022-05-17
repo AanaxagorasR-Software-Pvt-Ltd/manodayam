@@ -7,12 +7,7 @@ import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
 import logo from "./favicon.png";
-import Ai from "./ai.jpeg";
-import library from "./library.jpeg";
-import sprituality from "./sprituality.jpeg";
-import teledoctor from "./teledr.png";
-import { FloatingLettersTextBuilder } from "react-animated-text-builders";
-import voiceAssisstant from "../utill/rdxassisstant";
+
 import {
   API_ADMIN_URL,
   BANNER_API,
@@ -262,14 +257,14 @@ export default function Home(props) {
     mastercategory();
   }, []);
   const handlePlay = (evt) => {
-    let allVideosElements = document.getElementsByTagName('video');
+    let allVideosElements = document.getElementsByTagName("video");
     let currentVideoElement = evt.target;
     for (let v of allVideosElements) {
       if (v !== currentVideoElement) {
-        v.pause()
+        v.pause();
       }
     }
-  }
+  };
   return (
     <>
       <Login humanId={humanId} />
@@ -298,7 +293,7 @@ export default function Home(props) {
                   >
                     {element.banner_text}
                   </FloatingLettersTextBuilder> */}
-              
+
                   <h1 className="banner-text">{element.banner_text}</h1>
                 </div>
               </div>
@@ -391,6 +386,7 @@ export default function Home(props) {
             <div className="service-heading">
               <h5>How We Do</h5>
               <div className="exam"></div>
+            
               <p>
                 Our Technology Architecture helps you to find the solutions to
                 various possible mental/emotional scenarios which are or may be
@@ -414,7 +410,9 @@ export default function Home(props) {
                 </div>
                 <div
                   className="flip-box mr-2 ml-2"
-                  onClick={() => loginsubmits(voiceAssisstant.liveLink)}
+                  onClick={() =>
+                    loginsubmits("https://master.dmn3o3hk3w2r8.amplifyapp.com")
+                  }
                 >
                   <div className="flip-box-inner ">
                     {/* <div className="flip-box-front"> */}
@@ -434,6 +432,9 @@ export default function Home(props) {
                     <p className="flip-para">
                       SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
                     </p>
+                    
+                  
+
                   </div>
                 </div>
               </div>
@@ -444,11 +445,7 @@ export default function Home(props) {
                     // onClick={() => loginsubmit("/primary-sprituality")}
                   >
                     {/* <div className="flip-box-front"> */}
-                    <img
-                      src={logo}
-                      className="flip-img"
-                      alt="loading..."
-                    />
+                    <img src={logo} className="flip-img" alt="loading..." />
                     {/* <p className="flip-para-center">MANODAYAM</p> */}
                     {/* </div> */}
                     <div className="flip-box-back"></div>
@@ -511,6 +508,7 @@ export default function Home(props) {
                 >
                   know more
                 </button>
+               
               </div>
             </div>
             <div className="col-lg-5 mt-25">
@@ -574,7 +572,7 @@ export default function Home(props) {
           <div className="row">
             <div className="col-lg-12">
               {/* <h4 className="text-center text-info">Change Your Life</h4> */}
-              <div className="contact-details d-flex justify-content-around">
+              <div className="contact-details">
                 <div className="pd-add">
                   <h2>Contact Me Now</h2>
                   <p>

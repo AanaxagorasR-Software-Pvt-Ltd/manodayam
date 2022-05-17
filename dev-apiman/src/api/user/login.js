@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const validate = (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, type } = req.body;
   if (email && password) {
     next();
     // res.redirect("/");
@@ -27,6 +27,7 @@ router.post("/user/login", validate, async (req, res) => {
       const token = jwt.sign( {
           email: email,
           password: password,
+          type: type
         },
         "STERETE8998858JUJFHKJ*8",
         { expiresIn: 9860 }

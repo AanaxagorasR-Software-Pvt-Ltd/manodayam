@@ -285,7 +285,7 @@ const SubAdmin = () => {
                               <th>Photo</th>
                               <th>Name</th>
                               <th>Work Roll</th>
-                              <th>Sab-admin Id</th>
+                              <th>Email</th>
                               {/* <th>Audio Link</th> */}
                               <th>Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -300,7 +300,7 @@ const SubAdmin = () => {
                                 </td>
                                 <td>{a.name}</td>
                                 <td>{a.roll}</td>
-                                <td>{a.type}</td>
+                                <td>{a.email}</td>
                                 <td>{a.created}</td>
 
                                 <td>
@@ -425,13 +425,52 @@ const Addform = forwardRef((props, ref) => {
         }}
       >
         <Modal.Header>
-          <Modal.Title>Audio Uplode</Modal.Title>
+          <Modal.Title>Sub-Admin Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <div class="d-flex">
-                <div class="col-md-4">
+              <div className="d-flex">
+                <div class="form-group col-lg-6">
+                  <label for="exampleInputUsername1">Subadmin Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={data.name || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "name");
+                    }}
+                    placeholder="Subadmin name"
+                  />
+                </div>
+                <div class="form-group col-lg-6">
+                  <label for="exampleInputUsername1">Subadmin Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={data.email || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "email");
+                    }}
+                    placeholder="Subadmin Email"
+                  />
+                </div>
+              </div>
+              <div className="d-flex">
+                <div class="form-group col-md-6">
+                  <label for="exampleInputUsername1">
+                    Subadmin Photo Upload
+                  </label>
+                  <input
+                    type="file"
+                    class="form-control file-upload-info"
+                    onChange={(e) => {
+                      handleChange(e.target.files[0], "image");
+                    }}
+                    placeholder="Upload Photo"
+                  />
+                </div>
+                <div class="form-group col-lg-6">
                   <label for="exampleInputUsername1">Subadmin Roll</label>
                   <select
                     class="form-control"
@@ -449,54 +488,6 @@ const Addform = forwardRef((props, ref) => {
                     <option>Voice Assistant</option>
                     <option>Shakthi OTT</option>
                   </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="exampleInputUsername1">Subadmin Id</label>
-                  <select
-                    class="form-control"
-                    value={data.type || ""}
-                    onChange={(e) => {
-                      handleChange(e.target.value, "type");
-                    }}
-                  >
-                    <option>Select</option>
-                    <option>manodayam001</option>
-                    <option>manodayam002</option>
-                    <option>manodayam003</option>
-                    <option>manodayam004</option>
-                    <option>manodayam005</option>
-                    <option>manodayam006</option>
-                    <option>manodayam007</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="exampleInputUsername1">Subadmin Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  value={data.name || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "name");
-                  }}
-                  placeholder="Subadmin name"
-                />
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">
-                    Subadmin Photo Upload
-                  </label>
-                  <input
-                    type="file"
-                    class="form-control file-upload-info"
-                    onChange={(e) => {
-                      handleChange(e.target.files[0], "image");
-                    }}
-                    placeholder="Upload Photo"
-                  />
-                  <small></small>
                 </div>
               </div>
             </div>
