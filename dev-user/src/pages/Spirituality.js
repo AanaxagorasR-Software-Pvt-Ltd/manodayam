@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import globalData from "../utill/rdx";
+import { useNavigate } from "react-router-dom";
 import { API_ADMIN_URL, SHAKTHI_QUESTION_API } from "../utill/api.endpoints";
 export default function Spirituality() {
   const [responseData, setResponseData] = useState([]);
 
   const [count, setCount] = useState(0);
-
+  let hist = useNavigate();
 
   // ShakthiQuestionlist
   const ShakthiQuestion = () => {
@@ -35,10 +36,12 @@ export default function Spirituality() {
   }, []);
   let element = responseData[count] || {};
   const incrementNextQuestion = ()=>{
-    if (count == responseData.length - 1){
+    if (count == responseData.length -1){
       
+      window.location.replace("http://localhost:3002/shakthi-ott/body");
     } else {
       setCount(count + 1)
+      // hist(shakthi-ott/body)
     }
     
   } 
@@ -89,6 +92,7 @@ export default function Spirituality() {
                   </ul>
                   <button className="ctn-btn btn btn-web cnt-btn hvr-float-shadow" onClick={() => incrementNextQuestion()}>
                   Continue 
+
                     {/* <a href="https://swarnratnaindia.com/shakthi-ott/"> */}
                     {/* Continue &nbsp; */}
                     {/* </a> */}

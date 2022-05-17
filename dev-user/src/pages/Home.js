@@ -443,7 +443,7 @@ export default function Home(props) {
                 <div className="flip-box-center">
                   <div
                     className="flip-box-inner"
-                    // onClick={() => loginsubmit("/primary-sprituality")}
+                  // onClick={() => loginsubmit("/primary-sprituality")}
                   >
                     {/* <div className="flip-box-front"> */}
                     <img src={logo} className="flip-img" alt="loading..." />
