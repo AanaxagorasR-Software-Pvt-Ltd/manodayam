@@ -93,7 +93,7 @@ header {
   position: sticky;
   top: 72px;
   background: white;
-  border-bottom: 1px solid rgb(218, 218, 218);
+  border-top: 1px solid rgb(218, 218, 218);
   z-index: 0;
 }
 .banner-content h1 {
@@ -390,7 +390,7 @@ header {
 }
 .header-top {
   border-bottom: 1px solid #e1e1e1;
-  padding: 9px 0;
+  padding: 7px 0;
 }
 .navbar-expand-md {
   padding-left: 0px;
@@ -421,7 +421,7 @@ header {
     ),
     url(../image/banner/first.jpeg);
   background-size: cover;
-  height: 72vh;
+  height: 68vh;
   /* margin-top: 130px;*/
   background-position-y: 20%;
 }

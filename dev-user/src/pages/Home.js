@@ -262,14 +262,14 @@ export default function Home(props) {
     mastercategory();
   }, []);
   const handlePlay = (evt) => {
-    let allVideosElements = document.getElementsByTagName('video');
+    let allVideosElements = document.getElementsByTagName("video");
     let currentVideoElement = evt.target;
     for (let v of allVideosElements) {
       if (v !== currentVideoElement) {
-        v.pause()
+        v.pause();
       }
     }
-  }
+  };
   return (
     <>
       <Login humanId={humanId} />
@@ -414,7 +414,9 @@ export default function Home(props) {
                 </div>
                 <div
                   className="flip-box mr-2 ml-2"
-                  onClick={() => loginsubmits(voiceAssisstant.liveLink)}
+                  onClick={() =>
+                    loginsubmits("https://master.dmn3o3hk3w2r8.amplifyapp.com")
+                  }
                 >
                   <div className="flip-box-inner ">
                     {/* <div className="flip-box-front"> */}
@@ -444,11 +446,7 @@ export default function Home(props) {
                   // onClick={() => loginsubmit("/primary-sprituality")}
                   >
                     {/* <div className="flip-box-front"> */}
-                    <img
-                      src={logo}
-                      className="flip-img"
-                      alt="loading..."
-                    />
+                    <img src={logo} className="flip-img" alt="loading..." />
                     {/* <p className="flip-para-center">MANODAYAM</p> */}
                     {/* </div> */}
                     <div className="flip-box-back"></div>
@@ -574,7 +572,7 @@ export default function Home(props) {
           <div className="row">
             <div className="col-lg-12">
               {/* <h4 className="text-center text-info">Change Your Life</h4> */}
-              <div className="contact-details d-flex justify-content-around">
+              <div className="contact-details">
                 <div className="pd-add">
                   <h2>Contact Me Now</h2>
                   <p>
