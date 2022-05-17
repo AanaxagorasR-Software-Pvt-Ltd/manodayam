@@ -10,6 +10,7 @@ import {
 } from "../utill/api.endpoints";
 import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Login from "./Login";
 
 export default function Therapy() {
   let hist = useNavigate();
@@ -54,6 +55,7 @@ export default function Therapy() {
   }, []);
   return (
     <>
+    <Login/>
       <div className="contact-banner mb-50">
         <div className="container">
           <div className="row">
