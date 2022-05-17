@@ -223,9 +223,9 @@ export default function PrimaryLibrary() {
                         </button>
                         <button
                           // onClick={() =>loginsubmit()}
-                          onClick={() => pleasetalk(element._id)}
+                          // onClick={() => pleasetalk(element._id)}
                           data-toggle="modal"
-                          data-target={isLoggedIn ? "#library-modal" : ""}
+                          data-target="#library-modal"
                           className="btn-web col-11 mt-2 hvr-float-shadow"
                         >
                           Personal therapy
@@ -234,8 +234,8 @@ export default function PrimaryLibrary() {
                         <button
                           className="btn-web col-11 mt-2 hvr-float-shadow"
                           data-toggle="modal"
-                          data-target={isLoggedIn ? "#library-modalgroup" : ""}
-                          onClick={() => joingroup(element._id)}
+                          data-target="#library-modalgroup"
+                          // onClick={() => joingroup(element._id)}
                         >
                           Group therapy
                         </button>
@@ -247,6 +247,7 @@ export default function PrimaryLibrary() {
             </div>
             {/* </div> */}
           </div>
+          
         </div>
         <hr />
         <div className="library-section mb-50">

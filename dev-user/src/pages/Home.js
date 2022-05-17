@@ -7,12 +7,7 @@ import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 import { Modal as Bmodal, Button, Dropdown } from "react-bootstrap";
 import logo from "./favicon.png";
-import Ai from "./ai.jpeg";
-import library from "./library.jpeg";
-import sprituality from "./sprituality.jpeg";
-import teledoctor from "./teledr.png";
-import { FloatingLettersTextBuilder } from "react-animated-text-builders";
-import voiceAssisstant from "../utill/rdxassisstant";
+
 import {
   API_ADMIN_URL,
   BANNER_API,
@@ -391,6 +386,7 @@ export default function Home(props) {
             <div className="service-heading">
               <h5>How We Do</h5>
               <div className="exam"></div>
+            
               <p>
                 Our Technology Architecture helps you to find the solutions to
                 various possible mental/emotional scenarios which are or may be
@@ -443,7 +439,7 @@ export default function Home(props) {
                 <div className="flip-box-center">
                   <div
                     className="flip-box-inner"
-                  // onClick={() => loginsubmit("/primary-sprituality")}
+                    // onClick={() => loginsubmit("/primary-sprituality")}
                   >
                     {/* <div className="flip-box-front"> */}
                     <img src={logo} className="flip-img" alt="loading..." />

@@ -64,12 +64,18 @@ const SubadminLogin = () => {
         console.log(error);
       });
   };
+  const toBack = () => {
+    navigate("/admin/welcome");
+  };
   return (
     <>
       <div className="container-fluid page-body-wrapper full-page-wrapper">
         <div className="content-wrapper d-flex align-items-center auth px-0">
           <div className="row w-100 mx-0">
             <div className="col-lg-4 mx-auto">
+              <h3 className="fa fa-arrow-left mb-2 back-btn" onClick={toBack}>
+                &nbsp;Back
+              </h3>
               <div className="auth-form-light text-left py-5 px-4 px-sm-5">
                 <div className="brand-logo">
                   <img src="images/logo.png" alt="logo" />
@@ -107,7 +113,7 @@ const SubadminLogin = () => {
                     />
                   </div>
 
-                  <div class="form-group">
+                  {/* <div class="form-group">
                     <label for="exampleInputUsername1">Subadmin Roll</label>
                     <select
                       class="form-control"
@@ -125,7 +131,7 @@ const SubadminLogin = () => {
                       <option>Voice Assistant</option>
                       <option>Shakthi OTT</option>
                     </select>
-                  </div>
+                  </div> */}
                   <div className="mt-3">
                     <input
                       type="button"

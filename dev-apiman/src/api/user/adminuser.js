@@ -55,7 +55,7 @@ router.post("/admin/new",validate , async (req, res) => {
       .json({ message: "please try again later!", status: false, e: e });
   }
 });
-router.get("/user/list", async (req, res) => {
+router.get("/admin/list", async (req, res) => {
   try {
     const db = await getDatabase();
     let dt = await db.collection("subadmin_user").find().toArray();

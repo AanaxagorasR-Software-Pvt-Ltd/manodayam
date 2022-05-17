@@ -5,8 +5,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const validate = (req, res, next) => {
-  const { email, password, roll } = req.body;
-  if (email && password && roll) {
+  const { email, password } = req.body;
+  if (email && password) {
     next();
     // res.redirect("/");
   } else {

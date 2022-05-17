@@ -563,8 +563,6 @@ const leftSideBarMenu = [
     iconClass: "icon-contract",
     link: "",
     userAccess: "admin",
-
-
     submenu: [
       {
         name: "Voice Chat",
@@ -584,16 +582,32 @@ const leftSideBarMenu = [
     isHover: false,
   },
   {
-    name: "User List",
+    name: "User/admin List",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/admin/users-list",
     iconClass: "icon-contract",
-    submenu: [],
+    link: "",
     userAccess: "admin",
+    submenu: [
+      {
+        name: "User",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/users-list",
+        isExpand: false,
+      },
+      {
+        name: "Admin/Subadmin",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/admin-list",
+        isExpand: false,
+      },
+    ],
     isHover: false,
   },
+
   {
     name: "Admin Setting",
     isActive: false,

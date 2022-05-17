@@ -29,6 +29,7 @@ const Main = () => {
     if (istoggle) {
     }
   }, [istoggle]);
+  
   const handleSideBar = () => {
     dispatch(isToggle());
   };
@@ -36,7 +37,7 @@ const Main = () => {
   const logoutUser = () => {
     logout()
       .then((re) => {
-        navigate("/admin/login");
+        navigate("/admin/welcome");
       })
       .catch((er) => {
         console.log("some error");
@@ -47,11 +48,11 @@ const Main = () => {
       {/* partial:partials/_navbar.html */}
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo mr-5" href="index.html">
+          <a class="navbar-brand brand-logo mr-5">
             <img src="images/logo.png" class="mr-2" alt="logo" />
           </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
-            <img src="images/logo.png" alt="logo" />
+          <a class="navbar-brand brand-logo-mini">
+            <img src="images/favicon.png" alt="logo" />
           </a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -60,6 +61,7 @@ const Main = () => {
             type="button"
             data-toggle="minimize"
             onClick={handleSideBar}
+
           >
             <span class="icon-menu"></span>
           </button>
@@ -67,68 +69,6 @@ const Main = () => {
             <li class="nav-item nav-search d-none d-lg-block"></li>
           </ul>
           <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link count-indicator dropdown-toggle"
-                id="notificationDropdown"
-                href="#"
-                data-toggle="dropdown"
-              >
-                <i class="icon-bell mx-0"></i>
-                <span class="count"></span>
-              </a>
-              <div
-                class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="notificationDropdown"
-              >
-                <p class="mb-0 font-weight-normal float-left dropdown-header">
-                  Notifications
-                </p>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-success">
-                      <i class="ti-info-alt mx-0"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <h6 class="preview-subject font-weight-normal">
-                      Application Error
-                    </h6>
-                    <p class="font-weight-light small-text mb-0 text-muted">
-                      Just now
-                    </p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-warning">
-                      <i class="ti-settings mx-0"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <h6 class="preview-subject font-weight-normal">Settings</h6>
-                    <p class="font-weight-light small-text mb-0 text-muted">
-                      Private message
-                    </p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-info">
-                      <i class="ti-user mx-0"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <h6 class="preview-subject font-weight-normal">
-                      New user registration
-                    </h6>
-                    <p class="font-weight-light small-text mb-0 text-muted">
-                      2 days ago
-                    </p>
-                  </div>
-                </a>
-              </div>
-            </li>
             <li
               class={`nav-item nav-profile dropdown ${
                 profileShow ? "show" : ""
@@ -137,12 +77,12 @@ const Main = () => {
             >
               <a
                 class="nav-link dropdown-toggle"
-                href="#"
                 data-toggle="dropdown"
                 id="profileDropdown"
                 aria-expanded={`${profileShow}`}
               >
-                <img src="images/faces/face28.jpg" alt="profile" />
+                {/* <img src="images/faces/face28.jpg" alt="profile" /> */}
+                <h2 className="fa fa-user text-primary"></h2>
               </a>
               <div
                 class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
@@ -151,8 +91,8 @@ const Main = () => {
                 aria-labelledby="profileDropdown"
               >
                 <a class="dropdown-item">
-                  <i class="ti-settings text-primary"></i>
-                  Settings
+                  <i class="fa fa-user text-primary"></i>
+                  Hello Admin
                 </a>
                 <a class="dropdown-item" onClick={logoutUser}>
                   <i class="ti-power-off text-primary"></i>
@@ -160,11 +100,11 @@ const Main = () => {
                 </a>
               </div>
             </li>
-            <li class="nav-item nav-settings d-none d-lg-flex">
+            {/* <li class="nav-item nav-settings d-none d-lg-flex">
               <a class="nav-link" href="#">
                 <i class="icon-ellipsis"></i>
               </a>
-            </li>
+            </li> */}
           </ul>
           <button
             class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
@@ -435,7 +375,7 @@ const Main = () => {
               <div class="col-md-12 grid-margin">
                 <div class="row">
                   <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">Welcome Admin</h3>
+                    <h3 class="font-weight-bold">Welcome You</h3>
                     <h6 class="font-weight-normal mb-0">
                       All systems are running smoothly! You have{" "}
                       <span class="text-primary">3 unread alerts!</span>
@@ -452,7 +392,8 @@ const Main = () => {
                           aria-haspopup="true"
                           aria-expanded="true"
                         >
-                          <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
+                          <i class="mdi mdi-calendar"></i>
+                          {Date()}
                         </button>
                         <div
                           class="dropdown-menu dropdown-menu-right"

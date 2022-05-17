@@ -25,6 +25,7 @@ import LibraryAppoint from "./pages/LibraryAppoint";
 import LibraryAppointBooked from "./pages/LibraryAppointBooked";
 import AboutCategory from "./pages/AboutCategory";
 import Userslist from "./pages/Userslist";
+import AdminList from "./pages/AdminList";
 import AboutUs from "./pages/AboutUs";
 import ShakthiQuestion from "./pages/ShakthiQuestion";
 import LibraryGroupAppoint from "./pages/LibraryGroupAppoint";
@@ -66,6 +67,7 @@ const InternalRoute = (props) => {
           <Route path="/admin/welcome" element={<Welcome />} exact />
           <Route path="/admin/subadmin-login" element={<SubadminLogin />} exact />
           <Route path="/admin/subadmin-register" element={<SubadminRegister />} exact />
+          <Route path="/admin/admin-list" element={<AdminList />} exact />
 
           
           

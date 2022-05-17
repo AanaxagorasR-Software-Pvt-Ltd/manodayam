@@ -30600,4 +30600,13 @@ color: red;
     top: 50%;
     z-index: 9 !important;
   }
+  .back-btn{
+    color: #4B49AC;
+    font-size: 22px;
+  }
+  .back-btn:hover{
+    color: #3f3e91;
+    cursor: pointer;
+    font-size: 22px;
+  }
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
