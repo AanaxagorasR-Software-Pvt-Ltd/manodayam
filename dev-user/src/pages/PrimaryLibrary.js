@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import globalDataLive from "../utill/rdxLive";
 import Slider from "react-slick";
+import Login from "./Login";
 import {
   API_ADMIN_URL,
   DIGITAL_HUMAN_LIBRARY_DATA_API,
@@ -86,17 +87,17 @@ export default function PrimaryLibrary() {
     }
   }, []);
   const pleasetalk = (_id) => {
-    let local = localStorage.getItem("Token");
-    if (local) {
+    // let local = localStorage.getItem("Token");
+    // if (local) {
       setHumanId(_id);
       console.log(_id);
       console.log(humanId);
       return true;
-    } else {
-      setAlerdata({ title: "Sorry", body: "Login and registration First" });
-      setshow(true);
-      return false;
-    }
+    // } else {
+      // setAlerdata({ title: "Sorry", body: "Login and registration First" });
+      // setshow(true);
+      // return false;
+    // }
   };
   const filtercoach = libraryData.filter((element) =>
     element?.type?.includes((element = "Life Coach"))
@@ -143,6 +144,7 @@ export default function PrimaryLibrary() {
 
   return (
     <>
+      <Login  humanId={humanId} />
       <div className="contact-banner mb-50">
         <div className="container">
           <div className="row">
@@ -225,11 +227,13 @@ export default function PrimaryLibrary() {
                           // onClick={() =>loginsubmit()}
                           // onClick={() => pleasetalk(element._id)}
                           data-toggle="modal"
-                          data-target="#library-modal"
+                          data-target= "#library-modal" 
                           className="btn-web col-11 mt-2 hvr-float-shadow"
                         >
                           Personal therapy
+                          
                         </button>
+                         
 
                         <button
                           className="btn-web col-11 mt-2 hvr-float-shadow"

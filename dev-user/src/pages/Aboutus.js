@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { Link } from "react-router-dom";
 import { API_ADMIN_URL, ABOUT_API } from "../utill/api.endpoints";
+import Login from "./Login";
 export default function Aboutus() {
   const [data, setData] = useState([]);
 
@@ -32,6 +33,7 @@ export default function Aboutus() {
   }, []);
   return (
     <>
+    <Login/>
       <div className="contact-banner mb-50">
         {/* <video className="aboutus-banner mb-50" autoPlay loop muted>
           <source src={sample} type="video/mp4" />

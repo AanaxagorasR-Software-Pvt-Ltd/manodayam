@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Login from "./Login";
 export default function Contact() {
   return (
     <>
+    <Login/>
       <div className="contact-banner mb-50">
         <div className="container">
           <div className="row">
