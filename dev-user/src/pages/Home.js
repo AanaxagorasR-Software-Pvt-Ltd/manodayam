@@ -298,7 +298,7 @@ export default function Home(props) {
                   >
                     {element.banner_text}
                   </FloatingLettersTextBuilder> */}
-              
+
                   <h1 className="banner-text">{element.banner_text}</h1>
                 </div>
               </div>
@@ -441,7 +441,7 @@ export default function Home(props) {
                 <div className="flip-box-center">
                   <div
                     className="flip-box-inner"
-                    // onClick={() => loginsubmit("/primary-sprituality")}
+                  // onClick={() => loginsubmit("/primary-sprituality")}
                   >
                     {/* <div className="flip-box-front"> */}
                     <img
