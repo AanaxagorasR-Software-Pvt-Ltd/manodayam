@@ -432,7 +432,9 @@ export default function Header() {
           </header>
         </div>
       </div>
-
+      <a href="#" className="scrollToTop">
+        <i className="fa fa-hand-pointer-o" aria-hidden="true"></i>
+      </a>
       <Bmodal show={show}>
         <Bmodal.Header closeButton>
           <Bmodal.Title className="modal-head">{alertData.title}</Bmodal.Title>

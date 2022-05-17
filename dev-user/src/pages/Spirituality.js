@@ -35,16 +35,14 @@ export default function Spirituality() {
     ShakthiQuestion();
   }, []);
   let element = responseData[count] || {};
-  const incrementNextQuestion = ()=>{
-    if (count == responseData.length -1){
-      
-      window.location.replace("http://localhost:3002/shakthi-ott/body");
+  const incrementNextQuestion = () => {
+    if (count == responseData.length - 1) {
+      window.location.replace("https://swarnratnaindia.com/shakthi-ott");
     } else {
-      setCount(count + 1)
+      setCount(count + 1);
       // hist(shakthi-ott/body)
     }
-    
-  } 
+  };
   return (
     <>
       <div className="contact-banner mb-50">
@@ -52,12 +50,12 @@ export default function Spirituality() {
           <div className="row">
             <div className="col-lg-6">
               <div className="contact-breadcrumb">
-                <h3>Self Assessment</h3>
+                <h3>Shakthi Assessment</h3>
                 <ol className="breadcrumb">
                   <li>
                     <Link to="/">Home / &nbsp;</Link>
                   </li>
-                  <li>Self Assessment</li>
+                  <li>Shakthi Assessment</li>
                 </ol>
               </div>
             </div>
@@ -70,7 +68,7 @@ export default function Spirituality() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="service-heading">
-                  <h5>Self Assessment</h5>
+                  <h5>Shakthi Assessment</h5>
                   <p>{element.ques}</p>
                 </div>
               </div>
@@ -90,17 +88,17 @@ export default function Spirituality() {
                       <button className="btn spr-btn">{element.ans4}</button>
                     </li>
                   </ul>
-                  <button className="ctn-btn btn btn-web cnt-btn hvr-float-shadow" onClick={() => incrementNextQuestion()}>
-                  Continue 
-
+                  <button
+                    className="ctn-btn btn btn-web cnt-btn hvr-float-shadow"
+                    onClick={() => incrementNextQuestion()}
+                  >
+                    Continue
                     {/* <a href="https://swarnratnaindia.com/shakthi-ott/"> */}
                     {/* Continue &nbsp; */}
                     {/* </a> */}
                     {/* {globalData.ottLink} */}
                   </button>
-                  <form>
-
-                  </form>
+                  <form></form>
                 </div>
               </div>
             </div>

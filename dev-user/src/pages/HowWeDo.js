@@ -61,7 +61,7 @@ export default function HowWeDo() {
                 <h3>How We Do</h3>
                 <ol className="breadcrumb">
                   <li>
-                    <Link to="/home">Home / &nbsp;</Link>
+                    <Link to="/">Home / &nbsp;</Link>
                   </li>
                   <li>How We Do</li>
                 </ol>
