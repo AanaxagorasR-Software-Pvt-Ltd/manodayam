@@ -25,9 +25,6 @@ export default function LeftSideBar() {
     setMenuList(menuList.map((li) => ({ ...li, isHover: false })));
   };
 
-  // const userType = ["root", "admin", "editor", "video-editor"];
-  // console.log("3333333", window.__USER);
-  // let adminType = window?.__USER?.roll;
   let adminType = localStorage.getItem("Roll");
   console.log("99999999999", adminType);
   return (
@@ -36,7 +33,9 @@ export default function LeftSideBar() {
         {/* {menuList.map((sMenu, i) => ( */}
         {menuList
           .filter((menu) =>
-            adminType === "root" ? true : adminType === menu.userAccess
+            adminType === "root"
+              ? true
+              : adminType === menu.userAccess
           )
           .map((sMenu, i) => (
             <li

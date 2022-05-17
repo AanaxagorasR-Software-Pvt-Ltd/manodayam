@@ -292,6 +292,7 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "admin",
   },
   {
     name: "Spirituality",
@@ -303,6 +304,8 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "admin",
+
   },
   {
     name: "Banner",
@@ -314,6 +317,8 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "admin",
+
   },
   {
     name: "About us manodayam",
@@ -325,6 +330,8 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "admin",
+
   },
   {
     name: "Master Category",
@@ -336,6 +343,8 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "admin",
+
   },
   {
     name: "Subscription plan",
@@ -347,6 +356,8 @@ const leftSideBarMenu = [
     subMenuid: "ui-basic",
     submenu: [],
     isHover: false,
+    userAccess: "admin",
+
   },
   {
     name: "Self-Awareness Category",
@@ -355,6 +366,8 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
+    userAccess: "admin",
+
     submenu: [
       {
         name: "Category List",
@@ -380,6 +393,8 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
+    userAccess: "admin",
+
     submenu: [
       {
         name: "Doctor List",
@@ -425,6 +440,8 @@ const leftSideBarMenu = [
     dataToggle: "",
     isExpand: false,
     iconClass: "icon-layout",
+    userAccess: "admin",
+
     submenu: [
       // {
       //   name: "Media Solutions",
@@ -461,6 +478,8 @@ const leftSideBarMenu = [
     name: "Product module",
     isActive: false,
     dataToggle: "",
+    userAccess: "admin",
+
     isExpand: false,
     link: "",
     iconClass: "icon-layout",
@@ -493,6 +512,8 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-layout",
     link: "",
+    userAccess: "admin",
+
 
     submenu: [
       {
@@ -541,6 +562,8 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-contract",
     link: "",
+    userAccess: "admin",
+
 
     submenu: [
       {
@@ -568,6 +591,7 @@ const leftSideBarMenu = [
     link: "/admin/users-list",
     iconClass: "icon-contract",
     submenu: [],
+    userAccess: "admin",
     isHover: false,
   },
   {
@@ -577,6 +601,7 @@ const leftSideBarMenu = [
     isExpand: false,
     iconClass: "icon-contract",
     link: "",
+    userAccess: "admin",
 
     submenu: [
       {

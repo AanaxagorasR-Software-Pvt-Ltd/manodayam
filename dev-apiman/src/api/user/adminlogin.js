@@ -5,39 +5,39 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const validate = (req, res, next) => {
-  const { email, password, type } = req.body;
-  if (email && password) {
+  const { email, password, roll } = req.body;
+  if (email && password && roll) {
     next();
     // res.redirect("/");
   } else {
     res.status(400).json({ status: false, message: "Bad request " });
   }
 };
-router.post("/user/login", validate, async (req, res) => {
+router.post("/admin/login", validate, async (req, res) => {
   // res.send({kk: 1111});
   try {
 
-    const { email, password } = req.body;
+    const { email, password , roll ,} = req.body;
     const db = await getDatabase();
-    const user = await db.collection("user").findOne({ email: email });
-    console.log("user login", user);
+    const user = await db.collection("subadmin_user").findOne({ email: email });
+    console.log("subadmin login", user);
     if (user && (await bcrypt.compare(password, user.password))) {
-      const { type, name, age, _id, email, password } = user;
+      const { roll, email, password } = user;
 
       const token = jwt.sign( {
           email: email,
           password: password,
-          type: type
+          roll: roll
         },
         "STERETE8998858JUJFHKJ*8",
         { expiresIn: 9860 }
       );
-
-      res.send({ message: "login sucessfully", status: true, token: token ,user});
+      console.log("9999999", user)
+      res.send({ message: "login sucessfully", status: true, token: token ,user: user});
       // res.write("=======this is your");
       // console.log("[[[[[[[[");
     } else {
-      res.send({ message: "bad credentails", status: false });
+      res.send({ message: "bad credentails 2", status: false });
       
     }
   } catch (e) {
