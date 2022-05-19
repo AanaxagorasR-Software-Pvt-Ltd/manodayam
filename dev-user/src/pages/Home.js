@@ -386,7 +386,7 @@ export default function Home(props) {
             <div className="service-heading">
               <h5>How We Do</h5>
               <div className="exam"></div>
-            
+
               <p>
                 Our Technology Architecture helps you to find the solutions to
                 various possible mental/emotional scenarios which are or may be
@@ -432,9 +432,6 @@ export default function Home(props) {
                     <p className="flip-para">
                       SPRITUALITY LIVE SESSIONS & ARCHIVED VIDEOS
                     </p>
-                    
-                  
-
                   </div>
                 </div>
               </div>
@@ -508,7 +505,6 @@ export default function Home(props) {
                 >
                   know more
                 </button>
-               
               </div>
             </div>
             <div className="col-lg-5 mt-25">

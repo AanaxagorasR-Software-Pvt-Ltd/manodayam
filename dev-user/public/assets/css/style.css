@@ -1263,7 +1263,7 @@ footer {
 /* flip-box */
 .flip-box {
   background: linear-gradient(45deg, #23adba, #9d1892);
-  height: 100px;
+  height: 120px;
   text-align: center;
   display: flex;
   border-radius: 10px;
@@ -1319,7 +1319,7 @@ footer {
   transform: rotateY(180deg);
 }
 .flip-para {
-  font-size: 16px;
+  font-size: 15px;
   color: #fff;
   padding-top: 16px;
   text-align: center;
