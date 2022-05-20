@@ -48,7 +48,7 @@ export const runAudio = () => {
     saySpeech(w);
     const recorder = await recordAudio();
     recorder.start();
-    await sleep(3000);
+    await sleep(4000);
     const audio = await recorder.stop();
     try {
       const savedFile = await saveFile(audio);
@@ -59,7 +59,7 @@ export const runAudio = () => {
     // end
 
     console.log("audio", audio, it.done);
-    await sleep(3000);
+    await sleep(4000);
     if (quize.length > 0) {
       it.next();
     } else {
@@ -72,7 +72,7 @@ export const runAudio = () => {
         "Did you answer questions to your satisfaction. Please press start Assessment button for us to proceed to Self assessment and please press restart if you want to re-run questions again?"
       );
 
-      await sleep(3000);
+      await sleep(4000);
       let rest1 = document.querySelector("#Myques");
       rest1.click();
       console.log("button under hood");
