@@ -158,7 +158,7 @@ export default function Profile() {
                   <div className="col-lg-3 col-sm-3">
                     <div className="profile-img">
                       {/* <img src="assets/image/profile.jpg" alt="" /> */}
-                      <img src="assets/image/profile.png" alt="" />
+                      <img src="assets/image/imageses.jpg" alt="" class="hello"/>
                     </div>
                   </div>
                   <div className="col-lg-7 col-sm-9">

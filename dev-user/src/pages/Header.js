@@ -82,7 +82,7 @@ export default function Header() {
       cName: "nav-text",
     },
     {
-      title: "How we do",
+      title: "What we do",
       path: "/how-we-do",
       icon: <FaIcons.FaQuestion />,
       cName: "nav-text",
@@ -198,6 +198,11 @@ export default function Header() {
       name: "Self-Awareness",
       path: "self-awareness",
     },
+    {
+      id:99,
+      name:"what we do",
+      path: "/how-we-do"
+    }
   ];
 
   const handleOnSearch = (string, results) => {
@@ -336,12 +341,12 @@ export default function Header() {
                     </li>
                     <li className="nav-item">
                       <a href="/how-we-do" className="nav-link">
-                        How we do
+                        What we do
                       </a>
                     </li>
                     <li className="nav-item">
                       <a href="/therapy" className="nav-link">
-                        Therapies
+                        Therapy
                       </a>
                     </li>
                     <li className="nav-item">
@@ -356,7 +361,7 @@ export default function Header() {
                     </li>
                     <li className="nav-item">
                       <a href="/contact" className="nav-link">
-                        Contact
+                        Contact Us
                       </a>
                     </li>
                   </ul>

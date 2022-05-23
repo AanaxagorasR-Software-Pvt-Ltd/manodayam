@@ -106,7 +106,7 @@ export default function MentalHealth() {
                     </div>
                     <div className="col-lg-12">
                       <button className="btn-web hvr-float-shadow">
-                        <Link to="/bookingAppoint">Get Solutions</Link>
+                        <a href="#therapy">Therapy</a>
                       </button>
                     </div>
                   </div>

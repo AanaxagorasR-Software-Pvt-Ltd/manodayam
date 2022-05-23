@@ -61,12 +61,12 @@ export default function Therapy() {
           <div className="row">
             <div className="col-lg-6">
               <div className="contact-breadcrumb">
-                <h3>Therapies</h3>
+                <h3>Therapy</h3>
                 <ol className="breadcrumb">
                   <li>
                     <Link to="/">Home / &nbsp;</Link>
                   </li>
-                  <li>Therapies</li>
+                  <li>Therapy</li>
                 </ol>
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function Therapy() {
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>Menu (Therapy)</h5>
+              <h5>(Therapy)</h5>
               <div className="exam"></div>
               <p>We present you therapies for your specific problems.</p>
               <p>

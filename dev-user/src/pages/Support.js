@@ -17,12 +17,12 @@ const handleShow = () => setshow(true);
           <div className="row">
             <div className="col-lg-6">
               <div className="contact-breadcrumb">
-                <h3>your support network</h3>
+                <h3>support network</h3>
                 <ol className="breadcrumb">
                   <li>
                     <Link to="/">Home / &nbsp;</Link>
                   </li>
-                  <li>Your support Network</li>
+                  <li>support Network</li>
                 </ol>
               </div>
             </div>
@@ -41,8 +41,8 @@ const handleShow = () => setshow(true);
 
             <div className="col-lg-7">
               <div className="about-content support-content">
-                <h5>support</h5>
-                <h2>Your Support Network</h2>
+                <h5>support Network</h5>
+                {/* <h2>Support Network</h2> */}
                 <p>
                   Manodayam presents you a support network which helps in
                   scientifically providing various solutions.The support network

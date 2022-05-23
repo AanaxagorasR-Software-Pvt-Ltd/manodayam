@@ -314,7 +314,7 @@ export default function Home(props) {
                   India(MHFI) for technical, functional and strategic depth &
                   are backed & invested by STPI (Ministry of Electronics and
                   Information Technology , MieTY) Govt Of India, under DIGITAL
-                  Health initiative called “ MediTech”.
+                  Health initiative called “MedTech”.
                 </p>
 
                 <p>
@@ -327,9 +327,9 @@ export default function Home(props) {
                   This platform is scaled to provide Solutions to different
                   Mental Health scenarios such as Depression, Panic, Stress,
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
-                  ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
+                  ,Bipolar, ADHD, Dementia, Parkinson ,Juvenile
                   Delinquency, Autism & Sexual Disorders!! Though as per data
-                  from Health experts and WHO , we have First seven scenarios as
+                  from Health experts and WHO , we have scenarios as
                   majority of ongoing and potential scenarios.
                 </p>
                 <p>
@@ -343,7 +343,7 @@ export default function Home(props) {
                 </p>
                 <p>
                   Expertise in Mathematical Modelling, Business Management, Big
-                  Data Management, Statistical Analytics.
+                  Data Management & Statistical Analytics.
                 </p>
                 <p>
                   We have a special focus on Compliances to Clinical Trials,
@@ -384,7 +384,7 @@ export default function Home(props) {
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>How We Do</h5>
+              <h5>What We Do</h5>
               <div className="exam"></div>
 
               <p>
@@ -482,45 +482,11 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      {/* support */}
-      <div id="support" className="about-section mb-50">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-7">
-              <div className="about-content support-content">
-                <h5>support</h5>
-                <h2>Your Support Network</h2>
-                <p>
-                  Manodayam presents you a support network which helps in
-                  scientifically providing various solutions.The support network
-                  provides you latest scientific solutions and scientifically
-                  backed age old spiritual theories. These theories are backed
-                  up with scientific research in the field of Neuromodulation
-                  and Neuro simulations.
-                </p>
-
-                <button
-                  className="btn-web hvr-float-shadow mt-3"
-                  onClick={() => loginsubmit("/support")}
-                >
-                  know more
-                </button>
-              </div>
-            </div>
-            <div className="col-lg-5 mt-25">
-              <div className="about-img mt-30">
-                <img src="assets/image/supportss.jpg" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Therapy */}
-      <div className="service-section mb-50">
+      <div className="service-section mb-50" id="therapy">
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>Menu (Therapy)</h5>
+              <h5>THERAPY</h5>
               <div className="exam"></div>
               <p>We present you therapies for your specific problems.</p>
               <p>
@@ -562,6 +528,162 @@ export default function Home(props) {
           </div>
         </div>
       </div>
+      {/* <div className="service-section mb-50" id="therapy">
+        <div className="container">
+          <div className="col-lg-12">
+            <div className="service-heading">
+              <h5>THERAPY</h5>
+              <div className="exam"></div>
+              <p>We present you therapies for your specific problems.</p>
+              <p>
+                Please click below (… these are various possible therapies …
+                which will be guided by platform & Health experts)
+              </p>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <div className="col-lg-6">
+              <div className="doctor-form">
+                <h3>Select Your Therapy Type / Subscription Plane</h3>
+                <form action="">
+                  <div className="col-lg-12"></div>
+                  <div className="col-lg-12">
+                    <Dropdown className="form-group">
+                      <Dropdown.Toggle
+                        id="dropdown-basic"
+                        className="hvr-float-shadow"
+                      >
+                        Choose Therapy
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map((element) => (
+                          <Dropdown.Item
+                            as="p"
+                            onClick={(e) => subchange(element.mastercategory)}
+                          >
+                            {element.mastercategory}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}
+
+      <div id="support" className="about-section mb-50">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-7">
+              <div className="about-content support-content">
+                <h5>Research</h5>
+                
+                <p>
+                The study is designed to see effect of mental health on other comorbid conditions such as Oncology,Cardiovascular,Pain Management and Neurological science
+                Manodayam with the help of its partners is working in Tihar prison since last one year and addressing the psychological needs and problems of the inmates. 
+                </p>
+
+                <button
+                  className="btn-web hvr-float-shadow mt-3"
+                  onClick={() => loginsubmit("/research")}
+                >
+                  veiw more
+                </button>
+               
+              </div>
+            </div>
+            <div className="col-lg-5 mt-25">
+              <div className="about-img mt-30">
+                <img src="assets/image/reserchs.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="support" className="about-section mb-50">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-7">
+              <div className="about-content support-content">
+                <h5>support Network</h5>
+            
+                <p>
+                  Manodayam presents you a support network which helps in
+                  scientifically providing various solutions.The support network
+                  provides you latest scientific solutions and scientifically
+                  backed age old spiritual theories. These theories are backed
+                  up with scientific research in the field of Neuromodulation
+                  and Neuro simulations.
+                </p>
+
+                <button
+                  className="btn-web hvr-float-shadow mt-3"
+                  onClick={() => loginsubmit("/support")}
+                >
+                  know more
+                </button>
+               
+              </div>
+            </div>
+            <div className="col-lg-5 mt-25">
+              <div className="about-img mt-30">
+                <img src="assets/image/supportss.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Therapy */}
+      {/* <div className="service-section mb-50" id="therapy">
+        <div className="container">
+          <div className="col-lg-12">
+            <div className="service-heading">
+              <h5>THERAPY</h5>
+              <div className="exam"></div>
+              <p>We present you therapies for your specific problems.</p>
+              <p>
+                Please click below (… these are various possible therapies …
+                which will be guided by platform & Health experts)
+              </p>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <div className="col-lg-6">
+              <div className="doctor-form">
+                <h3>Select Your Therapy Type / Subscription Plane</h3>
+                <form action="">
+                  <div className="col-lg-12"></div>
+                  <div className="col-lg-12">
+                    <Dropdown className="form-group">
+                      <Dropdown.Toggle
+                        id="dropdown-basic"
+                        className="hvr-float-shadow"
+                      >
+                        Choose Therapy
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu className="scrollable-menu">
+                        {mastercategorys.map((element) => (
+                          <Dropdown.Item
+                            as="p"
+                            onClick={(e) => subchange(element.mastercategory)}
+                          >
+                            {element.mastercategory}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}
       {/* contact */}
       <div className="contact-form-section mb-50">
         <div className="container">
