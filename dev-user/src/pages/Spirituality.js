@@ -105,7 +105,7 @@ export default function Spirituality() {
           }
         </div>
       </div>
-      <a href="#howwedo">
+      <Link to="/primary-sprituality">
         <div
           data-placement="top"
           tabindex="0"
@@ -115,7 +115,7 @@ export default function Spirituality() {
         >
           <li className="scrollToTop fa fa-chevron-left backbtn"></li>
         </div>
-      </a>
+      </Link>
     </>
   );
 }

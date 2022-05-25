@@ -583,8 +583,11 @@ export default function Home(props) {
                 <h5>Research</h5>
                 
                 <p>
-                The study is designed to see effect of mental health on other comorbid conditions such as Oncology,Cardiovascular,Pain Management and Neurological science
-                Manodayam with the help of its partners is working in Tihar prison since last one year and addressing the psychological needs and problems of the inmates. 
+            
+                <h4>Mental Health and Criminology</h4>
+                <h4>Mental Health and Spirituality</h4>
+                <h4>Cow assisted Psychotherapy</h4>
+
                 </p>
 
                 <button
@@ -692,17 +695,22 @@ export default function Home(props) {
               {/* <h4 className="text-center text-info">Change Your Life</h4> */}
               <div className="contact-details">
                 <div className="pd-add">
-                  <h2>Contact Me Now</h2>
-                  <p>
-                    Molestie ac feugiat sed lectus vestibulum mattis ullamcorper
-                    velit sed. Arcu vitae elementum vitae nunc.
-                  </p>
+                  <h2>Contact Us:</h2>
+                 
                 </div>
 
                 <div className="pd-add">
-                  <h4>Address</h4>
+                  <h4>Regional Office:</h4>
                   <p>
-                    MEDTECH Incubation Center 3rd Floor, New library building ,
+               <p>Manodayam pvt Ltd</p>
+                 c/o Software Technology park of india,Noida . Ganga Software technical Complex ,(sector-29 noida-201303)
+                  </p>
+                </div>
+                <div className="pd-add">
+                  <h4>Head Office:</h4>
+                  <p>
+               <p>Manodayam pvt Ltd</p>
+                 c/o MEDTECH Incubation Center 3rd Floor, New library building ,
                     Sanjay Gandhi Postgraduate Institute of Medical Sciences
                     (SGPGI) New PMSSY Rd, Raibareli Rd,Lucknow,Uttar Pradesh
                   </p>
@@ -711,7 +719,7 @@ export default function Home(props) {
                   <h4>Phone Number & Email</h4>
                   <a href="">+91 8882832500</a>
                   <br />
-                  <a href="">info@manodsyam.com</a>
+                  <a href="">info@manodayam.com</a>
                 </div>
               </div>
             </div>

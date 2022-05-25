@@ -312,7 +312,7 @@ export default function Appointment() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <a href="#howwedo">
+      <Link to="/bookingAppoint">
         <div
           data-placement="top"
           tabindex="0"
@@ -322,7 +322,7 @@ export default function Appointment() {
         >
           <li className="scrollToTop fa fa-chevron-left backbtn"></li>
         </div>
-      </a>
+      </Link>
     </>
   );
 }

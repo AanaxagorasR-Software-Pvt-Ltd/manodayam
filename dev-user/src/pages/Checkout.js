@@ -142,6 +142,9 @@ export default function Checkout() {
     allshipping();
     shipping();
   }, []);
+  const Backclick =()=>{
+    window.history.back()
+  }
   return (
     <>
       <div className="contact-banner mb-50">
@@ -380,17 +383,18 @@ export default function Checkout() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <a href="#howwedo">
+      <Link to="">
         <div
           data-placement="top"
           tabindex="0"
           data-toggle="tooltip"
           title="Previous page"
           className="bd-dark"
+          onClick={Backclick}
         >
           <li className="scrollToTop fa fa-chevron-left backbtn"></li>
         </div>
-      </a>
+      </Link>
     </>
   );
 }

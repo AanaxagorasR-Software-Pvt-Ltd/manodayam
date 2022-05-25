@@ -27,18 +27,25 @@ export default function Contact() {
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
+           
               <div className="contact-details">
-                <h5>Change Your Life</h5>
-                <h2>Contact Me Now</h2>
-                <p>
-                  Molestie ac feugiat sed lectus vestibulum mattis ullamcorper
-                  velit sed. Arcu vitae elementum vitae nunc.
-                </p>
+                <div className="pd-add">
+                  <h2>Contact Us:</h2>
+                 
+                </div>
 
                 <div className="pd-add">
-                  <h4>Address</h4>
+                  <h4>Regional Office:</h4>
                   <p>
-                    MEDTECH Incubation Center 3rd Floor, New library building ,
+               <p>Manodayam pvt Ltd</p>
+                 c/o Software Technology park of india,Noida . Ganga Software technical Complex ,(sector-29 noida-201303)
+                  </p>
+                </div>
+                <div className="pd-add">
+                  <h4>Head Office:</h4>
+                  <p>
+               <p>Manodayam pvt Ltd</p>
+                 c/o MEDTECH Incubation Center 3rd Floor, New library building ,
                     Sanjay Gandhi Postgraduate Institute of Medical Sciences
                     (SGPGI) New PMSSY Rd, Raibareli Rd,Lucknow,Uttar Pradesh
                   </p>
@@ -47,32 +54,7 @@ export default function Contact() {
                   <h4>Phone Number & Email</h4>
                   <a href="">+91 8882832500</a>
                   <br />
-                  <a href="">info@manodsyam.com</a>
-                </div>
-                <div className="pd-add">
-                  {/* <h4>Follow Us On-</h4> */}
-                  {/* <ul>
-                    <li className="hvr-float-shadow">
-                      <a href="">
-                        <i className="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li className="hvr-float-shadow">
-                      <a href="">
-                        <i className="fa fa-instagram"></i>
-                      </a>
-                    </li>
-                    <li className="hvr-float-shadow">
-                      <a href="">
-                        <i className="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li className="hvr-float-shadow">
-                      <a href="">
-                        <i className="fa fa-pinterest"></i>
-                      </a>
-                    </li>
-                  </ul> */}
+                  <a href="">info@manodayam.com</a>
                 </div>
               </div>
             </div>

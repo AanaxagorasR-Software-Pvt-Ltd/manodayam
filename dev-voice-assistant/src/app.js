@@ -54,25 +54,32 @@ function onListen(word) {
   processingWord = word;
   processWord(word);
 }
-
+let stop_,resume_;
 startButton.onclick = async () => {
+
+  console.log("====isStarted",isStarted)
   if (!isStarted) {
     //Start assistant
     startButton.innerText = "Starting...";
     
-    // start
-    runAudio()
-    // end
+   
 
     // await voiceAssistant.startAssistant(onListen);
     await voiceVisualizer.startVisualization();
     isStarted = true;
+     // start
+     const { stop } =  runAudio()
+     stop_ = stop
+      // end
     startButton.innerText = "Stop Assistant";
   } else {
+    if(typeof stop_ === 'function') {
+      stop_()
+    }
     //Stop assistant
     startButton.innerText = "Stopping...";
-    await voiceAssistant.stopAssistant();
-    voiceVisualizer.stopVisualization();
+    // await voiceAssistant.stopAssistant();
+    // voiceVisualizer.stopVisualization();
     isStarted = false;
     startButton.innerText = "Start Assistant";
   }
@@ -83,3 +90,9 @@ console.log('clicked')
   runAudio();
   document.getElementById('id01').style.display='none'
 })
+
+document.querySelector('#restart').addEventListener('click',() => {
+  console.log('clicked')
+    runAudio();
+    document.getElementById('id01').style.display='none'
+  })

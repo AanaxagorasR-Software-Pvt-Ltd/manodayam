@@ -116,7 +116,7 @@ export default function MentalHealth() {
           </div>
         </div>
       ))}
-      <a href="#howwedo">
+      <Link to="/self-awareness">
         <div
           data-placement="top"
           tabindex="0"
@@ -126,7 +126,7 @@ export default function MentalHealth() {
         >
           <li className="scrollToTop fa fa-chevron-left backbtn"></li>
         </div>
-      </a>
+      </Link>
     </>
   );
 }

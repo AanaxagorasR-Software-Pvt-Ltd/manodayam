@@ -100,7 +100,9 @@ export default function Cart(props) {
         console.log(error);
       });
   };
-
+ const Backclick =()=>{
+   window.history.back()
+ }
   return (
     <>
       <div className="contact-banner mb-50">
@@ -149,11 +151,11 @@ export default function Cart(props) {
                     {responseData &&
                       responseData.map((element, index) => (
                         <tr key={element._id}>
-                          <td>
+                          {/* <td>
                             <img src={element.products.img_url} alt="" />
-                          </td>
+                          </td> */}
                           {/* <td>{element.products.product_name}</td> */}
-
+                          <td> {index + 1}</td>
                           <td>
                             <Link to={"/ViewProduct/" + element.products.slug}>
                               {element.products.product_name}
@@ -247,17 +249,18 @@ export default function Cart(props) {
           </div>
         </div>
       </div>
-      <a href="#howwedo">
+      <Link to="">
         <div
           data-placement="top"
           tabindex="0"
           data-toggle="tooltip"
           title="Previous page"
           className="bd-dark"
+          onClick={Backclick}
         >
           <li className="scrollToTop fa fa-chevron-left backbtn"></li>
         </div>
-      </a>
+      </Link>
     </>
   );
 }
