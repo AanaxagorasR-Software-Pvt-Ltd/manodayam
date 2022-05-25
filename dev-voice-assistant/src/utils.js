@@ -6,7 +6,7 @@ export const runAudio = (isStop) => {
   let isStoped = false
   // put here quize
   let quize = [
-    "We welcome you on our MANODAYAM’s holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
+    "We welcome you on our Manodyam's holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
     "Please   share  your  Name ?",
     "Please   share  your  age ?",
     "Please   share   your  gender ?",
@@ -42,11 +42,25 @@ export const runAudio = (isStop) => {
   const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
   const saySpeech = function (text) {
     if(!isStoped) {
+      
       const speech = new window.SpeechSynthesisUtterance(text);
-      window.speechSynthesis.speak(speech);
+      
+      const speak  = () => {
+        let voices = window.speechSynthesis.getVoices();
+        speech.voice = voices[10];
+        window.speechSynthesis.speak(speech);
+      }
+
+      if (window.speechSynthesis.getVoices().length > 0) {
+        speak();
+      } else {
+        window.speechSynthesis.addEventListener('voiceschanged', speak);
+      }
+      
     } else{
       const speech = new window.SpeechSynthesisUtterance('i am going to quite');
-      window.speechSynthesis.speak(speech);
+     
+     
       window.speechSynthesis.cancel()
       window.speechSynthesis.cancel()
       quize = []
