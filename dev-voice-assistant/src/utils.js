@@ -6,12 +6,12 @@ export const runAudio = (isStop) => {
   let isStoped = false
   // put here quize
   let quize = [
-    "We welcome you on our Manodyam's holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
+    "We ,welcome you on our , Manodyam's , holistic online  solution ,on Mental health wellness , powered by , Artificial , intelligence & machine learning, Will like to know few important , things about you followed by , a self Voice assessment.",
     "Please   share  your  Name ?",
     "Please   share  your  age ?",
     "Please   share   your  gender ?",
     "Would you like to share , How are you feeling today ?",
-    "Would you like to Share one good thing which happened in last one week ?",
+    "Would you like to Share ,one good thing ,which happened in ,last , one week ?",
   ];
   let it;
   const recordAudio = () =>
@@ -134,7 +134,7 @@ export const runAudio = (isStop) => {
     stop() {
       isStoped = true;
       window.speechSynthesis.cancel()
-      
+
     }
   }
 
