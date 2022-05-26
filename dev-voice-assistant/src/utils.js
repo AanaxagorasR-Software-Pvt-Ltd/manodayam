@@ -6,7 +6,7 @@ export const runAudio = (isStop) => {
   let isStoped = false
   // put here quize
   let quize = [
-    "We ,welcome you on our , Manodyam's , holistic online  solution ,on Mental health wellness , powered by , Artificial , intelligence & machine learning, Will like to know few important , things about you followed by , a self Voice assessment.",
+    "We ,welcome you on our , Manodyam's , holistic online  solution ,on Mental health wellness , powered by , Artificial , intelligence & , machine learning , Will like to know few important , things about , you followed by , a self Voice  , assessment.",
     "Please   share  your  Name ?",
     "Please   share  your  age ?",
     "Please   share   your  gender ?",
@@ -78,7 +78,7 @@ export const runAudio = (isStop) => {
     } catch (e) {
       console.log(`error ${e}`);
     }
-    audio.play();
+    // audio.play();
     // end
 
     console.log("audio", audio, it.done);
@@ -92,7 +92,7 @@ export const runAudio = (isStop) => {
       //   )
       // );
       let rest = saySpeech(
-        "Did you answer questions , to your satisfaction. Please press start ,  Assessment button for us to proceed , to Self assessment and please press  , restart if you want to re-run questions  , again?"
+        "Did you answer questions , to your satisfaction. , Please press start ,  Assessment button for us to proceed , to Self assessment and please press  , restart , if you want to re-run , questions  , again?"
       );
 
       await sleep(6000);
