@@ -106,7 +106,7 @@ export default function MentalHealth() {
                     </div>
                     <div className="col-lg-12">
                       <button className="btn-web hvr-float-shadow">
-                        <Link to="/bookingAppoint">Get Solutions</Link>
+                        <a href="#therapy">Therapy</a>
                       </button>
                     </div>
                   </div>
@@ -116,7 +116,7 @@ export default function MentalHealth() {
           </div>
         </div>
       ))}
-      <a href="#howwedo">
+      <Link to="/self-awareness">
         <div
           data-placement="top"
           tabindex="0"
@@ -126,7 +126,7 @@ export default function MentalHealth() {
         >
           <li className="scrollToTop fa fa-chevron-left backbtn"></li>
         </div>
-      </a>
+      </Link>
     </>
   );
 }

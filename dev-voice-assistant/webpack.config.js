@@ -71,6 +71,9 @@ module.exports = {
         },
       ],
     }),
+    new webpack.SourceMapDevToolPlugin({
+      filename: "[file].map"
+    }),
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "src/index.html",

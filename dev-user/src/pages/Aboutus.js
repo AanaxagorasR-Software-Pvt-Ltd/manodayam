@@ -89,7 +89,7 @@ export default function Aboutus() {
                   India(MHFI) for technical, functional and strategic depth &
                   are backed & invested by STPI (Ministry of Electronics and
                   Information Technology , MieTY) Govt Of India, under DIGITAL
-                  Health initiative called “ MediTech”.
+                  Health initiative called “ MedTech”.
                 </p>
                 <p>
                   We provide Unique Value proposition of integrating continual
@@ -101,9 +101,9 @@ export default function Aboutus() {
                   This platform is scaled to provide Solutions to different
                   Mental Health scenarios such as Depression, Panic, Stress,
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
-                  ,Bipolar, ADHD, Dementia, ,Alzheimer’s, Parkinson ,Juvenile
+                  ,Bipolar, ADHD, Dementia, Parkinson ,Juvenile
                   Delinquency, Autism & Sexual Disorders!! Though as per data
-                  from Health experts and WHO , we have First seven scenarios as
+                  from Health experts and WHO , we have  scenarios as
                   majority of ongoing and potential scenarios.
                 </p>
                 <p>
@@ -117,7 +117,7 @@ export default function Aboutus() {
                 </p>
                 <p>
                   Expertise in Mathematical Modelling, Business Management, Big
-                  Data Management, Statistical Analytics.
+                  Data Management & Statistical Analytics.
                 </p>
                 <p>
                   We have a special focus on Compliances to Clinical Trials,

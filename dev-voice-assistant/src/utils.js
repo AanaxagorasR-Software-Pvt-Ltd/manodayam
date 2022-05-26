@@ -2,13 +2,14 @@ import { saveFile } from "./api";
 
 export const wait = (s) => new Promise((rs) => setTimeout(rs, s));
 
-export const runAudio = () => {
+export const runAudio = (isStop) => {
+  let isStoped = false
   // put here quize
   let quize = [
-    "We welcome you on our MANODAYAM’s holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
-    "Please share your Name ?",
-    "Please share your age ?",
-    "Please share  your gender ?",
+    "We welcome you on our Manodyam's holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
+    "Please   share  your  Name ?",
+    "Please   share  your  age ?",
+    "Please   share   your  gender ?",
     "Would you like to share , How are you feeling today ?",
     "Would you like to Share one good thing which happened in last one week ?",
   ];
@@ -40,15 +41,37 @@ export const runAudio = () => {
 
   const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
   const saySpeech = function (text) {
-    const speech = new window.SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(speech);
+    if(!isStoped) {
+      
+      const speech = new window.SpeechSynthesisUtterance(text);
+      
+      const speak  = () => {
+        let voices = window.speechSynthesis.getVoices();
+        speech.voice = voices[10];
+        window.speechSynthesis.speak(speech);
+      }
+
+      if (window.speechSynthesis.getVoices().length > 0) {
+        speak();
+      } else {
+        window.speechSynthesis.addEventListener('voiceschanged', speak);
+      }
+      
+    } else{
+      const speech = new window.SpeechSynthesisUtterance('i am going to quite');
+     
+     
+      window.speechSynthesis.cancel()
+      window.speechSynthesis.cancel()
+      quize = []
+    }
   };
 
   const __main = async (w) => {
     saySpeech(w);
     const recorder = await recordAudio();
     recorder.start();
-    await sleep(3000);
+    await sleep(6000);
     const audio = await recorder.stop();
     try {
       const savedFile = await saveFile(audio);
@@ -59,8 +82,8 @@ export const runAudio = () => {
     // end
 
     console.log("audio", audio, it.done);
-    await sleep(3000);
-    if (quize.length > 0) {
+    await sleep(6000);
+    if (quize.length > 0 && !isStoped) {
       it.next();
     } else {
       // let rest = confirm(
@@ -69,21 +92,21 @@ export const runAudio = () => {
       //   )
       // );
       let rest = saySpeech(
-        "Did you answer questions to your satisfaction. Please press start Assessment button for us to proceed to Self assessment and please press restart if you want to re-run questions again?"
+        "Did you answer questions , to your satisfaction. Please press start ,  Assessment button for us to proceed , to Self assessment and please press  , restart if you want to re-run questions  , again?"
       );
 
-      await sleep(3000);
+      await sleep(6000);
       let rest1 = document.querySelector("#Myques");
       rest1.click();
       console.log("button under hood");
       if (rest) {
         quize = [
-          "We welcome you on our MANODAYAM’s holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
+          "We welcome you on our MANODAYAM’s, holistic online solution , on Mental health wellness powered , by Artificial intelligence  , & machine learning , Will like to know few important things , about you followed ,by a self Voice assessment.",
           "Please share your Name ?",
           "Please share your age ?",
           "Please share  your gender ?",
           "Would you like to share , How are you feeling today ?",
-          "Would you like to Share one good thing which happened in last one week ?",
+          "Would you like to Share , one good thing which , happened in last , one week ?",
         ];
         it.next();
       }
@@ -107,4 +130,11 @@ export const runAudio = () => {
   setTimeout(() => {
     it.next();
   }, 1000);
+  return {
+    stop() {
+      isStoped = true;
+      window.speechSynthesis.cancel()
+    }
+  }
+
 };

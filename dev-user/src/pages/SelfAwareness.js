@@ -97,12 +97,12 @@ export default function SelfAwareness() {
           <div className="row">
             <div className="col-lg-6">
               <div className="contact-breadcrumb">
-                <h3>Self SelfAwareness</h3>
+                <h3>Self Awareness</h3>
                 <ol className="breadcrumb">
                   <li>
                     <Link to="/">Home / &nbsp;</Link>
                   </li>
-                  <li>Self SelfAwareness (Swayam)</li>
+                  <li>Self Awareness</li>
                 </ol>
               </div>
             </div>
@@ -113,7 +113,7 @@ export default function SelfAwareness() {
         <div className="container">
           <div className="col-lg-12">
             <div className="service-heading">
-              <h5>Swayam- Do It Yourself</h5>
+              {/* <h5>Swayam- Do It Yourself</h5> */}
               <p>Swayam gives you power to heal and get you to wellness</p>
             </div>
           </div>
@@ -131,14 +131,14 @@ export default function SelfAwareness() {
                         loginsubmit("/mentalHealth/" + element.slug)
                       }
                     >
-                      Find Solution
+                      View More
                     </buttton>
-                    <buttton
+                    {/* <buttton
                       className="btn-web hvr-float-shadow"
                       onClick={() => loginsubmit("/all-mental-wellness")}
                     >
-                      View More
-                    </buttton>
+                      
+                    </buttton> */}
                   </div>
                 </div>
               ))}

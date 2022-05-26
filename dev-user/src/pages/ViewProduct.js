@@ -210,7 +210,7 @@ export default function ViewProduct(props) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <a href="#howwedo">
+      <Link to="/eco-system">
         <div
           data-placement="top"
           tabindex="0"
@@ -220,7 +220,7 @@ export default function ViewProduct(props) {
         >
           <li className="scrollToTop fa fa-chevron-left backbtn"></li>
         </div>
-      </a>
+      </Link>
     </>
   );
 }

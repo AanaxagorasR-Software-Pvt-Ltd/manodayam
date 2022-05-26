@@ -54,9 +54,9 @@ startDatabase().then(async () => {
 });
 
 // start the server
-// app.listen(3020, async () => {
-//   console.log(`listening on port ${3020}`);
-// });
-app.listen(4070, async () => {
+app.listen(3020, async () => {
   console.log(`listening on port ${3020}`);
 });
+// app.listen(4070, async () => {
+//   console.log(`listening on port ${3020}`);
+// });
