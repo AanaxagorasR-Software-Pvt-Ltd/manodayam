@@ -134,6 +134,7 @@ export const runAudio = (isStop) => {
     stop() {
       isStoped = true;
       window.speechSynthesis.cancel()
+      
     }
   }
 
