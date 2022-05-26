@@ -58,11 +58,11 @@ export const runAudio = (isStop) => {
       }
       
     } else{
-      const speech = new window.SpeechSynthesisUtterance('i am going to quite');
+     
      
      
       window.speechSynthesis.cancel()
-      window.speechSynthesis.cancel()
+   
       quize = []
     }
   };
