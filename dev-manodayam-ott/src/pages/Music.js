@@ -25,8 +25,8 @@ export default function Music() {
     MusicApi();
   }, []);
   const filterType = resData.filter((element) =>
-  element?.type?.includes((element = "Music"))
-);
+    element?.type?.includes((element = "Music"))
+  );
   return (
     <>
       <div>
@@ -57,10 +57,13 @@ export default function Music() {
                       <div class="col-lg-3 col-sm-6">
                         <div class="display-card">
                           <i class="fas fa-lock"></i>
-                          <Link to={{
-                              pathname: "/musicplayer?audioid=" + element._id
-                            }}>
-                            <img className="music"
+                          <Link
+                            to={{
+                              pathname: "/musicplayer?audioid=" + element._id,
+                            }}
+                          >
+                            <img
+                              className="music"
                               style={{ borderRadius: "25px" }}
                               src={element.image}
                               alt=""

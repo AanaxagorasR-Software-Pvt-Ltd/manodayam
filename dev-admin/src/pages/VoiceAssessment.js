@@ -287,6 +287,7 @@ const VoiceAssessment = () => {
                               <th>Questions</th>
                               {/* <th>Right-Answer</th> */}
                               <th>Category</th>
+                              <th>Question bank</th>
                               <th>Created Date</th>
                               <th style={{ width: "80px" }}>Action</th>
                             </tr>
@@ -306,6 +307,7 @@ const VoiceAssessment = () => {
                                 </td>
                                 {/* <td>{v.rytAns}</td> */}
                                 <td>{v.category}</td>
+                                <td>{v.type}</td>
                                 <td>{v.createdAt}</td>
 
                                 {/* <td>
@@ -538,6 +540,25 @@ const Addform = forwardRef((props, ref) => {
                 <option value="Sexual Addiction">Sexual Addiction</option>
                 <option value="Hyperactivity">Hyperactivity</option>
                 <option value="Impulsivity">Impulsivity</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"> Select Category</label>
+              <select
+                class="form-control"
+                value={data.type || ""}
+                onChange={(e) => {
+                  handleChange(e.target.value, "type");
+                }}
+              >
+                <option value="" disabled>
+                  Select Question Type
+                </option>
+                <option value="H-1">H-1</option>
+                <option value="H-2">H-2</option>
+                <option value="H-3">H-3</option>
+                <option value="H-4">H-4</option>
+                <option value="H-5">H-5</option>
               </select>
             </div>
           </form>

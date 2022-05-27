@@ -24,7 +24,7 @@ router.post("/new", async (req, res) => {
         ans4: body.ans4,
         // rytAns: body.rytAns,
         category: body.category,
-        // type: body.type
+        type: body.type
       };
       if (!body?._id) {
         data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
