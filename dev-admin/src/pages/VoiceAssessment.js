@@ -300,12 +300,17 @@ const VoiceAssessment = () => {
                                   <strong>Q:</strong> {v.ques}
                                   {/* <br /> */}
                                   <hr />
-                                  <strong>Ans1:</strong> {v.ans1} <br />
-                                  <strong>Ans2:</strong> {v.ans2} <br />
-                                  <strong>Ans3:</strong> {v.ans3} <br />
-                                  <strong>Ans4:</strong> {v.ans4} <br />
+                                  <strong>Ans1:</strong> {v.ans1} &nbsp; &nbsp;
+                                  <strong>Score:</strong> {v.score1}
+                                  <br />
+                                  <strong>Ans2:</strong> {v.ans2} &nbsp; &nbsp;
+                                  <strong>Score:</strong> {v.score2} <br />
+                                  <strong>Ans3:</strong> {v.ans3} &nbsp; &nbsp;
+                                  <strong>Score:</strong> {v.score3} <br />
+                                  <strong>Ans4:</strong> {v.ans4} &nbsp; &nbsp;
+                                  <strong>Score:</strong> {v.score4} <br />
+                                  <br />
                                 </td>
-                                {/* <td>{v.rytAns}</td> */}
                                 <td>{v.category}</td>
                                 <td>{v.type}</td>
                                 <td>{v.createdAt}</td>
@@ -448,72 +453,134 @@ const Addform = forwardRef((props, ref) => {
                 placeholder="Your Question"
               />
             </div>
-            <div class="form-group">
-              <label for="exampleInputUsername1">Answer-1</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.ans1 || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "ans1");
-                }}
-                placeholder="Answer here"
-              />
+            <div class="row">
+              <div class="form-group col-lg-9">
+                <label for="exampleInputUsername1">Answer-1</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value={data.ans1 || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "ans1");
+                  }}
+                  placeholder="Answer here"
+                />
+              </div>
+              <div class="form-group col-lg-3">
+                <label for="exampleInputUsername1">Score</label>
+                <select
+                  class="form-control"
+                  value={data.score1 || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "score1");
+                  }}
+                >
+                  <option value="" disabled>
+                    Select
+                  </option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="exampleInputUsername1">Answer-2</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.ans2 || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "ans2");
-                }}
-                placeholder="Answer here"
-              />
-            </div>{" "}
-            <div class="form-group">
-              <label for="exampleInputUsername1">Answer-3</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.ans3 || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "ans3");
-                }}
-                placeholder="Answer here"
-              />
+            <div class="row">
+              <div class="form-group col-lg-9">
+                <label for="exampleInputUsername1">Answer-2</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value={data.ans2 || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "ans2");
+                  }}
+                  placeholder="Answer here"
+                />
+              </div>
+              <div class="form-group col-lg-3">
+                <label for="exampleInputUsername1">Score</label>
+                <select
+                  class="form-control"
+                  value={data.score2 || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "score2");
+                  }}
+                >
+                  <option value="" disabled>
+                    Select
+                  </option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="exampleInputUsername1">Answer-4</label>
-              <input
-                type="text"
-                class="form-control"
-                value={data.ans4 || ""}
-                onChange={(e) => {
-                  handleChange(e.target.value, "ans4");
-                }}
-                placeholder="Answer here"
-              />
+            <div class="row">
+              <div class="form-group col-lg-9">
+                <label for="exampleInputUsername1">Answer-3</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value={data.ans3 || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "ans3");
+                  }}
+                  placeholder="Answer here"
+                />
+              </div>
+              <div class="form-group col-lg-3">
+                <label for="exampleInputUsername1">Score</label>
+                <select
+                  class="form-control"
+                  value={data.score3 || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "score3");
+                  }}
+                >
+                  <option value="" disabled>
+                    Select
+                  </option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
             </div>
-            {/* <div class="form-group">
-              <label for="exampleInputUsername1">Right Answer</label>
+            <div class="row">
+              <div class="form-group col-lg-9">
+                <label for="exampleInputUsername1">Answer-4</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value={data.ans4 || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "ans4");
+                  }}
+                  placeholder="Answer here"
+                />
+              </div>
+              <div class="form-group col-lg-3">
+              <label for="exampleInputUsername1">Score</label>
               <select
                 class="form-control"
-                value={data.rytAns || ""}
+                value={data.score4 || ""}
                 onChange={(e) => {
-                  handleChange(e.target.value, "rytAns");
+                  handleChange(e.target.value, "score4");
                 }}
               >
                 <option value="" disabled>
-                  Select Your Right Answer
+                  Select
                 </option>
-                <option value="Answer-1">Answer-1</option>
-                <option value="Answer-2">Answer-2</option>
-                <option value="Answer-3">Answer-3</option>
-                <option value="Answer-4">Answer-4</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
               </select>
-            </div> */}
+            </div>
+            </div>
             <div class="form-group">
               <label for="exampleInputUsername1"> Select Category</label>
               <select
