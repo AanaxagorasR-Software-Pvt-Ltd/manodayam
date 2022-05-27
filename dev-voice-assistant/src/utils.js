@@ -31,8 +31,8 @@ export const runAudio = (isStop) => {
             });
             const audioUrl = URL.createObjectURL(audioBlob);
             const audio = new Audio(audioUrl);
-            const play = () => audio.play();
-            resolve({ audioBlob, audioUrl, play });
+            // const play = () => audio.play();
+            resolve({ audioBlob, audioUrl});
           });
           mediaRecorder.stop();
         });
@@ -71,14 +71,14 @@ export const runAudio = (isStop) => {
     saySpeech(w);
     const recorder = await recordAudio();
     recorder.start();
-    await sleep(6000);
+    await sleep(5000);
     const audio = await recorder.stop();
     try {
       const savedFile = await saveFile(audio);
     } catch (e) {
       console.log(`error ${e}`);
     }
-    audio.play();
+    // audio.play();
     // end
 
     console.log("audio", audio, it.done);
@@ -106,8 +106,8 @@ export const runAudio = (isStop) => {
           "Please share your Name ?",
           "Please share your age ?",
           "Please share  your gender ?",
-          "Would you like to share , How are you feeling today ?",
-          "Would you like to Share , one good thing which , happened in last , one week ?",
+          "Would you like to share  How are you , feeling today ?",
+          "Would you like to Share  one good thing which , happened in last , one week ?",
           
         ];
         it.next();
