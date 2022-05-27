@@ -6,12 +6,12 @@ export const runAudio = (isStop) => {
   let isStoped = false
   // put here quize
   let quize = [
-    "We ,welcome you on our , Manodyam's , holistic online  solution ,on Mental health wellness , powered by , Artificial , intelligence & , machine learning , Will like to know few important , things about , you followed by , a self Voice  , assessment.",
+    "We welcome  , you on our , Manodyam's , holistic online  solution ,on Mental health wellness , powered by Artificial intelligence , & machine learning  Will like to know few important , things about , you followed by , a self Voassessment.",
     "Please   share  your  Name ?",
     "Please   share  your  age ?",
     "Please   share   your  gender ?",
-    "Would you like to share , How are you feeling today ?",
-    "Would you like to Share ,one good thing ,which happened in ,last , one week ?",
+    "Would you , like to share , How are you feeling  , today ?",
+    "Would you ,  like to Share ,one good thing ,which happened in ,last , one week ?",
   ];
   let it;
   const recordAudio = () =>
@@ -78,11 +78,11 @@ export const runAudio = (isStop) => {
     } catch (e) {
       console.log(`error ${e}`);
     }
-    // audio.play();
+    audio.play();
     // end
 
     console.log("audio", audio, it.done);
-    await sleep(6000);
+    await sleep(5000);
     if (quize.length > 0 && !isStoped) {
       it.next();
     } else {
@@ -95,18 +95,20 @@ export const runAudio = (isStop) => {
         "Did you answer questions , to your satisfaction. , Please press start ,  Assessment button for us to proceed , to Self assessment and please press  , restart , if you want to re-run , questions  , again?"
       );
 
-      await sleep(6000);
+      await sleep(5000);
       let rest1 = document.querySelector("#Myques");
       rest1.click();
       console.log("button under hood");
       if (rest) {
         quize = [
+
           "We welcome you on our MANODAYAM’s, holistic online solution , on Mental health wellness powered , by Artificial intelligence  , & machine learning , Will like to know few important things , about you followed ,by a self Voice assessment.",
           "Please share your Name ?",
           "Please share your age ?",
           "Please share  your gender ?",
           "Would you like to share , How are you feeling today ?",
           "Would you like to Share , one good thing which , happened in last , one week ?",
+          
         ];
         it.next();
       }
