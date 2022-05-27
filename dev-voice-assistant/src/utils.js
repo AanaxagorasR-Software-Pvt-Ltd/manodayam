@@ -6,12 +6,12 @@ export const runAudio = (isStop) => {
   let isStoped = false
   // put here quize
   let quize = [
-    "We welcome you on our Manodyam's holistic online solution on Mental health wellness powered by Artificial intelligence & machine learning, Will like to know few important things about you followed by a self Voice assessment.",
+    "We welcome  , you on our , Manodyam's , holistic online  solution ,on Mental health wellness , powered by Artificial intelligence , & machine learning  Will like to know few important , things about , you followed by , a self Voassessment.",
     "Please   share  your  Name ?",
     "Please   share  your  age ?",
     "Please   share   your  gender ?",
-    "Would you like to share , How are you feeling today ?",
-    "Would you like to Share one good thing which happened in last one week ?",
+    "Would you , like to share , How are you feeling  , today ?",
+    "Would you ,  like to Share ,one good thing ,which happened in ,last , one week ?",
   ];
   let it;
   const recordAudio = () =>
@@ -31,8 +31,8 @@ export const runAudio = (isStop) => {
             });
             const audioUrl = URL.createObjectURL(audioBlob);
             const audio = new Audio(audioUrl);
-            const play = () => audio.play();
-            resolve({ audioBlob, audioUrl, play });
+            // const play = () => audio.play();
+            resolve({ audioBlob, audioUrl});
           });
           mediaRecorder.stop();
         });
@@ -58,11 +58,11 @@ export const runAudio = (isStop) => {
       }
       
     } else{
-      const speech = new window.SpeechSynthesisUtterance('i am going to quite');
+     
      
      
       window.speechSynthesis.cancel()
-      window.speechSynthesis.cancel()
+   
       quize = []
     }
   };
@@ -71,18 +71,18 @@ export const runAudio = (isStop) => {
     saySpeech(w);
     const recorder = await recordAudio();
     recorder.start();
-    await sleep(6000);
+    await sleep(5000);
     const audio = await recorder.stop();
     try {
       const savedFile = await saveFile(audio);
     } catch (e) {
       console.log(`error ${e}`);
     }
-    audio.play();
+    // audio.play();
     // end
 
     console.log("audio", audio, it.done);
-    await sleep(6000);
+    await sleep(5000);
     if (quize.length > 0 && !isStoped) {
       it.next();
     } else {
@@ -92,21 +92,23 @@ export const runAudio = (isStop) => {
       //   )
       // );
       let rest = saySpeech(
-        "Did you answer questions , to your satisfaction. Please press start ,  Assessment button for us to proceed , to Self assessment and please press  , restart if you want to re-run questions  , again?"
+        "Did you answer questions , to your satisfaction. , Please press start ,  Assessment button for us to proceed , to Self assessment and please press  , restart , if you want to re-run , questions  , again?"
       );
 
-      await sleep(6000);
+      await sleep(5000);
       let rest1 = document.querySelector("#Myques");
       rest1.click();
       console.log("button under hood");
       if (rest) {
         quize = [
+
           "We welcome you on our MANODAYAM’s, holistic online solution , on Mental health wellness powered , by Artificial intelligence  , & machine learning , Will like to know few important things , about you followed ,by a self Voice assessment.",
           "Please share your Name ?",
           "Please share your age ?",
           "Please share  your gender ?",
-          "Would you like to share , How are you feeling today ?",
-          "Would you like to Share , one good thing which , happened in last , one week ?",
+          "Would you like to share  How are you , feeling today ?",
+          "Would you like to Share  one good thing which , happened in last , one week ?",
+          
         ];
         it.next();
       }
@@ -134,6 +136,7 @@ export const runAudio = (isStop) => {
     stop() {
       isStoped = true;
       window.speechSynthesis.cancel()
+
     }
   }
 

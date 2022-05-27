@@ -594,7 +594,7 @@ export default function Home(props) {
                   className="btn-web hvr-float-shadow mt-3"
                   onClick={() => loginsubmit("/research")}
                 >
-                  veiw more
+                  Veiw more
                 </button>
                
               </div>
