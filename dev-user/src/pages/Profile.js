@@ -11,6 +11,7 @@ import {
 } from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
+
 import { useFormik } from "formik";
 
 export default function Profile() {
@@ -19,10 +20,12 @@ export default function Profile() {
   // const [data, setdatta] = useState([]);
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
+  const [alertDatas, setAlerdatas] = useState({ title: "", body: "" });
   const [user, setUser] = useState({});
   const [editData, setEditData] = useState([]);
   const [subScriptiondata, setSubscriptiondata] = useState([]);
   const [subbuy, setsubBuy] = useState("");
+  const [subID , setSubId]= useState("")
   let params = new URLSearchParams(window.location.search);
   const ProfilData = () => {
     console.log(`${API_ADMIN_URL}${PROFIL_API}`);
@@ -104,7 +107,7 @@ export default function Profile() {
   }, []);
 
   const handleClose = () => setshow(false);
-
+  const handleCloses = () => setshow(false);
   const formik = useFormik({
     initialValues: {
       name: "name",
@@ -118,16 +121,24 @@ export default function Profile() {
     const d = new Date(time);
     return d.toLocaleDateString() + " " + d.toLocaleTimeString();
   };
-  const subscriptionbook = (subId) => {
+  const subscriptionbook = () => {
     let sub = JSON.parse(localStorage.getItem("user"));
     axios.post(
       // ?humanId=${}`
 
-      `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?subemail=${sub.email}&subid=${subId}`
+      `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_BOOK}?subemail=${sub.email}&subid=${subID}`
     );
+    setshow(false)
   };
-  // setAlerdata({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
+  // setAlerdatas({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
   // setshow(true);
+ const handleBuy=(id)=>{
+  setSubId(id);
+    setAlerdatas({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
+   setshow(true) ;
+  
+   console.log("id", id);
+  }
   return (
     <>
       <div className="contact-banner mb-50">
@@ -247,7 +258,7 @@ export default function Profile() {
                                 <th>Group Therapy</th>
                                 <th>Meditation Spirituality</th>
                                 <th>Benefitsdescription</th>
-                                <th>Create Date</th>
+                                <th>Validity Date</th>
                                 <th>Price</th>
                                 <th>Action</th>
                               </tr>
@@ -264,7 +275,7 @@ export default function Profile() {
                                     <td>{a.grouptherapy} </td>
                                     <td> {a.meditation} </td>
                                     <td> {a.benefitsdescription}</td>
-                                    <th>{convertToDateTime(a.created)}</th>
+                                    <th>{convertToDateTime(a.schedule)}</th>
                                     <td>
                                       {" "}
                                       <i className="fa fa-inr"></i>
@@ -273,11 +284,13 @@ export default function Profile() {
 
                                     <td>
                                       <button
+                                     
                                         type="button"
                                         className="btn-web subbutton  hvr-float-shadow"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
-                                        onClick={() => subscriptionbook(a._id)}
+                                      
+                                        onClick={() => handleBuy(a._id)}
                                       >
                                         Buy
                                       </button>
@@ -397,6 +410,18 @@ export default function Profile() {
         <Bmodal.Footer>
           <Button variant="primary" onClick={handleClose}>
             ok
+          </Button>
+        </Bmodal.Footer>
+      </Bmodal>
+
+      <Bmodal show={show}>
+        <Bmodal.Header closeButton>
+          <Bmodal.Title>{alertDatas.title}</Bmodal.Title>
+        </Bmodal.Header>
+        <Bmodal.Body>{alertDatas.body}</Bmodal.Body>
+        <Bmodal.Footer>
+          <Button variant="primary"  onClick={() => subscriptionbook()}>
+            Confirm
           </Button>
         </Bmodal.Footer>
       </Bmodal>

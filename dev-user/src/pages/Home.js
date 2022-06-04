@@ -160,24 +160,7 @@ export default function Home(props) {
   const subchange = (e) => {
     let user = JSON.parse(localStorage.getItem("user"));
     hist(`/profile?usertype=${e}`);
-    // axios
-    //   .post(
-    //     // ?humanId=${}`
-    //     `${API_ADMIN_URL}${SUBSCRIPTION_PLANE}`,
-    //   )
-    //   .then((res) => {
-    //     console.log("====mentalHealthData====", res.data);
-    //     if (user) {
-    //       hist(`/profile?catid=${e}`)
-    //     } else {
-    //       setAlerdata({ title: "Sorry", body: "Login and registration First" });
-    //       setshow(true);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // console.log();
+   
   };
   const subchange2 = (e) => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -267,8 +250,10 @@ export default function Home(props) {
   };
   return (
     <>
-      <Login humanId={humanId} />
-      <div className="web-banner-slider">
+
+  <Login humanId={humanId}/>
+
+        <div className="web-banner-slider">
         <Slider {...settings}>
           {bannerData.map((element) => (
             <div className="web-banner mb-50">
@@ -329,7 +314,7 @@ export default function Home(props) {
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
                   ,Bipolar, ADHD, Dementia, Parkinson ,Juvenile
                   Delinquency, Autism & Sexual Disorders!! Though as per data
-                  from Health experts and WHO , we have scenarios as
+                from Health experts and WHO , we have  seven ~scenarios as
                   majority of ongoing and potential scenarios.
                 </p>
                 <p>
@@ -359,6 +344,7 @@ export default function Home(props) {
               {data.map((element) => (
                 <div className="col-lg-4">
                   <div>
+                    
                     <video
                       id="about-us-video-2"
                       controls
@@ -411,7 +397,7 @@ export default function Home(props) {
                 <div
                   className="flip-box mr-2 ml-2"
                   onClick={() =>
-                    loginsubmits("https://master.dmn3o3hk3w2r8.amplifyapp.com")
+                    loginsubmits("https://master.d378gmn9ahk7zs.amplifyapp.com/")
                   }
                 >
                   <div className="flip-box-inner ">
@@ -584,9 +570,9 @@ export default function Home(props) {
                 
                 <p>
             
+                <h4>Mental health and AI</h4>
+                <h4>Mental Health and its effect on Comorbidity</h4>
                 <h4>Mental Health and Criminology</h4>
-                <h4>Mental Health and Spirituality</h4>
-                <h4>Cow assisted Psychotherapy</h4>
 
                 </p>
 

@@ -122,6 +122,7 @@ export default function Therapy() {
         </div>
       </div>
       {/* </div> */}
+      
       <a href="#howwedo">
         <div
           data-placement="top"
