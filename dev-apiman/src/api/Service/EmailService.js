@@ -1,6 +1,9 @@
 const nodemailer = require("nodemailer");
 const env = require("../../config");
-
+const convertToDateTime = (time) => {
+  const d = new Date(time);
+  return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+};
 class EmailService {
   constructor() {
     this.configure();
@@ -667,6 +670,7 @@ async sendEmailToUserJoingroupbooked(email, details) {
 
 // -------------------------------------------------------------email for subscription plane book------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
 async sendEmailToPlanebooked(email, details) {
   console.log("sendEmailtoUser")
   let info = await this.transporter.sendMail({
@@ -699,7 +703,7 @@ async sendEmailToPlanebooked(email, details) {
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
         <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Your Subscription plane is successfully book on
-        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.schedule}</strong> kindly Check  your subscription plane details
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${convertToDateTime(details.schedule)}</strong> kindly Check  your subscription plane details
           <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
        
 

@@ -136,7 +136,7 @@ router.post("/bookplane", async (req, res) => {
     let subscriptionplane = await db
       .collection("Subscription_Plan")
       .findOne({ _id: new ObjectID(data.id) });
-    var date = new Date(subscriptionplane.created);
+    var date = new Date(subscriptionplane.schedule);
     var dates = date.toLocaleString("en-IN");
 
     EmailService.sendEmailToPlanebooked(data.email, subscriptionplane);
@@ -153,6 +153,18 @@ router.post("/bookplane", async (req, res) => {
 
   //   // res.send('hello')
   // });
+
+
+//   const schedule = require('node-schedule');
+// schedule.scheduleJob('*/1 * * * *', function(){
+
+
+//     console.log('err');
+//     // email.send(config)
+// })
+
+
+
 
   router.get("/list", async (req, res) => {
     let filter = {};

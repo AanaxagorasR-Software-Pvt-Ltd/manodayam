@@ -208,9 +208,8 @@ const Subscription = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -223,9 +222,8 @@ const Subscription = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -314,7 +312,7 @@ const Subscription = () => {
 
                                 <td>{a.meditation}</td>
                                 <th>{a.benefitsdescription}</th>
-                                <th>{convertToDateTime(a.created)}</th>
+                                <th>{convertToDateTime(a.schedule)}</th>
 
                                 <td>{a.price}</td>
 
@@ -553,17 +551,36 @@ const Addform = forwardRef((props, ref) => {
                   />
                 </div>
               </div>
-              <div class="form-group">
-                <label for="exampleInputUsername1">Benefits/Description</label>
-                <textarea
-                  class="form-control"
-                  row={4}
-                  value={data.benefitsdescription || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "benefitsdescription");
-                  }}
-                  placeholder=" Benefits/Description "
-                />
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="exampleInputUsername1">Benefits/Description</label>
+                  <textarea
+                    class="form-control"
+                    row={4}
+                    value={data.benefitsdescription || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "benefitsdescription");
+                    }}
+                    placeholder=" Benefits/Description "
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                <label for="">Date</label>
+                  <input
+                    type="datetime-local"
+                    name=""
+                    id=""
+                    placeholder="DD/MM/YYYY"
+                    className="form-control"
+                    value={data.schedule || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "schedule");
+                    }}
+                  />
+                  {/* {libraryDate == "" ? (
+                    <p className="text-danger"></p>
+                  ) : null} */}
+                </div>
               </div>
             </div>
           </form>

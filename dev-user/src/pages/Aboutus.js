@@ -103,7 +103,7 @@ export default function Aboutus() {
                   Sleeplessness , Alcoholism, Substance Abuse, PSTD , Alzheimer
                   ,Bipolar, ADHD, Dementia, Parkinson ,Juvenile
                   Delinquency, Autism & Sexual Disorders!! Though as per data
-                  from Health experts and WHO , we have  scenarios as
+                  from Health experts and WHO , we have Seven scenarios as
                   majority of ongoing and potential scenarios.
                 </p>
                 <p>
