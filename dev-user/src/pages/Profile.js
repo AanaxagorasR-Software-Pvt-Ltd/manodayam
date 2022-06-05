@@ -275,7 +275,7 @@ export default function Profile() {
                                     <td>{a.grouptherapy} </td>
                                     <td> {a.meditation} </td>
                                     <td> {a.benefitsdescription}</td>
-                                    <th>{convertToDateTime(a.schedule)}</th>
+                                    <th>{(a.schedule)}</th>
                                     <td>
                                       {" "}
                                       <i className="fa fa-inr"></i>

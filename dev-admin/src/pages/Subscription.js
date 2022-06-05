@@ -312,7 +312,7 @@ const Subscription = () => {
 
                                 <td>{a.meditation}</td>
                                 <th>{a.benefitsdescription}</th>
-                                <th>{convertToDateTime(a.schedule)}</th>
+                                <th>{(a.schedule)}</th>
 
                                 <td>{a.price}</td>
 
@@ -566,17 +566,32 @@ const Addform = forwardRef((props, ref) => {
                 </div>
                 <div class="form-group col-md-6">
                 <label for="">Date</label>
-                  <input
-                    type="datetime-local"
+                <select
+                  class="form-control"
+                  value={data.schedule || ""}
+                  onChange={(e) => {
+                    handleChange(e.target.value, "schedule");
+                  }}
+                >
+                  <option>Select</option>
+                  <option>2-month</option>
+                  <option>3-week</option>
+                  <option>5-month</option>
+                  <option>6-week</option>
+                  <option>7-month</option>
+                  <option>9-month</option>
+                </select>
+                  {/* <input
+                    text=""
                     name=""
                     id=""
-                    placeholder="DD/MM/YYYY"
+                    // placeholder="DD/MM/YYYY"
                     className="form-control"
                     value={data.schedule || ""}
                     onChange={(e) => {
                       handleChange(e.target.value, "schedule");
                     }}
-                  />
+                  /> */}
                   {/* {libraryDate == "" ? (
                     <p className="text-danger"></p>
                   ) : null} */}

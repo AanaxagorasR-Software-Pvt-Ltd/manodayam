@@ -671,7 +671,7 @@ async sendEmailToUserJoingroupbooked(email, details) {
 // -------------------------------------------------------------email for subscription plane book------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-async sendEmailToPlanebooked(email, details) {
+async sendEmailToPlanebooked(email, details, startDate) {
   console.log("sendEmailtoUser")
   let info = await this.transporter.sendMail({
     to: email,
@@ -703,9 +703,65 @@ async sendEmailToPlanebooked(email, details) {
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
         <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Your Subscription plane is successfully book on
-        <strong style="box-sizing: border-box;font-weight: bolder;"> ${convertToDateTime(details.schedule)}</strong> kindly Check  your subscription plane details
-          <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${startDate}</strong> kindly Check  your subscription plane details is  Therapy :${details.therapy} 
+      , Selfassessment: ${details.selfassessment}, doctorassessment :${details.doctorassessment} Grouptherapy:${details.grouptherapy}  ,Meditation:${details.meditation} ,Validity : ${details.schedule}, Price: ${details.price}
+
+         if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
+         
        
+
+
+        ~~
+       
+      </div>
+    </div>
+  </body>
+  
+  </html>
+                 
+              `,
+  });
+  console.log(info);
+}
+// ------------------------------------------------------------------Email send to scheduler-----------------------------------------------------
+async sendEmailToscheduler(details) {
+  console.log("sendEmailtoUser")
+  let info = await this.transporter.sendMail({
+    to: details.user.email,
+    from: `manodayam.swayamshakthi@gmail.com`,
+    subject: "Hello Your Subscription is on active ",
+    // alternatives: [{ contentType: "text/html" }],
+    html: ` 
+         
+    <html lang="en" style="box-sizing: border-box;font-family: sans-serif;line-height: 1.15;-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;">
+
+    <head style="box-sizing: border-box;">
+    <meta charset="UTF-8" style="box-sizing: border-box;">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" style="box-sizing: border-box;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="box-sizing: border-box;">
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous" style="box-sizing: border-box;"></script>
+      
+  
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous" style="box-sizing: border-box;"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous" style="box-sizing: border-box;"></script>
+    <title style="box-sizing: border-box;">Document</title>
+  </head>
+  
+  <body style="box-sizing: border-box;margin: 0;font-family: -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;Noto Sans&quot;,&quot;Liberation Sans&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size: 1rem;font-weight: 400;line-height: 1.5;color: #212529;text-align: left;background-color: #fff;min-width: 992px!important;">
+  
+    
+    <div class="card" style="width: 24rem;box-sizing: border-box;position: relative;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;">
+      <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
+      <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
+        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
+        <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Hello ${details.user.name} Your Subscription plane is Active
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.createdAt} </strong> and validity  at <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.endDate} </strong> kindly Check  your subscription plane details is  Therapy :${details.subscription.therapy} 
+      , Selfassessment: ${details.subscription.selfassessment}, doctorassessment :${details.subscription.doctorassessment} Grouptherapy:${details.subscription.grouptherapy}  ,Meditation:${details.subscription.meditation} ,Validity : ${details.subscription.schedule}, Price: ${details.subscription.price}
+
+         if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
+         
+     
 
 
         ~~
