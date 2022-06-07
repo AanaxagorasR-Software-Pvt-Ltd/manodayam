@@ -22,6 +22,7 @@ import LeftSideBar from "../Layout/LeftSideBar";
 
 const Audio = () => {
   const [data, setData] = React.useState([]);
+
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -283,9 +284,10 @@ const Audio = () => {
                               <th>S.N</th>
 
                               <th>Audio</th>
-                              <th> Audio Title</th>
-                              <th> Audio Description</th>
-                              <th> Type</th>
+                              <th>Audio Title</th>
+                              <th>Audio Description</th>
+                              <th>Category</th>
+                              <th>Type</th>
                               <th>Audio Link</th>
                               <th>Date</th>
                               <th style={{ width: "80px" }}>Action</th>
@@ -300,12 +302,10 @@ const Audio = () => {
                                 </td>
                                 <td>{a.title}</td>
                                 <td>{a.description}</td>
+                                <td>{a.category}</td>
                                 <td>{a.type}</td>
-
                                 <td>{a.audio_link}</td>
-
                                 <td>{a.created}</td>
-
                                 <td>
                                   <button
                                     type="button"
@@ -373,6 +373,8 @@ const Addform = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
   const [media, setMedia] = useState([]);
   const [data, setData] = useState({});
+  const [category, setcategory] = React.useState([]);
+
   const [showdata, setshowdata] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
 
@@ -417,7 +419,20 @@ const Addform = forwardRef((props, ref) => {
         setAlerdata({ title: "Sorry", body: "Server Error" });
       });
   };
-
+  const categorypart = () => {
+    axios
+      .get("mastercategory")
+      .then((res) => {
+        console.log("res", res, typeof res);
+        setcategory(res);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
+  React.useEffect(() => {
+    categorypart();
+  }, []);
   return (
     <>
       <Modal
@@ -433,23 +448,39 @@ const Addform = forwardRef((props, ref) => {
         <Modal.Body>
           <form class="forms-sample">
             <div class="form-group">
-              <div class="col-md-3  offset-9">
-                <label for="exampleInputUsername1">Audio Type</label>
-                <select
-                  class="form-control"
-                  value={data.type || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "type");
-                  }}
-                >
-                  <option>Select</option>
-                  <option>Latest updates</option>
-                  <option>Sleep</option>
-                  <option>Music</option>
-                  <option>Meditate</option>
-                  <option>Calm Masterclass</option>
-                  <option>Scenes</option>
-                </select>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="exampleInputUsername1">Audio Category</label>
+                  <select
+                    class="form-control"
+                    value={data.category || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "category");
+                    }}
+                  >
+                    {category.map((x) => (
+                      <option>{x.mastercategory}</option>
+                    ))}
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="exampleInputUsername1">Audio Type</label>
+                  <select
+                    class="form-control"
+                    value={data.type || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "type");
+                    }}
+                  >
+                    <option>Select</option>
+                    <option>Latest updates</option>
+                    <option>Sleep</option>
+                    <option>Music</option>
+                    <option>Meditate</option>
+                    <option>Calm Masterclass</option>
+                    <option>Scenes</option>
+                  </select>
+                </div>
               </div>
               <div class="form-group">
                 <label for="exampleInputUsername1">Audio Title</label>
@@ -476,7 +507,6 @@ const Addform = forwardRef((props, ref) => {
                   />
                   <small></small>
                 </div>
-
                 <div class="form-group col-md-6">
                   <label for="exampleInputUsername1">Audio Link</label>
                   <input
