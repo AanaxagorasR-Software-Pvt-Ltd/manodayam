@@ -9,7 +9,7 @@ const passport = require("passport");
 const session = require("express-session");
 const { env } = process;
 const app = express();
-
+const Schedule=require("./api/subscription/schedule")
 app.use(cors());
 app.use(`${env.MEDIA_PATH}`, express.static(`${env.MEDIA_PATH}`));
 // allow to use body as json file

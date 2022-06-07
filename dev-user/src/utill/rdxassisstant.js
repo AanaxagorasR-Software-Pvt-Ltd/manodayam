@@ -2,7 +2,8 @@ const voiceAssisstant = {
     link:
       window.location.hostname === "localhost"
         ? "http://localhost:3020/"
-        : "https://master.dmn3o3hk3w2r8.amplifyapp.com/",
+        : "https://master.d378gmn9ahk7zs.amplifyapp.com/",
   };
   export default voiceAssisstant;
-  
+
+

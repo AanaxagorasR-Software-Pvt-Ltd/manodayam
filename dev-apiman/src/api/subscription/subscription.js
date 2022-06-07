@@ -8,7 +8,7 @@ const { getDatabase } = require("../../db/mongo");
 const path = require("path");
 const { env } = process;
 const { DOMAIN_NAME, PORT, MEDIA_PATH } = require("../../config");
-
+const moment = require('moment');
 const validate = (req, res, next) => {
   const {
     query: { pid },
@@ -130,16 +130,22 @@ router.post("/bookplane", async (req, res) => {
     }
 
     let subscriptionbook = await db.collection("Subscription_Book");
-    let subscriptiondata = await db
-      .collection("Subscription_Book")
-      .insertOne(data);
+  
     let subscriptionplane = await db
       .collection("Subscription_Plan")
       .findOne({ _id: new ObjectID(data.id) });
-    var date = new Date(subscriptionplane.created);
+    var date = new Date(subscriptionplane.schedule);
     var dates = date.toLocaleString("en-IN");
+    // <option value="2-month">2 Month</option>
+    // split("-")[1]=> month
+    let amount = subscriptionplane.schedule.split("-")[0];
+    let unit = subscriptionplane.schedule.split("-")[1];
+    data.endDate = moment(data.createdAt).add(amount,unit).toDate().toJSON().slice(0, 10).replace(/-/g, "-");
+    let subscriptiondata = await db
+    .collection("Subscription_Book")
+    .insertOne(data);
 
-    EmailService.sendEmailToPlanebooked(data.email, subscriptionplane);
+    EmailService.sendEmailToPlanebooked(data.email, subscriptionplane , data.createdAt);
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
@@ -148,11 +154,25 @@ router.post("/bookplane", async (req, res) => {
     });
   }
 }),
+
+
   // router.get("/list", async (req, res) => {
   //   const db = await getDatabase();
 
   //   // res.send('hello')
   // });
+
+
+//   const schedule = require('node-schedule');
+// schedule.scheduleJob('*/1 * * * *', function(){
+
+
+//     console.log('err');
+//     // email.send(config)
+// })
+
+
+
 
   router.get("/list", async (req, res) => {
     let filter = {};

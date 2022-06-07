@@ -300,15 +300,15 @@ const VoiceChat = (props) => {
                                   <td>{i + 1}</td>
                                   <td>{v.name}</td>
                                   <td>
-                                  <button
-                                    type="button"
-                                    class="btn btn-sm btn-info border-radius-0 add-btn"
-                                    onClick={() => {
-                                      formRef.current.openForm(v);
-                                    }}
-                                  >
-                                    <i class="ti-pencil"></i>
-                                  </button>
+                                    <button
+                                      type="button"
+                                      class="btn btn-sm btn-info border-radius-0 add-btn"
+                                      onClick={() => {
+                                        formRef.current.openForm(v);
+                                      }}
+                                    >
+                                      <i class="ti-pencil"></i>
+                                    </button>
                                     {v.welcome}
                                     <br />
                                     {v.first_ques}
@@ -324,39 +324,9 @@ const VoiceChat = (props) => {
                                     <br />
                                     {v.fifth_ques}
                                   </td>
-                                  {/* <td>{v.audio_link}</td> */}
                                   <td>
                                     <ReactAudioPlayer
-                                      // src={
-                                      //   new Audio(
-                                      //     URL.createObjectURL(v.audioblob, {type: "audio/mp3"})
-                                      //   )
-                                      // }
-                                      // src={v.audioBlob}
-                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
-                                      autoPlay={false}
-                                      controls
-                                      style={{ color: "red" }}
-                                    />
-                                    <br />
-
-                                    <ReactAudioPlayer
-                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
-                                      autoPlay={false}
-                                      controls
-                                      style={{ color: "red" }}
-                                    />
-                                    <br />
-                                    <ReactAudioPlayer
-                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
-                                      autoPlay={false}
-                                      controls
-                                      style={{ color: "red" }}
-                                    />
-                                    <br />
-
-                                    <ReactAudioPlayer
-                                      src="blob:http://localhost:3000/25897eb5-2eaa-4da0-aac4-0bc157acc8a3"
+                                      src={v.audiourl}
                                       autoPlay={false}
                                       controls
                                       style={{ color: "red" }}

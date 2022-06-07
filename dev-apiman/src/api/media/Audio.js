@@ -58,7 +58,7 @@ router.post(
         title: body.title,
         audio_link: body.audio_link,
         description: body.description,
-        // type: body.type,
+        category: body.category,
       };
 
       if (typeof req.file !== "undefined") {
@@ -66,6 +66,7 @@ router.post(
         const imageurl =
           DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + imagefile;
         data.image = imageurl;
+        console.log("77777", imageurl)
       } else {
         data.image = body.image;
       }

@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const ObjectId = require("mongodb").ObjectId;
@@ -79,10 +80,31 @@ const audioUpload = multer({
     fieldSize: 1000000,
   },
 });
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, path.join(__dirname, "../../../uploads/images"));
+  },
+  filename(req, file, cb) {
+    cb(
+      null,
+      // Set file name to
+      // filename-Date.now().extension
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+    );
+  },
+});
+
+const upload = multer({
+  preservePath: true,
+  storage,
+});
+console.log("upload", upload);
+// uploadAudio = upload.single("audio");
+// mcy - sppo - psk;
 
 router.post(
   `/voice`,
-  audioUpload.single("audio_link"),
+  upload.single("audio"),
   async (req, res) => {
     try {
       const db = await getDatabase();
@@ -90,8 +112,14 @@ router.post(
       let data = {
         audio_link: body.audio_link,
         audioblob: body.audioBlob,
+        fullname: body.fullname,
+        mail: body.mail
       };
 
+      const imageurl =
+        DOMAIN_NAME + PORT + "/" + MEDIA_PATH + "/images/" + req.file.filename;
+      data.image = imageurl;
+      data.audiourl = imageurl;
       console.log(data);
       if (!body?._id) {
         data.created = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
