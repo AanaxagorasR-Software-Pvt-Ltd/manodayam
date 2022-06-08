@@ -703,8 +703,8 @@ async sendEmailToPlanebooked(email, details, startDate) {
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
         <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Your Subscription plane is successfully book on
-        <strong style="box-sizing: border-box;font-weight: bolder;"> ${startDate}</strong> kindly Check  your subscription plane details is  Therapy :${details.therapy} 
-      , Selfassessment: ${details.selfassessment}, doctorassessment :${details.doctorassessment} Grouptherapy:${details.grouptherapy}  ,Meditation:${details.meditation} ,Validity : ${details.schedule}, Price: ${details.price}
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${startDate}</strong> kindly Check  your subscription plane details is<strong style="box-sizing: border-box;font-weight: bolder;"> Therapy :${details.therapy} </strong>
+      , <strong style="box-sizing: border-box;font-weight: bolder;"> Selfassessment: ${details.selfassessment} </strong>,  <strong style="box-sizing: border-box;font-weight: bolder;">doctorassessment :${details.doctorassessment} </strong> , <strong style="box-sizing: border-box;font-weight: bolder;">Grouptherapy:${details.grouptherapy} </strong> , <strong style="box-sizing: border-box;font-weight: bolder;">Meditation:${details.meditation}  </strong>, <strong style="box-sizing: border-box;font-weight: bolder;"> Validity : ${details.schedule} </strong>, <strong style="box-sizing: border-box;font-weight: bolder;"> Price: ${details.price} </strong>
 
          if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
          
@@ -755,14 +755,15 @@ async sendEmailToscheduler(details) {
       <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
         <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
-        <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Hello ${details.user.name} Your Subscription plane is Active
-        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.createdAt} </strong> and validity  at <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.endDate} </strong> kindly Check  your subscription plane details is  Therapy :${details.subscription.therapy} 
-      , Selfassessment: ${details.subscription.selfassessment}, doctorassessment :${details.subscription.doctorassessment} Grouptherapy:${details.subscription.grouptherapy}  ,Meditation:${details.subscription.meditation} ,Validity : ${details.subscription.schedule}, Price: ${details.subscription.price}
+        <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Hello<strong style="box-sizing: border-box;font-weight: bolder;"> ${details.user.name}</strong> Your Subscription plane is Active
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.createdAt} </strong> and validity  at <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.endDate} </strong> kindly Check  your subscription plane details Your  <strong style="box-sizing: border-box;font-weight: bolder;"> Therapy :${details.subscription.therapy}  </strong>
+      ,<strong style="box-sizing: border-box;font-weight: bolder;"> doctorassessment :${details.subscription.doctorassessment} </strong>,<strong style="box-sizing: border-box;font-weight: bolder;"> Selfassessment: ${details.subscription.selfassessment} </strong>, <strong style="box-sizing: border-box;font-weight: bolder;">Grouptherapy:${details.subscription.grouptherapy}</strong> ,Meditation:${details.subscription.meditation} , <strong style="box-sizing: border-box;font-weight: bolder;">Validity : ${details.subscription.schedule}</strong>,<strong style="box-sizing: border-box;font-weight: bolder;">  Price: ${details.subscription.price} </strong>
 
-         if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
          
-     
-
+      if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
+         
+         Price: ${details.subscription.price}
+        
 
         ~~
        
