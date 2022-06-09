@@ -17,7 +17,7 @@ class EmailService {
       secure: false,
       auth: {
         user: `manodayam.swayamshakthi@gmail.com`,
-        pass: `Manodayam@321`,
+        pass: `rztauaqjhftxxvhg`,
       },
       tls: { rejectUnauthorized: false },
     });
