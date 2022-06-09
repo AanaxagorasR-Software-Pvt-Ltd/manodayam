@@ -5,6 +5,7 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
+
 import { leftSideBarMenu } from "../Layout/menuList";
 import { useToggle } from "../hooks";
 import { v4 as uuidv4 } from "uuid";
@@ -17,7 +18,8 @@ import { Modal } from "react-bootstrap";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import axios from "../utill/axios";
 import library_appoint from "../Store/Connect/library_appoint";
-import globalData from "../rdx";
+import globalDataLibraryCall from "../rdxLibraryCall";
+
 import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
@@ -331,7 +333,8 @@ const LibraryAppointBooked = () => {
                                   ) : (
                                     <a
                                       href={
-                                        globalData.videoCallLink + v.room_no
+                                        globalDataLibraryCall.libraryCallLink + v.room_no
+
                                       }
                                       target="_blank"
                                     >

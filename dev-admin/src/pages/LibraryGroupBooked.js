@@ -17,7 +17,8 @@ import { Modal } from "react-bootstrap";
 import { Modal as Bmodal, Button } from "react-bootstrap";
 import axios from "../utill/axios";
 import libraryGroup from "../Store/Connect/libraryGroup";
-import globalData from "../rdx";
+import globalDataLibraryCall from "../rdxLibraryCall";
+
 import LeftSideBar from "../Layout/LeftSideBar";
 // let Button = new AA()
 
@@ -211,9 +212,8 @@ const LibraryGroupBooked = () => {
                 </div>
               </li>
               <li
-                class={`nav-item nav-profile dropdown ${
-                  profileShow ? "show" : ""
-                }`}
+                class={`nav-item nav-profile dropdown ${profileShow ? "show" : ""
+                  }`}
                 onClick={setProfileShow}
               >
                 <a
@@ -226,9 +226,8 @@ const LibraryGroupBooked = () => {
                   <img src="images/faces/face28.jpg" alt="profile" />
                 </a>
                 <div
-                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${
-                    profileShow ? "show" : ""
-                  }`}
+                  class={`dropdown-menu dropdown-menu-right navbar-dropdown ${profileShow ? "show" : ""
+                    }`}
                   aria-labelledby="profileDropdown"
                 >
                   <a class="dropdown-item">
@@ -297,8 +296,8 @@ const LibraryGroupBooked = () => {
                                   {v.call_status === "pending"
                                     ? "Pending"
                                     : v.status === "success"
-                                    ? "Success"
-                                    : "Unsuccess"}
+                                      ? "Success"
+                                      : "Unsuccess"}
                                 </td>
                                 <td>
                                   {v.room_no == null ? (
@@ -315,7 +314,8 @@ const LibraryGroupBooked = () => {
                                   ) : (
                                     <a
                                       href={
-                                        globalData.videoCallLink + v.room_no
+                                        globalDataLibraryCall.libraryCallLink + v.room_no
+
                                       }
                                       target="_blank"
                                     >
