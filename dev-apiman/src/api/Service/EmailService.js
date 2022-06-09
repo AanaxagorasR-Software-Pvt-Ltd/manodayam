@@ -470,7 +470,7 @@ async sendEmailToUserJoingroup(email, details) {
   let info = await this.transporter.sendMail({
     to: email,
     from: `manodayam.swayamshakthi@gmail.com`,
-    subject: "Your appointment has been booked.",
+    subject: "Your  appointment has been booked.",
     // alternatives: [{ contentType: "text/html" }],
     html: `
          
@@ -495,7 +495,7 @@ async sendEmailToUserJoingroup(email, details) {
     <div class="card" style="width: 24rem;box-sizing: border-box;position: relative;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;">
       <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
-        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
+        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meetings</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with
         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.date}</strong> .Please confirm your acceptance via on-line registration available 
 
@@ -545,7 +545,7 @@ async sendEmailToExpertjoingroup(email, details) {
     <div class="card" style="width: 24rem;box-sizing: border-box;position: relative;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;">
       <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
-        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
+        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meetings</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">  We are pleased to invite  on Online Video Conference schedule  from
         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> .please acknowledge this appointment !! your patient name  is 
         <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> email   <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>
