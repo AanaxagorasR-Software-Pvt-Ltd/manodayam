@@ -279,7 +279,7 @@ const LibraryAppointBooked = () => {
                           <thead>
                             <tr>
                               <th>S.No</th>
-                              <th>Motivator Details</th>
+                              {/* <th>Motivator Details</th> */}
 
                               <th>Patient Details</th>
                               <th>Schedule Date</th>
@@ -292,14 +292,14 @@ const LibraryAppointBooked = () => {
                             {filterdata.map((v, i) => (
                               <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td>
+                                {/* <td>
                                   <strong>Name: </strong>
                                   {v.library && v.library.title}
                                   <br />
                                   <strong>Email:</strong>
                                   {v.library && v.library.expert_email}
                                   <br />
-                                </td>
+                                </td> */}
                                 <td>
                                   <strong>Name: </strong> {v.fullname}
                                   <br />

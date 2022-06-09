@@ -87,12 +87,21 @@ export default function Header() {
                 <Link class="nav-link " to="profile">
                   <i class="fas fa-user"></i>
                   <span class="sidemenu-label">Profile</span>
+                  const globalDataLive = {
+    liveLink:
+      window.location.hostname === "localhost"
+        ? "http://localhost:4000/manodayam"
+        : "https://manodayam-live-session.herokuapp.com/",
+  };
+  export default globalDataLive;
+  
+
                 </Link>
               </li> */}
 
               <li class="nav-item nav-link">
                 {/* <Link class="nav-link " to="vdolist"> */}
-                  <a href="https://confrecall.herokuapp.com/" target="_blank" class="a-tag">
+                  <a href="https://manodayam-live-session.herokuapp.com/" target="_blank" class="a-tag">
                   <i class="fas fa-stream"></i>
                   <span class="sidemenu-label">Live</span>
                   </a>
