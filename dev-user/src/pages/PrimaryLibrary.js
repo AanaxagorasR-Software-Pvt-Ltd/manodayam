@@ -225,7 +225,7 @@ export default function PrimaryLibrary() {
                         </button>
                         <button
                           // onClick={() =>loginsubmit()}
-                          // onClick={() => pleasetalk(element._id)}
+                          onClick={() => pleasetalk(element._id)}
                           data-toggle="modal"
                           data-target= "#library-modal" 
                           className="btn-web col-11 mt-2 hvr-float-shadow"
@@ -239,7 +239,7 @@ export default function PrimaryLibrary() {
                           className="btn-web col-11 mt-2 hvr-float-shadow"
                           data-toggle="modal"
                           data-target="#library-modalgroup"
-                          // onClick={() => joingroup(element._id)}
+                          onClick={() => joingroup(element._id)}
                         >
                           Group therapy
                         </button>

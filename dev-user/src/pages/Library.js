@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Login from "./Login";
-import globalDataGroupCall from "../utill/rdxGroupCall";
-import globalDataLive from "../utill/rdxLive";
+
+
 import { useNavigate } from "react-router-dom";
 import {
   API_ADMIN_URL,

@@ -17,7 +17,7 @@ class EmailService {
       secure: false,
       auth: {
         user: `manodayam.swayamshakthi@gmail.com`,
-        pass: `Manodayam@321`,
+        pass: `rztauaqjhftxxvhg`,
       },
       tls: { rejectUnauthorized: false },
     });
@@ -153,7 +153,7 @@ class EmailService {
           } </strong> Disorder <strong style="box-sizing: border-box;font-weight: bolder;">${details.disorder
           }</strong>
                 ${details.email}</p>
-              <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+              <a href="${"https://doctor-video-call.herokuapp.com/" + details.room_no
           }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a>
             </div>
           </div>
@@ -351,8 +351,7 @@ class EmailService {
   
           .please acknowledge this appointment !! your patient name  is   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> email
            <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please  join  meeting      
-                    <a href="${"https://confrecall.herokuapp.com/" + details.room_no
-        }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
+                    <a href="${"https://library-conference-call.herokuapp.com/" + details.room_no}" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
          
         </div>
       </div> 
@@ -401,7 +400,7 @@ class EmailService {
  
             <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
             If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
-           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please join meeting   <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+           <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please join meeting   <a href="${"https://library-conference-call.herokuapp.com/" + details.room_no
         }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
          
         </div>
@@ -471,7 +470,7 @@ async sendEmailToUserJoingroup(email, details) {
   let info = await this.transporter.sendMail({
     to: email,
     from: `manodayam.swayamshakthi@gmail.com`,
-    subject: "Your appointment has been booked.",
+    subject: "Your  appointment has been booked.",
     // alternatives: [{ contentType: "text/html" }],
     html: `
          
@@ -496,7 +495,7 @@ async sendEmailToUserJoingroup(email, details) {
     <div class="card" style="width: 24rem;box-sizing: border-box;position: relative;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;">
       <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
-        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
+        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meetings</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Thanku  you for approaching  us @ Manodayam !! Would like to inform you  that you have a scheduled appointment with
         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.date}</strong> .Please confirm your acceptance via on-line registration available 
 
@@ -546,7 +545,7 @@ async sendEmailToExpertjoingroup(email, details) {
     <div class="card" style="width: 24rem;box-sizing: border-box;position: relative;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;">
       <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
-        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meeting</h5>
+        <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Vedio meetings</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">  We are pleased to invite  on Online Video Conference schedule  from
         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.created}</strong> .please acknowledge this appointment !! your patient name  is 
         <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> email   <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>
@@ -602,7 +601,7 @@ async sendEmailToExpertjoingroupbooked(email, details) {
 
         .please acknowledge this appointment !! your patient name  is   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong> email
          <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please  join  meeting      
-                  <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+                  <a href="${"https://library-conference-call.herokuapp.com/"+ details.room_no
       }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
        
       </div>
@@ -652,7 +651,7 @@ async sendEmailToUserJoingroupbooked(email, details) {
 
           <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
           If you have any questions or queries before or after the session ,pls feel free to  mail   <strong style="box-sizing: border-box;font-weight: bolder;">${details.name}</strong>
-         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please join meeting   <a href="${"https://confrecall.herokuapp.com/" + details.room_no
+         <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.email}</strong>please join meeting   <a href="${"https://library-conference-call.herokuapp.com/" + details.room_no
       }" class="btn btn-primary" style="box-sizing: border-box;color: #fff;text-decoration: none;background-color: #007bff;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-color: #007bff;">  <i class="fas fa-video" style="box-sizing: border-box;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-family: &quot;Font Awesome 5 Pro&quot;;font-weight: 900;"></i>join Meeting</a></p>
        
       </div>
@@ -703,8 +702,8 @@ async sendEmailToPlanebooked(email, details, startDate) {
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
         <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
         <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Your Subscription plane is successfully book on
-        <strong style="box-sizing: border-box;font-weight: bolder;"> ${startDate}</strong> kindly Check  your subscription plane details is  Therapy :${details.therapy} 
-      , Selfassessment: ${details.selfassessment}, doctorassessment :${details.doctorassessment} Grouptherapy:${details.grouptherapy}  ,Meditation:${details.meditation} ,Validity : ${details.schedule}, Price: ${details.price}
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${startDate}</strong> kindly Check  your subscription plane details is<strong style="box-sizing: border-box;font-weight: bolder;"> Therapy :${details.therapy} </strong>
+      , <strong style="box-sizing: border-box;font-weight: bolder;"> Selfassessment: ${details.selfassessment} </strong>,  <strong style="box-sizing: border-box;font-weight: bolder;">doctorassessment :${details.doctorassessment} </strong> , <strong style="box-sizing: border-box;font-weight: bolder;">Grouptherapy:${details.grouptherapy} </strong> , <strong style="box-sizing: border-box;font-weight: bolder;">Meditation:${details.meditation}  </strong>, <strong style="box-sizing: border-box;font-weight: bolder;"> Validity : ${details.schedule} </strong>, <strong style="box-sizing: border-box;font-weight: bolder;"> Price: ${details.price} </strong>
 
          if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
          
@@ -755,14 +754,15 @@ async sendEmailToscheduler(details) {
       <img src="https://imgur.com/FypMf7S" class="card-img-top" style="width: 100%;height: auto;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;-ms-flex-negative: 0;flex-shrink: 0;border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
       <div class="card-body" style="box-sizing: border-box;-ms-flex: 1 1 auto;flex: 1 1 auto;min-height: 1px;padding: 1.25rem;">
         <h5 class="card-title" style="box-sizing: border-box;margin-top: 0;margin-bottom: .75rem;font-weight: 500;line-height: 1.2;font-size: 1.25rem;">Subscription plane book</h5>
-        <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Hello ${details.user.name} Your Subscription plane is Active
-        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.createdAt} </strong> and validity  at <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.endDate} </strong> kindly Check  your subscription plane details is  Therapy :${details.subscription.therapy} 
-      , Selfassessment: ${details.subscription.selfassessment}, doctorassessment :${details.subscription.doctorassessment} Grouptherapy:${details.subscription.grouptherapy}  ,Meditation:${details.subscription.meditation} ,Validity : ${details.subscription.schedule}, Price: ${details.subscription.price}
+        <p class="card-text font-italic text-info" style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;font-style: italic!important;color: #17a2b8!important;">Hello<strong style="box-sizing: border-box;font-weight: bolder;"> ${details.user.name}</strong> Your Subscription plane is Active
+        <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.createdAt} </strong> and validity  at <strong style="box-sizing: border-box;font-weight: bolder;"> ${details.endDate} </strong> kindly Check  your subscription plane details Your  <strong style="box-sizing: border-box;font-weight: bolder;"> Therapy :${details.subscription.therapy}  </strong>
+      ,<strong style="box-sizing: border-box;font-weight: bolder;"> doctorassessment :${details.subscription.doctorassessment} </strong>,<strong style="box-sizing: border-box;font-weight: bolder;"> Selfassessment: ${details.subscription.selfassessment} </strong>, <strong style="box-sizing: border-box;font-weight: bolder;">Grouptherapy:${details.subscription.grouptherapy}</strong> ,Meditation:${details.subscription.meditation} , <strong style="box-sizing: border-box;font-weight: bolder;">Validity : ${details.subscription.schedule}</strong>,<strong style="box-sizing: border-box;font-weight: bolder;">  Price: ${details.subscription.price} </strong>
 
-         if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
          
-     
-
+      if you have any query Visit this link  <strong style="box-sizing: border-box;font-weight: bolder;">https://swarnratnaindia.com/</strong>.
+         
+         Price: ${details.subscription.price}
+        
 
         ~~
        

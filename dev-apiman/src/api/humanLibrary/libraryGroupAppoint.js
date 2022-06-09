@@ -165,15 +165,17 @@ router.post("/status", async (req, res) => {
         ])
         .toArray();
       // res.json(result);
-      console.log(result);
+      console.log(result,"hjukjjkjhhoiho;i");
       console.log(result);
       var dat = new Date(result[0].date);
       var datess = dat.toLocaleString("en-IN");
+
       EmailService.sendEmailToUserJoingroup(result[0].email, {
         name: result[0].library.title,
         date: datess,
         email: result[0].library.expert_email,
       });
+      
       EmailService.sendEmailToExpertjoingroup(result[0].library.expert_email, {
         name: result[0].fullname,
         created: datess,
