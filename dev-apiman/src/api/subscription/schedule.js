@@ -7,7 +7,7 @@ const { getDatabase } = require("../../db/mongo");
 const moment = require('moment')
 const schedule = require('node-schedule');
 
-schedule.scheduleJob('*/5 * * * *', async function () {
+schedule.scheduleJob('*/10 * * * * *', async function () {
     let now = new Date();
     let matchDate = moment(now).add(1, 'week').toDate().toJSON().slice(0, 10).replace(/-/g, "-");
     const db= await getDatabase();
@@ -34,8 +34,8 @@ schedule.scheduleJob('*/5 * * * *', async function () {
           }
         }, {
           '$match': {
-            'endDate': '2023-01-04'
-            //'endDate': matchDate
+            'endDate': '2022-08-09]'
+            // 'endDate':
           }
         }, {
           '$unwind': {

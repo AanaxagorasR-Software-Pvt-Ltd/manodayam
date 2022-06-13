@@ -289,7 +289,8 @@ const Subscription = () => {
 
                               <th>Therapy Title</th>
                               <th>Self Assessment</th>
-                              <th> Doctor Assessment</th>
+                              <th> Doctor for Assessment</th>
+                              <th> Total Assessment</th>
                               <th> Group Therapy</th>
                               <th>Meditation Spirituality</th>
                               <th>Benefits/Description</th>
@@ -307,7 +308,8 @@ const Subscription = () => {
                                 <td>{a.therapy} </td>
 
                                 <td>{a.selfassessment}</td>
-                                <td>{a.doctorassessment}</td>
+                                <td>{a.docterlisting.name} /{a.docterlisting.specialist}</td>
+                                <td>{a.totalassessment}</td>
                                 <td>{a.grouptherapy}</td>
 
                                 <td>{a.meditation}</td>
@@ -386,6 +388,7 @@ const Addform = forwardRef((props, ref) => {
   const [showdata, setshowdata] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
   const [mastercategorys, setmastercategorys] = useState([]);
+  const [masterdocter, setmasterdocter] = useState([]);
 
   const handleClose = () => setshowdata(false);
   const handleShow = () => setshowdata(true);
@@ -441,8 +444,20 @@ const Addform = forwardRef((props, ref) => {
         console.log(error);
       });
   };
+  const docterlist = () => {
+    axios
+      .get("doctors")
+      .then((res) => {
+        setmasterdocter(res);
+        console.log("====mentalHealthData====", res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect((props) => {
     mastercategory();
+    docterlist();
   }, []);
 
   return (
@@ -502,18 +517,61 @@ const Addform = forwardRef((props, ref) => {
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="exampleInputUsername1">doctor Assessment </label>
+                <div class="form-group col-md-3">
+
+                  <label for="exampleInputUsername1">Doctor for Assessment </label>
+
+                  <select
+                    class="form-control"
+                    value={data.name || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "name");
+                    }}
+                  >
+                    {masterdocter?.map((element) => (
+                      <option value={element._id}>
+                        {`${element.name} - (${element.specialist} )`}
+                      </option>
+                    ))}
+                  </select>
+                 
+                </div>
+                <div class="form-group col-md-3" style={{color:"black"}}>
+                    <label for="exampleInputUsername1">Total Assessment </label>
+
+                    <select
+                    class="form-control"
+                    value={data.total || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "total");
+                    }}
+                  >
+                    <option>Select</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+
+                  </div>
+                <div class="form-group col-md-3">
+                  <label for="exampleInputUsername1">Group Therapy</label>
                   <input
                     class="form-control"
-                    value={data.doctorassessment || ""}
+                    value={data.grouptherapy || ""}
                     onChange={(e) => {
-                      handleChange(e.target.value, "doctorassessment");
+                      handleChange(e.target.value, "grouptherapy");
                     }}
-                    placeholder=" Doctor Assessment "
+                    placeholder=" Group Therapy"
                   />
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
                   <label for="exampleInputUsername1">Group Therapy</label>
                   <input
                     class="form-control"
@@ -565,22 +623,22 @@ const Addform = forwardRef((props, ref) => {
                   />
                 </div>
                 <div class="form-group col-md-6">
-                <label for="">Date</label>
-                <select
-                  class="form-control"
-                  value={data.schedule || ""}
-                  onChange={(e) => {
-                    handleChange(e.target.value, "schedule");
-                  }}
-                >
-                  <option>Select</option>
-                  <option>2-month</option>
-                  <option>3-week</option>
-                  <option>5-month</option>
-                  <option>6-week</option>
-                  <option>7-month</option>
-                  <option>9-month</option>
-                </select>
+                  <label for="">Date</label>
+                  <select
+                    class="form-control"
+                    value={data.schedule || ""}
+                    onChange={(e) => {
+                      handleChange(e.target.value, "schedule");
+                    }}
+                  >
+                    <option>Select</option>
+                    <option>2-month</option>
+                    <option>3-week</option>
+                    <option>5-month</option>
+                    <option>6-week</option>
+                    <option>7-month</option>
+                    <option>9-month</option>
+                  </select>
                   {/* <input
                     text=""
                     name=""

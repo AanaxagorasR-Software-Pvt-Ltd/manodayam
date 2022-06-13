@@ -207,7 +207,7 @@ export default function Profile() {
                             data-toggle="tab"
                             href="#menu1"
                           >
-                            My Subscriptions
+                            Subscriptions Plans
                           </a>
                         </li>
                         {/* <li className="nav-item">
@@ -226,6 +226,15 @@ export default function Profile() {
                             href="#menu3"
                           >
                             Appointments
+                          </a>
+                        </li>
+                        <li className="nav-item">
+                          <a
+                            className="nav-link"
+                            data-toggle="tab"
+                            href="#menu1"
+                          >
+                           My Subscriptions 
                           </a>
                         </li>
                       </ul>
@@ -254,7 +263,8 @@ export default function Profile() {
                                 <th>Therapy Type</th>
                                 <th>Therapy</th>
                                 <th>Self Assessment</th>
-                                <th>Doctor Assessment</th>
+                                <th>Doctor for Assessment</th>
+                                <th>Total Assessment</th>
                                 <th>Group Therapy</th>
                                 <th>Meditation Spirituality</th>
                                 <th>Benefitsdescription</th>
@@ -271,7 +281,18 @@ export default function Profile() {
                                     <td>{a.type}</td>
                                     <td>{a.therapy}</td>
                                     <td> {a.selfassessment}</td>
-                                    <td> {a.doctorassessment} </td>
+                                    <td> {a.docterlisting.name} /{a.docterlisting.specialist}  <button
+                                     
+                                     type="button"
+                                     className="btn-web subbutton  hvr-float-shadow"
+                                     data-toggle="modal"
+                                     data-target="#exampleModal"
+                                   
+                                     onClick={() => handleBuy(a._id)}
+                                   >
+                                     Click
+                                   </button></td>
+                                    <td>{a.totalassessment}</td>
                                     <td>{a.grouptherapy} </td>
                                     <td> {a.meditation} </td>
                                     <td> {a.benefitsdescription}</td>
@@ -375,6 +396,57 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
+                  {/* <div className="tab-pane fade" id="menu1">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <div className="cart-table table-responsive">
+                          <table className="table table-bordered table-striped table-hover">
+                            <thead>
+                              <tr>
+                                <th>S.no</th>
+                                <th>Therapy Type</th>
+                                <th>Therapy</th>
+                                <th>Self Assessment</th>
+                                <th>Doctor Assessment</th>
+                                <th>Group Therapy</th>
+                                <th>Meditation Spirituality</th>
+                                <th>Benefitsdescription</th>
+                                <th>Validity Date</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            {
+                              <tbody>
+                                {subScriptiondata.map((a, i) => (
+                                  <tr key={i}>
+                                    <td> {i + 1}</td>
+                                    <td>{a.type}</td>
+                                    <td>{a.therapy}</td>
+                                    <td> {a.selfassessment}</td>
+                                    <td> {a.doctorassessment} </td>
+                                    <td>{a.grouptherapy} </td>
+                                    <td> {a.meditation} </td>
+                                    <td> {a.benefitsdescription}</td>
+                                    <th>{(a.schedule)}</th>
+                                    <td>
+                                      {" "}
+                                      <i className="fa fa-inr"></i>
+                                      {a.price}
+                                    </td>
+
+                                    <td>
+                                      
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            }
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div> */}
                 </div>
               </div>
             </div>

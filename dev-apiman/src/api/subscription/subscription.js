@@ -48,7 +48,8 @@ router.post(
         type: body.type,
         therapy: body.therapy,
         selfassessment: body.selfassessment,
-        doctorassessment: body.doctorassessment,
+        doctorassessment: body.name,
+        totalassessment: body.total,
         grouptherapy: body.grouptherapy,
         meditation: body.meditation,
         benefitsdescription: body.benefitsdescription,
@@ -67,6 +68,7 @@ router.post(
 
       let insertedId = null;
       let vedios = await db.collection("Subscription_Plan");
+
       if (body._id) {
         insertedId = await vedios.updateOne(
           { _id: new ObjectID(body._id) },
@@ -130,7 +132,7 @@ router.post("/bookplane", async (req, res) => {
     }
 
     let subscriptionbook = await db.collection("Subscription_Book");
-  
+
     let subscriptionplane = await db
       .collection("Subscription_Plan")
       .findOne({ _id: new ObjectID(data.id) });
@@ -140,12 +142,12 @@ router.post("/bookplane", async (req, res) => {
     // split("-")[1]=> month
     let amount = subscriptionplane.schedule.split("-")[0];
     let unit = subscriptionplane.schedule.split("-")[1];
-    data.endDate = moment(data.createdAt).add(amount,unit).toDate().toJSON().slice(0, 10).replace(/-/g, "-");
+    data.endDate = moment(data.createdAt).add(amount, unit).toDate().toJSON().slice(0, 10).replace(/-/g, "-");
     let subscriptiondata = await db
-    .collection("Subscription_Book")
-    .insertOne(data);
+      .collection("Subscription_Book")
+      .insertOne(data);
 
-    EmailService.sendEmailToPlanebooked(data.email, subscriptionplane , data.createdAt);
+    EmailService.sendEmailToPlanebooked(data.email, subscriptionplane, data.createdAt);
   } catch (e) {
     console.log("error", e);
     res.status(500).json({
@@ -163,13 +165,13 @@ router.post("/bookplane", async (req, res) => {
   // });
 
 
-//   const schedule = require('node-schedule');
-// schedule.scheduleJob('*/1 * * * *', function(){
+  //   const schedule = require('node-schedule');
+  // schedule.scheduleJob('*/1 * * * *', function(){
 
 
-//     console.log('err');
-//     // email.send(config)
-// })
+  //     console.log('err');
+  //     // email.send(config)
+  // })
 
 
 
@@ -182,11 +184,32 @@ router.post("/bookplane", async (req, res) => {
 
     try {
       const db = await getDatabase();
-      const data = await db
-        .collection("Subscription_Plan")
-        .find(filter)
-        .sort({ type: -1 })
-        .toArray();
+      const data = await db.collection("Subscription_Plan").aggregate([
+        {
+          '$addFields': {
+
+            'doctorassessment': {
+              $toObjectId: '$doctorassessment'
+            }
+
+          }
+        },
+        {
+          '$lookup': {
+
+            'from': 'doctorListing',
+            'localField': 'doctorassessment',
+            'foreignField': '_id',
+            'as': 'docterlisting'
+          }
+        },
+        {
+          '$unwind': {
+            'path': '$docterlisting'
+          }
+        }
+
+      ]).toArray();
       res.send(data);
     } catch (err) {
       console.log("err", err.message);

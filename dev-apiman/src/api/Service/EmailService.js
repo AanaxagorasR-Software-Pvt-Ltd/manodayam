@@ -764,7 +764,7 @@ async sendEmailToscheduler(details) {
          Price: ${details.subscription.price}
         
 
-        ~~
+        
        
       </div>
     </div>
