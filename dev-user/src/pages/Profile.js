@@ -232,7 +232,7 @@ export default function Profile() {
                           <a
                             className="nav-link"
                             data-toggle="tab"
-                            href="#menu1"
+                            href="#menu4"
                           >
                            My Subscriptions 
                           </a>
@@ -281,17 +281,7 @@ export default function Profile() {
                                     <td>{a.type}</td>
                                     <td>{a.therapy}</td>
                                     <td> {a.selfassessment}</td>
-                                    <td> {a.docterlisting.name} /{a.docterlisting.specialist}  <button
-                                     
-                                     type="button"
-                                     className="btn-web subbutton  hvr-float-shadow"
-                                     data-toggle="modal"
-                                     data-target="#exampleModal"
-                                   
-                                     onClick={() => handleBuy(a._id)}
-                                   >
-                                     Click
-                                   </button></td>
+                                    <td> {a.docterlisting.name} /{a.docterlisting.specialist} </td>
                                     <td>{a.totalassessment}</td>
                                     <td>{a.grouptherapy} </td>
                                     <td> {a.meditation} </td>
@@ -396,7 +386,7 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="tab-pane fade" id="menu1">
+                  <div className="tab-pane fade" id="menu4">
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="cart-table table-responsive">
@@ -408,6 +398,7 @@ export default function Profile() {
                                 <th>Therapy</th>
                                 <th>Self Assessment</th>
                                 <th>Doctor Assessment</th>
+                                <th>Total Assessment</th>
                                 <th>Group Therapy</th>
                                 <th>Meditation Spirituality</th>
                                 <th>Benefitsdescription</th>
@@ -424,7 +415,22 @@ export default function Profile() {
                                     <td>{a.type}</td>
                                     <td>{a.therapy}</td>
                                     <td> {a.selfassessment}</td>
-                                    <td> {a.doctorassessment} </td>
+                                    <td> {a.docterlisting.name} /{a.docterlisting.specialist} 
+                                    <Link to="/bookingAppoint">
+                                     <button
+                                     
+                                     type="button"
+                                     className="btn-web subbutton  hvr-float-shadow"
+                                     data-toggle="modal"
+                                     data-target="#exampleModal"
+                                   
+                                    
+                                   >
+                                     Click
+                                   </button>
+                                   </Link>
+                                   </td>
+                                   <td>{a.totalassessment}</td>
                                     <td>{a.grouptherapy} </td>
                                     <td> {a.meditation} </td>
                                     <td> {a.benefitsdescription}</td>
@@ -446,7 +452,7 @@ export default function Profile() {
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
