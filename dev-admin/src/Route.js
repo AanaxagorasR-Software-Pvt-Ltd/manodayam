@@ -36,6 +36,7 @@ import SubAdmin from "./pages/SubAdmin";
 import Welcome from "./pages/Welcome";
 import SubadminLogin from "./pages/SubadminLogin";
 import SubadminRegister from "./pages/SubadminRegister"
+import SubscriptionBookedList from "./pages/SubscriptionBookedList";
 
 const Login = React.lazy(() => import("./pages/Login"));
 const ProtectedRoute = React.lazy(() => import("./Auth/Protected"));
@@ -68,6 +69,7 @@ const InternalRoute = (props) => {
           <Route path="/admin/subadmin-login" element={<SubadminLogin />} exact />
           <Route path="/admin/subadmin-register" element={<SubadminRegister />} exact />
           <Route path="/admin/admin-list" element={<AdminList />} exact />
+
 
           
           
@@ -104,6 +106,12 @@ const InternalRoute = (props) => {
             element={<Subscription />}
             exact
           />
+          <Route
+            path="/admin/subscription-booked-list"
+            element={<SubscriptionBookedList />}
+            exact
+          />
+
           <Route path="/admin/category" element={<Category />} exact />
           <Route
             path="/admin/about-category"

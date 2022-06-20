@@ -280,7 +280,7 @@ const leftSideBarMenu = [
     ],
     isHover: false,
   },
- 
+
   // admin roll
   {
     name: "Dashboard",
@@ -347,16 +347,39 @@ const leftSideBarMenu = [
 
   },
   {
-    name: "Subscription plan",
+
+    userAccess: "admin",
+    name: "Subscription",
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "/admin/subscription-plan",
-    iconClass: "icon-grid",
-    subMenuid: "ui-basic",
-    submenu: [],
-    isHover: false,
+    iconClass: "icon-layout",
+    link: "",
     userAccess: "admin",
+
+    submenu: [
+
+      {
+        name: "Subscription plans",
+        isActive: false,
+        dataToggle: "",
+        isExpand: false,
+        link: "/admin/subscription-plan",
+        // iconClass: "icon-grid",
+        // subMenuid: "ui-basic",
+        // submenu: [],
+        // isHover: false,
+        // userAccess: "admin",
+      },
+      {
+        name: "Subscription Booked List",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/subscription-booked-list",
+        isExpand: false,
+      },
+    ],
+    isHover: false,
 
   },
   {

@@ -186,6 +186,9 @@ router.post("/bookplane", async (req, res) => {
       const db = await getDatabase();
       const data = await db.collection("Subscription_Plan").aggregate([
         {
+          $match: { type: { $eq: req.query.usertype } },
+        },
+        {
           '$addFields': {
 
             'doctorassessment': {
@@ -215,6 +218,130 @@ router.post("/bookplane", async (req, res) => {
       console.log("err", err.message);
     }
   });
+  router.post('/mySubscriptionlist', async (req, res) => {
+    const db = await getDatabase();
+    console.log("hyyyyyyyy")
+    try {
+  
+      let result = await db
+        .collection("Subscription_Book")
+        .aggregate([
+          {
+            $match: { userEmail: { $eq: req.query.userEmail } },
+          },
+  
+          {
+            $addFields: {
+            subId: {
+                $toObjectId: "$subId",
+              },
+            },
+          },
+          {
+            $lookup: {
+              from: "Subscription_Plan",
+              localField: "subId",
+              foreignField: "_id",
+              as: "subscription",
+            },
+          },
+          {
+            $unwind: {
+              path: "$subscription",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+        ])
+        .toArray();
+      res.json({ data: result, status: true });
+    } catch (e) {
+      res.status(500).json({
+        status: false,
+        message: "server error",
+      });
+    }
+  })
+
+   router.post('/getsubscription', async (req, res) => {
+    const db = await getDatabase();
+    console.log("hyyyyyyyy")
+    try {
+  
+      let result = await db
+        .collection("Subscription_Book")
+        .aggregate([
+         
+          {
+            $addFields: {
+            id: {
+                $toObjectId: "$id",
+              },
+            },
+          },
+          {
+            $lookup: {
+              from: "Subscription_Plan",
+              localField: "id",
+              foreignField: "_id",
+              as: "subscription",
+            },
+
+          },
+          {
+            $unwind: {
+              path: "$subscription",
+              preserveNullAndEmptyArrays: false,
+            },
+          },
+          {
+            $lookup: {
+              from: "user",
+              localField: "email",
+              foreignField: "email",
+              as: "user",
+            },
+            
+          },
+          {
+            $unwind: {
+              path: "$user",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          {
+            $addFields: {
+            doctorId: {
+                $toObjectId: "$subscription.doctorassessment",
+              },
+            },
+          },
+          {
+            $lookup: {
+              from: "doctorListing",
+              localField: "doctorId",
+              foreignField: "_id",
+              as: "doctorListing",
+            },
+          },
+          {
+            $unwind: {
+              path: "$doctorListing",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+         
+        ])
+        .toArray();
+      res.json({ data: result, status: true });
+    } catch (e) {
+      res.status(500).json({
+        status: false,
+        message: "server error",
+      });
+    }
+  })
+
+
 
 router.get("/", async (req, res) => {
   try {

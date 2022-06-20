@@ -37,5 +37,7 @@ export const SHAKTHI_QUESTION_API = "/shakthi-ques/shakthi-asking"
 export const FORGOTPASSWORD_URL="/otp/user/forgot";
 export const RESETPASSWORD_URL="/otp/user/reset";
 export const ALL_MENTALHEALTH_DATA_API="/category-item/category/item"
+export const ALL_ASSESSMENT="/subscription/mySubscriptionlist"
+export const GET_ASSESSMENT="/subscription/"
 // export const MCQ = "/mcq/question"const
 export const API_ADMIN_URL = API_HOST_URL + API_MIDD 

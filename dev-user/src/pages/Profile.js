@@ -8,6 +8,8 @@ import {
   BOOKED_API,
   SUBSCRIPTION_PLANE_LISTA,
   SUBSCRIPTION_PLANE_BOOK,
+  ALL_ASSESSMENT,
+  GET_ASSESSMENT
 } from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
@@ -17,6 +19,7 @@ import { useFormik } from "formik";
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
   const [bookData, setbookData] = useState([]);
+  const [bookassessment, setbookassessment] = useState([]);
   // const [data, setdatta] = useState([]);
   const [show, setshow] = useState(false);
   const [alertData, setAlerdata] = useState({ title: "", body: "" });
@@ -65,6 +68,20 @@ export default function Profile() {
         console.log("err", err.message);
       });
   };
+  const listofMySubscription = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    axios
+
+      .post(`${API_ADMIN_URL}${ALL_ASSESSMENT}?userEmail=${user.email}`)
+      .then((res) => {
+        console.log("res", res, typeof res);
+        setbookassessment(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
+
 
   const Editprofile = () => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -87,9 +104,7 @@ export default function Profile() {
       .get(
         // ?humanId=${}`
 
-        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get(
-          "usertype"
-        )}`
+        `${API_ADMIN_URL}${SUBSCRIPTION_PLANE_LISTA}?usertype=${params.get("usertype")}`
       )
       .then((res) => {
         console.log("res", res, typeof res);
@@ -104,6 +119,7 @@ export default function Profile() {
     listBooked();
     Editprofile();
     subscription();
+    listofMySubscription();
   }, []);
 
   const handleClose = () => setshow(false);
@@ -133,12 +149,18 @@ export default function Profile() {
   // setAlerdatas({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
   // setshow(true);
  const handleBuy=(id)=>{
+  
   setSubId(id);
+
+
+  
+
     setAlerdatas({ title: "Subsciption Plane", body: "Confirm your subscription plane" });
    setshow(true) ;
-  
+
    console.log("id", id);
   }
+
   return (
     <>
       <div className="contact-banner mb-50">
@@ -409,7 +431,7 @@ export default function Profile() {
                             </thead>
                             {
                               <tbody>
-                                {subScriptiondata.map((a, i) => (
+                                {bookassessment.map((a, i) => (
                                   <tr key={i}>
                                     <td> {i + 1}</td>
                                     <td>{a.type}</td>
