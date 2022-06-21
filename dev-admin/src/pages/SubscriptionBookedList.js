@@ -20,7 +20,7 @@ import axios from "../utill/axios";
 import subscriptions from "../Store/Connect/subscription";
 import { Link } from "react-router-dom";
 import LeftSideBar from "../Layout/LeftSideBar";
-
+import BookList from "../Store/Connect/BookList";
 import getsubscription from "../Store/Connect/subscription";
 
 // let Button = new AA()
@@ -80,7 +80,7 @@ const SubscriptionBookedList = (props) => {
   // };
   const update_status = async (status, id) => {
     try {
-      let response = subscriptions.status({
+      let response = BookList.status({
         _id: id,
         status: status,
       });
@@ -371,11 +371,11 @@ const SubscriptionBookedList = (props) => {
                                     {v.doctorListing && v.doctorListing.name}
                                     <br />
                                     <strong>Email:</strong>
-
-
                                     {v.doctorListing && v.doctorListing.email} <br />
                                     
                                     <br/>
+                                    <strong>Total Assessment:</strong>
+                                    {v.subscription && v.subscription.totalassessment} <br />
                                     <select className="mt-2" value={v.status || ''} onChange={(e) => { update_status(e.target.value, v._id) }}>
                                       <option value="pending">Pending</option>
                                       <option value="cancelled">

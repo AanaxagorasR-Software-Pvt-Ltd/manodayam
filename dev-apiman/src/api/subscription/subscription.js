@@ -56,6 +56,7 @@ router.post(
         schedule: body.schedule,
         price: body.price,
 
+
         // type: body.type,
       };
 
@@ -157,189 +158,407 @@ router.post("/bookplane", async (req, res) => {
   }
 }),
 
-
-  // router.get("/list", async (req, res) => {
-  //   const db = await getDatabase();
-
-  //   // res.send('hello')
-  // });
-
-
-  //   const schedule = require('node-schedule');
-  // schedule.scheduleJob('*/1 * * * *', function(){
-
-
-  //     console.log('err');
-  //     // email.send(config)
-  // })
-
-
-
-
-  router.get("/list", async (req, res) => {
-    let filter = {};
-    if (req.query.usertype) {
-      filter.type = req.query.usertype;
-    }
-
+  router.post("/status", async (req, res) => {
+    const body = req.body;
+    console.log(body);
     try {
       const db = await getDatabase();
-      const data = await db.collection("Subscription_Plan").aggregate([
-        {
-          $match: { type: { $eq: req.query.usertype } },
-        },
-        {
-          '$addFields': {
+      let appointments = await db.collection("Subscription_Book");
+      insertedId = await appointments.updateOne(
+        { _id: new ObjectID(body._id) },
+        { $set: { status: body.status } }
+      ).insertedId;
 
-            'doctorassessment': {
-              $toObjectId: '$doctorassessment'
-            }
+      // sed email to patient
+      // let details = await appointments.findOne({ _id: new ObjectID(body._id) });
+      if (body.status == "booked") {
+        let result = await db
+          .collection("Subscription_Book")
 
-          }
-        },
-        {
-          '$lookup': {
 
-            'from': 'doctorListing',
-            'localField': 'doctorassessment',
-            'foreignField': '_id',
-            'as': 'docterlisting'
-          }
-        },
-        {
-          '$unwind': {
-            'path': '$docterlisting'
-          }
-        }
 
-      ]).toArray();
-      res.send(data);
+        console.log(result);
+        // var dat = new Date(result[0].schedule)
+        // var datess=dat.toLocaleString('en-IN');
+        // EmailService.sendEmailToPatient(result[0].email, {
+        // 	name: result[0].doctor.name,
+        // 	schedule: datess,email: result[0].doctor.email
+        // });
+        // EmailService.sendEmailToDoctor(result[0].doctor.email, {
+        // 	name: result[0].fullname,
+        // 	schedule: datess,
+        // 	disorder: result[0].disorder,email: result[0].email
+        // });
+      }
+      res.json();
     } catch (err) {
       console.log("err", err.message);
+      res.status(500).end()
     }
+
+    // res.json({
+    // 	message: "Update successfull",
+    // });
   });
-  router.post('/mySubscriptionlist', async (req, res) => {
-    const db = await getDatabase();
-    console.log("hyyyyyyyy")
-    try {
-  
-      let result = await db
-        .collection("Subscription_Book")
-        .aggregate([
-          {
-            $match: { userEmail: { $eq: req.query.userEmail } },
-          },
-  
-          {
-            $addFields: {
-            subId: {
-                $toObjectId: "$subId",
-              },
-            },
-          },
-          {
-            $lookup: {
-              from: "Subscription_Plan",
-              localField: "subId",
-              foreignField: "_id",
-              as: "subscription",
-            },
-          },
-          {
-            $unwind: {
-              path: "$subscription",
-              preserveNullAndEmptyArrays: true,
-            },
-          },
-        ])
-        .toArray();
-      res.json({ data: result, status: true });
-    } catch (e) {
-      res.status(500).json({
-        status: false,
-        message: "server error",
-      });
-    }
-  })
 
-   router.post('/getsubscription', async (req, res) => {
+router.get("/Booked", async (req, res) => {
+  try {
+    let filter = {
+      status: "booked"
+    };
+    if (req.query.userId) {
+      filter.userId = req.query.userId
+    }
+
     const db = await getDatabase();
-    console.log("hyyyyyyyy")
-    try {
-  
-      let result = await db
-        .collection("Subscription_Book")
-        .aggregate([
-         
-          {
-            $addFields: {
+
+
+
+    let result = await db
+      .collection("Subscription_Book")
+      .aggregate([
+        {
+          $match: { status: { $eq: "booked" } },
+        },
+
+        {
+          $addFields: {
             id: {
-                $toObjectId: "$id",
-              },
+              $toObjectId: "$id",
             },
           },
-          {
-            $lookup: {
-              from: "Subscription_Plan",
-              localField: "id",
-              foreignField: "_id",
-              as: "subscription",
-            },
+        },
+        {
+          $lookup: {
+            from: "Subscription_Plan",
+            localField: "id",
+            foreignField: "_id",
+            as: "subscription",
+          },
 
+        },
+        {
+          $unwind: {
+            path: "$subscription",
+            preserveNullAndEmptyArrays: false,
           },
-          {
-            $unwind: {
-              path: "$subscription",
-              preserveNullAndEmptyArrays: false,
-            },
+        },
+        {
+          $lookup: {
+            from: "user",
+            localField: "email",
+            foreignField: "email",
+            as: "user",
           },
-          {
-            $lookup: {
-              from: "user",
-              localField: "email",
-              foreignField: "email",
-              as: "user",
-            },
-            
+
+        },
+        {
+          $unwind: {
+            path: "$user",
+            preserveNullAndEmptyArrays: true,
           },
-          {
-            $unwind: {
-              path: "$user",
-              preserveNullAndEmptyArrays: true,
-            },
-          },
-          {
-            $addFields: {
+        },
+        {
+          $addFields: {
             doctorId: {
-                $toObjectId: "$subscription.doctorassessment",
-              },
+              $toObjectId: "$subscription.doctorassessment",
             },
           },
-          {
-            $lookup: {
-              from: "doctorListing",
-              localField: "doctorId",
-              foreignField: "_id",
-              as: "doctorListing",
-            },
+        },
+        {
+          $lookup: {
+            from: "doctorListing",
+            localField: "doctorId",
+            foreignField: "_id",
+            as: "doctorListing",
           },
-          {
-            $unwind: {
-              path: "$doctorListing",
-              preserveNullAndEmptyArrays: true,
-            },
+        },
+        {
+          $unwind: {
+            path: "$doctorListing",
+            preserveNullAndEmptyArrays: true,
           },
-         
-        ])
-        .toArray();
-      res.json({ data: result, status: true });
-    } catch (e) {
-      res.status(500).json({
-        status: false,
-        message: "server error",
-      });
+        },
+
+      ])
+      .toArray();
+    res.json({ data: result, status: true });
+  } catch (err) {
+    console.log("err", err.message);
+  }
+});
+
+router.post('/saveroom', async (req, res) => {
+  const db = await getDatabase();
+  const body = req.body;
+  console.log('data', req.body);
+
+  try {
+
+    let data = {
+      room_no: body.room_no,
     }
-  })
+    console.log(data);
+    if (!body?._id) {
+      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    } else {
+      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    }
+
+    let insertedId = null;
+    let appointments = await db.collection("Subscription_Book")
+
+    if (body._id) {
+      insertedId = await appointments.updateOne(
+        { _id: new ObjectID(body._id) },
+        { $set: data },
+      ).insertedId;
+    }
+    else {
+      insertedId = await category.insertOne(data).insertedId;
+    }
+
+    res.status(200).json({
+      data: {
+        _id: insertedId,
+        ...req.body
+      },
+      status: true,
+      message: "Room created successfully!"
+    });
+
+    
+    
+  //   let appointmentdata = await db
+  //     .collection("doctorListing").findOne({_id: new ObjectID(body.docid)})
+  //     var date = new Date(body.schedule)
+  //     var dates=date.toLocaleString('en-IN');
+      
+
+  //   EmailService.sendEmailToDoctorbooked(appointmentdata.email, { name: body.fullname, created: dates, disorder: body.disorder ,email:body.email,room_no:body.room_no});
+  //   EmailService.sendEmailToPatientbooked(body.email, { name: appointmentdata.name, created:dates, disorder: body.disorder, email: appointmentdata.email })
+  // }
+
+  }catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error",
+      error: e,
+    });
+  }
+}),
+router.post('/changecallstatus', async (req, res) => {
+  const db = await getDatabase();
+  const body = req.body;
+
+  try {
+
+    let data = {
+      call_status: body.call_status,
+    }
+    console.log(data);
+    if (!body?._id) {
+      data.createdAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    } else {
+      data.updatedAt = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    }
+
+    let insertedId = null;
+    let appointments = await db.collection("Subscription_Book");
+    if (body._id) {
+      insertedId = await appointments.updateOne(
+        { _id: new ObjectID(body._id) },
+        { $set: data },
+      ).insertedId;
+    }
+    else {
+      insertedId = await category.insertOne(data).insertedId;
+    }
+    res.status(200).json({
+      data: {
+        _id: insertedId,
+        ...req.body
+      },
+      status: true,
+      message: "Call Status Changed successfully!"
+    });
+  }
+
+
+  catch (e) {
+    console.log("error", e);
+    res.status(500).json({
+      message: "server error",
+      error: e,
+    });
+  }
+
+});
+
+router.get("/list", async (req, res) => {
+  let filter = {};
+  if (req.query.usertype) {
+    filter.type = req.query.usertype;
+  }
+
+  try {
+    const db = await getDatabase();
+    const data = await db.collection("Subscription_Plan").aggregate([
+      // {
+      //   $match: { type: { $eq: req.query.usertype } },
+      // },
+      {
+        '$addFields': {
+
+          'doctorassessment': {
+            $toObjectId: '$doctorassessment'
+          }
+
+        }
+      },
+      {
+        '$lookup': {
+
+          'from': 'doctorListing',
+          'localField': 'doctorassessment',
+          'foreignField': '_id',
+          'as': 'docterlisting'
+        }
+      },
+      {
+        '$unwind': {
+          'path': '$docterlisting'
+        }
+      }
+
+    ]).toArray();
+    res.send(data);
+  } catch (err) {
+    console.log("err", err.message);
+  }
+});
+router.post('/mySubscriptionlist', async (req, res) => {
+  const db = await getDatabase();
+  console.log("hyyyyyyyy")
+  try {
+
+    let result = await db
+      .collection("Subscription_Book")
+      .aggregate([
+        {
+          $match: { userEmail: { $eq: req.query.userEmail } },
+        },
+
+        {
+          $addFields: {
+            subId: {
+              $toObjectId: "$subId",
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "Subscription_Plan",
+            localField: "subId",
+            foreignField: "_id",
+            as: "subscription",
+          },
+        },
+        {
+          $unwind: {
+            path: "$subscription",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+      ])
+      .toArray();
+    res.json({ data: result, status: true });
+  } catch (e) {
+    res.status(500).json({
+      status: false,
+      message: "server error",
+    });
+  }
+})
+
+router.post('/getsubscription', async (req, res) => {
+  const db = await getDatabase();
+  console.log("hyyyyyyyy")
+  try {
+
+    let result = await db
+      .collection("Subscription_Book")
+      .aggregate([
+
+        {
+          $addFields: {
+            id: {
+              $toObjectId: "$id",
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "Subscription_Plan",
+            localField: "id",
+            foreignField: "_id",
+            as: "subscription",
+          },
+
+        },
+        {
+          $unwind: {
+            path: "$subscription",
+            preserveNullAndEmptyArrays: false,
+          },
+        },
+        {
+          $lookup: {
+            from: "user",
+            localField: "email",
+            foreignField: "email",
+            as: "user",
+          },
+
+        },
+        {
+          $unwind: {
+            path: "$user",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $addFields: {
+            doctorId: {
+              $toObjectId: "$subscription.doctorassessment",
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "doctorListing",
+            localField: "doctorId",
+            foreignField: "_id",
+            as: "doctorListing",
+          },
+        },
+        {
+          $unwind: {
+            path: "$doctorListing",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+
+      ])
+      .toArray();
+    res.json({ data: result, status: true });
+  } catch (e) {
+    res.status(500).json({
+      status: false,
+      message: "server error",
+    });
+  }
+})
 
 
 

@@ -360,7 +360,7 @@ const leftSideBarMenu = [
     submenu: [
 
       {
-        name: "Subscription plans",
+        name: "Subscription list",
         isActive: false,
         dataToggle: "",
         isExpand: false,
@@ -372,10 +372,17 @@ const leftSideBarMenu = [
         // userAccess: "admin",
       },
       {
-        name: "Subscription Booked List",
+        name: "Subscription Booked plan",
         isActive: true,
         dataToggle: "",
         link: "/admin/subscription-booked-list",
+        isExpand: false,
+      },
+      {
+        name: "Booked List",
+        isActive: true,
+        dataToggle: "",
+        link: "/admin/BookedList",
         isExpand: false,
       },
     ],
