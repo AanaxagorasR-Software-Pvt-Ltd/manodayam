@@ -173,21 +173,80 @@ router.post("/bookplane", async (req, res) => {
       // let details = await appointments.findOne({ _id: new ObjectID(body._id) });
       if (body.status == "booked") {
         let result = await db
-          .collection("Subscription_Book")
-
-
+          .collection("Subscription_Book") .aggregate([
+            {
+              $match: { status: { $eq: "booked" } },
+            },
+    
+            {
+              $addFields: {
+                id: {
+                  $toObjectId: "$id",
+                },
+              },
+            },
+            {
+              $lookup: {
+                from: "Subscription_Plan",
+                localField: "id",
+                foreignField: "_id",
+                as: "subscription",
+              },
+    
+            },
+            {
+              $unwind: {
+                path: "$subscription",
+                preserveNullAndEmptyArrays: false,
+              },
+            },
+            {
+              $lookup: {
+                from: "user",
+                localField: "email",
+                foreignField: "email",
+                as: "user",
+              },
+    
+            },
+            {
+              $unwind: {
+                path: "$user",
+                preserveNullAndEmptyArrays: true,
+              },
+            },
+            {
+              $addFields: {
+                doctorId: {
+                  $toObjectId: "$subscription.doctorassessment",
+                },
+              },
+            },
+            {
+              $lookup: {
+                from: "doctorListing",
+                localField: "doctorId",
+                foreignField: "_id",
+                as: "doctorListing",
+              },
+            },
+            {
+              $unwind: {
+                path: "$doctorListing",
+                preserveNullAndEmptyArrays: true,
+              },
+            },
+          ]).toArray();
 
         console.log(result);
         // var dat = new Date(result[0].schedule)
         // var datess=dat.toLocaleString('en-IN');
-        // EmailService.sendEmailToPatient(result[0].email, {
-        // 	name: result[0].doctor.name,
-        // 	schedule: datess,email: result[0].doctor.email
-        // });
-        // EmailService.sendEmailToDoctor(result[0].doctor.email, {
-        // 	name: result[0].fullname,
-        // 	schedule: datess,
-        // 	disorder: result[0].disorder,email: result[0].email
+        EmailService.sendEmailTosubscriptionusers(result);
+        EmailService.sendEmailTosubscriptionDocter(result);
+        
+        // 	// name: result[0].fullname,
+        // 	// schedule: datess,
+        // 	// disorder: result[0].disorder,email: result[0].email
         // });
       }
       res.json();
@@ -306,7 +365,70 @@ router.post('/saveroom', async (req, res) => {
     }
 
     let insertedId = null;
-    let appointments = await db.collection("Subscription_Book")
+    let appointments = await db.collection("Subscription_Book").aggregate([
+      {
+        $match: { status: { $eq: "booked" } },
+      },
+
+      {
+        $addFields: {
+          id: {
+            $toObjectId: "$id",
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "Subscription_Plan",
+          localField: "id",
+          foreignField: "_id",
+          as: "subscription",
+        },
+
+      },
+      {
+        $unwind: {
+          path: "$subscription",
+          preserveNullAndEmptyArrays: false,
+        },
+      },
+      {
+        $lookup: {
+          from: "user",
+          localField: "email",
+          foreignField: "email",
+          as: "user",
+        },
+
+      },
+      {
+        $unwind: {
+          path: "$user",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $addFields: {
+          doctorId: {
+            $toObjectId: "$subscription.doctorassessment",
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "doctorListing",
+          localField: "doctorId",
+          foreignField: "_id",
+          as: "doctorListing",
+        },
+      },
+      {
+        $unwind: {
+          path: "$doctorListing",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+    ]).toArray();
 
     if (body._id) {
       insertedId = await appointments.updateOne(
@@ -327,17 +449,10 @@ router.post('/saveroom', async (req, res) => {
       message: "Room created successfully!"
     });
 
-    
-    
-  //   let appointmentdata = await db
-  //     .collection("doctorListing").findOne({_id: new ObjectID(body.docid)})
-  //     var date = new Date(body.schedule)
-  //     var dates=date.toLocaleString('en-IN');
-      
+    EmailService.sendEmailToDoctorbookedsubscription(appointments);
 
-  //   EmailService.sendEmailToDoctorbooked(appointmentdata.email, { name: body.fullname, created: dates, disorder: body.disorder ,email:body.email,room_no:body.room_no});
-  //   EmailService.sendEmailToPatientbooked(body.email, { name: appointmentdata.name, created:dates, disorder: body.disorder, email: appointmentdata.email })
-  // }
+    EmailService.sendEmailToPatientbookedsubscription(appointments);
+  
 
   }catch (e) {
     console.log("error", e);
@@ -347,6 +462,7 @@ router.post('/saveroom', async (req, res) => {
     });
   }
 }),
+
 router.post('/changecallstatus', async (req, res) => {
   const db = await getDatabase();
   const body = req.body;
