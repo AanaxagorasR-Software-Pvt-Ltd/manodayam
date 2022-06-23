@@ -9,7 +9,7 @@ import {
   SUBSCRIPTION_PLANE_LISTA,
   SUBSCRIPTION_PLANE_BOOK,
   ALL_ASSESSMENT,
-  GET_ASSESSMENT
+  BOOKEDSUBSCRIPTIONLIST_API
 } from "../utill/api.endpoints";
 import globalDataCall from "../utill/rdxcall";
 import { Modal as Bmodal, Button } from "react-bootstrap";
@@ -19,6 +19,7 @@ import { useFormik } from "formik";
 export default function Profile() {
   const [profilData, setprofilData] = useState([]);
   const [bookData, setbookData] = useState([]);
+  const [bookDataSub, setbookDataSub] = useState([]);
   const [bookassessment, setbookassessment] = useState([]);
   // const [data, setdatta] = useState([]);
   const [show, setshow] = useState(false);
@@ -68,6 +69,33 @@ export default function Profile() {
         console.log("err", err.message);
       });
   };
+  const listBookedSub = () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    axios
+
+      .get(`${API_ADMIN_URL}${BOOKEDSUBSCRIPTIONLIST_API}?userId=${user._id}`)
+      .then((res) => {
+        console.log("res", res, typeof res);
+        debugger;
+        setbookDataSub(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
+  };
+  // const listBooked = () => {
+  //   let user = JSON.parse(localStorage.getItem("user"));
+  //   axios
+
+  //     .get(`${API_ADMIN_URL}${BOOKED_API}?userId=${user._id}`)
+  //     .then((res) => {
+  //       console.log("res", res, typeof res);
+  //       setbookData(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err.message);
+  //     });
+  // };
   const listofMySubscription = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     axios
@@ -120,6 +148,7 @@ export default function Profile() {
     Editprofile();
     subscription();
     listofMySubscription();
+    listBookedSub();
   }, []);
 
   const handleClose = () => setshow(false);
@@ -257,6 +286,15 @@ export default function Profile() {
                             href="#menu4"
                           >
                            My Subscriptions 
+                          </a>
+                        </li>
+                        <li className="nav-item">
+                          <a
+                            className="nav-link"
+                            data-toggle="tab"
+                            href="#menu5"
+                          >
+                            My Subscription Appointments
                           </a>
                         </li>
                       </ul>
@@ -470,6 +508,77 @@ export default function Profile() {
                                 ))}
                               </tbody>
                             }
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane fade" id="menu5">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <div className="cart-table table-responsive">
+                          <table className="table table-bordered table-striped table-hover">
+                            <thead>
+                              <tr>
+                                <th>S.no</th>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Condition</th>
+                                <th>Connect Here!</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {bookDataSub.map((a, i) => (
+                                <tr key={i}>
+                                  <td>{i + 1}</td>
+                                  {/* {new Date(a.schedule).toLocaleDateString()} */}
+
+                                  <td>{convertToDateTime(a.createdAt)}</td>
+                                  {/* <td>{a.title}</td> */}
+                                  <td>{a &&  a.user.name}</td>
+
+                                  <td>{a &&  a.subscription && a.subscription.type}</td>
+                                  <td>
+                                    {a.room_no == null ? (
+                                      <button
+                                        onClick={() => {
+                                          setAlerdata({
+                                            title: " Please Wait !!",
+                                            body: "please waiting for meeting schedule",
+                                          });
+                                          setshow(true);
+                                        }}
+                                        type="button"
+                                        class="btn btn-sm btn-info border-radius-0 add-btn"
+                                        // onClick={() => {
+                                        //   createRoomRef.current.openForm(a);
+                                        // }}
+                                        title="Create Room"
+                                      >
+                                        <i class="fas fa-video"></i>
+                                      </button>
+                                    ) : (
+                                      <a
+                                        href={
+                                          globalDataCall.videoCallLink +
+                                          a.room_no
+                                        }
+                                        target="_blank"
+                                      >
+                                        <button
+                                          type="button"
+                                          class="btn btn-sm btn-success border-radius-0 add-btn"
+                                        >
+                                          <i class="ti-video-camera"></i>
+                                        </button>
+                                      </a>
+                                    )}
+                                  </td>
+                                  <td>{a.status}</td>
+                                </tr>
+                              ))}
+                            </tbody>
                           </table>
                         </div>
                       </div>

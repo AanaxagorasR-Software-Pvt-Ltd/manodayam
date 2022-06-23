@@ -32,12 +32,13 @@ export const SPIRITUALITY_API = "/spirituality/spirituality/item";
 export const ABOUT_API = "/about/about-us"
 // export const BOOKED_API = "/appointed/booklistshow"
 export const BOOKED_API = "/appointments/booked";
+export const BOOKEDSUBSCRIPTIONLIST_API = "/subscription/booked";
 export const MENTALHEALTH_DATA_API = "/category-data";
 export const SHAKTHI_QUESTION_API = "/shakthi-ques/shakthi-asking"
 export const FORGOTPASSWORD_URL="/otp/user/forgot";
 export const RESETPASSWORD_URL="/otp/user/reset";
 export const ALL_MENTALHEALTH_DATA_API="/category-item/category/item"
 export const ALL_ASSESSMENT="/subscription/mySubscriptionlist"
-export const GET_ASSESSMENT="/subscription/"
+
 // export const MCQ = "/mcq/question"const
 export const API_ADMIN_URL = API_HOST_URL + API_MIDD 

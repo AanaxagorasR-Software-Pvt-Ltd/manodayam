@@ -175,7 +175,7 @@ router.post("/bookplane", async (req, res) => {
         let result = await db
           .collection("Subscription_Book") .aggregate([
             {
-              $match: { status: { $eq: "booked" } },
+              $match: { _id: { $eq: new ObjectID(body._id) } },
             },
     
             {
@@ -241,8 +241,8 @@ router.post("/bookplane", async (req, res) => {
         console.log(result);
         // var dat = new Date(result[0].schedule)
         // var datess=dat.toLocaleString('en-IN');
-        EmailService.sendEmailTosubscriptionusers(result);
-        EmailService.sendEmailTosubscriptionDocter(result);
+        EmailService.sendEmailTosubscriptionusers(result[0]);
+        EmailService.sendEmailTosubscriptionDocter(result[0]);
         
         // 	// name: result[0].fullname,
         // 	// schedule: datess,
@@ -260,7 +260,7 @@ router.post("/bookplane", async (req, res) => {
     // });
   });
 
-router.get("/Booked", async (req, res) => {
+router.get("/booked", async (req, res) => {
   try {
     let filter = {
       status: "booked"
@@ -365,10 +365,30 @@ router.post('/saveroom', async (req, res) => {
     }
 
     let insertedId = null;
-    let appointments = await db.collection("Subscription_Book").aggregate([
-      {
-        $match: { status: { $eq: "booked" } },
+    const db = await getDatabase();
+    let appointments = await db.collection("Subscription_Book");
+    if (body._id) {
+      insertedId = await appointments.updateOne(
+        { _id: new ObjectID(body._id) },
+        { $set: data },
+      ).insertedId;
+    }
+    else {
+      insertedId = await category.insertOne(data).insertedId;
+    }
+    res.status(200).json({
+      data: {
+        _id: insertedId,
+        ...req.body
       },
+      status: true,
+      message: "Room created successfully!"
+    });
+    let result = await db.collection("Subscription_Book").aggregate([
+      {
+        $match: { _id: { $eq: new ObjectID(body._id) } },
+      },
+
 
       {
         $addFields: {
@@ -430,28 +450,28 @@ router.post('/saveroom', async (req, res) => {
       },
     ]).toArray();
 
-    if (body._id) {
-      insertedId = await appointments.updateOne(
-        { _id: new ObjectID(body._id) },
-        { $set: data },
-      ).insertedId;
-    }
-    else {
-      insertedId = await category.insertOne(data).insertedId;
-    }
+    // if (body._id) {
+    //   insertedId = await appointments.updateOne(
+    //     { _id: new ObjectID(body._id) },
+    //     { $set: data },
+    //   ).insertedId;
+    // }
+    // else {
+    //   insertedId = await category.insertOne(data).insertedId;
+    // }
 
-    res.status(200).json({
-      data: {
-        _id: insertedId,
-        ...req.body
-      },
-      status: true,
-      message: "Room created successfully!"
-    });
+    // res.status(200).json({
+    //   data: {
+    //     _id: insertedId,
+    //     ...req.body
+    //   },
+    //   status: true,
+    //   message: "Room created successfully!"
+    // });
 
-    EmailService.sendEmailToDoctorbookedsubscription(appointments);
+    EmailService.sendEmailToDoctorbookedsubscription(result[0]);
 
-    EmailService.sendEmailToPatientbookedsubscription(appointments);
+    EmailService.sendEmailToPatientbookedsubscription(result[0]);
   
 
   }catch (e) {
@@ -513,9 +533,9 @@ router.post('/changecallstatus', async (req, res) => {
 
 router.get("/list", async (req, res) => {
   let filter = {};
-  if (req.query.usertype) {
-    filter.type = req.query.usertype;
-  }
+  // if (req.query.usertype) {
+  //   filter.type = req.query.usertype;
+  // }
 
   try {
     const db = await getDatabase();
